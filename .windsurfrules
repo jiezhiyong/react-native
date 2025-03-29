@@ -1,0 +1,19 @@
+# Windsurf Rules for Expo + React Native Project
+
+1. 你应该用中文回复我
+2. 使用的技术包含:
+   - React Native
+   - Expo
+   - TypeScript
+   - ESLint
+   - Prettier
+   - Jest/React Native Testing Library
+   - React Navigation
+   - Redux/Context API
+   - Axios/Fetch
+3. 遵循 React Native 和 Expo 最佳实践
+4. 优先使用 Expo 提供的 API 和组件
+5. 组件化开发，保持代码简洁可维护
+6. 性能优化：避免不必要的渲染和大型依赖
+7. 良好的错误处理机制
+8. 支持多平台（iOS 和 Android）适配
