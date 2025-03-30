@@ -22,16 +22,26 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <Link href={{
-          pathname: '/details/[id]',
-          params: { id: 'bacon', name:'abc' },
-        }}>
+        <Link
+          href={{
+            pathname: "/details/[id]",
+            params: { id: "bacon", name: "abc" },
+          }}
+        >
           <ThemedText>View first user details</ThemedText>
         </Link>
         <Link href="/details/2?name=xyz">
           <ThemedText>View second user details</ThemedText>
         </Link>
       </ThemedView>
+      <ThemedText type="defaultSemiBold">
+        {Platform.select({
+          ios: "cmd + d",
+          android: "cmd + m",
+          web: "F12",
+        })}
+        &nbsp;to open developer tools.
+      </ThemedText>
     </ParallaxScrollView>
   );
 }

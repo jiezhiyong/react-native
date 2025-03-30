@@ -53,8 +53,9 @@ npx expo config
 npx expo-doctor
 ```
 
-## 使用 VS Code 进行调试 https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
+## 存储数据 https://docs.expo.dev/develop/user-interface/store-data/
 
+## 使用 VS Code 进行调试 https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
 
 ## Snack 共享代码片段和试验 React Native https://snack.expo.dev/
 
