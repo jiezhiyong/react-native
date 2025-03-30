@@ -28,6 +28,9 @@ In the output, you'll find options to open the app in a
 ```sh
 npx expo install expo-dev-client
 
+# Continuous Native Generation（CNG）
+npx expo prebuild --clean
+
 # Android
 - eas build --platform android --profile development # eas
 - npx expo run:android
@@ -37,3 +40,25 @@ npx expo install expo-dev-client
 - npx expo run:ios # simulator
 - npx expo run:ios --device # device
 ```
+
+## 使用应用程序配置进行配置 https://docs.expo.dev/workflow/configuration/
+
+```sh
+npx expo config
+```
+
+## 检查配置 https://docs.expo.dev/develop/tools/#expo-doctor
+
+```sh
+npx expo-doctor
+```
+
+## 使用 VS Code 进行调试 https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
+
+
+## Snack 共享代码片段和试验 React Native https://snack.expo.dev/
+
+## TODO
+
+- brew install cocoapods
+- brew install watchman

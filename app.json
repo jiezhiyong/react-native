@@ -1,10 +1,9 @@
 {
   "expo": {
-    "name": "qa-chat",
+    "name": "QA Chat",
     "slug": "qa-chat",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
