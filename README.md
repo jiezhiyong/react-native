@@ -89,6 +89,14 @@ eas update --auto
 
 https://docs.expo.dev/debugging/errors-and-warnings
 
+## 创建生产构建
+
+```sh
+eas build --platform all
+eas build --platform android
+eas build --platform ios
+```
+
 ## 使用应用程序配置进行配置 https://docs.expo.dev/workflow/configuration/
 
 ```sh
