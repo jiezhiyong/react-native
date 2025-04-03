@@ -9,9 +9,7 @@ export default function DetailsScreen() {
   const { id, name } = useLocalSearchParams();
   return (
     <ThemedView style={styles.container}>
-      <SafeAreaView
-        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-      >
+      <SafeAreaView style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ThemedText>
           Details of user {id} {name}
         </ThemedText>
