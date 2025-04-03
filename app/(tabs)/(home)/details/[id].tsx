@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
 
-import { ThemedText } from "@/components/ThemedText";
+import { ThemedText } from "~/components/ThemedText";
 import { useLocalSearchParams } from "expo-router";
-import { ThemedView } from "@/components/ThemedView";
+import { ThemedView } from "~/components/ThemedView";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DetailsScreen() {

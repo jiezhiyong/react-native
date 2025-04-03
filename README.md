@@ -1,13 +1,13 @@
 # Expo app 👋
 
-This is an [Expo](expo.dev) project. doc: [Expo documentation](docs.expo.dev) with [nativewind](nativewind.dev)、
+This is an [Expo](https://expo.dev) project. doc: [Expo documentation](https://docs.expo.dev) with [nativewind](https://nativewind.dev)、[react-native-reusables](https://rnr-docs.vercel.app)
 
 ## Get started
 
 1. Install dependencies
 
    ```bash
-   pnpm install
+    pnpm install
    ```
 
 2. Start the app
@@ -16,12 +16,28 @@ This is an [Expo](expo.dev) project. doc: [Expo documentation](docs.expo.dev) wi
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## 添加通用组件
 
-- [development build](docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](expo.dev/go), a limited sandbox for trying out app development with Expo
+```sh
+npx @react-native-reusables/cli@latest add
+```
+
+## 重要组件 & 调试工具
+
+- [tanstack-query](https://tanstack.com/query/v4)
+- [react-hook-form](https://react-hook-form.com)
+- [react-native-bottom-sheet](https://gorhom.dev/react-native-bottom-sheet)
+- [flash-list](https://shopify.github.io/flash-list)
+- [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler)
+- [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)
+- [react-native-safe-area-context](https://appandflow.github.io/react-native-safe-area-context)
+- [react-native-device-info](https://github.com/react-native-device-info/react-native-device-info)
+- [react-native-modal](https://github.com/react-native-modal/react-native-modal) => 一般使用 react-native-reusables 即可
+- [react-navigation](https://reactnavigation.org) => 一般使用 Expo Router 即可
+- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) => 一般使用 AsyncStorage 即可
+
+- [fbflipper](https://fbflipper.com)
+- [sentry](https://docs.sentry.io/platforms/react-native)
 
 ## 创建开发版本
 
