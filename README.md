@@ -1,6 +1,6 @@
 # Expo app 👋
 
-This is an [Expo](expo.dev) project. doc: [Expo documentation](https://docs.expo.dev/)
+This is an [Expo](expo.dev) project. doc: [Expo documentation](docs.expo.dev) with [nativewind](nativewind.dev)、
 
 ## Get started
 
