@@ -5,5 +5,42 @@
   },
   "files.associations": {
     "*.css": "tailwindcss"
+  },
+  "todo-tree.highlights.enabled": true,
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/public/**",
+    "**/*.min.*",
+    "**/*.map"
+  ],
+  "todo-tree.general.tags": ["TODO", "FIXME", "BUG", "NOTE", "HACK"],
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "foreground": "#fff",
+      "background": "#ffbd2a",
+      "iconColour": "#ffbd2a"
+    },
+    "FIXME": {
+      "foreground": "#fff",
+      "background": "#f06292",
+      "iconColour": "#f06292"
+    },
+    "BUG": {
+      "foreground": "#fff",
+      "background": "#f44336",
+      "iconColour": "#f44336"
+    },
+    "NOTE": {
+      "foreground": "#fff",
+      "background": "#3f51b5",
+      "iconColour": "#3f51b5"
+    },
+    "HACK": {
+      "foreground": "#fff",
+      "background": "#8bc34a",
+      "iconColour": "#8bc34a"
+    }
   }
 }

@@ -22,7 +22,16 @@ This is an [Expo](https://expo.dev) project. doc: [Expo documentation](https://d
 npx @react-native-reusables/cli@latest add
 ```
 
-## 重要组件 & 调试工具
+## Expo SDK
+
+- [expo-auth-session](https://docs.expo.dev/versions/latest/sdk/auth-session)
+- [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore)
+- [expo-file-system](https://docs.expo.dev/versions/latest/sdk/filesystem)
+- [expo-sqlite](https://docs.expo.dev/versions/latest/sdk/sqlite)
+- [expo-camera](https://docs.expo.dev/versions/latest/sdk/camera)
+- [expo-network](https://docs.expo.dev/versions/latest/sdk/network)
+
+## 重要组件 & 工具
 
 - [tanstack-query](https://tanstack.com/query/v4)
 - [react-hook-form](https://react-hook-form.com)
@@ -34,10 +43,12 @@ npx @react-native-reusables/cli@latest add
 - [react-native-device-info](https://github.com/react-native-device-info/react-native-device-info)
 - [react-native-modal](https://github.com/react-native-modal/react-native-modal) => 一般使用 react-native-reusables 即可
 - [react-navigation](https://reactnavigation.org) => 一般使用 Expo Router 即可
-- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) => 一般使用 AsyncStorage 即可
-
+- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) => 一般使用 expo-secure-store 即可
+- [async-storage](https://react-native-async-storage.github.io/async-storage/docs/usage/)
 - [fbflipper](https://fbflipper.com)
 - [sentry](https://docs.sentry.io/platforms/react-native)
+
+- [...](https://reactnative.directory)
 
 ## 创建开发版本
 
@@ -68,6 +79,16 @@ eas build --platform ios --profile development
 npx expo prebuild --clean # 使用 Prebuild 生成原生 Android 和 iOS 目录
 ```
 
+### 发布更改预览
+
+```sh
+eas update --auto
+```
+
+### 调试
+
+https://docs.expo.dev/debugging/errors-and-warnings
+
 ## 使用应用程序配置进行配置 https://docs.expo.dev/workflow/configuration/
 
 ```sh
@@ -92,6 +113,11 @@ brew install expo-orbit
 ## 使用 VS Code 进行调试 https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
 
 ## Snack 共享代码片段和试验 React Native https://snack.expo.dev/
+
+## 单元测试 & E2E 测试
+
+https://docs.expo.dev/develop/unit-testing
+https://docs.expo.dev/build-reference/e2e-tests
 
 ## TODO
 

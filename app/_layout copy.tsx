@@ -1,10 +1,10 @@
 import type {
   MaterialTopTabNavigationEventMap,
   MaterialTopTabNavigationOptions,
-} from "@react-navigation/material-top-tabs";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { useTheme, type ParamListBase, type TabNavigationState } from "@react-navigation/native";
-import { withLayoutContext } from "expo-router";
+} from '@react-navigation/material-top-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { useTheme, type ParamListBase, type TabNavigationState } from '@react-navigation/native';
+import { withLayoutContext } from 'expo-router';
 
 const { Navigator } = createMaterialTopTabNavigator();
 
@@ -22,41 +22,41 @@ export default function MaterialTopTabsLayout() {
       initialRouteName="index"
       screenOptions={{
         tabBarActiveTintColor: colors.text,
-        tabBarInactiveTintColor: "grey",
+        tabBarInactiveTintColor: 'grey',
         tabBarLabelStyle: {
           fontSize: 14,
-          textTransform: "capitalize",
-          fontWeight: "bold",
+          textTransform: 'capitalize',
+          fontWeight: 'bold',
         },
         tabBarIndicatorStyle: {
           backgroundColor: colors.text,
         },
         tabBarScrollEnabled: true,
-        tabBarItemStyle: { width: "auto", minWidth: 100 },
+        tabBarItemStyle: { width: 'auto', minWidth: 100 },
       }}
     >
       <MaterialTopTabs.Screen
         name="index"
         options={{
-          title: "Blue",
+          title: 'Blue',
         }}
       />
       <MaterialTopTabs.Screen
         name="red"
         options={{
-          title: "Red",
+          title: 'Red',
         }}
       />
       <MaterialTopTabs.Screen
         name="green"
         options={{
-          title: "Green",
+          title: 'Green',
         }}
       />
       <MaterialTopTabs.Screen
         name="purple"
         options={{
-          title: "Purple",
+          title: 'Purple',
         }}
       />
     </MaterialTopTabs>

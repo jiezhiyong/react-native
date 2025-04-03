@@ -1,14 +1,14 @@
-import * as React from "react";
-import { Keyboard, type KeyboardEvent } from "react-native";
+import * as React from 'react';
+import { Keyboard, type KeyboardEvent } from 'react-native';
 
 const EVENT_TYPE = {
   // Only keyboardDidShow and keyboardDidHide events are available on Android with 1 exception: https://reactnative.dev/docs/keyboard#addlistener
-  didShow: { show: "keyboardDidShow", hide: "keyboardDidHide" },
-  willShow: { show: "keyboardWillShow", hide: "keyboardWillHide" },
+  didShow: { show: 'keyboardDidShow', hide: 'keyboardDidHide' },
+  willShow: { show: 'keyboardWillShow', hide: 'keyboardWillHide' },
 } as const;
 
 export function useKeyboard(
-  { eventType = "didShow" }: { eventType?: keyof typeof EVENT_TYPE } = { eventType: "didShow" }
+  { eventType = 'didShow' }: { eventType?: keyof typeof EVENT_TYPE } = { eventType: 'didShow' }
 ) {
   const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
   const [keyboardHeight, setKeyboardHeight] = React.useState(0);

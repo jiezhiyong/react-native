@@ -1,17 +1,17 @@
-import * as SwitchPrimitives from "@rn-primitives/switch";
-import * as React from "react";
-import { Platform } from "react-native";
-import Animated, { interpolateColor, useAnimatedStyle, useDerivedValue, withTiming } from "react-native-reanimated";
-import { useColorScheme } from "~/lib/useColorScheme";
-import { cn } from "~/lib/utils";
+import * as SwitchPrimitives from '@rn-primitives/switch';
+import * as React from 'react';
+import { Platform } from 'react-native';
+import Animated, { interpolateColor, useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
+import { useColorScheme } from '~/lib/useColorScheme';
+import { cn } from '~/lib/utils';
 
 const SwitchWeb = React.forwardRef<SwitchPrimitives.RootRef, SwitchPrimitives.RootProps>(
   ({ className, ...props }, ref) => (
     <SwitchPrimitives.Root
       className={cn(
-        "peer flex-row h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed",
-        props.checked ? "bg-primary" : "bg-input",
-        props.disabled && "opacity-50",
+        'peer flex-row h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed',
+        props.checked ? 'bg-primary' : 'bg-input',
+        props.disabled && 'opacity-50',
         className
       )}
       {...props}
@@ -19,24 +19,24 @@ const SwitchWeb = React.forwardRef<SwitchPrimitives.RootRef, SwitchPrimitives.Ro
     >
       <SwitchPrimitives.Thumb
         className={cn(
-          "pointer-events-none block h-5 w-5 rounded-full bg-background shadow-md shadow-foreground/5 ring-0 transition-transform",
-          props.checked ? "translate-x-5" : "translate-x-0"
+          'pointer-events-none block h-5 w-5 rounded-full bg-background shadow-md shadow-foreground/5 ring-0 transition-transform',
+          props.checked ? 'translate-x-5' : 'translate-x-0'
         )}
       />
     </SwitchPrimitives.Root>
   )
 );
 
-SwitchWeb.displayName = "SwitchWeb";
+SwitchWeb.displayName = 'SwitchWeb';
 
 const RGB_COLORS = {
   light: {
-    primary: "rgb(24, 24, 27)",
-    input: "rgb(228, 228, 231)",
+    primary: 'rgb(24, 24, 27)',
+    input: 'rgb(228, 228, 231)',
   },
   dark: {
-    primary: "rgb(250, 250, 250)",
-    input: "rgb(39, 39, 42)",
+    primary: 'rgb(250, 250, 250)',
+    input: 'rgb(39, 39, 42)',
   },
 } as const;
 
@@ -59,12 +59,12 @@ const SwitchNative = React.forwardRef<SwitchPrimitives.RootRef, SwitchPrimitives
     return (
       <Animated.View
         style={animatedRootStyle}
-        className={cn("h-8 w-[46px] rounded-full", props.disabled && "opacity-50")}
+        className={cn('h-8 w-[46px] rounded-full', props.disabled && 'opacity-50')}
       >
         <SwitchPrimitives.Root
           className={cn(
-            "flex-row h-8 w-[46px] shrink-0 items-center rounded-full border-2 border-transparent",
-            props.checked ? "bg-primary" : "bg-input",
+            'flex-row h-8 w-[46px] shrink-0 items-center rounded-full border-2 border-transparent',
+            props.checked ? 'bg-primary' : 'bg-input',
             className
           )}
           {...props}
@@ -72,7 +72,7 @@ const SwitchNative = React.forwardRef<SwitchPrimitives.RootRef, SwitchPrimitives
         >
           <Animated.View style={animatedThumbStyle}>
             <SwitchPrimitives.Thumb
-              className={"h-7 w-7 rounded-full bg-background shadow-md shadow-foreground/25 ring-0"}
+              className={'h-7 w-7 rounded-full bg-background shadow-md shadow-foreground/25 ring-0'}
             />
           </Animated.View>
         </SwitchPrimitives.Root>
@@ -80,7 +80,7 @@ const SwitchNative = React.forwardRef<SwitchPrimitives.RootRef, SwitchPrimitives
     );
   }
 );
-SwitchNative.displayName = "SwitchNative";
+SwitchNative.displayName = 'SwitchNative';
 
 const Switch = Platform.select({
   web: SwitchWeb,
