@@ -76,27 +76,50 @@ npx expo run:ios --device # - device, eas.json 需要设置 build.development.io
 
 ```sh
 npm install -g eas-cli
-eas build --platform all
+eas build --platform all --profile development
 eas build --platform android --profile development
 eas build --platform ios --profile development
-```
-
-### 发布更改预览
-
-```sh
-eas update --auto
 ```
 
 ### 调试
 
 https://docs.expo.dev/debugging/errors-and-warnings
 
-## 创建生产构建
+## 创建生产构建 - 在 EAS 上构建 / 使用 EAS CLI 本地构建 (--local)
 
 ```sh
-eas build --platform all
-eas build --platform android
-eas build --platform ios
+eas build --platform all --profile production
+eas build --platform android --profile production
+eas build --platform ios --profile production
+```
+
+### 提交构建
+
+```sh
+eas submit --platform android
+eas submit --platform ios
+```
+
+### 提交 ios 商店元数据
+
+```sh
+eas metadata:push
+```
+
+### 发送无线更新
+
+```sh
+eas update --auto
+eas update:configure
+eas update --channel production
+```
+
+### 部署 WEB 应用
+
+```sh
+npx expo export --platform web
+eas deploy
+eas deploy --prod
 ```
 
 ## 使用应用程序配置进行配置 https://docs.expo.dev/workflow/configuration/
@@ -128,8 +151,3 @@ brew install expo-orbit
 
 https://docs.expo.dev/develop/unit-testing
 https://docs.expo.dev/build-reference/e2e-tests
-
-## TODO
-
-- brew install cocoapods
-- brew install watchman
