@@ -41,9 +41,9 @@ npx @react-native-reusables/cli@latest add
 - [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)
 - [react-native-safe-area-context](https://appandflow.github.io/react-native-safe-area-context)
 - [react-native-device-info](https://github.com/react-native-device-info/react-native-device-info)
-- [react-native-modal](https://github.com/react-native-modal/react-native-modal) => 一般使用 react-native-reusables 即可
-- [react-navigation](https://reactnavigation.org) => 一般使用 Expo Router 即可
-- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) => 一般使用 expo-secure-store 即可
+- [react-native-modal](https://github.com/react-native-modal/react-native-modal)
+- [react-navigation](https://reactnavigation.org)
+- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv)
 - [async-storage](https://react-native-async-storage.github.io/async-storage/docs/usage/)
 - [fbflipper](https://fbflipper.com)
 - [sentry](https://docs.sentry.io/platforms/react-native)
@@ -54,6 +54,14 @@ npx @react-native-reusables/cli@latest add
 
 ```sh
 npx expo install expo-dev-client
+```
+
+### 预构建
+
+```sh
+npx expo prebuild --clean # 使用 Prebuild 生成原生 Android 和 iOS 目录
+npx expo prebuild --clean --platform android
+npx expo prebuild --clean --platform ios
 ```
 
 ### 创建开发版本 - 本地构建
@@ -71,12 +79,6 @@ npm install -g eas-cli
 eas build --platform all
 eas build --platform android --profile development
 eas build --platform ios --profile development
-```
-
-### 预构建
-
-```sh
-npx expo prebuild --clean # 使用 Prebuild 生成原生 Android 和 iOS 目录
 ```
 
 ### 发布更改预览
