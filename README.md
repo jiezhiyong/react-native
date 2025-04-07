@@ -81,10 +81,6 @@ eas build --platform android --profile development
 eas build --platform ios --profile development
 ```
 
-### 调试
-
-https://docs.expo.dev/debugging/errors-and-warnings
-
 ## 创建生产构建 - 在 EAS 上构建 / 使用 EAS CLI 本地构建 (--local)
 
 ```sh
@@ -122,12 +118,6 @@ eas deploy
 eas deploy --prod
 ```
 
-## 使用应用程序配置进行配置 https://docs.expo.dev/workflow/configuration/
-
-```sh
-npx expo config
-```
-
 ## 检查配置 https://docs.expo.dev/develop/tools/#expo-doctor
 
 ```sh
@@ -141,13 +131,19 @@ npx expo-doctor
 brew install expo-orbit
 ```
 
-## 存储数据 https://docs.expo.dev/develop/user-interface/store-data/
+## 其他
 
-## 使用 VS Code 进行调试 https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
+```sh
+npx expo install --fix ## 将 Expo SDK 库更新为 SDK 版本的最新版本
+```
 
-## Snack 共享代码片段和试验 React Native https://snack.expo.dev/
+## More
 
-## 单元测试 & E2E 测试
-
-https://docs.expo.dev/develop/unit-testing
-https://docs.expo.dev/build-reference/e2e-tests
+- 调试 https://docs.expo.dev/debugging/errors-and-warnings
+- 权限 https://docs.expo.dev/guides/permissions
+- 单元测试 https://docs.expo.dev/develop/unit-testing
+- E2E https://docs.expo.dev/build-reference/e2e-tests
+- 存储数据 https://docs.expo.dev/develop/user-interface/store-data/
+- 使用 VS Code 进行调试 https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
+- Snack https://snack.expo.dev
+- 使用 app config 配置 https://docs.expo.dev/workflow/configuration
