@@ -161,10 +161,23 @@ npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分�
 - 使用 app config 配置 https://docs.expo.dev/workflow/configuration
 - 链接 https://docs.expo.dev/linking/overview
 - 自定义本机代码 https://docs.expo.dev/workflow/customizing
+- PWA https://docs.expo.dev/guides/progressive-web-apps
+- 分析 JavaScript 包 https://docs.expo.dev/guides/analyzing-bundles
+- 树摇 https://docs.expo.dev/guides/tree-shaking
+- 压缩 JavaScript https://docs.expo.dev/guides/minify
+
+## 分析 JavaScript 包
+
+```sh
+EXPO_UNSTABLE_ATLAS=true npx expo start # 使用 Atlas 分析包大小
+EXPO_UNSTABLE_ATLAS=true npx expo start --no-dev # 将开发模式更改为生产模式
+EXPO_UNSTABLE_ATLAS=true npx expo export & npx expo-atlas .expo/atlas.jsonl # 使用 Atlas 与 npx expo export 结合
+```
 
 ## TODO
 
 - 应用图标、启屏图片
+- Webview
 - 应用链接
 - 应用变体（debug、release、production | free、paid）
 - 应用签名

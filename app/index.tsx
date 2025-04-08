@@ -1,11 +1,12 @@
 import { A } from '@expo/html-elements';
 import * as Linking from 'expo-linking';
-import { Link } from 'expo-router';
+import { Link, usePathname } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { ScrollView, View } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
 import Animated, { FadeInUp, FadeOutDown, LayoutAnimationConfig } from 'react-native-reanimated';
 
+import DOMComponents from '~/components/DOMComponents';
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/components/ui/card';
@@ -17,10 +18,21 @@ import { Info } from '~/lib/icons/Info';
 const GITHUB_AVATAR_URI = 'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
 
 export default function Screen() {
+  const pathname = usePathname();
+
   const [progress, setProgress] = React.useState(78);
+  const [containerSize, setContainerSize] = React.useState<{ width: number; height: number } | null>(null);
 
   function updateProgressValue() {
     setProgress(Math.floor(Math.random() * 100));
+  }
+
+  if (Platform.OS === 'ios') {
+    console.log('Hello on iOS');
+  }
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Hello in development');
   }
 
   return (
@@ -80,6 +92,29 @@ export default function Screen() {
             </Button>
           </CardFooter>
         </Card>
+
+        <View style={{ $$css: true, _: 'bg-slate-100 rounded-xl p-3' }}>
+          <Text style={{ $$css: true, _: 'text-lg font-medium' }}>Tailwind + React Native web elements</Text>
+        </View>
+
+        <DOMComponents
+          name="this is a DOMComponents"
+          dom={{
+            containerStyle: containerSize != null ? { width: containerSize.width, height: containerSize.height } : null,
+            matchContents: true,
+            scrollEnabled: false,
+            style: {},
+          }}
+          pathname={pathname}
+          nativeActions={async (data: string) => {
+            console.log('Hello', data);
+          }}
+          onDOMLayout={async ({ width, height }) => {
+            if (containerSize?.width !== width || containerSize?.height !== height) {
+              setContainerSize({ width, height });
+            }
+          }}
+        />
 
         <Button onPress={() => Linking.openURL('https://expo.dev')}>
           <Text>expo-linking-api</Text>

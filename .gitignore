@@ -35,3 +35,7 @@ yarn-error.*
 
 # coverage
 coverage/**/*
+# Expo
+.expo
+dist/
+web-build/

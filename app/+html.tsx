@@ -1,3 +1,4 @@
+import { ScrollViewStyleReset } from 'expo-router/html';
 import { type PropsWithChildren } from 'react';
 
 export default function Root({ children }: PropsWithChildren) {
@@ -13,6 +14,15 @@ export default function Root({ children }: PropsWithChildren) {
             __html: `html, body, #root { height: 100% } body { overflow: hidden } #root { display: flex }`,
           }}
         />
+
+        {/* Link the PWA manifest file. */}
+        <link rel="manifest" href="/manifest.json" />
+
+        {/*
+          Disable body scrolling on web. This makes ScrollView components work closer to how they do on native.
+          However, body scrolling is often nice to have for mobile web. If you want to enable it, remove this line.
+        */}
+        <ScrollViewStyleReset />
       </head>
       <body>{children}</body>
     </html>
