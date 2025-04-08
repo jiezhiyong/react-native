@@ -16,6 +16,12 @@ This is an [Expo](https://expo.dev) project. doc: [Expo documentation](https://d
     npx expo start
    ```
 
+## 添加插件
+
+```sh
+npx expo install <plugin-name>
+```
+
 ## 添加通用组件
 
 ```sh
@@ -47,6 +53,9 @@ npx @react-native-reusables/cli@latest add
 - [async-storage](https://react-native-async-storage.github.io/async-storage/docs/usage/)
 - [fbflipper](https://fbflipper.com)
 - [sentry](https://docs.sentry.io/platforms/react-native)
+
+- [react-native-app-link](https://github.com/FiberJW/react-native-app-link)
+- [uri-scheme](https://github.com/expo/expo/tree/main/packages/uri-scheme#readme)
 
 - [...](https://reactnative.directory)
 
@@ -114,6 +123,7 @@ eas update --channel production
 
 ```sh
 npx expo export --platform web
+npx expo serve
 eas deploy
 eas deploy --prod
 ```
@@ -134,7 +144,9 @@ brew install expo-orbit
 ## 其他
 
 ```sh
-npx expo install --fix ## 将 Expo SDK 库更新为 SDK 版本的最新版本
+npx expo install --fix # 将 Expo SDK 库更新为 SDK 版本的最新版本
+eas credentials -p android # 获取 Android SHA256 证书指纹
+npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分配权限，并在商店中创建 iTunes 应用条目
 ```
 
 ## More
@@ -143,7 +155,16 @@ npx expo install --fix ## 将 Expo SDK 库更新为 SDK 版本的最新版本
 - 权限 https://docs.expo.dev/guides/permissions
 - 单元测试 https://docs.expo.dev/develop/unit-testing
 - E2E https://docs.expo.dev/build-reference/e2e-tests
-- 存储数据 https://docs.expo.dev/develop/user-interface/store-data/
+- 存储数据 https://docs.expo.dev/develop/user-interface/store-data
 - 使用 VS Code 进行调试 https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
 - Snack https://snack.expo.dev
 - 使用 app config 配置 https://docs.expo.dev/workflow/configuration
+- 链接 https://docs.expo.dev/linking/overview
+- 自定义本机代码 https://docs.expo.dev/workflow/customizing
+
+## TODO
+
+- 应用图标、启屏图片
+- 应用链接
+- 应用变体（debug、release、production | free、paid）
+- 应用签名

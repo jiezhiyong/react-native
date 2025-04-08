@@ -1,0 +1,30 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "457Z87HK84.com.jiezhiyong.qachat"
+        ],
+        "paths": [
+          "/app/*"
+        ],
+        "components": [
+          {
+            "/": "*",
+            "comment": "Matches all routes"
+          }
+        ]
+      }
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "457Z87HK84.com.jiezhiyong.qachat"
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "457Z87HK84.com.jiezhiyong.qachat"
+    ]
+  }
+}
