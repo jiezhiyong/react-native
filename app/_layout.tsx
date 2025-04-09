@@ -14,10 +14,10 @@ import { AppState, Platform } from 'react-native';
 import type { AppStateStatus } from 'react-native';
 
 import { ThemeToggle } from '~/components/ThemeToggle';
+import { useColorScheme } from '~/hooks/useColorScheme';
 import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -98,20 +98,22 @@ export default function RootLayout() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-        <Stack>
-          <Stack.Screen
-            name="index"
-            options={{
-              title: 'Starter Base',
-              headerRight: () => <ThemeToggle />,
-            }}
-          />
-        </Stack>
-        <PortalHost />
-      </ThemeProvider>
-    </QueryClientProvider>
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+          <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+          <Stack>
+            <Stack.Screen
+              name="index"
+              options={{
+                title: 'Starter Base',
+                headerRight: () => <ThemeToggle />,
+              }}
+            />
+          </Stack>
+          <PortalHost />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 }

@@ -1,4 +1,7 @@
 .expo
 node_modules
-android
-ios
+/android
+/ios
+/dist
+/coverage
+/backup

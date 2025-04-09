@@ -1,10 +1,10 @@
-import { registerWebModule, NativeModule } from 'expo';
+import { NativeModule, registerWebModule } from 'expo';
 
 import { ChangeEventPayload } from './MyModule.types';
 
 type MyModuleEvents = {
   onChange: (params: ChangeEventPayload) => void;
-}
+};
 
 class MyModule extends NativeModule<MyModuleEvents> {
   PI = Math.PI;
@@ -14,6 +14,6 @@ class MyModule extends NativeModule<MyModuleEvents> {
   hello() {
     return 'Hello world! 👋';
   }
-};
+}
 
 export default registerWebModule(MyModule);

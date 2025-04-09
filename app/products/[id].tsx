@@ -1,17 +1,17 @@
-import { StyleSheet } from 'react-native';
-
-import { ThemedText } from '~/components/ThemedText';
 import { useLocalSearchParams } from 'expo-router';
-import { ThemedView } from '~/components/ThemedView';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function DetailsScreen() {
+import { ThemedText } from '~/components/ThemedText';
+import { ThemedView } from '~/components/ThemedView';
+
+export default function ProductsDetail() {
   const { id, name } = useLocalSearchParams();
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ThemedText>
-          Details of user {id} {name}
+          Details of product {id} {name}
         </ThemedText>
       </SafeAreaView>
     </ThemedView>

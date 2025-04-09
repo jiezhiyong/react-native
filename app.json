@@ -8,6 +8,10 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "jsEngine": "hermes",
+    "experiments": {
+      "reactCompiler": true,
+      "typedRoutes": true
+    },
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -86,9 +90,6 @@
         }
       ]
     ],
-    "experiments": {
-      "typedRoutes": true
-    },
     "extra": {
       "router": {
         "origin": false

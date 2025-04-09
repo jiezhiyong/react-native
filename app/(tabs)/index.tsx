@@ -1,0 +1,164 @@
+import { A } from '@expo/html-elements';
+import * as Linking from 'expo-linking';
+import { Link, usePathname, useRouter } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
+import * as React from 'react';
+import { Platform, ScrollView, View } from 'react-native';
+import Animated, { FadeInUp, FadeOutDown, LayoutAnimationConfig } from 'react-native-reanimated';
+
+import DOMComponents from '~/components/DOMComponents';
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+import { Button } from '~/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/components/ui/card';
+import { Progress } from '~/components/ui/progress';
+import { Text } from '~/components/ui/text';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
+import { Info } from '~/lib/icons/Info';
+
+const GITHUB_AVATAR_URI = 'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
+
+export default function HomeScreen() {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const [progress, setProgress] = React.useState(78);
+  const [containerSize, setContainerSize] = React.useState<{ width: number; height: number } | null>(null);
+
+  function updateProgressValue() {
+    setProgress(Math.floor(Math.random() * 100));
+  }
+
+  if (Platform.OS === 'ios') {
+    console.log('Hello on iOS');
+  }
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Hello in development');
+  }
+
+  return (
+    <ScrollView>
+      <View className="flex-1 gap-3 p-5 bg-secondary/30">
+        <Card className="w-full p-6 rounded-2xl">
+          <CardHeader className="items-center">
+            <Avatar alt="Rick Sanchez's Avatar" className="w-24 h-24">
+              <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
+              <AvatarFallback>
+                <Text>RS</Text>
+              </AvatarFallback>
+            </Avatar>
+            <View className="p-3" />
+            <CardTitle className="pb-2 text-center">Rick Sanchez</CardTitle>
+            <View className="flex-row">
+              <CardDescription className="text-base font-semibold">Scientist</CardDescription>
+              <Tooltip delayDuration={150}>
+                <TooltipTrigger className="px-2 pb-0.5 active:opacity-50">
+                  <Info size={14} strokeWidth={2.5} className="w-4 h-4 text-foreground/70" />
+                </TooltipTrigger>
+                <TooltipContent className="py-2 px-4 shadow">
+                  <Text className="native:text-lg">Freelance</Text>
+                </TooltipContent>
+              </Tooltip>
+            </View>
+          </CardHeader>
+          <CardContent>
+            <View className="flex-row justify-around gap-3">
+              <View className="items-center">
+                <Text className="text-sm text-muted-foreground">Env</Text>
+                <Text className="text-xl font-semibold">{process.env.EXPO_PUBLIC_API_KEY}</Text>
+              </View>
+              <View className="items-center">
+                <Text className="text-sm text-muted-foreground">Age</Text>
+                <Text className="text-xl font-semibold">70</Text>
+              </View>
+              <View className="items-center">
+                <Text className="text-sm text-muted-foreground">Species</Text>
+                <Text className="text-xl font-semibold">Human</Text>
+              </View>
+            </View>
+          </CardContent>
+          <CardFooter className="flex-col gap-3 pb-0">
+            <View className="flex-row items-center overflow-hidden">
+              <Text className="text-sm text-muted-foreground">Productivity:</Text>
+              <LayoutAnimationConfig skipEntering>
+                <Animated.View key={progress} entering={FadeInUp} exiting={FadeOutDown} className="w-11 items-center">
+                  <Text className="text-sm font-bold text-sky-600">{progress}%</Text>
+                </Animated.View>
+              </LayoutAnimationConfig>
+            </View>
+            <Progress value={progress} className="h-2" indicatorClassName="bg-sky-600" />
+            <View />
+            <Button variant="outline" className="shadow shadow-foreground/5" onPress={updateProgressValue}>
+              <Text>Update</Text>
+            </Button>
+          </CardFooter>
+        </Card>
+
+        <View style={{ $$css: true, _: 'bg-slate-100 rounded-xl p-3' }}>
+          <Text style={{ $$css: true, _: 'text-lg font-medium' }}>Tailwind + React Native web elements</Text>
+        </View>
+
+        <DOMComponents
+          name="this is a DOMComponents"
+          dom={{
+            containerStyle: containerSize != null ? { width: containerSize.width, height: containerSize.height } : null,
+            matchContents: true,
+            scrollEnabled: false,
+            style: {},
+          }}
+          pathname={pathname}
+          nativeActions={async (data: string) => {
+            console.log('Hello', data);
+          }}
+          onDOMLayout={async ({ width, height }) => {
+            if (containerSize?.width !== width || containerSize?.height !== height) {
+              setContainerSize({ width, height });
+            }
+          }}
+        />
+
+        <Text>导航</Text>
+        <Button onPress={() => router.navigate('/about')}>
+          <Text>Go to About</Text>
+        </Button>
+
+        <Link href={`/products/${20}?name=abc`} asChild>
+          <Button>
+            <Text>view products</Text>
+          </Button>
+        </Link>
+
+        <Text>使用默认浏览器打开URL</Text>
+        <Button onPress={() => Linking.openURL('https://expo.dev')}>
+          <Text>expo-linking-api</Text>
+        </Button>
+
+        <Link href="https://expo.dev" asChild>
+          <Button>
+            <Text>expo-routers-link-component</Text>
+          </Button>
+        </Link>
+
+        <Button variant="outline">
+          <A href="https://expo.dev">@expo/html-elements</A>
+        </Button>
+
+        <Button onPress={() => WebBrowser.openBrowserAsync('https://expo.dev')}>
+          <Text>WebBrowser</Text>
+        </Button>
+
+        <Button onPress={() => Linking.openURL('mailto:support@expo.dev')}>
+          <Text>mailto</Text>
+        </Button>
+
+        <Button onPress={() => Linking.openURL('tel:+123456789')}>
+          <Text>tel</Text>
+        </Button>
+
+        <Button onPress={() => Linking.openURL('sms:+123456789')}>
+          <Text>sms</Text>
+        </Button>
+      </View>
+    </ScrollView>
+  );
+}

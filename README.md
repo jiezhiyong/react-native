@@ -8,6 +8,7 @@ This is an [Expo](https://expo.dev) project. doc: [Expo documentation](https://d
 pnpm install # 安装依赖
 npx expo start # 启动开发模式
 npx expo start --no-dev --minify # 启动生产模式
+npx expo start --clear # 清除 bundler 缓存
 ```
 
 ## 添加插件
@@ -24,6 +25,7 @@ npx @react-native-reusables/cli@latest add
 
 ## Expo SDK
 
+- [expo-router](https://docs.expo.dev/router/introduction)
 - [expo-auth-session](https://docs.expo.dev/versions/latest/sdk/auth-session)
 - [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore)
 - [expo-file-system](https://docs.expo.dev/versions/latest/sdk/filesystem)
@@ -63,8 +65,8 @@ npx expo install expo-dev-client
 
 ```sh
 npx expo prebuild --clean # 使用 Prebuild 生成原生 Android 和 iOS 目录
-npx expo prebuild --clean --platform android
-npx expo prebuild --clean --platform ios
+npx expo prebuild --clean -p android
+npx expo prebuild --clean -p ios
 ```
 
 ### 创建开发版本 - 本地构建
@@ -79,24 +81,24 @@ npx expo run:ios --device # - device, eas.json 需要设置 build.development.io
 
 ```sh
 npm install -g eas-cli
-eas build --platform all --profile development
-eas build --platform android --profile development
-eas build --platform ios --profile development
+eas build -p all --profile development
+eas build -p android --profile development
+eas build -p ios --profile development
 ```
 
 ## 创建生产构建 - 在 EAS 上构建 / 使用 EAS CLI 本地构建 (--local)
 
 ```sh
-eas build --platform all --profile production
-eas build --platform android --profile production
-eas build --platform ios --profile production
+eas build -p all --profile production
+eas build -p android --profile production
+eas build -p ios --profile production
 ```
 
 ### 提交构建
 
 ```sh
-eas submit --platform android
-eas submit --platform ios
+eas submit -p android
+eas submit -p ios
 ```
 
 ### 提交 ios 商店元数据
@@ -116,7 +118,7 @@ eas update --channel production
 ### 部署 WEB 应用
 
 ```sh
-npx expo export --platform web
+npx expo export -p web
 npx expo serve
 eas deploy
 eas deploy --prod
@@ -125,8 +127,9 @@ eas deploy --prod
 ## 检查配置 https://docs.expo.dev/develop/tools/#expo-doctor
 
 ```sh
-npx expo install --check
-npx expo-doctor
+npx expo install --check # 检查依赖
+npx expo-doctor # 检查配置
+npx react-compiler-healthcheck@latest # 检查项目与 React 编译器的兼容性
 ```
 
 ## Orbit
