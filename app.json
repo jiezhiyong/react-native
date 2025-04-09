@@ -13,32 +13,28 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jiezhiyong.qachat",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets.",
-        "LSApplicationQueriesSchemes": [
-          "uber"
-        ]
+        "LSApplicationQueriesSchemes": ["uber"]
       },
       "privacyManifests": {
         "NSPrivacyAccessedAPITypes": [
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
-            "NSPrivacyAccessedAPITypeReasons": [
-              "CA92.1"
-            ]
+            "NSPrivacyAccessedAPITypeReasons": ["CA92.1"]
+          },
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+            "NSPrivacyAccessedAPITypeReasons": ["CA92.1"]
           }
         ]
       },
-      "associatedDomains": [
-        "applinks:qachat.com"
-      ]
+      "associatedDomains": ["applinks:qachat.com"]
     },
     "android": {
       "adaptiveIcon": {
@@ -47,11 +43,13 @@
       },
       "package": "com.jiezhiyong.qachat",
       "permissions": [
-        "android.permission.SCHEDULE_EXACT_ALARM"
+        "android.permission.SCHEDULE_EXACT_ALARM",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
       ],
-      "blockedPermissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
+      "blockedPermissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "bundler": "metro",
@@ -68,10 +66,7 @@
               "pathPrefix": "/records"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ]
     },
@@ -99,9 +94,13 @@
         "origin": false
       },
       "eas": {
-        "projectId": "48ec1897-f3a4-4fa0-9f7d-632eac90b513"
+        "projectId": "240e7c3e-9922-48a7-9a4a-84be0fcc615c"
       }
     },
-    "owner": "jiezhiyong"
+    "owner": "jiezhiyong",
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/240e7c3e-9922-48a7-9a4a-84be0fcc615c"
+    }
   }
 }

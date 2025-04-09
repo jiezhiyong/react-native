@@ -4,17 +4,11 @@ This is an [Expo](https://expo.dev) project. doc: [Expo documentation](https://d
 
 ## Get started
 
-1. Install dependencies
-
-   ```bash
-    pnpm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
+```bash
+pnpm install # 安装依赖
+npx expo start # 启动开发模式
+npx expo start --no-dev --minify # 启动生产模式
+```
 
 ## 添加插件
 
