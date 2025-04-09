@@ -2,10 +2,10 @@ import { View } from 'react-native';
 
 import { Text } from '~/components/ui/text';
 
-export default function AboutScreen() {
+export default function DrawerOne() {
   return (
     <View>
-      <Text>About</Text>
+      <Text>DrawerOne</Text>
     </View>
   );
 }

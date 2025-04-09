@@ -1,7 +1,7 @@
 import { useIsFocused } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { Text } from 'react-native';
+import { Text } from '~/components/ui/text';
 
 /**
  * 禁用非焦点屏幕上的查询

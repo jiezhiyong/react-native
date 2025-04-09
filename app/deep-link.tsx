@@ -1,5 +1,6 @@
 import * as Linking from 'expo-linking';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '~/components/ui/text';
 
 /**
  * 测试深层链接

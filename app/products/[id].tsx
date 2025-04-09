@@ -1,20 +1,34 @@
-import { useLocalSearchParams } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-import { ThemedText } from '~/components/ThemedText';
-import { ThemedView } from '~/components/ThemedView';
 
 export default function ProductsDetail() {
   const { id, name } = useLocalSearchParams();
+  const router = useRouter();
+  const params = useLocalSearchParams();
+
   return (
-    <ThemedView style={styles.container}>
+    <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: params.name, // 动态设置屏幕选项
+        }}
+      />
+
       <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ThemedText>
+        <Text>
           Details of product {id} {name}
-        </ThemedText>
+        </Text>
+
+        <Text
+          onPress={() => {
+            router.setParams({ name: 'Updated' });
+          }}
+        >
+          Update the title
+        </Text>
       </SafeAreaView>
-    </ThemedView>
+    </View>
   );
 }
 

@@ -15,7 +15,9 @@
    - Axios/Fetch
 3. 遵循 React Native 和 Expo 最佳实践
 4. 优先使用 Expo 提供的 API 和组件
-5. 组件化开发，保持代码简洁可维护
-6. 性能优化：避免不必要的渲染和大型依赖
-7. 良好的错误处理机制
-8. 支持多平台（iOS 和 Android）适配
+5. 尽量使用 nativewind (tailwindcss) 进行样式处理，而不是直接使用 StyleSheet
+6. 尽量使用 zustand 进行状态管理
+7. 组件化开发，保持代码简洁可维护
+8. 性能优化：避免不必要的渲染和大型依赖
+9. 良好的错误处理机制
+10. 支持多平台（iOS 和 Android）适配

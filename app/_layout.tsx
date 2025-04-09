@@ -104,10 +104,25 @@ export default function RootLayout() {
           <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
           <Stack>
             <Stack.Screen
-              name="index"
+              name="(tabs)"
               options={{
-                title: 'Starter Base',
+                title: 'Starter Tabs',
                 headerRight: () => <ThemeToggle />,
+              }}
+            />
+            <Stack.Screen
+              name="login"
+              options={{
+                presentation: 'modal',
+                title: '登录',
+                headerShown: true,
+              }}
+            />
+            <Stack.Screen
+              name="(protected)"
+              options={{
+                headerShown: true,
+                title: '受保护内容',
               }}
             />
           </Stack>

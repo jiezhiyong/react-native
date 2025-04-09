@@ -4,14 +4,14 @@ import { View } from 'react-native';
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
 
-export default function DiscoverIndex() {
+export default function DiscoverOne() {
   const router = useRouter();
   return (
     <View>
-      <Text>DiscoverIndex</Text>
+      <Text>DiscoverOne</Text>
 
-      <Button onPress={() => router.navigate('/discover/one')}>
-        <Text>Go to Discover One</Text>
+      <Button onPress={() => router.navigate('/discover/two')}>
+        <Text>Go to Discover Two</Text>
       </Button>
     </View>
   );
