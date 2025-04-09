@@ -25,7 +25,7 @@ export default function DOMComponent({
   return (
     <div>
       <h1>Hello, {name}</h1>
-      <img src={`${process.env.EXPO_BASE_URL}/assets/images/partial-react-logo.png`} />
+      <img src={`~/assets/images/partial-react-logo.png`} />
       <Link href="/webview">webview</Link>
       <p>Pathname: {pathname}</p>
     </div>

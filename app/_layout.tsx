@@ -7,6 +7,7 @@ import { PortalHost } from '@rn-primitives/portal';
 import { focusManager, onlineManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as Network from 'expo-network';
 import { Stack, useNavigationContainerRef } from 'expo-router';
+import Head from 'expo-router/head';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { useEffect } from 'react';
@@ -26,6 +27,10 @@ const LIGHT_THEME: Theme = {
 const DARK_THEME: Theme = {
   ...DarkTheme,
   colors: NAV_THEME.dark,
+};
+
+export const unstable_settings = {
+  initialRouteName: '(tabs)',
 };
 
 export {
@@ -129,6 +134,11 @@ export default function RootLayout() {
           <PortalHost />
         </ThemeProvider>
       </QueryClientProvider>
+
+      {/* 苹果接力 https://docs.expo.dev/router/advanced/apple-handoff/ */}
+      <Head>
+        <meta property="expo:handoff" content="true" />
+      </Head>
     </React.StrictMode>
   );
 }

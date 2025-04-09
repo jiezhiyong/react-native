@@ -3,6 +3,10 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import { useAuth } from '~/store/auth';
 
+export const unstable_settings = {
+  initialRouteName: 'bill',
+};
+
 /**
  * 受保护路由的布局组件
  * 该组件会检查用户是否已经认证，如果没有认证则重定向到登录页面

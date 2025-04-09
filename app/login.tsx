@@ -1,8 +1,11 @@
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Platform, StyleSheet, TextInput, View } from 'react-native';
 
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
 import { useAuth } from '~/store/auth';
 
 // GitHub OAuth 配置
@@ -36,8 +39,16 @@ export default function LoginScreen() {
   const handleOAuthSuccess = useCallback(
     async (code: string) => {
       try {
-        // TODO: 实现实际的 OAuth 令牌交换逻辑
-        const { accessToken } = await exchangeAuthCode(code);
+        const response = await fetch('/exchange-github-auth-code+api', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ code }),
+        });
+        const res = await response.json();
+        console.log(res);
+        const { accessToken } = res;
 
         // 调用登录方法
         await signIn({ accessToken });
@@ -78,17 +89,18 @@ export default function LoginScreen() {
     }
   };
 
+  const isPresented = router.canGoBack();
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>登录</Text>
+      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
 
       <TextInput style={styles.input} placeholder="用户名" value={username} onChangeText={setUsername} />
 
       <TextInput style={styles.input} placeholder="密码" secureTextEntry value={password} onChangeText={setPassword} />
 
-      <Pressable style={styles.loginButton} onPress={handleFormLogin}>
-        <Text style={styles.buttonText}>{isLoading ? '登录中...' : '登录'}</Text>
-      </Pressable>
+      <Button onPress={handleFormLogin} className="w-full">
+        <Text>{isLoading ? '登录中...' : '登录'}</Text>
+      </Button>
 
       <View style={styles.divider}>
         <View style={styles.dividerLine} />
@@ -96,9 +108,18 @@ export default function LoginScreen() {
         <View style={styles.dividerLine} />
       </View>
 
-      <Pressable style={styles.oauthButton} disabled={!request || isLoading} onPress={() => promptAsync()}>
-        <Text style={styles.buttonText}>GitHub 登录</Text>
-      </Pressable>
+      <Button disabled={!request || isLoading} onPress={() => promptAsync()} className="w-full" variant="outline">
+        <Text>GitHub 登录</Text>
+      </Button>
+
+      {/* for WEB */}
+      {isPresented && (
+        <Link href="../" asChild>
+          <Button variant="ghost">
+            <Text>Dismiss</Text>
+          </Button>
+        </Link>
+      )}
     </View>
   );
 }
@@ -107,13 +128,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
   },
   input: {
     width: '100%',
@@ -161,25 +176,3 @@ const styles = StyleSheet.create({
     color: '#999',
   },
 });
-
-// 服务器端代码示例（不要在客户端实现）
-async function exchangeAuthCode(code: string) {
-  const response = await fetch('https://github.com/login/oauth/access_token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({
-      client_id: githubClientId,
-      client_secret: 'd041c1e5e4cc546e992a8ca2d630fa112b167dd6', // 敏感信息，只在服务器端使用
-      code,
-    }),
-  });
-
-  const { accessToken } = await response.json();
-  console.log('accessToken', accessToken);
-  // TODO: 调用 GitHub API 获取用户信息
-  // TODO: 返回 accessToken、用户信息
-  return { accessToken };
-}

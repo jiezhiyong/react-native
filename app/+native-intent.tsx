@@ -1,15 +1,23 @@
-import { Stack } from 'expo-router';
-import { View } from 'react-native';
+// import ThirdPartyService from 'third-party-sdk';
 
-import { Text } from '~/components/ui/text';
-
-export default function NativeIntent() {
-  return (
-    <>
-      <Stack.Screen options={{ title: 'Native Intent' }} />
-      <View>
-        <Text>Native Intent</Text>
-      </View>
-    </>
-  );
-}
+// export function redirectSystemPath({ path, initial }: { path: string; initial: boolean }) {
+//   try {
+//     if (initial) {
+//       // While the parameter is called `path` there is no guarantee that this is a path or a valid URL
+//       const url = new URL(path, 'myapp://app.home');
+//       // Detection of third-party URLs will change based on the provider
+//       if (url.hostname === '<third-party-provider-hostname>') {
+//         return ThirdPartyService.processReferringUrl(url).catch(() => {
+//           // Something went wrong
+//           return '/unexpected-error';
+//         });
+//       }
+//       return path;
+//     }
+//     return path;
+//   } catch {
+//     // Do not crash inside this function! Instead you should redirect users
+//     // to a custom route to handle unexpected errors, where they are able to report the incident
+//     return '/unexpected-error';
+//   }
+// }

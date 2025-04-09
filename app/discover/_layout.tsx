@@ -1,23 +1,24 @@
+import { useFonts } from 'expo-font';
 import { Slot } from 'expo-router';
-import { Modal, SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 
 export const unstable_settings = {
   initialRouteName: 'index', // Ensure any route can link back to `/`
 };
 
 export default function DiscoverLayout() {
-  const isAuthenticated = false; /* check for valid auth token / session */
+  const [isLoaded] = useFonts({
+    spaceMono: require('~/assets/fonts/SpaceMono-Regular.ttf'),
+  });
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <SafeAreaView>
-      <Modal visible={!isAuthenticated}>
-        <View>
-          <Text>用户未登录</Text>
-        </View>
-      </Modal>
-
       <View>
-        <Text>DiscoverLayout Header</Text>
+        <Text style={{ fontFamily: 'spaceMono' }}>DiscoverLayout Header</Text>
       </View>
 
       <Slot />
