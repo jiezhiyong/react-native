@@ -119,8 +119,7 @@ eas update --channel production
 
 ```sh
 npx expo export -p web
-npx expo serve
-npx serve dist # 在本地测试生产构建
+npx expo serve # 在本地进行测试
 eas deploy
 eas deploy --prod
 ```

@@ -51,16 +51,17 @@ const queryClient = new QueryClient({
 });
 
 // 在线状态管理 - 自动重新连接时的自动重新获取
-try {
-  onlineManager.setEventListener((setOnline) => {
-    const eventSubscription = Network.addNetworkStateListener((state) => {
-      setOnline(!!state.isConnected);
-    });
-    return eventSubscription.remove;
-  });
-} catch (error) {
-  console.error('Failed to set online event listener:', error);
-}
+// TODO: npx expo export -p web 时报错 Module implementation must be a class
+// try {
+//   onlineManager.setEventListener((setOnline) => {
+//     const eventSubscription = Network.addNetworkStateListener((state) => {
+//       setOnline(!!state.isConnected);
+//     });
+//     return eventSubscription.remove;
+//   });
+// } catch (error) {
+//   console.error('Failed to set online event listener:', error);
+// }
 
 // 应用程序聚焦时重新获取
 function onAppStateChange(status: AppStateStatus) {
