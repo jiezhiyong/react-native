@@ -79,8 +79,8 @@ eas credentials
 
 ```sh
 npx expo run:android
-npx expo run:ios # - simulator, eas.json 需要设置 build.development.ios.simulator: true
-npx expo run:ios --device # - device, eas.json 需要设置 build.development.ios.simulator: false
+npx expo run:ios # simulator, eas.json => build.development.ios.simulator: true
+npx expo run:ios --device # eas.json => build.development.ios.simulator: false
 ```
 
 ### 创建开发版本 - 在 EAS 上构建 / 使用 EAS CLI 本地构建 (--local)

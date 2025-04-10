@@ -16,7 +16,7 @@ export default function DiscoverLayout() {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1 gap-3 p-5">
       <View>
         <Text style={{ fontFamily: 'spaceMono' }}>DiscoverLayout Header</Text>
       </View>

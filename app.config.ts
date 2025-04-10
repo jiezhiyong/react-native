@@ -41,7 +41,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 
   plugins: [
     'expo-secure-store',
-    '@logrocket/react-native',
     [
       'expo-router',
       {
@@ -60,6 +59,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       {
         photosPermission: 'Allow $(PRODUCT_NAME) to access your photos.',
         savePhotosPermission: 'Allow $(PRODUCT_NAME) to save photos.',
+      },
+    ],
+    [
+      'expo-notifications',
+      {
+        enableBackgroundRemoteNotifications: true,
       },
     ],
   ],

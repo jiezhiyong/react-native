@@ -112,7 +112,6 @@ export default function LoginScreen() {
         <Text>GitHub 登录</Text>
       </Button>
 
-      {/* for WEB */}
       {isPresented && (
         <Link href="../" asChild>
           <Button variant="ghost">
