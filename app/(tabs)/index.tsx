@@ -45,11 +45,15 @@ export default function HomeScreen() {
             console.log('Hello', data);
           }}
           onDOMLayout={async ({ width, height }) => {
-            if (containerSize?.width !== width || containerSize?.height !== height) {
-              setContainerSize({ width, height });
-            }
+            // if (containerSize?.width !== width || containerSize?.height !== height) {
+            //   setContainerSize({ width, height });
+            // }
           }}
         />
+
+        <Button onPress={() => router.navigate('/discover')}>
+          <Text>Go to Discover</Text>
+        </Button>
 
         <Text>登录</Text>
         <Button onPress={() => router.navigate('/login')}>
@@ -61,10 +65,6 @@ export default function HomeScreen() {
         </Button>
 
         <Text>导航</Text>
-        <Button onPress={() => router.navigate('/discover')}>
-          <Text>Go to Discover</Text>
-        </Button>
-
         <Button onPress={() => router.navigate('/products')}>
           <Text>Go to Products</Text>
         </Button>

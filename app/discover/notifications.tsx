@@ -4,6 +4,10 @@ import * as Notifications from 'expo-notifications';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Platform, Text, View } from 'react-native';
 
+/**
+ * 推送通知
+ * Expo 工具: https://expo.dev/notifications
+ */
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,

@@ -45,3 +45,4 @@ web-build/
 # 凭证文件
 credentials.json
 credentials/
+google-services.json
