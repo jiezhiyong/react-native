@@ -70,6 +70,9 @@ function onAppStateChange(status: AppStateStatus) {
   }
 }
 
+// LogRocket
+// LogRocket.init('zu1q7o/qa-chat');
+
 export default function RootLayout() {
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(navigationRef);

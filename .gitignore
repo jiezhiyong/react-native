@@ -41,3 +41,7 @@ coverage/**/*
 .expo
 dist/
 web-build/
+
+# 凭证文件
+credentials.json
+credentials/

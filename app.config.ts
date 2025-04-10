@@ -41,6 +41,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 
   plugins: [
     'expo-secure-store',
+    '@logrocket/react-native',
     [
       'expo-router',
       {

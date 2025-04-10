@@ -8,6 +8,7 @@ import { Platform, ScrollView, View } from 'react-native';
 import DOMComponents from '~/components/DOMComponents';
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
+import MyModule from '~/modules/my-module';
 
 export default function HomeScreen() {
   const pathname = usePathname();
@@ -104,6 +105,9 @@ export default function HomeScreen() {
         <Button onPress={() => Linking.openURL('sms:+123456789')}>
           <Text>sms</Text>
         </Button>
+
+        <Text>Expo Modules API</Text>
+        <Text>{MyModule.hello()}</Text>
       </View>
     </ScrollView>
   );

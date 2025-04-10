@@ -69,12 +69,18 @@ npx expo prebuild --clean -p android
 npx expo prebuild --clean -p ios
 ```
 
+### 配置证书
+
+```sh
+eas credentials
+```
+
 ### 创建开发版本 - 本地构建
 
 ```sh
 npx expo run:android
 npx expo run:ios # - simulator, eas.json 需要设置 build.development.ios.simulator: true
-npx expo run:ios --device # - device, eas.json 需要设置 build.development.ios.device: false
+npx expo run:ios --device # - device, eas.json 需要设置 build.development.ios.simulator: false
 ```
 
 ### 创建开发版本 - 在 EAS 上构建 / 使用 EAS CLI 本地构建 (--local)
@@ -148,20 +154,23 @@ npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分�
 
 ## More
 
-- 调试 https://docs.expo.dev/debugging/errors-and-warnings
-- 权限 https://docs.expo.dev/guides/permissions
-- 单元测试 https://docs.expo.dev/develop/unit-testing
-- E2E https://docs.expo.dev/build-reference/e2e-tests
-- 存储数据 https://docs.expo.dev/develop/user-interface/store-data
-- 使用 VS Code 进行调试 https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
-- Snack https://snack.expo.dev
-- 使用 app config 配置 https://docs.expo.dev/workflow/configuration
-- 链接 https://docs.expo.dev/linking/overview
-- 自定义本机代码 https://docs.expo.dev/workflow/customizing
-- PWA https://docs.expo.dev/guides/progressive-web-apps
-- 分析 JavaScript 包 https://docs.expo.dev/guides/analyzing-bundles
-- 树摇 https://docs.expo.dev/guides/tree-shaking
-- 压缩 JavaScript https://docs.expo.dev/guides/minify
+- 调试: https://docs.expo.dev/debugging/errors-and-warnings
+- 权限: https://docs.expo.dev/guides/permissions
+- 单元测试: https://docs.expo.dev/develop/unit-testing
+- E2E: https://docs.expo.dev/build-reference/e2e-tests
+- 存储数据: https://docs.expo.dev/develop/user-interface/store-data
+- 使用 VS Code 进行调试: https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
+- Snack: https://snack.expo.dev
+- 使用 app config 配置: https://docs.expo.dev/workflow/configuration
+- 链接: https://docs.expo.dev/linking/overview
+- 自定义本机代码: https://docs.expo.dev/workflow/customizing
+- PWA: https://docs.expo.dev/guides/progressive-web-apps
+- 分析 JavaScript 包: https://docs.expo.dev/guides/analyzing-bundles
+- 树摇: https://docs.expo.dev/guides/tree-shaking
+- 压缩 JavaScript: https://docs.expo.dev/guides/minify
+- Expo Modules API: https://docs.expo.dev/modules/overview
+- Expo 推送通知: https://docs.expo.dev/push-notifications/overview
+- 应用签名: https://docs.expo.dev/app-signing/app-credentials/#distribution-certificate
 
 ## 分析 JavaScript 包
 
@@ -177,4 +186,3 @@ EXPO_UNSTABLE_ATLAS=true npx expo export & npx expo-atlas .expo/atlas.jsonl # �
 - Webview
 - 应用链接
 - 应用变体（debug、release、production | free、paid）
-- 应用签名
