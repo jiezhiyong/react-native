@@ -16,6 +16,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       ITSAppUsesNonExemptEncryption: false,
       NSCameraUsageDescription: 'This app uses the camera to scan barcodes on event tickets.',
       LSApplicationQueriesSchemes: ['uber'],
+      CFBundleAllowMixedLocalizations: true,
     },
     privacyManifests: {
       NSPrivacyAccessedAPITypes: [
@@ -41,6 +42,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 
   plugins: [
     'expo-secure-store',
+    'expo-localization',
     [
       'expo-router',
       {

@@ -56,7 +56,11 @@
     "notification": {
       "vapidPublicKey": "BBoJGcBmcJwYCQ6NMx2Df3xOpCXIpsezrjqce23KKTqyA1yuLpDuefkSDBXxDm4xzHGBRDvxua5cIFv2r24WI0M"
     },
+    "locales": {
+      "ja": "./languages/japanese.json"
+    },
     "extra": {
+      "supportsRTL": true,
       "router": {
         "origin": false
       },

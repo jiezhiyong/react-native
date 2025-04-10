@@ -147,7 +147,8 @@ brew install expo-orbit
 ## 其他
 
 ```sh
-npx expo install --fix # 将 Expo SDK 库更新为 SDK 版本的最新版本
+npx expo install expo@latest # 升级 Expo SDK
+npx expo install --fix # 将所有依赖升级以匹配已安装的 SDK 版本
 eas credentials -p android # 获取 Android SHA256 证书指纹
 npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分配权限，并在商店中创建 iTunes 应用条目
 ```

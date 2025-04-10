@@ -19,6 +19,11 @@ config.transformer.minifierConfig = {
   },
 };
 
+// add .cjs extensions
+const sourceExts = config.resolver.sourceExts;
+const exts = process.env.RN_SRC_EXT ? process.env.RN_SRC_EXT.split(',').concat(sourceExts) : sourceExts;
+config.resolver.sourceExts = [...exts, 'cjs'];
+
 // Adds support for `.db` files for SQLite databases
 config.resolver.assetExts.push('db');
 

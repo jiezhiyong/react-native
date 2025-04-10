@@ -17,6 +17,7 @@ import type { AppStateStatus } from 'react-native';
 import { ThemeToggle } from '~/components/ThemeToggle';
 import { useColorScheme } from '~/hooks/useColorScheme';
 import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
+import TypesafeI18n from '~/i18n/i18n-react';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
 
@@ -110,32 +111,34 @@ export default function RootLayout() {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-          <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-          <Stack>
-            <Stack.Screen
-              name="(tabs)"
-              options={{
-                title: 'Starter Tabs',
-                headerRight: () => <ThemeToggle />,
-              }}
-            />
-            <Stack.Screen
-              name="login"
-              options={{
-                presentation: 'modal',
-                title: '登录',
-                headerShown: true,
-              }}
-            />
-            <Stack.Screen
-              name="(protected)"
-              options={{
-                headerShown: true,
-                title: '受保护内容',
-              }}
-            />
-          </Stack>
-          <PortalHost />
+          <TypesafeI18n locale={'en'}>
+            <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+            <Stack>
+              <Stack.Screen
+                name="(tabs)"
+                options={{
+                  title: 'Starter Tabs',
+                  headerRight: () => <ThemeToggle />,
+                }}
+              />
+              <Stack.Screen
+                name="login"
+                options={{
+                  presentation: 'modal',
+                  title: '登录',
+                  headerShown: true,
+                }}
+              />
+              <Stack.Screen
+                name="(protected)"
+                options={{
+                  headerShown: true,
+                  title: '受保护内容',
+                }}
+              />
+            </Stack>
+            <PortalHost />
+          </TypesafeI18n>
         </ThemeProvider>
       </QueryClientProvider>
 
