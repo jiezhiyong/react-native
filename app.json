@@ -53,6 +53,9 @@
         }
       ]
     },
+    "notification": {
+      "vapidPublicKey": "BBoJGcBmcJwYCQ6NMx2Df3xOpCXIpsezrjqce23KKTqyA1yuLpDuefkSDBXxDm4xzHGBRDvxua5cIFv2r24WI0M"
+    },
     "extra": {
       "router": {
         "origin": false

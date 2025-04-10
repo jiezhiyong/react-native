@@ -23,6 +23,8 @@ async function sendPushNotification(expoPushToken: string) {
     title: 'Original Title',
     body: 'And here is the body!',
     data: { someData: 'goes here' },
+    androidChannelId: 'default',
+    priority: 'high',
   };
 
   await fetch('https://exp.host/--/api/v2/push/send', {
@@ -43,11 +45,17 @@ function handleRegistrationError(errorMessage: string) {
 
 async function registerForPushNotificationsAsync() {
   if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
+    await Notifications.setNotificationChannelAsync('default', {
       name: 'default',
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
       lightColor: '#FF231F7C',
+      enableLights: true,
+      enableVibrate: true,
+      showBadge: true,
+      lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
+      sound: 'default',
+      description: '应用的默认通知渠道',
     });
   }
 
@@ -89,6 +97,21 @@ export default function App() {
   const responseListener = useRef<Notifications.EventSubscription>();
 
   useEffect(() => {
+    if (Platform.OS === 'web') {
+      setExpoPushToken('not supported on web');
+      return;
+    }
+
+    if (Platform.OS === 'android') {
+      Notifications.setNotificationHandler({
+        handleNotification: async () => ({
+          shouldShowAlert: true,
+          shouldPlaySound: true,
+          shouldSetBadge: true,
+        }),
+      });
+    }
+
     registerForPushNotificationsAsync()
       .then((token) => setExpoPushToken(token ?? ''))
       .catch((error: any) => setExpoPushToken(`${error}`));
