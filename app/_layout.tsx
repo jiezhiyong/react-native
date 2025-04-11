@@ -111,34 +111,35 @@ export default function RootLayout() {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-          <TypesafeI18n locale={'zh'}>
-            <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-            <Stack>
-              <Stack.Screen
-                name="(tabs)"
-                options={{
-                  title: 'Starter Tabs',
-                  headerRight: () => <ThemeToggle />,
-                }}
-              />
-              <Stack.Screen
-                name="login"
-                options={{
-                  presentation: 'modal',
-                  title: '登录',
-                  headerShown: true,
-                }}
-              />
-              <Stack.Screen
-                name="(protected)"
-                options={{
-                  headerShown: true,
-                  title: '受保护内容',
-                }}
-              />
-            </Stack>
-            <PortalHost />
-          </TypesafeI18n>
+          {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
+          {/* <TypesafeI18n locale={'zh'}> */}
+          <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+          <Stack>
+            <Stack.Screen
+              name="(tabs)"
+              options={{
+                title: 'Starter Tabs',
+                headerRight: () => <ThemeToggle />,
+              }}
+            />
+            <Stack.Screen
+              name="login"
+              options={{
+                presentation: 'modal',
+                title: '登录',
+                headerShown: true,
+              }}
+            />
+            <Stack.Screen
+              name="(protected)"
+              options={{
+                headerShown: true,
+                title: '受保护内容',
+              }}
+            />
+          </Stack>
+          <PortalHost />
+          {/* </TypesafeI18n> */}
         </ThemeProvider>
       </QueryClientProvider>
 

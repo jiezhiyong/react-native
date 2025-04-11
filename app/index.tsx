@@ -1,1 +1,0 @@
-// using (tabs)/index.tsx

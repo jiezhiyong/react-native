@@ -52,7 +52,7 @@ npx @react-native-reusables/cli@latest add
 
 - [react-native-app-link](https://github.com/FiberJW/react-native-app-link)
 - [uri-scheme](https://github.com/expo/expo/tree/main/packages/uri-scheme#readme)
-
+- [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n)
 - [...](https://reactnative.directory)
 
 ## 创建开发版本
@@ -155,23 +155,24 @@ npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分�
 
 ## More
 
-- 调试: https://docs.expo.dev/debugging/errors-and-warnings
-- 权限: https://docs.expo.dev/guides/permissions
-- 单元测试: https://docs.expo.dev/develop/unit-testing
-- E2E: https://docs.expo.dev/build-reference/e2e-tests
-- 存储数据: https://docs.expo.dev/develop/user-interface/store-data
-- 使用 VS Code 进行调试: https://docs.expo.dev/debugging/tools/#debugging-with-vs-code
-- Snack: https://snack.expo.dev
-- 使用 app config 配置: https://docs.expo.dev/workflow/configuration
-- 链接: https://docs.expo.dev/linking/overview
-- 自定义本机代码: https://docs.expo.dev/workflow/customizing
-- PWA: https://docs.expo.dev/guides/progressive-web-apps
-- 分析 JavaScript 包: https://docs.expo.dev/guides/analyzing-bundles
-- 树摇: https://docs.expo.dev/guides/tree-shaking
-- 压缩 JavaScript: https://docs.expo.dev/guides/minify
-- Expo Modules API: https://docs.expo.dev/modules/overview
-- Expo 推送通知: https://docs.expo.dev/push-notifications/overview
-- 应用签名: https://docs.expo.dev/app-signing/app-credentials/#distribution-certificate
+- [Expo Go](https://expo.dev/go)
+- [调试](https://docs.expo.dev/debugging/errors-and-warnings)
+- [权限](https://docs.expo.dev/guides/permissions)
+- [单元测试](https://docs.expo.dev/develop/unit-testing)
+- [E2E](https://docs.expo.dev/build-reference/e2e-tests)
+- [存储数据](https://docs.expo.dev/develop/user-interface/store-data)
+- [使用 VS Code 进行调试](https://docs.expo.dev/debugging/tools/#debugging-with-vs-code)
+- [Snack](https://snack.expo.dev)
+- [使用 app config 配置](https://docs.expo.dev/workflow/configuration)
+- [链接](https://docs.expo.dev/linking/overview)
+- [自定义本机代码](https://docs.expo.dev/workflow/customizing)
+- [PWA](https://docs.expo.dev/guides/progressive-web-apps)
+- [分析 JavaScript 包](https://docs.expo.dev/guides/analyzing-bundles)
+- [树摇](https://docs.expo.dev/guides/tree-shaking)
+- [压缩 JavaScript](https://docs.expo.dev/guides/minify)
+- [Expo Modules API](https://docs.expo.dev/modules/overview)
+- [Expo 推送通知](https://docs.expo.dev/push-notifications/overview)
+- [应用签名](https://docs.expo.dev/app-signing/app-credentials/#distribution-certificate)
 
 ## 分析 JavaScript 包
 

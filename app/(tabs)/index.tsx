@@ -3,17 +3,20 @@ import * as Linking from 'expo-linking';
 import { Link, usePathname, useRouter } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Platform, ScrollView, View } from 'react-native';
+import { Image, Platform, ScrollView, View } from 'react-native';
 
 import DOMComponents from '~/components/DOMComponents';
+import { LanguageToggle } from '~/components/LanguageToggle';
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
-import MyModule from '~/modules/my-module';
+import { useI18nContext } from '~/i18n/i18n-react';
+// import MyModule from '~/modules/my-module';
 
 export default function HomeScreen() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const { LL, locale } = useI18nContext();
   const [containerSize, setContainerSize] = React.useState<{ width: number; height: number } | null>(null);
 
   // ios 模拟器或设备上打开后一直触发 console ？
@@ -28,28 +31,12 @@ export default function HomeScreen() {
   return (
     <ScrollView>
       <View className="flex-1 gap-3 p-5 bg-secondary/30">
+        {/* <Text>{LL.HI({ name: 'React Native', locale })}</Text> */}
+        {/* <LanguageToggle /> */}
+
         <View style={{ $$css: true, _: 'bg-slate-100 rounded-xl p-3' }}>
           <Text style={{ $$css: true, _: 'text-lg font-medium' }}>Tailwind + React Native web elements</Text>
         </View>
-
-        <DOMComponents
-          name="this is a DOMComponents"
-          dom={{
-            containerStyle: containerSize != null ? { width: containerSize.width, height: containerSize.height } : null,
-            matchContents: true,
-            scrollEnabled: false,
-            style: {},
-          }}
-          pathname={pathname}
-          nativeActions={async (data: string) => {
-            console.log('Hello', data);
-          }}
-          onDOMLayout={async ({ width, height }) => {
-            // if (containerSize?.width !== width || containerSize?.height !== height) {
-            //   setContainerSize({ width, height });
-            // }
-          }}
-        />
 
         <Button onPress={() => router.navigate('/discover')}>
           <Text>Go to Discover</Text>
@@ -107,7 +94,28 @@ export default function HomeScreen() {
         </Button>
 
         <Text>Expo Modules API</Text>
-        <Text>{MyModule.hello()}</Text>
+        {/* <Text>{MyModule.hello()}</Text> */}
+
+        <Image source={require('~/assets/images/react-logo.png')} />
+
+        <DOMComponents
+          name="this is a DOMComponents"
+          dom={{
+            containerStyle: containerSize != null ? { width: containerSize.width, height: containerSize.height } : null,
+            matchContents: true,
+            scrollEnabled: false,
+            style: {},
+          }}
+          pathname={pathname}
+          nativeActions={async (data: string) => {
+            console.log('Hello', data);
+          }}
+          onDOMLayout={async ({ width, height }) => {
+            // if (containerSize?.width !== width || containerSize?.height !== height) {
+            //   setContainerSize({ width, height });
+            // }
+          }}
+        />
       </View>
     </ScrollView>
   );
