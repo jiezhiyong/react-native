@@ -5,7 +5,7 @@ import { useI18nContext } from '~/i18n/i18n-react';
 import { Locales } from '~/i18n/i18n-types';
 import { loadLocale } from '~/i18n/i18n-util.sync';
 
-export const LocalizedComponent = () => {
+export default function LocalizedComponent() {
   const { LL, locale, setLocale } = useI18nContext();
 
   const applyLocale = (it: Locales) => {
@@ -16,7 +16,7 @@ export const LocalizedComponent = () => {
 
   const [, toggleLocale] = useReducer(
     (currentLocale: Locales) => {
-      const nextLocale: Locales = currentLocale === 'en' ? 'de' : 'en';
+      const nextLocale: Locales = currentLocale === 'en' ? 'zh' : 'en';
 
       return applyLocale(nextLocale);
     },
@@ -28,12 +28,12 @@ export const LocalizedComponent = () => {
     <SafeAreaView style={styles.root}>
       <Text style={styles.textTitle}>typesafe-i18n: {locale}</Text>
 
-      <Text style={styles.textBody}>{LL.HI({ name: locale })}</Text>
+      <Text style={styles.textBody}>{LL.HI({ name: 'React Native', locale })}</Text>
 
       <Button onPress={toggleLocale} title="toggle locale" />
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {

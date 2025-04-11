@@ -111,7 +111,7 @@ export default function RootLayout() {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-          <TypesafeI18n locale={'en'}>
+          <TypesafeI18n locale={'zh'}>
             <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
             <Stack>
               <Stack.Screen

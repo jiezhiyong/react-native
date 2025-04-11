@@ -17,6 +17,10 @@ export default function DiscoverIndex() {
       <Button onPress={() => router.navigate('/discover/notifications')}>
         <Text>Go to Discover Notifications</Text>
       </Button>
+
+      <Button onPress={() => router.navigate('/discover/localization')}>
+        <Text>Go to Discover Localization</Text>
+      </Button>
     </View>
   );
 }

@@ -1,7 +1,7 @@
 import type { BaseTranslation } from '../i18n-types';
 
-const zh: BaseTranslation = {
-  HI: 'Hi {name:string}!\nPlease leave a star if you like this project: https://github.com/ivanhofer/typesafe-i18n',
-};
+const zh = {
+  HI: '你好 {name:string}! 当前展示的是 {locale:string} 语言',
+} satisfies BaseTranslation;
 
 export default zh;

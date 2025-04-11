@@ -1,7 +1,7 @@
-import type { BaseTranslation } from '../i18n-types';
+import type { Translation } from '../i18n-types';
 
-const en: BaseTranslation = {
-  HI: 'Hi {name:string}!\nPlease leave a star if you like this project: https://github.com/ivanhofer/typesafe-i18n',
-};
+const en = {
+  HI: 'Hi {name}! now showing {locale} language',
+} satisfies Translation;
 
 export default en;
