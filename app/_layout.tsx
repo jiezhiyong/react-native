@@ -4,15 +4,19 @@ import { useReactNavigationDevTools } from '@dev-plugins/react-navigation';
 import { useReactQueryDevTools } from '@dev-plugins/react-query';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
+import * as Sentry from '@sentry/react-native';
 import { focusManager, onlineManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { isRunningInExpoGo } from 'expo';
 import * as Network from 'expo-network';
 import { Stack, useNavigationContainerRef } from 'expo-router';
 import Head from 'expo-router/head';
 import { StatusBar } from 'expo-status-bar';
+import * as Updates from 'expo-updates';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
 import type { AppStateStatus } from 'react-native';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { ThemeToggle } from '~/components/ThemeToggle';
 import { useColorScheme } from '~/hooks/useColorScheme';
@@ -20,6 +24,41 @@ import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
 import TypesafeI18n from '~/i18n/i18n-react';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
+
+// Construct a new integration instance. This is needed to communicate between the integration and React
+const navigationIntegration = Sentry.reactNavigationIntegration({
+  enableTimeToInitialDisplay: !isRunningInExpoGo(),
+});
+
+const manifest = Updates.manifest;
+const metadata = 'metadata' in manifest ? manifest.metadata : undefined;
+const extra = 'extra' in manifest ? manifest.extra : undefined;
+const updateGroup = metadata && 'updateGroup' in metadata ? metadata.updateGroup : undefined;
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  debug: process.env.NODE_ENV === 'development',
+  sendDefaultPii: true,
+  tracesSampleRate: 1.0,
+  profilesSampleRate: 1.0,
+  integrations: [navigationIntegration],
+  enableNativeFramesTracking: !isRunningInExpoGo(),
+});
+
+const scope = Sentry.getGlobalScope();
+
+scope.setTag('expo-update-id', Updates.updateId);
+scope.setTag('expo-is-embedded-update', Updates.isEmbeddedLaunch);
+
+if (typeof updateGroup === 'string') {
+  scope.setTag('expo-update-group-id', updateGroup);
+
+  const owner = extra?.expoClient?.owner ?? '[account]';
+  const slug = extra?.expoClient?.slug ?? '[project]';
+  scope.setTag('expo-update-debug-url', `https://expo.dev/accounts/${owner}/projects/${slug}/updates/${updateGroup}`);
+} else if (Updates.isEmbeddedLaunch) {
+  scope.setTag('expo-update-debug-url', 'not applicable for embedded updates');
+}
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -71,10 +110,7 @@ function onAppStateChange(status: AppStateStatus) {
   }
 }
 
-// LogRocket
-// LogRocket.init('zu1q7o/qa-chat');
-
-export default function RootLayout() {
+function RootLayout() {
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(navigationRef);
   useReactQueryDevTools(queryClient);
@@ -82,6 +118,13 @@ export default function RootLayout() {
   const hasMounted = React.useRef(false);
   const { colorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
+
+  // Capture the NavigationContainer ref and register it with the integration.
+  useEffect(() => {
+    if (navigationRef?.current) {
+      navigationIntegration.registerNavigationContainer(navigationRef);
+    }
+  }, [navigationRef]);
 
   useIsomorphicLayoutEffect(() => {
     if (hasMounted.current) {
@@ -113,32 +156,36 @@ export default function RootLayout() {
         <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
           {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
           {/* <TypesafeI18n locale={'zh'}> */}
-          <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-          <Stack>
-            <Stack.Screen
-              name="(tabs)"
-              options={{
-                title: 'Starter Tabs',
-                headerRight: () => <ThemeToggle />,
-              }}
-            />
-            <Stack.Screen
-              name="login"
-              options={{
-                presentation: 'modal',
-                title: '登录',
-                headerShown: true,
-              }}
-            />
-            <Stack.Screen
-              name="(protected)"
-              options={{
-                headerShown: true,
-                title: '受保护内容',
-              }}
-            />
-          </Stack>
-          <PortalHost />
+          <KeyboardProvider>
+            <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+            <Stack>
+              <Stack.Screen
+                name="(tabs)"
+                options={{
+                  headerShown: false,
+                  // title: 'Starter Tabs',
+                  // headerRight: () => <ThemeToggle />,
+                }}
+              />
+              <Stack.Screen
+                name="login"
+                options={{
+                  presentation: 'modal',
+                  title: '登录',
+                  headerShown: true,
+                }}
+              />
+              <Stack.Screen
+                name="(protected)"
+                options={{
+                  headerShown: true,
+                  title: '受保护内容',
+                }}
+              />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <PortalHost />
+          </KeyboardProvider>
           {/* </TypesafeI18n> */}
         </ThemeProvider>
       </QueryClientProvider>
@@ -150,3 +197,5 @@ export default function RootLayout() {
     </React.StrictMode>
   );
 }
+
+export default Sentry.wrap(RootLayout);

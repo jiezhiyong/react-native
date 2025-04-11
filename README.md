@@ -1,6 +1,9 @@
-# Expo app 👋
+# Expo app with EAS 👋
 
-This is an [Expo](https://expo.dev) project. doc: [Expo documentation](https://docs.expo.dev) with [nativewind](https://nativewind.dev)、[react-native-reusables](https://rnr-docs.vercel.app)
+This is an [Expo](https://expo.dev) project template. doc: [Expo documentation](https://docs.expo.dev)
+
+- [使用 EAS: 工作流、构建、托管、发布、更新、元数据、分析、分发](https://docs.expo.dev/eas)
+- [使用 Sentry:错误追踪](https://docs.sentry.io/platforms/react-native)
 
 ## Get started
 
@@ -35,6 +38,7 @@ npx @react-native-reusables/cli@latest add
 
 ## 重要组件 & 工具
 
+- [keyboard](https://kirillzyusko.github.io/react-native-keyboard-controller)
 - [tanstack-query](https://tanstack.com/query/v4)
 - [react-hook-form](https://react-hook-form.com)
 - [react-native-bottom-sheet](https://gorhom.dev/react-native-bottom-sheet)
@@ -48,7 +52,6 @@ npx @react-native-reusables/cli@latest add
 - [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv)
 - [async-storage](https://react-native-async-storage.github.io/async-storage/docs/usage/)
 - [fbflipper](https://fbflipper.com)
-- [sentry](https://docs.sentry.io/platforms/react-native)
 
 - [react-native-app-link](https://github.com/FiberJW/react-native-app-link)
 - [uri-scheme](https://github.com/expo/expo/tree/main/packages/uri-scheme#readme)
@@ -116,6 +119,9 @@ eas metadata:push
 ### 发送无线更新
 
 ```sh
+eas update --environment production | preview | development
+npx sentry-expo-upload-sourcemaps dist
+
 eas update --auto
 eas update:configure
 eas update --channel production
@@ -173,6 +179,9 @@ npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分�
 - [Expo Modules API](https://docs.expo.dev/modules/overview)
 - [Expo 推送通知](https://docs.expo.dev/push-notifications/overview)
 - [应用签名](https://docs.expo.dev/app-signing/app-credentials/#distribution-certificate)
+- [本地优先](https://docs.expo.dev/guides/local-first)
+- [React Native 分析 SDK 和库](https://docs.expo.dev/guides/using-analytics、https://rnfirebase.io)
+- [使用内购](https://docs.expo.dev/guides/in-app-purchases)
 
 ## 分析 JavaScript 包
 

@@ -61,6 +61,7 @@
     "@rn-primitives/tabs": "^1.1.0",
     "@rn-primitives/tooltip": "~1.1.0",
     "@rn-primitives/types": "~1.1.0",
+    "@sentry/react-native": "~6.3.0",
     "@tanstack/react-query": "^5.71.5",
     "babel-plugin-react-compiler": "19.0.0-beta-e993439-20250405",
     "class-variance-authority": "^0.7.1",
@@ -76,6 +77,8 @@
     "expo-device": "~7.0.3",
     "expo-font": "~13.0.4",
     "expo-haptics": "~14.0.1",
+    "expo-image": "~2.0.7",
+    "expo-image-picker": "~16.0.6",
     "expo-linking": "~7.0.5",
     "expo-localization": "~16.0.1",
     "expo-media-library": "~17.0.6",
@@ -97,6 +100,7 @@
     "react-dom": "18.3.1",
     "react-native": "^0.76.9",
     "react-native-gesture-handler": "~2.20.2",
+    "react-native-keyboard-controller": "^1.17.0",
     "react-native-localize": "^3.4.1",
     "react-native-pager-view": "6.5.1",
     "react-native-reanimated": "~3.16.2",
@@ -127,6 +131,7 @@
     "jest-expo": "~52.0.6",
     "prettier": "^3.5.3",
     "source-map-explorer": "^2.5.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "expo": {

@@ -1,0 +1,14 @@
+# 每个分支上每次提交都会发布一个预览更新
+# 使用: eas workflow:run .eas/workflows/publish-preview-update.yml
+name: Publish preview update
+
+on:
+  push:
+    branches: ["*"]
+
+jobs:
+  publish_preview_update:
+    name: Publish preview update
+    type: update
+    params:
+      branch: ${{ github.ref_name || 'test' }}

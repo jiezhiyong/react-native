@@ -1,122 +1,53 @@
-import { A } from '@expo/html-elements';
-import * as Linking from 'expo-linking';
-import { Link, usePathname, useRouter } from 'expo-router';
-import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
-import { Image, Platform, ScrollView, View } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
-import DOMComponents from '~/components/DOMComponents';
-import { LanguageToggle } from '~/components/LanguageToggle';
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { useI18nContext } from '~/i18n/i18n-react';
-// import MyModule from '~/modules/my-module';
+import Button from '~/components/Button';
+import ImageViewer from '~/components/ImageViewer';
 
-export default function HomeScreen() {
-  const pathname = usePathname();
-  const router = useRouter();
+const PlaceholderImage = require('~/assets/images/background-image.png');
 
-  const { LL, locale } = useI18nContext();
-  const [containerSize, setContainerSize] = React.useState<{ width: number; height: number } | null>(null);
+export default function Index() {
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
 
-  // ios 模拟器或设备上打开后一直触发 console ？
-  // if (Platform.OS === 'ios') {
-  //   console.log('Hello on iOS');
-  // }
+  const pickImageAsync = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      quality: 1,
+    });
 
-  // if (process.env.NODE_ENV === 'development') {
-  //   console.log('Hello in development');
-  // }
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    } else {
+      alert('You did not select any image.');
+    }
+  };
 
   return (
-    <ScrollView>
-      <View className="flex-1 gap-3 p-5 bg-secondary/30">
-        {/* <Text>{LL.HI({ name: 'React Native', locale })}</Text> */}
-        {/* <LanguageToggle /> */}
-
-        <View style={{ $$css: true, _: 'bg-slate-100 rounded-xl p-3' }}>
-          <Text style={{ $$css: true, _: 'text-lg font-medium' }}>Tailwind + React Native web elements</Text>
-        </View>
-
-        <Button onPress={() => router.navigate('/discover')}>
-          <Text>Go to Discover</Text>
-        </Button>
-
-        <Text>登录</Text>
-        <Button onPress={() => router.navigate('/login')}>
-          <Text>Go to Login</Text>
-        </Button>
-
-        <Button onPress={() => router.navigate('/(protected)/bill')}>
-          <Text>Go to Protected Page Bill</Text>
-        </Button>
-
-        <Text>导航</Text>
-        <Button onPress={() => router.navigate('/products')}>
-          <Text>Go to Products</Text>
-        </Button>
-
-        <Link href={`/products/${20}?name=abc`} asChild withAnchor>
-          <Button>
-            <Text>view products</Text>
-          </Button>
-        </Link>
-
-        <Text>使用默认浏览器打开URL</Text>
-        <Button onPress={() => Linking.openURL('https://expo.dev')}>
-          <Text>expo-linking-api</Text>
-        </Button>
-
-        <Link href="https://expo.dev" asChild>
-          <Button>
-            <Text>expo-routers-link-component</Text>
-          </Button>
-        </Link>
-
-        <Button variant="outline">
-          <A href="https://expo.dev">@expo/html-elements</A>
-        </Button>
-
-        <Button onPress={() => WebBrowser.openBrowserAsync('https://expo.dev')}>
-          <Text>WebBrowser</Text>
-        </Button>
-
-        <Button onPress={() => Linking.openURL('mailto:support@expo.dev')}>
-          <Text>mailto</Text>
-        </Button>
-
-        <Button onPress={() => Linking.openURL('tel:+123456789')}>
-          <Text>tel</Text>
-        </Button>
-
-        <Button onPress={() => Linking.openURL('sms:+123456789')}>
-          <Text>sms</Text>
-        </Button>
-
-        <Text>Expo Modules API</Text>
-        {/* <Text>{MyModule.hello()}</Text> */}
-
-        <Image source={require('~/assets/images/react-logo.png')} />
-
-        <DOMComponents
-          name="this is a DOMComponents"
-          dom={{
-            containerStyle: containerSize != null ? { width: containerSize.width, height: containerSize.height } : null,
-            matchContents: true,
-            scrollEnabled: false,
-            style: {},
-          }}
-          pathname={pathname}
-          nativeActions={async (data: string) => {
-            console.log('Hello', data);
-          }}
-          onDOMLayout={async ({ width, height }) => {
-            // if (containerSize?.width !== width || containerSize?.height !== height) {
-            //   setContainerSize({ width, height });
-            // }
-          }}
-        />
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
       </View>
-    </ScrollView>
+      <View style={styles.footerContainer}>
+        <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
+        <Button label="Use this photo" />
+      </View>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#25292e',
+    alignItems: 'center',
+  },
+  imageContainer: {
+    flex: 1,
+  },
+  footerContainer: {
+    flex: 1 / 3,
+    alignItems: 'center',
+  },
+});
