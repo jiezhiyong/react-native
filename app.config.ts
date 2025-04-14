@@ -1,17 +1,40 @@
 import 'ts-node/register';
+
 import { ConfigContext, ExpoConfig } from 'expo/config';
 
+const VERSION_CODE = 1;
+const IS_DEV = process.env.APP_VARIANT === 'development';
+const IS_PREVIEW = process.env.APP_VARIANT === 'preview';
 const ngrokUrl = `${process.env.EXPO_TUNNEL_SUBDOMAIN}.ngrok.io`;
+
+const getUniqueIdentifier = () => {
+  if (IS_DEV) {
+    return 'com.jiezhiyong.qachat.dev';
+  } else if (IS_PREVIEW) {
+    return 'com.jiezhiyong.qachat.preview';
+  }
+  return 'com.jiezhiyong.qachat';
+};
+
+const getAppName = () => {
+  if (IS_DEV) {
+    return 'QA Chat (Dev)';
+  } else if (IS_PREVIEW) {
+    return 'QA Chat (Preview)';
+  }
+  return 'QA Chat';
+};
 
 // 以 .ts 格式复写 app.json
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
 
-  name: 'QA Chat',
+  name: getAppName(),
+  icon: './assets/images/icon.png',
   slug: 'qachat',
+  scheme: 'qachat',
   version: '1.0.0',
   orientation: 'portrait',
-  scheme: 'qachat',
   userInterfaceStyle: 'automatic',
   newArchEnabled: true,
   jsEngine: 'hermes',
@@ -26,7 +49,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   assetBundlePatterns: ['**/*'],
   android: {
-    package: 'com.jiezhiyong.qachat',
+    versionCode: VERSION_CODE,
+    package: getUniqueIdentifier(),
     softwareKeyboardLayoutMode: 'pan',
     adaptiveIcon: {
       foregroundImage: './assets/images/adaptive-icon.png',
@@ -35,12 +59,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     permissions: [
       'android.permission.SCHEDULE_EXACT_ALARM',
       'android.permission.CAMERA',
-      'android.permission.RECORD_AUDIO',
       'android.permission.READ_EXTERNAL_STORAGE',
       'android.permission.WRITE_EXTERNAL_STORAGE',
     ],
     googleServicesFile: process.env.GOOGLE_SERVICES_JSON ?? './google-services.json',
-    blockedPermissions: ['android.permission.RECORD_AUDIO'],
   },
   web: {
     bundler: 'metro',
@@ -53,7 +75,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         data: [
           {
             scheme: 'https',
-            host: 'qachat.com.ngrok.io',
+            host: `${process.env.EXPO_TUNNEL_SUBDOMAIN}.ngrok.io`,
             pathPrefix: '/records',
           },
         ],
@@ -76,10 +98,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     url: 'https://u.expo.dev/240e7c3e-9922-48a7-9a4a-84be0fcc615c',
   },
 
-  icon: process.env.ENVIRONMENT === 'production' ? './assets/images/icon.png' : './assets/images/icon.png',
-
   ios: {
-    bundleIdentifier: 'com.jiezhiyong.qachat',
+    buildNumber: String(VERSION_CODE),
+    bundleIdentifier: getUniqueIdentifier(),
     supportsTablet: true,
     googleServicesFile: process.env.GOOGLE_SERVICES_INFO_PLIST ?? './GoogleService-Info.plist',
     infoPlist: {
@@ -104,9 +125,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       `applinks:${ngrokUrl}`,
       `activitycontinuation:${ngrokUrl}`,
       `webcredentials:${ngrokUrl}`,
-      `applinks:qachat.com`,
-      `activitycontinuation:qachat.com`,
-      `webcredentials:qachat.com`,
+      `applinks:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
+      `activitycontinuation:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
+      `webcredentials:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
     ],
   },
 
@@ -116,8 +137,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-router',
       {
-        headOrigin: process.env.NODE_ENV === 'development' ? `https://${ngrokUrl}` : 'https://qachat.com',
-        origin: 'https://qachat.com',
+        headOrigin: IS_DEV ? `https://${ngrokUrl}` : `https://${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
+        origin: `https://${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
       },
     ],
     [
@@ -125,7 +146,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       {
         organization: process.env.SENTRY_ORG,
         project: process.env.SENTRY_PROJECT,
-        url: 'https://sentry.io/',
+        url: process.env.SENTRY_URL,
       },
     ],
     [
@@ -150,7 +171,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-splash-screen',
       {
+        backgroundColor: '#232323',
         image: './assets/images/splash-icon.png',
+        dark: {
+          image: './assets/images/splash-icon-dark.png',
+          backgroundColor: '#000000',
+        },
+        imageWidth: 200,
       },
     ],
   ],

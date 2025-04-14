@@ -1,17 +1,12 @@
-# Expo app with EAS 👋
+# Expo React Native APP 👋
 
 This is an [Expo](https://expo.dev) project template. doc: [Expo documentation](https://docs.expo.dev)
-
-- [使用 EAS: 工作流、构建、托管、发布、更新、元数据、分析、分发](https://docs.expo.dev/eas)
-- [使用 Sentry:错误追踪](https://docs.sentry.io/platforms/react-native)
 
 ## 初始化 & 本地开发
 
 ```bash
 pnpm install # 安装依赖
-npx expo start # 启动开发模式
-npx expo start --no-dev --minify # 启动生产模式
-npx expo start --clear # 清除 bundler 缓存
+pnpm start:dev # 启动开发模式, --clear (清除 bundler 缓存)
 ```
 
 ### 添加插件
@@ -26,17 +21,9 @@ npx expo install <plugin-name>
 npx @react-native-reusables/cli@latest add
 ```
 
-### Expo SDK
-
-- [expo-router](https://docs.expo.dev/router/introduction)
-- [expo-auth-session](https://docs.expo.dev/versions/latest/sdk/auth-session)
-- [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore)
-- [expo-file-system](https://docs.expo.dev/versions/latest/sdk/filesystem)
-- [expo-sqlite](https://docs.expo.dev/versions/latest/sdk/sqlite)
-- [expo-camera](https://docs.expo.dev/versions/latest/sdk/camera)
-- [expo-network](https://docs.expo.dev/versions/latest/sdk/network)
-
 ### 重要组件 & 工具
+
+- [Expo SDK](https://docs.expo.dev/versions/latest/sdk/expo)
 
 - [keyboard](https://kirillzyusko.github.io/react-native-keyboard-controller)
 - [tanstack-query](https://tanstack.com/query/v4)
@@ -55,6 +42,8 @@ npx @react-native-reusables/cli@latest add
 - [react-native-app-link](https://github.com/FiberJW/react-native-app-link)
 - [uri-scheme](https://github.com/expo/expo/tree/main/packages/uri-scheme#readme)
 - [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n)
+- [sentry](https://docs.sentry.io/platforms/react-native)
+
 - [...](https://reactnative.directory)
 
 ## 创建开发版本
@@ -67,10 +56,10 @@ npx expo install expo-dev-client
 
 ```sh
 npx expo prebuild --clean # 使用 Prebuild 生成原生 Android 和 iOS 目录
-npx expo prebuild --clean -p android | ios # 预构建 Android | iOS
+npx expo prebuild --clean -p <android | ios> # 预构建 Android | iOS
 ```
 
-### 配置证书
+### 配置证书 // TODO: 本地配置
 
 ```sh
 eas credentials
@@ -84,54 +73,11 @@ npx expo run:ios # simulator, eas.json => build.development.ios.simulator: true
 npx expo run:ios --device # eas.json => build.development.ios.simulator: false
 ```
 
-### 创建开发版本 - 在 EAS 上构建 / 使用 EAS CLI 本地构建 (--local)
-
-```sh
-npm install -g eas-cli
-eas build -p all --profile development
-eas build -p android --profile development
-eas build -p ios --profile development
-```
-
-## 创建生产构建 - 在 EAS 上构建 / 使用 EAS CLI 本地构建 (--local)
-
-```sh
-eas build -p all --profile production
-eas build -p android --profile production
-eas build -p ios --profile production
-```
-
-### 提交构建
-
-```sh
-eas submit -p android
-eas submit -p ios
-```
-
-### 提交 ios 商店元数据
-
-```sh
-eas metadata:push
-```
-
-### 发送无线更新
-
-```sh
-eas update --environment production | preview | development
-npx sentry-expo-upload-sourcemaps dist
-
-eas update --auto
-eas update:configure
-eas update --channel production
-```
-
 ### 部署 WEB 应用
 
 ```sh
 npx expo export -p web
 npx expo serve # 在本地进行测试
-eas deploy
-eas deploy --prod
 ```
 
 ## 检查配置 https://docs.expo.dev/develop/tools/#expo-doctor
@@ -142,18 +88,11 @@ npx expo-doctor # 检查配置
 npx react-compiler-healthcheck@latest # 检查项目与 React 编译器的兼容性
 ```
 
-## Orbit
-
-```sh
-brew install expo-orbit
-```
-
 ## 其他
 
 ```sh
 npx expo install expo@latest # 升级 Expo SDK
 npx expo install --fix # 将所有依赖升级以匹配已安装的 SDK 版本
-eas credentials -p android # 获取 Android SHA256 证书指纹
 npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分配权限，并在商店中创建 iTunes 应用条目
 ```
 
@@ -180,6 +119,9 @@ npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分�
 - [本地优先](https://docs.expo.dev/guides/local-first)
 - [React Native 分析 SDK 和库](https://docs.expo.dev/guides/using-analytics、https://rnfirebase.io)
 - [使用内购](https://docs.expo.dev/guides/in-app-purchases)
+- [Exmple](https://github.com/expo/examples)
+- [Follow Up](https://docs.expo.dev/tutorial/follow-up/)
+- [Additional Resources](https://docs.expo.dev/additional-resources/)
 
 ## 分析 JavaScript 包
 
@@ -188,10 +130,3 @@ EXPO_UNSTABLE_ATLAS=true npx expo start # 使用 Atlas 分析包大小
 EXPO_UNSTABLE_ATLAS=true npx expo start --no-dev # 将开发模式更改为生产模式
 EXPO_UNSTABLE_ATLAS=true npx expo export & npx expo-atlas .expo/atlas.jsonl # 使用 Atlas 与 npx expo export 结合
 ```
-
-## TODO
-
-- 应用图标、启屏图片
-- Webview
-- 应用链接
-- 应用变体（debug、release、production | free、paid）
