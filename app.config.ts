@@ -147,5 +147,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         enableBackgroundRemoteNotifications: true,
       },
     ],
+    [
+      'expo-splash-screen',
+      {
+        image: './assets/images/splash-icon.png',
+      },
+    ],
   ],
 });

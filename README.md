@@ -5,7 +5,7 @@ This is an [Expo](https://expo.dev) project template. doc: [Expo documentation](
 - [使用 EAS: 工作流、构建、托管、发布、更新、元数据、分析、分发](https://docs.expo.dev/eas)
 - [使用 Sentry:错误追踪](https://docs.sentry.io/platforms/react-native)
 
-## Get started
+## 初始化 & 本地开发
 
 ```bash
 pnpm install # 安装依赖
@@ -14,19 +14,19 @@ npx expo start --no-dev --minify # 启动生产模式
 npx expo start --clear # 清除 bundler 缓存
 ```
 
-## 添加插件
+### 添加插件
 
 ```sh
 npx expo install <plugin-name>
 ```
 
-## 添加通用组件
+### 添加 shadcn/ui 组件
 
 ```sh
 npx @react-native-reusables/cli@latest add
 ```
 
-## Expo SDK
+### Expo SDK
 
 - [expo-router](https://docs.expo.dev/router/introduction)
 - [expo-auth-session](https://docs.expo.dev/versions/latest/sdk/auth-session)
@@ -36,7 +36,7 @@ npx @react-native-reusables/cli@latest add
 - [expo-camera](https://docs.expo.dev/versions/latest/sdk/camera)
 - [expo-network](https://docs.expo.dev/versions/latest/sdk/network)
 
-## 重要组件 & 工具
+### 重要组件 & 工具
 
 - [keyboard](https://kirillzyusko.github.io/react-native-keyboard-controller)
 - [tanstack-query](https://tanstack.com/query/v4)
@@ -52,7 +52,6 @@ npx @react-native-reusables/cli@latest add
 - [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv)
 - [async-storage](https://react-native-async-storage.github.io/async-storage/docs/usage/)
 - [fbflipper](https://fbflipper.com)
-
 - [react-native-app-link](https://github.com/FiberJW/react-native-app-link)
 - [uri-scheme](https://github.com/expo/expo/tree/main/packages/uri-scheme#readme)
 - [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n)
@@ -68,8 +67,7 @@ npx expo install expo-dev-client
 
 ```sh
 npx expo prebuild --clean # 使用 Prebuild 生成原生 Android 和 iOS 目录
-npx expo prebuild --clean -p android
-npx expo prebuild --clean -p ios
+npx expo prebuild --clean -p android | ios # 预构建 Android | iOS
 ```
 
 ### 配置证书
