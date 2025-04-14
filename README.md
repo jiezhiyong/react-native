@@ -65,12 +65,12 @@ npx expo prebuild --clean -p <android | ios> # 预构建 Android | iOS
 eas credentials
 ```
 
-### 创建开发版本 - 本地构建
+### 创建开发版本
 
 ```sh
 npx expo run:android
-npx expo run:ios # simulator, eas.json => build.development.ios.simulator: true
-npx expo run:ios --device # eas.json => build.development.ios.simulator: false
+npx expo run:ios # simulator
+npx expo run:ios --device # device
 ```
 
 ### 部署 WEB 应用
