@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>aps-environment</key>
+    <string>development</string>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+      <string>applinks:qachat.com.ngrok.io</string>
+      <string>activitycontinuation:qachat.com.ngrok.io</string>
+      <string>webcredentials:qachat.com.ngrok.io</string>
+      <string>applinks:qachat.com</string>
+      <string>activitycontinuation:qachat.com</string>
+      <string>webcredentials:qachat.com</string>
+    </array>
+  </dict>
+</plist>

@@ -6,8 +6,6 @@ node_modules/
 # Expo
 .expo/
 expo-env.d.ts
-/android
-/ios
 
 # Native
 *.orig.*
@@ -37,6 +35,7 @@ yarn-error.*
 
 # coverage
 coverage/**/*
+
 # Expo
 .expo
 dist/

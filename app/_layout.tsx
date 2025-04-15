@@ -130,12 +130,12 @@ function RootLayout() {
   }
 
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-          {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
-          {/* <TypesafeI18n locale={'zh'}> */}
-          <KeyboardProvider>
+    <>
+      <KeyboardProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+            {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
+            {/* <TypesafeI18n locale={'zh'}> */}
             <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
             <Stack>
               <Stack.Screen
@@ -164,16 +164,16 @@ function RootLayout() {
               <Stack.Screen name="+not-found" />
             </Stack>
             <PortalHost />
-          </KeyboardProvider>
-          {/* </TypesafeI18n> */}
-        </ThemeProvider>
-      </QueryClientProvider>
+            {/* </TypesafeI18n> */}
+          </ThemeProvider>
+        </QueryClientProvider>
+      </KeyboardProvider>
 
       {/* 苹果接力 https://docs.expo.dev/router/advanced/apple-handoff/ */}
       <Head>
         <meta property="expo:handoff" content="true" />
       </Head>
-    </React.StrictMode>
+    </>
   );
 }
 

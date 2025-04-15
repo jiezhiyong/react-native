@@ -6,7 +6,10 @@
         "title": "QA Chat",
         "subtitle": "Your self-made awesome app",
         "description": "The most awesome app you have ever seen",
-        "keywords": ["awesome", "app"],
+        "keywords": [
+          "awesome",
+          "app"
+        ],
         "marketingUrl": "https://example.com/zh/promo",
         "supportUrl": "https://example.com/zh/support",
         "privacyPolicyUrl": "https://example.com/zh/privacy"

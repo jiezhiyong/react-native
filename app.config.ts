@@ -132,8 +132,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
 
   plugins: [
-    'expo-secure-store',
-    'expo-localization',
+    ['./plugins/withAndroidQueries.js', {}],
+    ['expo-secure-store', {}],
+    ['expo-localization', {}],
     [
       'expo-router',
       {

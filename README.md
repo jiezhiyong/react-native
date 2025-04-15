@@ -46,6 +46,11 @@ npx @react-native-reusables/cli@latest add
 
 - [...](https://reactnative.directory)
 
+## 应用签名证书
+
+- [android](https://docs.expo.dev/app-signing/local-credentials/#android-credentials)
+- [ios](https://docs.expo.dev/app-signing/local-credentials/#ios-credentials)
+
 ## 创建开发版本
 
 ```sh
@@ -71,6 +76,25 @@ eas credentials
 npx expo run:android
 npx expo run:ios # simulator
 npx expo run:ios --device # device
+```
+
+### 创建生产版本
+
+- [ios](https://reactnative.dev/docs/publishing-to-app-store)
+
+```sh
+1. npx expo prebuild --clean -p ios
+2. open ios/QAChat.xcworkspace
+3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Build Configuration -> 选择 Release
+4. Xcode - Archive: 选择 Any iOS Device (arm64) -> Product -> Archive
+```
+
+- [android](https://reactnative.dev/docs/signed-apk-android)
+
+```sh
+1. npx expo prebuild --clean -p android
+2. /usr/libexec/java_home => eg: /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+3. sudo keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 ```
 
 ### 部署 WEB 应用
