@@ -3,7 +3,7 @@
 1. 你应该用中文回复我
 2. 使用的技术包含:
    - React Native
-   - Expo
+   - Expo（不使用EAS）
    - TypeScript
    - ESLint
    - Prettier

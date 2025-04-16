@@ -46,31 +46,16 @@ npx @react-native-reusables/cli@latest add
 
 - [...](https://reactnative.directory)
 
-## 应用签名证书
-
-- [android](https://docs.expo.dev/app-signing/local-credentials/#android-credentials)
-- [ios](https://docs.expo.dev/app-signing/local-credentials/#ios-credentials)
-
 ## 创建开发版本
 
 ```sh
-npx expo install expo-dev-client
+npx expo install expo-dev-client # 安装开发客户端
 ```
-
-### 预构建
 
 ```sh
-npx expo prebuild --clean # 使用 Prebuild 生成原生 Android 和 iOS 目录
-npx expo prebuild --clean -p <android | ios> # 预构建 Android | iOS
+npx expo prebuild # 使用 Prebuild 生成原生 Android 和 iOS 目录
+npx expo prebuild -p <android | ios> # 预构建 Android | iOS
 ```
-
-### 配置证书 // TODO: 本地配置
-
-```sh
-eas credentials
-```
-
-### 创建开发版本
 
 ```sh
 npx expo run:android
@@ -78,12 +63,12 @@ npx expo run:ios # simulator
 npx expo run:ios --device # device
 ```
 
-### 创建生产版本
+## 创建生产版本
 
 - [ios](https://reactnative.dev/docs/publishing-to-app-store)
 
 ```sh
-1. npx expo prebuild --clean -p ios
+1. npx expo prebuild -p ios
 2. open ios/QAChat.xcworkspace
 3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Build Configuration -> 选择 Release
 4. Xcode - Archive: 选择 Any iOS Device (arm64) -> Product -> Archive
@@ -92,24 +77,16 @@ npx expo run:ios --device # device
 - [android](https://reactnative.dev/docs/signed-apk-android)
 
 ```sh
-1. npx expo prebuild --clean -p android
-2. /usr/libexec/java_home => eg: /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
-3. sudo keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+1. npx expo prebuild -p android
+2. keytool -genkeypair -v -storetype PKCS12 -keystore keystores/release.keystore -alias qachat-release -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=com.jiezhiyong.qachat,OU=,O=,L=Shanghai,S=Shanghai,C=CN"
+3. cd android && ./gradlew app:assembleRelease # 生成发布 APK
 ```
 
-### 部署 WEB 应用
+## 部署 WEB 应用
 
 ```sh
 npx expo export -p web
 npx expo serve # 在本地进行测试
-```
-
-## 检查配置 https://docs.expo.dev/develop/tools/#expo-doctor
-
-```sh
-npx expo install --check # 检查依赖
-npx expo-doctor # 检查配置
-npx react-compiler-healthcheck@latest # 检查项目与 React 编译器的兼容性
 ```
 
 ## 其他
@@ -120,7 +97,19 @@ npx expo install --fix # 将所有依赖升级以匹配已安装的 SDK 版本
 npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分配权限，并在商店中创建 iTunes 应用条目
 ```
 
-## More
+```sh
+npx expo install --check # 检查依赖
+npx expo-doctor # 检查配置
+npx react-compiler-healthcheck@latest # 检查项目与 React 编译器的兼容性
+```
+
+```sh
+EXPO_UNSTABLE_ATLAS=true npx expo start # 使用 Atlas 分析包大小
+EXPO_UNSTABLE_ATLAS=true npx expo start --no-dev # 将开发模式更改为生产模式
+EXPO_UNSTABLE_ATLAS=true npx expo export & npx expo-atlas .expo/atlas.jsonl # 使用 Atlas 与 npx expo export 结合
+```
+
+## 参考文档
 
 - [Expo Go](https://expo.dev/go)
 - [调试](https://docs.expo.dev/debugging/errors-and-warnings)
@@ -146,11 +135,3 @@ npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分�
 - [Exmple](https://github.com/expo/examples)
 - [Follow Up](https://docs.expo.dev/tutorial/follow-up/)
 - [Additional Resources](https://docs.expo.dev/additional-resources/)
-
-## 分析 JavaScript 包
-
-```sh
-EXPO_UNSTABLE_ATLAS=true npx expo start # 使用 Atlas 分析包大小
-EXPO_UNSTABLE_ATLAS=true npx expo start --no-dev # 将开发模式更改为生产模式
-EXPO_UNSTABLE_ATLAS=true npx expo export & npx expo-atlas .expo/atlas.jsonl # 使用 Atlas 与 npx expo export 结合
-```

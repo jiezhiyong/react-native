@@ -20,6 +20,7 @@ eas device:create
 npm install -g eas-cli
 eas build --profile <development | preview | production>
 eas build -p ios --profile ios-simulator
+eas build -p <android | ios> --auto-submit
 ```
 
 ### 提交构建

@@ -1,0 +1,151 @@
+{
+  "apiRoutes": [
+    {
+      "file": "_expo/functions/exchange-github-auth-code+api.js",
+      "page": "/exchange-github-auth-code",
+      "namedRegex": "^/exchange\\-github\\-auth\\-code(?:/)?$",
+      "routeKeys": {}
+    }
+  ],
+  "htmlRoutes": [
+    {
+      "file": "./products/index.tsx",
+      "page": "/products/index",
+      "namedRegex": "^/products(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./discover/index.tsx",
+      "page": "/discover/index",
+      "namedRegex": "^/discover(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./(tabs)/index.tsx",
+      "page": "/(tabs)/index",
+      "namedRegex": "^(?:/\\(tabs\\))?(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./drawer/two.tsx",
+      "page": "/drawer/two",
+      "namedRegex": "^/drawer/two(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./drawer/one.tsx",
+      "page": "/drawer/one",
+      "namedRegex": "^/drawer/one(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./discover/two.tsx",
+      "page": "/discover/two",
+      "namedRegex": "^/discover/two(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./discover/one.tsx",
+      "page": "/discover/one",
+      "namedRegex": "^/discover/one(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./(protected)/bill.tsx",
+      "page": "/(protected)/bill",
+      "namedRegex": "^(?:/\\(protected\\))?/bill(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./jest.tsx",
+      "page": "/jest",
+      "namedRegex": "^/jest(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./discover/three.tsx",
+      "page": "/discover/three",
+      "namedRegex": "^/discover/three(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./(tabs)/about.tsx",
+      "page": "/(tabs)/about",
+      "namedRegex": "^(?:/\\(tabs\\))?/about(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./login.tsx",
+      "page": "/login",
+      "namedRegex": "^/login(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./discover/detail.tsx",
+      "page": "/discover/detail",
+      "namedRegex": "^/discover/detail(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./webview.tsx",
+      "page": "/webview",
+      "namedRegex": "^/webview(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./discover/keyboard.tsx",
+      "page": "/discover/keyboard",
+      "namedRegex": "^/discover/keyboard(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "expo-router/build/views/Sitemap.js",
+      "page": "/_sitemap",
+      "namedRegex": "^/_sitemap(?:/)?$",
+      "routeKeys": {},
+      "generated": true
+    },
+    {
+      "file": "./deep-link.tsx",
+      "page": "/deep-link",
+      "namedRegex": "^/deep\\-link(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./index copy.tsx",
+      "page": "/index copy",
+      "namedRegex": "^/index copy(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./discover/notifications.tsx",
+      "page": "/discover/notifications",
+      "namedRegex": "^/discover/notifications(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./privacy-policy.tsx",
+      "page": "/privacy-policy",
+      "namedRegex": "^/privacy\\-policy(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./products/[id].tsx",
+      "page": "/products/[id]",
+      "namedRegex": "^/products/(?<id>[^/]+?)(?:/)?$",
+      "routeKeys": {
+        "id": "id"
+      }
+    }
+  ],
+  "notFoundRoutes": [
+    {
+      "file": "./+not-found.tsx",
+      "page": "/+not-found",
+      "namedRegex": "^(?:/(?<notfound>.+?))?(?:/)?$",
+      "routeKeys": {
+        "notfound": "not-found"
+      }
+    }
+  ]
+}

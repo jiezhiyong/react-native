@@ -18,11 +18,11 @@ const getUniqueIdentifier = () => {
 
 const getAppName = () => {
   if (IS_DEV) {
-    return 'QA Chat (Dev)';
+    return 'Chat QA (Dev)';
   } else if (IS_PREVIEW) {
-    return 'QA Chat (Preview)';
+    return 'Chat QA (Preview)';
   }
-  return 'QA Chat';
+  return 'Chat QA';
 };
 
 // 以 .ts 格式复写 app.json
@@ -148,6 +148,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         organization: process.env.SENTRY_ORG,
         project: process.env.SENTRY_PROJECT,
         url: process.env.SENTRY_URL,
+        note: 'Use SENTRY_AUTH_TOKEN env to authenticate with Sentry.',
       },
     ],
     [

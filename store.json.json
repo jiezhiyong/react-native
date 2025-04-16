@@ -3,16 +3,16 @@
   "apple": {
     "info": {
       "zh-CN": {
-        "title": "QA Chat",
+        "title": "Chat QA",
         "subtitle": "Your self-made awesome app",
         "description": "The most awesome app you have ever seen",
         "keywords": [
           "awesome",
           "app"
         ],
-        "marketingUrl": "https://example.com/zh/promo",
-        "supportUrl": "https://example.com/zh/support",
-        "privacyPolicyUrl": "https://example.com/zh/privacy"
+        "marketingUrl": "https://qachat.expo.app",
+        "supportUrl": "https://qachat.expo.app/support",
+        "privacyPolicyUrl": "https://qachat.expo.app/privacy-policy"
       }
     }
   }
