@@ -46,7 +46,7 @@ npx @react-native-reusables/cli@latest add
 
 - [...](https://reactnative.directory)
 
-## 创建开发版本
+## 创建本地开发版本
 
 ```sh
 npx expo install expo-dev-client # 安装开发客户端
@@ -63,14 +63,29 @@ npx expo run:ios # simulator
 npx expo run:ios --device # device
 ```
 
+## 创建内部分发用 DEBUG 版本
+
+```sh
+1. npx expo prebuild -p ios
+2. open ios/ChatQA.xcworkspace
+3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Info - Build Configuration -> 选择 Debug
+4. Xcode - Archive: 选择 Any iOS Device (arm64) -> Product -> Archive
+5. 选择 Archive -> Debugging -> Export -> 导出 .ipa 文件
+```
+
+```sh
+1. npx expo prebuild -p android
+2. cd android && ./gradlew app:assembleDebug
+```
+
 ## 创建生产版本
 
 - [ios](https://reactnative.dev/docs/publishing-to-app-store)
 
 ```sh
 1. npx expo prebuild -p ios
-2. open ios/QAChat.xcworkspace
-3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Build Configuration -> 选择 Release
+2. open ios/ChatQA.xcworkspace
+3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Info - Build Configuration -> 选择 Release
 4. Xcode - Archive: 选择 Any iOS Device (arm64) -> Product -> Archive
 ```
 

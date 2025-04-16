@@ -93,6 +93,12 @@
       "routeKeys": {}
     },
     {
+      "file": "./support.tsx",
+      "page": "/support",
+      "namedRegex": "^/support(?:/)?$",
+      "routeKeys": {}
+    },
+    {
       "file": "./discover/keyboard.tsx",
       "page": "/discover/keyboard",
       "namedRegex": "^/discover/keyboard(?:/)?$",
@@ -104,6 +110,12 @@
       "namedRegex": "^/_sitemap(?:/)?$",
       "routeKeys": {},
       "generated": true
+    },
+    {
+      "file": "./feedback.tsx",
+      "page": "/feedback",
+      "namedRegex": "^/feedback(?:/)?$",
+      "routeKeys": {}
     },
     {
       "file": "./deep-link.tsx",
@@ -127,6 +139,12 @@
       "file": "./privacy-policy.tsx",
       "page": "/privacy-policy",
       "namedRegex": "^/privacy\\-policy(?:/)?$",
+      "routeKeys": {}
+    },
+    {
+      "file": "./destroy-account.tsx",
+      "page": "/destroy-account",
+      "namedRegex": "^/destroy\\-account(?:/)?$",
       "routeKeys": {}
     },
     {

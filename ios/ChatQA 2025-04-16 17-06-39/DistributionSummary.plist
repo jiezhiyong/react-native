@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ChatQA.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>1</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>D6BEA3AAC62C3BDB97FF6D772230A2565CD59F7E</string>
+				<key>dateExpires</key>
+				<string>2026/4/10</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>0.12.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>D6BEA3AAC62C3BDB97FF6D772230A2565CD59F7E</string>
+						<key>dateExpires</key>
+						<string>2026/4/10</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>hermes.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>457Z87HK84</string>
+						<key>name</key>
+						<string>zhiyong jie</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>0.12.0</string>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>457Z87HK84.com.jiezhiyong.qachat</string>
+				<key>aps-environment</key>
+				<string>development</string>
+				<key>com.apple.developer.associated-domains</key>
+				<array>
+					<string>applinks:qachat.com.ngrok.io</string>
+					<string>activitycontinuation:qachat.com.ngrok.io</string>
+					<string>webcredentials:qachat.com.ngrok.io</string>
+					<string>applinks:qachat.com</string>
+					<string>activitycontinuation:qachat.com</string>
+					<string>webcredentials:qachat.com</string>
+				</array>
+				<key>com.apple.developer.team-identifier</key>
+				<string>457Z87HK84</string>
+				<key>get-task-allow</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>ChatQA.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>9eb6a65f-9946-4970-9f30-957fd22d3239</string>
+				<key>dateExpires</key>
+				<string>2026/4/16</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: com.jiezhiyong.qachat</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>457Z87HK84</string>
+				<key>name</key>
+				<string>zhiyong jie</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.0.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>
