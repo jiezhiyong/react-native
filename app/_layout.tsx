@@ -18,6 +18,7 @@ import type { AppStateStatus } from 'react-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { ThemeToggle } from '~/components/ThemeToggle';
+import { DebugPanel } from '~/debug-panel';
 import { useColorScheme } from '~/hooks/useColorScheme';
 import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
 import TypesafeI18n from '~/i18n/i18n-react';
@@ -131,6 +132,7 @@ function RootLayout() {
 
   return (
     <>
+      <DebugPanel />
       <KeyboardProvider>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>

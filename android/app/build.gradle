@@ -98,10 +98,10 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('../../keystores/debug.keystore')
-            storePassword 'QaChatDebug'
-            keyAlias 'qachat-debug'
-            keyPassword 'QaChatDebug'
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
         }
         release {
             if (project.hasProperty('UPLOAD_STORE_FILE')) {
