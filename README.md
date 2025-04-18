@@ -93,9 +93,12 @@ npx expo run:ios --device # device, --configuration <Debug | Release>
 - [android](https://reactnative.dev/docs/signed-apk-android)
 
 ```sh
+keytool -genkeypair -v -storetype PKCS12 -keystore keystores/release.keystore -alias qachat-release -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=com.jiezhiyong.qachat,OU=,O=,L=Shanghai,S=Shanghai,C=CN"
+```
+
+```sh
 1. npx expo prebuild -p android
-2. keytool -genkeypair -v -storetype PKCS12 -keystore keystores/release.keystore -alias qachat-release -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=com.jiezhiyong.qachat,OU=,O=,L=Shanghai,S=Shanghai,C=CN"
-3. cd android && ./gradlew app:assembleRelease # 生成发布 APK
+2. cd android && ./gradlew app:assembleRelease # 生成发布 APK
 ```
 
 ## 部署 WEB 应用

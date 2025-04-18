@@ -7,6 +7,7 @@ import { PortalHost } from '@rn-primitives/portal';
 import * as Sentry from '@sentry/react-native';
 import { focusManager, onlineManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { isRunningInExpoGo } from 'expo';
+import Constants from 'expo-constants';
 import * as Network from 'expo-network';
 import { Stack, useNavigationContainerRef } from 'expo-router';
 import Head from 'expo-router/head';
@@ -157,9 +158,12 @@ function RootLayout() {
     return null;
   }
 
+  // 使用环境变量或自定义配置控制DebugPanel的显示
+  const showDebugPanel = __DEV__ || Constants.expoConfig?.extra?.enableDebugPanel;
+
   return (
     <>
-      {__DEV__ ? <DebugPanel /> : null}
+      {showDebugPanel ? <DebugPanel /> : null}
       <KeyboardProvider>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>

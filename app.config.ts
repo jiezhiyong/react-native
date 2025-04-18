@@ -2,6 +2,9 @@ import 'ts-node/register';
 
 import { ConfigContext, ExpoConfig } from 'expo/config';
 
+// TODO:
+console.log('======================= process.env.APP_VARIANT', process.env.APP_VARIANT);
+
 const VERSION_CODE = 1;
 const IS_DEV = process.env.APP_VARIANT === 'development';
 const IS_PREVIEW = process.env.APP_VARIANT === 'preview';
@@ -91,6 +94,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     eas: {
       projectId: '240e7c3e-9922-48a7-9a4a-84be0fcc615c',
     },
+    enableDebugPanel: process.env.ENABLE_DEBUG_PANEL === 'true',
   },
   owner: 'jiezhiyong',
   runtimeVersion: '1.0.0',

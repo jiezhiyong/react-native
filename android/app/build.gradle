@@ -93,9 +93,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.jiezhiyong.qachat'
+    namespace 'com.jiezhiyong.qachat.dev'
     defaultConfig {
-        applicationId 'com.jiezhiyong.qachat'
+        applicationId 'com.jiezhiyong.qachat.dev'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

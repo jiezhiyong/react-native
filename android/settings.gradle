@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'Chat QA'
+rootProject.name = 'Chat QA (Dev)'
 
 dependencyResolutionManagement {
   versionCatalogs {

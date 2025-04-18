@@ -35,6 +35,8 @@
         <data android:scheme="qachat"/>
         <data android:scheme="com.jiezhiyong.qachat"/>
         <data android:scheme="exp+qachat"/>
+        <data android:scheme="com.jiezhiyong.qachat.preview"/>
+        <data android:scheme="com.jiezhiyong.qachat.dev"/>
       </intent-filter>
     </activity>
   </application>
