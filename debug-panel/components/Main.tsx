@@ -37,7 +37,7 @@ const ENV_API = {
 
 export function Main() {
   const sheetRef = React.useRef<BottomSheet>(null);
-  const snapPoints = React.useMemo(() => ['64%', '100%'], []);
+  const snapPoints = React.useMemo(() => ['63.6%', '100%'], []);
 
   const { top } = useSafeAreaInsets();
   const { isVisible, setVisible } = useDebugPanelStore();
@@ -52,7 +52,6 @@ export function Main() {
     try {
       const keys = await AsyncStorage.getAllKeys();
       const results = await AsyncStorage.multiGet(keys);
-      // 使用类型断言解决只读数组的兼容性问题
       setStorageItems([...results] as string[][]);
     } catch (e) {
       console.error('获取AsyncStorage内容失败', e);
@@ -92,8 +91,6 @@ export function Main() {
   React.useEffect(() => {
     if (isVisible) {
       sheetRef.current?.expand();
-    } else {
-      sheetRef.current?.close();
     }
   }, [isVisible]);
 
@@ -106,12 +103,14 @@ export function Main() {
   }, [isRequestEncryptionEnabled]);
 
   const handleClosePress = React.useCallback(() => {
-    setVisible(false);
+    sheetRef.current?.close();
+    setTimeout(() => {
+      setVisible(false);
+    }, 300);
   }, [setVisible]);
 
-  // 如果不可见，只渲染触发区域
-  if (!isVisible) {
-    return (
+  return (
+    <>
       <Pressable
         onPress={() => setVisible(true)}
         style={{
@@ -127,178 +126,178 @@ export function Main() {
           source={require('~/assets/images/debug.png')}
         />
       </Pressable>
-    );
-  }
 
-  return (
-    <GestureHandlerRootView style={styles.container}>
-      <BottomSheet
-        ref={sheetRef}
-        index={0}
-        snapPoints={snapPoints}
-        enableDynamicSizing={false}
-        enablePanDownToClose
-        handleComponent={null}
-        topInset={top}
-        backdropComponent={(props) => (
-          <BottomSheetBackdrop {...props} enableTouchThrough appearsOnIndex={0} disappearsOnIndex={-1} />
-        )}
-        onClose={handleClosePress}
-      >
-        <View flex="1" bg="secondary">
-          <View py="medium" bg="default">
-            <Row align="start">
-              <Spacer.Horizontal size="medium" />
-              <Row align="center" shrink="1">
-                <View>
-                  <View height="xl" width="xl" overflow="hidden" bg="secondary" rounded="medium">
-                    <Image
-                      source={require('~/assets/images/icon.png')}
-                      style={{ flex: 1, width: '100%', resizeMode: 'contain' }}
-                    />
-                  </View>
-                </View>
-
-                <Spacer.Horizontal size="small" />
-
-                <View shrink="1">
-                  <Row style={{ flexWrap: 'wrap' }}>
-                    <Heading weight="bold" numberOfLines={1}>
-                      {Constants.expoConfig?.name} - Test Tools
-                    </Heading>
-                  </Row>
-
-                  <Text size="small" color="secondary">
-                    version: {Application.nativeApplicationVersion || Constants.expoConfig?.version || '-'} (
-                    {Application.nativeBuildVersion})
-                  </Text>
-                </View>
-
-                <Spacer.Horizontal />
-
-                <View width="large" style={{ alignSelf: 'flex-start' }}>
-                  <Button.FadeOnPressContainer onPress={handleClosePress} bg="ghost" rounded="full">
-                    <View padding="micro">
-                      <XIcon />
-                    </View>
-                  </Button.FadeOnPressContainer>
-                </View>
-
-                <Spacer.Horizontal size="small" />
-              </Row>
-            </Row>
-          </View>
-
-          <Divider />
-          <View style={{ flex: 1 }}>
-            <BottomSheetScrollView>
-              <View margin="small">
-                <View bg="default" roundedTop="large">
-                  <SettingsRowButton
-                    label={`切换接口环境 (${env.charAt(0).toUpperCase() + env.slice(1)})`}
-                    description={api}
-                    icon={<Globe size={20} color="#444" />}
-                    onPress={() => {
-                      // 按顺序依次、循环切换inte、rc、prod，切换后将 env 写入 AsyncStorage
-                      const index = ENV_NAME.indexOf(env);
-                      const nextIndex = (index + 1) % ENV_NAME.length;
-                      const nextEnv = ENV_NAME[nextIndex];
-                      setEnv(nextEnv);
-                      setApi(ENV_API[nextEnv]);
-                      AsyncStorage.setItem('env', nextEnv);
-                    }}
-                  />
-                </View>
-                <Divider />
-                <View bg="default" roundedBottom="large">
-                  <SettingsRowSwitch
-                    testID="request-encryption"
-                    label="切换请求加密"
-                    icon={<LockKeyhole size={20} color="#444" />}
-                    setIsEnabled={setRequestEncryptionEnabled}
-                    isEnabled={isRequestEncryptionEnabled}
-                  />
-                </View>
-              </View>
-
-              <View mx="small" mb="small" rounded="large" overflow="hidden">
-                <View bg="default" roundedTop="large">
-                  <SettingsRowButton
-                    label="重新加载"
-                    icon={<RefreshIcon />}
-                    onPress={() => {
-                      try {
-                        if (__DEV__ && DevSettings) {
-                          DevSettings.reload();
-                        } else {
-                          console.warn('重启功能仅在开发环境可用');
-                        }
-                      } catch (error) {
-                        console.error('重启APP失败:', error);
-                      }
-                    }}
-                  />
-                </View>
-                <Divider />
-                <View bg="default" roundedTop="large">
-                  <SettingsRowButton
-                    label="返回首页"
-                    icon={<House size={20} color="#444" />}
-                    onPress={() => {
-                      try {
-                        router.replace('/');
-                        setVisible(false);
-                      } catch (error) {
-                        console.error('导航到首页失败:', error);
-                      }
-                    }}
-                  />
-                </View>
-              </View>
-
-              <View mx="small" rounded="large" overflow="hidden">
-                <AppInfoRow title="Bundle ID" value={Application.applicationId || '-'} />
-                <Divider />
-                <AppInfoRow title="OS" value={`${Platform.OS}, ${Platform.Version?.toString() || '-'}`} />
-              </View>
-
-              <View margin="small">
-                <View bg="warning" padding="medium" rounded="medium" border="warning">
-                  <Row align="center">
-                    <Heading color="warning" size="small" style={{ top: 1 }}>
-                      AsyncStorage
-                    </Heading>
-                    <Spacer.Horizontal style={{ flex: 1 }} />
-                    <Button.FadeOnPressContainer onPress={getAllStorageItems} bg="ghost" rounded="full">
-                      <View padding="micro">
-                        <RefreshIcon size="small" />
+      {isVisible && (
+        <GestureHandlerRootView style={styles.container}>
+          <BottomSheet
+            ref={sheetRef}
+            index={0}
+            snapPoints={snapPoints}
+            enableDynamicSizing={false}
+            enablePanDownToClose
+            handleComponent={null}
+            topInset={top}
+            backdropComponent={(props) => (
+              <BottomSheetBackdrop {...props} enableTouchThrough appearsOnIndex={0} disappearsOnIndex={-1} />
+            )}
+            onClose={handleClosePress}
+          >
+            <View flex="1" bg="secondary">
+              <View py="medium" bg="default">
+                <Row align="start">
+                  {Platform.OS === 'web' ? <View style={{ width: 16 }} /> : <Spacer.Horizontal size="medium" />}
+                  <Row align="center" grow="1" shrink="1">
+                    <View>
+                      <View height="xl" width="xl" overflow="hidden" bg="secondary" rounded="medium">
+                        <Image
+                          source={require('~/assets/images/icon.png')}
+                          style={{ flex: 1, width: '100%', resizeMode: 'contain' }}
+                        />
                       </View>
-                    </Button.FadeOnPressContainer>
-                  </Row>
-                  <Spacer.Vertical size="tiny" />
-                  <View>
-                    {storageItems.length > 0 ? (
-                      storageItems.map(([key, value], index) => (
-                        <Text key={index} size="small" color="warning">
-                          {index + 1}. {key}: {value}
-                        </Text>
-                      ))
-                    ) : (
-                      <Text size="small" color="warning">
-                        ...
+                    </View>
+
+                    {Platform.OS === 'web' ? <View style={{ width: 12 }} /> : <Spacer.Horizontal size="small" />}
+
+                    <View grow="1" shrink="1">
+                      <Row style={{ flexWrap: 'wrap' }}>
+                        <Heading weight="bold" numberOfLines={1}>
+                          {Constants.expoConfig?.name} - Test Tools
+                        </Heading>
+                      </Row>
+
+                      <Text size="small" color="secondary">
+                        version: {Application.nativeApplicationVersion || Constants.expoConfig?.version || '-'} (
+                        {Application.nativeBuildVersion})
                       </Text>
-                    )}
-                  </View>
-                </View>
+                    </View>
+
+                    {Platform.OS === 'web' ? <View style={{ width: 12 }} /> : <Spacer.Horizontal />}
+
+                    <View width="large" style={{ alignSelf: 'flex-start' }}>
+                      <Button.FadeOnPressContainer onPress={handleClosePress} bg="ghost" rounded="full">
+                        <View padding="micro">
+                          <XIcon />
+                        </View>
+                      </Button.FadeOnPressContainer>
+                    </View>
+
+                    {Platform.OS === 'web' ? <View style={{ width: 12 }} /> : <Spacer.Horizontal size="small" />}
+                  </Row>
+                </Row>
               </View>
 
-              {Platform.OS === 'android' && <View style={{ height: 50 }} />}
-              <Spacer.Vertical size="large" />
-            </BottomSheetScrollView>
-          </View>
-        </View>
-      </BottomSheet>
-    </GestureHandlerRootView>
+              <Divider />
+              <View style={{ flex: 1 }}>
+                <BottomSheetScrollView>
+                  <View margin="small">
+                    <View bg="default" roundedTop="large">
+                      <SettingsRowButton
+                        label={`切换接口环境 (${env.charAt(0).toUpperCase() + env.slice(1)})`}
+                        description={api}
+                        icon={<Globe size={20} color="#444" />}
+                        onPress={() => {
+                          // 按顺序依次、循环切换inte、rc、prod，切换后将 env 写入 AsyncStorage
+                          const index = ENV_NAME.indexOf(env);
+                          const nextIndex = (index + 1) % ENV_NAME.length;
+                          const nextEnv = ENV_NAME[nextIndex];
+                          setEnv(nextEnv);
+                          setApi(ENV_API[nextEnv]);
+                          AsyncStorage.setItem('env', nextEnv);
+                        }}
+                      />
+                    </View>
+                    <Divider />
+                    <View bg="default" roundedBottom="large">
+                      <SettingsRowSwitch
+                        testID="request-encryption"
+                        label="切换请求加密"
+                        icon={<LockKeyhole size={20} color="#444" />}
+                        setIsEnabled={setRequestEncryptionEnabled}
+                        isEnabled={isRequestEncryptionEnabled}
+                      />
+                    </View>
+                  </View>
+
+                  <View mx="small" mb="small" rounded="large" overflow="hidden">
+                    <View bg="default" roundedTop="large">
+                      <SettingsRowButton
+                        label="重新加载"
+                        icon={<RefreshIcon />}
+                        onPress={() => {
+                          try {
+                            if (__DEV__ && DevSettings) {
+                              DevSettings.reload();
+                            } else {
+                              console.warn('重启功能仅在开发环境可用');
+                            }
+                          } catch (error) {
+                            console.error('重启APP失败:', error);
+                          }
+                        }}
+                      />
+                    </View>
+                    <Divider />
+                    <View bg="default" roundedTop="large">
+                      <SettingsRowButton
+                        label="返回首页"
+                        icon={<House size={20} color="#444" />}
+                        onPress={() => {
+                          try {
+                            router.replace('/');
+                            setVisible(false);
+                          } catch (error) {
+                            console.error('导航到首页失败:', error);
+                          }
+                        }}
+                      />
+                    </View>
+                  </View>
+
+                  <View mx="small" rounded="large" overflow="hidden">
+                    <AppInfoRow title="Bundle ID" value={Application.applicationId || '-'} />
+                    <Divider />
+                    <AppInfoRow title="OS" value={`${Platform.OS}, ${Platform.Version?.toString() || '-'}`} />
+                  </View>
+
+                  <View margin="small">
+                    <View bg="warning" padding="medium" rounded="medium" border="warning">
+                      <Row align="center">
+                        <Heading color="warning" size="small" style={{ top: 1 }}>
+                          AsyncStorage
+                        </Heading>
+                        <Spacer.Horizontal style={{ flex: 1 }} />
+                        <Button.FadeOnPressContainer onPress={getAllStorageItems} bg="ghost" rounded="full">
+                          <View padding="micro">
+                            <RefreshIcon size="small" />
+                          </View>
+                        </Button.FadeOnPressContainer>
+                      </Row>
+                      <Spacer.Vertical size="tiny" />
+                      <View>
+                        {storageItems.length > 0 ? (
+                          storageItems.map(([key, value], index) => (
+                            <Text key={index} size="small" color="warning">
+                              {index + 1}. {key}: {value}
+                            </Text>
+                          ))
+                        ) : (
+                          <Text size="small" color="warning">
+                            ...
+                          </Text>
+                        )}
+                      </View>
+                    </View>
+                  </View>
+
+                  {Platform.OS === 'android' && <View style={{ height: 50 }} />}
+                  <Spacer.Vertical size="large" />
+                </BottomSheetScrollView>
+              </View>
+            </View>
+          </BottomSheet>
+        </GestureHandlerRootView>
+      )}
+    </>
   );
 }
 

@@ -136,12 +136,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ['expo-secure-store', {}],
     ['expo-localization', {}],
     [
-      'expo-dev-client',
-      {
-        launchMode: 'most-recent',
-      },
-    ],
-    [
       'expo-router',
       {
         headOrigin: IS_DEV ? `https://${ngrokUrl}` : `https://${process.env.EXPO_TUNNEL_SUBDOMAIN}`,

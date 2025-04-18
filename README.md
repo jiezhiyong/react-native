@@ -46,7 +46,7 @@ npx @react-native-reusables/cli@latest add
 
 - [...](https://reactnative.directory)
 
-## 创建本地开发版本
+## 创建本地开发版本 Development Build（依赖 Development servers）
 
 ```sh
 npx expo install expo-dev-client # 安装开发客户端
@@ -54,13 +54,14 @@ npx expo install expo-dev-client # 安装开发客户端
 
 ```sh
 npx expo prebuild # 使用 Prebuild 生成原生 Android 和 iOS 目录
+npx pod-install # 安装 iOS 依赖，按需运行
 npx expo prebuild -p <android | ios> # 预构建 Android | iOS
 ```
 
 ```sh
-npx expo run:android
-npx expo run:ios # simulator
-npx expo run:ios --device # device
+npx expo run:android # --variant <debug | release>，variant 在 build.gradle 中定义
+npx expo run:ios # simulator, --configuration <Debug | Release>
+npx expo run:ios --device # device, --configuration <Debug | Release>
 ```
 
 ## 创建内部分发用 DEBUG 版本
@@ -102,6 +103,30 @@ npx expo run:ios --device # device
 ```sh
 npx expo export -p web
 npx expo serve # 在本地进行测试
+```
+
+## 构建具有与发布构建相同更新行为的调试版本
+
+- https://docs.expo.dev/versions/latest/sdk/updates/#testing
+- https://docs.expo.dev/debugging/runtime-issues/#native-debugging
+
+```sh
+1. export EX_UPDATES_NATIVE_DEBUG=1
+2. npx expo prebuild
+
+# Android Studio
+3. open -a "/Applications/Android Studio.app" ./android
+4. 等待项目同步完成（右下角进度条消失）
+5. 选择设备，构建应用 (Control + R)
+
+# Xcode
+3. npx pod-install
+4. sed -i '' 's/SKIP_BUNDLING/FORCE_BUNDLING/g;' ios/ChatQA.xcodeproj/project.pbxproj
+5. xed ios
+6. 选择设备，构建应用 (Command + R)
+
+7. unset EX_UPDATES_NATIVE_DEBUG
+8. sed -i '' 's/FORCE_BUNDLING/SKIP_BUNDLING/g' ios/ChatQA.xcodeproj/project.pbxproj # 恢复 SKIP_BUNDLING 变更
 ```
 
 ## 其他
@@ -150,3 +175,15 @@ EXPO_UNSTABLE_ATLAS=true npx expo export & npx expo-atlas .expo/atlas.jsonl # �
 - [Exmple](https://github.com/expo/examples)
 - [Follow Up](https://docs.expo.dev/tutorial/follow-up/)
 - [Additional Resources](https://docs.expo.dev/additional-resources/)
+- [OTA](https://github.com/vantuan88291/react-native-ota-hot-update、 https://github.com/gronxb/hot-updater)
+- [Expo 配置插件](https://github.com/expo/config-plugins)
+
+## TODO
+
+```sh
+# android
+npx react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+
+# ios
+npx react-native bundle --platform ios --dev true --entry-file index.js --bundle-output ios/main.jsbundle --assets-dest ios
+```

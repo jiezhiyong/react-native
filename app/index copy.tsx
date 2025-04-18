@@ -5,7 +5,6 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, ScrollView, View } from 'react-native';
 
-import DOMComponents from '~/components/DOMComponents';
 import { LanguageToggle } from '~/components/LanguageToggle';
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
@@ -97,25 +96,6 @@ export default function HomeScreen() {
         {/* <Text>{MyModule.hello()}</Text> */}
 
         <Image source={require('~/assets/images/react-logo.png')} />
-
-        <DOMComponents
-          name="this is a DOMComponents"
-          dom={{
-            containerStyle: containerSize != null ? { width: containerSize.width, height: containerSize.height } : null,
-            matchContents: true,
-            scrollEnabled: false,
-            style: {},
-          }}
-          pathname={pathname}
-          nativeActions={async (data: string) => {
-            console.log('Hello', data);
-          }}
-          onDOMLayout={async ({ width, height }) => {
-            // if (containerSize?.width !== width || containerSize?.height !== height) {
-            //   setContainerSize({ width, height });
-            // }
-          }}
-        />
       </View>
     </ScrollView>
   );

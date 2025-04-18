@@ -1,25 +1,37 @@
+const path = require('path');
+
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 const { getSentryExpoConfig } = require('@sentry/react-native/metro');
 const { withNativeWind } = require('nativewind/metro');
 
-const config = getSentryExpoConfig(__dirname, {
+const defaultConfig = getDefaultConfig(__dirname, {
   isCSSEnabled: true,
 });
+const config = getSentryExpoConfig(__dirname);
+
+// 合并默认配置
+const mergedConfig = mergeConfig(defaultConfig, config);
+
+// 添加路径别名配置
+mergedConfig.resolver.extraNodeModules = {
+  '~': path.resolve(__dirname),
+};
 
 // enabling-tree-shaking
-config.transformer.getTransformOptions = async () => ({
+mergedConfig.transformer.getTransformOptions = async () => ({
   transform: {
     experimentalImportSupport: true,
   },
 });
 
 // remove-console-logs
-config.transformer.minifierConfig = {
+mergedConfig.transformer.minifierConfig = {
   compress: {
     drop_console: ['log', 'info'],
   },
 };
 
 // Adds support for `.db` files for SQLite databases
-config.resolver.assetExts.push('db');
+mergedConfig.resolver.assetExts.push('db');
 
-module.exports = withNativeWind(config, { input: './global.css' });
+module.exports = withNativeWind(mergedConfig, { input: './global.css' });

@@ -11,6 +11,7 @@ import * as Network from 'expo-network';
 import { Stack, useNavigationContainerRef } from 'expo-router';
 import Head from 'expo-router/head';
 import { StatusBar } from 'expo-status-bar';
+import * as Updates from 'expo-updates';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
@@ -96,7 +97,9 @@ function RootLayout() {
   useReactQueryDevTools(queryClient);
 
   const hasMounted = React.useRef(false);
+
   const { colorScheme, isDarkColorScheme } = useColorScheme();
+  const { isUpdatePending } = Updates.useUpdates();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
   // Capture the NavigationContainer ref and register it with the integration.
@@ -120,11 +123,35 @@ function RootLayout() {
     hasMounted.current = true;
   }, []);
 
+  // async function onFetchUpdateAsync() {
+  //   try {
+  //     const update = await Updates.checkForUpdateAsync();
+
+  //     if (update.isAvailable) {
+  //       await Updates.fetchUpdateAsync();
+  //       await Updates.reloadAsync();
+  //     }
+  //   } catch (error) {
+  //     alert(`Error fetching latest Expo update: ${error}`);
+  //   }
+  // }
+
   useEffect(() => {
+    // onFetchUpdateAsync();
     const subscription = AppState.addEventListener('change', onAppStateChange);
 
     return () => subscription.remove();
   }, []);
+
+  // TODO:
+  // useEffect(() => {
+  //   if (isUpdatePending) {
+  //     const isConfirm = confirm('A new update is available. Reload app?');
+  //     if (isConfirm) {
+  //       Updates.reloadAsync();
+  //     }
+  //   }
+  // }, [isUpdatePending]);
 
   if (!isColorSchemeLoaded) {
     return null;
@@ -132,7 +159,7 @@ function RootLayout() {
 
   return (
     <>
-      <DebugPanel />
+      {__DEV__ ? <DebugPanel /> : null}
       <KeyboardProvider>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
