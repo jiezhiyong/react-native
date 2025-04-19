@@ -5,7 +5,16 @@
     "module": "esnext",
     "paths": {
       "~/*": ["./*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "types"]
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "nativewind-env.d.ts", "index.js"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts",
+    "index.js",
+    "types/**/*.d.ts"
+  ]
 }

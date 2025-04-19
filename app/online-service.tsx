@@ -12,7 +12,7 @@ export default function OnlineServiceScreen() {
       />
 
       <ScrollView className="flex-1 px-4 py-6">
-        <Text className="text-2xl font-bold mb-6">在线客服</Text>
+        <Text className="text-2xl font-bold mb-6">// TODO:在线客服</Text>
       </ScrollView>
     </View>
   );

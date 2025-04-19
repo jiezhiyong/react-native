@@ -25,6 +25,7 @@ npx @react-native-reusables/cli@latest add
 
 - [Expo SDK](https://docs.expo.dev/versions/latest/sdk/expo)
 
+- [React Native Vision Camera](https://react-native-vision-camera.com)
 - [keyboard](https://kirillzyusko.github.io/react-native-keyboard-controller)
 - [tanstack-query](https://tanstack.com/query/v4)
 - [react-hook-form](https://react-hook-form.com)

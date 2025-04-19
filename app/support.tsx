@@ -39,7 +39,7 @@ export default function HelpScreen() {
       </View>
 
       <View className="bg-white rounded-xl mx-4 overflow-hidden">
-        <HelpOption title="常见问题" onPress={() => router.push('/help')} />
+        <HelpOption title="常见问题" onPress={() => router.push('/qa')} />
         <HelpOption title="投诉 / 反馈 / 建议" onPress={() => router.push('/feedback')} />
       </View>
     </SafeAreaView>
