@@ -15,12 +15,9 @@ import {
   useCameraPermission,
   useCodeScanner,
 } from 'react-native-vision-camera';
+import validator from 'validator';
 
-import { useScanHistoryStore } from '../../store/scan-history';
-
-// 判断是否是URL的正则表达式
-const URL_REGEX =
-  /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+import { useScanHistoryStore } from '~/store/scan-history';
 
 export default function ScanScreen() {
   const [scanned, setScanned] = useState(false);
@@ -56,14 +53,14 @@ export default function ScanScreen() {
 
       const data = code.value;
       setScanned(true);
-      const isUrlData = URL_REGEX.test(data);
-      setIsUrl(isUrlData);
+      const isValidUrl = validator.isURL(scannedData);
+      setIsUrl(isValidUrl);
       setScannedData(data);
 
       // 添加到历史记录
-      addHistory(data, isUrlData);
+      addHistory(data, isValidUrl);
 
-      if (isUrlData) {
+      if (isValidUrl) {
         // 如果是URL，使用WebView打开
         router.push({
           pathname: '/webview',
@@ -74,7 +71,7 @@ export default function ScanScreen() {
         setModalVisible(true);
       }
     },
-    [scanned, addHistory, router]
+    [scanned, addHistory, router, scannedData]
   );
 
   // 代码扫描器
@@ -121,14 +118,14 @@ export default function ScanScreen() {
 
         // 扫描成功，处理扫描结果
         setScanned(true);
-        const isUrlData = URL_REGEX.test(qrData);
-        setIsUrl(isUrlData);
+        const isValidUrl = validator.isURL(scannedData);
+        setIsUrl(isValidUrl);
         setScannedData(qrData);
 
         // 添加到历史记录
-        addHistory(qrData, isUrlData);
+        addHistory(qrData, isValidUrl);
 
-        if (isUrlData) {
+        if (isValidUrl) {
           // 如果是URL，使用WebView打开
           router.push({
             pathname: '/webview',
