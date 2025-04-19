@@ -19,8 +19,8 @@ const discovery = {
 export default function LoginScreen() {
   const router = useRouter();
   const { signIn } = useAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('goodman@ly.com');
+  const [password, setPassword] = useState('123456');
   const [isLoading, setIsLoading] = useState(false);
 
   // 设置 OAuth 请求
@@ -71,7 +71,7 @@ export default function LoginScreen() {
   }, [response, handleOAuthSuccess]);
 
   // 处理表单登录
-  const handleFormLogin = async () => {
+  const handleLogin = async () => {
     if (!username || !password) {
       alert('请输入用户名和密码');
       return;
@@ -80,7 +80,7 @@ export default function LoginScreen() {
     setIsLoading(true);
     try {
       await signIn({ username, password });
-      router.replace('/(protected)/bill');
+      router.back();
     } catch (error) {
       console.error('登录失败:', error);
       alert('登录失败，请检查用户名和密码');
@@ -98,13 +98,15 @@ export default function LoginScreen() {
 
       <TextInput style={styles.input} placeholder="密码" secureTextEntry value={password} onChangeText={setPassword} />
 
-      <Button onPress={handleFormLogin} className="w-full">
-        <Text>{isLoading ? '登录中...' : '登录'}</Text>
+      <Button onPress={handleLogin} className="w-full flex-row items-center gap-2" disabled={isLoading}>
+        {isLoading ? <ActivityIndicator size="small" color="#fff" /> : <Text>登录</Text>}
       </Button>
 
       <View style={styles.divider}>
         <View style={styles.dividerLine} />
-        <Text style={styles.dividerText}>或</Text>
+        <Text style={styles.dividerText} className="text-xs">
+          或
+        </Text>
         <View style={styles.dividerLine} />
       </View>
 
@@ -114,8 +116,8 @@ export default function LoginScreen() {
 
       {isPresented && (
         <Link href="../" asChild>
-          <Button variant="ghost">
-            <Text>Dismiss</Text>
+          <Button variant="ghost" className="mt-6">
+            <Text className="text-xs">返回</Text>
           </Button>
         </Link>
       )}

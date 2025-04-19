@@ -11,6 +11,10 @@ interface AuthState {
   id: string | null;
   // 用户名
   name: string | null;
+  // 用户头像
+  avatar: string | null;
+  // 手机号
+  mobile: string | null;
   // 加载状态
   isLoading: boolean;
   // 登录方法
@@ -26,6 +30,8 @@ export const useAuthStore = create<AuthState>()(
       session: null,
       id: null,
       name: null,
+      avatar: null,
+      mobile: null,
       isLoading: true,
 
       // 登录方法
@@ -41,6 +47,8 @@ export const useAuthStore = create<AuthState>()(
             session: 'session_abc',
             id: 'id_123456',
             name: '张三',
+            avatar: 'avatar.png',
+            mobile: '138 **** 1234',
             isLoading: false,
           });
         } catch (error) {
@@ -63,6 +71,8 @@ export const useAuthStore = create<AuthState>()(
             session: null,
             id: null,
             name: null,
+            avatar: null,
+            mobile: null,
             isLoading: false,
           });
         } catch (error) {
@@ -79,6 +89,8 @@ export const useAuthStore = create<AuthState>()(
         session: state.session,
         id: state.id,
         name: state.name,
+        avatar: state.avatar,
+        mobile: state.mobile,
       }),
       onRehydrateStorage: () => (state) => {
         if (state) {
@@ -91,12 +103,14 @@ export const useAuthStore = create<AuthState>()(
 
 // 辅助钩子，用于在组件中获取认证状态
 export function useAuth() {
-  const { session, id, name, isLoading, signIn, signOut } = useAuthStore();
+  const { session, id, name, avatar, mobile, isLoading, signIn, signOut } = useAuthStore();
 
   return {
     session,
     id,
     name,
+    avatar,
+    mobile,
     isLoading,
     signIn,
     signOut,

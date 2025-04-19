@@ -1,144 +1,102 @@
-import domtoimage from 'dom-to-image';
-import { type ImageSource } from 'expo-image';
-import * as ImagePicker from 'expo-image-picker';
-import * as MediaLibrary from 'expo-media-library';
-import { useRef, useState } from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { captureRef } from 'react-native-view-shot';
+import { A } from '@expo/html-elements';
+import * as Linking from 'expo-linking';
+import { Link, usePathname, useRouter } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
+import * as React from 'react';
+import { Image, Platform, ScrollView, View } from 'react-native';
 
-import Button from '~/components/Button';
-import CircleButton from '~/components/CircleButton';
-import EmojiList from '~/components/EmojiList';
-import EmojiPicker from '~/components/EmojiPicker';
-import EmojiSticker from '~/components/EmojiSticker';
-import IconButton from '~/components/IconButton';
-import ImageViewer from '~/components/ImageViewer';
+import { LanguageToggle } from '~/components/LanguageToggle';
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
+import { useI18nContext } from '~/i18n/i18n-react';
+// import MyModule from '~/modules/my-module';
 
-const PlaceholderImage = require('~/assets/images/background-image.png');
+export default function HomeScreen() {
+  const pathname = usePathname();
+  const router = useRouter();
 
-export default function Index() {
-  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
-  const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [pickedEmoji, setPickedEmoji] = useState<ImageSource | undefined>(undefined);
-  const [status, requestPermission] = MediaLibrary.usePermissions();
-  const imageRef = useRef<View>(null);
+  const { LL, locale } = useI18nContext();
+  const [containerSize, setContainerSize] = React.useState<{ width: number; height: number } | null>(null);
 
-  if (status === null) {
-    requestPermission();
-  }
+  // ios 模拟器或设备上打开后一直触发 console ？
+  // if (Platform.OS === 'ios') {
+  //   console.log('Hello on iOS');
+  // }
 
-  const pickImageAsync = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setSelectedImage(result.assets[0].uri);
-      setShowAppOptions(true);
-    } else {
-      alert('You did not select any image.');
-    }
-  };
-
-  const onReset = () => {
-    setShowAppOptions(false);
-    setSelectedImage(undefined);
-    setPickedEmoji(undefined);
-  };
-
-  const onAddSticker = () => {
-    setIsModalVisible(true);
-  };
-
-  const onModalClose = () => {
-    setIsModalVisible(false);
-  };
-
-  const onSaveImageAsync = async () => {
-    if (Platform.OS !== 'web') {
-      try {
-        const localUri = await captureRef(imageRef, {
-          height: 440,
-          quality: 1,
-        });
-
-        await MediaLibrary.saveToLibraryAsync(localUri);
-        if (localUri) {
-          alert('Saved!');
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    } else {
-      try {
-        const dataUrl = await domtoimage.toJpeg(imageRef.current, {
-          quality: 0.95,
-          width: 320,
-          height: 440,
-        });
-
-        let link = document.createElement('a');
-        link.download = 'sticker-smash.jpeg';
-        link.href = dataUrl;
-        link.click();
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
+  // if (process.env.NODE_ENV === 'development') {
+  //   console.log('Hello in development');
+  // }
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <View style={styles.imageContainer}>
-        <View ref={imageRef} collapsable={false}>
-          <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
-          {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />}
+    <ScrollView>
+      <View className="flex-1 gap-3 p-5 bg-secondary/30">
+        {/* <Text>{LL.HI({ name: 'React Native', locale })}</Text> */}
+        {/* <LanguageToggle /> */}
+
+        <View style={{ $$css: true, _: 'bg-slate-100 rounded-xl p-3' }}>
+          <Text style={{ $$css: true, _: 'text-lg font-medium' }}>Tailwind + React Native web elements</Text>
         </View>
+
+        <Button onPress={() => router.navigate('/discover')}>
+          <Text>Go to Discover</Text>
+        </Button>
+
+        <Text>登录</Text>
+        <Button onPress={() => router.navigate('/login')}>
+          <Text>Go to Login</Text>
+        </Button>
+
+        <Button onPress={() => router.navigate('/(protected)/bill')}>
+          <Text>Go to Protected Page Bill</Text>
+        </Button>
+
+        <Text>导航</Text>
+        <Button onPress={() => router.navigate('/products')}>
+          <Text>Go to Products</Text>
+        </Button>
+
+        <Link href={`/products/${20}?name=abc`} asChild withAnchor>
+          <Button>
+            <Text>view products</Text>
+          </Button>
+        </Link>
+
+        <Text>使用默认浏览器打开URL</Text>
+        <Button onPress={() => Linking.openURL('https://expo.dev')}>
+          <Text>expo-linking-api</Text>
+        </Button>
+
+        <Link href="https://expo.dev" asChild>
+          <Button>
+            <Text>expo-routers-link-component</Text>
+          </Button>
+        </Link>
+
+        <Button variant="outline">
+          <A href="https://expo.dev">@expo/html-elements</A>
+        </Button>
+
+        <Button onPress={() => WebBrowser.openBrowserAsync('https://expo.dev')}>
+          <Text>WebBrowser</Text>
+        </Button>
+
+        <Button onPress={() => Linking.openURL('mailto:support@expo.dev')}>
+          <Text>mailto</Text>
+        </Button>
+
+        <Button onPress={() => Linking.openURL('tel:+123456789')}>
+          <Text>tel</Text>
+        </Button>
+
+        <Button onPress={() => Linking.openURL('sms:+123456789')}>
+          <Text>sms</Text>
+        </Button>
+
+        <Text>Expo Modules API</Text>
+        {/* <Text>{MyModule.hello()}</Text> */}
+
+        <Image source={require('~/assets/images/react-logo.png')} />
       </View>
-      {showAppOptions ? (
-        <View style={styles.optionsContainer}>
-          <View style={styles.optionsRow}>
-            <IconButton icon="refresh" label="Reset" onPress={onReset} />
-            <CircleButton onPress={onAddSticker} />
-            <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
-          </View>
-        </View>
-      ) : (
-        <View style={styles.footerContainer}>
-          <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
-          <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
-        </View>
-      )}
-      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
-        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
-      </EmojiPicker>
-    </GestureHandlerRootView>
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#25292e',
-    alignItems: 'center',
-  },
-  imageContainer: {
-    flex: 1,
-  },
-  footerContainer: {
-    flex: 1 / 3,
-    alignItems: 'center',
-  },
-  optionsContainer: {
-    position: 'absolute',
-    bottom: 80,
-  },
-  optionsRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-});
