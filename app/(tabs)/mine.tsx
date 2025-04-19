@@ -54,7 +54,7 @@ const quickLinks: ItemEntry[][] = [
 // 其他入口数据
 const otherEntries: ItemEntry[] = [
   { title: '银行卡管理', icon: 'CreditCard', iconColor: '#6366f1' },
-  { title: '帮助中心', icon: 'HelpCircle', iconColor: '#10b981', route: '/help' },
+  { title: '帮助中心', icon: 'HelpCircle', iconColor: '#10b981', route: '/support' },
   { title: '意见反馈', icon: 'MessageSquare', iconColor: '#f59e0b', route: '/feedback' },
   { title: '关于我们', icon: 'Info', iconColor: '#0ea5e9', route: '/about' },
 ];

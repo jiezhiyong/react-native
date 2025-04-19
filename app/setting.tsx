@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import React from 'react';
 import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -35,12 +36,13 @@ const SettingGroup = ({ children }: SettingGroupProps) => {
 };
 
 export default function SettingScreen() {
+  const router = useRouter();
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <SettingGroup>
           <SettingItem title="营业执照" />
-          <SettingItem title="隐私设置" />
+          <SettingItem title="隐私设置" onPress={() => router.push('/privacy-setting')} />
         </SettingGroup>
 
         <SettingGroup>

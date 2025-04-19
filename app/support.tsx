@@ -1,23 +1,47 @@
-import { Stack } from 'expo-router';
+import { useRouter } from 'expo-router';
+import { ChevronRight } from 'lucide-react-native';
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 
-/**
- * 支持页面
- * 展示应用的支持内容
- */
-export default function SupportScreen() {
+interface HelpOptionProps {
+  title: string;
+  onPress: () => void;
+  isExternal?: boolean;
+}
+
+const HelpOption = ({ title, onPress, isExternal = false }: HelpOptionProps) => {
   return (
-    <View className="flex-1 bg-white">
-      <Stack.Screen
-        options={{
-          title: '服务支持',
-        }}
-      />
+    <TouchableOpacity
+      className="flex-row items-center justify-between py-4 px-5 border-b border-gray-100"
+      activeOpacity={0.7}
+      onPress={onPress}
+    >
+      <View className="flex-row items-center">
+        <Text className="text-base ml-3">{title}</Text>
+      </View>
+      <ChevronRight size={20} color="#ccc" />
+    </TouchableOpacity>
+  );
+};
 
-      <ScrollView className="flex-1 px-4 py-6">
-        <Text className="text-2xl font-bold mb-6">服务支持</Text>
-      </ScrollView>
-    </View>
+export default function HelpScreen() {
+  const router = useRouter();
+
+  return (
+    <SafeAreaView className="flex-1 bg-gray-100 gap-4 pt-8">
+      <View className="px-4">
+        <Text className="text-2xl text-gray-500">您好 👋</Text>
+        <Text className="text-3xl font-bold mt-1">我们能提供什么帮助?</Text>
+      </View>
+
+      <View className="bg-white rounded-xl mx-4 overflow-hidden">
+        <HelpOption title="消息中心" onPress={() => router.push('/notice')} />
+      </View>
+
+      <View className="bg-white rounded-xl mx-4 overflow-hidden">
+        <HelpOption title="常见问题" onPress={() => router.push('/help')} />
+        <HelpOption title="投诉 / 反馈 / 建议" onPress={() => router.push('/feedback')} />
+      </View>
+    </SafeAreaView>
   );
 }
