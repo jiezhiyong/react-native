@@ -26,8 +26,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAuth } from '~/store/auth';
 
+interface ItemEntry {
+  title: string;
+  icon: string;
+  iconColor: string;
+  route?: string;
+}
+
 // 快捷入口数据
-const quickLinks = [
+const quickLinks: ItemEntry[][] = [
   [
     { title: '订单管理', icon: 'ClipboardList', iconColor: '#4f46e5' },
     { title: '收货地址', icon: 'MapPin', iconColor: '#0891b2' },
@@ -45,11 +52,11 @@ const quickLinks = [
 ];
 
 // 其他入口数据
-const otherEntries = [
+const otherEntries: ItemEntry[] = [
   { title: '银行卡管理', icon: 'CreditCard', iconColor: '#6366f1' },
-  { title: '帮助中心', icon: 'HelpCircle', iconColor: '#10b981' },
-  { title: '意见反馈', icon: 'MessageSquare', iconColor: '#f59e0b' },
-  { title: '关于我们', icon: 'Info', iconColor: '#0ea5e9' },
+  { title: '帮助中心', icon: 'HelpCircle', iconColor: '#10b981', route: '/help' },
+  { title: '意见反馈', icon: 'MessageSquare', iconColor: '#f59e0b', route: '/feedback' },
+  { title: '关于我们', icon: 'Info', iconColor: '#0ea5e9', route: '/about' },
 ];
 
 // 图标组件
@@ -133,8 +140,8 @@ const UserHeader = () => {
 
 // 快捷入口组件
 const QuickLinksSection = () => {
-  const handleQuickLinkPress = (title: string) => {
-    Alert.alert('功能开发中', `您点击了：${title}`);
+  const handleQuickLinkPress = (item: ItemEntry) => {
+    Alert.alert('功能开发中', `您点击了：${item.title}`);
   };
 
   return (
@@ -145,7 +152,7 @@ const QuickLinksSection = () => {
             key={index}
             className="items-center"
             style={{ width: '18%' }}
-            onPress={() => handleQuickLinkPress(item.title)}
+            onPress={() => handleQuickLinkPress(item)}
           >
             <View
               className="w-9 h-9 rounded-full items-center justify-center mb-1"
@@ -163,7 +170,7 @@ const QuickLinksSection = () => {
             key={index}
             className="items-center"
             style={{ width: '18%' }}
-            onPress={() => handleQuickLinkPress(item.title)}
+            onPress={() => handleQuickLinkPress(item)}
           >
             <View
               className="w-9 h-9 rounded-full items-center justify-center mb-1"
@@ -181,15 +188,20 @@ const QuickLinksSection = () => {
 
 // 其他入口组件
 const OtherEntriesSection = () => {
-  const handleEntryPress = (title: string) => {
-    Alert.alert('功能开发中', `您点击了：${title}`);
+  const router = useRouter();
+  const handleEntryPress = (item: ItemEntry) => {
+    if (item.route) {
+      router.push(item.route as any);
+    } else {
+      Alert.alert('功能开发中', `您点击了：${item.title}`);
+    }
   };
 
   return (
     <View className="bg-white rounded-lg px-4 mb-4 mx-4">
       {otherEntries.map((item, index) => (
         <React.Fragment key={index}>
-          <TouchableOpacity className="flex-row items-center py-3" onPress={() => handleEntryPress(item.title)}>
+          <TouchableOpacity className="flex-row items-center py-3" onPress={() => handleEntryPress(item)}>
             <View
               className="w-8 h-8 rounded-full items-center justify-center mr-3"
               style={{ backgroundColor: `${item.iconColor}15` }}
