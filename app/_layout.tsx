@@ -20,6 +20,7 @@ import type { AppStateStatus } from 'react-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { ThemeToggle } from '~/components/ThemeToggle';
+import { Toaster } from '~/components/ui/sonner';
 import { DebugPanel } from '~/debug-panel';
 import { useColorScheme } from '~/hooks/useColorScheme';
 import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
@@ -197,6 +198,7 @@ function RootLayout() {
               <Stack.Screen name="+not-found" />
             </Stack>
             <PortalHost />
+            <Toaster />
             {/* </TypesafeI18n> */}
           </ThemeProvider>
         </QueryClientProvider>

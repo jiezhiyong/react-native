@@ -12,12 +12,12 @@ interface HelpOptionProps {
 const HelpOption = ({ title, onPress, isExternal = false }: HelpOptionProps) => {
   return (
     <TouchableOpacity
-      className="flex-row items-center justify-between py-4 px-5 border-b border-gray-100"
+      className="flex-row items-center justify-between p-4 border-b border-gray-100"
       activeOpacity={0.7}
       onPress={onPress}
     >
       <View className="flex-row items-center">
-        <Text className="text-base ml-3">{title}</Text>
+        <Text className="text-base">{title}</Text>
       </View>
       <ChevronRight size={20} color="#ccc" />
     </TouchableOpacity>

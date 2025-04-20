@@ -219,17 +219,20 @@ const OtherEntriesSection = () => {
 };
 
 export default function MinePage() {
-  // 处理图标点击
+  const router = useRouter();
   const handleTopIconPress = (action: string) => {
     switch (action) {
       case 'scan':
-        Alert.alert('扫一扫', '功能开发中...');
+        router.push('/scan');
         break;
       case 'settings':
-        Alert.alert('设置', '功能开发中...');
+        router.push('/setting');
         break;
       case 'service':
-        Alert.alert('客服', '功能开发中...');
+        router.push('/online-service');
+        break;
+      case 'notice':
+        router.push('/notice');
         break;
       default:
         break;
@@ -248,6 +251,9 @@ export default function MinePage() {
         </TouchableOpacity>
         <TouchableOpacity className="p-2" onPress={() => handleTopIconPress('service')}>
           <Headphones size={20} color="#333" strokeWidth={2} />
+        </TouchableOpacity>
+        <TouchableOpacity className="p-2" onPress={() => handleTopIconPress('notice')}>
+          <Bell size={20} color="#333" strokeWidth={2} />
         </TouchableOpacity>
       </View>
 

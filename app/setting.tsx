@@ -56,6 +56,10 @@ export default function SettingScreen() {
           <SettingItem title="系统权限使用清单" />
           <SettingItem title="互联网信息服务算法备案" />
         </SettingGroup>
+
+        <SettingGroup>
+          <SettingItem title="账户注销" onPress={() => router.push('/destroy-account')} />
+        </SettingGroup>
       </ScrollView>
     </SafeAreaView>
   );
