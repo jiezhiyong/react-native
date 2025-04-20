@@ -208,7 +208,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
 const QuickQuestionButton = ({ question, onPress }: { question: QuickQuestion; onPress: () => void }) => {
   return (
     <TouchableOpacity
-      className="bg-gray-50 border border-gray-200 rounded-full px-4 py-2 mr-3"
+      className="bg-gray-50 border border-gray-200 rounded-full px-4 py-2"
       onPress={onPress}
       activeOpacity={0.7}
     >
@@ -477,16 +477,14 @@ export default function OnlineServiceScreen() {
         />
 
         {/* 常见问题快捷入口 */}
-        {messages.length < 4 && (
-          <View className="px-4 py-2 border-t border-gray-100">
-            <Text className="text-sm text-gray-500 mb-2">常见问题</Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} className="py-1">
-              {quickQuestions.map((q) => (
-                <QuickQuestionButton key={q.id} question={q} onPress={() => handleQuickQuestionPress(q.question)} />
-              ))}
-            </ScrollView>
-          </View>
-        )}
+        <View className="px-4 py-2">
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row items-center gap-2">
+            <Text className="text-sm text-gray-500">常见问题：</Text>
+            {quickQuestions.map((q) => (
+              <QuickQuestionButton key={q.id} question={q} onPress={() => handleQuickQuestionPress(q.question)} />
+            ))}
+          </ScrollView>
+        </View>
 
         {/* 输入框区域 */}
         <View className="px-4 py-2 border-t border-gray-200 flex-row items-center">
