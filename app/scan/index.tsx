@@ -1,20 +1,12 @@
-/* eslint-disable import/no-unresolved */
 import Clipboard from '@react-native-clipboard/clipboard';
+import { BrowserQRCodeReader } from '@zxing/browser';
 import * as ImagePicker from 'expo-image-picker';
 import { Link, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { ArrowLeft, CheckCircle2, Copy, History, ImagePlus, LampDesk } from 'lucide-react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Modal, Text, TouchableOpacity, View } from 'react-native';
-import { QRreader } from 'react-native-qr-decode-image-camera';
-import {
-  Camera,
-  Code,
-  CodeScannerFrame,
-  useCameraDevice,
-  useCameraPermission,
-  useCodeScanner,
-} from 'react-native-vision-camera';
+import { Camera, Code, useCameraDevice, useCameraPermission, useCodeScanner } from 'react-native-vision-camera';
 import validator from 'validator';
 
 import { useScanHistoryStore } from '~/store/scan-history';
@@ -25,6 +17,7 @@ export default function ScanScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [scannedData, setScannedData] = useState('');
   const [isUrl, setIsUrl] = useState(false);
+
   const cameraRef = useRef<Camera>(null);
   const router = useRouter();
 
@@ -45,7 +38,7 @@ export default function ScanScreen() {
 
   // 处理扫描结果
   const handleBarCodeScanned = useCallback(
-    (codes: Code[], frame: CodeScannerFrame) => {
+    (codes: Code[]) => {
       if (scanned || codes.length === 0) return;
 
       const code = codes[0];
@@ -53,14 +46,14 @@ export default function ScanScreen() {
 
       const data = code.value;
       setScanned(true);
-      const isValidUrl = validator.isURL(scannedData);
+      const isValidUrl = validator.isURL(data);
       setIsUrl(isValidUrl);
       setScannedData(data);
 
-      // 添加到历史记录
-      addHistory(data, isValidUrl);
-
       if (isValidUrl) {
+        // 添加到历史记录
+        addHistory(data, isValidUrl);
+
         // 如果是URL，使用WebView打开
         router.push({
           pathname: '/webview',
@@ -71,10 +64,10 @@ export default function ScanScreen() {
         setModalVisible(true);
       }
     },
-    [scanned, addHistory, router, scannedData]
+    [scanned, addHistory, router]
   );
 
-  // 代码扫描器
+  // 二维码和条形码扫描器
   const codeScanner = useCodeScanner({
     codeTypes: ['qr', 'ean-13'], // 支持二维码和条形码
     onCodeScanned: handleBarCodeScanned,
@@ -99,12 +92,12 @@ export default function ScanScreen() {
     try {
       // 打开图片选择器
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        mediaTypes: ['images'],
         allowsEditing: true,
         quality: 1,
       });
 
-      if (result.canceled || !result.assets || result.assets.length === 0) {
+      if (result.canceled || !result.assets[0].uri) {
         return;
       }
 
@@ -112,20 +105,20 @@ export default function ScanScreen() {
       Alert.alert('处理中', '正在识别图片中的二维码...');
 
       try {
-        // 使用QRreader解析图片中的二维码
-        const imageUri = result.assets[0].uri;
-        const qrData = await QRreader(imageUri);
+        const codeReader = new BrowserQRCodeReader();
+        const decoded = await codeReader.decodeFromImageUrl(result.assets[0].uri);
+        const qrData = decoded.getText();
 
         // 扫描成功，处理扫描结果
         setScanned(true);
-        const isValidUrl = validator.isURL(scannedData);
+        const isValidUrl = validator.isURL(qrData);
         setIsUrl(isValidUrl);
         setScannedData(qrData);
 
-        // 添加到历史记录
-        addHistory(qrData, isValidUrl);
-
         if (isValidUrl) {
+          // 添加到历史记录
+          addHistory(qrData, isValidUrl);
+
           // 如果是URL，使用WebView打开
           router.push({
             pathname: '/webview',
