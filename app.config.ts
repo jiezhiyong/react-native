@@ -158,8 +158,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-media-library',
       {
-        photosPermission: 'Allow $(PRODUCT_NAME) to access your photos.',
-        savePhotosPermission: 'Allow $(PRODUCT_NAME) to save photos.',
+        photosPermission: '允许 $(PRODUCT_NAME) 访问您的照片',
+        savePhotosPermission: '允许 $(PRODUCT_NAME) 保存照片',
+        isAccessMediaLocationEnabled: true,
       },
     ],
     [
