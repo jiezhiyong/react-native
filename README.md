@@ -192,3 +192,14 @@ npx react-native bundle --platform android --dev true --entry-file index.js --bu
 # ios
 npx react-native bundle --platform ios --dev true --entry-file index.js --bundle-output ios/main.jsbundle --assets-dest ios
 ```
+
+## 待办事项
+
+- All sdk demo
+- Webview
+- PDF预览器
+- Webview sdk
+- 包含调试面板，但不包含 dev-client 的 Test 变体包
+- 网络请求封装
+- Sentry
+- 网络加解密封装
