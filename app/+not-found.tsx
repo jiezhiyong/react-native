@@ -1,7 +1,7 @@
 import { Stack, useRouter } from 'expo-router';
 import { AlertCircle } from 'lucide-react-native';
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
@@ -14,13 +14,13 @@ export default function NotFoundScreen() {
   };
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <SafeAreaView className="flex-1 bg-gray-50">
       <Stack.Screen options={{ headerShown: false }} />
 
       <View className="flex-1 items-center p-8">
         {/* 错误图标 */}
-        <View className="items-center justify-center w-32 h-32 rounded-full mb-8 text-destructive bg-destructive/5">
-          <AlertCircle size={64} />
+        <View className="items-center justify-center w-32 h-32 rounded-full mb-8 bg-destructive/5">
+          <AlertCircle size={64} color="red" />
         </View>
 
         {/* 错误信息 */}
@@ -39,11 +39,11 @@ export default function NotFoundScreen() {
             <Text>返回首页</Text>
           </Button>
 
-          <TouchableOpacity className="py-3" onPress={() => router.back()}>
+          <TouchableOpacity className="py-5" onPress={() => router.back()}>
             <Text className="text-primary text-center font-medium text-sm">返回上一页</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

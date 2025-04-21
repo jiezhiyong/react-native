@@ -21,3 +21,4 @@
 9. 良好的错误处理机制
 10. 图标优先使用 lucide-react-native
 11. 样式颜色尽量使用 tailwindcss 的预定义颜色变量
+12. 使用 pnpm 管理依赖

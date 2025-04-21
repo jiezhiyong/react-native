@@ -233,8 +233,6 @@ PODS:
     - ExpoModulesCore
   - ExpoAudio (0.3.5):
     - ExpoModulesCore
-  - ExpoBackgroundFetch (13.0.6):
-    - ExpoModulesCore
   - ExpoBackgroundTask (0.1.4):
     - ExpoModulesCore
   - ExpoBattery (9.0.2):
@@ -359,8 +357,6 @@ PODS:
   - ExpoSensors (14.0.2):
     - ExpoModulesCore
   - ExpoSharing (13.0.1):
-    - ExpoModulesCore
-  - ExpoSMS (13.0.1):
     - ExpoModulesCore
   - ExpoSpeech (13.0.1):
     - ExpoModulesCore
@@ -2706,7 +2702,6 @@ DEPENDENCIES:
   - ExpoAppleAuthentication (from `../node_modules/expo-apple-authentication/ios`)
   - ExpoAsset (from `../node_modules/expo-asset/ios`)
   - ExpoAudio (from `../node_modules/expo-audio/ios`)
-  - ExpoBackgroundFetch (from `../node_modules/expo-background-fetch/ios`)
   - ExpoBackgroundTask (from `../node_modules/expo-background-task/ios`)
   - ExpoBattery (from `../node_modules/expo-battery/ios`)
   - ExpoBlur (from `../node_modules/expo-blur/ios`)
@@ -2744,7 +2739,6 @@ DEPENDENCIES:
   - ExpoSecureStore (from `../node_modules/expo-secure-store/ios`)
   - ExpoSensors (from `../node_modules/expo-sensors/ios`)
   - ExpoSharing (from `../node_modules/expo-sharing/ios`)
-  - ExpoSMS (from `../node_modules/expo-sms/ios`)
   - ExpoSpeech (from `../node_modules/expo-speech/ios`)
   - ExpoSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - ExpoSQLite (from `../node_modules/expo-sqlite/ios`)
@@ -2910,8 +2904,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-asset/ios"
   ExpoAudio:
     :path: "../node_modules/expo-audio/ios"
-  ExpoBackgroundFetch:
-    :path: "../node_modules/expo-background-fetch/ios"
   ExpoBackgroundTask:
     :path: "../node_modules/expo-background-task/ios"
   ExpoBattery:
@@ -2986,8 +2978,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-sensors/ios"
   ExpoSharing:
     :path: "../node_modules/expo-sharing/ios"
-  ExpoSMS:
-    :path: "../node_modules/expo-sms/ios"
   ExpoSpeech:
     :path: "../node_modules/expo-speech/ios"
   ExpoSplashScreen:
@@ -3213,7 +3203,6 @@ SPEC CHECKSUMS:
   ExpoAppleAuthentication: 52631ed9dcb71c65712a447bbb9a5667bb8fcf0c
   ExpoAsset: 48386d40d53a8c1738929b3ed509bcad595b5516
   ExpoAudio: 5fe5fc98236b820c4affd09e0631de1c7a7c299b
-  ExpoBackgroundFetch: 72d9978cf6addacc6fb5e211ef99f74146a52d76
   ExpoBackgroundTask: b66774cecd216aad73c388a3c30fac07edca4a7f
   ExpoBattery: d2e508fb7a2a6214d97ff598274c8bd71b704ce6
   ExpoBlur: 392c1207f71d0ecf22371621c1fbd44ba84d9742
@@ -3251,7 +3240,6 @@ SPEC CHECKSUMS:
   ExpoSecureStore: 9a3665d7161dd1031be386e278bffd623658f316
   ExpoSensors: 02a52ddab1e3a8a1438258c3d87d1ee5f721743a
   ExpoSharing: 849a5ce9985c22598c16ec027e32969be8062e8e
-  ExpoSMS: 9cd812ab438c5c1d86bddaa7749387c762e43b92
   ExpoSpeech: 8f74347608243ee8fdc2faa14e7d2cd5503f33f8
   ExpoSplashScreen: 8261985ce9778f904abc7e31bed3538dce67ed4d
   ExpoSQLite: 10fceac6748e9e8f010c70733e0e704fa67399ab

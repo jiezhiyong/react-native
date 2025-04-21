@@ -61,6 +61,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       'android.permission.CAMERA',
       'android.permission.READ_EXTERNAL_STORAGE',
       'android.permission.WRITE_EXTERNAL_STORAGE',
+      'android.permission.RECEIVE_BOOT_COMPLETED',
+      'android.permission.WAKE_LOCK',
     ],
     googleServicesFile: process.env.GOOGLE_SERVICES_JSON ?? './google-services.json',
   },
@@ -110,7 +112,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       NSCameraUsageDescription: 'This app uses the camera to scan barcodes on event tickets.',
       LSApplicationQueriesSchemes: ['uber'],
       CFBundleAllowMixedLocalizations: true,
-      UIBackgroundModes: ['audio'],
+      UIBackgroundModes: ['audio', 'fetch', 'processing'],
     },
     privacyManifests: {
       NSPrivacyAccessedAPITypes: [
@@ -138,7 +140,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ['./plugins/withAndroidQueries.js', {}],
     ['expo-secure-store', {}],
     ['expo-localization', {}],
-    ['expo-audio', {}],
     ['expo-asset', {}],
     ['expo-background-task', {}],
     ['expo-build-properties', {}],
@@ -255,6 +256,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       {
         supportsBackgroundPlayback: true,
         supportsPictureInPicture: true,
+      },
+    ],
+    [
+      'expo-audio',
+      {
+        microphonePermission: 'Allow $(PRODUCT_NAME) to access your microphone.',
       },
     ],
   ],

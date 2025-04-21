@@ -11,25 +11,31 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'apple-authentication', desc: '为 iOS 提供 Apple 身份验证', supports: 'iOS' },
   {
     name: 'expo-application',
-    desc: '提供有关原生应用 ID、应用名称和构建版本的详细信息',
+    desc: '原生应用 ID、应用名称和构建版本等信息',
     supports: 'Android, iOS, Web',
   },
+  { name: 'expo-asset', desc: '资源加载和管理', supports: 'Android, iOS, Web' },
+  { name: 'async-storage', desc: '异步、未加密、持久化键值存储', supports: 'Android, iOS, Web' },
+  { name: 'expo-audio', desc: '音频播放和录音', supports: 'Android, iOS, Web' },
+  { name: 'expo-auth-session', desc: '基于浏览器的身份验证', supports: 'Android, iOS, Web' },
+  { name: 'expo-background-task', desc: '运行后台任务', supports: 'Android, iOS' },
+  { name: 'expo-calendar', desc: '访问和管理日历', supports: 'Android, iOS, Web' },
 ];
 
 export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView className="flex-1 p-4 bg-gray-100 dark:bg-gray-800">
-      <View className="flex gap-2">
+    <ScrollView className="flex-1 bg-gray-100 dark:bg-gray-800">
+      <View className="flex gap-2 p-6">
         {demos.map((demo) => (
           <TouchableOpacity key={demo.name} onPress={() => router.navigate(`/discover/${demo.name}` as any)}>
             <Alert icon={Terminal}>
-              <AlertTitle className="capitalize">{demo.name}</AlertTitle>
-              <AlertDescription className="text-gray-700 dark:text-gray-300">
-                <Text>{demo.desc}, </Text>
-                <Text className="text-green-600">{demo.supports}</Text>
-              </AlertDescription>
+              <AlertTitle className="capitalize">
+                <Text>{demo.name}</Text>
+                <Text className="text-green-500 text-xs"> - {demo.supports}</Text>
+              </AlertTitle>
+              <AlertDescription className="text-gray-700 dark:text-gray-300">{demo.desc}</AlertDescription>
             </Alert>
           </TouchableOpacity>
         ))}
