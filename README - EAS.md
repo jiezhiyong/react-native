@@ -14,11 +14,11 @@ eas credentials
 eas device:create
 ```
 
-## 创建开发版本、预览版本、生产版本构建 - 在 EAS 上构建 / 使用 EAS CLI 本地构建 (--local)
+## 创建开发版本、测试版本、生产版本构建 - 在 EAS 上构建 / 使用 EAS CLI 本地构建 (--local)
 
 ```sh
 npm install -g eas-cli
-eas build --profile <development | preview | production>
+eas build --profile <development | test | production>
 eas build -p ios --profile ios-simulator
 eas build -p <android | ios> --auto-submit
 ```
@@ -40,10 +40,10 @@ eas metadata:push
 ```sh
 eas update:configure
 eas update --branch development --message "Change first button label"
-eas update --environment <production | preview | development>
+eas update --environment <production | test | development>
 npx sentry-expo-upload-sourcemaps dist # 上传源映射
 eas update --auto
-eas update --channel <production | preview | development>
+eas update --channel <production | test | development>
 ```
 
 ### 部署 WEB 应用

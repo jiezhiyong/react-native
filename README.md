@@ -55,9 +55,9 @@ npx expo install expo-dev-client # 安装开发客户端
 ```
 
 ```sh
-npx expo prebuild # 使用 Prebuild 生成原生 Android 和 iOS 目录
+pnpm prebuild:dev # 使用 Prebuild 生成原生 Android 和 iOS 目录
 npx pod-install # 安装 iOS 依赖，按需运行
-npx expo prebuild -p <android | ios> # 预构建 Android | iOS
+pnpm prebuild:dev -p <android | ios> # 预构建 Android | iOS
 ```
 
 ```sh
@@ -66,10 +66,10 @@ npx expo run:ios # simulator, --configuration <Debug | Release>
 npx expo run:ios --device # device, --configuration <Debug | Release>
 ```
 
-## 创建内部分发用 DEBUG 版本
+## TODO: 创建内部分发用 DEBUG 版本
 
 ```sh
-1. npx expo prebuild -p ios
+1. pnpm prebuild:test -p ios
 2. open ios/ChatQA.xcworkspace
 3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Info - Build Configuration -> 选择 Debug
 4. Xcode - Archive: 选择 Any iOS Device (arm64) -> Product -> Archive
@@ -77,7 +77,7 @@ npx expo run:ios --device # device, --configuration <Debug | Release>
 ```
 
 ```sh
-1. npx expo prebuild -p android
+1. pnpm prebuild:test -p android
 2. cd android && ./gradlew app:assembleDebug
 ```
 
@@ -86,7 +86,7 @@ npx expo run:ios --device # device, --configuration <Debug | Release>
 - [ios](https://reactnative.dev/docs/publishing-to-app-store)
 
 ```sh
-1. npx expo prebuild -p ios
+1. pnpm prebuild:prod -p ios
 2. open ios/ChatQA.xcworkspace
 3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Info - Build Configuration -> 选择 Release
 4. Xcode - Archive: 选择 Any iOS Device (arm64) -> Product -> Archive
@@ -99,7 +99,7 @@ keytool -genkeypair -v -storetype PKCS12 -keystore keystores/release.keystore -a
 ```
 
 ```sh
-1. npx expo prebuild -p android
+1. pnpm prebuild:prod -p android
 2. cd android && ./gradlew app:assembleRelease # 生成发布 APK
 ```
 
@@ -117,7 +117,7 @@ npx expo serve # 在本地进行测试
 
 ```sh
 1. export EX_UPDATES_NATIVE_DEBUG=1
-2. npx expo prebuild
+2. pnpm prebuild:dev
 
 # Android Studio
 3. open -a "/Applications/Android Studio.app" ./android

@@ -135,7 +135,7 @@ export default function DestroyAccountScreen() {
               />
             )}
           />
-          {errors.password && <Text className="text-xs text-red-500">{errors.password.message}</Text>}
+          {errors.password && <Text className="text-sm text-red-500">{errors.password.message}</Text>}
         </View>
 
         {/* 确认选项 */}
@@ -146,13 +146,13 @@ export default function DestroyAccountScreen() {
             render={({ field: { onChange, value } }) => (
               <View className="flex-row items-start">
                 <Checkbox checked={value} onCheckedChange={onChange} disabled={isSubmitting} />
-                <Text className={cn('flex-1 ml-2 text-gray-700 text-xs', errors.confirmDestroy ? 'text-red-500' : '')}>
+                <Text className={cn('flex-1 ml-2 text-gray-700 text-sm', errors.confirmDestroy ? 'text-red-500' : '')}>
                   我理解注销账户将永久删除我的所有数据，且此操作不可逆转
                 </Text>
               </View>
             )}
           />
-          {errors.confirmDestroy && <Text className="text-xs text-red-500 ml-6">{errors.confirmDestroy.message}</Text>}
+          {errors.confirmDestroy && <Text className="text-sm text-red-500 ml-6">{errors.confirmDestroy.message}</Text>}
         </View>
 
         {/* 提交按钮 */}

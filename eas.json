@@ -26,11 +26,11 @@
         "simulator": true
       }
     },
-    "preview": {
+    "test": {
       "distribution": "internal",
-      "channel": "preview",
+      "channel": "test",
       "env": {
-        "APP_VARIANT": "preview"
+        "APP_VARIANT": "test"
       },
       "android": {
         "buildType": "apk",

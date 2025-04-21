@@ -2,19 +2,16 @@ import 'ts-node/register';
 
 import { ConfigContext, ExpoConfig } from 'expo/config';
 
-// TODO:
-console.log('======================= process.env.APP_VARIANT', process.env.APP_VARIANT);
-
 const VERSION_CODE = 1;
 const IS_DEV = process.env.APP_VARIANT === 'development';
-const IS_PREVIEW = process.env.APP_VARIANT === 'preview';
+const IS_TEST = process.env.APP_VARIANT === 'test';
 const ngrokUrl = `${process.env.EXPO_TUNNEL_SUBDOMAIN}.ngrok.io`;
 
 const getUniqueIdentifier = () => {
   if (IS_DEV) {
     return 'com.jiezhiyong.qachat.dev';
-  } else if (IS_PREVIEW) {
-    return 'com.jiezhiyong.qachat.preview';
+  } else if (IS_TEST) {
+    return 'com.jiezhiyong.qachat.test';
   }
   return 'com.jiezhiyong.qachat';
 };
@@ -22,8 +19,8 @@ const getUniqueIdentifier = () => {
 const getAppName = () => {
   if (IS_DEV) {
     return 'Chat QA (Dev)';
-  } else if (IS_PREVIEW) {
-    return 'Chat QA (Preview)';
+  } else if (IS_TEST) {
+    return 'Chat QA (Test)';
   }
   return 'Chat QA';
 };
@@ -139,6 +136,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ['./plugins/withAndroidQueries.js', {}],
     ['expo-secure-store', {}],
     ['expo-localization', {}],
+    ['expo-audio', {}],
+    ['expo-asset', {}],
+    ['expo-background-task', {}],
+    ['expo-build-properties', {}],
+    ['expo-localization', {}],
     [
       'expo-router',
       {
@@ -186,6 +188,70 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           backgroundColor: '#000000',
         },
         imageWidth: 200,
+      },
+    ],
+    [
+      'expo-calendar',
+      {
+        calendarPermission: 'Allow $(PRODUCT_NAME) to access your calendar',
+        remindersPermission: 'Allow $(PRODUCT_NAME) to access your reminders',
+      },
+    ],
+    [
+      'expo-camera',
+      {
+        cameraPermission: 'Allow $(PRODUCT_NAME) to access your camera',
+        microphonePermission: 'Allow $(PRODUCT_NAME) to access your microphone',
+        recordAudioAndroid: true,
+      },
+    ],
+    [
+      'expo-contacts',
+      {
+        contactsPermission: 'Allow $(PRODUCT_NAME) to access your contacts.',
+      },
+    ],
+    [
+      'expo-sensors',
+      {
+        motionPermission: 'Allow $(PRODUCT_NAME) to access your device motion.',
+      },
+    ],
+    [
+      'expo-document-picker',
+      {
+        iCloudContainerEnvironment: 'Production',
+      },
+    ],
+    [
+      'expo-local-authentication',
+      {
+        faceIDPermission: 'Allow $(PRODUCT_NAME) to use Face ID.',
+      },
+    ],
+    [
+      'expo-location',
+      {
+        locationAlwaysAndWhenInUsePermission: 'Allow $(PRODUCT_NAME) to use your location.',
+      },
+    ],
+    [
+      'expo-screen-orientation',
+      {
+        initialOrientation: 'DEFAULT',
+      },
+    ],
+    [
+      'expo-tracking-transparency',
+      {
+        userTrackingPermission: 'This identifier will be used to deliver personalized ads to you.',
+      },
+    ],
+    [
+      'expo-video',
+      {
+        supportsBackgroundPlayback: true,
+        supportsPictureInPicture: true,
       },
     ],
   ],
