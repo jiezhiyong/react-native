@@ -48,7 +48,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="qachat"/>
-        <data android:scheme="com.jiezhiyong.qachat.dev"/>
+        <data android:scheme="com.jiezhiyong.qachat"/>
         <data android:scheme="exp+qachat"/>
       </intent-filter>
     </activity>

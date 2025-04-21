@@ -13,7 +13,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>Chat QA (Dev)</string>
+    <string>Chat QA</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -34,7 +34,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>qachat</string>
-          <string>com.jiezhiyong.qachat.dev</string>
+          <string>com.jiezhiyong.qachat</string>
         </array>
       </dict>
       <dict>
@@ -103,9 +103,9 @@
     <string>This identifier will be used to deliver personalized ads to you.</string>
     <key>UIBackgroundModes</key>
     <array>
-      <string>remote-notification</string>
-      <string>fetch</string>
       <string>audio</string>
+      <string>fetch</string>
+      <string>remote-notification</string>
       <string>processing</string>
     </array>
     <key>UILaunchStoryboardName</key>

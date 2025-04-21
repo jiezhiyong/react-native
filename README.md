@@ -61,9 +61,9 @@ pnpm prebuild:dev -p <android | ios> # 预构建 Android | iOS
 ```
 
 ```sh
-npx expo run:android # --variant <debug | release>，variant 在 build.gradle 中定义
-npx expo run:ios # simulator, --configuration <Debug | Release>
-npx expo run:ios --device # device, --configuration <Debug | Release>
+pnpm run:android
+pnpm run:ios:simulator
+pnpm run:ios:device
 ```
 
 ## TODO: 创建内部分发用 DEBUG 版本
@@ -81,6 +81,12 @@ npx expo run:ios --device # device, --configuration <Debug | Release>
 2. cd android && ./gradlew app:assembleDebug
 ```
 
+## 生成安卓打包密钥
+
+```sh
+keytool -genkeypair -v -storetype PKCS12 -keystore keystores/release.keystore -alias qachat-release -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=com.jiezhiyong.qachat,OU=,O=,L=Shanghai,S=Shanghai,C=CN"
+```
+
 ## 创建生产版本
 
 - [ios](https://reactnative.dev/docs/publishing-to-app-store)
@@ -95,10 +101,6 @@ npx expo run:ios --device # device, --configuration <Debug | Release>
 - [android](https://reactnative.dev/docs/signed-apk-android)
 
 ```sh
-keytool -genkeypair -v -storetype PKCS12 -keystore keystores/release.keystore -alias qachat-release -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=com.jiezhiyong.qachat,OU=,O=,L=Shanghai,S=Shanghai,C=CN"
-```
-
-```sh
 1. pnpm prebuild:prod -p android
 2. cd android && ./gradlew app:assembleRelease # 生成发布 APK
 ```
@@ -110,7 +112,7 @@ npx expo export -p web
 npx expo serve # 在本地进行测试
 ```
 
-## 构建具有与发布构建相同更新行为的调试版本
+## TODO: 构建具有与发布构建相同更新行为的调试版本
 
 - https://docs.expo.dev/versions/latest/sdk/updates/#testing
 - https://docs.expo.dev/debugging/runtime-issues/#native-debugging
@@ -203,3 +205,10 @@ npx react-native bundle --platform ios --dev true --entry-file index.js --bundle
 - 网络请求封装
 - Sentry
 - 网络加解密封装
+- i18n
+- theme
+- 应用宝
+- 地图
+- 人脸识别
+- 友盟？消息推送？
+- ios 设备上安装 Test 变体报错

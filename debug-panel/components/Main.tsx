@@ -42,7 +42,7 @@ export function Main() {
   const { top } = useSafeAreaInsets();
   const { isVisible, setVisible } = useDebugPanelStore();
 
-  const [env, setEnv] = React.useState(ENV_NAME[0]);
+  const [env, setEnv] = React.useState(ENV_NAME[2]);
   const [api, setApi] = React.useState(ENV_API[env]);
   const [isRequestEncryptionEnabled, setRequestEncryptionEnabled] = React.useState(false);
   const [storageItems, setStorageItems] = React.useState<string[][]>([]);

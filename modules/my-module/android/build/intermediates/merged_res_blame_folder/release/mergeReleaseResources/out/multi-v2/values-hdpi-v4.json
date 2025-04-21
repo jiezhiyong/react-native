@@ -1,36 +1,36 @@
 {
-    "logs": [
+  "logs": [
+    {
+      "outputFile": "expo.modules.mymodule.my-module-mergeReleaseResources-46:/values-hdpi-v4/values-hdpi-v4.xml",
+      "map": [
         {
-            "outputFile": "expo.modules.mymodule.my-module-mergeReleaseResources-46:/values-hdpi-v4/values-hdpi-v4.xml",
-            "map": [
-                {
-                    "source": "/Users/jiezhiyong/.gradle/caches/8.10.2/transforms/ff3c1802e2557eb9c6325a01256a6383/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "6",
-                        "endColumns": "13",
-                        "endOffsets": "327"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "expo.modules.mymodule.my-module-release-48:/values-hdpi-v4/values-hdpi-v4.xml",
-            "map": [
-                {
-                    "source": "/Users/jiezhiyong/.gradle/caches/8.10.2/transforms/ff3c1802e2557eb9c6325a01256a6383/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "6",
-                        "endColumns": "13",
-                        "endOffsets": "327"
-                    }
-                }
-            ]
+          "source": "/Users/jiezhiyong/.gradle/caches/8.10.2/transforms/ff3c1802e2557eb9c6325a01256a6383/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
+          "from": {
+            "startLines": "2",
+            "startColumns": "4",
+            "startOffsets": "55",
+            "endLines": "6",
+            "endColumns": "13",
+            "endOffsets": "327"
+          }
         }
-    ]
+      ]
+    },
+    {
+      "outputFile": "expo.modules.mymodule.my-module-release-48:/values-hdpi-v4/values-hdpi-v4.xml",
+      "map": [
+        {
+          "source": "/Users/jiezhiyong/.gradle/caches/8.10.2/transforms/ff3c1802e2557eb9c6325a01256a6383/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
+          "from": {
+            "startLines": "2",
+            "startColumns": "4",
+            "startOffsets": "55",
+            "endLines": "6",
+            "endColumns": "13",
+            "endOffsets": "327"
+          }
+        }
+      ]
+    }
+  ]
 }

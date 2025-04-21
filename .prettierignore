@@ -1,5 +1,10 @@
 .expo
 node_modules
+pnpm-lock.yaml
+
 /android
 /ios
-pnpm-lock.yaml
+/coverage
+/public
+/modules
+/dist

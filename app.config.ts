@@ -103,12 +103,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     buildNumber: String(VERSION_CODE),
     bundleIdentifier: getUniqueIdentifier(),
     supportsTablet: true,
+    usesAppleSignIn: true,
     googleServicesFile: process.env.GOOGLE_SERVICES_INFO_PLIST ?? './GoogleService-Info.plist',
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
       NSCameraUsageDescription: 'This app uses the camera to scan barcodes on event tickets.',
       LSApplicationQueriesSchemes: ['uber'],
       CFBundleAllowMixedLocalizations: true,
+      UIBackgroundModes: ['audio'],
     },
     privacyManifests: {
       NSPrivacyAccessedAPITypes: [
@@ -141,6 +143,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ['expo-background-task', {}],
     ['expo-build-properties', {}],
     ['expo-localization', {}],
+    ['expo-apple-authentication', {}],
     [
       'expo-router',
       {
