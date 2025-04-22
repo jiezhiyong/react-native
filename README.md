@@ -45,6 +45,7 @@ npx @react-native-reusables/cli@latest add
 - [uri-scheme](https://github.com/expo/expo/tree/main/packages/uri-scheme#readme)
 - [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n)
 - [sentry](https://docs.sentry.io/platforms/react-native)
+- [react-native-gifted-charts](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts)
 
 - [...](https://reactnative.directory)
 

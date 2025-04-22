@@ -175,6 +175,7 @@
     "react-hook-form": "^7.56.0",
     "react-native": "^0.76.9",
     "react-native-gesture-handler": "~2.20.2",
+    "react-native-gifted-charts": "^1.4.60",
     "react-native-keyboard-controller": "^1.17.0",
     "react-native-localize": "^3.4.1",
     "react-native-pager-view": "6.5.1",
