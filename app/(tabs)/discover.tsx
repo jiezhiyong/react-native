@@ -22,6 +22,7 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'barometer', desc: '访问设备加速度计传感器', supports: 'Android, iOS (device only)' },
   { name: 'battery', desc: '访问物理设备电池信息，以及相应的事件监听器', supports: 'Android, iOS (device only), Web' },
   { name: 'blur', desc: '模糊视图效果', supports: 'Android, iOS, Web' },
+  { name: 'brightness', desc: '获取和设置屏幕亮度', supports: 'Android, iOS' },
 
   { name: 'calendar', desc: '访问设备气压传感器', supports: 'Android, iOS (device only)' },
 ];

@@ -63,6 +63,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       'android.permission.WRITE_EXTERNAL_STORAGE',
       'android.permission.RECEIVE_BOOT_COMPLETED',
       'android.permission.WAKE_LOCK',
+      'android.permission.WRITE_SETTINGS',
     ],
     googleServicesFile: process.env.GOOGLE_SERVICES_JSON ?? './google-services.json',
   },
