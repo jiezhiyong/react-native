@@ -8,7 +8,7 @@
     "start:prod": "expo start --no-dev --minify",
     "prebuild:dev": "APP_VARIANT=development expo prebuild",
     "prebuild:test": "APP_VARIANT=test expo prebuild",
-    "prebuild:prod": "expo prebuild",
+    "prebuild": "expo prebuild",
     "run:android": "expo run:android",
     "run:ios:device": "expo run:ios --device",
     "run:ios:simulator": "expo run:ios",

@@ -23,9 +23,15 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'battery', desc: '访问物理设备电池信息，以及相应的事件监听器', supports: 'Android, iOS (device only), Web' },
   { name: 'blur', desc: '模糊视图效果', supports: 'Android, iOS, Web' },
   { name: 'brightness', desc: '获取和设置屏幕亮度', supports: 'Android, iOS' },
-
-  { name: 'calendar', desc: '访问设备气压传感器', supports: 'Android, iOS (device only)' },
-];
+  { name: 'calendar', desc: '与日历、事件、提醒及其相关记录交互', supports: 'Android, iOS' },
+  { name: 'camera', desc: '渲染设备前后摄像头的预览', supports: 'Android (device only), iOS (device only), Web' },
+  { name: 'captureRef', desc: '捕获视图', supports: 'Android, iOS' },
+  { name: 'cellular', desc: '用户蜂窝服务提供商的信息', supports: 'Android, iOS, Web' },
+  { name: 'checkbox', desc: '基本复选框', supports: 'Android, iOS, Web' },
+  { name: 'clipboard', desc: '获取和设置剪贴板', supports: 'Android, iOS, Web' },
+  { name: 'constants', desc: '获取和设置剪贴板', supports: 'Android, iOS, Web' },
+  { name: 'contacts', desc: '访问手机系统联系人', supports: 'Android, iOS' },
+].reverse();
 
 export default function HomeScreen() {
   const router = useRouter();

@@ -17,6 +17,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
 import type { AppStateStatus } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { ThemeToggle } from '~/components/ThemeToggle';
@@ -168,37 +169,40 @@ function RootLayout() {
       <KeyboardProvider>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-            {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
-            {/* <TypesafeI18n locale={'zh'}> */}
-            <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-            <Stack>
-              <Stack.Screen
-                name="(tabs)"
-                options={{
-                  headerShown: false,
-                  title: 'Starter Tabs',
-                  headerRight: () => <ThemeToggle />,
-                }}
-              />
-              <Stack.Screen
-                name="login"
-                options={{
-                  presentation: 'modal',
-                  title: '登录',
-                  headerShown: true,
-                }}
-              />
-              <Stack.Screen
-                name="(protected)"
-                options={{
-                  headerShown: true,
-                  title: '受保护内容',
-                }}
-              />
-              <Stack.Screen name="+not-found" />
-            </Stack>
-            <PortalHost />
-            <Toaster />
+            <GestureHandlerRootView>
+              {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
+              {/* <TypesafeI18n locale={'zh'}> */}
+              <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+              <Stack>
+                <Stack.Screen
+                  name="(tabs)"
+                  options={{
+                    headerShown: false,
+                    title: 'Starter Tabs',
+                    headerRight: () => <ThemeToggle />,
+                  }}
+                />
+                <Stack.Screen
+                  name="login"
+                  options={{
+                    presentation: 'modal',
+                    title: '登录',
+                    headerShown: true,
+                  }}
+                />
+                <Stack.Screen
+                  name="(protected)"
+                  options={{
+                    headerShown: true,
+                    title: '受保护内容',
+                  }}
+                />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+              <PortalHost />
+
+              <Toaster />
+            </GestureHandlerRootView>
             {/* </TypesafeI18n> */}
           </ThemeProvider>
         </QueryClientProvider>

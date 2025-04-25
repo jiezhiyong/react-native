@@ -22,6 +22,7 @@ export default function DiscoverLayout() {
     <SafeAreaView className="flex-1">
       <ScrollView className="flex-1 p-6">
         <H2 className="border-b pb-4 mb-4 border-secondary capitalize">{pathname.split('/').pop()}</H2>
+
         <Slot />
       </ScrollView>
     </SafeAreaView>
