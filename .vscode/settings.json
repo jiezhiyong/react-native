@@ -42,5 +42,6 @@
       "background": "#8bc34a",
       "iconColour": "#8bc34a"
     }
-  }
+  },
+  "java.compile.nullAnalysis.mode": "disabled"
 }
