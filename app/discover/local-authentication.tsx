@@ -95,7 +95,7 @@ export default function LocalAuthenticationScreen() {
   };
 
   return (
-    <>
+    <View className="flex-1 p-6">
       <Card className="p-4 mb-4 bg-muted">
         <Text className="text-lg font-semibold mb-2">支持情况</Text>
         <View className="flex-row items-center mb-2">
@@ -127,6 +127,6 @@ export default function LocalAuthenticationScreen() {
       <Button disabled={!isCompatible || isAuthenticating} onPress={authenticate}>
         <Text>{isAuthenticating ? '正在验证...' : '使用生物识别验证'}</Text>
       </Button>
-    </>
+    </View>
   );
 }

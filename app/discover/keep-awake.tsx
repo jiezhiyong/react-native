@@ -1,3 +1,6 @@
+import { ScrollView } from 'react-native';
+
+// https://docs.expo.dev/versions/latest/sdk/keep-awake/
 export default function ExpoKeepAwakeScreen() {
   return <ScrollView className="flex-1 p-6"></ScrollView>;
 }
