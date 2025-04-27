@@ -92,7 +92,7 @@ export default function ExpoCellularScreen() {
 
   if (status?.status !== PermissionStatus.GRANTED) {
     return (
-      <View className="bg-muted rounded-xl p-6">
+      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
         <Text className="text-center mb-6">需要电话状态权限来访问蜂窝网络信息</Text>
         <Button onPress={() => requestPermission()}>
           <Text>授予权限</Text>
@@ -102,7 +102,7 @@ export default function ExpoCellularScreen() {
   }
 
   return (
-    <View>
+    <View className="flex-1 p-6">
       {cellularInfo && (
         <View className="pt-4">
           {renderInfoItem('运营商', cellularInfo.carrier)}

@@ -2,6 +2,7 @@ export default function ScanScreen() {
   return null;
 }
 
+// import { PermissionStatus } from 'expo-modules-core';
 // import Clipboard from '@react-native-clipboard/clipboard';
 // import { BrowserQRCodeReader } from '@zxing/browser';
 // import * as ImagePicker from 'expo-image-picker';
@@ -88,7 +89,7 @@ export default function ScanScreen() {
 //   const pickImage = async () => {
 //     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-//     if (status !== 'granted') {
+//     if (status !== PermissionStatus.GRANTED) {
 //       Alert.alert('需要权限', '请允许访问相册以选择图片');
 //       return;
 //     }

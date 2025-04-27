@@ -1,4 +1,3 @@
-import { Stack } from 'expo-router';
 import { Accelerometer } from 'expo-sensors';
 import React, { useEffect, useState } from 'react';
 import { Alert, View } from 'react-native';
@@ -127,11 +126,9 @@ export default function AccelerometerScreen() {
   };
 
   return (
-    <View>
-      <Stack.Screen options={{ title: 'expo-sensors', headerTitleAlign: 'center' }} />
-
+    <View className="flex-1 p-6">
       {/* 状态信息 */}
-      <View className="mb-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg flex-col gap-2">
+      <View className="mb-6 p-4 bg-muted dark:bg-gray-800 rounded-lg flex-col gap-2">
         <Text className="text-gray-700 dark:text-gray-300">
           是否支持加速度计:&nbsp;
           {subscription.isAvailable === null ? '检查中 ...' : String(subscription.isAvailable)}

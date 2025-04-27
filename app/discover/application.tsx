@@ -1,7 +1,7 @@
 import * as Application from 'expo-application';
 import { ApplicationReleaseType } from 'expo-application';
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { Text } from '~/components/ui/text';
 
@@ -140,7 +140,7 @@ export default function ExpoApplicationScreen() {
   );
 
   return (
-    <View>
+    <ScrollView className="flex-1 p-6">
       {renderInfoItem('应用名称', appInfo.applicationName)}
       {renderInfoItem('应用ID', appInfo.applicationId)}
       {renderInfoItem('应用版本', appInfo.nativeApplicationVersion)}
@@ -152,6 +152,6 @@ export default function ExpoApplicationScreen() {
       {renderInfoItem('iOS ID For Vendor', appInfo.iosIdForVendor)}
       {renderInfoItem('iOS 推送通知服务环境', appInfo.iosPushNotificationServiceEnvironment)}
       {renderInfoItem('最后更新时间', appInfo.lastUpdateTime)}
-    </View>
+    </ScrollView>
   );
 }

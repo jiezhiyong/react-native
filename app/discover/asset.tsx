@@ -1,6 +1,6 @@
 import { Asset } from 'expo-asset';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, View } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, View } from 'react-native';
 
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
@@ -49,7 +49,7 @@ export default function ExpoAssetScreen() {
       <Text>资源 #{index + 1}</Text>
       <Text>{asset.uri}</Text>
       {asset.localUri && (
-        <Image source={{ uri: asset.localUri }} className="w-20 h-20 rounded bg-gray-100" resizeMode="contain" />
+        <Image source={{ uri: asset.localUri }} className="w-20 h-20 rounded bg-muted" resizeMode="contain" />
       )}
       <Text>
         {asset.name}.{asset.type} ({asset.width || '?'} x {asset.height || '?'})
@@ -117,8 +117,8 @@ export default function ExpoAssetScreen() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center">
-        <ActivityIndicator size="large" color="#0891b2" />
+      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+        <ActivityIndicator color="#0891b2" />
         <Text className="mt-2">加载资源中...</Text>
       </View>
     );
@@ -126,19 +126,19 @@ export default function ExpoAssetScreen() {
 
   if (error) {
     return (
-      <View className="p-4">
-        <Text className="text-red-500">{error}</Text>
+      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+        <Text className="text-center text-destructive">{error || '-'}</Text>
       </View>
     );
   }
 
   return (
-    <View>
+    <ScrollView className="flex-1 p-6">
       <Text className="font-bold mb-2">预加载的资源:</Text>
       {loadedAssets.map(renderAssetInfo)}
 
       <Text className="font-bold mb-2">资源下载演示: {downloadedAsset ? '已下载' : '未下载'}</Text>
       {renderAssetDownloadDemo()}
-    </View>
+    </ScrollView>
   );
 }

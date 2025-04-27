@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { Terminal } from 'lucide-react-native';
 import * as React from 'react';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { Text } from '~/components/ui/text';
@@ -31,26 +31,95 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'clipboard', desc: '获取和设置剪贴板', supports: 'Android, iOS, Web' },
   { name: 'constants', desc: '获取和设置剪贴板', supports: 'Android, iOS, Web' },
   { name: 'contacts', desc: '访问手机系统联系人', supports: 'Android, iOS' },
+  { name: 'crypto', desc: '使用 `crypto` API, 对数据进行哈希处理', supports: 'Android, iOS, Web' },
+  { name: 'date-time-picker', desc: '访问系统 UI 以选择日期和时间的组件', supports: 'Android, iOS' },
+  { name: 'device', desc: '物理设备系统信息', supports: 'Android, iOS, Web' },
+  { name: 'document-picker', desc: '访问系统 UI 以从用户设备上的可用提供者中选择文档', supports: 'Android, iOS, Web' },
+  { name: 'encoding', desc: 'TextEncoder 和 TextDecoder API', supports: 'Android, iOS, Web' },
+  { name: 'file-system', desc: '访问设备本地文件系统', supports: 'Android, iOS' },
+  { name: 'flash-list', desc: '快速且性能优异的渲染列表方式', supports: 'Android, iOS, Web' },
+  { name: 'font', desc: '在运行时加载字体', supports: 'Android, iOS, Web' },
+  { name: 'gesture-handler', desc: '处理复杂手势', supports: 'Android, iOS, Web' },
+  { name: 'gl', desc: '渲染 2D 和 3D 图形', supports: 'Android, iOS, Web' },
+  { name: 'haptics', desc: '访问 Android 系统振动效果和 iOS 触觉引擎', supports: 'Android, iOS' },
+  { name: 'image', desc: '访问 Android 系统振动效果和 iOS 触觉引擎', supports: 'Android, iOS, Web' },
+  { name: 'image-manipulator', desc: '操作本地文件系统上图像', supports: 'Android, iOS, Web' },
+  { name: 'image-picker', desc: '访问系统 UI 以从手机相册选择图片和视频或使用相机拍照', supports: 'Android, iOS, Web' },
+  { name: 'intent-launcher', desc: '启动 Android 意图 API', supports: 'Android' },
+  // { name: 'keep-awake', desc: '保持屏幕唤醒', supports: 'Android, iOS, Web' },
+  // { name: 'light-sensor', desc: '访问设备光传感器', supports: 'Android' },
+  // { name: 'linear-gradient', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'linking', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'live-photo', desc: '启动', supports: 'Android, iOS, Web' },
+  { name: 'local-authentication', desc: '通过面部或指纹扫描验证用户', supports: 'Android, iOS' },
+  // { name: 'localization', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'location', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'lottie', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'magnetometer', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'mail-composer', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'manifests', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'masked-view', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'media-library', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'navigation-bar', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'netinfo', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'network', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'notifications', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'pedometer', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'picker', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'print', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'reanimated', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'register-root-component', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'route', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'route-ui', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'safe-area-context', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'screen-capture', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'screen-orientation', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'screens', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'securestore', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'segmented-control', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'sharing', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'skia', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'slider', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'sms', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'speech', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'sqlite', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'status-bar', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'store-review', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'stripe', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'svg', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'symbols', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'system-ui', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'task-manager', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'tracking-transparency', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'updates', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'url', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'video', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'video-thumbnails', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'view-pager', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'web-browser', desc: '启动', supports: 'Android, iOS, Web' },
+  // { name: 'webview', desc: '启动', supports: 'Android, iOS, Web' },
 ].reverse();
 
 export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView className="flex-1 bg-gray-100 dark:bg-gray-800">
-      <View className="flex gap-2 p-6">
-        {demos.map((demo) => (
-          <TouchableOpacity key={demo.name} onPress={() => router.navigate(`/discover/${demo.name}` as any)}>
-            <Alert icon={Terminal}>
-              <AlertTitle className="capitalize">
-                <Text>{demo.name}</Text>
-                <Text className="text-green-500 text-xs"> - {demo.supports}</Text>
-              </AlertTitle>
-              <AlertDescription className="text-gray-700 dark:text-gray-300">{demo.desc}</AlertDescription>
-            </Alert>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </ScrollView>
+    <FlatList
+      className="flex-1 p-6"
+      data={demos}
+      renderItem={({ item, index }) => (
+        <TouchableOpacity className="mb-2" onPress={() => router.navigate(`/discover/${item.name}` as any)}>
+          <Alert icon={Terminal}>
+            <AlertTitle className="capitalize">
+              <Text>
+                {index + 1}. {item.name}
+              </Text>
+              <Text className="text-green-600 text-xs"> - {item.supports}</Text>
+            </AlertTitle>
+            <AlertDescription className="text-muted-foreground">{item.desc}</AlertDescription>
+          </Alert>
+        </TouchableOpacity>
+      )}
+    />
   );
 }

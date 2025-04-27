@@ -5,7 +5,7 @@ import { Text } from '~/components/ui/text';
 
 export default function ExpoBlurScreen() {
   return (
-    <View className="flex-1">
+    <View className="flex-1 p-6">
       <Text className="text-lg font-semibold mb-3">不同模糊强度效果对比 - Light</Text>
 
       <View className="flex-row justify-between mb-6">

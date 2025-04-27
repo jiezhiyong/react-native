@@ -138,7 +138,7 @@ export default function ExpoBackgroundTaskScreen() {
   };
 
   return (
-    <>
+    <View className="flex-1 p-6">
       {/* 状态信息 */}
       <View className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200 gap-2">
         <Text className="text-lg font-bold">当前状态</Text>
@@ -168,6 +168,6 @@ export default function ExpoBackgroundTaskScreen() {
           </Button>
         )}
       </View>
-    </>
+    </View>
   );
 }

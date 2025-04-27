@@ -48,7 +48,7 @@ export default function ExpoClipboardScreen() {
   };
 
   return (
-    <>
+    <View className="flex-1 p-6">
       {/* 复制到剪贴板 */}
       <View className="mb-6">
         <Text className="text-xl font-semibold mb-2">复制到剪贴板</Text>
@@ -90,6 +90,6 @@ export default function ExpoClipboardScreen() {
           <Text className="text-destructive-foreground">清空剪贴板</Text>
         </Button>
       </View>
-    </>
+    </View>
   );
 }

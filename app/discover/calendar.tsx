@@ -1,7 +1,8 @@
 import * as Calendar from 'expo-calendar';
+import { PermissionStatus } from 'expo-modules-core';
 import { CalendarIcon, Trash } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import { Alert, Platform, View } from 'react-native';
+import { Alert, Platform, ScrollView, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { cn } from '~/lib/utils';
@@ -19,7 +20,7 @@ export default function ExpoCalendarScreen() {
   const getCalendarPermissions = async () => {
     try {
       const { status } = await Calendar.requestCalendarPermissionsAsync();
-      if (status === 'granted') {
+      if (status === PermissionStatus.GRANTED) {
         setHasPermission(true);
         fetchCalendars();
       } else {
@@ -164,16 +165,16 @@ export default function ExpoCalendarScreen() {
 
   if (hasPermission === null) {
     return (
-      <View className="flex-1 items-center justify-center">
-        <Text>正在请求日历权限...</Text>
+      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+        <Text className="text-center">正在请求日历权限...</Text>
       </View>
     );
   }
 
   if (hasPermission === false) {
     return (
-      <View className="flex-1 items-center justify-center p-4">
-        <Text className="text-lg mb-4 text-center">需要日历权限才能使用此功能</Text>
+      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+        <Text className="mb-6 text-center">需要日历权限才能使用此功能</Text>
         <Button onPress={getCalendarPermissions}>
           <Text>请求权限</Text>
         </Button>
@@ -182,7 +183,7 @@ export default function ExpoCalendarScreen() {
   }
 
   return (
-    <View>
+    <ScrollView className="flex-1 p-6">
       {/* 日历列表 */}
       <View className="flex-row justify-between items-center mb-2">
         <Text className="text-lg font-semibold">日历列表</Text>
@@ -192,7 +193,7 @@ export default function ExpoCalendarScreen() {
       </View>
 
       {calendars.length === 0 ? (
-        <View className="p-4 bg-gray-100 rounded-lg">
+        <View className="p-4 bg-muted rounded-lg">
           <Text className="text-center text-gray-500">暂无日历</Text>
         </View>
       ) : (
@@ -253,6 +254,6 @@ export default function ExpoCalendarScreen() {
           )}
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 }

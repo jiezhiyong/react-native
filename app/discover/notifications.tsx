@@ -1,5 +1,6 @@
 import Constants from 'expo-constants';
 import * as Device from 'expo-device';
+import { PermissionStatus } from 'expo-modules-core';
 import * as Notifications from 'expo-notifications';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Platform, Text, View } from 'react-native';
@@ -62,11 +63,11 @@ async function registerForPushNotificationsAsync() {
   if (Device.isDevice) {
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
+    if (existingStatus !== PermissionStatus.GRANTED) {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
-    if (finalStatus !== 'granted') {
+    if (finalStatus !== PermissionStatus.GRANTED) {
       handleRegistrationError('Permission not granted to get push token for push notification!');
       return;
     }

@@ -1,3 +1,3 @@
 export default function LottieScreen() {
-  return null;
+  return <ScrollView className="flex-1 p-6"></ScrollView>;
 }

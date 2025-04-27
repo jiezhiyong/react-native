@@ -23,7 +23,7 @@ export default function ExpoCheckboxScreen() {
   };
 
   return (
-    <>
+    <View className="flex-1 p-6">
       {/* 基本用法 */}
       <View className="mb-6">
         <Text className="text-xl font-semibold text-foreground mb-2">基本用法</Text>
@@ -72,6 +72,6 @@ export default function ExpoCheckboxScreen() {
           <Text className="text-secondary-foreground">禁用状态（已选中）</Text>
         </View>
       </View>
-    </>
+    </View>
   );
 }

@@ -1,5 +1,4 @@
 import * as AppleAuthentication from 'expo-apple-authentication';
-import { Stack } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, View } from 'react-native';
 
@@ -93,10 +92,8 @@ export default function AppleAuthenticationScreen() {
   };
 
   return (
-    <View className="flex-1">
-      <Stack.Screen options={{ title: 'Apple 登录', headerTitleAlign: 'center' }} />
-
-      <View className="mb-6 bg-gray-100 dark:bg-gray-800 rounded-lg p-4 flex-col gap-2">
+    <View className="flex-1 p-6">
+      <View className="mb-6 bg-muted dark:bg-gray-800 rounded-lg p-4 flex-col gap-2">
         <Text className="text-gray-700 dark:text-gray-300">
           Apple 身份验证状态: {isAppleAuthAvailable === null ? '检查中...' : isAppleAuthAvailable ? '可用' : '不可用'}
         </Text>

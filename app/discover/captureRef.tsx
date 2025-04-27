@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
 import React, { useRef, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 
 import { Button } from '~/components/ui/button';
@@ -67,7 +67,7 @@ export default function CaptureRefScreen() {
   };
 
   return (
-    <View>
+    <ScrollView className="flex-1 p-6">
       {/* 这个视图将被捕获 */}
       <View
         ref={viewRef}
@@ -94,6 +94,6 @@ export default function CaptureRefScreen() {
           <Image source={{ uri: capturedImage }} style={{ width: '100%', aspectRatio: 1 }} contentFit="contain" />
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 }

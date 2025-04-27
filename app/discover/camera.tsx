@@ -1,5 +1,6 @@
 import { CameraMode, CameraType, CameraView, useCameraPermissions } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
+import { PermissionStatus } from 'expo-modules-core';
 import { Camera, SwitchCamera, Video, Zap, ZapOff } from 'lucide-react-native';
 import { useRef, useState } from 'react';
 import { Alert, Pressable, TouchableOpacity, View } from 'react-native';
@@ -37,8 +38,8 @@ export default function ExpoCameraScreen() {
   // 请求媒体库权限
   const requestMediaLibraryPermission = async () => {
     const permission = await MediaLibrary.requestPermissionsAsync();
-    setHasMediaLibraryPermission(permission.status === 'granted');
-    return permission.status === 'granted';
+    setHasMediaLibraryPermission(permission.status === PermissionStatus.GRANTED);
+    return permission.status === PermissionStatus.GRANTED;
   };
 
   // 初始化媒体库权限
@@ -49,8 +50,8 @@ export default function ExpoCameraScreen() {
   // 如果权限状态未确定
   if (!cameraPermission) {
     return (
-      <View className="flex-1 items-center justify-center bg-gray-900">
-        <Text className="text-white text-center mb-4">正在检查相机权限...</Text>
+      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+        <Text className="text-center">正在检查相机权限...</Text>
       </View>
     );
   }
@@ -58,7 +59,7 @@ export default function ExpoCameraScreen() {
   // 如果没有相机权限
   if (!cameraPermission.granted) {
     return (
-      <View className="flex-1 items-center justify-center p-4 bg-gray-100 rounded-lg">
+      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
         <Text className="text-center mb-6">需要相机权限才能使用此功能</Text>
         <Button onPress={requestCameraPermission}>
           <Text>申请相机权限</Text>
@@ -180,7 +181,7 @@ export default function ExpoCameraScreen() {
   };
 
   return (
-    <View className="h-[600px] rounded-xl overflow-hidden">
+    <View className="flex-1 p-6">
       <CameraView
         ref={cameraRef}
         style={{ flex: 1, width: '100%' }}

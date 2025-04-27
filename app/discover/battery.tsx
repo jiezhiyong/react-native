@@ -7,7 +7,7 @@ export default function ExpoBatteryScreen() {
   const { lowPowerMode, batteryLevel, batteryState } = Battery.usePowerState();
 
   return (
-    <View className="space-y-4">
+    <View className="flex-1 p-6 space-y-4">
       <View className="flex-row justify-between items-center border-b border-gray-200 py-4">
         <Text className="font-medium">电池电量:</Text>
         <Text>{batteryLevel !== null ? `${Math.round(batteryLevel * 100)}%` : '...'}</Text>

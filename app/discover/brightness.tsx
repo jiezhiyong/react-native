@@ -1,5 +1,6 @@
 import Slider from '@react-native-community/slider';
 import * as Brightness from 'expo-brightness';
+import { PermissionStatus } from 'expo-modules-core';
 import { useEffect, useState } from 'react';
 import { Platform, View } from 'react-native';
 
@@ -16,7 +17,7 @@ export default function ExpoBrightnessScreen() {
   const requestPermission = async () => {
     const { status } = await Brightness.requestPermissionsAsync();
 
-    if (status === 'granted') {
+    if (status === PermissionStatus.GRANTED) {
       setHasPermission(true);
       getBrightness();
     }
@@ -78,8 +79,8 @@ export default function ExpoBrightnessScreen() {
 
   if (hasPermission === false) {
     return (
-      <View className="flex-1 items-center justify-center p-4">
-        <Text className="text-lg text-center mb-4">需要权限来控制设备亮度</Text>
+      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+        <Text className="text-center mb-6">需要权限来控制设备亮度</Text>
         <Button onPress={requestPermission}>
           <Text>请求权限</Text>
         </Button>
@@ -88,7 +89,7 @@ export default function ExpoBrightnessScreen() {
   }
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 p-6">
       <View className="mb-6">
         <Text className="font-bold mb-2">当前设备亮度</Text>
         <Text className="text-3xl font-semibold">{Math.round(brightness * 100)}%</Text>

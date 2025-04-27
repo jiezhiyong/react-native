@@ -181,7 +181,7 @@ export default function ExpoAudioScreen() {
 
   // 播放器 UI
   return (
-    <View className="flex-1">
+    <View className="flex-1 p-6">
       <View className="p-4 bg-gray-50 rounded-lg mb-4">
         <Text className="font-bold mb-2">音频源选择</Text>
         <View className="flex-row flex-wrap gap-2">

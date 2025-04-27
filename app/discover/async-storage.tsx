@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RefreshCcw } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
@@ -144,7 +144,7 @@ export default function AsyncStorageScreen() {
   };
 
   return (
-    <>
+    <ScrollView className="flex-1 p-6">
       {/* 访问时间示例 */}
       <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">
         <Text className="text-lg font-bold mb-3">最后访问时间</Text>
@@ -205,6 +205,6 @@ export default function AsyncStorageScreen() {
           </Button>
         )}
       </View>
-    </>
+    </ScrollView>
   );
 }

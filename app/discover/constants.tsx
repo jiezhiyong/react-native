@@ -1,6 +1,6 @@
 import Constants from 'expo-constants';
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
 
 import { Text } from '../../components/ui/text';
 
@@ -44,7 +44,7 @@ export default function ExpoConstantsScreen() {
   ];
 
   return (
-    <>
+    <ScrollView className="flex-1 p-6">
       {cards.map((card, index) => (
         <View key={index} className="mb-6">
           <View className="">
@@ -66,6 +66,6 @@ export default function ExpoConstantsScreen() {
           注意：某些信息在不同环境下可能显示为"未知"，这是正常现象。在生产环境和开发环境中，某些常量值可能会有所不同。
         </Text>
       </View>
-    </>
+    </ScrollView>
   );
 }

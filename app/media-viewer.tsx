@@ -1,6 +1,7 @@
 import { ResizeMode, Video } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
+import { PermissionStatus } from 'expo-modules-core';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import * as Sharing from 'expo-sharing';
 import { ArrowLeft, Download, Share2, X } from 'lucide-react-native';
@@ -30,7 +31,7 @@ export default function MediaViewerScreen() {
     (async () => {
       if (Platform.OS !== 'web') {
         const { status } = await MediaLibrary.requestPermissionsAsync();
-        setHasPermission(status === 'granted');
+        setHasPermission(status === PermissionStatus.GRANTED);
       }
     })();
   }, []);
@@ -62,7 +63,7 @@ export default function MediaViewerScreen() {
 
       if (!hasPermission) {
         const { status } = await MediaLibrary.requestPermissionsAsync();
-        if (status !== 'granted') {
+        if (status !== PermissionStatus.GRANTED) {
           setError('需要存储权限才能保存媒体');
           return;
         }

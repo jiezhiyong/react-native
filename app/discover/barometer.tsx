@@ -64,7 +64,7 @@ export default function BarometerScreen() {
   const formattedAltitude = data.relativeAltitude ? data.relativeAltitude.toFixed(2) : '不可用';
 
   return (
-    <>
+    <View className="flex-1 p-6">
       {/* 当前气压数据 */}
       <View className="bg-blue-50 rounded-xl p-6 mb-6 items-center">
         <View className="flex-row items-center justify-center mb-2">
@@ -89,6 +89,6 @@ export default function BarometerScreen() {
           <Text className="text-white font-medium">{isMonitoring ? '停止监测' : '开始监测'}</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 }

@@ -119,6 +119,7 @@ export function Main() {
           right: 5,
           bottom: 5,
           zIndex: 9998,
+          opacity: 0.8,
         }}
       >
         <Image
