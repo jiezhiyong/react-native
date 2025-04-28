@@ -14,7 +14,7 @@
    - Sentry
 3. 遵循 React Native 和 Expo 最佳实践、支持多平台（iOS 和 Android）适配
 4. 优先使用 Expo 提供的 API 和组件
-5. 尽量使用 nativewind (tailwindcss) 进行样式处理，而不是直接使用 StyleSheet
+5. 尽量使用 nativewind (tailwindcss) 进行样式处理，而不是直接使用 StyleSheet。expo-image 的 Image 等不兼容 nativewind 的组件使用原生样式
 6. 尽量使用 zustand 进行状态管理
 7. 组件化开发，保持代码简洁可维护
 8. 性能优化：避免不必要的渲染和大型依赖
@@ -22,6 +22,6 @@
 10. 图标优先使用 lucide-react-native
 11. 样式颜色尽量使用 tailwindcss 的预定义颜色变量, 比如背景色使用 bg-background, 灰色文字使用 text-secondary-foreground
 12. 使用 pnpm 管理依赖
-13. 组件尽量使用 shadcn/ui, 目录在 /components/ui/*, 如：按钮使用 /components/ui/button 而不是 TouchableOpacity, Text 使用 /components/ui/text, 输入框使用 /components/ui/input
+13. 组件尽量使用 shadcn/ui, 目录在 ~/components/ui/*, 如：按钮使用 ~/components/ui/button 而不是 TouchableOpacity, Text 使用 ~/components/ui/text, 输入框使用 ~/components/ui/input
 14. 不用关心 import rule 顺序的问题
-
+15. 避免使用已弃用的 API

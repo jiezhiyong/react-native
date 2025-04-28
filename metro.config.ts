@@ -41,6 +41,6 @@ mergedConfig.transformer.minifierConfig = {
 };
 
 // Adds support for `.db` files for SQLite databases
-mergedConfig.resolver.assetExts.push('db');
+mergedConfig.resolver.assetExts.push(...['db', 'mp3', 'ttf', 'obj', 'png', 'jpg']);
 
 module.exports = withNativeWind(mergedConfig, { input: './global.css' });
