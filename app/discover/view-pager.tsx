@@ -13,9 +13,7 @@ export default function ExpoViewPagerScreen() {
       {/* 顶部标题 */}
       <View className="p-6">
         <Text className="text-lg font-bold mb-2">视图分页器</Text>
-        <Text className="text-gray-600">
-          此功能展示了如何使用视图分页器组件。
-        </Text>
+        <Text className="text-gray-600">此功能展示了如何使用视图分页器组件。</Text>
       </View>
 
       {/* 分页器 */}
@@ -36,9 +34,7 @@ export default function ExpoViewPagerScreen() {
         {colors.map((_, index) => (
           <View
             key={index}
-            className={`w-2 h-2 rounded-full mx-1 ${
-              index === currentPage ? 'bg-blue-500' : 'bg-gray-300'
-            }`}
+            className={`w-2 h-2 rounded-full mx-1 ${index === currentPage ? 'bg-blue-500' : 'bg-gray-300'}`}
           />
         ))}
       </View>

@@ -11,7 +11,7 @@ export default function ExpoVideoScreen() {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   // 初始化视频播放器
-  const player = useVideoPlayer(videoSource, player => {
+  const player = useVideoPlayer(videoSource, (player) => {
     player.loop = true;
     player.play();
   });
@@ -23,9 +23,7 @@ export default function ExpoVideoScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">视频功能</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用 expo-video 播放视频。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用 expo-video 播放视频。</Text>
       </View>
 
       {/* 视频播放器 */}
@@ -54,14 +52,8 @@ export default function ExpoVideoScreen() {
               }
             }}
           >
-            <Ionicons
-              name={isPlaying ? 'pause' : 'play'}
-              size={20}
-              color="white"
-            />
-            <Text className="text-white ml-2">
-              {isPlaying ? '暂停' : '播放'}
-            </Text>
+            <Ionicons name={isPlaying ? 'pause' : 'play'} size={20} color="white" />
+            <Text className="text-white ml-2">{isPlaying ? '暂停' : '播放'}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity

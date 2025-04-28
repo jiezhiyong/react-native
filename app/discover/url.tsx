@@ -51,9 +51,7 @@ export default function ExpoUrlScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">URL 功能</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用 URL 相关功能。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用 URL 相关功能。</Text>
       </View>
 
       {/* URL 输入 */}
@@ -68,9 +66,7 @@ export default function ExpoUrlScreen() {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <Text className="text-gray-600">
-          URL 状态: {canOpen ? '可以打开' : '无法打开'}
-        </Text>
+        <Text className="text-gray-600">URL 状态: {canOpen ? '可以打开' : '无法打开'}</Text>
       </View>
 
       {/* 打开 URL */}

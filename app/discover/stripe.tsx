@@ -68,9 +68,7 @@ function PaymentForm() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">Stripe 支付</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用 Stripe 进行支付。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用 Stripe 进行支付。</Text>
       </View>
 
       {/* 支付金额输入 */}
@@ -96,9 +94,7 @@ function PaymentForm() {
           disabled={loading}
         >
           <Ionicons name="card" size={20} color="white" />
-          <Text className="text-white ml-2">
-            {loading ? '处理中...' : '初始化支付'}
-          </Text>
+          <Text className="text-white ml-2">{loading ? '处理中...' : '初始化支付'}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -107,9 +103,7 @@ function PaymentForm() {
           disabled={loading}
         >
           <Ionicons name="wallet" size={20} color="white" />
-          <Text className="text-white ml-2">
-            {loading ? '处理中...' : '确认支付'}
-          </Text>
+          <Text className="text-white ml-2">{loading ? '处理中...' : '确认支付'}</Text>
         </TouchableOpacity>
       </View>
 

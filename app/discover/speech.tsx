@@ -53,9 +53,7 @@ export default function ExpoSpeechScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">语音功能</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用语音合成功能。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用语音合成功能。</Text>
       </View>
 
       {/* 语音合成 */}
@@ -73,14 +71,8 @@ export default function ExpoSpeechScreen() {
           onPress={isSpeaking ? stopSpeaking : startSpeaking}
           disabled={!text}
         >
-          <Ionicons
-            name={isSpeaking ? 'stop' : 'play'}
-            size={20}
-            color="white"
-          />
-          <Text className="text-white ml-2">
-            {isSpeaking ? '停止播放' : '开始播放'}
-          </Text>
+          <Ionicons name={isSpeaking ? 'stop' : 'play'} size={20} color="white" />
+          <Text className="text-white ml-2">{isSpeaking ? '停止播放' : '开始播放'}</Text>
         </TouchableOpacity>
       </View>
 

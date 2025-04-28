@@ -34,9 +34,7 @@ export default function ExpoStoreReviewScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">应用商店评分</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用 Expo 的应用商店评分功能。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用 Expo 的应用商店评分功能。</Text>
       </View>
 
       {/* 检查可用性 */}

@@ -33,9 +33,7 @@ export default function ExpoStatusBarScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">状态栏</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何控制状态栏的样式和行为。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何控制状态栏的样式和行为。</Text>
       </View>
 
       {/* 状态栏控制 */}
@@ -43,33 +41,15 @@ export default function ExpoStatusBarScreen() {
         <Text className="text-base font-semibold mb-4">状态栏控制</Text>
         <View className="space-y-4">
           {/* 可见性控制 */}
-          <TouchableOpacity
-            className="bg-blue-500 rounded-lg p-4 flex-row items-center"
-            onPress={toggleVisibility}
-          >
-            <Ionicons
-              name={isHidden ? 'eye-off' : 'eye'}
-              size={20}
-              color="white"
-            />
-            <Text className="text-white ml-2">
-              {isHidden ? '显示状态栏' : '隐藏状态栏'}
-            </Text>
+          <TouchableOpacity className="bg-blue-500 rounded-lg p-4 flex-row items-center" onPress={toggleVisibility}>
+            <Ionicons name={isHidden ? 'eye-off' : 'eye'} size={20} color="white" />
+            <Text className="text-white ml-2">{isHidden ? '显示状态栏' : '隐藏状态栏'}</Text>
           </TouchableOpacity>
 
           {/* 样式控制 */}
-          <TouchableOpacity
-            className="bg-purple-500 rounded-lg p-4 flex-row items-center"
-            onPress={toggleStyle}
-          >
-            <Ionicons
-              name={style === 'light' ? 'moon' : 'sunny'}
-              size={20}
-              color="white"
-            />
-            <Text className="text-white ml-2">
-              切换为{style === 'light' ? '深色' : '浅色'}样式
-            </Text>
+          <TouchableOpacity className="bg-purple-500 rounded-lg p-4 flex-row items-center" onPress={toggleStyle}>
+            <Ionicons name={style === 'light' ? 'moon' : 'sunny'} size={20} color="white" />
+            <Text className="text-white ml-2">切换为{style === 'light' ? '深色' : '浅色'}样式</Text>
           </TouchableOpacity>
 
           {/* 背景颜色控制 */}
@@ -77,14 +57,8 @@ export default function ExpoStatusBarScreen() {
             className="bg-green-500 rounded-lg p-4 flex-row items-center"
             onPress={toggleBackgroundColor}
           >
-            <Ionicons
-              name="color-palette"
-              size={20}
-              color="white"
-            />
-            <Text className="text-white ml-2">
-              切换背景颜色
-            </Text>
+            <Ionicons name="color-palette" size={20} color="white" />
+            <Text className="text-white ml-2">切换背景颜色</Text>
           </TouchableOpacity>
 
           {/* 半透明控制 */}
@@ -93,14 +67,8 @@ export default function ExpoStatusBarScreen() {
               className="bg-orange-500 rounded-lg p-4 flex-row items-center"
               onPress={toggleTranslucent}
             >
-              <Ionicons
-                name="contrast"
-                size={20}
-                color="white"
-              />
-              <Text className="text-white ml-2">
-                {translucent ? '禁用' : '启用'}半透明效果
-              </Text>
+              <Ionicons name="contrast" size={20} color="white" />
+              <Text className="text-white ml-2">{translucent ? '禁用' : '启用'}半透明效果</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -109,16 +77,8 @@ export default function ExpoStatusBarScreen() {
       {/* 状态栏预览 */}
       <View className="mb-8">
         <Text className="text-base font-semibold mb-4">状态栏预览</Text>
-        <View
-          className="h-12 rounded-lg overflow-hidden"
-          style={{ backgroundColor }}
-        >
-          <StatusBar
-            hidden={isHidden}
-            style={style}
-            backgroundColor={backgroundColor}
-            translucent={translucent}
-          />
+        <View className="h-12 rounded-lg overflow-hidden" style={{ backgroundColor }}>
+          <StatusBar hidden={isHidden} style={style} backgroundColor={backgroundColor} translucent={translucent} />
         </View>
       </View>
 

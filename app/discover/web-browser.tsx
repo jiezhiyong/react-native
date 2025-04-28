@@ -29,10 +29,7 @@ export default function ExpoWebBrowserScreen() {
   const openAuthSession = async () => {
     try {
       setError('');
-      const result = await WebBrowser.openAuthSessionAsync(
-        'https://expo.dev',
-        'expo://'
-      );
+      const result = await WebBrowser.openAuthSessionAsync('https://expo.dev', 'expo://');
       setBrowserResult(JSON.stringify(result, null, 2));
     } catch (error) {
       setError('打开认证页面失败');
@@ -61,9 +58,7 @@ export default function ExpoWebBrowserScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">内置浏览器</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用内置浏览器打开网页。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用内置浏览器打开网页。</Text>
       </View>
 
       {/* URL 输入 */}

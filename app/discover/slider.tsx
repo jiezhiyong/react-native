@@ -11,9 +11,7 @@ export default function ExpoSliderScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">滑块功能</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用 React Native 的滑块组件。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用 React Native 的滑块组件。</Text>
       </View>
 
       {/* 基本滑块 */}

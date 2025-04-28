@@ -55,9 +55,7 @@ export default function ExpoWebViewScreen() {
       {/* 顶部标题 */}
       <View className="p-6">
         <Text className="text-lg font-bold mb-2">WebView</Text>
-        <Text className="text-gray-600">
-          此功能展示了如何在应用中嵌入网页内容。
-        </Text>
+        <Text className="text-gray-600">此功能展示了如何在应用中嵌入网页内容。</Text>
       </View>
 
       {/* URL 输入和控制栏 */}
@@ -90,10 +88,7 @@ export default function ExpoWebViewScreen() {
             <Ionicons name="arrow-forward" size={20} color="white" />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            className="bg-blue-500 rounded-lg p-4 flex-row items-center"
-            onPress={reload}
-          >
+          <TouchableOpacity className="bg-blue-500 rounded-lg p-4 flex-row items-center" onPress={reload}>
             <Ionicons name="refresh" size={20} color="white" />
             <Text className="text-white ml-2">刷新</Text>
           </TouchableOpacity>

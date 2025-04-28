@@ -97,26 +97,16 @@ export default function ExpoNetInfoScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">网络信息</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何检测和监控网络连接状态。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何检测和监控网络连接状态。</Text>
       </View>
 
       {/* 网络状态卡片 */}
       <View className="bg-white rounded-lg shadow-sm p-6 mb-6">
         <View className="flex-row items-center">
-          <Ionicons
-            name={getConnectionIcon()}
-            size={32}
-            className={getConnectionColor()}
-          />
+          <Ionicons name={getConnectionIcon()} size={32} className={getConnectionColor()} />
           <View className="ml-4">
-            <Text className="text-lg font-semibold">
-              {isConnected ? '已连接' : '未连接'}
-            </Text>
-            <Text className="text-gray-600">
-              连接类型: {connectionType || '未知'}
-            </Text>
+            <Text className="text-lg font-semibold">{isConnected ? '已连接' : '未连接'}</Text>
+            <Text className="text-gray-600">连接类型: {connectionType || '未知'}</Text>
           </View>
         </View>
 
@@ -127,15 +117,9 @@ export default function ExpoNetInfoScreen() {
       <View className="bg-gray-100 rounded-lg p-4 mb-6">
         <Text className="text-base font-semibold mb-2">网络详情</Text>
         <View className="space-y-2">
-          <Text className="text-gray-600">
-            WiFi 状态: {isWifiEnabled ? '已启用' : '未启用'}
-          </Text>
-          <Text className="text-gray-600">
-            连接类型: {connectionType || '未知'}
-          </Text>
-          <Text className="text-gray-600">
-            是否连接: {isConnected ? '是' : '否'}
-          </Text>
+          <Text className="text-gray-600">WiFi 状态: {isWifiEnabled ? '已启用' : '未启用'}</Text>
+          <Text className="text-gray-600">连接类型: {connectionType || '未知'}</Text>
+          <Text className="text-gray-600">是否连接: {isConnected ? '是' : '否'}</Text>
         </View>
       </View>
 

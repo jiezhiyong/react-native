@@ -62,7 +62,6 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'picker', desc: '访问系统 UI 以在多个选项之间进行选择', supports: 'Android, iOS, Web' },
   { name: 'print', desc: '打印', supports: 'Android, iOS, Web' },
   { name: 'reanimated', desc: '创建平滑、强大和可维护动画', supports: 'Android, iOS, Web' },
-  { name: 'register-root-component', desc: '注册根组件', supports: 'Android, iOS, Web' },
   { name: 'router', desc: '路由器', supports: 'Android, iOS, Web' },
   { name: 'router-ui', desc: '路由 UI', supports: 'Android, iOS, Web' },
   { name: 'safe-area-context', desc: '安全区域上下文', supports: 'Android, iOS, Web' },

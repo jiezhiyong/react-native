@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { Dimensions, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
-    Easing,
-    useAnimatedStyle,
-    useSharedValue,
-    withRepeat,
-    withSequence,
-    withSpring,
-    withTiming
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 
 const { width } = Dimensions.get('window');
@@ -29,39 +29,22 @@ export default function ReanimatedScreen() {
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        { scale: scale.value },
-        { rotate: `${rotation.value}deg` },
-        { translateX: position.value },
-      ],
+      transform: [{ scale: scale.value }, { rotate: `${rotation.value}deg` }, { translateX: position.value }],
     };
   });
 
   const gestureStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        { translateX: translateX.value },
-        { translateY: translateY.value },
-      ],
+      transform: [{ translateX: translateX.value }, { translateY: translateY.value }],
     };
   });
 
   const startBasicAnimation = () => {
     setIsAnimating(true);
-    scale.value = withSequence(
-      withSpring(1.5, { damping: 2 }),
-      withSpring(1, { damping: 2 })
-    );
-    rotation.value = withRepeat(
-      withTiming(360, { duration: 2000, easing: Easing.linear }),
-      -1,
-      false
-    );
+    scale.value = withSequence(withSpring(1.5, { damping: 2 }), withSpring(1, { damping: 2 }));
+    rotation.value = withRepeat(withTiming(360, { duration: 2000, easing: Easing.linear }), -1, false);
     position.value = withRepeat(
-      withSequence(
-        withTiming(width - 100, { duration: 1000 }),
-        withTiming(0, { duration: 1000 })
-      ),
+      withSequence(withTiming(width - 100, { duration: 1000 }), withTiming(0, { duration: 1000 })),
       -1,
       true
     );
@@ -91,32 +74,21 @@ export default function ReanimatedScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">动画示例</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了 React Native Reanimated 的各种动画效果。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了 React Native Reanimated 的各种动画效果。</Text>
       </View>
 
       <View className="space-y-8">
         {/* 基本动画 */}
         <View className="space-y-4">
           <Text className="text-base font-semibold">基本动画</Text>
-          <Animated.View
-            className="w-20 h-20 bg-blue-500 rounded-lg"
-            style={animatedStyle}
-          />
+          <Animated.View className="w-20 h-20 bg-blue-500 rounded-lg" style={animatedStyle} />
           <View className="flex-row space-x-4">
             <TouchableOpacity
               className="flex-1 bg-blue-500 rounded-lg p-3 flex-row items-center justify-center"
               onPress={isAnimating ? stopBasicAnimation : startBasicAnimation}
             >
-              <Ionicons
-                name={isAnimating ? 'stop' : 'play'}
-                size={20}
-                color="white"
-              />
-              <Text className="text-white ml-2">
-                {isAnimating ? '停止动画' : '开始动画'}
-              </Text>
+              <Ionicons name={isAnimating ? 'stop' : 'play'} size={20} color="white" />
+              <Text className="text-white ml-2">{isAnimating ? '停止动画' : '开始动画'}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -125,14 +97,9 @@ export default function ReanimatedScreen() {
         <View className="space-y-4">
           <Text className="text-base font-semibold">手势动画</Text>
           <GestureDetector gesture={gesture}>
-            <Animated.View
-              className="w-20 h-20 bg-green-500 rounded-lg"
-              style={gestureStyle}
-            />
+            <Animated.View className="w-20 h-20 bg-green-500 rounded-lg" style={gestureStyle} />
           </GestureDetector>
-          <Text className="text-sm text-gray-500">
-            尝试拖动方块，松开后会回到原位
-          </Text>
+          <Text className="text-sm text-gray-500">尝试拖动方块，松开后会回到原位</Text>
         </View>
       </View>
 

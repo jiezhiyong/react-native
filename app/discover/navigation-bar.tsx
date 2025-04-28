@@ -83,9 +83,7 @@ export default function ExpoNavigationBarScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">导航栏控制</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何控制和管理导航栏的样式和行为。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何控制和管理导航栏的样式和行为。</Text>
       </View>
 
       {/* 导航栏可见性控制 */}
@@ -95,14 +93,8 @@ export default function ExpoNavigationBarScreen() {
           className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
           onPress={toggleVisibility}
         >
-          <Ionicons
-            name={visibility === 'visible' ? 'eye-off' : 'eye'}
-            size={20}
-            color="white"
-          />
-          <Text className="text-white ml-2">
-            {visibility === 'visible' ? '隐藏导航栏' : '显示导航栏'}
-          </Text>
+          <Ionicons name={visibility === 'visible' ? 'eye-off' : 'eye'} size={20} color="white" />
+          <Text className="text-white ml-2">{visibility === 'visible' ? '隐藏导航栏' : '显示导航栏'}</Text>
         </TouchableOpacity>
       </View>
 
@@ -128,14 +120,11 @@ export default function ExpoNavigationBarScreen() {
           {(['overlay-swipe', 'inset-swipe', 'inset-touch'] as const).map((mode) => (
             <TouchableOpacity
               key={mode}
-              className={`p-4 rounded-lg ${
-                behavior === mode ? 'bg-blue-500' : 'bg-gray-200'
-              }`}
+              className={`p-4 rounded-lg ${behavior === mode ? 'bg-blue-500' : 'bg-gray-200'}`}
               onPress={() => changeBehavior(mode)}
             >
               <Text className={behavior === mode ? 'text-white' : 'text-gray-600'}>
-                {mode === 'overlay-swipe' ? '覆盖滑动' :
-                 mode === 'inset-swipe' ? '嵌入滑动' : '嵌入触摸'}
+                {mode === 'overlay-swipe' ? '覆盖滑动' : mode === 'inset-swipe' ? '嵌入滑动' : '嵌入触摸'}
               </Text>
             </TouchableOpacity>
           ))}
@@ -149,9 +138,7 @@ export default function ExpoNavigationBarScreen() {
           {(['relative', 'absolute'] as const).map((pos) => (
             <TouchableOpacity
               key={pos}
-              className={`p-4 rounded-lg ${
-                position === pos ? 'bg-blue-500' : 'bg-gray-200'
-              }`}
+              className={`p-4 rounded-lg ${position === pos ? 'bg-blue-500' : 'bg-gray-200'}`}
               onPress={() => changePosition(pos)}
             >
               <Text className={position === pos ? 'text-white' : 'text-gray-600'}>
@@ -169,9 +156,7 @@ export default function ExpoNavigationBarScreen() {
           {(['light', 'dark'] as const).map((style) => (
             <TouchableOpacity
               key={style}
-              className={`p-4 rounded-lg ${
-                buttonStyle === style ? 'bg-blue-500' : 'bg-gray-200'
-              }`}
+              className={`p-4 rounded-lg ${buttonStyle === style ? 'bg-blue-500' : 'bg-gray-200'}`}
               onPress={() => changeButtonStyle(style)}
             >
               <Text className={buttonStyle === style ? 'text-white' : 'text-gray-600'}>

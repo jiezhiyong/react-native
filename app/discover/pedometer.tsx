@@ -40,7 +40,7 @@ export default function ExpoPedometerScreen() {
       setStepCount(result.steps);
       setIsTracking(true);
 
-      const subscription = Pedometer.watchStepCount(result => {
+      const subscription = Pedometer.watchStepCount((result) => {
         setStepCount(result.steps);
       });
 
@@ -70,9 +70,7 @@ export default function ExpoPedometerScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">计步器</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能用于获取用户的步数和行走距离。需要设备支持计步传感器。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能用于获取用户的步数和行走距离。需要设备支持计步传感器。</Text>
       </View>
 
       <View className="space-y-6">

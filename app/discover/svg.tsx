@@ -1,12 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import Animated, {
-  useAnimatedProps,
-  useSharedValue,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { useAnimatedProps, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import Svg, { Circle, G, Path, Rect, Text as SvgText } from 'react-native-svg';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -52,9 +47,7 @@ export default function ExpoSvgScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">SVG 图形</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用 SVG 图形和动画。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用 SVG 图形和动画。</Text>
       </View>
 
       {/* SVG 画布 */}
@@ -63,39 +56,18 @@ export default function ExpoSvgScreen() {
         <View className="bg-gray-100 rounded-lg p-4 items-center">
           <Svg width={300} height={300}>
             {/* 圆形 */}
-            <AnimatedCircle
-              cx="150"
-              cy="100"
-              fill="red"
-              animatedProps={animatedCircleProps}
-            />
+            <AnimatedCircle cx="150" cy="100" fill="red" animatedProps={animatedCircleProps} />
 
             {/* 矩形 */}
-            <AnimatedRect
-              x="100"
-              y="150"
-              height="50"
-              fill="blue"
-              animatedProps={animatedRectProps}
-            />
+            <AnimatedRect x="100" y="150" height="50" fill="blue" animatedProps={animatedRectProps} />
 
             {/* 路径 */}
             <G transform="translate(150, 200)">
-              <AnimatedPath
-                d="M0,0 L50,0 L25,50 Z"
-                fill="green"
-                animatedProps={animatedPathProps}
-              />
+              <AnimatedPath d="M0,0 L50,0 L25,50 Z" fill="green" animatedProps={animatedPathProps} />
             </G>
 
             {/* 文本 */}
-            <SvgText
-              x="150"
-              y="280"
-              textAnchor="middle"
-              fill="black"
-              fontSize="16"
-            >
+            <SvgText x="150" y="280" textAnchor="middle" fill="black" fontSize="16">
               SVG 示例
             </SvgText>
           </Svg>

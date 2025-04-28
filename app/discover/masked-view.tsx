@@ -16,9 +16,7 @@ export default function ExpoMaskedViewScreen() {
           <View className="items-center justify-center">
             <MaskedView
               style={{ width: 200, height: 200 }}
-              maskElement={
-                <View className="w-full h-full rounded-full bg-black" />
-              }
+              maskElement={<View className="w-full h-full rounded-full bg-black" />}
             >
               <Image
                 source={{ uri: 'https://picsum.photos/200' }}
@@ -79,9 +77,7 @@ export default function ExpoMaskedViewScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">遮罩视图</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用遮罩视图来创建特殊的视觉效果。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用遮罩视图来创建特殊的视觉效果。</Text>
       </View>
 
       {/* 遮罩类型选择 */}
@@ -92,18 +88,8 @@ export default function ExpoMaskedViewScreen() {
           }`}
           onPress={() => setSelectedMask('circle')}
         >
-          <Ionicons
-            name="ellipse"
-            size={24}
-            color={selectedMask === 'circle' ? 'white' : 'gray'}
-          />
-          <Text
-            className={`mt-2 ${
-              selectedMask === 'circle' ? 'text-white' : 'text-gray-600'
-            }`}
-          >
-            圆形遮罩
-          </Text>
+          <Ionicons name="ellipse" size={24} color={selectedMask === 'circle' ? 'white' : 'gray'} />
+          <Text className={`mt-2 ${selectedMask === 'circle' ? 'text-white' : 'text-gray-600'}`}>圆形遮罩</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -112,45 +98,21 @@ export default function ExpoMaskedViewScreen() {
           }`}
           onPress={() => setSelectedMask('gradient')}
         >
-          <Ionicons
-            name="color-palette"
-            size={24}
-            color={selectedMask === 'gradient' ? 'white' : 'gray'}
-          />
-          <Text
-            className={`mt-2 ${
-              selectedMask === 'gradient' ? 'text-white' : 'text-gray-600'
-            }`}
-          >
-            渐变遮罩
-          </Text>
+          <Ionicons name="color-palette" size={24} color={selectedMask === 'gradient' ? 'white' : 'gray'} />
+          <Text className={`mt-2 ${selectedMask === 'gradient' ? 'text-white' : 'text-gray-600'}`}>渐变遮罩</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          className={`flex-1 p-3 items-center rounded-lg ${
-            selectedMask === 'text' ? 'bg-blue-500' : 'bg-gray-200'
-          }`}
+          className={`flex-1 p-3 items-center rounded-lg ${selectedMask === 'text' ? 'bg-blue-500' : 'bg-gray-200'}`}
           onPress={() => setSelectedMask('text')}
         >
-          <Ionicons
-            name="text"
-            size={24}
-            color={selectedMask === 'text' ? 'white' : 'gray'}
-          />
-          <Text
-            className={`mt-2 ${
-              selectedMask === 'text' ? 'text-white' : 'text-gray-600'
-            }`}
-          >
-            文字遮罩
-          </Text>
+          <Ionicons name="text" size={24} color={selectedMask === 'text' ? 'white' : 'gray'} />
+          <Text className={`mt-2 ${selectedMask === 'text' ? 'text-white' : 'text-gray-600'}`}>文字遮罩</Text>
         </TouchableOpacity>
       </View>
 
       {/* 遮罩效果展示 */}
-      <View className="items-center justify-center mb-6">
-        {renderMaskedContent()}
-      </View>
+      <View className="items-center justify-center mb-6">{renderMaskedContent()}</View>
 
       {/* 说明区域 */}
       <View className="bg-gray-100 p-4 rounded-lg">

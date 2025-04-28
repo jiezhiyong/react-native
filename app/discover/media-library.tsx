@@ -89,10 +89,7 @@ export default function ExpoMediaLibraryScreen() {
     return (
       <View className="flex-1 p-6 justify-center items-center">
         <Text className="text-lg mb-4">需要媒体库访问权限</Text>
-        <TouchableOpacity
-          className="bg-blue-500 rounded-lg p-4"
-          onPress={checkPermission}
-        >
+        <TouchableOpacity className="bg-blue-500 rounded-lg p-4" onPress={checkPermission}>
           <Text className="text-white">请求权限</Text>
         </TouchableOpacity>
       </View>
@@ -103,9 +100,7 @@ export default function ExpoMediaLibraryScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">媒体库访问</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能用于访问设备媒体库，可以查看相册、图片，并创建新的相册。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能用于访问设备媒体库，可以查看相册、图片，并创建新的相册。</Text>
       </View>
 
       <View className="space-y-4 mb-6">
@@ -133,13 +128,7 @@ export default function ExpoMediaLibraryScreen() {
             data={assets}
             numColumns={3}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Image
-                source={{ uri: item.uri }}
-                className="w-32 h-32 m-1"
-                resizeMode="cover"
-              />
-            )}
+            renderItem={({ item }) => <Image source={{ uri: item.uri }} className="w-32 h-32 m-1" resizeMode="cover" />}
           />
         </View>
       )}

@@ -36,9 +36,7 @@ export default function ExpoSystemUIScreen() {
       <ScrollView className="flex-1 p-6">
         <View className="mb-6">
           <Text className="text-lg font-bold mb-2">系统 UI 功能</Text>
-          <Text className="text-gray-600 mb-4">
-            此功能展示了如何使用系统 UI 相关功能。
-          </Text>
+          <Text className="text-gray-600 mb-4">此功能展示了如何使用系统 UI 相关功能。</Text>
         </View>
 
         {/* 状态栏样式 */}
@@ -48,14 +46,8 @@ export default function ExpoSystemUIScreen() {
             className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
             onPress={toggleStatusBarStyle}
           >
-            <Ionicons
-              name={statusBarStyle === 'light' ? 'sunny' : 'moon'}
-              size={20}
-              color="white"
-            />
-            <Text className="text-white ml-2">
-              切换为{statusBarStyle === 'light' ? '深色' : '浅色'}样式
-            </Text>
+            <Ionicons name={statusBarStyle === 'light' ? 'sunny' : 'moon'} size={20} color="white" />
+            <Text className="text-white ml-2">切换为{statusBarStyle === 'light' ? '深色' : '浅色'}样式</Text>
           </TouchableOpacity>
         </View>
 
@@ -66,14 +58,8 @@ export default function ExpoSystemUIScreen() {
             className="bg-green-500 rounded-lg p-4 flex-row items-center justify-center"
             onPress={toggleStatusBarVisibility}
           >
-            <Ionicons
-              name={statusBarHidden ? 'eye' : 'eye-off'}
-              size={20}
-              color="white"
-            />
-            <Text className="text-white ml-2">
-              {statusBarHidden ? '显示' : '隐藏'}状态栏
-            </Text>
+            <Ionicons name={statusBarHidden ? 'eye' : 'eye-off'} size={20} color="white" />
+            <Text className="text-white ml-2">{statusBarHidden ? '显示' : '隐藏'}状态栏</Text>
           </TouchableOpacity>
         </View>
 
@@ -84,14 +70,8 @@ export default function ExpoSystemUIScreen() {
             className="bg-purple-500 rounded-lg p-4 flex-row items-center justify-center"
             onPress={changeBackgroundColor}
           >
-            <Ionicons
-              name="color-palette"
-              size={20}
-              color="white"
-            />
-            <Text className="text-white ml-2">
-              切换背景颜色
-            </Text>
+            <Ionicons name="color-palette" size={20} color="white" />
+            <Text className="text-white ml-2">切换背景颜色</Text>
           </TouchableOpacity>
         </View>
 
@@ -99,15 +79,9 @@ export default function ExpoSystemUIScreen() {
         <View className="mb-8">
           <Text className="text-base font-semibold mb-4">系统信息</Text>
           <View className="bg-white rounded-lg p-4">
-            <Text className="text-gray-600 mb-2">
-              系统主题: {colorScheme}
-            </Text>
-            <Text className="text-gray-600 mb-2">
-              平台: {Platform.OS}
-            </Text>
-            <Text className="text-gray-600">
-              版本: {Platform.Version}
-            </Text>
+            <Text className="text-gray-600 mb-2">系统主题: {colorScheme}</Text>
+            <Text className="text-gray-600 mb-2">平台: {Platform.OS}</Text>
+            <Text className="text-gray-600">版本: {Platform.Version}</Text>
           </View>
         </View>
 

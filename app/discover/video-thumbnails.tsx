@@ -52,9 +52,7 @@ export default function ExpoVideoThumbnailsScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">视频缩略图</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何从视频中提取缩略图。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何从视频中提取缩略图。</Text>
       </View>
 
       {/* 视频选择 */}
@@ -68,9 +66,7 @@ export default function ExpoVideoThumbnailsScreen() {
           <Text className="text-white ml-2">从相册选择视频</Text>
         </TouchableOpacity>
         {videoUri ? (
-          <Text className="text-gray-600 mt-2">
-            已选择视频: {videoUri.substring(videoUri.lastIndexOf('/') + 1)}
-          </Text>
+          <Text className="text-gray-600 mt-2">已选择视频: {videoUri.substring(videoUri.lastIndexOf('/') + 1)}</Text>
         ) : null}
       </View>
 
@@ -92,11 +88,7 @@ export default function ExpoVideoThumbnailsScreen() {
       {thumbnailUri ? (
         <View className="mb-8">
           <Text className="text-base font-semibold mb-4">缩略图预览</Text>
-          <Image
-            source={{ uri: thumbnailUri }}
-            style={{ width: '100%', height: 200 }}
-            resizeMode="cover"
-          />
+          <Image source={{ uri: thumbnailUri }} style={{ width: '100%', height: 200 }} resizeMode="cover" />
         </View>
       ) : null}
 

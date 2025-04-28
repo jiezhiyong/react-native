@@ -26,7 +26,7 @@ export default function PickerScreen() {
   };
 
   const getLanguageLabel = (value: string) => {
-    const language = languages.find(lang => lang.value === value);
+    const language = languages.find((lang) => lang.value === value);
     return language ? language.label : '未知';
   };
 
@@ -34,9 +34,7 @@ export default function PickerScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">选择器示例</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了不同类型的系统选择器，包括日期选择器和选项选择器。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了不同类型的系统选择器，包括日期选择器和选项选择器。</Text>
       </View>
 
       <View className="space-y-6">
@@ -47,9 +45,7 @@ export default function PickerScreen() {
             className="bg-white p-4 rounded-lg flex-row items-center justify-between"
             onPress={() => setShowDatePicker(true)}
           >
-            <Text className="text-lg">
-              {date.toLocaleDateString('zh-CN')}
-            </Text>
+            <Text className="text-lg">{date.toLocaleDateString('zh-CN')}</Text>
             <Ionicons name="calendar" size={20} color="gray" />
           </TouchableOpacity>
 
@@ -71,23 +67,14 @@ export default function PickerScreen() {
               className="bg-white p-4 rounded-lg flex-row items-center justify-between"
               onPress={() => setShowLanguagePicker(!showLanguagePicker)}
             >
-              <Text className="text-lg">
-                {getLanguageLabel(selectedLanguage)}
-              </Text>
+              <Text className="text-lg">{getLanguageLabel(selectedLanguage)}</Text>
               <Ionicons name="chevron-down" size={20} color="gray" />
             </TouchableOpacity>
           ) : (
             <View className="bg-white rounded-lg">
-              <Picker
-                selectedValue={selectedLanguage}
-                onValueChange={(itemValue) => setSelectedLanguage(itemValue)}
-              >
+              <Picker selectedValue={selectedLanguage} onValueChange={(itemValue) => setSelectedLanguage(itemValue)}>
                 {languages.map((language) => (
-                  <Picker.Item
-                    key={language.value}
-                    label={language.label}
-                    value={language.value}
-                  />
+                  <Picker.Item key={language.value} label={language.label} value={language.value} />
                 ))}
               </Picker>
             </View>
@@ -104,9 +91,7 @@ export default function PickerScreen() {
                     setShowLanguagePicker(false);
                   }}
                 >
-                  <Text className="text-lg">
-                    {language.label}
-                  </Text>
+                  <Text className="text-lg">{language.label}</Text>
                 </TouchableOpacity>
               ))}
             </View>

@@ -67,9 +67,7 @@ export default function ExpoScreenCaptureScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">屏幕截图</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何捕获屏幕内容并保存或分享。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何捕获屏幕内容并保存或分享。</Text>
       </View>
 
       <View ref={viewRef} className="space-y-6">
@@ -77,11 +75,7 @@ export default function ExpoScreenCaptureScreen() {
         {screenshotUri && (
           <View className="space-y-4">
             <Text className="text-base font-semibold">截图预览</Text>
-            <Image
-              source={{ uri: screenshotUri }}
-              className="w-full h-64 rounded-lg"
-              resizeMode="contain"
-            />
+            <Image source={{ uri: screenshotUri }} className="w-full h-64 rounded-lg" resizeMode="contain" />
             <View className="flex-row space-x-4">
               <TouchableOpacity
                 className="flex-1 bg-blue-500 rounded-lg p-3 flex-row items-center justify-center"
@@ -106,9 +100,7 @@ export default function ExpoScreenCaptureScreen() {
           <Text className="text-base font-semibold">示例内容</Text>
           <View className="bg-gray-100 rounded-lg p-6">
             <Text className="text-lg font-bold mb-2">这是一个示例标题</Text>
-            <Text className="text-gray-600 mb-4">
-              这是一段示例文本，用于展示截图功能。截图将包含这个区域的内容。
-            </Text>
+            <Text className="text-gray-600 mb-4">这是一段示例文本，用于展示截图功能。截图将包含这个区域的内容。</Text>
             <View className="flex-row space-x-4">
               <View className="w-20 h-20 bg-blue-500 rounded-lg" />
               <View className="w-20 h-20 bg-green-500 rounded-lg" />
@@ -123,14 +115,8 @@ export default function ExpoScreenCaptureScreen() {
           onPress={takeScreenshot}
           disabled={isCapturing}
         >
-          <Ionicons
-            name={isCapturing ? 'hourglass' : 'camera'}
-            size={20}
-            color="white"
-          />
-          <Text className="text-white ml-2">
-            {isCapturing ? '正在截图...' : '截图'}
-          </Text>
+          <Ionicons name={isCapturing ? 'hourglass' : 'camera'} size={20} color="white" />
+          <Text className="text-white ml-2">{isCapturing ? '正在截图...' : '截图'}</Text>
         </TouchableOpacity>
       </View>
 

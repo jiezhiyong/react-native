@@ -53,9 +53,7 @@ export default function ExpoTrackingTransparencyScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">跟踪透明度</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能用于请求用户允许应用跟踪其活动。主要用于 iOS 14.5 及以上版本。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能用于请求用户允许应用跟踪其活动。主要用于 iOS 14.5 及以上版本。</Text>
       </View>
 
       <View className="mb-6 p-4 bg-gray-100 rounded-lg">

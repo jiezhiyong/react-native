@@ -32,22 +32,12 @@ function TabContent({ title }: { title: string }) {
 // 模态框组件
 function CustomModal({ visible, onClose }: { visible: boolean; onClose: () => void }) {
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={visible}
-      onRequestClose={onClose}
-    >
+    <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={onClose}>
       <View className="flex-1 justify-center items-center bg-black/50">
         <View className="bg-white rounded-lg p-6 w-4/5">
           <Text className="text-lg font-bold mb-4">自定义模态框</Text>
-          <Text className="text-gray-600 mb-4">
-            这是一个使用路由UI组件的模态框示例。
-          </Text>
-          <TouchableOpacity
-            className="bg-blue-500 rounded-lg p-3 items-center"
-            onPress={onClose}
-          >
+          <Text className="text-gray-600 mb-4">这是一个使用路由UI组件的模态框示例。</Text>
+          <TouchableOpacity className="bg-blue-500 rounded-lg p-3 items-center" onPress={onClose}>
             <Text className="text-white">关闭</Text>
           </TouchableOpacity>
         </View>
@@ -72,9 +62,7 @@ export default function RouteUIScreen() {
       <ScrollView className="flex-1 p-6">
         <View className="mb-6">
           <Text className="text-lg font-bold mb-2">路由UI组件</Text>
-          <Text className="text-gray-600 mb-4">
-            此功能展示了路由UI组件的使用方法，包括导航栏、标签栏和模态框。
-          </Text>
+          <Text className="text-gray-600 mb-4">此功能展示了路由UI组件的使用方法，包括导航栏、标签栏和模态框。</Text>
         </View>
 
         <View className="space-y-6">
@@ -85,28 +73,16 @@ export default function RouteUIScreen() {
               {['home', 'search', 'profile'].map((tab) => (
                 <TouchableOpacity
                   key={tab}
-                  className={`flex-1 p-3 rounded-lg ${
-                    activeTab === tab ? 'bg-white' : ''
-                  }`}
+                  className={`flex-1 p-3 rounded-lg ${activeTab === tab ? 'bg-white' : ''}`}
                   onPress={() => setActiveTab(tab)}
                 >
                   <View className="items-center">
                     <Ionicons
-                      name={
-                        tab === 'home'
-                          ? 'home'
-                          : tab === 'search'
-                          ? 'search'
-                          : 'person'
-                      }
+                      name={tab === 'home' ? 'home' : tab === 'search' ? 'search' : 'person'}
                       size={20}
                       color={activeTab === tab ? 'blue' : 'gray'}
                     />
-                    <Text
-                      className={`mt-1 ${
-                        activeTab === tab ? 'text-blue-500' : 'text-gray-500'
-                      }`}
-                    >
+                    <Text className={`mt-1 ${activeTab === tab ? 'text-blue-500' : 'text-gray-500'}`}>
                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
                     </Text>
                   </View>
@@ -141,10 +117,7 @@ export default function RouteUIScreen() {
         </View>
       </ScrollView>
 
-      <CustomModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-      />
+      <CustomModal visible={modalVisible} onClose={() => setModalVisible(false)} />
     </View>
   );
 }

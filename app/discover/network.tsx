@@ -55,9 +55,7 @@ export default function ExpoNetworkScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">网络请求</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何进行网络请求和处理响应。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何进行网络请求和处理响应。</Text>
       </View>
 
       {/* GET 请求示例 */}
@@ -68,14 +66,8 @@ export default function ExpoNetworkScreen() {
           onPress={makeGetRequest}
           disabled={isLoading}
         >
-          <Ionicons
-            name={isLoading ? 'hourglass' : 'download'}
-            size={20}
-            color="white"
-          />
-          <Text className="text-white ml-2">
-            {isLoading ? '请求中...' : '发送 GET 请求'}
-          </Text>
+          <Ionicons name={isLoading ? 'hourglass' : 'download'} size={20} color="white" />
+          <Text className="text-white ml-2">{isLoading ? '请求中...' : '发送 GET 请求'}</Text>
         </TouchableOpacity>
 
         {getResponse ? (
@@ -101,14 +93,8 @@ export default function ExpoNetworkScreen() {
           onPress={makePostRequest}
           disabled={isLoading}
         >
-          <Ionicons
-            name={isLoading ? 'hourglass' : 'send'}
-            size={20}
-            color="white"
-          />
-          <Text className="text-white ml-2">
-            {isLoading ? '发送中...' : '发送 POST 请求'}
-          </Text>
+          <Ionicons name={isLoading ? 'hourglass' : 'send'} size={20} color="white" />
+          <Text className="text-white ml-2">{isLoading ? '发送中...' : '发送 POST 请求'}</Text>
         </TouchableOpacity>
 
         {postResponse ? (

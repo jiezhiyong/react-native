@@ -64,9 +64,7 @@ export default function ExpoSecureStoreScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">安全存储</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能展示了如何使用安全存储来保存敏感信息，如令牌、密码等。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能展示了如何使用安全存储来保存敏感信息，如令牌、密码等。</Text>
       </View>
 
       {/* 输入区域 */}

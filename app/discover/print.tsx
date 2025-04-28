@@ -73,9 +73,7 @@ export default function ExpoPrintScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">打印功能</Text>
-        <Text className="text-gray-600 mb-4">
-          此功能用于打印内容，支持打印为PDF文件或直接打印。
-        </Text>
+        <Text className="text-gray-600 mb-4">此功能用于打印内容，支持打印为PDF文件或直接打印。</Text>
       </View>
 
       <View className="space-y-4">
@@ -97,9 +95,7 @@ export default function ExpoPrintScreen() {
             disabled={isPrinting || !htmlContent}
           >
             <Ionicons name="document" size={20} color="white" />
-            <Text className="text-white ml-2 text-lg">
-              {isPrinting ? '正在生成PDF...' : '生成PDF文件'}
-            </Text>
+            <Text className="text-white ml-2 text-lg">{isPrinting ? '正在生成PDF...' : '生成PDF文件'}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -108,9 +104,7 @@ export default function ExpoPrintScreen() {
             disabled={isPrinting || !htmlContent}
           >
             <Ionicons name="print" size={20} color="white" />
-            <Text className="text-white ml-2 text-lg">
-              {isPrinting ? '正在打印...' : '直接打印'}
-            </Text>
+            <Text className="text-white ml-2 text-lg">{isPrinting ? '正在打印...' : '直接打印'}</Text>
           </TouchableOpacity>
         </View>
       </View>
