@@ -10,13 +10,13 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1CEBF4FB6F454EBA8A3AF8A9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB7EB2EEF9E64F28AFF596CF /* GoogleService-Info.plist */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		69BACD662A7E4E3EAE05EB62 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99E5B5DD00C4EBBAB6FC6C1 /* noop-file.swift */; };
-		6F226462FD7E46988ED4F022 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71FAC4746B1463293E705A3 /* GoogleService-Info.plist */; };
-		967564778CD146C5997A837E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6F1E0150FE32424397E89216 /* PrivacyInfo.xcprivacy */; };
+		509E64A6202B4D9881D1FD3A /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBD2AE0BBB42139ADD3215 /* noop-file.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-ChatQA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-ChatQA.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		DE931D20E80745779C136C51 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 3E525814CDF2442C93FFDD2A /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,15 +26,15 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ChatQA/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ChatQA/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ChatQA/main.m; sourceTree = "<group>"; };
+		1FDBD2AE0BBB42139ADD3215 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "ChatQA/noop-file.swift"; sourceTree = "<group>"; };
+		37939D7F21704EE0B7B8F73E /* ChatQA-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "ChatQA-Bridging-Header.h"; path = "ChatQA/ChatQA-Bridging-Header.h"; sourceTree = "<group>"; };
+		3E525814CDF2442C93FFDD2A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = PrivacyInfo.xcprivacy; path = ChatQA/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-ChatQA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatQA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-ChatQA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatQA.debug.xcconfig"; path = "Target Support Files/Pods-ChatQA/Pods-ChatQA.debug.xcconfig"; sourceTree = "<group>"; };
-		6F1E0150FE32424397E89216 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = PrivacyInfo.xcprivacy; path = ChatQA/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-ChatQA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatQA.release.xcconfig"; path = "Target Support Files/Pods-ChatQA/Pods-ChatQA.release.xcconfig"; sourceTree = "<group>"; };
-		A5880980376E451C9CEBFE7C /* ChatQA-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "ChatQA-Bridging-Header.h"; path = "ChatQA/ChatQA-Bridging-Header.h"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = ChatQA/SplashScreen.storyboard; sourceTree = "<group>"; };
-		B99E5B5DD00C4EBBAB6FC6C1 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "ChatQA/noop-file.swift"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		D71FAC4746B1463293E705A3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ChatQA/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DB7EB2EEF9E64F28AFF596CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ChatQA/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ChatQA/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,10 +61,10 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				6F1E0150FE32424397E89216 /* PrivacyInfo.xcprivacy */,
-				D71FAC4746B1463293E705A3 /* GoogleService-Info.plist */,
-				B99E5B5DD00C4EBBAB6FC6C1 /* noop-file.swift */,
-				A5880980376E451C9CEBFE7C /* ChatQA-Bridging-Header.h */,
+				3E525814CDF2442C93FFDD2A /* PrivacyInfo.xcprivacy */,
+				DB7EB2EEF9E64F28AFF596CF /* GoogleService-Info.plist */,
+				1FDBD2AE0BBB42139ADD3215 /* noop-file.swift */,
+				37939D7F21704EE0B7B8F73E /* ChatQA-Bridging-Header.h */,
 			);
 			name = ChatQA;
 			sourceTree = "<group>";
@@ -76,14 +76,6 @@
 				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-ChatQA.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		3017E06ABB25420DB39FB64F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -102,7 +94,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
-				3017E06ABB25420DB39FB64F /* Resources */,
+				8D2ADB3817364441AA81CABA /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -115,6 +107,14 @@
 				13B07F961A680F5B00A75B9A /* ChatQA.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8D2ADB3817364441AA81CABA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		92DBD88DE9BF7D494EA9DA96 /* ChatQA */ = {
@@ -159,14 +159,14 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ChatQA" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				7A1D0D1B8F45BB7F81D42577 /* [Expo] Configure project */,
+				123A790FA927F00A1D118B59 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				D0FFC126AEF645C3B276A9AF /* Upload Debug Symbols to Sentry */,
-				B10F019758B85E87EA3B87FF /* [CP] Embed Pods Frameworks */,
+				B2335F7D51E541B1A30DD154 /* Upload Debug Symbols to Sentry */,
+				BAEEC783643EB1E0E9EE39B8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -187,6 +187,8 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1250;
+						DevelopmentTeam = "457Z87HK84";
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -216,8 +218,8 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				967564778CD146C5997A837E /* PrivacyInfo.xcprivacy in Resources */,
-				6F226462FD7E46988ED4F022 /* GoogleService-Info.plist in Resources */,
+				DE931D20E80745779C136C51 /* PrivacyInfo.xcprivacy in Resources */,
+				1CEBF4FB6F454EBA8A3AF8A9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +263,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7A1D0D1B8F45BB7F81D42577 /* [Expo] Configure project */ = {
+		123A790FA927F00A1D118B59 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -356,7 +358,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatQA/Pods-ChatQA-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B10F019758B85E87EA3B87FF /* [CP] Embed Pods Frameworks */ = {
+		B2335F7D51E541B1A30DD154 /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Debug Symbols to Sentry";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh `${NODE_BINARY:-node} --print \"require('path').dirname(require.resolve('@sentry/react-native/package.json')) + '/scripts/sentry-xcode-debug-files.sh'\"`";
+		};
+		BAEEC783643EB1E0E9EE39B8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -376,20 +392,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatQA/Pods-ChatQA-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D0FFC126AEF645C3B276A9AF /* Upload Debug Symbols to Sentry */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Upload Debug Symbols to Sentry";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/bin/sh `${NODE_BINARY:-node} --print \"require('path').dirname(require.resolve('@sentry/react-native/package.json')) + '/scripts/sentry-xcode-debug-files.sh'\"`";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -400,7 +402,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				69BACD662A7E4E3EAE05EB62 /* noop-file.swift in Sources */,
+				509E64A6202B4D9881D1FD3A /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +439,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
+				DEVELOPMENT_TEAM = "457Z87HK84";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 			};
 			name = Debug;
 		};
@@ -464,6 +469,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
+				DEVELOPMENT_TEAM = "457Z87HK84";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 			};
 			name = Release;
 		};

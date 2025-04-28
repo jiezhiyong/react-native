@@ -1,3 +1,9 @@
+import { View } from 'react-native';
+
+export default function FileSystemScreen() {
+  return <View />;
+}
+
 // import { Directory, File, Paths } from 'expo-file-system/next';
 // import React, { useCallback, useState } from 'react';
 // import { ScrollView, View } from 'react-native';
