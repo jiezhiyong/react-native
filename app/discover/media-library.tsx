@@ -97,7 +97,7 @@ export default function ExpoMediaLibraryScreen() {
         <Text className="text-secondary-foreground">访问设备媒体库，可以查看相册、图片，并创建新的相册。</Text>
       </View>
 
-      <View className="flex gap-2 mb-6">
+      <View className="flex gap-3 mb-6">
         <Button onPress={createAlbum}>
           <Text>创建新相册</Text>
         </Button>

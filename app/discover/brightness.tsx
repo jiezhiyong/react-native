@@ -97,7 +97,7 @@ export default function ExpoBrightnessScreen() {
 
       <View className="mb-6">
         <Text className="font-bold mb-2">当前设备亮度</Text>
-        <Text className="text-3xl font-semibold">{Math.round(brightness * 100)}%</Text>
+        <Text className="text-3xl font-medium">{Math.round(brightness * 100)}%</Text>
       </View>
 
       <View className="mb-6">

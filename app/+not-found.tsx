@@ -29,7 +29,7 @@ export default function NotFoundScreen() {
         <Text className="text-base text-gray-500 text-center mb-2">抱歉，您访问的页面不存在</Text>
 
         {/* 错误代码 */}
-        <View className="py-2 px-6 bg-gray-100 rounded-full mb-8">
+        <View className="py-2 px-6 bg-muted rounded-full mb-8">
           <Text className="text-gray-400 text-sm">错误代码: 404</Text>
         </View>
 

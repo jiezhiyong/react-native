@@ -189,7 +189,7 @@ export default function ExpoAudioScreen() {
 
       <View className="p-4 bg-gray-50 rounded-lg mb-4">
         <Text className="font-bold mb-2">音频源选择</Text>
-        <View className="flex-row flex-wrap gap-2">
+        <View className="flex-row flex-wrap gap-3">
           {audioSources.map((source, index) => (
             <Button
               key={index}

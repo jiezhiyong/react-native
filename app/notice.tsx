@@ -110,9 +110,7 @@ const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) =>
   return (
     <View className={`p-4 mb-3 rounded-lg ${item.isRead ? 'bg-gray-50' : 'bg-blue-50'}`} onTouchEnd={onPress}>
       <View className="flex-row items-center justify-between mb-2">
-        <Text className={`text-base font-semibold ${item.isRead ? 'text-gray-700' : 'text-blue-700'}`}>
-          {item.title}
-        </Text>
+        <Text className={`text-base font-medium ${item.isRead ? 'text-gray-700' : 'text-blue-700'}`}>{item.title}</Text>
         {!item.isRead && <View className="bg-red-500 w-2 h-2 rounded-full" />}
       </View>
       <Text className="text-secondary-foreground mb-2" numberOfLines={2}>

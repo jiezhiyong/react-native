@@ -77,7 +77,7 @@ export default function ExpoMaskedViewScreen() {
       </View>
 
       {/* 遮罩类型选择 */}
-      <View className="flex-row justify-between mb-6 gap-2">
+      <View className="flex-row justify-between mb-6 gap-3">
         <TouchableOpacity
           className={cn('flex-1 p-3 items-center rounded-lg', selectedMask === 'text' ? 'bg-primary' : 'bg-muted')}
           onPress={() => setSelectedMask('text')}

@@ -98,7 +98,7 @@ export default function LoginScreen() {
 
       <TextInput style={styles.input} placeholder="密码" secureTextEntry value={password} onChangeText={setPassword} />
 
-      <Button onPress={handleLogin} className="w-full flex-row items-center gap-2" disabled={isLoading}>
+      <Button onPress={handleLogin} className="w-full flex-row items-center gap-3" disabled={isLoading}>
         {isLoading ? <ActivityIndicator size="small" color="#fff" /> : <Text>登录</Text>}
       </Button>
 

@@ -62,9 +62,9 @@ export default function ExpoTrackingTransparencyScreen() {
         <Text className="text-secondary-foreground">请求用户允许应用跟踪其活动。主要用于 iOS 14.5 及以上版本。</Text>
       </View>
 
-      <View className="mb-6 p-4 bg-gray-100 rounded-lg">
+      <View className="mb-6 p-4 bg-muted rounded-lg">
         <Text className="text-base mb-2">当前跟踪状态</Text>
-        <Text className="text-lg font-semibold">{getStatusText(trackingStatus)}</Text>
+        <Text className="text-lg font-medium">{getStatusText(trackingStatus)}</Text>
       </View>
 
       <TouchableOpacity

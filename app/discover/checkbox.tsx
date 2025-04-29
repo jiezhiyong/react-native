@@ -31,7 +31,7 @@ export default function ExpoCheckboxScreen() {
 
       {/* 基本用法 */}
       <View className="mb-6">
-        <Text className="text-xl font-semibold text-foreground mb-2">基本用法</Text>
+        <Text className="text-xl font-medium text-foreground mb-2">基本用法</Text>
         <View className="flex-row items-center mb-4">
           <Checkbox value={isChecked} onValueChange={setIsChecked} className="mr-2 size-5" />
           <Text className="text-foreground">我接受服务条款 ({isChecked ? '已选择' : '未选择'})</Text>
@@ -40,7 +40,7 @@ export default function ExpoCheckboxScreen() {
 
       {/* 不同颜色 */}
       <View className="mb-6">
-        <Text className="text-xl font-semibold text-foreground mb-2">不同颜色</Text>
+        <Text className="text-xl font-medium text-foreground mb-2">不同颜色</Text>
 
         <View className="flex-row items-center mb-2">
           <Checkbox
@@ -65,7 +65,7 @@ export default function ExpoCheckboxScreen() {
 
       {/* 禁用状态 */}
       <View className="mb-6">
-        <Text className="text-xl font-semibold text-foreground mb-2">禁用状态</Text>
+        <Text className="text-xl font-medium text-foreground mb-2">禁用状态</Text>
 
         <View className="flex-row items-center mb-2">
           <Checkbox value={false} disabled={true} className="mr-2 size-5 opacity-50" />

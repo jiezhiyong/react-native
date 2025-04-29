@@ -63,7 +63,7 @@ export default function ExpoSpeechScreen() {
 
       {/* 语音合成 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">语音合成</Text>
+        <Text className="text-base font-medium mb-4">语音合成</Text>
         <TextInput
           className="border border-gray-300 rounded-lg p-4 mb-4"
           value={text}
@@ -89,8 +89,8 @@ export default function ExpoSpeechScreen() {
       ) : null}
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 语音合成：将文本转换为语音
           {'\n'}2. 支持中文合成

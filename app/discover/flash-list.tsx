@@ -115,7 +115,7 @@ const ListItemCard: React.FC<{ item: ListItem }> = ({ item }) => {
   return (
     <Card className="mb-2">
       <CardHeader className="px-4 py-2 pb-0">
-        <CardTitle className="text-base font-semibold">{item.title}</CardTitle>
+        <CardTitle className="text-base font-medium">{item.title}</CardTitle>
       </CardHeader>
       <CardContent className="px-4 py-2">
         <Text className="text-sm text-secondary-foreground">{item.description}</Text>

@@ -141,7 +141,7 @@ const CategoryTag = ({
 }) => {
   return (
     <TouchableOpacity
-      className={`py-1.5 px-3 mr-2 rounded-full ${isSelected ? 'bg-primary' : 'bg-gray-100'}`}
+      className={`py-1.5 px-3 mr-2 rounded-full ${isSelected ? 'bg-primary' : 'bg-muted'}`}
       onPress={onPress}
       activeOpacity={0.7}
     >
@@ -201,7 +201,7 @@ export default function QaScreen() {
 
       <View className="px-4 pt-4 pb-2">
         {/* 搜索框 */}
-        <View className="flex-row items-center bg-gray-100 rounded-full px-4 mb-4">
+        <View className="flex-row items-center bg-muted rounded-full px-4 mb-4">
           <Search size={20} color="#9ca3af" />
           <TextInput
             className="flex-1 py-2 px-3 text-base"

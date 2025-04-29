@@ -44,7 +44,7 @@ export default function ExpoStoreReviewScreen() {
 
       {/* 检查可用性 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">检查可用性</Text>
+        <Text className="text-base font-medium mb-4">检查可用性</Text>
         <TouchableOpacity
           className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
           onPress={checkAvailability}
@@ -56,7 +56,7 @@ export default function ExpoStoreReviewScreen() {
 
       {/* 请求评分 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">请求评分</Text>
+        <Text className="text-base font-medium mb-4">请求评分</Text>
         <TouchableOpacity
           className="bg-green-500 rounded-lg p-4 flex-row items-center justify-center"
           onPress={requestReview}
@@ -69,15 +69,15 @@ export default function ExpoStoreReviewScreen() {
 
       {/* 结果显示 */}
       {result ? (
-        <View className="bg-gray-100 rounded-lg p-4 mb-8">
-          <Text className="text-base font-semibold mb-2">操作结果</Text>
+        <View className="bg-muted rounded-lg p-4 mb-8">
+          <Text className="text-base font-medium mb-2">操作结果</Text>
           <Text className="text-secondary-foreground">{result}</Text>
         </View>
       ) : null}
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 支持检查评分功能是否可用
           {'\n'}2. 支持请求用户评分

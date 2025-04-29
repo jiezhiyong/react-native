@@ -78,7 +78,7 @@ function PaymentForm() {
 
       {/* 支付金额输入 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">支付金额</Text>
+        <Text className="text-base font-medium mb-4">支付金额</Text>
         <View className="flex-row items-center">
           <Text className="text-2xl mr-2">$</Text>
           <TextInput
@@ -113,8 +113,8 @@ function PaymentForm() {
       </View>
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 支持信用卡支付
           {'\n'}2. 支持 Apple Pay/Google Pay

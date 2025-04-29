@@ -85,7 +85,7 @@ export default function ExpoPrintScreen() {
         onChangeText={setHtmlContent}
       />
 
-      <View className="flex gap-2">
+      <View className="flex gap-3">
         <Button onPress={printToFile} disabled={isPrinting || !htmlContent}>
           <Text>{isPrinting ? '正在生成PDF...' : '生成PDF文件'}</Text>
         </Button>

@@ -68,7 +68,7 @@ export default function ExpoWebBrowserScreen() {
 
       {/* URL 输入 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">URL 输入</Text>
+        <Text className="text-base font-medium mb-4">URL 输入</Text>
         <TextInput
           className="border border-gray-300 rounded-lg p-4 mb-4"
           value={url}
@@ -82,7 +82,7 @@ export default function ExpoWebBrowserScreen() {
 
       {/* 打开浏览器 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">打开浏览器</Text>
+        <Text className="text-base font-medium mb-4">打开浏览器</Text>
         <TouchableOpacity
           className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center mb-4"
           onPress={openBrowser}
@@ -111,8 +111,8 @@ export default function ExpoWebBrowserScreen() {
       {/* 浏览器结果 */}
       {browserResult ? (
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">浏览器结果</Text>
-          <View className="bg-gray-100 rounded-lg p-4">
+          <Text className="text-base font-medium mb-4">浏览器结果</Text>
+          <View className="bg-muted rounded-lg p-4">
             <Text className="text-secondary-foreground">{browserResult}</Text>
           </View>
         </View>
@@ -126,8 +126,8 @@ export default function ExpoWebBrowserScreen() {
       ) : null}
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 支持打开内置浏览器
           {'\n'}2. 支持打开认证页面

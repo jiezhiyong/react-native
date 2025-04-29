@@ -35,14 +35,14 @@ export default function FeedbackScreen() {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1">
-      <SafeAreaView className="flex-1 bg-gray-100">
+      <SafeAreaView className="flex-1 bg-muted">
         <ScrollView className="flex-1">
           {/* 问题标签 */}
           <View className="p-4 bg-white">
             <Text className="text-lg">请选择问题标签</Text>
             <Text className="text-xs text-gray-400 mb-4">精准分类，处理更快</Text>
 
-            <View className="flex-row flex-wrap gap-2">
+            <View className="flex-row flex-wrap gap-3">
               {feedbackTypes.map((type) => (
                 <TypeButton
                   key={type}
@@ -62,14 +62,14 @@ export default function FeedbackScreen() {
             </View>
 
             <TextInput
-              className="bg-gray-100 p-3 rounded-md mb-3"
+              className="bg-muted p-3 rounded-md mb-3"
               placeholder="标题（最多30个字）"
               maxLength={30}
               value={title}
               onChangeText={setTitle}
             />
 
-            <View className="bg-gray-100 rounded-md mb-1 min-h-[160px]">
+            <View className="bg-muted rounded-md mb-1 min-h-[160px]">
               <TextInput
                 className="flex-1 p-3"
                 placeholder="您的建议是我们改进的动力"
@@ -90,7 +90,7 @@ export default function FeedbackScreen() {
               上传操作入口，报错提示截图、手机系统版本截图等信息，最多可上传10张，图像尺寸小于1M
             </Text>
 
-            <TouchableOpacity className="w-20 h-20 bg-gray-100 items-center justify-center rounded-md">
+            <TouchableOpacity className="w-20 h-20 bg-muted items-center justify-center rounded-md">
               <Plus size={24} color="#999" />
             </TouchableOpacity>
           </View>
@@ -116,7 +116,7 @@ interface TypeButtonProps {
 const TypeButton = ({ title, isSelected, onPress }: TypeButtonProps) => {
   return (
     <TouchableOpacity
-      className={`py-1.5 px-3 rounded-full ${isSelected ? 'bg-primary' : 'bg-gray-100'}`}
+      className={`py-1.5 px-3 rounded-full ${isSelected ? 'bg-primary' : 'bg-muted'}`}
       onPress={onPress}
     >
       <Text className={`text-sm ${isSelected ? 'text-white' : 'text-gray-700'}`}>{title}</Text>

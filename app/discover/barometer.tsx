@@ -80,7 +80,7 @@ export default function BarometerScreen() {
         {data.relativeAltitude !== null && (
           <View className="mt-4 items-center">
             <Text className="text-md font-medium text-gray-700">相对海拔 (m)</Text>
-            <Text className="text-2xl font-semibold text-blue-500 mt-1">{formattedAltitude}</Text>
+            <Text className="text-2xl font-medium text-blue-500 mt-1">{formattedAltitude}</Text>
           </View>
         )}
       </View>

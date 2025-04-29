@@ -51,7 +51,7 @@ export default function ExpoHapticsScreen() {
         </Text>
       </View>
 
-      <View className="flex-col gap-2">
+      <View className="flex-col gap-3">
         <Text className="text-lg font-bold">触觉强度</Text>
         <Button onPress={triggerLightHaptic}>
           <Text>轻度反馈</Text>
@@ -66,7 +66,7 @@ export default function ExpoHapticsScreen() {
 
       <Separator className="my-4" />
 
-      <View className="flex-col gap-2">
+      <View className="flex-col gap-3">
         <Text className="text-lg font-bold">系统通知反馈</Text>
         <Text className="text-sm text-secondary-foreground">iOS 设备会触发不同类型的系统通知反馈</Text>
         <Button className="w-full bg-green-600" onPress={triggerSuccessHaptic}>
@@ -82,7 +82,7 @@ export default function ExpoHapticsScreen() {
 
       <Separator className="my-4" />
 
-      <View className="flex-col gap-2">
+      <View className="flex-col gap-3">
         <Text className="text-lg font-bold">选择反馈</Text>
         <Text className="text-sm text-secondary-foreground">轻微的触觉反馈，适用于用户选择项目时</Text>
         <Button onPress={triggerSelectionHaptic}>

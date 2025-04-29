@@ -64,8 +64,8 @@ export default function ExpoUpdatesScreen() {
 
       {/* 当前版本信息 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">当前版本信息</Text>
-        <View className="bg-gray-100 rounded-lg p-4">
+        <Text className="text-base font-medium mb-4">当前版本信息</Text>
+        <View className="bg-muted rounded-lg p-4">
           <Text className="text-secondary-foreground">
             更新渠道: {Updates.channel}
             {'\n'}运行时版本: {Updates.runtimeVersion}
@@ -75,7 +75,7 @@ export default function ExpoUpdatesScreen() {
 
       {/* 检查更新 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">检查更新</Text>
+        <Text className="text-base font-medium mb-4">检查更新</Text>
         <TouchableOpacity
           className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
           onPress={checkForUpdate}
@@ -95,8 +95,8 @@ export default function ExpoUpdatesScreen() {
       {/* 更新信息 */}
       {updateInfo && (
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">更新信息</Text>
-          <View className="bg-gray-100 rounded-lg p-4">
+          <Text className="text-base font-medium mb-4">更新信息</Text>
+          <View className="bg-muted rounded-lg p-4">
             <Text className="text-secondary-foreground">
               有新版本: {updateInfo.isAvailable ? '是' : '否'}
               {'\n'}已下载: {updateInfo.isDownloaded ? '是' : '否'}
@@ -108,7 +108,7 @@ export default function ExpoUpdatesScreen() {
       {/* 下载更新 */}
       {updateInfo?.isAvailable && !updateInfo.isDownloaded && (
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">下载更新</Text>
+          <Text className="text-base font-medium mb-4">下载更新</Text>
           <TouchableOpacity
             className="bg-green-500 rounded-lg p-4 flex-row items-center justify-center"
             onPress={downloadUpdate}
@@ -129,7 +129,7 @@ export default function ExpoUpdatesScreen() {
       {/* 应用更新 */}
       {updateInfo?.isDownloaded && (
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">应用更新</Text>
+          <Text className="text-base font-medium mb-4">应用更新</Text>
           <TouchableOpacity
             className="bg-purple-500 rounded-lg p-4 flex-row items-center justify-center"
             onPress={applyUpdate}
@@ -155,8 +155,8 @@ export default function ExpoUpdatesScreen() {
       ) : null}
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 检查更新：检查是否有新版本可用
           {'\n'}2. 下载更新：下载新版本

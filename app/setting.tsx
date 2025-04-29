@@ -17,7 +17,7 @@ const SettingItem = ({ title, desc, icon, onPress }: SettingItemProps) => {
       className="flex-row items-center justify-between py-4 px-4 border-b border-gray-100"
       activeOpacity={0.7}
     >
-      <View className="flex-row items-center flex-1 gap-2">
+      <View className="flex-row items-center flex-1 gap-3">
         {icon}
         <Text className="text-base text-gray-800 flex-1">{title}</Text>
         {desc && <Text className="text-sm text-gray-400">{desc}</Text>}
@@ -38,7 +38,7 @@ const SettingGroup = ({ children }: SettingGroupProps) => {
 export default function SettingScreen() {
   const router = useRouter();
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
+    <SafeAreaView className="flex-1 bg-muted">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <SettingGroup>
           <SettingItem title="营业执照" />

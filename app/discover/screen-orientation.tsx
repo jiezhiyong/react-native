@@ -81,13 +81,13 @@ export default function ExpoScreenOrientationScreen() {
       </View>
 
       {/* 当前方向显示 */}
-      <View className="bg-gray-100 rounded-lg p-4 mb-6">
+      <View className="bg-muted rounded-lg p-4 mb-6">
         <Text>当前屏幕方向: {getOrientationText(currentOrientation)}</Text>
         <Text>状态: {isLocked ? '已手动锁定' : '未手动锁定'}</Text>
       </View>
 
       {/* 方向控制按钮 */}
-      <View className="flex gap-2">
+      <View className="flex gap-3">
         <Button
           onPress={currentOrientation === ScreenOrientation.Orientation.PORTRAIT_UP ? lockToLandscape : lockToPortrait}
         >

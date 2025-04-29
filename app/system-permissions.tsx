@@ -16,7 +16,7 @@ interface PermissionItemProps {
 const PermissionItem = ({ title, description, icon, status, onPress, last }: PermissionItemProps) => {
   return (
     <View className={cn('px-4 pt-3 pb-0', last && 'pb-3')}>
-      <TouchableOpacity className="flex gap-2" activeOpacity={0.7} onPress={onPress}>
+      <TouchableOpacity className="flex gap-3" activeOpacity={0.7} onPress={onPress}>
         <View className="flex-row items-center flex-1 gap-3">
           <View className="items-center justify-center">{icon}</View>
           <Text className="text-base text-gray-800 flex-1">{title}</Text>
@@ -29,7 +29,7 @@ const PermissionItem = ({ title, description, icon, status, onPress, last }: Per
           <Text className="text-xs text-gray-500">{description}</Text>
         </View>
       </TouchableOpacity>
-      {last ? null : <View className="h-px bg-gray-100 mt-3" />}
+      {last ? null : <View className="h-px bg-muted mt-3" />}
     </View>
   );
 };
@@ -40,7 +40,7 @@ export default function SystemPermissionsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
+    <SafeAreaView className="flex-1 bg-muted">
       <ScrollView className="flex-1">
         <View className="p-4">
           <Text className="text-gray-500 text-sm">

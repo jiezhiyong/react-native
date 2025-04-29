@@ -43,7 +43,7 @@ export default function ExpoStatusBarScreen() {
 
       {/* 状态栏控制 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">状态栏控制</Text>
+        <Text className="text-base font-medium mb-4">状态栏控制</Text>
         <View className="space-y-4">
           {/* 可见性控制 */}
           <TouchableOpacity className="bg-blue-500 rounded-lg p-4 flex-row items-center" onPress={toggleVisibility}>
@@ -81,15 +81,15 @@ export default function ExpoStatusBarScreen() {
 
       {/* 状态栏预览 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">状态栏预览</Text>
+        <Text className="text-base font-medium mb-4">状态栏预览</Text>
         <View className="h-12 rounded-lg overflow-hidden" style={{ backgroundColor }}>
           <StatusBar hidden={isHidden} style={style} backgroundColor={backgroundColor} translucent={translucent} />
         </View>
       </View>
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 控制状态栏的可见性
           {'\n'}2. 切换状态栏的样式（浅色/深色）

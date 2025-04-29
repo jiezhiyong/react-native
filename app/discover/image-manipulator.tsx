@@ -81,7 +81,7 @@ export default function ExpoImageManipulatorScreen() {
       </Button>
 
       <Text className="text-lg mb-2 font-medium">操作</Text>
-      <View className="flex-row flex-wrap gap-2 mb-6">
+      <View className="flex-row flex-wrap gap-3 mb-6">
         <Button onPress={rotateImage} disabled={!image} className="flex-1">
           <Text>旋转90度</Text>
         </Button>

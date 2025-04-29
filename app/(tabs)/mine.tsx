@@ -111,7 +111,7 @@ const UserHeader = () => {
   if (session) {
     return (
       <View className="flex-row items-center p-4">
-        <Image source={{ uri: avatar || '' }} className="w-12 h-12 rounded-full bg-gray-100" />
+        <Image source={{ uri: avatar || '' }} className="w-12 h-12 rounded-full bg-muted" />
         <View className="ml-4">
           <Text className="text-lg font-bold">{name}</Text>
           <Text className="text-gray-500">{mobile || '未绑定手机号'}</Text>
@@ -128,7 +128,7 @@ const UserHeader = () => {
   return (
     <View className="flex-row items-center justify-between p-4">
       <TouchableOpacity className="flex-row items-center" onPress={() => router.push('/login')}>
-        <View className="w-12 h-12 rounded-full bg-gray-100 items-center justify-center">
+        <View className="w-12 h-12 rounded-full bg-muted items-center justify-center">
           <User size={24} color="#999" strokeWidth={1.5} />
         </View>
         <Text className="ml-4 text-lg font-bold">登录/注册</Text>
@@ -240,7 +240,7 @@ export default function MinePage() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
+    <SafeAreaView className="flex-1 bg-muted">
       {/* 顶部图标栏 - 放置在导航栏上方 */}
       <View className="flex-row justify-end px-4 py-2 bg-white">
         <TouchableOpacity className="p-2" onPress={() => handleTopIconPress('scan')}>

@@ -1,11 +1,14 @@
-import { Ionicons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
 import { useState } from 'react';
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, View } from 'react-native';
+
+import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
+import { Text } from '~/components/ui/text';
 
 export default function ExpoSecureStoreScreen() {
-  const [key, setKey] = useState('');
-  const [value, setValue] = useState('');
+  const [key, setKey] = useState('password');
+  const [value, setValue] = useState('Ads@dafa#fa123456!');
   const [storedValue, setStoredValue] = useState<string | null>(null);
 
   const saveValue = async () => {
@@ -61,85 +64,47 @@ export default function ExpoSecureStoreScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <View className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">安全存储</Text>
-        <Text className="text-secondary-foreground">安全地存储和访问敏感信息和凭据。</Text>
-      </View>
-
-      <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">安全存储</Text>
         <Text className="text-secondary-foreground">使用安全存储来保存敏感信息，如令牌、密码等。</Text>
       </View>
 
       {/* 输入区域 */}
-      <View className="space-y-4 mb-6">
+      <View className="flex gap-3 mb-6">
         <View>
-          <Text className="text-base font-semibold mb-2">键</Text>
-          <TextInput
-            className="border border-gray-300 rounded-lg p-3"
-            placeholder="输入键名"
-            value={key}
-            onChangeText={setKey}
-          />
+          <Text className="text-base font-medium mb-2">键</Text>
+          <Input placeholder="输入键名" value={key} onChangeText={setKey} />
         </View>
 
         <View>
-          <Text className="text-base font-semibold mb-2">值</Text>
-          <TextInput
-            className="border border-gray-300 rounded-lg p-3"
-            placeholder="输入要保存的值"
-            value={value}
-            onChangeText={setValue}
-            secureTextEntry
-          />
+          <Text className="text-base font-medium mb-2">值</Text>
+          <Input placeholder="输入要保存的值" value={value} onChangeText={setValue} secureTextEntry />
         </View>
       </View>
 
       {/* 操作按钮 */}
-      <View className="space-y-4 mb-6">
-        <TouchableOpacity
-          className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
-          onPress={saveValue}
-        >
-          <Ionicons name="save" size={20} color="white" />
-          <Text className="text-white ml-2">保存</Text>
-        </TouchableOpacity>
+      <View className="flex gap-3 mb-6">
+        <Button onPress={saveValue}>
+          <Text>保存</Text>
+        </Button>
 
-        <TouchableOpacity
-          className="bg-green-500 rounded-lg p-4 flex-row items-center justify-center"
-          onPress={getValue}
-        >
-          <Ionicons name="search" size={20} color="white" />
-          <Text className="text-white ml-2">读取</Text>
-        </TouchableOpacity>
+        <Button onPress={getValue} variant="secondary" className="border">
+          <Text>读取</Text>
+        </Button>
 
-        <TouchableOpacity
-          className="bg-red-500 rounded-lg p-4 flex-row items-center justify-center"
-          onPress={deleteValue}
-        >
-          <Ionicons name="trash" size={20} color="white" />
-          <Text className="text-white ml-2">删除</Text>
-        </TouchableOpacity>
+        <Button onPress={deleteValue} variant="destructive">
+          <Text>删除</Text>
+        </Button>
       </View>
 
       {/* 存储的值显示 */}
       {storedValue !== null && (
-        <View className="bg-gray-100 rounded-lg p-4 mb-6">
-          <Text className="text-base font-semibold mb-2">存储的值</Text>
-          <Text className="text-lg">{storedValue}</Text>
+        <View className="bg-muted rounded-lg p-4">
+          <Text className="font-medium mb-2">存储的值</Text>
+          <Text>{storedValue}</Text>
         </View>
       )}
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 安全存储用于保存敏感信息
-          {'\n'}2. 数据会被加密存储
-          {'\n'}3. 即使应用被卸载，数据也会被保留
-          {'\n'}4. 建议用于存储令牌、密码等敏感信息
-        </Text>
-      </View>
-    </ScrollView>
+    </View>
   );
 }

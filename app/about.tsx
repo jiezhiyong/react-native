@@ -17,7 +17,7 @@ const AboutItem = ({ title, desc, onPress }: AboutItemProps) => {
       className="flex-row items-center justify-between py-4 px-4 border-b border-gray-100"
       activeOpacity={0.7}
     >
-      <View className="flex-row items-center gap-2 flex-1">
+      <View className="flex-row items-center gap-3 flex-1">
         <Text className="text-base text-gray-800 flex-1">{title}</Text>
         {desc && <Text className="text-xs text-gray-500">{desc}</Text>}
       </View>
@@ -51,10 +51,10 @@ export default function AboutScreen() {
   }, [isUpdatePending]);
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 p-4">
+    <SafeAreaView className="flex-1 bg-muted p-4">
       {/* 应用信息 */}
       <View className="items-center justify-center py-10 bg-white rounded-xl">
-        <View className="w-20 h-20 rounded-xl overflow-hidden mb-4 bg-gray-100 items-center justify-center">
+        <View className="w-20 h-20 rounded-xl overflow-hidden mb-4 bg-muted items-center justify-center">
           <Image source={require('../assets/images/icon.png')} className="flex-1" resizeMode="contain" />
         </View>
         <Text className="text-xl font-bold mb-1">{appName}</Text>

@@ -56,7 +56,7 @@ export default function ExpoClipboardScreen() {
 
       {/* 复制到剪贴板 */}
       <View className="mb-6">
-        <Text className="text-xl font-semibold mb-2">复制到剪贴板</Text>
+        <Text className="text-xl font-medium mb-2">复制到剪贴板</Text>
         <View className="mb-6">
           <Input
             className="border border-input rounded-md p-3 mb-2 text-foreground"
@@ -76,7 +76,7 @@ export default function ExpoClipboardScreen() {
 
       {/* 从剪贴板读取 */}
       <View className="mb-6">
-        <Text className="text-xl font-semibold mb-2">从剪贴板读取</Text>
+        <Text className="text-xl font-medium mb-2">从剪贴板读取</Text>
         <View className="mb-2">
           <Button onPress={getFromClipboard} className="mb-2">
             <Text>读取剪贴板内容</Text>
@@ -90,7 +90,7 @@ export default function ExpoClipboardScreen() {
 
       {/* 清空剪贴板 */}
       <View className="mb-6">
-        <Text className="text-xl font-semibold mb-2">高级操作</Text>
+        <Text className="text-xl font-medium mb-2">高级操作</Text>
         <Button variant="destructive" onPress={clearClipboard}>
           <Text className="text-destructive-foreground">清空剪贴板</Text>
         </Button>

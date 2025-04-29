@@ -98,7 +98,7 @@ export default function AppleAuthenticationScreen() {
         <Text className="text-secondary-foreground">集成 Apple 的身份验证服务，为用户提供安全便捷的登录方式。</Text>
       </View>
 
-      <View className="mb-6 bg-muted dark:bg-gray-800 rounded-lg p-4 flex-col gap-2">
+      <View className="mb-6 bg-muted dark:bg-gray-800 rounded-lg p-4 flex-col gap-3">
         <Text className="text-gray-700 dark:text-gray-300">
           Apple 身份验证状态: {isAppleAuthAvailable === null ? '检查中...' : isAppleAuthAvailable ? '可用' : '不可用'}
         </Text>
@@ -127,7 +127,7 @@ export default function AppleAuthenticationScreen() {
       {/* 用户信息显示 */}
       {userInfo && (
         <View className="bg-green-50 border border-green-300 dark:bg-green-800 rounded-lg p-4">
-          <Text className="text-lg font-semibold mb-2">用户信息</Text>
+          <Text className="text-lg font-medium mb-2">用户信息</Text>
           <Text>ID: {userInfo.user}</Text>
           {userInfo.email && <Text>邮箱: {userInfo.email}</Text>}
           {userInfo.fullName && (

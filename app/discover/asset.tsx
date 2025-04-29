@@ -45,7 +45,7 @@ export default function ExpoAssetScreen() {
 
   // 渲染资源信息项
   const renderAssetInfo = (asset: Asset, index: number) => (
-    <View key={index} className="mb-4 p-4 bg-gray-50 rounded-lg flex-col gap-2 text-secondary-foreground">
+    <View key={index} className="mb-4 p-4 bg-gray-50 rounded-lg flex-col gap-3 text-secondary-foreground">
       <Text>资源 #{index + 1}</Text>
       <Text>{asset.uri}</Text>
       {asset.localUri && (

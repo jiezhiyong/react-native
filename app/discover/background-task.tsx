@@ -145,18 +145,18 @@ export default function ExpoBackgroundTaskScreen() {
   return (
     <View className="flex-1 p-6">
       {/* 状态信息 */}
-      <View className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200 gap-2">
+      <View className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200 gap-3">
         <Text className="text-lg font-bold">当前状态</Text>
-        <View className="flex-row gap-2">
-          <Text className="font-semibold w-[90px]">任务名称:</Text>
+        <View className="flex-row gap-3">
+          <Text className="font-medium w-[90px]">任务名称:</Text>
           <Text className="flex-1">{taskStatus.taskName}</Text>
         </View>
-        <View className="flex-row gap-2">
-          <Text className="font-semibold w-[90px]">是否已注册:</Text>
+        <View className="flex-row gap-3">
+          <Text className="font-medium w-[90px]">是否已注册:</Text>
           <Text className="flex-1">{taskStatus.isRegistered ? '已注册' : '未注册'}</Text>
         </View>
-        <View className="flex-row gap-2">
-          <Text className="font-semibold w-[90px]">最后检查时间:</Text>
+        <View className="flex-row gap-3">
+          <Text className="font-medium w-[90px]">最后检查时间:</Text>
           <Text className="flex-1">{lastUpdateTime.toLocaleString()}</Text>
         </View>
       </View>

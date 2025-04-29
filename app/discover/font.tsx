@@ -15,7 +15,7 @@ const FontSample: React.FC<{ name: string }> = ({ name }) => {
     <Card className="mb-4 border-border">
       <CardHeader className="px-4 py-2">
         <CardTitle className="text-base flex-row items-center">
-          <Text className="font-semibold">{name}</Text>
+          <Text className="font-medium">{name}</Text>
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4 py-2">

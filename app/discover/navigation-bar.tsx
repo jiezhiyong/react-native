@@ -119,7 +119,7 @@ export default function ExpoNavigationBarScreen() {
       {/* 行为模式控制 */}
       <View className="mb-8">
         <Text className="text-base font-medium mb-2">行为模式</Text>
-        <View className="flex-row justify-between gap-2">
+        <View className="flex-row justify-between gap-3">
           {(['overlay-swipe', 'inset-swipe', 'inset-touch'] as const).map((mode) => (
             <Button
               className="flex-1"
@@ -136,7 +136,7 @@ export default function ExpoNavigationBarScreen() {
       {/* 位置控制 */}
       <View className="mb-8">
         <Text className="text-base font-medium mb-2">位置</Text>
-        <View className="flex-row justify-between gap-2">
+        <View className="flex-row justify-between gap-3">
           {(['relative', 'absolute'] as const).map((pos) => (
             <Button
               key={pos}

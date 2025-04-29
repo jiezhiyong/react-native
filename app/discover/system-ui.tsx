@@ -46,7 +46,7 @@ export default function ExpoSystemUIScreen() {
 
         {/* 状态栏样式 */}
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">状态栏样式</Text>
+          <Text className="text-base font-medium mb-4">状态栏样式</Text>
           <TouchableOpacity
             className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
             onPress={toggleStatusBarStyle}
@@ -58,7 +58,7 @@ export default function ExpoSystemUIScreen() {
 
         {/* 状态栏可见性 */}
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">状态栏可见性</Text>
+          <Text className="text-base font-medium mb-4">状态栏可见性</Text>
           <TouchableOpacity
             className="bg-green-500 rounded-lg p-4 flex-row items-center justify-center"
             onPress={toggleStatusBarVisibility}
@@ -70,7 +70,7 @@ export default function ExpoSystemUIScreen() {
 
         {/* 背景颜色 */}
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">背景颜色</Text>
+          <Text className="text-base font-medium mb-4">背景颜色</Text>
           <TouchableOpacity
             className="bg-purple-500 rounded-lg p-4 flex-row items-center justify-center"
             onPress={changeBackgroundColor}
@@ -82,7 +82,7 @@ export default function ExpoSystemUIScreen() {
 
         {/* 系统信息 */}
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">系统信息</Text>
+          <Text className="text-base font-medium mb-4">系统信息</Text>
           <View className="bg-white rounded-lg p-4">
             <Text className="text-secondary-foreground mb-2">系统主题: {colorScheme}</Text>
             <Text className="text-secondary-foreground mb-2">平台: {Platform.OS}</Text>
@@ -91,8 +91,8 @@ export default function ExpoSystemUIScreen() {
         </View>
 
         {/* 说明区域 */}
-        <View className="bg-gray-100 rounded-lg p-4">
-          <Text className="text-base font-semibold mb-2">使用说明</Text>
+        <View className="bg-muted rounded-lg p-4">
+          <Text className="text-base font-medium mb-2">使用说明</Text>
           <Text className="text-secondary-foreground">
             1. 支持状态栏样式控制
             {'\n'}2. 支持状态栏可见性控制

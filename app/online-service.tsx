@@ -151,7 +151,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
 
   if (isSystem) {
     return (
-      <View className="my-2 px-4 py-2 rounded-lg self-center bg-gray-100">
+      <View className="my-2 px-4 py-2 rounded-lg self-center bg-muted">
         <Text className="text-xs text-gray-500">{message.content}</Text>
       </View>
     );
@@ -161,7 +161,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
     <View className={`flex-row max-w-[85%] my-2 ${isUser ? 'self-end' : 'self-start'}`}>
       {!isUser && <Image source={{ uri: agentAvatar }} className="w-8 h-8 rounded-full mr-2" />}
 
-      <View className={`p-3 rounded-lg ${isUser ? 'bg-primary rounded-tr-none' : 'bg-gray-100 rounded-tl-none'}`}>
+      <View className={`p-3 rounded-lg ${isUser ? 'bg-primary rounded-tr-none' : 'bg-muted rounded-tl-none'}`}>
         {message.type === 'text' && <Text className={isUser ? 'text-white' : 'text-gray-800'}>{message.content}</Text>}
 
         {message.type === 'image' && message.mediaUrl && (
@@ -304,28 +304,28 @@ const MediaPicker = ({
 
           <View className="flex-row justify-around mb-8">
             <TouchableOpacity className="items-center" onPress={handleTakePhoto}>
-              <View className="w-14 h-14 rounded-full bg-gray-100 items-center justify-center mb-2">
+              <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
                 <Camera size={28} color="#3B82F6" />
               </View>
               <Text className="text-sm text-gray-700">拍照</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickImage}>
-              <View className="w-14 h-14 rounded-full bg-gray-100 items-center justify-center mb-2">
+              <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
                 <ImageIcon size={28} color="#3B82F6" />
               </View>
               <Text className="text-sm text-gray-700">图片</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickVideo}>
-              <View className="w-14 h-14 rounded-full bg-gray-100 items-center justify-center mb-2">
+              <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
                 <Mic size={28} color="#3B82F6" />
               </View>
               <Text className="text-sm text-gray-700">视频</Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity className="bg-gray-100 rounded-lg py-3 items-center" onPress={onClose}>
+          <TouchableOpacity className="bg-muted rounded-lg py-3 items-center" onPress={onClose}>
             <Text className="text-gray-700 font-medium">取消</Text>
           </TouchableOpacity>
         </View>
@@ -478,7 +478,7 @@ export default function OnlineServiceScreen() {
 
         {/* 常见问题快捷入口 */}
         <View className="px-4 py-2">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row items-center gap-2">
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row items-center gap-3">
             <Text className="text-sm text-gray-500">常见问题：</Text>
             {quickQuestions.map((q) => (
               <QuickQuestionButton key={q.id} question={q} onPress={() => handleQuickQuestionPress(q.question)} />
@@ -492,7 +492,7 @@ export default function OnlineServiceScreen() {
             <Plus size={24} color="#3B82F6" />
           </TouchableOpacity>
 
-          <View className="flex-1 flex-row items-center bg-gray-100 rounded-full px-4">
+          <View className="flex-1 flex-row items-center bg-muted rounded-full px-4">
             <TextInput
               className="flex-1 py-2 text-base"
               placeholder="请输入消息..."

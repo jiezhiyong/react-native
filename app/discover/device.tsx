@@ -141,7 +141,7 @@ export default function ExpoDeviceScreen() {
 
       {/* 基本设备信息 */}
       <Card className="p-4 mb-4">
-        <Text className="text-lg font-semibold mb-4">基本设备信息</Text>
+        <Text className="text-lg font-medium mb-4">基本设备信息</Text>
         <InfoItem label="是否为真实设备" value={deviceInfo.isDevice ? '是' : '否'} />
         <InfoItem label="品牌" value={deviceInfo.brand} />
         <InfoItem label="制造商" value={deviceInfo.manufacturer} />
@@ -154,7 +154,7 @@ export default function ExpoDeviceScreen() {
 
       {/* 系统信息 */}
       <Card className="p-4 mb-4">
-        <Text className="text-lg font-semibold mb-4">系统信息</Text>
+        <Text className="text-lg font-medium mb-4">系统信息</Text>
         <InfoItem label="操作系统" value={deviceInfo.osName} />
         <InfoItem label="操作系统版本" value={deviceInfo.osVersion} />
         <InfoItem label="构建ID" value={deviceInfo.osBuildId} />
@@ -164,7 +164,7 @@ export default function ExpoDeviceScreen() {
 
       {/* 硬件信息 */}
       <Card className="p-4 mb-4">
-        <Text className="text-lg font-semibold mb-4">硬件信息</Text>
+        <Text className="text-lg font-medium mb-4">硬件信息</Text>
         <InfoItem label="总内存" value={deviceInfo.totalMemory} />
         <InfoItem label="支持的CPU架构" value={deviceInfo.supportedCpuArchitectures?.join(', ') || null} />
         <InfoItem label="设计名称" value={deviceInfo.designName} />
@@ -173,7 +173,7 @@ export default function ExpoDeviceScreen() {
 
       {/* 平台功能 */}
       <Card className="p-4 mb-4">
-        <Text className="text-lg font-semibold mb-2">平台功能</Text>
+        <Text className="text-lg font-medium mb-2">平台功能</Text>
         <Text className="text-secondary-foreground mb-2">
           {deviceInfo.platformFeatures && deviceInfo.platformFeatures.length > 0
             ? '支持的平台功能列表:'

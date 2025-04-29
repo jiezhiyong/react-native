@@ -60,7 +60,7 @@ export default function ExpoNetworkScreen() {
         <Text>飞行模式: {String(networkInfo.isAirplaneMode || '未知')}</Text>
       </View>
 
-      <View className="flex-row gap-2">
+      <View className="flex-row gap-3">
         <Button onPress={getIpAddress} className="flex-1">
           <Text>获取IP地址</Text>
         </Button>

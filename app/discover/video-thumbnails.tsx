@@ -62,7 +62,7 @@ export default function ExpoVideoThumbnailsScreen() {
 
       {/* 视频选择 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">视频选择</Text>
+        <Text className="text-base font-medium mb-4">视频选择</Text>
         <TouchableOpacity
           className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
           onPress={pickVideo}
@@ -80,7 +80,7 @@ export default function ExpoVideoThumbnailsScreen() {
       {/* 生成缩略图 */}
       {videoUri && (
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">生成缩略图</Text>
+          <Text className="text-base font-medium mb-4">生成缩略图</Text>
           <TouchableOpacity
             className="bg-green-500 rounded-lg p-4 flex-row items-center justify-center"
             onPress={generateThumbnail}
@@ -94,7 +94,7 @@ export default function ExpoVideoThumbnailsScreen() {
       {/* 缩略图预览 */}
       {thumbnailUri ? (
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">缩略图预览</Text>
+          <Text className="text-base font-medium mb-4">缩略图预览</Text>
           <Image source={{ uri: thumbnailUri }} style={{ width: '100%', height: 200 }} resizeMode="cover" />
         </View>
       ) : null}
@@ -107,8 +107,8 @@ export default function ExpoVideoThumbnailsScreen() {
       ) : null}
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 支持从相册选择视频
           {'\n'}2. 支持生成视频缩略图

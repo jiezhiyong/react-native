@@ -191,7 +191,7 @@ export default function ExpoCalendarScreen() {
     <ScrollView className="flex-1 p-6">
       {/* 日历列表 */}
       <View className="flex-row justify-between items-center mb-2">
-        <Text className="text-lg font-semibold">日历列表</Text>
+        <Text className="text-lg font-medium">日历列表</Text>
         <Button size="sm" onPress={createCalendar}>
           <Text>创建日历</Text>
         </Button>
@@ -205,7 +205,7 @@ export default function ExpoCalendarScreen() {
         calendars.map((calendar) => (
           <TouchableOpacity key={calendar.id} onPress={() => selectCalendar(calendar)}>
             <View
-              className={cn('p-3 mb-2 rounded-lg border border-gray-200 flex-row items-center gap-2', {
+              className={cn('p-3 mb-2 rounded-lg border border-gray-200 flex-row items-center gap-3', {
                 'bg-blue-50 border-blue-300': selectedCalendar?.id === calendar.id,
                 'bg-white border-gray-200': selectedCalendar?.id !== calendar.id,
               })}
@@ -223,7 +223,7 @@ export default function ExpoCalendarScreen() {
       )}
 
       <View className="flex-row justify-between items-center mb-2 mt-6">
-        <Text className="text-lg font-semibold">事件列表</Text>
+        <Text className="text-lg font-medium">事件列表</Text>
         <Button onPress={createEvent} size="sm" disabled={!selectedCalendar}>
           <Text>创建事件</Text>
         </Button>

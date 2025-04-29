@@ -133,7 +133,7 @@ export default function AccelerometerScreen() {
       </View>
 
       {/* 状态信息 */}
-      <View className="mb-6 p-4 bg-muted dark:bg-gray-800 rounded-lg flex-col gap-2">
+      <View className="mb-6 p-4 bg-muted dark:bg-gray-800 rounded-lg flex-col gap-3">
         <Text className="text-gray-700 dark:text-gray-300">
           是否支持加速度计:&nbsp;
           {subscription.isAvailable === null ? '检查中 ...' : String(subscription.isAvailable)}
@@ -146,17 +146,17 @@ export default function AccelerometerScreen() {
       <View className="mb-6">
         <View className="flex-row justify-between items-center mb-2 p-3 bg-blue-50 dark:bg-blue-900 rounded-lg">
           <Text>X轴</Text>
-          <Text className="text-lg font-semibold text-blue-600 dark:text-blue-400">{formatData(data.x)}</Text>
+          <Text className="text-lg font-medium text-blue-600 dark:text-blue-400">{formatData(data.x)}</Text>
         </View>
 
         <View className="flex-row justify-between items-center mb-2 p-3 bg-green-50 dark:bg-green-900 rounded-lg">
           <Text>Y轴</Text>
-          <Text className="text-lg font-semibold text-green-600 dark:text-green-400">{formatData(data.y)}</Text>
+          <Text className="text-lg font-medium text-green-600 dark:text-green-400">{formatData(data.y)}</Text>
         </View>
 
         <View className="flex-row justify-between items-center mb-2 p-3 bg-red-50 dark:bg-red-900 rounded-lg">
           <Text>Z轴</Text>
-          <Text className="text-lg font-semibold text-red-600 dark:text-red-400">{formatData(data.z)}</Text>
+          <Text className="text-lg font-medium text-red-600 dark:text-red-400">{formatData(data.z)}</Text>
         </View>
       </View>
 

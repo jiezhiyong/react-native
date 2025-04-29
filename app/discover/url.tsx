@@ -61,7 +61,7 @@ export default function ExpoUrlScreen() {
 
       {/* URL 输入 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">URL 输入</Text>
+        <Text className="text-base font-medium mb-4">URL 输入</Text>
         <TextInput
           className="border border-gray-300 rounded-lg p-4 mb-4"
           value={url}
@@ -76,7 +76,7 @@ export default function ExpoUrlScreen() {
 
       {/* 打开 URL */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">打开 URL</Text>
+        <Text className="text-base font-medium mb-4">打开 URL</Text>
         <View className="flex-row space-x-4">
           <TouchableOpacity
             className="flex-1 bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
@@ -100,8 +100,8 @@ export default function ExpoUrlScreen() {
       {/* 最近打开的 URL */}
       {lastOpenedUrl ? (
         <View className="mb-8">
-          <Text className="text-base font-semibold mb-4">最近打开的 URL</Text>
-          <View className="bg-gray-100 rounded-lg p-4">
+          <Text className="text-base font-medium mb-4">最近打开的 URL</Text>
+          <View className="bg-muted rounded-lg p-4">
             <Text className="text-secondary-foreground">{lastOpenedUrl}</Text>
           </View>
         </View>
@@ -115,8 +115,8 @@ export default function ExpoUrlScreen() {
       ) : null}
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 支持检查 URL 是否可以打开
           {'\n'}2. 支持在浏览器中打开 URL

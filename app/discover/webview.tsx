@@ -122,7 +122,7 @@ export default function ExpoWebViewScreen() {
       ) : null}
 
       {/* 当前 URL 显示 */}
-      <View className="absolute bottom-0 left-0 right-0 bg-gray-100 p-2">
+      <View className="absolute bottom-0 left-0 right-0 bg-muted p-2">
         <Text className="text-secondary-foreground text-xs" numberOfLines={1}>
           {currentUrl}
         </Text>

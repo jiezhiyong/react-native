@@ -81,7 +81,7 @@ export default function ReanimatedScreen() {
 
       <View className="space-y-8">
         {/* 基本动画 */}
-        <View className="flex gap-2 mb-6">
+        <View className="flex gap-3 mb-6">
           <Text className="text-lg font-medium">基本动画</Text>
           <Animated.View className="w-20 h-20 bg-blue-500 rounded-lg" style={animatedStyle} />
           <Button onPress={isAnimating ? stopBasicAnimation : startBasicAnimation}>
@@ -90,7 +90,7 @@ export default function ReanimatedScreen() {
         </View>
 
         {/* 手势动画 */}
-        <View className="flex gap-2">
+        <View className="flex gap-3">
           <Text className="text-lg font-medium">手势动画</Text>
           <Text className="text-secondary-foreground">尝试拖动方块，松开后会回到原位</Text>
           <GestureDetector gesture={gesture}>

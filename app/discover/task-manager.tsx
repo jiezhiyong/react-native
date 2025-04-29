@@ -111,8 +111,8 @@ export default function ExpoTaskManagerScreen() {
 
       {/* 任务管理器状态 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">任务状态</Text>
-        <View className="bg-gray-100 rounded-lg p-4">
+        <Text className="text-base font-medium mb-4">任务状态</Text>
+        <View className="bg-muted rounded-lg p-4">
           <Text className="text-secondary-foreground mb-2">任务管理器可用: {isTaskAvailable ? '是' : '否'}</Text>
           <Text className="text-secondary-foreground mb-2">位置任务已注册: {isTaskRegistered ? '是' : '否'}</Text>
           <Text className="text-secondary-foreground mb-2">位置权限: {locationPermission || '未请求'}</Text>
@@ -121,7 +121,7 @@ export default function ExpoTaskManagerScreen() {
 
       {/* 任务控制 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">任务控制</Text>
+        <Text className="text-base font-medium mb-4">任务控制</Text>
         <View className="space-y-4">
           <TouchableOpacity
             className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
@@ -151,8 +151,8 @@ export default function ExpoTaskManagerScreen() {
       ) : null}
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 点击"启动位置更新"按钮请求位置权限
           {'\n'}2. 需要同时授予前台和后台位置权限

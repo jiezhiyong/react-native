@@ -33,7 +33,7 @@ export default function ExpoVideoScreen() {
 
       {/* 视频播放器 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">视频播放</Text>
+        <Text className="text-base font-medium mb-4">视频播放</Text>
         <View style={styles.videoContainer}>
           <VideoView
             style={styles.video}
@@ -81,8 +81,8 @@ export default function ExpoVideoScreen() {
       ) : null}
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 支持视频播放和暂停
           {'\n'}2. 支持全屏播放

@@ -66,7 +66,7 @@ export default function ExpoSegmentedControlScreen() {
 
       {/* 基本分段控制器 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">基本分段控制器</Text>
+        <Text className="text-base font-medium mb-4">基本分段控制器</Text>
         <View className="flex-row border border-gray-200 rounded-lg overflow-hidden">
           {segments.map((segment, index) => (
             <TouchableOpacity
@@ -85,7 +85,7 @@ export default function ExpoSegmentedControlScreen() {
 
       {/* 自定义颜色分段控制器 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">自定义颜色</Text>
+        <Text className="text-base font-medium mb-4">自定义颜色</Text>
         <View className="flex-row border border-gray-200 rounded-lg overflow-hidden">
           {colors.map((color) => (
             <TouchableOpacity
@@ -104,7 +104,7 @@ export default function ExpoSegmentedControlScreen() {
 
       {/* 带图标的分段控制器 */}
       <View>
-        <Text className="text-base font-semibold mb-4">带图标的分段控制器</Text>
+        <Text className="text-base font-medium mb-4">带图标的分段控制器</Text>
         <View className="flex-row border border-gray-200 rounded-lg overflow-hidden">
           {['home', 'heart', 'settings'].map((icon, index) => (
             <TouchableOpacity

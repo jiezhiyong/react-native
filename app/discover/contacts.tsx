@@ -81,7 +81,7 @@ export default function ExpoContactsScreen() {
 
   // 渲染单个联系人
   const renderContactItem = ({ item }: { item: ContactItem }) => (
-    <Card className="mb-2 p-3 bg-card flex-row items-center gap-2">
+    <Card className="mb-2 p-3 bg-card flex-row items-center gap-3">
       <Text className="font-medium text-green-700">{item.name}</Text>
       {item.phoneNumbers && item.phoneNumbers.length > 0 ? (
         item.phoneNumbers.map((phone, index) => (

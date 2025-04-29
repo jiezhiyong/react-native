@@ -21,7 +21,7 @@ export default function ExpoSliderScreen() {
 
       {/* 基本滑块 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">基本滑块</Text>
+        <Text className="text-base font-medium mb-4">基本滑块</Text>
         <View className="bg-white rounded-lg p-4 shadow-sm">
           <Text className="text-secondary-foreground mb-2">当前值: {basicValue.toFixed(1)}</Text>
           <Slider
@@ -39,7 +39,7 @@ export default function ExpoSliderScreen() {
 
       {/* 带步长的滑块 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">带步长的滑块</Text>
+        <Text className="text-base font-medium mb-4">带步长的滑块</Text>
         <View className="bg-white rounded-lg p-4 shadow-sm">
           <Text className="text-secondary-foreground mb-2">当前值: {stepValue}</Text>
           <Slider
@@ -58,7 +58,7 @@ export default function ExpoSliderScreen() {
 
       {/* 自定义样式滑块 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">自定义样式滑块</Text>
+        <Text className="text-base font-medium mb-4">自定义样式滑块</Text>
         <View className="bg-white rounded-lg p-4 shadow-sm">
           <Text className="text-secondary-foreground mb-2">当前值: {customValue.toFixed(1)}</Text>
           <Slider
@@ -80,8 +80,8 @@ export default function ExpoSliderScreen() {
       </View>
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 支持基本滑块功能
           {'\n'}2. 支持设置步长

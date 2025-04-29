@@ -75,7 +75,7 @@ export default function ExpoIntentLauncherScreen() {
         <Text className="text-lg mb-2 font-medium">Android 系统设置</Text>
         <Text className="text-sm mb-2">IntentLauncher 允许你在 Android 上打开系统设置页面</Text>
 
-        <View className="flex-col gap-2">
+        <View className="flex-col gap-3">
           {SETTINGS_PAGES.map((setting, index) => (
             <Button key={index} onPress={() => openSettings(setting)} disabled={!isAndroid}>
               <Text>{setting.label}</Text>

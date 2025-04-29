@@ -65,7 +65,7 @@ const PrivacyGroup = ({ children }: { children: React.ReactNode }) => {
 export default function PrivacySettingScreen() {
   const router = useRouter();
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
+    <SafeAreaView className="flex-1 bg-muted">
       <ScrollView className="flex-1 p-4">
         {/* 个性化推荐组 */}
         <PrivacyGroup>
@@ -75,7 +75,7 @@ export default function PrivacySettingScreen() {
             hasSwitch
             defaultValue={true}
           />
-          <View className="h-px bg-gray-100 mx-4" />
+          <View className="h-px bg-muted mx-4" />
 
           <PrivacyItem
             title="个性化广告推荐"
@@ -98,7 +98,7 @@ export default function PrivacySettingScreen() {
         {/* 隐私协议组 */}
         <PrivacyGroup>
           <PrivacyItem title="隐私协议授权" description="授权后可享受会员相关服务" hasSwitch defaultValue={true} />
-          <View className="h-px bg-gray-100 mx-4" />
+          <View className="h-px bg-muted mx-4" />
 
           <PrivacyItem title="隐私政策条款" hasChevron onPress={() => router.push('/privacy-policy')} />
         </PrivacyGroup>

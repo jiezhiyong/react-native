@@ -62,7 +62,7 @@ export default function ExpoSharingScreen() {
 
       {/* 分享文本 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">分享文本</Text>
+        <Text className="text-base font-medium mb-4">分享文本</Text>
         <TextInput
           className="border border-gray-300 rounded-lg p-3 mb-4"
           placeholder="输入要分享的文本"
@@ -80,7 +80,7 @@ export default function ExpoSharingScreen() {
 
       {/* 分享图片 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">分享图片</Text>
+        <Text className="text-base font-medium mb-4">分享图片</Text>
         <Image source={{ uri: 'https://picsum.photos/200/300' }} className="w-full h-48 rounded-lg mb-4" />
         <TouchableOpacity
           className="bg-green-500 rounded-lg p-4 flex-row items-center justify-center"
@@ -93,7 +93,7 @@ export default function ExpoSharingScreen() {
 
       {/* 分享文件 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">分享文件</Text>
+        <Text className="text-base font-medium mb-4">分享文件</Text>
         <TouchableOpacity
           className="bg-purple-500 rounded-lg p-4 flex-row items-center justify-center"
           onPress={shareFile}
@@ -105,15 +105,15 @@ export default function ExpoSharingScreen() {
 
       {/* 分享结果 */}
       {shareResult ? (
-        <View className="bg-gray-100 rounded-lg p-4 mb-8">
-          <Text className="text-base font-semibold mb-2">分享结果</Text>
+        <View className="bg-muted rounded-lg p-4 mb-8">
+          <Text className="text-base font-medium mb-2">分享结果</Text>
           <Text className="text-secondary-foreground">{shareResult}</Text>
         </View>
       ) : null}
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 支持文本分享
           {'\n'}2. 支持图片分享

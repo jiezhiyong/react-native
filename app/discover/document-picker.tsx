@@ -148,7 +148,7 @@ export default function ExpoDocumentPickerScreen() {
 
       {/* 单文件选择结果 */}
       {singleDocument && !singleDocument.canceled && singleDocument.assets && singleDocument.assets.length > 0 && (
-        <Card className="p-4 mt-4 flex-col gap-2">
+        <Card className="p-4 mt-4 flex-col gap-3">
           <Text className="font-medium">单文件选择结果</Text>
           <View className="bg-card-foreground/5 p-4 rounded-md">
             <Text className="text-sm">文件名: {singleDocument.assets[0].name}</Text>
@@ -163,7 +163,7 @@ export default function ExpoDocumentPickerScreen() {
         !multipleDocuments.canceled &&
         multipleDocuments.assets &&
         multipleDocuments.assets.length > 0 && (
-          <Card className="p-4 mt-4 flex-col gap-2">
+          <Card className="p-4 mt-4 flex-col gap-3">
             <Text className="font-medium">多文件选择结果 ({multipleDocuments.assets.length} 个文件)</Text>
             {multipleDocuments.assets.map((doc, index) => (
               <View key={index} className="bg-card-foreground/5 p-4 rounded-md flex-col gap-1">

@@ -82,7 +82,7 @@ export default function CaptureRefScreen() {
         <View className="items-center mb-4 rounded-lg overflow-hidden">
           <Image source={require('~/assets/images/icon.png')} style={{ width: 300, height: 200 }} contentFit="cover" />
         </View>
-        <Text className="text-lg font-semibold mb-2">使用 captureRef 捕获视图</Text>
+        <Text className="text-lg font-medium mb-2">使用 captureRef 捕获视图</Text>
         <Text className="text-secondary-foreground">
           这个整个卡片会被截图，包括所有的内容。您可以捕获任何React Native视图， 包括地图、图表、复杂UI等。
         </Text>
@@ -95,7 +95,7 @@ export default function CaptureRefScreen() {
       {/* 显示截图结果 */}
       {capturedImage && (
         <View className="mt-6">
-          <Text className="text-lg font-semibold mb-2 dark:text-white">截图结果</Text>
+          <Text className="text-lg font-medium mb-2 dark:text-white">截图结果</Text>
           <Image source={{ uri: capturedImage }} style={{ width: '100%', aspectRatio: 1 }} contentFit="contain" />
         </View>
       )}

@@ -11,7 +11,7 @@ export default function ExpoBlurScreen() {
         <Text className="text-secondary-foreground">使用模糊效果为界面元素添加深度和层次感。</Text>
       </View>
 
-      <Text className="text-lg font-semibold mb-3">不同模糊强度效果对比 - Light</Text>
+      <Text className="text-lg font-medium mb-3">不同模糊强度效果对比 - Light</Text>
 
       <View className="flex-row justify-between mb-6">
         {[10, 40, 70, 100].map((level) => (
@@ -30,7 +30,7 @@ export default function ExpoBlurScreen() {
         ))}
       </View>
 
-      <Text className="text-lg font-semibold mb-3">不同模糊强度效果对比 - Dark</Text>
+      <Text className="text-lg font-medium mb-3">不同模糊强度效果对比 - Dark</Text>
 
       <View className="flex-row justify-between mb-4">
         {[10, 40, 70, 100].map((level) => (

@@ -28,7 +28,7 @@ export default function HelpScreen() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 gap-4 pt-8">
+    <SafeAreaView className="flex-1 bg-muted gap-4 pt-8">
       <View className="px-4">
         <Text className="text-2xl text-gray-500">您好 👋</Text>
         <Text className="text-3xl font-bold mt-1">我们能提供什么帮助?</Text>

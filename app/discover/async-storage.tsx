@@ -159,7 +159,7 @@ export default function AsyncStorageScreen() {
       {/* 自定义键值对 */}
       <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">
         <Text className="text-lg font-bold mb-3">添加键值对</Text>
-        <View className="flex-row mb-3 gap-2">
+        <View className="flex-row mb-3 gap-3">
           <Input className="flex-1" value={inputKey} onChangeText={setInputKey} placeholder="键名" />
           <Input className="flex-[2]" value={inputValue} onChangeText={setInputValue} placeholder="值" />
         </View>
@@ -189,7 +189,7 @@ export default function AsyncStorageScreen() {
             allItems.map(([key, value], index) => (
               <View key={index} className="flex-row border-b border-gray-100 py-2 items-center">
                 <View className="flex-1">
-                  <Text className="font-semibold">{key}</Text>
+                  <Text className="font-medium">{key}</Text>
                   <Text className="text-secondary-foreground text-sm" numberOfLines={2}>
                     {value || '(空)'}
                   </Text>
@@ -206,7 +206,7 @@ export default function AsyncStorageScreen() {
 
         {allItems.length > 0 && (
           <Button variant="destructive" onPress={handleClearAll}>
-            <Text className="text-white font-semibold">清除所有数据</Text>
+            <Text className="text-white font-medium">清除所有数据</Text>
           </Button>
         )}
       </View>

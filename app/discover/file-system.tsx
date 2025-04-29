@@ -63,7 +63,7 @@ export default function FileSystemScreen() {
 //   return (
 //     <>
 //       {/* 操作按钮 */}
-//       <View className="flex-row flex-wrap gap-2 mb-4">
+//       <View className="flex-row flex-wrap gap-3 mb-4">
 //         <Button onPress={createReadWriteFile}>
 //           <Text>创建、写入和读取文件</Text>
 //         </Button>

@@ -55,7 +55,7 @@ export default function ExpoScreenCaptureScreen() {
       </View>
 
       {/* 屏幕截图保护状态和控制 */}
-      <View className="p-4 bg-muted rounded-lg mb-6 flex gap-2">
+      <View className="p-4 bg-muted rounded-lg mb-6 flex gap-3">
         <Text className="text-lg font-medium">屏幕截图保护状态: {isProtectionEnabled ? '已启用' : '已禁用'}</Text>
         <Text>可用状态: {isAvailable ? '可用' : '不可用'}</Text>
         <Text>权限状态: {status?.granted ? '已授予' : '未授予'}</Text>
@@ -66,7 +66,7 @@ export default function ExpoScreenCaptureScreen() {
       </Button>
 
       {/* 屏幕截图监听器信息 */}
-      <View className="p-4 bg-muted rounded-lg flex gap-2">
+      <View className="p-4 bg-muted rounded-lg flex gap-3">
         <Text className="text-lg font-medium">屏幕截图监听器</Text>
         <Text>截图次数: {screenshotCount}</Text>
         <Text className="mt-1">上次截图时间: {lastScreenshotTime || '?'}</Text>

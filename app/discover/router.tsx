@@ -15,7 +15,7 @@ export default function RouteScreen() {
         <Text className="text-secondary-foreground">展示路由的基本用法，包括导航、参数传递等。</Text>
       </View>
 
-      <View className="flex gap-2">
+      <View className="flex gap-3">
         <Button
           onPress={() =>
             // eg:

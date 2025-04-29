@@ -75,7 +75,7 @@ export default function ExpoViewPagerScreen() {
 
       {/* 说明区域 */}
       <View className="p-6">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 支持左右滑动切换页面
           {'\n'}2. 支持自定义页面指示器

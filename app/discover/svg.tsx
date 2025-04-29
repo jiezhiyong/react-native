@@ -57,8 +57,8 @@ export default function ExpoSvgScreen() {
 
       {/* SVG 画布 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">SVG 示例</Text>
-        <View className="bg-gray-100 rounded-lg p-4 items-center">
+        <Text className="text-base font-medium mb-4">SVG 示例</Text>
+        <View className="bg-muted rounded-lg p-4 items-center">
           <Svg width={300} height={300}>
             {/* 圆形 */}
             <AnimatedCircle cx="150" cy="100" fill="red" animatedProps={animatedCircleProps} />
@@ -101,8 +101,8 @@ export default function ExpoSvgScreen() {
       </View>
 
       {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
+      <View className="bg-muted rounded-lg p-4">
+        <Text className="text-base font-medium mb-2">使用说明</Text>
         <Text className="text-secondary-foreground">
           1. 基本图形：圆形、矩形、路径
           {'\n'}2. 动画效果：缩放、大小变化

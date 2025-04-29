@@ -173,7 +173,7 @@ export default function ScanScreen() {
 //             </View>
 
 //             <Text className="mb-4 text-center font-medium">扫描内容：</Text>
-//             <View className={`bg-gray-100 p-3 rounded-lg mb-4 ${isUrl ? 'border-green-500 border' : ''}`}>
+//             <View className={`bg-muted p-3 rounded-lg mb-4 ${isUrl ? 'border-green-500 border' : ''}`}>
 //               <Text className="text-center">{scannedData}</Text>
 //               {isUrl && <Text className="text-center text-green-600 text-xs mt-1">有效链接</Text>}
 //             </View>
