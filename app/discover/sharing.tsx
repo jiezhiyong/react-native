@@ -14,7 +14,7 @@ export default function ExpoSharingScreen() {
   const shareTextContent = async () => {
     try {
       await Sharing.shareAsync(shareText);
-      setShareResult(`分享结果: Success`);
+      setShareResult(`Success`);
     } catch (error: any) {
       setShareResult(error.message);
     }
@@ -31,7 +31,7 @@ export default function ExpoSharingScreen() {
 
       // 分享图片
       await Sharing.shareAsync(uri);
-      setShareResult(`分享结果: Success`);
+      setShareResult(`Success`);
     } catch (error: any) {
       setShareResult(error.message);
     }
@@ -45,7 +45,7 @@ export default function ExpoSharingScreen() {
 
       // 分享文件
       await Sharing.shareAsync(fileUri);
-      setShareResult(`分享结果: Success`);
+      setShareResult(`Success`);
     } catch (error: any) {
       setShareResult(error.message);
     }
