@@ -10,10 +10,15 @@ export default function ExpoViewPagerScreen() {
 
   return (
     <View className="flex-1">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">View Pager</Text>
+        <Text className="text-secondary-foreground">使用和配置 View Pager 相关功能。</Text>
+      </View>
+
       {/* 顶部标题 */}
       <View className="p-6">
         <Text className="text-lg font-bold mb-2">视图分页器</Text>
-        <Text className="text-gray-600">此功能展示了如何使用视图分页器组件。</Text>
+        <Text className="text-secondary-foreground">使用视图分页器组件。</Text>
       </View>
 
       {/* 分页器 */}
@@ -71,7 +76,7 @@ export default function ExpoViewPagerScreen() {
       {/* 说明区域 */}
       <View className="p-6">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持左右滑动切换页面
           {'\n'}2. 支持自定义页面指示器
           {'\n'}3. 支持按钮控制页面切换

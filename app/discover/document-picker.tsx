@@ -121,6 +121,11 @@ export default function ExpoDocumentPickerScreen() {
 
   return (
     <ScrollView className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">文档选择器</Text>
+        <Text className="text-secondary-foreground">从设备存储中选择和导入文档文件。</Text>
+      </View>
+
       {/* 按钮区域 */}
       <Card className="p-4">
         <Text className="font-medium mb-4">选择文件</Text>

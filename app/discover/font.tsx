@@ -42,6 +42,11 @@ export default function ExpoFontScreen() {
 
   return (
     <View className="flex-1 px-6 pt-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">字体管理</Text>
+        <Text className="text-secondary-foreground">在应用中加载和使用自定义字体。</Text>
+      </View>
+
       {fontError && (
         <View className="bg-destructive/10 p-3 rounded-md mb-4">
           <Text className="text-destructive">字体加载失败: {fontError?.message}</Text>

@@ -145,6 +145,11 @@ export default function AsyncStorageScreen() {
 
   return (
     <ScrollView className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">异步存储</Text>
+        <Text className="text-secondary-foreground">使用异步存储来持久化保存应用数据。</Text>
+      </View>
+
       {/* 访问时间示例 */}
       <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">
         <Text className="text-lg font-bold mb-3">最后访问时间</Text>
@@ -185,7 +190,7 @@ export default function AsyncStorageScreen() {
               <View key={index} className="flex-row border-b border-gray-100 py-2 items-center">
                 <View className="flex-1">
                   <Text className="font-semibold">{key}</Text>
-                  <Text className="text-gray-600 text-sm" numberOfLines={2}>
+                  <Text className="text-secondary-foreground text-sm" numberOfLines={2}>
                     {value || '(空)'}
                   </Text>
                 </View>

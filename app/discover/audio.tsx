@@ -9,7 +9,7 @@ import { Text } from '~/components/ui/text';
 
 /**
  * Expo Audio 示例组件
- * 展示如何使用 expo-audio 进行音频播放
+ * 使用 expo-audio 进行音频播放
  */
 export default function ExpoAudioScreen() {
   // 音频源示例
@@ -182,6 +182,11 @@ export default function ExpoAudioScreen() {
   // 播放器 UI
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">音频播放</Text>
+        <Text className="text-secondary-foreground">在应用中播放、暂停和控制音频内容。</Text>
+      </View>
+
       <View className="p-4 bg-gray-50 rounded-lg mb-4">
         <Text className="font-bold mb-2">音频源选择</Text>
         <View className="flex-row flex-wrap gap-2">

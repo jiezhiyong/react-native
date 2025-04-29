@@ -28,6 +28,11 @@ export default function ExpoSystemUIScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor }}>
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">系统界面</Text>
+        <Text className="text-secondary-foreground">适配和利用系统界面元素和样式。</Text>
+      </View>
+
       <StatusBar
         barStyle={statusBarStyle === 'light' ? 'light-content' : 'dark-content'}
         hidden={statusBarHidden}
@@ -36,7 +41,7 @@ export default function ExpoSystemUIScreen() {
       <ScrollView className="flex-1 p-6">
         <View className="mb-6">
           <Text className="text-lg font-bold mb-2">系统 UI 功能</Text>
-          <Text className="text-gray-600 mb-4">此功能展示了如何使用系统 UI 相关功能。</Text>
+          <Text className="text-secondary-foreground">使用系统 UI 相关功能。</Text>
         </View>
 
         {/* 状态栏样式 */}
@@ -79,16 +84,16 @@ export default function ExpoSystemUIScreen() {
         <View className="mb-8">
           <Text className="text-base font-semibold mb-4">系统信息</Text>
           <View className="bg-white rounded-lg p-4">
-            <Text className="text-gray-600 mb-2">系统主题: {colorScheme}</Text>
-            <Text className="text-gray-600 mb-2">平台: {Platform.OS}</Text>
-            <Text className="text-gray-600">版本: {Platform.Version}</Text>
+            <Text className="text-secondary-foreground mb-2">系统主题: {colorScheme}</Text>
+            <Text className="text-secondary-foreground mb-2">平台: {Platform.OS}</Text>
+            <Text className="text-secondary-foreground">版本: {Platform.Version}</Text>
           </View>
         </View>
 
         {/* 说明区域 */}
         <View className="bg-gray-100 rounded-lg p-4">
           <Text className="text-base font-semibold mb-2">使用说明</Text>
-          <Text className="text-gray-600">
+          <Text className="text-secondary-foreground">
             1. 支持状态栏样式控制
             {'\n'}2. 支持状态栏可见性控制
             {'\n'}3. 支持背景颜色设置

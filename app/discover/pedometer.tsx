@@ -1,15 +1,21 @@
-import { Ionicons } from '@expo/vector-icons';
+import { PermissionStatus } from 'expo-modules-core';
 import { Pedometer } from 'expo-sensors';
-import { useEffect, useState } from 'react';
-import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, View } from 'react-native';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
+import { useEffectAsync } from '~/hooks/use-effect-async';
 
 export default function ExpoPedometerScreen() {
   const [isAvailable, setIsAvailable] = useState<boolean>(false);
   const [stepCount, setStepCount] = useState<number>(0);
   const [isTracking, setIsTracking] = useState<boolean>(false);
 
-  useEffect(() => {
-    checkAvailability();
+  useEffectAsync(async () => {
+    await checkAvailability();
+    await getStepCount();
+
     return () => {
       if (isTracking) {
         stopTracking();
@@ -30,7 +36,22 @@ export default function ExpoPedometerScreen() {
     }
   };
 
-  const startTracking = async () => {
+  const requestPermissions = async () => {
+    try {
+      const { status } = await Pedometer.getPermissionsAsync();
+      if (status !== PermissionStatus.GRANTED) {
+        const { status } = await Pedometer.requestPermissionsAsync();
+        if (status !== PermissionStatus.GRANTED) {
+          Alert.alert('提示', '未授予计步器权限');
+        }
+      }
+    } catch (error) {
+      console.error('请求计步器权限失败:', error);
+      Alert.alert('错误', '请求计步器权限失败');
+    }
+  };
+
+  const getStepCount = async () => {
     try {
       const end = new Date();
       const start = new Date();
@@ -38,8 +59,15 @@ export default function ExpoPedometerScreen() {
 
       const result = await Pedometer.getStepCountAsync(start, end);
       setStepCount(result.steps);
-      setIsTracking(true);
+    } catch (error) {
+      console.error('获取步数失败:', error);
+      Alert.alert('错误', '获取步数失败');
+    }
+  };
 
+  const startTracking = async () => {
+    try {
+      setIsTracking(true);
       const subscription = Pedometer.watchStepCount((result) => {
         setStepCount(result.steps);
       });
@@ -55,59 +83,44 @@ export default function ExpoPedometerScreen() {
 
   const stopTracking = () => {
     setIsTracking(false);
-    setStepCount(0);
   };
 
   if (!isAvailable) {
     return (
-      <View className="flex-1 p-6 justify-center items-center">
-        <Text className="text-lg">此设备不支持计步功能</Text>
+      <View className="flex-1 p-6 justify-center items-center bg-muted m-6 rounded-lg">
+        <Text>此设备不支持计步功能</Text>
+        <Button onPress={requestPermissions} className="mt-2">
+          <Text>授权</Text>
+        </Button>
       </View>
     );
   }
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <View className="flex-1 p-6">
       <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">计步器</Text>
-        <Text className="text-gray-600 mb-4">此功能用于获取用户的步数和行走距离。需要设备支持计步传感器。</Text>
+        <Text className="text-2xl font-bold mb-2">计步器</Text>
+        <Text className="text-secondary-foreground">使用设备传感器计算和记录用户的步数。</Text>
       </View>
 
       <View className="space-y-6">
-        <View className="p-4 bg-gray-100 rounded-lg">
-          <Text className="text-base mb-2">今日步数</Text>
-          <Text className="text-3xl font-bold">{stepCount}</Text>
+        <View className="p-6 bg-muted rounded-lg mb-6 items-center">
+          <Text className="mb-2">今日步数</Text>
+          <Text className="text-4xl font-bold">{stepCount.toLocaleString()}</Text>
         </View>
 
-        <View className="space-y-4">
+        <View>
           {!isTracking ? (
-            <TouchableOpacity
-              className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
-              onPress={startTracking}
-            >
-              <Ionicons name="play" size={20} color="white" />
-              <Text className="text-white ml-2 text-lg">开始计步</Text>
-            </TouchableOpacity>
+            <Button onPress={startTracking}>
+              <Text>订阅计步器更新</Text>
+            </Button>
           ) : (
-            <TouchableOpacity
-              className="bg-red-500 rounded-lg p-4 flex-row items-center justify-center"
-              onPress={stopTracking}
-            >
-              <Ionicons name="stop" size={20} color="white" />
-              <Text className="text-white ml-2 text-lg">停止计步</Text>
-            </TouchableOpacity>
+            <Button onPress={stopTracking} variant="destructive">
+              <Text>停止订阅</Text>
+            </Button>
           )}
         </View>
       </View>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 需要设备支持计步传感器
-          {'\n'}2. 步数统计可能有误差
-          {'\n'}3. 距离计算基于平均步长估算
-        </Text>
-      </View>
-    </ScrollView>
+    </View>
   );
 }

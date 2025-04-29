@@ -180,6 +180,11 @@ export default function GLScreen() {
 
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">OpenGL 渲染</Text>
+        <Text className="text-secondary-foreground">使用 OpenGL 进行高性能图形渲染。</Text>
+      </View>
+
       <View className="h-80 w-full mb-4 overflow-hidden rounded-lg bg-gray-900">
         <GLView style={{ flex: 1 }} onContextCreate={onContextCreate} />
       </View>

@@ -7,19 +7,27 @@ export const unstable_settings = {
 
 export default function DiscoverLayout() {
   const pathname = usePathname();
+  const isSafeAreaContext = pathname === '/discover/safe-area-context';
 
-  return (
-    <SafeAreaView className="flex-1">
+  const inner = (
+    <>
       <Stack.Screen
         options={{
           title: pathname.split('/').pop(),
           headerShadowVisible: false,
+          headerShown: !isSafeAreaContext,
         }}
       />
 
       <View className="flex-1">
         <Slot />
       </View>
-    </SafeAreaView>
+    </>
   );
+
+  if (isSafeAreaContext) {
+    return inner;
+  }
+
+  return <SafeAreaView className="flex-1">{inner}</SafeAreaView>;
 }

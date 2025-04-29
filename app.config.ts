@@ -65,6 +65,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       'android.permission.WAKE_LOCK',
       'android.permission.WRITE_SETTINGS',
       'android.permission.READ_PHONE_STATE',
+      'android.permission.READ_MEDIA_IMAGES',
     ],
     googleServicesFile: process.env.GOOGLE_SERVICES_JSON ?? './google-services.json',
   },
@@ -111,7 +112,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     googleServicesFile: process.env.GOOGLE_SERVICES_INFO_PLIST ?? './GoogleService-Info.plist',
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
-      NSCameraUsageDescription: 'This app uses the camera to scan barcodes on event tickets.',
+      NSCameraUsageDescription: '应用需要使用您的相机来扫描活动票券上的条形码，以便您快速参与活动。',
       LSApplicationQueriesSchemes: ['uber'],
       CFBundleAllowMixedLocalizations: true,
       UIBackgroundModes: ['audio', 'fetch', 'processing'],
@@ -136,6 +137,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       `activitycontinuation:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
       `webcredentials:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
     ],
+    entitlements: {
+      'com.apple.developer.networking.wifi-info': true,
+    },
   },
 
   plugins: [
@@ -166,8 +170,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-media-library',
       {
-        photosPermission: '允许 $(PRODUCT_NAME) 访问您的照片',
-        savePhotosPermission: '允许 $(PRODUCT_NAME) 保存照片',
+        photosPermission: '允许 $(PRODUCT_NAME) 访问您的照片，以便您可以选择并分享您喜欢的照片',
+        savePhotosPermission: '允许 $(PRODUCT_NAME) 保存照片到您的相册，方便您随时查看',
         isAccessMediaLocationEnabled: true,
       },
     ],
@@ -180,7 +184,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'react-native-vision-camera',
       {
-        cameraPermissionText: '$(PRODUCT_NAME) needs access to your Camera.',
+        cameraPermissionText: '允许 $(PRODUCT_NAME) 访问您的相机，以便您可以拍摄照片和视频',
         enableCodeScanner: true,
       },
     ],
@@ -199,28 +203,28 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-calendar',
       {
-        calendarPermission: 'Allow $(PRODUCT_NAME) to access your calendar',
-        remindersPermission: 'Allow $(PRODUCT_NAME) to access your reminders',
+        calendarPermission: '允许 $(PRODUCT_NAME) 访问您的日历，以便为您创建和管理活动提醒',
+        remindersPermission: '允许 $(PRODUCT_NAME) 访问您的提醒事项，以帮助您管理待办任务',
       },
     ],
     [
       'expo-camera',
       {
-        cameraPermission: 'Allow $(PRODUCT_NAME) to access your camera',
-        microphonePermission: 'Allow $(PRODUCT_NAME) to access your microphone',
+        cameraPermission: '允许 $(PRODUCT_NAME) 访问您的相机，以便您可以拍摄和分享精彩瞬间',
+        microphonePermission: '允许 $(PRODUCT_NAME) 访问您的麦克风，以便在视频中录制声音',
         recordAudioAndroid: true,
       },
     ],
     [
       'expo-contacts',
       {
-        contactsPermission: 'Allow $(PRODUCT_NAME) to access your contacts.',
+        contactsPermission: '允许 $(PRODUCT_NAME) 访问您的联系人，以便您可以轻松分享内容给朋友',
       },
     ],
     [
       'expo-sensors',
       {
-        motionPermission: 'Allow $(PRODUCT_NAME) to access your device motion.',
+        motionPermission: '允许 $(PRODUCT_NAME) 访问您的设备运动数据，以提供更精准的体验',
       },
     ],
     [
@@ -232,13 +236,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-local-authentication',
       {
-        faceIDPermission: 'Allow $(PRODUCT_NAME) to use Face ID.',
+        faceIDPermission: '允许 $(PRODUCT_NAME) 使用面容 ID 功能，以便您快速安全地登录',
       },
     ],
     [
       'expo-location',
       {
-        locationAlwaysAndWhenInUsePermission: 'Allow $(PRODUCT_NAME) to use your location.',
+        locationAlwaysAndWhenInUsePermission: '允许 $(PRODUCT_NAME) 使用您的位置信息，以便为您提供位置相关服务',
       },
     ],
     [
@@ -250,7 +254,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-tracking-transparency',
       {
-        userTrackingPermission: 'This identifier will be used to deliver personalized ads to you.',
+        userTrackingPermission: '该标识符将用于为您提供个性化广告，提升您的使用体验',
       },
     ],
     [
@@ -263,13 +267,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-audio',
       {
-        microphonePermission: 'Allow $(PRODUCT_NAME) to access your microphone.',
+        microphonePermission: '允许 $(PRODUCT_NAME) 访问您的麦克风，以便您可以录制音频和语音消息',
       },
     ],
     [
       'expo-image-picker',
       {
-        photosPermission: 'The app accesses your photos to let you share them with your friends.',
+        photosPermission: '允许 $(PRODUCT_NAME) 访问您的照片，以便您可以选择并与朋友分享您的精彩瞬间',
       },
     ],
   ],

@@ -1,6 +1,5 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import { Dimensions, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   Easing,
@@ -11,6 +10,9 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
 
 const { width } = Dimensions.get('window');
 
@@ -71,46 +73,31 @@ export default function ReanimatedScreen() {
     });
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <View className="flex-1 p-6">
       <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">动画示例</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了 React Native Reanimated 的各种动画效果。</Text>
+        <Text className="text-2xl font-bold mb-2">高级动画</Text>
+        <Text className="text-secondary-foreground">使用 Reanimated 创建流畅的高性能动画效果。</Text>
       </View>
 
       <View className="space-y-8">
         {/* 基本动画 */}
-        <View className="space-y-4">
-          <Text className="text-base font-semibold">基本动画</Text>
+        <View className="flex gap-2 mb-6">
+          <Text className="text-lg font-medium">基本动画</Text>
           <Animated.View className="w-20 h-20 bg-blue-500 rounded-lg" style={animatedStyle} />
-          <View className="flex-row space-x-4">
-            <TouchableOpacity
-              className="flex-1 bg-blue-500 rounded-lg p-3 flex-row items-center justify-center"
-              onPress={isAnimating ? stopBasicAnimation : startBasicAnimation}
-            >
-              <Ionicons name={isAnimating ? 'stop' : 'play'} size={20} color="white" />
-              <Text className="text-white ml-2">{isAnimating ? '停止动画' : '开始动画'}</Text>
-            </TouchableOpacity>
-          </View>
+          <Button onPress={isAnimating ? stopBasicAnimation : startBasicAnimation}>
+            <Text className="text-white ml-2">{isAnimating ? '停止动画' : '开始动画'}</Text>
+          </Button>
         </View>
 
         {/* 手势动画 */}
-        <View className="space-y-4">
-          <Text className="text-base font-semibold">手势动画</Text>
+        <View className="flex gap-2">
+          <Text className="text-lg font-medium">手势动画</Text>
+          <Text className="text-secondary-foreground">尝试拖动方块，松开后会回到原位</Text>
           <GestureDetector gesture={gesture}>
             <Animated.View className="w-20 h-20 bg-green-500 rounded-lg" style={gestureStyle} />
           </GestureDetector>
-          <Text className="text-sm text-gray-500">尝试拖动方块，松开后会回到原位</Text>
         </View>
       </View>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 基本动画包括缩放、旋转和平移
-          {'\n'}2. 手势动画支持拖拽操作
-          {'\n'}3. 所有动画都使用原生线程运行
-        </Text>
-      </View>
-    </ScrollView>
+    </View>
   );
 }

@@ -117,6 +117,11 @@ export default function ExpoBackgroundTaskScreen() {
     }, 5000);
 
     return () => clearInterval(intervalId);
+
+    <View className="mb-6">
+      <Text className="text-2xl font-bold mb-2">后台任务</Text>
+      <Text className="text-secondary-foreground">在应用进入后台时执行特定任务和操作。</Text>
+    </View>;
   }, []);
 
   // 处理注册任务

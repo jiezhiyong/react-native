@@ -25,8 +25,15 @@ export default function ExpoSmsScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">短信功能</Text>
+        <Text className="text-secondary-foreground">在应用中发送和处理短信。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">发送短信</Text>
-        <Text className="text-gray-600 mb-4">使用 Expo SMS API 发送短信。请注意，此功能需要设备支持短信功能。</Text>
+        <Text className="text-secondary-foreground">
+          使用 Expo SMS API 发送短信。请注意，此功能需要设备支持短信功能。
+        </Text>
       </View>
 
       <View className="mb-4">

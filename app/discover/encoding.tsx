@@ -87,6 +87,11 @@ export default function EncodingScreen() {
 
   return (
     <ScrollView className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">编码工具</Text>
+        <Text className="text-secondary-foreground">在应用中进行各种数据编码和解码操作。</Text>
+      </View>
+
       {/* 编码区域 */}
       <Card className="p-4 mb-4">
         <Text className="font-medium mb-2">文本编码 - TextEncoder</Text>

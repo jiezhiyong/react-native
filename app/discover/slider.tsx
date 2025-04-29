@@ -10,15 +10,20 @@ export default function ExpoSliderScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">滑块控件</Text>
+        <Text className="text-secondary-foreground">实现可交互的值范围选择控件。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">滑块功能</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用 React Native 的滑块组件。</Text>
+        <Text className="text-secondary-foreground">使用 React Native 的滑块组件。</Text>
       </View>
 
       {/* 基本滑块 */}
       <View className="mb-8">
         <Text className="text-base font-semibold mb-4">基本滑块</Text>
         <View className="bg-white rounded-lg p-4 shadow-sm">
-          <Text className="text-gray-600 mb-2">当前值: {basicValue.toFixed(1)}</Text>
+          <Text className="text-secondary-foreground mb-2">当前值: {basicValue.toFixed(1)}</Text>
           <Slider
             style={{ width: '100%', height: 40 }}
             minimumValue={0}
@@ -36,7 +41,7 @@ export default function ExpoSliderScreen() {
       <View className="mb-8">
         <Text className="text-base font-semibold mb-4">带步长的滑块</Text>
         <View className="bg-white rounded-lg p-4 shadow-sm">
-          <Text className="text-gray-600 mb-2">当前值: {stepValue}</Text>
+          <Text className="text-secondary-foreground mb-2">当前值: {stepValue}</Text>
           <Slider
             style={{ width: '100%', height: 40 }}
             minimumValue={0}
@@ -55,7 +60,7 @@ export default function ExpoSliderScreen() {
       <View className="mb-8">
         <Text className="text-base font-semibold mb-4">自定义样式滑块</Text>
         <View className="bg-white rounded-lg p-4 shadow-sm">
-          <Text className="text-gray-600 mb-2">当前值: {customValue.toFixed(1)}</Text>
+          <Text className="text-secondary-foreground mb-2">当前值: {customValue.toFixed(1)}</Text>
           <Slider
             style={{ width: '100%', height: 40 }}
             minimumValue={0}
@@ -77,7 +82,7 @@ export default function ExpoSliderScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持基本滑块功能
           {'\n'}2. 支持设置步长
           {'\n'}3. 支持自定义样式

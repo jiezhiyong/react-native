@@ -53,15 +53,20 @@ export default function ExpoUpdatesScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">应用更新</Text>
+        <Text className="text-secondary-foreground">实现应用内更新和版本管理。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">应用更新</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用 Expo 的应用更新功能。</Text>
+        <Text className="text-secondary-foreground">使用 Expo 的应用更新功能。</Text>
       </View>
 
       {/* 当前版本信息 */}
       <View className="mb-8">
         <Text className="text-base font-semibold mb-4">当前版本信息</Text>
         <View className="bg-gray-100 rounded-lg p-4">
-          <Text className="text-gray-600">
+          <Text className="text-secondary-foreground">
             更新渠道: {Updates.channel}
             {'\n'}运行时版本: {Updates.runtimeVersion}
           </Text>
@@ -92,7 +97,7 @@ export default function ExpoUpdatesScreen() {
         <View className="mb-8">
           <Text className="text-base font-semibold mb-4">更新信息</Text>
           <View className="bg-gray-100 rounded-lg p-4">
-            <Text className="text-gray-600">
+            <Text className="text-secondary-foreground">
               有新版本: {updateInfo.isAvailable ? '是' : '否'}
               {'\n'}已下载: {updateInfo.isDownloaded ? '是' : '否'}
             </Text>
@@ -152,7 +157,7 @@ export default function ExpoUpdatesScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 检查更新：检查是否有新版本可用
           {'\n'}2. 下载更新：下载新版本
           {'\n'}3. 应用更新：重启应用以应用更新

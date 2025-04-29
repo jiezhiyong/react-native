@@ -96,6 +96,11 @@ export default function LocalAuthenticationScreen() {
 
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">本地认证</Text>
+        <Text className="text-secondary-foreground">使用设备的生物识别或密码进行本地身份验证。</Text>
+      </View>
+
       <Card className="p-4 mb-4 bg-muted">
         <Text className="text-lg font-semibold mb-2">支持情况</Text>
         <View className="flex-row items-center mb-2">

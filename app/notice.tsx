@@ -115,7 +115,7 @@ const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) =>
         </Text>
         {!item.isRead && <View className="bg-red-500 w-2 h-2 rounded-full" />}
       </View>
-      <Text className="text-gray-600 mb-2" numberOfLines={2}>
+      <Text className="text-secondary-foreground mb-2" numberOfLines={2}>
         {item.content}
       </Text>
       <Text className="text-xs text-gray-400">{format(parseISO(item.createdAt), 'yyyy-MM-dd HH:mm')}</Text>

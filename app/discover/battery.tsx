@@ -8,6 +8,11 @@ export default function ExpoBatteryScreen() {
 
   return (
     <View className="flex-1 p-6 space-y-4">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">电池状态</Text>
+        <Text className="text-secondary-foreground">监控设备电池状态和电量水平变化。</Text>
+      </View>
+
       <View className="flex-row justify-between items-center border-b border-gray-200 py-4">
         <Text className="font-medium">电池电量:</Text>
         <Text>{batteryLevel !== null ? `${Math.round(batteryLevel * 100)}%` : '...'}</Text>

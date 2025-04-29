@@ -1,4 +1,5 @@
 import * as Location from 'expo-location';
+import { PermissionStatus } from 'expo-modules-core';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
@@ -26,7 +27,7 @@ export default function ExpoLocationScreen() {
   const requestPermissions = async () => {
     try {
       const { status: foregroundStatus } = await Location.requestForegroundPermissionsAsync();
-      if (foregroundStatus !== 'granted') {
+      if (foregroundStatus !== PermissionStatus.GRANTED) {
         setErrorMsg('需要位置权限才能使用此功能');
         return false;
       }
@@ -137,6 +138,11 @@ export default function ExpoLocationScreen() {
 
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">位置服务</Text>
+        <Text className="text-secondary-foreground">获取和跟踪设备的地理位置信息。</Text>
+      </View>
+
       <View className="mb-6 bg-muted rounded-lg p-4">
         <Text className="mb-2 text-lg font-medium">位置信息:</Text>
         <View>{getLocationText()}</View>

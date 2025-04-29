@@ -7,7 +7,7 @@ import { Text } from '~/components/ui/text';
 
 /**
  * Expo Asset 示例屏幕
- * 展示如何使用 expo-asset 加载和管理资源
+ * 使用 expo-asset 加载和管理资源
  */
 export default function ExpoAssetScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +45,7 @@ export default function ExpoAssetScreen() {
 
   // 渲染资源信息项
   const renderAssetInfo = (asset: Asset, index: number) => (
-    <View key={index} className="mb-4 p-4 bg-gray-50 rounded-lg flex-col gap-2 text-gray-600">
+    <View key={index} className="mb-4 p-4 bg-gray-50 rounded-lg flex-col gap-2 text-secondary-foreground">
       <Text>资源 #{index + 1}</Text>
       <Text>{asset.uri}</Text>
       {asset.localUri && (
@@ -118,6 +118,11 @@ export default function ExpoAssetScreen() {
   if (isLoading) {
     return (
       <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+        <View className="mb-6">
+          <Text className="text-2xl font-bold mb-2">资源管理</Text>
+          <Text className="text-secondary-foreground">在应用中加载和管理各类静态资源文件。</Text>
+        </View>
+
         <ActivityIndicator color="#0891b2" />
         <Text className="mt-2">加载资源中...</Text>
       </View>

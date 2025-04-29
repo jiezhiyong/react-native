@@ -24,6 +24,11 @@ export default function ExpoCheckboxScreen() {
 
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">复选框</Text>
+        <Text className="text-secondary-foreground">实现和自定义交互式复选框组件。</Text>
+      </View>
+
       {/* 基本用法 */}
       <View className="mb-6">
         <Text className="text-xl font-semibold text-foreground mb-2">基本用法</Text>

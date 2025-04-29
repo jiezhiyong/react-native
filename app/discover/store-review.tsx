@@ -33,8 +33,13 @@ export default function ExpoStoreReviewScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">应用评分</Text>
+        <Text className="text-secondary-foreground">提示用户在应用商店对应用进行评分和评价。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">应用商店评分</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用 Expo 的应用商店评分功能。</Text>
+        <Text className="text-secondary-foreground">使用 Expo 的应用商店评分功能。</Text>
       </View>
 
       {/* 检查可用性 */}
@@ -66,14 +71,14 @@ export default function ExpoStoreReviewScreen() {
       {result ? (
         <View className="bg-gray-100 rounded-lg p-4 mb-8">
           <Text className="text-base font-semibold mb-2">操作结果</Text>
-          <Text className="text-gray-600">{result}</Text>
+          <Text className="text-secondary-foreground">{result}</Text>
         </View>
       ) : null}
 
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持检查评分功能是否可用
           {'\n'}2. 支持请求用户评分
           {'\n'}3. 支持错误处理

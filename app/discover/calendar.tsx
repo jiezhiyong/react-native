@@ -166,6 +166,11 @@ export default function ExpoCalendarScreen() {
   if (hasPermission === null) {
     return (
       <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+        <View className="mb-6">
+          <Text className="text-2xl font-bold mb-2">日历功能</Text>
+          <Text className="text-secondary-foreground">访问和管理设备上的日历事件和提醒。</Text>
+        </View>
+
         <Text className="text-center">正在请求日历权限...</Text>
       </View>
     );
@@ -247,8 +252,10 @@ export default function ExpoCalendarScreen() {
                 <Text className="text-xs text-gray-500 mt-1">
                   {event.allDay ? '全天事件' : `时间: ${event.startDate} - ${event.endDate}`}
                 </Text>
-                {event.location && <Text className="text-xs text-gray-600 mt-1">地点: {event.location}</Text>}
-                {event.notes && <Text className="text-xs text-gray-600 mt-1">备注: {event.notes}</Text>}
+                {event.location && (
+                  <Text className="text-xs text-secondary-foreground mt-1">地点: {event.location}</Text>
+                )}
+                {event.notes && <Text className="text-xs text-secondary-foreground mt-1">备注: {event.notes}</Text>}
               </View>
             ))
           )}

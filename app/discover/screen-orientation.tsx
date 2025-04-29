@@ -1,7 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useEffect, useState } from 'react';
-import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
 
 export default function ExpoScreenOrientationScreen() {
   const [currentOrientation, setCurrentOrientation] = useState<ScreenOrientation.Orientation | null>(null);
@@ -32,12 +34,17 @@ export default function ExpoScreenOrientationScreen() {
 
   const lockToPortrait = async () => {
     try {
-      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+      const isSupported = await ScreenOrientation.supportsOrientationLockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT_UP
+      );
+      if (!isSupported) {
+        console.error('竖屏锁定不支持');
+        return;
+      }
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
       setIsLocked(true);
-      Alert.alert('成功', '已锁定为竖屏');
     } catch (error) {
       console.error('锁定竖屏失败:', error);
-      Alert.alert('错误', '锁定竖屏失败');
     }
   };
 
@@ -45,21 +52,8 @@ export default function ExpoScreenOrientationScreen() {
     try {
       await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
       setIsLocked(true);
-      Alert.alert('成功', '已锁定为横屏');
     } catch (error) {
       console.error('锁定横屏失败:', error);
-      Alert.alert('错误', '锁定横屏失败');
-    }
-  };
-
-  const unlockOrientation = async () => {
-    try {
-      await ScreenOrientation.unlockAsync();
-      setIsLocked(false);
-      Alert.alert('成功', '已解锁屏幕方向');
-    } catch (error) {
-      console.error('解锁屏幕方向失败:', error);
-      Alert.alert('错误', '解锁屏幕方向失败');
     }
   };
 
@@ -80,54 +74,26 @@ export default function ExpoScreenOrientationScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <View className="flex-1 p-6">
       <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">屏幕方向控制</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何控制屏幕方向，包括锁定和解锁不同方向。</Text>
+        <Text className="text-2xl font-bold mb-2">屏幕方向</Text>
+        <Text className="text-secondary-foreground">控制和响应设备屏幕方向的变化。</Text>
       </View>
 
       {/* 当前方向显示 */}
       <View className="bg-gray-100 rounded-lg p-4 mb-6">
-        <Text className="text-base font-semibold mb-2">当前屏幕方向</Text>
-        <Text className="text-lg">{getOrientationText(currentOrientation)}</Text>
-        <Text className="text-sm text-gray-500 mt-2">状态: {isLocked ? '已锁定' : '未锁定'}</Text>
+        <Text>当前屏幕方向: {getOrientationText(currentOrientation)}</Text>
+        <Text>状态: {isLocked ? '已手动锁定' : '未手动锁定'}</Text>
       </View>
 
       {/* 方向控制按钮 */}
-      <View className="space-y-4">
-        <TouchableOpacity
-          className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
-          onPress={lockToPortrait}
+      <View className="flex gap-2">
+        <Button
+          onPress={currentOrientation === ScreenOrientation.Orientation.PORTRAIT_UP ? lockToLandscape : lockToPortrait}
         >
-          <Ionicons name="phone-portrait" size={20} color="white" />
-          <Text className="text-white ml-2">锁定为竖屏</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          className="bg-green-500 rounded-lg p-4 flex-row items-center justify-center"
-          onPress={lockToLandscape}
-        >
-          <Ionicons name="phone-landscape" size={20} color="white" />
-          <Text className="text-white ml-2">锁定为横屏</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          className="bg-red-500 rounded-lg p-4 flex-row items-center justify-center"
-          onPress={unlockOrientation}
-        >
-          <Ionicons name="lock-closed" size={20} color="white" />
-          <Text className="text-white ml-2">解锁屏幕方向</Text>
-        </TouchableOpacity>
+          <Text>{currentOrientation === ScreenOrientation.Orientation.PORTRAIT_UP ? '切换横屏' : '切换竖屏'}</Text>
+        </Button>
       </View>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 某些设备可能不支持所有方向
-          {'\n'}2. 锁定方向后需要手动解锁才能切换
-          {'\n'}3. 部分功能在模拟器上可能无法正常工作
-        </Text>
-      </View>
-    </ScrollView>
+    </View>
   );
 }

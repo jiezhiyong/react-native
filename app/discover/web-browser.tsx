@@ -57,8 +57,13 @@ export default function ExpoWebBrowserScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">网页浏览器</Text>
+        <Text className="text-secondary-foreground">在应用内集成网页浏览功能。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">内置浏览器</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用内置浏览器打开网页。</Text>
+        <Text className="text-secondary-foreground">使用内置浏览器打开网页。</Text>
       </View>
 
       {/* URL 输入 */}
@@ -108,7 +113,7 @@ export default function ExpoWebBrowserScreen() {
         <View className="mb-8">
           <Text className="text-base font-semibold mb-4">浏览器结果</Text>
           <View className="bg-gray-100 rounded-lg p-4">
-            <Text className="text-gray-600">{browserResult}</Text>
+            <Text className="text-secondary-foreground">{browserResult}</Text>
           </View>
         </View>
       ) : null}
@@ -123,7 +128,7 @@ export default function ExpoWebBrowserScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持打开内置浏览器
           {'\n'}2. 支持打开认证页面
           {'\n'}3. 支持自定义浏览器样式

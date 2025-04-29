@@ -106,8 +106,13 @@ export default function ExpoSQLiteScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">SQLite 数据库</Text>
+        <Text className="text-secondary-foreground">在应用中使用 SQLite 进行结构化数据存储。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">SQLite 数据库</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用 Expo 的 SQLite 数据库功能。</Text>
+        <Text className="text-secondary-foreground">使用 Expo 的 SQLite 数据库功能。</Text>
       </View>
 
       {/* 添加新任务 */}
@@ -146,7 +151,7 @@ export default function ExpoSQLiteScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持创建 SQLite 数据库
           {'\n'}2. 支持增删改查操作
           {'\n'}3. 支持事务处理

@@ -97,6 +97,11 @@ export default function ExpoContactsScreen() {
 
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">联系人</Text>
+        <Text className="text-secondary-foreground">访问和管理设备通讯录中的联系人信息。</Text>
+      </View>
+
       <Button className="mb-4" onPress={requestContactsPermission} disabled={loading}>
         {loading ? (
           <ActivityIndicator color="white" />

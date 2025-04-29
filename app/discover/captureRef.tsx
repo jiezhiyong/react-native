@@ -9,7 +9,7 @@ import { Text } from '~/components/ui/text';
 
 /**
  * CaptureRef 示例页面
- * 展示如何使用 react-native-view-shot 捕获视图截图
+ * 使用 react-native-view-shot 捕获视图截图
  */
 export default function CaptureRefScreen() {
   // 要捕获的视图的引用
@@ -68,6 +68,11 @@ export default function CaptureRefScreen() {
 
   return (
     <ScrollView className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">视图截图</Text>
+        <Text className="text-secondary-foreground">捕获和保存应用界面的特定区域为图片。</Text>
+      </View>
+
       {/* 这个视图将被捕获 */}
       <View
         ref={viewRef}

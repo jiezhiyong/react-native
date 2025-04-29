@@ -14,6 +14,11 @@ export default function ExpoSegmentedControlScreen() {
       case 0:
         return (
           <View className="bg-blue-50 p-4 rounded-lg">
+            <View className="mb-6">
+              <Text className="text-2xl font-bold mb-2">Segmented Control</Text>
+              <Text className="text-secondary-foreground">使用和配置 Segmented Control 相关功能。</Text>
+            </View>
+
             <Text className="text-blue-800">显示全部内容</Text>
             <Text className="text-blue-600 mt-2">这里可以显示所有项目的列表</Text>
           </View>
@@ -56,7 +61,7 @@ export default function ExpoSegmentedControlScreen() {
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">分段控制器</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用分段控制器来切换不同的视图或选项。</Text>
+        <Text className="text-secondary-foreground">使用分段控制器来切换不同的视图或选项。</Text>
       </View>
 
       {/* 基本分段控制器 */}
@@ -69,7 +74,9 @@ export default function ExpoSegmentedControlScreen() {
               className={`flex-1 p-3 items-center ${selectedIndex === index ? 'bg-blue-500' : 'bg-white'}`}
               onPress={() => setSelectedIndex(index)}
             >
-              <Text className={`${selectedIndex === index ? 'text-white' : 'text-gray-600'}`}>{segment}</Text>
+              <Text className={`${selectedIndex === index ? 'text-white' : 'text-secondary-foreground'}`}>
+                {segment}
+              </Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -86,7 +93,7 @@ export default function ExpoSegmentedControlScreen() {
               className={`flex-1 p-3 items-center ${selectedColor === color ? getColorClass(color) : 'bg-white'}`}
               onPress={() => setSelectedColor(color)}
             >
-              <Text className={`${selectedColor === color ? 'text-white' : 'text-gray-600'}`}>{color}</Text>
+              <Text className={`${selectedColor === color ? 'text-white' : 'text-secondary-foreground'}`}>{color}</Text>
             </TouchableOpacity>
           ))}
         </View>

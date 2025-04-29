@@ -67,8 +67,13 @@ function PaymentForm() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">Stripe</Text>
+        <Text className="text-secondary-foreground">使用和配置 Stripe 相关功能。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">Stripe 支付</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用 Stripe 进行支付。</Text>
+        <Text className="text-secondary-foreground">使用 Stripe 进行支付。</Text>
       </View>
 
       {/* 支付金额输入 */}
@@ -110,7 +115,7 @@ function PaymentForm() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持信用卡支付
           {'\n'}2. 支持 Apple Pay/Google Pay
           {'\n'}3. 支持多种货币

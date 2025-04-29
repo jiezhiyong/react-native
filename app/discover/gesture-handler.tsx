@@ -356,6 +356,11 @@ export default function GestureHandlerScreen() {
 
   return (
     <GestureHandlerRootView className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">手势处理</Text>
+        <Text className="text-secondary-foreground">识别和响应用户的各种触摸手势操作。</Text>
+      </View>
+
       <Button onPress={resetGestures} className="mb-4">
         <Text>重置所有手势</Text>
       </Button>

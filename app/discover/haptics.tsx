@@ -44,6 +44,13 @@ export default function ExpoHapticsScreen() {
 
   return (
     <ScrollView className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">触觉反馈</Text>
+        <Text className="text-secondary-foreground">
+          使用触觉反馈增强用户交互体验，为不同的操作提供适当的振动反馈。
+        </Text>
+      </View>
+
       <View className="flex-col gap-2">
         <Text className="text-lg font-bold">触觉强度</Text>
         <Button onPress={triggerLightHaptic}>

@@ -76,6 +76,11 @@ export default function ExpoImagePickerScreen() {
 
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">图像选择器</Text>
+        <Text className="text-secondary-foreground">从设备相册选择图片或直接拍摄新照片。</Text>
+      </View>
+
       <View className="flex-row flex-wrap gap-2 mb-6">
         <Button className="flex-1" onPress={takePicture}>
           <Text>拍摄照片</Text>

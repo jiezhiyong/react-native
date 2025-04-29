@@ -50,8 +50,13 @@ export default function ExpoUrlScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">Url</Text>
+        <Text className="text-secondary-foreground">使用和配置 Url 相关功能。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">URL 功能</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用 URL 相关功能。</Text>
+        <Text className="text-secondary-foreground">使用 URL 相关功能。</Text>
       </View>
 
       {/* URL 输入 */}
@@ -66,7 +71,7 @@ export default function ExpoUrlScreen() {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <Text className="text-gray-600">URL 状态: {canOpen ? '可以打开' : '无法打开'}</Text>
+        <Text className="text-secondary-foreground">URL 状态: {canOpen ? '可以打开' : '无法打开'}</Text>
       </View>
 
       {/* 打开 URL */}
@@ -97,7 +102,7 @@ export default function ExpoUrlScreen() {
         <View className="mb-8">
           <Text className="text-base font-semibold mb-4">最近打开的 URL</Text>
           <View className="bg-gray-100 rounded-lg p-4">
-            <Text className="text-gray-600">{lastOpenedUrl}</Text>
+            <Text className="text-secondary-foreground">{lastOpenedUrl}</Text>
           </View>
         </View>
       ) : null}
@@ -112,7 +117,7 @@ export default function ExpoUrlScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持检查 URL 是否可以打开
           {'\n'}2. 支持在浏览器中打开 URL
           {'\n'}3. 支持在系统应用中打开 URL

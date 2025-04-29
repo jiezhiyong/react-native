@@ -51,8 +51,13 @@ export default function ExpoVideoThumbnailsScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">Video Thumbnails</Text>
+        <Text className="text-secondary-foreground">使用和配置 Video Thumbnails 相关功能。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">视频缩略图</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何从视频中提取缩略图。</Text>
+        <Text className="text-secondary-foreground">从视频中提取缩略图。</Text>
       </View>
 
       {/* 视频选择 */}
@@ -66,7 +71,9 @@ export default function ExpoVideoThumbnailsScreen() {
           <Text className="text-white ml-2">从相册选择视频</Text>
         </TouchableOpacity>
         {videoUri ? (
-          <Text className="text-gray-600 mt-2">已选择视频: {videoUri.substring(videoUri.lastIndexOf('/') + 1)}</Text>
+          <Text className="text-secondary-foreground mt-2">
+            已选择视频: {videoUri.substring(videoUri.lastIndexOf('/') + 1)}
+          </Text>
         ) : null}
       </View>
 
@@ -102,7 +109,7 @@ export default function ExpoVideoThumbnailsScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持从相册选择视频
           {'\n'}2. 支持生成视频缩略图
           {'\n'}3. 支持预览缩略图

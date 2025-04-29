@@ -1,7 +1,20 @@
 import { View } from 'react-native';
 
+import { Text } from '~/components/ui/text';
+
 export default function FileSystemScreen() {
-  return <View />;
+  return (
+    <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">文件系统</Text>
+        <Text className="text-secondary-foreground">在应用中进行文件和目录的创建、读取和管理。</Text>
+      </View>
+
+      <View className="items-center justify-center flex-1">
+        <Text className="text-secondary-foreground">功能开发中...</Text>
+      </View>
+    </View>
+  );
 }
 
 // import { Directory, File, Paths } from 'expo-file-system/next';

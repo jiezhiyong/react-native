@@ -32,8 +32,13 @@ export default function ExpoStatusBarScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">Status Bar</Text>
+        <Text className="text-secondary-foreground">使用和配置 Status Bar 相关功能。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">状态栏</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何控制状态栏的样式和行为。</Text>
+        <Text className="text-secondary-foreground">控制状态栏的样式和行为。</Text>
       </View>
 
       {/* 状态栏控制 */}
@@ -85,7 +90,7 @@ export default function ExpoStatusBarScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 控制状态栏的可见性
           {'\n'}2. 切换状态栏的样式（浅色/深色）
           {'\n'}3. 更改状态栏的背景颜色

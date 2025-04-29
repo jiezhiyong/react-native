@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { PermissionStatus } from 'expo-modules-core';
 import * as TrackingTransparency from 'expo-tracking-transparency';
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -25,7 +26,7 @@ export default function ExpoTrackingTransparencyScreen() {
       const { status } = await TrackingTransparency.requestTrackingPermissionsAsync();
       setTrackingStatus(status);
 
-      if (status === 'granted') {
+      if (status === PermissionStatus.GRANTED) {
         Alert.alert('成功', '已获得跟踪权限');
       } else if (status === 'denied') {
         Alert.alert('提示', '用户拒绝了跟踪权限');
@@ -38,11 +39,11 @@ export default function ExpoTrackingTransparencyScreen() {
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'granted':
+      case PermissionStatus.GRANTED:
         return '已授权';
-      case 'denied':
+      case PermissionStatus.DENIED:
         return '已拒绝';
-      case 'not-determined':
+      case PermissionStatus.UNDETERMINED:
         return '未确定';
       default:
         return status;
@@ -52,8 +53,13 @@ export default function ExpoTrackingTransparencyScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">Tracking Transparency</Text>
+        <Text className="text-secondary-foreground">使用和配置 Tracking Transparency 相关功能。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">跟踪透明度</Text>
-        <Text className="text-gray-600 mb-4">此功能用于请求用户允许应用跟踪其活动。主要用于 iOS 14.5 及以上版本。</Text>
+        <Text className="text-secondary-foreground">请求用户允许应用跟踪其活动。主要用于 iOS 14.5 及以上版本。</Text>
       </View>
 
       <View className="mb-6 p-4 bg-gray-100 rounded-lg">

@@ -52,8 +52,13 @@ export default function ExpoSpeechScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">语音识别</Text>
+        <Text className="text-secondary-foreground">将用户语音转换为文本。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">语音功能</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用语音合成功能。</Text>
+        <Text className="text-secondary-foreground">使用语音合成功能。</Text>
       </View>
 
       {/* 语音合成 */}
@@ -86,7 +91,7 @@ export default function ExpoSpeechScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 语音合成：将文本转换为语音
           {'\n'}2. 支持中文合成
           {'\n'}3. 可以控制语音的语速和音调

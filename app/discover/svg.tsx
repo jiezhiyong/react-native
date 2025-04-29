@@ -46,8 +46,13 @@ export default function ExpoSvgScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">Svg</Text>
+        <Text className="text-secondary-foreground">使用和配置 Svg 相关功能。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">SVG 图形</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用 SVG 图形和动画。</Text>
+        <Text className="text-secondary-foreground">使用 SVG 图形和动画。</Text>
       </View>
 
       {/* SVG 画布 */}
@@ -98,7 +103,7 @@ export default function ExpoSvgScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 基本图形：圆形、矩形、路径
           {'\n'}2. 动画效果：缩放、大小变化
           {'\n'}3. 交互控制：开始/重置动画

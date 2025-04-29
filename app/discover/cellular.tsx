@@ -93,6 +93,11 @@ export default function ExpoCellularScreen() {
   if (status?.status !== PermissionStatus.GRANTED) {
     return (
       <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+        <View className="mb-6">
+          <Text className="text-2xl font-bold mb-2">蜂窝网络</Text>
+          <Text className="text-secondary-foreground">获取和监控设备的蜂窝网络连接状态。</Text>
+        </View>
+
         <Text className="text-center mb-6">需要电话状态权限来访问蜂窝网络信息</Text>
         <Button onPress={() => requestPermission()}>
           <Text>授予权限</Text>

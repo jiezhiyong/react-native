@@ -6,6 +6,11 @@ import { Text } from '~/components/ui/text';
 export default function ExpoBlurScreen() {
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">模糊视图</Text>
+        <Text className="text-secondary-foreground">使用模糊效果为界面元素添加深度和层次感。</Text>
+      </View>
+
       <Text className="text-lg font-semibold mb-3">不同模糊强度效果对比 - Light</Text>
 
       <View className="flex-row justify-between mb-6">

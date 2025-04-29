@@ -66,6 +66,11 @@ export default function ExpoImageManipulatorScreen() {
 
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">图像处理</Text>
+        <Text className="text-secondary-foreground">对图像进行裁剪、旋转和调整等编辑操作。</Text>
+      </View>
+
       <View className="mb-2">
         <Text className="text-lg mb-2 font-medium">原始图片</Text>
         <Image source={{ uri: image }} contentFit="cover" style={{ height: 200, borderRadius: 6 }} />

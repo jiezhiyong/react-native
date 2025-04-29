@@ -59,6 +59,11 @@ export default function ExpoLinkingScreen() {
 
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">链接处理</Text>
+        <Text className="text-secondary-foreground">处理深层链接和与其他应用的交互。</Text>
+      </View>
+
       <View className="flex-col gap-2">
         <View>
           <Button className="flex-row justify-center items-center space-x-2" onPress={openWebUrl}>

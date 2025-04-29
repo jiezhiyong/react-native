@@ -1,14 +1,18 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as NavigationBar from 'expo-navigation-bar';
+import { Check } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
 
 export default function ExpoNavigationBarScreen() {
   const [visibility, setVisibility] = useState<NavigationBar.NavigationBarVisibility>('visible');
   const [backgroundColor, setBackgroundColor] = useState('#ffffff');
-  const [behavior, setBehavior] = useState<NavigationBar.NavigationBarBehavior>('inset-touch');
+  const [behavior, setBehavior] = useState<NavigationBar.NavigationBarBehavior>('overlay-swipe');
   const [position, setPosition] = useState<NavigationBar.NavigationBarPosition>('relative');
-  const [buttonStyle, setButtonStyle] = useState<NavigationBar.NavigationBarButtonStyle>('dark');
+  const [buttonStyle, setButtonStyle] = useState<NavigationBar.NavigationBarButtonStyle>('light');
   const [error, setError] = useState('');
 
   // 初始化导航栏设置
@@ -82,119 +86,98 @@ export default function ExpoNavigationBarScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">导航栏控制</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何控制和管理导航栏的样式和行为。</Text>
+        <Text className="text-2xl font-bold mb-2">导航栏</Text>
+        <Text className="text-secondary-foreground">自定义和控制设备的导航栏样式和行为</Text>
       </View>
 
       {/* 导航栏可见性控制 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">可见性控制</Text>
-        <TouchableOpacity
-          className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
-          onPress={toggleVisibility}
-        >
+        <Text className="text-base font-medium mb-2">可见性控制</Text>
+        <Button onPress={toggleVisibility} className="flex-row">
           <Ionicons name={visibility === 'visible' ? 'eye-off' : 'eye'} size={20} color="white" />
           <Text className="text-white ml-2">{visibility === 'visible' ? '隐藏导航栏' : '显示导航栏'}</Text>
-        </TouchableOpacity>
+        </Button>
       </View>
 
       {/* 背景颜色控制 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">背景颜色</Text>
+        <Text className="text-base font-medium mb-2">背景颜色</Text>
         <View className="flex-row justify-between">
-          {['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff'].map((color) => (
+          {['#ffffff', '#000000', '#ef4444', '#22c55e', '#3b82f6'].map((color) => (
             <TouchableOpacity
               key={color}
-              className="w-12 h-12 rounded-full"
+              className="size-14 rounded-full border justify-center items-center"
               style={{ backgroundColor: color }}
               onPress={() => changeBackgroundColor(color)}
-            />
+            >
+              {backgroundColor === color ? <Check /> : null}
+            </TouchableOpacity>
           ))}
         </View>
       </View>
 
       {/* 行为模式控制 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">行为模式</Text>
-        <View className="flex-row justify-between">
+        <Text className="text-base font-medium mb-2">行为模式</Text>
+        <View className="flex-row justify-between gap-2">
           {(['overlay-swipe', 'inset-swipe', 'inset-touch'] as const).map((mode) => (
-            <TouchableOpacity
+            <Button
+              className="flex-1"
               key={mode}
-              className={`p-4 rounded-lg ${behavior === mode ? 'bg-blue-500' : 'bg-gray-200'}`}
+              variant={behavior === mode ? 'default' : 'outline'}
               onPress={() => changeBehavior(mode)}
             >
-              <Text className={behavior === mode ? 'text-white' : 'text-gray-600'}>
-                {mode === 'overlay-swipe' ? '覆盖滑动' : mode === 'inset-swipe' ? '嵌入滑动' : '嵌入触摸'}
-              </Text>
-            </TouchableOpacity>
+              <Text>{mode === 'overlay-swipe' ? '覆盖滑动' : mode === 'inset-swipe' ? '嵌入滑动' : '嵌入触摸'}</Text>
+            </Button>
           ))}
         </View>
       </View>
 
       {/* 位置控制 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">位置</Text>
-        <View className="flex-row justify-between">
+        <Text className="text-base font-medium mb-2">位置</Text>
+        <View className="flex-row justify-between gap-2">
           {(['relative', 'absolute'] as const).map((pos) => (
-            <TouchableOpacity
+            <Button
               key={pos}
-              className={`p-4 rounded-lg ${position === pos ? 'bg-blue-500' : 'bg-gray-200'}`}
+              className="flex-1"
+              variant={position === pos ? 'default' : 'outline'}
               onPress={() => changePosition(pos)}
             >
-              <Text className={position === pos ? 'text-white' : 'text-gray-600'}>
+              <Text className={position === pos ? 'text-white' : 'text-secondary-foreground'}>
                 {pos === 'absolute' ? '绝对定位' : '相对定位'}
               </Text>
-            </TouchableOpacity>
+            </Button>
           ))}
         </View>
       </View>
 
       {/* 按钮样式控制 */}
       <View className="mb-8">
-        <Text className="text-base font-semibold mb-4">按钮样式</Text>
+        <Text className="text-base font-medium mb-2">按钮样式</Text>
         <View className="flex-row justify-between">
           {(['light', 'dark'] as const).map((style) => (
-            <TouchableOpacity
+            <Button
               key={style}
-              className={`p-4 rounded-lg ${buttonStyle === style ? 'bg-blue-500' : 'bg-gray-200'}`}
+              className="flex-1"
+              variant={buttonStyle === style ? 'default' : 'outline'}
               onPress={() => changeButtonStyle(style)}
             >
-              <Text className={buttonStyle === style ? 'text-white' : 'text-gray-600'}>
+              <Text className={buttonStyle === style ? 'text-white' : 'text-secondary-foreground'}>
                 {style === 'light' ? '浅色' : '深色'}
               </Text>
-            </TouchableOpacity>
+            </Button>
           ))}
         </View>
       </View>
 
       {/* 错误提示 */}
       {error ? (
-        <View className="bg-red-100 rounded-lg p-4 mb-8">
-          <Text className="text-red-500">{error}</Text>
+        <View>
+          <Text className="text-base font-medium mb-2">错误提示</Text>
+          <Text className="text-destructive">{error || '-'}</Text>
         </View>
       ) : null}
-
-      {/* 说明区域 */}
-      <View className="bg-gray-100 rounded-lg p-4">
-        <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
-          1. 可见性控制：显示或隐藏导航栏
-          {'\n'}2. 背景颜色：更改导航栏的背景颜色
-          {'\n'}3. 行为模式：控制导航栏与内容的交互方式
-          {'\n'}4. 位置：控制导航栏的定位方式
-          {'\n'}5. 按钮样式：控制导航栏按钮的颜色
-        </Text>
-      </View>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 需要安装 expo-navigation-bar
-          {'\n'}2. 此功能仅在 Android 平台上可用
-          {'\n'}3. 建议在真机上测试
-          {'\n'}4. 某些设备可能有特殊的行为限制
-        </Text>
-      </View>
     </ScrollView>
   );
 }

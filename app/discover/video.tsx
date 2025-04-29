@@ -22,8 +22,13 @@ export default function ExpoVideoScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">视频播放</Text>
+        <Text className="text-secondary-foreground">在应用中播放和控制视频内容。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">视频功能</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用 expo-video 播放视频。</Text>
+        <Text className="text-secondary-foreground">使用 expo-video 播放视频。</Text>
       </View>
 
       {/* 视频播放器 */}
@@ -78,7 +83,7 @@ export default function ExpoVideoScreen() {
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持视频播放和暂停
           {'\n'}2. 支持全屏播放
           {'\n'}3. 支持画中画模式

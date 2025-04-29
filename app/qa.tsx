@@ -122,7 +122,7 @@ const QuestionItem = ({
 
       {isExpanded && (
         <View className="p-4 bg-gray-50 border-t border-gray-100">
-          <Text className="text-gray-600 leading-6">{item.answer}</Text>
+          <Text className="text-secondary-foreground leading-6">{item.answer}</Text>
         </View>
       )}
     </View>
@@ -145,7 +145,7 @@ const CategoryTag = ({
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <Text className={`font-medium ${isSelected ? 'text-white' : 'text-gray-600'}`}>{category.name}</Text>
+      <Text className={`font-medium ${isSelected ? 'text-white' : 'text-secondary-foreground'}`}>{category.name}</Text>
     </TouchableOpacity>
   );
 };

@@ -7,7 +7,7 @@ import { Text } from '~/components/ui/text';
 
 /**
  * Expo Application 演示屏幕
- * 展示如何使用expo-application获取应用信息
+ * 使用expo-application获取应用信息
  */
 export default function ExpoApplicationScreen() {
   const [appInfo, setAppInfo] = useState({
@@ -141,6 +141,11 @@ export default function ExpoApplicationScreen() {
 
   return (
     <ScrollView className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">应用信息</Text>
+        <Text className="text-secondary-foreground">获取和显示应用程序的基本信息和状态。</Text>
+      </View>
+
       {renderInfoItem('应用名称', appInfo.applicationName)}
       {renderInfoItem('应用ID', appInfo.applicationId)}
       {renderInfoItem('应用版本', appInfo.nativeApplicationVersion)}

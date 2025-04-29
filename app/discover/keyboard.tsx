@@ -3,6 +3,7 @@ import { useKeyboardHandler } from 'react-native-keyboard-controller';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
 import { MessageItem } from '~/components/MessageItem';
+import { Text } from '~/components/ui/text';
 import { messages } from '~/mocks/messages';
 
 const PADDING_BOTTOM = 20;
@@ -39,6 +40,11 @@ export default function TabTwoScreen() {
 
   return (
     <View style={styles.container}>
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">键盘控制</Text>
+        <Text className="text-secondary-foreground">管理和响应屏幕键盘的显示和隐藏。</Text>
+      </View>
+
       <FlatList
         data={messages}
         renderItem={({ item }) => <MessageItem message={item} />}

@@ -51,8 +51,13 @@ export default function ExpoSharingScreen() {
   return (
     <ScrollView className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">内容分享</Text>
+        <Text className="text-secondary-foreground">实现应用内容的分享功能。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="text-lg font-bold mb-2">分享功能</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何使用 Expo 的分享功能。</Text>
+        <Text className="text-secondary-foreground">使用 Expo 的分享功能。</Text>
       </View>
 
       {/* 分享文本 */}
@@ -102,14 +107,14 @@ export default function ExpoSharingScreen() {
       {shareResult ? (
         <View className="bg-gray-100 rounded-lg p-4 mb-8">
           <Text className="text-base font-semibold mb-2">分享结果</Text>
-          <Text className="text-gray-600">{shareResult}</Text>
+          <Text className="text-secondary-foreground">{shareResult}</Text>
         </View>
       ) : null}
 
       {/* 说明区域 */}
       <View className="bg-gray-100 rounded-lg p-4">
         <Text className="text-base font-semibold mb-2">使用说明</Text>
-        <Text className="text-gray-600">
+        <Text className="text-secondary-foreground">
           1. 支持文本分享
           {'\n'}2. 支持图片分享
           {'\n'}3. 支持文件分享

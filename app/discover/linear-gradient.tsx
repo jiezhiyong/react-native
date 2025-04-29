@@ -8,6 +8,11 @@ import { Text } from '~/components/ui/text';
 export default function ExpoLinearGradientScreen() {
   return (
     <View className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">线性渐变</Text>
+        <Text className="text-secondary-foreground">使用线性渐变创建丰富多彩的背景和界面元素。</Text>
+      </View>
+
       {/* 基础渐变背景 */}
       <View className="mb-6">
         <Text className="text-lg font-medium mb-2">基础渐变背景</Text>

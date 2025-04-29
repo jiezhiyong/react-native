@@ -1,133 +1,76 @@
-import { Ionicons } from '@expo/vector-icons';
-import * as MediaLibrary from 'expo-media-library';
-import * as Sharing from 'expo-sharing';
-import { useRef, useState } from 'react';
-import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { captureRef } from 'react-native-view-shot';
+import * as ScreenCapture from 'expo-screen-capture';
+import { useState } from 'react';
+import { View } from 'react-native';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
+import { useEffectAsync } from '~/hooks/use-effect-async';
 
 export default function ExpoScreenCaptureScreen() {
-  const [isCapturing, setIsCapturing] = useState(false);
-  const [screenshotUri, setScreenshotUri] = useState<string | null>(null);
-  const viewRef = useRef<View>(null);
+  // 自动阻止屏幕截图（组件加载时启动保护，卸载时移除保护）
+  ScreenCapture.usePreventScreenCapture();
 
-  const requestPermissions = async () => {
-    const { status } = await MediaLibrary.requestPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert('需要权限', '需要相册权限才能保存截图');
-      return false;
-    }
-    return true;
-  };
+  const [status, requestPermission] = ScreenCapture.usePermissions();
+  const [isProtectionEnabled, setIsProtectionEnabled] = useState(true);
+  const [isAvailable, setIsAvailable] = useState(false);
+  const [screenshotCount, setScreenshotCount] = useState(0);
+  const [lastScreenshotTime, setLastScreenshotTime] = useState<string | null>(null);
 
-  const takeScreenshot = async () => {
-    try {
-      setIsCapturing(true);
-      if (!viewRef.current) return;
-
-      const uri = await captureRef(viewRef, {
-        format: 'png',
-        quality: 1,
-      });
-      setScreenshotUri(uri);
-    } catch (error) {
-      console.error('截图失败:', error);
-      Alert.alert('错误', '截图失败');
-    } finally {
-      setIsCapturing(false);
+  // 手动控制屏幕捕获保护
+  const toggleProtection = async () => {
+    if (isProtectionEnabled) {
+      await ScreenCapture.allowScreenCaptureAsync();
+      setIsProtectionEnabled(false);
+    } else {
+      await ScreenCapture.preventScreenCaptureAsync();
+      setIsProtectionEnabled(true);
     }
   };
 
-  const saveScreenshot = async () => {
-    if (!screenshotUri) return;
+  useEffectAsync(async () => {
+    await requestPermission();
+    const res = await ScreenCapture.isAvailableAsync();
+    setIsAvailable(res);
 
-    try {
-      const hasPermission = await requestPermissions();
-      if (!hasPermission) return;
+    // 添加屏幕截图监听器
+    const subscription = ScreenCapture.addScreenshotListener(() => {
+      const now = new Date();
+      setLastScreenshotTime(now.toLocaleTimeString());
+      setScreenshotCount((prev) => prev + 1);
+    });
 
-      await MediaLibrary.saveToLibraryAsync(screenshotUri);
-      Alert.alert('成功', '截图已保存到相册');
-    } catch (error) {
-      console.error('保存失败:', error);
-      Alert.alert('错误', '保存截图失败');
-    }
-  };
-
-  const shareScreenshot = async () => {
-    if (!screenshotUri) return;
-
-    try {
-      await Sharing.shareAsync(screenshotUri);
-    } catch (error) {
-      console.error('分享失败:', error);
-      Alert.alert('错误', '分享截图失败');
-    }
-  };
+    // 组件卸载时清理监听器
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <View className="flex-1 p-6">
       <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">屏幕截图</Text>
-        <Text className="text-gray-600 mb-4">此功能展示了如何捕获屏幕内容并保存或分享。</Text>
-      </View>
-
-      <View ref={viewRef} className="space-y-6">
-        {/* 截图预览 */}
-        {screenshotUri && (
-          <View className="space-y-4">
-            <Text className="text-base font-semibold">截图预览</Text>
-            <Image source={{ uri: screenshotUri }} className="w-full h-64 rounded-lg" resizeMode="contain" />
-            <View className="flex-row space-x-4">
-              <TouchableOpacity
-                className="flex-1 bg-blue-500 rounded-lg p-3 flex-row items-center justify-center"
-                onPress={saveScreenshot}
-              >
-                <Ionicons name="save" size={20} color="white" />
-                <Text className="text-white ml-2">保存到相册</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                className="flex-1 bg-green-500 rounded-lg p-3 flex-row items-center justify-center"
-                onPress={shareScreenshot}
-              >
-                <Ionicons name="share" size={20} color="white" />
-                <Text className="text-white ml-2">分享</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-
-        {/* 示例内容 */}
-        <View className="space-y-4">
-          <Text className="text-base font-semibold">示例内容</Text>
-          <View className="bg-gray-100 rounded-lg p-6">
-            <Text className="text-lg font-bold mb-2">这是一个示例标题</Text>
-            <Text className="text-gray-600 mb-4">这是一段示例文本，用于展示截图功能。截图将包含这个区域的内容。</Text>
-            <View className="flex-row space-x-4">
-              <View className="w-20 h-20 bg-blue-500 rounded-lg" />
-              <View className="w-20 h-20 bg-green-500 rounded-lg" />
-              <View className="w-20 h-20 bg-yellow-500 rounded-lg" />
-            </View>
-          </View>
-        </View>
-
-        {/* 截图按钮 */}
-        <TouchableOpacity
-          className="bg-red-500 rounded-lg p-4 flex-row items-center justify-center"
-          onPress={takeScreenshot}
-          disabled={isCapturing}
-        >
-          <Ionicons name={isCapturing ? 'hourglass' : 'camera'} size={20} color="white" />
-          <Text className="text-white ml-2">{isCapturing ? '正在截图...' : '截图'}</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 需要相册权限才能保存截图
-          {'\n'}2. 截图质量可以调整
-          {'\n'}3. 支持分享到其他应用
+        <Text className="text-2xl font-bold mb-2">屏幕保护</Text>
+        <Text className="text-secondary-foreground mb-4">
+          保护应用中屏幕不被捕获或录制（目前，在 iOS 上无法阻止截屏。这是由于底层操作系统限制造成的）
         </Text>
       </View>
-    </ScrollView>
+
+      {/* 屏幕截图保护状态和控制 */}
+      <View className="p-4 bg-muted rounded-lg mb-6 flex gap-2">
+        <Text className="text-lg font-medium">屏幕截图保护状态: {isProtectionEnabled ? '已启用' : '已禁用'}</Text>
+        <Text>可用状态: {isAvailable ? '可用' : '不可用'}</Text>
+        <Text>权限状态: {status?.granted ? '已授予' : '未授予'}</Text>
+      </View>
+
+      <Button onPress={toggleProtection} className="mb-6">
+        <Text>{isProtectionEnabled ? '禁用屏幕截图保护' : '启用屏幕截图保护'}</Text>
+      </Button>
+
+      {/* 屏幕截图监听器信息 */}
+      <View className="p-4 bg-muted rounded-lg flex gap-2">
+        <Text className="text-lg font-medium">屏幕截图监听器</Text>
+        <Text>截图次数: {screenshotCount}</Text>
+        <Text className="mt-1">上次截图时间: {lastScreenshotTime || '?'}</Text>
+      </View>
+    </View>
   );
 }

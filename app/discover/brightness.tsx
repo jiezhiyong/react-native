@@ -91,6 +91,11 @@ export default function ExpoBrightnessScreen() {
   return (
     <View className="flex-1 p-6">
       <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">屏幕亮度</Text>
+        <Text className="text-secondary-foreground">控制和调节设备屏幕的亮度级别。</Text>
+      </View>
+
+      <View className="mb-6">
         <Text className="font-bold mb-2">当前设备亮度</Text>
         <Text className="text-3xl font-semibold">{Math.round(brightness * 100)}%</Text>
       </View>

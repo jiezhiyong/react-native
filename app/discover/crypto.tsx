@@ -1,6 +1,6 @@
 import * as Crypto from 'expo-crypto';
 import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { toast } from '~/components/ui/sonner';
 
@@ -79,6 +79,11 @@ export default function ExpoCryptoScreen() {
 
   return (
     <ScrollView className="flex-1 p-6">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">加密功能</Text>
+        <Text className="text-secondary-foreground">在应用中使用加密算法保护敏感数据。</Text>
+      </View>
+
       {/* 输入区域 */}
       <Card className="p-4 mb-4">
         <Text className="font-medium mb-2">输入文本</Text>
