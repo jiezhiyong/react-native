@@ -151,7 +151,7 @@ export default function ExpoSQLiteScreen() {
     <View className="flex-1 px-6 pt-6">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">SQLite 数据库</Text>
-        <Text className="text-secondary-foreground">在应用中使用 SQLite 进行结构化数据存储。</Text>
+        <Text className="text-muted-foreground">在应用中使用 SQLite 进行结构化数据存储。</Text>
       </View>
 
       {/* 添加新任务 */}
