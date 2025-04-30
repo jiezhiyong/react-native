@@ -70,10 +70,10 @@ export default function ExpoMaskedViewScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">遮罩视图</Text>
-        <Text className="text-secondary-foreground">使用遮罩视图来创建特殊的视觉效果。</Text>
+        <Text className="text-muted-foreground">使用遮罩视图来创建特殊的视觉效果。</Text>
       </View>
 
       {/* 遮罩类型选择 */}
@@ -83,9 +83,7 @@ export default function ExpoMaskedViewScreen() {
           onPress={() => setSelectedMask('text')}
         >
           <Ionicons name="text" size={24} color={selectedMask === 'text' ? 'white' : 'gray'} />
-          <Text className={cn('mt-2', selectedMask === 'text' ? 'text-white' : 'text-secondary-foreground')}>
-            文字遮罩
-          </Text>
+          <Text className={cn('mt-2', selectedMask === 'text' ? 'text-white' : 'text-muted-foreground')}>文字遮罩</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -93,7 +91,7 @@ export default function ExpoMaskedViewScreen() {
           onPress={() => setSelectedMask('circle')}
         >
           <Ionicons name="ellipse" size={24} color={selectedMask === 'circle' ? 'white' : 'gray'} />
-          <Text className={cn('mt-2', selectedMask === 'circle' ? 'text-white' : 'text-secondary-foreground')}>
+          <Text className={cn('mt-2', selectedMask === 'circle' ? 'text-white' : 'text-muted-foreground')}>
             圆形遮罩
           </Text>
         </TouchableOpacity>
@@ -103,7 +101,7 @@ export default function ExpoMaskedViewScreen() {
           onPress={() => setSelectedMask('gradient')}
         >
           <Ionicons name="color-palette" size={24} color={selectedMask === 'gradient' ? 'white' : 'gray'} />
-          <Text className={cn('mt-2', selectedMask === 'gradient' ? 'text-white' : 'text-secondary-foreground')}>
+          <Text className={cn('mt-2', selectedMask === 'gradient' ? 'text-white' : 'text-muted-foreground')}>
             渐变遮罩
           </Text>
         </TouchableOpacity>

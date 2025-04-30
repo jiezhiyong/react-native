@@ -1,35 +1,37 @@
-import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import { PermissionStatus } from 'expo-modules-core';
 import * as TaskManager from 'expo-task-manager';
 import { useEffect, useState } from 'react';
-import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
 
 // 定义位置任务名称
 const LOCATION_TASK_NAME = 'background-location-task';
-
-// 定义位置任务执行器
-TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
-  if (error) {
-    console.error('位置任务执行错误:', error.message);
-    return Promise.resolve();
-  }
-  if (data) {
-    const { locations } = data as { locations: any[] };
-    console.log('收到位置更新:', locations);
-    // 这里可以处理位置数据，比如发送到服务器等
-  }
-  return Promise.resolve();
-});
 
 export default function ExpoTaskManagerScreen() {
   const [isTaskRegistered, setIsTaskRegistered] = useState(false);
   const [isTaskAvailable, setIsTaskAvailable] = useState(false);
   const [error, setError] = useState('');
   const [locationPermission, setLocationPermission] = useState<Location.PermissionStatus | null>(null);
+  const [locations, setLocations] = useState<any | null>(null);
 
-  // 检查任务管理器是否可用
   useEffect(() => {
+    // 定义位置任务执行器
+    TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
+      if (error) {
+        console.error('位置任务执行错误:', error.message);
+        return;
+      }
+      if (data) {
+        const { locations } = data as { locations: any[] };
+        console.log('收到位置更新:', locations);
+        setLocations(locations);
+      }
+    });
+
+    // 检查任务管理器是否可用
     async function checkAvailability() {
       try {
         const available = await TaskManager.isAvailableAsync();
@@ -38,11 +40,8 @@ export default function ExpoTaskManagerScreen() {
         setError('检查任务管理器可用性失败: ' + (error as Error).message);
       }
     }
-    checkAvailability();
-  }, []);
 
-  // 检查任务是否已注册
-  useEffect(() => {
+    // 检查任务是否已注册
     async function checkTaskRegistration() {
       try {
         const registered = await TaskManager.isTaskRegisteredAsync(LOCATION_TASK_NAME);
@@ -51,6 +50,8 @@ export default function ExpoTaskManagerScreen() {
         setError('检查任务注册状态失败: ' + (error as Error).message);
       }
     }
+
+    checkAvailability();
     checkTaskRegistration();
   }, []);
 
@@ -98,78 +99,47 @@ export default function ExpoTaskManagerScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
-        <Text className="text-2xl font-bold mb-2">Task Manager</Text>
-        <Text className="text-secondary-foreground">使用和配置 Task Manager 相关功能。</Text>
-      </View>
-
-      <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">位置更新任务</Text>
-        <Text className="text-secondary-foreground">在后台持续获取位置信息。</Text>
+        <Text className="text-2xl font-bold mb-2">任务管理器</Text>
+        <Text className="text-muted-foreground">使用和配置任务管理器相关功能</Text>
       </View>
 
       {/* 任务管理器状态 */}
-      <View className="mb-8">
-        <Text className="text-base font-medium mb-4">任务状态</Text>
-        <View className="bg-muted rounded-lg p-4">
-          <Text className="text-secondary-foreground mb-2">任务管理器可用: {isTaskAvailable ? '是' : '否'}</Text>
-          <Text className="text-secondary-foreground mb-2">位置任务已注册: {isTaskRegistered ? '是' : '否'}</Text>
-          <Text className="text-secondary-foreground mb-2">位置权限: {locationPermission || '未请求'}</Text>
+      <View className="mb-6">
+        <Text className="font-medium mb-2">任务状态</Text>
+        <View className="bg-muted rounded-lg p-4 gap-2">
+          <Text>任务管理器可用: {isTaskAvailable ? '是' : '否'}</Text>
+          <Text>位置任务已注册: {isTaskRegistered ? '是' : '否'}</Text>
+          <Text>位置权限: {locationPermission || '未请求'}</Text>
         </View>
       </View>
 
       {/* 任务控制 */}
-      <View className="mb-8">
-        <Text className="text-base font-medium mb-4">任务控制</Text>
-        <View className="space-y-4">
-          <TouchableOpacity
-            className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
-            onPress={requestLocationPermissions}
-            disabled={!isTaskAvailable || isTaskRegistered}
-          >
-            <Ionicons name="location" size={20} color="white" />
-            <Text className="text-white ml-2">启动位置更新</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className="bg-red-500 rounded-lg p-4 flex-row items-center justify-center"
-            onPress={stopLocationUpdates}
-            disabled={!isTaskRegistered}
-          >
-            <Ionicons name="stop" size={20} color="white" />
-            <Text className="text-white ml-2">停止位置更新</Text>
-          </TouchableOpacity>
-        </View>
+      <View className="mb-6">
+        <Text className="font-medium mb-2">任务控制</Text>
+        <Button
+          onPress={isTaskRegistered ? stopLocationUpdates : requestLocationPermissions}
+          disabled={!isTaskAvailable}
+          variant={isTaskRegistered ? 'destructive' : 'default'}
+        >
+          <Text>{isTaskRegistered ? '停止位置更新' : '启动位置更新'}</Text>
+        </Button>
       </View>
 
-      {/* 错误提示 */}
-      {error ? (
-        <View className="bg-red-100 rounded-lg p-4 mb-8">
-          <Text className="text-red-500">{error}</Text>
+      {/* 位置更新 */}
+      {locations ? (
+        <View className="bg-muted rounded-lg p-4 mb-8">
+          <Text>{JSON.stringify(locations, null, 2)}</Text>
         </View>
       ) : null}
 
-      {/* 说明区域 */}
-      <View className="bg-muted rounded-lg p-4">
-        <Text className="text-base font-medium mb-2">使用说明</Text>
-        <Text className="text-secondary-foreground">
-          1. 点击"启动位置更新"按钮请求位置权限
-          {'\n'}2. 需要同时授予前台和后台位置权限
-          {'\n'}3. 位置更新将在后台持续进行
-          {'\n'}4. 可以随时停止位置更新
-        </Text>
-      </View>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 需要安装 expo-location
-          {'\n'}2. 在 iOS 上需要配置后台模式
-          {'\n'}3. 在 Android 上需要配置前台服务
-          {'\n'}4. 建议在真机上测试
-        </Text>
-      </View>
+      {/* 错误提示 */}
+      {error ? (
+        <View className="bg-destructive/10 rounded-lg p-4 mb-8">
+          <Text className="text-destructive">{error}</Text>
+        </View>
+      ) : null}
     </ScrollView>
   );
 }

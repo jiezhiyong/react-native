@@ -9,13 +9,13 @@ export default function RouteDetailScreen() {
   const router = useRouter();
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">路由示例 - 详情</Text>
-        <Text className="text-secondary-foreground">使用和配置 Router 相关功能。</Text>
+        <Text className="text-muted-foreground">使用和配置 Router 相关功能。</Text>
       </View>
 
-      <Text className="text-lg font-medium mb-2">接收到的参数</Text>
+      <Text className="font-medium mb-2">接收到的参数</Text>
       <View className="bg-muted rounded-lg p-4">
         <Text>{JSON.stringify(params)}</Text>
       </View>

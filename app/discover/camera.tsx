@@ -50,7 +50,7 @@ export default function ExpoCameraScreen() {
   // 如果权限状态未确定
   if (!cameraPermission) {
     return (
-      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+      <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
         <Text className="text-center">正在检查相机权限...</Text>
       </View>
     );
@@ -59,7 +59,7 @@ export default function ExpoCameraScreen() {
   // 如果没有相机权限
   if (!cameraPermission.granted) {
     return (
-      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+      <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
         <Text className="text-center mb-6">需要相机权限才能使用此功能</Text>
         <Button onPress={requestCameraPermission}>
           <Text>申请相机权限</Text>
@@ -181,10 +181,10 @@ export default function ExpoCameraScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">相机功能</Text>
-        <Text className="text-secondary-foreground">使用设备相机拍摄照片和录制视频，并支持保存到相册。</Text>
+        <Text className="text-muted-foreground">使用设备相机拍摄照片和录制视频，并支持保存到相册。</Text>
       </View>
 
       <CameraView
@@ -198,7 +198,7 @@ export default function ExpoCameraScreen() {
         responsiveOrientationWhenOrientationLocked
       >
         {/* 顶部工具栏 */}
-        <View className="absolute top-0 w-full flex-row justify-between p-6 bg-black/30">
+        <View className="absolute top-0 w-full flex-row justify-between p-5 bg-black/30">
           <TouchableOpacity onPress={toggleFlash} className="items-center">
             {flash === 'on' ? <Zap size={20} color="yellow" /> : <ZapOff size={20} color="white" />}
           </TouchableOpacity>

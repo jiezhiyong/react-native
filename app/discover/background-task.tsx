@@ -120,7 +120,7 @@ export default function ExpoBackgroundTaskScreen() {
 
     <View className="mb-6">
       <Text className="text-2xl font-bold mb-2">后台任务</Text>
-      <Text className="text-secondary-foreground">在应用进入后台时执行特定任务和操作。</Text>
+      <Text className="text-muted-foreground">在应用进入后台时执行特定任务和操作。</Text>
     </View>;
   }, []);
 
@@ -143,7 +143,7 @@ export default function ExpoBackgroundTaskScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       {/* 状态信息 */}
       <View className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200 gap-3">
         <Text className="text-lg font-bold">当前状态</Text>

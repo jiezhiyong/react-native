@@ -43,12 +43,10 @@ export default function ExpoHapticsScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">触觉反馈</Text>
-        <Text className="text-secondary-foreground">
-          使用触觉反馈增强用户交互体验，为不同的操作提供适当的振动反馈。
-        </Text>
+        <Text className="text-muted-foreground">使用触觉反馈增强用户交互体验，为不同的操作提供适当的振动反馈。</Text>
       </View>
 
       <View className="flex-col gap-3">
@@ -68,7 +66,7 @@ export default function ExpoHapticsScreen() {
 
       <View className="flex-col gap-3">
         <Text className="text-lg font-bold">系统通知反馈</Text>
-        <Text className="text-sm text-secondary-foreground">iOS 设备会触发不同类型的系统通知反馈</Text>
+        <Text className="text-sm text-muted-foreground">iOS 设备会触发不同类型的系统通知反馈</Text>
         <Button className="w-full bg-green-600" onPress={triggerSuccessHaptic}>
           <Text>成功反馈</Text>
         </Button>
@@ -84,7 +82,7 @@ export default function ExpoHapticsScreen() {
 
       <View className="flex-col gap-3">
         <Text className="text-lg font-bold">选择反馈</Text>
-        <Text className="text-sm text-secondary-foreground">轻微的触觉反馈，适用于用户选择项目时</Text>
+        <Text className="text-sm text-muted-foreground">轻微的触觉反馈，适用于用户选择项目时</Text>
         <Button onPress={triggerSelectionHaptic}>
           <Text>选择反馈</Text>
         </Button>

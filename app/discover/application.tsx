@@ -3,6 +3,7 @@ import { ApplicationReleaseType } from 'expo-application';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import { InfoItem } from '~/components/InfoItem';
 import { Text } from '~/components/ui/text';
 
 /**
@@ -32,16 +33,16 @@ export default function ExpoApplicationScreen() {
     async function loadApplicationInfo() {
       try {
         // 获取应用名称（可能仅在某些平台支持）
-        const applicationName = Application.applicationName || '未知';
+        const applicationName = Application.applicationName || '-';
 
         // 获取应用ID
-        const applicationId = Application.applicationId || '未知';
+        const applicationId = Application.applicationId || '-';
 
         // 获取应用版本号（用户可见的版本号）
-        const nativeApplicationVersion = Application.nativeApplicationVersion || '未知';
+        const nativeApplicationVersion = Application.nativeApplicationVersion || '-';
 
         // 获取应用构建版本号（内部版本号）
-        const nativeBuildVersion = Application.nativeBuildVersion || '未知';
+        const nativeBuildVersion = Application.nativeBuildVersion || '-';
 
         // 获取应用安装时间（仅Android支持）
         let installationTime = '-';
@@ -56,7 +57,7 @@ export default function ExpoApplicationScreen() {
         let installReferrer = '-';
         try {
           const referrer = await Application?.getInstallReferrerAsync();
-          installReferrer = referrer || '未知';
+          installReferrer = referrer || '-';
         } catch {
           // 忽略错误
         }
@@ -65,7 +66,7 @@ export default function ExpoApplicationScreen() {
         let androidId = '-';
         try {
           const id = await Application?.getAndroidId();
-          androidId = id || '未知';
+          androidId = id || '-';
         } catch {
           // 忽略错误
         }
@@ -74,7 +75,7 @@ export default function ExpoApplicationScreen() {
         let iosApplicationReleaseType = '-' as unknown as ApplicationReleaseType;
         try {
           const releaseType = await Application?.getIosApplicationReleaseTypeAsync();
-          iosApplicationReleaseType = (releaseType || '未知') as unknown as ApplicationReleaseType;
+          iosApplicationReleaseType = (releaseType || '-') as unknown as ApplicationReleaseType;
         } catch {
           // 忽略错误
         }
@@ -83,7 +84,7 @@ export default function ExpoApplicationScreen() {
         let iosIdForVendor = '-';
         try {
           const id = await Application?.getIosIdForVendorAsync();
-          iosIdForVendor = id || '未知';
+          iosIdForVendor = id || '-';
         } catch {
           // 忽略错误
         }
@@ -92,7 +93,7 @@ export default function ExpoApplicationScreen() {
         let iosPushNotificationServiceEnvironment = '-';
         try {
           const environment = await Application?.getIosPushNotificationServiceEnvironmentAsync();
-          iosPushNotificationServiceEnvironment = environment || '未知';
+          iosPushNotificationServiceEnvironment = environment || '-';
         } catch {
           // 忽略错误
         }
@@ -131,32 +132,27 @@ export default function ExpoApplicationScreen() {
     loadApplicationInfo();
   }, []);
 
-  // 渲染信息项
-  const renderInfoItem = (label: string, value: string | number | boolean) => (
-    <View className="py-2 border-b border-gray-100">
-      <Text className="text-gray-500 flex-1">{label}</Text>
-      <Text className="text-lg font-medium">{value ? value.toString() : '-'}</Text>
-    </View>
-  );
-
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">应用信息</Text>
-        <Text className="text-secondary-foreground">获取和显示应用程序的基本信息和状态。</Text>
+        <Text className="text-muted-foreground">获取和显示应用程序的基本信息和状态。</Text>
       </View>
 
-      {renderInfoItem('应用名称', appInfo.applicationName)}
-      {renderInfoItem('应用ID', appInfo.applicationId)}
-      {renderInfoItem('应用版本', appInfo.nativeApplicationVersion)}
-      {renderInfoItem('构建版本', appInfo.nativeBuildVersion)}
-      {renderInfoItem('安装时间', appInfo.installationTime)}
-      {renderInfoItem('安装来源', appInfo.installReferrer)}
-      {renderInfoItem('Android ID', appInfo.androidId)}
-      {renderInfoItem('iOS 应用发布类型', appInfo.iosApplicationReleaseType)}
-      {renderInfoItem('iOS ID For Vendor', appInfo.iosIdForVendor)}
-      {renderInfoItem('iOS 推送通知服务环境', appInfo.iosPushNotificationServiceEnvironment)}
-      {renderInfoItem('最后更新时间', appInfo.lastUpdateTime)}
+      <InfoItem label="应用名称" value={appInfo.applicationName} />
+      <InfoItem label="应用ID" value={appInfo.applicationId} />
+      <InfoItem label="应用版本" value={appInfo.nativeApplicationVersion} />
+      <InfoItem label="构建版本" value={appInfo.nativeBuildVersion} />
+      <InfoItem label="安装时间" value={appInfo.installationTime} />
+      <InfoItem label="安装来源" value={appInfo.installReferrer} />
+      <InfoItem label="Android ID" value={appInfo.androidId} />
+      <InfoItem
+        label="iOS 应用发布类型"
+        value={`${appInfo.iosApplicationReleaseType}, ${ApplicationReleaseType[appInfo.iosApplicationReleaseType]}`}
+      />
+      <InfoItem label="iOS ID For Vendor (IDFV)" value={appInfo.iosIdForVendor} />
+      <InfoItem label="iOS 推送通知服务环境" value={appInfo.iosPushNotificationServiceEnvironment} />
+      <InfoItem label="最后更新时间" value={appInfo.lastUpdateTime} />
     </ScrollView>
   );
 }

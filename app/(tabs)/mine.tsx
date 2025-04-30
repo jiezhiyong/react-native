@@ -114,7 +114,7 @@ const UserHeader = () => {
         <Image source={{ uri: avatar || '' }} className="w-12 h-12 rounded-full bg-muted" />
         <View className="ml-4">
           <Text className="text-lg font-bold">{name}</Text>
-          <Text className="text-gray-500">{mobile || '未绑定手机号'}</Text>
+          <Text className="text-muted-foreground">{mobile || '未绑定手机号'}</Text>
         </View>
         <View className="ml-auto">
           <TouchableOpacity onPress={signOut}>

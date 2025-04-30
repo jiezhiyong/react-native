@@ -86,16 +86,16 @@ export default function EncodingScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">编码工具</Text>
-        <Text className="text-secondary-foreground">在应用中进行各种数据编码和解码操作。</Text>
+        <Text className="text-muted-foreground">在应用中进行各种数据编码和解码操作。</Text>
       </View>
 
       {/* 编码区域 */}
       <Card className="p-4 mb-4">
         <Text className="font-medium mb-2">文本编码 - TextEncoder</Text>
-        <Text className="text-secondary-foreground text-sm mb-3">
+        <Text className="text-muted-foreground text-sm mb-3">
           将输入的文本编码为UTF-8字节序列，并显示为十六进制字符串
         </Text>
         <Input
@@ -111,7 +111,7 @@ export default function EncodingScreen() {
         {encodedResult ? (
           <View className="bg-card-foreground/5 p-3 rounded-md mt-2">
             <Text className="font-medium mb-1">编码结果 (十六进制):</Text>
-            <Text className="text-secondary-foreground break-all text-xs">{encodedResult}</Text>
+            <Text className="text-muted-foreground break-all text-xs">{encodedResult}</Text>
           </View>
         ) : null}
       </Card>
@@ -119,7 +119,7 @@ export default function EncodingScreen() {
       {/* 解码区域 */}
       <Card className="p-4 mb-4">
         <Text className="font-medium mb-2">字节解码 - TextDecoder</Text>
-        <Text className="text-secondary-foreground text-sm mb-3">
+        <Text className="text-muted-foreground text-sm mb-3">
           将十六进制字符串解码为文本（格式为用空格分隔的十六进制值，如: "48 65 6c 6c 6f"）
         </Text>
         <Textarea
@@ -135,7 +135,7 @@ export default function EncodingScreen() {
         {decodedResult ? (
           <View className="bg-card-foreground/5 p-3 rounded-md mt-2">
             <Text className="font-medium mb-1">解码结果:</Text>
-            <Text className="text-secondary-foreground">{decodedResult}</Text>
+            <Text className="text-muted-foreground">{decodedResult}</Text>
           </View>
         ) : null}
       </Card>

@@ -65,10 +65,10 @@ export default function ExpoImageManipulatorScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">图像处理</Text>
-        <Text className="text-secondary-foreground">对图像进行裁剪、旋转和调整等编辑操作。</Text>
+        <Text className="text-muted-foreground">对图像进行裁剪、旋转和调整等编辑操作。</Text>
       </View>
 
       <View className="mb-2">

@@ -7,21 +7,21 @@ import { Text } from '~/components/ui/text';
 
 export default function ExpoLinearGradientScreen() {
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">线性渐变</Text>
-        <Text className="text-secondary-foreground">使用线性渐变创建丰富多彩的背景和界面元素。</Text>
+        <Text className="text-muted-foreground">使用线性渐变创建丰富多彩的背景和界面元素。</Text>
       </View>
 
       {/* 基础渐变背景 */}
       <View className="mb-6">
-        <Text className="text-lg font-medium mb-2">基础渐变背景</Text>
+        <Text className="font-medium mb-2">基础渐变背景</Text>
         <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={{ height: 80, borderRadius: 6 }} />
       </View>
 
       {/* 对角线渐变 */}
       <View className="mb-6">
-        <Text className="text-lg font-medium mb-2">对角线渐变</Text>
+        <Text className="font-medium mb-2">对角线渐变</Text>
         <LinearGradient
           colors={['#ff9a9e', '#fad0c4']}
           start={{ x: 0, y: 0 }}
@@ -32,7 +32,7 @@ export default function ExpoLinearGradientScreen() {
 
       {/* 多色渐变 */}
       <View className="mb-6">
-        <Text className="text-lg font-medium mb-2">多色渐变</Text>
+        <Text className="font-medium mb-2">多色渐变</Text>
         <LinearGradient
           colors={['#f43f5e', '#ec4899', '#8b5cf6', '#3b82f6']}
           start={{ x: 0, y: 0 }}
@@ -43,7 +43,7 @@ export default function ExpoLinearGradientScreen() {
 
       {/* 渐变按钮 */}
       <View className="mb-6">
-        <Text className="text-lg font-medium mb-2">渐变按钮</Text>
+        <Text className="font-medium mb-2">渐变按钮</Text>
         <LinearGradient
           colors={['#06b6d4', '#3b82f6']}
           start={{ x: 0, y: 0 }}

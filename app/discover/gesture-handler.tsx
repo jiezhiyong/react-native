@@ -80,7 +80,7 @@ const DraggableCard: React.FC = () => {
         <View className="flex-row items-center justify-center">
           <Move size={40} className="text-primary" />
         </View>
-        <Text className="text-sm text-center mt-2 text-secondary-foreground">双击可放大/缩小</Text>
+        <Text className="text-sm text-center mt-2 text-muted-foreground">双击可放大/缩小</Text>
       </Animated.View>
     </GestureDetector>
   );
@@ -123,10 +123,10 @@ const TapCard: React.FC = () => {
     <GestureDetector gesture={tapGesture}>
       <Animated.View style={[animatedStyle]}>
         <Card className="p-4 items-center justify-center">
-          <CardContent className="p-6 items-center">
+          <CardContent className="p-5 items-center">
             <Hand size={40} />
             <Text className="text-lg font-bold text-center mt-4">点击手势示例（单击增加，双击重置）</Text>
-            <Text className="text-base text-center mt-2 text-secondary-foreground">点击次数: {taps}</Text>
+            <Text className="text-base text-center mt-2 text-muted-foreground">点击次数: {taps}</Text>
           </CardContent>
         </Card>
       </Animated.View>
@@ -177,7 +177,7 @@ const PinchRotateCard: React.FC = () => {
           style={{ width: 200, height: 200, borderRadius: 10 }}
           contentFit="cover"
         />
-        <Text className="text-sm text-center mt-2 text-secondary-foreground">使用两指进行缩放和旋转</Text>
+        <Text className="text-sm text-center mt-2 text-muted-foreground">使用两指进行缩放和旋转</Text>
       </Animated.View>
     </GestureDetector>
   );
@@ -220,7 +220,7 @@ const LongPressCard: React.FC = () => {
       <GestureDetector gesture={longPress}>
         <Animated.View style={[styles.box, animatedStyle]}></Animated.View>
       </GestureDetector>
-      <Text className="text-sm text-center mt-2 text-secondary-foreground">长按方块改变颜色</Text>
+      <Text className="text-sm text-center mt-2 text-muted-foreground">长按方块改变颜色</Text>
     </View>
   );
 };
@@ -246,7 +246,7 @@ const SwipeToDeleteCard: React.FC = () => {
       ))}
       {items.length === 0 && (
         <View className="items-center py-6">
-          <Text className="text-secondary-foreground">所有项目已删除</Text>
+          <Text className="text-muted-foreground">所有项目已删除</Text>
           <Button
             className="mt-4"
             onPress={() =>
@@ -355,10 +355,10 @@ export default function GestureHandlerScreen() {
   };
 
   return (
-    <GestureHandlerRootView className="flex-1 p-6">
+    <GestureHandlerRootView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">手势处理</Text>
-        <Text className="text-secondary-foreground">识别和响应用户的各种触摸手势操作。</Text>
+        <Text className="text-muted-foreground">识别和响应用户的各种触摸手势操作。</Text>
       </View>
 
       <Button onPress={resetGestures} className="mb-4">

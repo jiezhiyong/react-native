@@ -81,7 +81,7 @@ export default function ExpoMediaLibraryScreen() {
 
   if (!permissionResponse?.granted) {
     return (
-      <View className="flex-1 p-6 justify-center items-center bg-muted m-6">
+      <View className="flex-1 p-5 justify-center items-center bg-muted m-6">
         <Text className="text-lg mb-4">需要媒体库访问权限</Text>
         <Button onPress={requestPermission}>
           <Text>请求权限</Text>
@@ -91,10 +91,10 @@ export default function ExpoMediaLibraryScreen() {
   }
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">媒体库访问</Text>
-        <Text className="text-secondary-foreground">访问设备媒体库，可以查看相册、图片，并创建新的相册。</Text>
+        <Text className="text-muted-foreground">访问设备媒体库，可以查看相册、图片，并创建新的相册。</Text>
       </View>
 
       <View className="flex gap-3 mb-6">

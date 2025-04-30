@@ -19,7 +19,7 @@ const AboutItem = ({ title, desc, onPress }: AboutItemProps) => {
     >
       <View className="flex-row items-center gap-3 flex-1">
         <Text className="text-base text-gray-800 flex-1">{title}</Text>
-        {desc && <Text className="text-xs text-gray-500">{desc}</Text>}
+        {desc && <Text className="text-xs text-muted-foreground">{desc}</Text>}
       </View>
       <ChevronRight size={20} color="#ccc" />
     </TouchableOpacity>
@@ -58,7 +58,7 @@ export default function AboutScreen() {
           <Image source={require('../assets/images/icon.png')} className="flex-1" resizeMode="contain" />
         </View>
         <Text className="text-xl font-bold mb-1">{appName}</Text>
-        <Text className="text-gray-500">Version {appVersion}</Text>
+        <Text className="text-muted-foreground">Version {appVersion}</Text>
       </View>
 
       {/* 功能列表 */}

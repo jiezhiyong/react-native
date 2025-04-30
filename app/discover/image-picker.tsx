@@ -75,10 +75,10 @@ export default function ExpoImagePickerScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">图像选择器</Text>
-        <Text className="text-secondary-foreground">从设备相册选择图片或直接拍摄新照片。</Text>
+        <Text className="text-muted-foreground">从设备相册选择图片或直接拍摄新照片。</Text>
       </View>
 
       <View className="flex-row flex-wrap gap-3 mb-6">
@@ -109,7 +109,7 @@ export default function ExpoImagePickerScreen() {
         </>
       ) : (
         <View className="items-center justify-center">
-          <Text className="text-secondary-foreground">尚未选择任何图片</Text>
+          <Text className="text-muted-foreground">尚未选择任何图片</Text>
         </View>
       )}
     </View>

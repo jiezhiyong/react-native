@@ -39,7 +39,7 @@ const PrivacyItem = ({
       <View className="flex-row justify-between items-center">
         <View className="flex-1 pr-4">
           <Text className="text-base font-medium text-gray-800">{title}</Text>
-          {description && <Text className="text-sm text-gray-500 mt-1">{description}</Text>}
+          {description && <Text className="text-sm text-muted-foreground mt-1">{description}</Text>}
         </View>
 
         {hasSwitch && (

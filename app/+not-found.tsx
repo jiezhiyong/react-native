@@ -26,7 +26,7 @@ export default function NotFoundScreen() {
         {/* 错误信息 */}
         <Text className="text-3xl font-bold text-center mb-2">找不到页面</Text>
 
-        <Text className="text-base text-gray-500 text-center mb-2">抱歉，您访问的页面不存在</Text>
+        <Text className="text-base text-muted-foreground text-center mb-2">抱歉，您访问的页面不存在</Text>
 
         {/* 错误代码 */}
         <View className="py-2 px-6 bg-muted rounded-full mb-8">

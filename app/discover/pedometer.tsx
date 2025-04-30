@@ -87,7 +87,7 @@ export default function ExpoPedometerScreen() {
 
   if (!isAvailable) {
     return (
-      <View className="flex-1 p-6 justify-center items-center bg-muted m-6 rounded-lg">
+      <View className="flex-1 p-5 justify-center items-center bg-muted m-6 rounded-lg">
         <Text>此设备不支持计步功能</Text>
         <Button onPress={requestPermissions} className="mt-2">
           <Text>授权</Text>
@@ -97,14 +97,14 @@ export default function ExpoPedometerScreen() {
   }
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">计步器</Text>
-        <Text className="text-secondary-foreground">使用设备传感器计算和记录用户的步数。</Text>
+        <Text className="text-muted-foreground">使用设备传感器计算和记录用户的步数。</Text>
       </View>
 
       <View className="space-y-6">
-        <View className="p-6 bg-muted rounded-lg mb-6 items-center">
+        <View className="p-5 bg-muted rounded-lg mb-6 items-center">
           <Text className="mb-2">今日步数</Text>
           <Text className="text-4xl font-bold">{stepCount.toLocaleString()}</Text>
         </View>

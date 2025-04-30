@@ -117,7 +117,7 @@ export default function ExpoLocationScreen() {
     }
 
     if (!location) {
-      return <Text className="text-secondary-foreground">尚未获取位置信息</Text>;
+      return <Text className="text-muted-foreground">尚未获取位置信息</Text>;
     }
 
     const { coords, timestamp } = location;
@@ -137,10 +137,10 @@ export default function ExpoLocationScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">位置服务</Text>
-        <Text className="text-secondary-foreground">获取和跟踪设备的地理位置信息。</Text>
+        <Text className="text-muted-foreground">获取和跟踪设备的地理位置信息。</Text>
       </View>
 
       <View className="mb-6 bg-muted rounded-lg p-4">

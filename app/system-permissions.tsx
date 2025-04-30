@@ -26,7 +26,7 @@ const PermissionItem = ({ title, description, icon, status, onPress, last }: Per
           </View>
         </View>
         <View>
-          <Text className="text-xs text-gray-500">{description}</Text>
+          <Text className="text-xs text-muted-foreground">{description}</Text>
         </View>
       </TouchableOpacity>
       {last ? null : <View className="h-px bg-muted mt-3" />}
@@ -43,7 +43,7 @@ export default function SystemPermissionsScreen() {
     <SafeAreaView className="flex-1 bg-muted">
       <ScrollView className="flex-1">
         <View className="p-4">
-          <Text className="text-gray-500 text-sm">
+          <Text className="text-muted-foreground text-sm">
             为了向您提供更好的用户体验，我们在特定场景需要向您申请以下手机系统权限
           </Text>
         </View>

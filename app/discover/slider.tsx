@@ -1,47 +1,39 @@
 import Slider from '@react-native-community/slider';
 import { useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default function ExpoSliderScreen() {
-  const [basicValue, setBasicValue] = useState(0);
-  const [stepValue, setStepValue] = useState(0);
-  const [customValue, setCustomValue] = useState(0);
+  const [basicValue, setBasicValue] = useState(70);
+  const [stepValue, setStepValue] = useState(1);
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">滑块控件</Text>
-        <Text className="text-secondary-foreground">实现可交互的值范围选择控件。</Text>
-      </View>
-
-      <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">滑块功能</Text>
-        <Text className="text-secondary-foreground">使用 React Native 的滑块组件。</Text>
+        <Text className="text-muted-foreground">实现可交互的值范围选择控件。</Text>
       </View>
 
       {/* 基本滑块 */}
-      <View className="mb-8">
-        <Text className="text-base font-medium mb-4">基本滑块</Text>
-        <View className="bg-white rounded-lg p-4 shadow-sm">
-          <Text className="text-secondary-foreground mb-2">当前值: {basicValue.toFixed(1)}</Text>
+      <View className="mb-6">
+        <Text className="font-medium mb-2">基本滑块, {basicValue.toFixed(1)}</Text>
+        <View className="rounded-lg p-4 bg-muted">
           <Slider
             style={{ width: '100%', height: 40 }}
             minimumValue={0}
             maximumValue={100}
             value={basicValue}
             onValueChange={setBasicValue}
-            minimumTrackTintColor="#3B82F6"
+            minimumTrackTintColor="#333"
             maximumTrackTintColor="#E5E7EB"
-            thumbTintColor="#3B82F6"
+            thumbTintColor="#333"
           />
         </View>
       </View>
 
       {/* 带步长的滑块 */}
-      <View className="mb-8">
-        <Text className="text-base font-medium mb-4">带步长的滑块</Text>
-        <View className="bg-white rounded-lg p-4 shadow-sm">
-          <Text className="text-secondary-foreground mb-2">当前值: {stepValue}</Text>
+      <View className="mb-6">
+        <Text className="font-medium mb-2">带步长的滑块, {stepValue}</Text>
+        <View className="rounded-lg p-4 bg-muted">
           <Slider
             style={{ width: '100%', height: 40 }}
             minimumValue={0}
@@ -49,56 +41,12 @@ export default function ExpoSliderScreen() {
             step={1}
             value={stepValue}
             onValueChange={setStepValue}
-            minimumTrackTintColor="#10B981"
+            minimumTrackTintColor="#333"
             maximumTrackTintColor="#E5E7EB"
-            thumbTintColor="#10B981"
+            thumbTintColor="#333"
           />
         </View>
       </View>
-
-      {/* 自定义样式滑块 */}
-      <View className="mb-8">
-        <Text className="text-base font-medium mb-4">自定义样式滑块</Text>
-        <View className="bg-white rounded-lg p-4 shadow-sm">
-          <Text className="text-secondary-foreground mb-2">当前值: {customValue.toFixed(1)}</Text>
-          <Slider
-            style={{ width: '100%', height: 40 }}
-            minimumValue={0}
-            maximumValue={100}
-            value={customValue}
-            onValueChange={setCustomValue}
-            minimumTrackTintColor="#8B5CF6"
-            maximumTrackTintColor="#E5E7EB"
-            thumbTintColor="#8B5CF6"
-          />
-          <View className="flex-row justify-between mt-2">
-            <Text className="text-gray-500">0</Text>
-            <Text className="text-gray-500">50</Text>
-            <Text className="text-gray-500">100</Text>
-          </View>
-        </View>
-      </View>
-
-      {/* 说明区域 */}
-      <View className="bg-muted rounded-lg p-4">
-        <Text className="text-base font-medium mb-2">使用说明</Text>
-        <Text className="text-secondary-foreground">
-          1. 支持基本滑块功能
-          {'\n'}2. 支持设置步长
-          {'\n'}3. 支持自定义样式
-          {'\n'}4. 支持实时值显示
-        </Text>
-      </View>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 需要安装 @react-native-community/slider
-          {'\n'}2. 不同平台样式可能略有差异
-          {'\n'}3. 支持手势操作
-          {'\n'}4. 可以自定义最小值和最大值
-        </Text>
-      </View>
-    </ScrollView>
+    </View>
   );
 }

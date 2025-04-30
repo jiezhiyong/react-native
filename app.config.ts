@@ -115,6 +115,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       NSCameraUsageDescription: '应用需要使用您的相机来扫描活动票券上的条形码，以便您快速参与活动。',
       LSApplicationQueriesSchemes: ['uber'],
       CFBundleAllowMixedLocalizations: true,
+      CFBundleLocalizations: ['zh-Hans'],
       UIBackgroundModes: ['audio', 'fetch', 'processing'],
     },
     privacyManifests: {
@@ -243,6 +244,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       'expo-location',
       {
         locationAlwaysAndWhenInUsePermission: '允许 $(PRODUCT_NAME) 使用您的位置信息，以便为您提供位置相关服务',
+        isIosBackgroundLocationEnabled: true,
+        isAndroidBackgroundLocationEnabled: true,
       },
     ],
     [
@@ -274,6 +277,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       'expo-image-picker',
       {
         photosPermission: '允许 $(PRODUCT_NAME) 访问您的照片，以便您可以选择并与朋友分享您的精彩瞬间',
+      },
+    ],
+    [
+      '@stripe/stripe-react-native',
+      {
+        merchantIdentifier: ['merchant.com.jiezhiyong.qachat'],
+        enableGooglePay: false,
       },
     ],
   ],

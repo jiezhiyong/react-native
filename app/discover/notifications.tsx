@@ -140,16 +140,16 @@ export default function App() {
   }, []);
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">通知系统</Text>
-        <Text className="text-secondary-foreground">创建和管理本地和推送通知。</Text>
+        <Text className="text-muted-foreground">创建和管理本地和推送通知。</Text>
       </View>
 
-      <Text className="text-lg font-medium mb-2">Push token</Text>
+      <Text className="font-medium mb-2">Push token</Text>
       <Text className="mb-6">{expoPushToken}</Text>
 
-      <Text className="text-lg font-medium mb-2">收到消息</Text>
+      <Text className="font-medium mb-2">收到消息</Text>
       <View className="mb-6 bg-muted p-4 rounded-lg">
         <Text>标题: {(notification && notification.request.content.title) || '未收到消息'} </Text>
         <Text>内容: {(notification && notification.request.content.body) || '未收到消息'}</Text>

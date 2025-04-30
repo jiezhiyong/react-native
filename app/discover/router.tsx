@@ -9,10 +9,10 @@ export default function RouteScreen() {
   const router = useRouter();
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">路由示例</Text>
-        <Text className="text-secondary-foreground">展示路由的基本用法，包括导航、参数传递等。</Text>
+        <Text className="text-muted-foreground">展示路由的基本用法，包括导航、参数传递等。</Text>
       </View>
 
       <View className="flex gap-3">

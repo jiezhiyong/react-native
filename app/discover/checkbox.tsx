@@ -23,10 +23,10 @@ export default function ExpoCheckboxScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">复选框</Text>
-        <Text className="text-secondary-foreground">实现和自定义交互式复选框组件。</Text>
+        <Text className="text-muted-foreground">实现和自定义交互式复选框组件。</Text>
       </View>
 
       {/* 基本用法 */}
@@ -69,12 +69,12 @@ export default function ExpoCheckboxScreen() {
 
         <View className="flex-row items-center mb-2">
           <Checkbox value={false} disabled={true} className="mr-2 size-5 opacity-50" />
-          <Text className="text-secondary-foreground">禁用状态（未选中）</Text>
+          <Text className="text-muted-foreground">禁用状态（未选中）</Text>
         </View>
 
         <View className="flex-row items-center mb-2">
           <Checkbox value={true} disabled={true} className="mr-2 size-5 opacity-50" />
-          <Text className="text-secondary-foreground">禁用状态（已选中）</Text>
+          <Text className="text-muted-foreground">禁用状态（已选中）</Text>
         </View>
       </View>
     </View>

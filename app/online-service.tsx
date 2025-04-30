@@ -152,7 +152,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
   if (isSystem) {
     return (
       <View className="my-2 px-4 py-2 rounded-lg self-center bg-muted">
-        <Text className="text-xs text-gray-500">{message.content}</Text>
+        <Text className="text-xs text-muted-foreground">{message.content}</Text>
       </View>
     );
   }
@@ -189,7 +189,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
           </TouchableOpacity>
         )}
 
-        <Text className={`text-xs mt-1 ${isUser ? 'text-white text-opacity-70' : 'text-gray-500'}`}>
+        <Text className={`text-xs mt-1 ${isUser ? 'text-white text-opacity-70' : 'text-muted-foreground'}`}>
           {new Date(message.timestamp).toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
@@ -479,7 +479,7 @@ export default function OnlineServiceScreen() {
         {/* 常见问题快捷入口 */}
         <View className="px-4 py-2">
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row items-center gap-3">
-            <Text className="text-sm text-gray-500">常见问题：</Text>
+            <Text className="text-sm text-muted-foreground">常见问题：</Text>
             {quickQuestions.map((q) => (
               <QuickQuestionButton key={q.id} question={q} onPress={() => handleQuickQuestionPress(q.question)} />
             ))}

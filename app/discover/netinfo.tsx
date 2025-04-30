@@ -51,14 +51,14 @@ export default function ExpoNetInfoScreen() {
 
   const details: any = netinfoState?.details;
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">网络信息</Text>
-        <Text className="text-secondary-foreground">获取和监控设备的网络连接状态。</Text>
+        <Text className="text-muted-foreground">获取和监控设备的网络连接状态。</Text>
       </View>
 
       {/* 网络状态卡片 */}
-      <View className="border border-input bg-muted rounded-lg p-6 mb-6">
+      <View className="border border-input bg-muted rounded-lg p-5 mb-6">
         <Text>链接状态：{netinfoState?.isConnected ? '已连接' : '未连接'}</Text>
         <Text>连接类型：{netinfoState?.type || '未知'}</Text>
 

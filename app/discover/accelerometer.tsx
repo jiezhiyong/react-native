@@ -126,10 +126,10 @@ export default function AccelerometerScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">加速度计</Text>
-        <Text className="text-secondary-foreground">使用设备加速度计感应设备的运动和方向变化。</Text>
+        <Text className="text-muted-foreground">使用设备加速度计感应设备的运动和方向变化。</Text>
       </View>
 
       {/* 状态信息 */}

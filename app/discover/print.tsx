@@ -71,10 +71,10 @@ export default function ExpoPrintScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">打印功能</Text>
-        <Text className="text-secondary-foreground">打印为PDF文件或直接打印。</Text>
+        <Text className="text-muted-foreground">打印为PDF文件或直接打印。</Text>
       </View>
 
       <Textarea

@@ -46,10 +46,10 @@ export default function ExpoScreenCaptureScreen() {
   }, []);
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">屏幕保护</Text>
-        <Text className="text-secondary-foreground mb-4">
+        <Text className="text-muted-foreground mb-4">
           保护应用中屏幕不被捕获或录制（目前，在 iOS 上无法阻止截屏。这是由于底层操作系统限制造成的）
         </Text>
       </View>

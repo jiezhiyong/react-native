@@ -74,10 +74,10 @@ export default function ExpoScreenOrientationScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">屏幕方向</Text>
-        <Text className="text-secondary-foreground">控制和响应设备屏幕方向的变化。</Text>
+        <Text className="text-muted-foreground">控制和响应设备屏幕方向的变化。</Text>
       </View>
 
       {/* 当前方向显示 */}

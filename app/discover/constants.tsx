@@ -44,10 +44,10 @@ export default function ExpoConstantsScreen() {
   ];
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">常量和配置</Text>
-        <Text className="text-secondary-foreground">访问和使用设备和平台相关的常量信息。</Text>
+        <Text className="text-muted-foreground">访问和使用设备和平台相关的常量信息。</Text>
       </View>
 
       {cards.map((card, index) => (
@@ -56,8 +56,8 @@ export default function ExpoConstantsScreen() {
             <Text className="text-lg font-bold">{card.title}</Text>
             <View className="">
               {card.items.map((item, itemIndex) => (
-                <View key={itemIndex} className="py-3 flex-row justify-between border-b border-border gap-6">
-                  <Text className="text-secondary-foreground">{item.label}</Text>
+                <View key={itemIndex} className="py-3 flex-row justify-between border-b border-border gap-5">
+                  <Text className="text-muted-foreground">{item.label}</Text>
                   <Text className="text-foreground">{String(item.value)}</Text>
                 </View>
               ))}
@@ -67,7 +67,7 @@ export default function ExpoConstantsScreen() {
       ))}
 
       <View className="">
-        <Text className="text-sm text-secondary-foreground">
+        <Text className="text-sm text-muted-foreground">
           注意：某些信息在不同环境下可能显示为"未知"，这是正常现象。在生产环境和开发环境中，某些常量值可能会有所不同。
         </Text>
       </View>

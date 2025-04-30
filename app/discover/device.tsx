@@ -126,17 +126,15 @@ export default function ExpoDeviceScreen() {
   const InfoItem = ({ label, value }: { label: string; value: string | number | null | boolean }) => (
     <View className="mb-2 flex-row justify-between">
       <Text className="font-medium">{label}:</Text>
-      <Text className="text-secondary-foreground">
-        {value !== null && value !== undefined ? String(value) : '不可用'}
-      </Text>
+      <Text className="text-muted-foreground">{value !== null && value !== undefined ? String(value) : '不可用'}</Text>
     </View>
   );
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">设备信息</Text>
-        <Text className="text-secondary-foreground">获取设备型号、操作系统和硬件规格等详细信息。</Text>
+        <Text className="text-muted-foreground">获取设备型号、操作系统和硬件规格等详细信息。</Text>
       </View>
 
       {/* 基本设备信息 */}
@@ -173,8 +171,8 @@ export default function ExpoDeviceScreen() {
 
       {/* 平台功能 */}
       <Card className="p-4 mb-4">
-        <Text className="text-lg font-medium mb-2">平台功能</Text>
-        <Text className="text-secondary-foreground mb-2">
+        <Text className="font-medium mb-2">平台功能</Text>
+        <Text className="text-muted-foreground mb-2">
           {deviceInfo.platformFeatures && deviceInfo.platformFeatures.length > 0
             ? '支持的平台功能列表:'
             : '此平台不支持功能列表查询或无可用功能'}
@@ -182,12 +180,12 @@ export default function ExpoDeviceScreen() {
         {deviceInfo.platformFeatures && deviceInfo.platformFeatures.length > 0 ? (
           <View className="bg-card-foreground/5 p-3 rounded-md">
             {deviceInfo.platformFeatures.slice(0, 10).map((feature, index) => (
-              <Text key={index} className="text-xs text-secondary-foreground mb-1">
+              <Text key={index} className="text-xs text-muted-foreground mb-1">
                 • {feature}
               </Text>
             ))}
             {deviceInfo.platformFeatures.length > 10 && (
-              <Text className="text-xs text-secondary-foreground italic">
+              <Text className="text-xs text-muted-foreground italic">
                 ...以及 {deviceInfo.platformFeatures.length - 10} 个更多功能
               </Text>
             )}

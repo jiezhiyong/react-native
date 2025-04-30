@@ -46,10 +46,10 @@ export default function ExpoNetworkScreen() {
   }, []);
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">网络信息</Text>
-        <Text className="text-secondary-foreground">访问设备网络信息的库，如 IP 地址、MAC 地址和飞行模式状态</Text>
+        <Text className="text-muted-foreground">访问设备网络信息的库，如 IP 地址、MAC 地址和飞行模式状态</Text>
       </View>
 
       <View className="bg-muted p-4 rounded-lg mb-4 flex gap-1">

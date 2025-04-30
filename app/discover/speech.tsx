@@ -1,11 +1,14 @@
-import { Ionicons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
 import { useState } from 'react';
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
+import { Textarea } from '~/components/ui/textarea';
 
 export default function ExpoSpeechScreen() {
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [text, setText] = useState('');
+  const [text, setText] = useState('有内鬼，终止交易');
   const [error, setError] = useState('');
 
   // 开始语音合成
@@ -50,64 +53,31 @@ export default function ExpoSpeechScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
-      <View className="mb-6">
-        <Text className="text-2xl font-bold mb-2">语音识别</Text>
-        <Text className="text-secondary-foreground">将用户语音转换为文本。</Text>
-      </View>
-
-      <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">语音功能</Text>
-        <Text className="text-secondary-foreground">使用语音合成功能。</Text>
-      </View>
-
-      {/* 语音合成 */}
-      <View className="mb-8">
-        <Text className="text-base font-medium mb-4">语音合成</Text>
-        <TextInput
-          className="border border-gray-300 rounded-lg p-4 mb-4"
-          value={text}
-          onChangeText={setText}
-          placeholder="输入要合成的文本"
-          multiline
-        />
-        <TouchableOpacity
-          className="bg-purple-500 rounded-lg p-4 flex-row items-center justify-center"
-          onPress={isSpeaking ? stopSpeaking : startSpeaking}
-          disabled={!text}
-        >
-          <Ionicons name={isSpeaking ? 'stop' : 'play'} size={20} color="white" />
-          <Text className="text-white ml-2">{isSpeaking ? '停止播放' : '开始播放'}</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* 错误提示 */}
-      {error ? (
-        <View className="bg-red-100 rounded-lg p-4 mb-8">
-          <Text className="text-red-500">{error}</Text>
+    <View className="flex-1 px-6 pt-6 flex">
+      <View className="flex-1">
+        <View className="mb-6">
+          <Text className="text-2xl font-bold mb-2">语音识别</Text>
+          <Text className="text-muted-foreground">语音转换为文本。</Text>
         </View>
-      ) : null}
 
-      {/* 说明区域 */}
-      <View className="bg-muted rounded-lg p-4">
-        <Text className="text-base font-medium mb-2">使用说明</Text>
-        <Text className="text-secondary-foreground">
-          1. 语音合成：将文本转换为语音
-          {'\n'}2. 支持中文合成
-          {'\n'}3. 可以控制语音的语速和音调
-          {'\n'}4. 支持暂停和继续播放
-        </Text>
+        {/* 输入框 */}
+        <Textarea value={text} onChangeText={setText} />
+
+        {/* 错误提示 */}
+        {error ? (
+          <View className="bg-destructive/20 rounded-lg p-4 mt-6">
+            <Text className="text-destructive">{error}</Text>
+          </View>
+        ) : null}
       </View>
 
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 需要安装 expo-speech
-          {'\n'}2. 建议在真机上测试
-          {'\n'}3. 需要网络连接
-          {'\n'}4. 某些设备可能有特殊的声音输出行为
-        </Text>
-      </View>
-    </ScrollView>
+      <Button
+        onPress={isSpeaking ? stopSpeaking : startSpeaking}
+        disabled={!text}
+        variant={isSpeaking ? 'destructive' : 'default'}
+      >
+        <Text>{isSpeaking ? '停止播放' : '开始播放'}</Text>
+      </Button>
+    </View>
   );
 }

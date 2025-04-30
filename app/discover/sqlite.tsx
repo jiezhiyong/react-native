@@ -1,7 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
 import { useEffect, useState } from 'react';
-import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, View } from 'react-native';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
 
 interface Todo {
   id: number;
@@ -12,7 +15,6 @@ interface Todo {
 export default function ExpoSQLiteScreen() {
   const [db, setDb] = useState<SQLite.SQLiteDatabase | null>(null);
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [newTodo, setNewTodo] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -21,153 +23,163 @@ export default function ExpoSQLiteScreen() {
 
   const initDatabase = async () => {
     try {
+      // 打开数据库连接
       const database = await SQLite.openDatabaseAsync('todos.db');
       setDb(database);
 
-      // 创建表
-      await database.execAsync(`
-        PRAGMA journal_mode = WAL;
-        CREATE TABLE IF NOT EXISTS todos (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          text TEXT NOT NULL,
-          completed INTEGER DEFAULT 0
-        );
-      `);
+      // 检查表是否已存在
+      const tableExists = await checkTableExists(database, 'todos');
+      if (!tableExists) {
+        // 表不存在，创建新表
+        await database.execAsync(`
+          PRAGMA journal_mode = WAL;
+          CREATE TABLE IF NOT EXISTS todos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            text TEXT NOT NULL,
+            completed INTEGER DEFAULT 0
+          );
+        `);
+        console.log('创建todos表成功');
+      } else {
+        // 表已存在，只设置journal_mode
+        await database.execAsync('PRAGMA journal_mode = WAL;');
+        console.log('todos表已存在，跳过创建步骤');
+      }
 
-      loadTodos();
+      // 确保数据库已初始化后再加载数据
+      await loadTodos(database);
     } catch (error) {
-      setError('数据库初始化失败: ' + (error as Error).message);
+      setError('initDatabase error, ' + (error as Error).message);
     }
   };
 
-  const loadTodos = async () => {
-    if (!db) return;
+  // 检查表是否存在
+  const checkTableExists = async (database: SQLite.SQLiteDatabase, tableName: string): Promise<boolean> => {
+    try {
+      const result = await database.getFirstAsync<{ count: number }>(
+        `SELECT count(*) as count FROM sqlite_master WHERE type='table' AND name=?`,
+        tableName
+      );
+      if (result && typeof result.count === 'number') {
+        return result.count > 0;
+      }
+      return false;
+    } catch (error) {
+      setError('检查表是否存在时出错: ' + (error as Error).message);
+      return false;
+    }
+  };
+
+  const loadTodos = async (database?: SQLite.SQLiteDatabase) => {
+    const dbToUse = database || db;
+    if (!dbToUse) {
+      setError('loadTodos error, 数据库未初始化');
+      return;
+    }
 
     try {
-      const result = await db.getAllAsync<Todo>('SELECT * FROM todos ORDER BY id DESC');
+      const result = await dbToUse.getAllAsync<Todo>('SELECT * FROM todos ORDER BY id DESC');
       setTodos(result);
     } catch (error) {
-      setError('加载数据失败: ' + (error as Error).message);
+      setError('loadTodos error, ' + (error as Error).message);
     }
   };
 
   const addTodo = async () => {
-    if (!newTodo.trim() || !db) return;
-
     try {
-      const result = await db.runAsync('INSERT INTO todos (text, completed) VALUES (?, ?)', newTodo, 0);
-      setNewTodo('');
+      const dbToUse = db;
+      if (!dbToUse) {
+        setError('addTodo error, 数据库未初始化');
+        return;
+      }
+      await dbToUse.runAsync('INSERT INTO todos (text, completed) VALUES (?, ?)', '数据库用户表脏数据清理', 0);
       loadTodos();
     } catch (error) {
-      setError('添加失败: ' + (error as Error).message);
+      setError('addTodo error, ' + (error as Error).message);
     }
   };
 
   const toggleTodo = async (id: number) => {
-    if (!db) return;
+    const dbToUse = db;
+    if (!dbToUse) {
+      setError('toggleTodo error, 数据库未初始化');
+      return;
+    }
 
     try {
-      await db.runAsync('UPDATE todos SET completed = 1 - completed WHERE id = ?', id);
+      await dbToUse.runAsync('UPDATE todos SET completed = 1 - completed WHERE id = ?', id);
       loadTodos();
     } catch (error) {
-      setError('更新失败: ' + (error as Error).message);
+      setError('toggleTodo error, ' + (error as Error).message);
     }
   };
 
   const deleteTodo = async (id: number) => {
-    if (!db) return;
+    const dbToUse = db;
+    if (!dbToUse) {
+      setError('deleteTodo error, 数据库未初始化');
+      return;
+    }
 
     try {
-      await db.runAsync('DELETE FROM todos WHERE id = ?', id);
+      await dbToUse.runAsync('DELETE FROM todos WHERE id = ?', id);
       loadTodos();
     } catch (error) {
-      setError('删除失败: ' + (error as Error).message);
+      setError('deleteTodo error, ' + (error as Error).message);
     }
   };
 
-  const renderTodo = ({ item }: { item: Todo }) => (
-    <View className="flex-row items-center justify-between bg-white p-4 rounded-lg mb-2">
-      <TouchableOpacity className="flex-row items-center flex-1" onPress={() => toggleTodo(item.id)}>
+  const renderTodo = ({ item, index }: { item: Todo; index: number }) => (
+    <View className="flex-row items-center justify-between bg-white rounded-lg mb-2 gap-2">
+      <Button className="flex-row items-center flex-1 gap-2" onPress={() => toggleTodo(item.id)} variant="outline">
         <Ionicons
           name={item.completed ? 'checkbox' : 'square-outline'}
-          size={24}
+          size={20}
           color={item.completed ? '#10B981' : '#6B7280'}
         />
-        <Text className={`ml-2 flex-1 ${item.completed ? 'line-through text-gray-400' : 'text-gray-800'}`}>
-          {item.text}
+        <Text className={`flex-1 ${item.completed ? 'line-through text-gray-400' : 'text-gray-800'}`}>
+          {index + 1}. {item.text}
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => deleteTodo(item.id)} className="ml-2">
-        <Ionicons name="trash" size={24} color="#EF4444" />
-      </TouchableOpacity>
+      </Button>
+      <Button onPress={() => deleteTodo(item.id)} variant="outline">
+        <Ionicons name="trash" size={18} color="red" />
+      </Button>
     </View>
   );
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <View className="flex-1 px-6 pt-6">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">SQLite 数据库</Text>
         <Text className="text-secondary-foreground">在应用中使用 SQLite 进行结构化数据存储。</Text>
       </View>
 
-      <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">SQLite 数据库</Text>
-        <Text className="text-secondary-foreground">使用 Expo 的 SQLite 数据库功能。</Text>
-      </View>
-
       {/* 添加新任务 */}
-      <View className="mb-8">
-        <View className="flex-row">
-          <TextInput
-            className="flex-1 border border-gray-300 rounded-lg p-3 mr-2"
-            placeholder="输入新任务"
-            value={newTodo}
-            onChangeText={setNewTodo}
-          />
-          <TouchableOpacity className="bg-blue-500 rounded-lg p-3" onPress={addTodo}>
-            <Ionicons name="add" size={24} color="white" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {/* 任务列表 */}
-      <View className="mb-8">
-        <Text className="text-base font-medium mb-4">任务列表</Text>
-        <FlatList
-          data={todos}
-          renderItem={renderTodo}
-          keyExtractor={(item) => item.id.toString()}
-          scrollEnabled={false}
-        />
+      <View>
+        <Text className="font-medium mb-2">添加任务</Text>
+        <Button onPress={addTodo} className="mb-6">
+          <Text>添加</Text>
+        </Button>
       </View>
 
       {/* 错误提示 */}
       {error ? (
-        <View className="bg-red-100 rounded-lg p-4 mb-8">
-          <Text className="text-red-500">{error}</Text>
+        <View className="bg-destructive/10 rounded-lg p-4 mb-6">
+          <Text className="text-destructive">{error}</Text>
         </View>
       ) : null}
 
-      {/* 说明区域 */}
-      <View className="bg-muted rounded-lg p-4">
-        <Text className="text-base font-medium mb-2">使用说明</Text>
-        <Text className="text-secondary-foreground">
-          1. 支持创建 SQLite 数据库
-          {'\n'}2. 支持增删改查操作
-          {'\n'}3. 支持事务处理
-          {'\n'}4. 数据持久化存储
-        </Text>
+      {/* 任务列表 */}
+      <View className="flex-1">
+        <Text className="font-medium mb-2">任务列表</Text>
+        <FlatList
+          data={todos}
+          renderItem={renderTodo}
+          keyExtractor={(item) => item.id.toString()}
+          scrollEnabled={true}
+          contentContainerStyle={{ paddingBottom: 0 }}
+        />
       </View>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 需要安装 expo-sqlite
-          {'\n'}2. 数据库文件存储在应用目录
-          {'\n'}3. 支持事务和错误处理
-          {'\n'}4. 支持异步操作
-        </Text>
-      </View>
-    </ScrollView>
+    </View>
   );
 }

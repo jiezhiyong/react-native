@@ -73,10 +73,10 @@ export default function ReanimatedScreen() {
     });
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">高级动画</Text>
-        <Text className="text-secondary-foreground">使用 Reanimated 创建流畅的高性能动画效果。</Text>
+        <Text className="text-muted-foreground">使用 Reanimated 创建流畅的高性能动画效果。</Text>
       </View>
 
       <View className="space-y-8">
@@ -92,7 +92,7 @@ export default function ReanimatedScreen() {
         {/* 手势动画 */}
         <View className="flex gap-3">
           <Text className="text-lg font-medium">手势动画</Text>
-          <Text className="text-secondary-foreground">尝试拖动方块，松开后会回到原位</Text>
+          <Text className="text-muted-foreground">尝试拖动方块，松开后会回到原位</Text>
           <GestureDetector gesture={gesture}>
             <Animated.View className="w-20 h-20 bg-green-500 rounded-lg" style={gestureStyle} />
           </GestureDetector>

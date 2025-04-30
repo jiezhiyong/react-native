@@ -118,9 +118,9 @@ const ListItemCard: React.FC<{ item: ListItem }> = ({ item }) => {
         <CardTitle className="text-base font-medium">{item.title}</CardTitle>
       </CardHeader>
       <CardContent className="px-4 py-2">
-        <Text className="text-sm text-secondary-foreground">{item.description}</Text>
+        <Text className="text-sm text-muted-foreground">{item.description}</Text>
         <View className="flex-row justify-between mt-2 items-center">
-          <Text className="text-xs text-gray-500">{item.timestamp}</Text>
+          <Text className="text-xs text-muted-foreground">{item.timestamp}</Text>
           <View className={`px-2 py-1 rounded-full ${categoryColors[item.category]}`}>
             <Text className="text-xs">{item.category}</Text>
           </View>
@@ -137,7 +137,7 @@ const ListFooter: React.FC<{ loading: boolean }> = ({ loading }) => {
   return (
     <View className="py-4 flex items-center justify-center">
       <ActivityIndicator size="small" color="#0284c7" />
-      <Text className="text-sm text-secondary-foreground mt-2">加载更多...</Text>
+      <Text className="text-sm text-muted-foreground mt-2">加载更多...</Text>
     </View>
   );
 };
@@ -170,7 +170,7 @@ export default function FlashListScreen() {
     <View className="flex-1 px-6 pt-6">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">高性能列表</Text>
-        <Text className="text-secondary-foreground">使用 FlashList 实现高性能的长列表渲染。</Text>
+        <Text className="text-muted-foreground">使用 FlashList 实现高性能的长列表渲染。</Text>
       </View>
 
       <Button onPress={handleRefresh} disabled={isLoading} className="mb-4">

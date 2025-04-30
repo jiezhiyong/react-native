@@ -67,23 +67,23 @@ export default function CaptureRefScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">视图截图</Text>
-        <Text className="text-secondary-foreground">捕获和保存应用界面的特定区域为图片。</Text>
+        <Text className="text-muted-foreground">捕获和保存应用界面的特定区域为图片。</Text>
       </View>
 
       {/* 这个视图将被捕获 */}
       <View
         ref={viewRef}
-        className="rounded-xl p-6 shadow-md mb-6 border border-gray-200 bg-white"
+        className="rounded-xl p-5 shadow-md mb-6 border border-gray-200 bg-white"
         collapsable={false} // 在Android上必须设置为false
       >
         <View className="items-center mb-4 rounded-lg overflow-hidden">
           <Image source={require('~/assets/images/icon.png')} style={{ width: 300, height: 200 }} contentFit="cover" />
         </View>
-        <Text className="text-lg font-medium mb-2">使用 captureRef 捕获视图</Text>
-        <Text className="text-secondary-foreground">
+        <Text className="font-medium mb-2">使用 captureRef 捕获视图</Text>
+        <Text className="text-muted-foreground">
           这个整个卡片会被截图，包括所有的内容。您可以捕获任何React Native视图， 包括地图、图表、复杂UI等。
         </Text>
       </View>
@@ -95,7 +95,7 @@ export default function CaptureRefScreen() {
       {/* 显示截图结果 */}
       {capturedImage && (
         <View className="mt-6">
-          <Text className="text-lg font-medium mb-2 dark:text-white">截图结果</Text>
+          <Text className="font-medium mb-2 dark:text-white">截图结果</Text>
           <Image source={{ uri: capturedImage }} style={{ width: '100%', aspectRatio: 1 }} contentFit="contain" />
         </View>
       )}

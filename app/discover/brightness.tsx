@@ -79,7 +79,7 @@ export default function ExpoBrightnessScreen() {
 
   if (hasPermission === false) {
     return (
-      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+      <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
         <Text className="text-center mb-6">需要权限来控制设备亮度</Text>
         <Button onPress={requestPermission}>
           <Text>请求权限</Text>
@@ -89,10 +89,10 @@ export default function ExpoBrightnessScreen() {
   }
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">屏幕亮度</Text>
-        <Text className="text-secondary-foreground">控制和调节设备屏幕的亮度级别。</Text>
+        <Text className="text-muted-foreground">控制和调节设备屏幕的亮度级别。</Text>
       </View>
 
       <View className="mb-6">
@@ -125,8 +125,8 @@ export default function ExpoBrightnessScreen() {
 
       <View>
         <Text className="font-bold mb-2">注意</Text>
-        <Text className="text-sm text-gray-500">1. 在Android上，应用关闭后亮度会恢复为系统亮度。</Text>
-        <Text className="text-sm text-gray-500">2. 在iOS上，应用关闭或设备锁屏后亮度会恢复为系统亮度。</Text>
+        <Text className="text-sm text-muted-foreground">1. 在Android上，应用关闭后亮度会恢复为系统亮度。</Text>
+        <Text className="text-sm text-muted-foreground">2. 在iOS上，应用关闭或设备锁屏后亮度会恢复为系统亮度。</Text>
       </View>
     </View>
   );

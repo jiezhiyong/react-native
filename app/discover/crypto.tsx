@@ -78,10 +78,10 @@ export default function ExpoCryptoScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">加密功能</Text>
-        <Text className="text-secondary-foreground">在应用中使用加密算法保护敏感数据。</Text>
+        <Text className="text-muted-foreground">在应用中使用加密算法保护敏感数据。</Text>
       </View>
 
       {/* 输入区域 */}
@@ -95,7 +95,7 @@ export default function ExpoCryptoScreen() {
         <Button className="mb-2" onPress={generateMD5}>
           <Text>MD5 哈希</Text>
         </Button>
-        <Text className="text-secondary-foreground text-sm">{results.md5 || '-'}</Text>
+        <Text className="text-muted-foreground text-sm">{results.md5 || '-'}</Text>
       </Card>
 
       <Card className="p-4 mb-4">
@@ -103,7 +103,7 @@ export default function ExpoCryptoScreen() {
         <Button className="mb-2" onPress={generateSHA512}>
           <Text>SHA-512 哈希</Text>
         </Button>
-        <Text className="text-secondary-foreground text-sm">{results.sha512 || '-'}</Text>
+        <Text className="text-muted-foreground text-sm">{results.sha512 || '-'}</Text>
       </Card>
 
       <Card className="p-4 mb-4">
@@ -111,7 +111,7 @@ export default function ExpoCryptoScreen() {
         <Button className="mb-2" onPress={generateRandomUUID}>
           <Text>生成随机UUID</Text>
         </Button>
-        <Text className="text-secondary-foreground text-sm">{results.randomUUID || '-'}</Text>
+        <Text className="text-muted-foreground text-sm">{results.randomUUID || '-'}</Text>
       </Card>
 
       <Card className="p-4 mb-4">
@@ -119,7 +119,7 @@ export default function ExpoCryptoScreen() {
         <Button className="mb-2" onPress={generateRandomBytes}>
           <Text>生成随机字节</Text>
         </Button>
-        <Text className="text-secondary-foreground text-sm">{results.randomBytes || '-'}</Text>
+        <Text className="text-muted-foreground text-sm">{results.randomBytes || '-'}</Text>
       </Card>
     </ScrollView>
   );

@@ -1,18 +1,17 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useEvent } from 'expo';
 import { useVideoPlayer, VideoView } from 'expo-video';
-import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
+
+// demo
 const videoSource = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 
 export default function ExpoVideoScreen() {
-  const [error, setError] = useState('');
-  const [isFullscreen, setIsFullscreen] = useState(false);
-
   // 初始化视频播放器
   const player = useVideoPlayer(videoSource, (player) => {
-    player.loop = true;
+    player.loop = false;
     player.play();
   });
 
@@ -20,35 +19,22 @@ export default function ExpoVideoScreen() {
   const { isPlaying } = useEvent(player, 'playingChange', { isPlaying: player.playing });
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">视频播放</Text>
-        <Text className="text-secondary-foreground">在应用中播放和控制视频内容。</Text>
-      </View>
-
-      <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">视频功能</Text>
-        <Text className="text-secondary-foreground">使用 expo-video 播放视频。</Text>
+        <Text className="text-muted-foreground">在应用中播放和控制视频内容。</Text>
       </View>
 
       {/* 视频播放器 */}
-      <View className="mb-8">
-        <Text className="text-base font-medium mb-4">视频播放</Text>
+      <View className="mb-6">
         <View style={styles.videoContainer}>
-          <VideoView
-            style={styles.video}
-            player={player}
-            allowsFullscreen
-            allowsPictureInPicture
-            onFullscreenEnter={() => setIsFullscreen(true)}
-            onFullscreenExit={() => setIsFullscreen(false)}
-          />
+          <VideoView style={styles.video} player={player} allowsFullscreen allowsPictureInPicture />
         </View>
 
         {/* 控制按钮 */}
-        <View className="flex-row justify-center mt-4 space-x-4">
-          <TouchableOpacity
-            className="bg-blue-500 rounded-lg p-4 flex-row items-center"
+        <View className="mt-6 space-x-4 gap-3">
+          <Button
+            variant={isPlaying ? 'destructive' : 'default'}
             onPress={() => {
               if (isPlaying) {
                 player.pause();
@@ -57,50 +43,15 @@ export default function ExpoVideoScreen() {
               }
             }}
           >
-            <Ionicons name={isPlaying ? 'pause' : 'play'} size={20} color="white" />
-            <Text className="text-white ml-2">{isPlaying ? '暂停' : '播放'}</Text>
-          </TouchableOpacity>
+            <Text>{isPlaying ? '暂停' : '播放'}</Text>
+          </Button>
 
-          <TouchableOpacity
-            className="bg-purple-500 rounded-lg p-4 flex-row items-center"
-            onPress={() => {
-              player.replay();
-            }}
-          >
-            <Ionicons name="refresh" size={20} color="white" />
-            <Text className="text-white ml-2">重播</Text>
-          </TouchableOpacity>
+          <Button variant="secondary" className="border" onPress={() => player.replay()}>
+            <Text>重播</Text>
+          </Button>
         </View>
       </View>
-
-      {/* 错误提示 */}
-      {error ? (
-        <View className="bg-red-100 rounded-lg p-4 mb-8">
-          <Text className="text-red-500">{error}</Text>
-        </View>
-      ) : null}
-
-      {/* 说明区域 */}
-      <View className="bg-muted rounded-lg p-4">
-        <Text className="text-base font-medium mb-2">使用说明</Text>
-        <Text className="text-secondary-foreground">
-          1. 支持视频播放和暂停
-          {'\n'}2. 支持全屏播放
-          {'\n'}3. 支持画中画模式
-          {'\n'}4. 支持循环播放
-        </Text>
-      </View>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：
-          {'\n'}1. 需要安装 expo-video
-          {'\n'}2. 建议在真机上测试
-          {'\n'}3. 需要网络连接
-          {'\n'}4. 支持全屏和画中画模式
-        </Text>
-      </View>
-    </ScrollView>
+    </View>
   );
 }
 

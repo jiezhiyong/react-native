@@ -84,10 +84,10 @@ export default function ExpoNavigationBarScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">导航栏</Text>
-        <Text className="text-secondary-foreground">自定义和控制设备的导航栏样式和行为</Text>
+        <Text className="text-muted-foreground">自定义和控制设备的导航栏样式和行为</Text>
       </View>
 
       {/* 导航栏可见性控制 */}
@@ -144,7 +144,7 @@ export default function ExpoNavigationBarScreen() {
               variant={position === pos ? 'default' : 'outline'}
               onPress={() => changePosition(pos)}
             >
-              <Text className={position === pos ? 'text-white' : 'text-secondary-foreground'}>
+              <Text className={position === pos ? 'text-white' : 'text-muted-foreground'}>
                 {pos === 'absolute' ? '绝对定位' : '相对定位'}
               </Text>
             </Button>
@@ -163,7 +163,7 @@ export default function ExpoNavigationBarScreen() {
               variant={buttonStyle === style ? 'default' : 'outline'}
               onPress={() => changeButtonStyle(style)}
             >
-              <Text className={buttonStyle === style ? 'text-white' : 'text-secondary-foreground'}>
+              <Text className={buttonStyle === style ? 'text-white' : 'text-muted-foreground'}>
                 {style === 'light' ? '浅色' : '深色'}
               </Text>
             </Button>

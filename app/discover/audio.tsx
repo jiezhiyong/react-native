@@ -181,10 +181,10 @@ export default function ExpoAudioScreen() {
 
   // 播放器 UI
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">音频播放</Text>
-        <Text className="text-secondary-foreground">在应用中播放、暂停和控制音频内容。</Text>
+        <Text className="text-muted-foreground">在应用中播放、暂停和控制音频内容。</Text>
       </View>
 
       <View className="p-4 bg-gray-50 rounded-lg mb-4">
@@ -222,8 +222,8 @@ export default function ExpoAudioScreen() {
             thumbTintColor="#0891b2"
           />
           <View className="flex-row justify-between mt-1">
-            <Text className="text-gray-500 text-xs">{formatTime(status?.currentTime)}</Text>
-            <Text className="text-gray-500 text-xs">{formatTime(status?.duration)}</Text>
+            <Text className="text-muted-foreground text-xs">{formatTime(status?.currentTime)}</Text>
+            <Text className="text-muted-foreground text-xs">{formatTime(status?.duration)}</Text>
           </View>
         </View>
 

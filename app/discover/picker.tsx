@@ -14,14 +14,14 @@ export default function PickerScreen() {
   ];
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">单项选择器</Text>
-        <Text className="text-secondary-foreground">单项选择器用于从预定义的选项列表中选择一个值。</Text>
+        <Text className="text-muted-foreground">单项选择器用于从预定义的选项列表中选择一个值。</Text>
       </View>
 
       {/* 语言选择器 */}
-      <Text className="text-lg font-medium mb-2">选择编程语言</Text>
+      <Text className="font-medium mb-2">选择编程语言</Text>
       <View className="bg-muted rounded-lg">
         <Picker selectedValue={selectedLanguage} onValueChange={(itemValue) => setSelectedLanguage(itemValue)}>
           {languages.map((language) => (

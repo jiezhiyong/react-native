@@ -1,85 +1,37 @@
-import { Ionicons } from '@expo/vector-icons';
-import { PermissionStatus } from 'expo-modules-core';
 import * as TrackingTransparency from 'expo-tracking-transparency';
-import { useEffect, useState } from 'react';
-import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { useTrackingPermissions } from 'expo-tracking-transparency';
+import { Alert, View } from 'react-native';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
 
 export default function ExpoTrackingTransparencyScreen() {
-  const [trackingStatus, setTrackingStatus] = useState<string>('未知');
-
-  useEffect(() => {
-    checkTrackingStatus();
-  }, []);
-
-  const checkTrackingStatus = async () => {
-    try {
-      const status = await TrackingTransparency.getTrackingPermissionsAsync();
-      setTrackingStatus(status.status);
-    } catch (error) {
-      console.error('获取跟踪状态失败:', error);
-      setTrackingStatus('错误');
-    }
-  };
-
-  const requestTrackingPermission = async () => {
-    try {
-      const { status } = await TrackingTransparency.requestTrackingPermissionsAsync();
-      setTrackingStatus(status);
-
-      if (status === PermissionStatus.GRANTED) {
-        Alert.alert('成功', '已获得跟踪权限');
-      } else if (status === 'denied') {
-        Alert.alert('提示', '用户拒绝了跟踪权限');
-      }
-    } catch (error) {
-      console.error('请求跟踪权限失败:', error);
-      Alert.alert('错误', '请求跟踪权限时出错');
-    }
-  };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case PermissionStatus.GRANTED:
-        return '已授权';
-      case PermissionStatus.DENIED:
-        return '已拒绝';
-      case PermissionStatus.UNDETERMINED:
-        return '未确定';
-      default:
-        return status;
-    }
-  };
+  const [status, requestPermission] = useTrackingPermissions();
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <View className="flex-1 px-6 pt-6">
       <View className="mb-6">
-        <Text className="text-2xl font-bold mb-2">Tracking Transparency</Text>
-        <Text className="text-secondary-foreground">使用和配置 Tracking Transparency 相关功能。</Text>
-      </View>
-
-      <View className="mb-6">
-        <Text className="text-lg font-bold mb-2">跟踪透明度</Text>
-        <Text className="text-secondary-foreground">请求用户允许应用跟踪其活动。主要用于 iOS 14.5 及以上版本。</Text>
-      </View>
-
-      <View className="mb-6 p-4 bg-muted rounded-lg">
-        <Text className="text-base mb-2">当前跟踪状态</Text>
-        <Text className="text-lg font-medium">{getStatusText(trackingStatus)}</Text>
-      </View>
-
-      <TouchableOpacity
-        className="bg-blue-500 rounded-lg p-4 flex-row items-center justify-center"
-        onPress={requestTrackingPermission}
-      >
-        <Ionicons name="shield-checkmark" size={20} color="white" />
-        <Text className="text-white ml-2 text-lg">请求跟踪权限</Text>
-      </TouchableOpacity>
-
-      <View className="mt-6">
-        <Text className="text-sm text-gray-500">
-          注意：此功能主要用于 iOS 设备。在 Android 设备上可能不会显示权限请求对话框。
+        <Text className="text-2xl font-bold mb-2">跟踪用户权限</Text>
+        <Text className="text-muted-foreground">
+          请求跟踪用户或其设备。跟踪数据包括电子邮件地址、设备 ID、广告 ID 等
         </Text>
       </View>
-    </ScrollView>
+
+      <View className="flex-1">
+        <View className="mb-6 p-4 bg-muted rounded-lg gap-2">
+          <Text>是否可用: {String(TrackingTransparency.isAvailable())}</Text>
+          <Text>当前跟踪状态: {String(status?.granted)}</Text>
+          <Text>广告 ID: {String(TrackingTransparency.getAdvertisingId())}</Text>
+        </View>
+        <Text className="text-muted-foreground">
+          注意：未开启 `允许App请求跟踪`，不会触发请求权限；
+          系统会记住用户的选项，除非用户卸载并重新安装应用在设备上，否则不会再次提示。
+        </Text>
+      </View>
+
+      <Button onPress={requestPermission}>
+        <Text>请求跟踪权限</Text>
+      </Button>
+    </View>
   );
 }

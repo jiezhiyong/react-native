@@ -58,10 +58,10 @@ export default function ExpoIntentLauncherScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">意图启动器</Text>
-        <Text className="text-secondary-foreground">启动系统或其他应用的特定功能和服务。</Text>
+        <Text className="text-muted-foreground">启动系统或其他应用的特定功能和服务。</Text>
       </View>
 
       <View className="mb-6">

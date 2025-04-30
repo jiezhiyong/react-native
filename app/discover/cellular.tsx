@@ -1,8 +1,10 @@
 import * as Cellular from 'expo-cellular';
+import { CellularGeneration } from 'expo-cellular';
 import { PermissionStatus } from 'expo-modules-core';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 
+import { InfoItem } from '~/components/InfoItem';
 import { toast } from '~/components/ui/sonner';
 
 import { Button } from '../../components/ui/button';
@@ -20,20 +22,6 @@ interface CellularInfo {
 export default function ExpoCellularScreen() {
   const [status, requestPermission] = Cellular.usePermissions();
   const [cellularInfo, setCellularInfo] = useState<CellularInfo | null>(null);
-
-  const doRequestPermission = useCallback(async () => {
-    const newStatus = await requestPermission();
-    if (newStatus.status !== PermissionStatus.GRANTED) {
-      Alert.alert('权限受限', '无法获取完整的蜂窝网络信息，因为缺少必要权限。', [{ text: '确定' }]);
-    }
-  }, [requestPermission]);
-
-  // 如果未授权，请求权限
-  useEffect(() => {
-    if (status?.status !== PermissionStatus.GRANTED) {
-      doRequestPermission();
-    }
-  }, [status, doRequestPermission]);
 
   // 当权限已授予时，获取信息
   useEffect(() => {
@@ -65,37 +53,12 @@ export default function ExpoCellularScreen() {
     }
   }, [status]);
 
-  const renderInfoItem = (label: string, value: any) => (
-    <View className="flex-row justify-between mb-4 border-b border-border pb-4">
-      <Text className="text-secondary-foreground font-medium">{label}</Text>
-      <Text>{value === null ? '不可用' : String(value)}</Text>
-    </View>
-  );
-
-  // 获取网络类型的友好显示名称
-  const getGenerationDisplayName = (generation: Cellular.CellularGeneration | null) => {
-    if (!generation) return '未知';
-
-    switch (generation) {
-      case Cellular.CellularGeneration.CELLULAR_2G:
-        return '2G';
-      case Cellular.CellularGeneration.CELLULAR_3G:
-        return '3G';
-      case Cellular.CellularGeneration.CELLULAR_4G:
-        return '4G';
-      case Cellular.CellularGeneration.CELLULAR_5G:
-        return '5G';
-      default:
-        return String(generation);
-    }
-  };
-
   if (status?.status !== PermissionStatus.GRANTED) {
     return (
-      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+      <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
         <View className="mb-6">
           <Text className="text-2xl font-bold mb-2">蜂窝网络</Text>
-          <Text className="text-secondary-foreground">获取和监控设备的蜂窝网络连接状态。</Text>
+          <Text className="text-muted-foreground">获取和监控设备的蜂窝网络连接状态。</Text>
         </View>
 
         <Text className="text-center mb-6">需要电话状态权限来访问蜂窝网络信息</Text>
@@ -107,23 +70,24 @@ export default function ExpoCellularScreen() {
   }
 
   return (
-    <View className="flex-1 p-6">
-      {cellularInfo && (
-        <View className="pt-4">
-          {renderInfoItem('运营商', cellularInfo.carrier)}
-          {renderInfoItem('国家代码 (ISO)', cellularInfo.isoCountryCode)}
-          {renderInfoItem('移动国家代码 (MCC)', cellularInfo.mobileCountryCode)}
-          {renderInfoItem('移动网络代码 (MNC)', cellularInfo.mobileNetworkCode)}
-          {renderInfoItem('支持网络通话 (VoIP)', cellularInfo.allowsVoip ? '是' : '否')}
-          {renderInfoItem('网络类型', getGenerationDisplayName(cellularInfo.cellularGeneration))}
+    <View className="flex-1 px-5 pt-5">
+      <ScrollView className="flex-1">
+        <View className="mb-6">
+          <Text className="text-2xl font-bold mb-2">蜂窝网络</Text>
+          <Text className="text-muted-foreground">蜂窝服务提供商信息</Text>
         </View>
-      )}
 
-      <View className="mt-4 bg-muted p-4 rounded-xl">
-        <Text className="text-muted-foreground">
-          注意: 在模拟器上或在没有 SIM 卡的设备上，某些信息可能无法获取。此示例最好在真实设备上测试。
-        </Text>
-      </View>
+        <InfoItem label="运营商" value={cellularInfo?.carrier} />
+        <InfoItem label="网络类型" value={CellularGeneration[cellularInfo?.cellularGeneration || 0]} />
+        <InfoItem label="国家代码 (ISO)" value={cellularInfo?.isoCountryCode} />
+        <InfoItem label="移动国家代码 (MCC)" value={cellularInfo?.mobileCountryCode} />
+        <InfoItem label="移动网络代码 (MNC)" value={cellularInfo?.mobileNetworkCode} />
+        <InfoItem label="支持网络通话 (VoIP)" value={cellularInfo?.allowsVoip ? '是' : '否'} />
+      </ScrollView>
+
+      <Button onPress={() => requestPermission()} disabled={status?.status === PermissionStatus.GRANTED}>
+        <Text className="capitalize">授予权限 ({status?.status})</Text>
+      </Button>
     </View>
   );
 }

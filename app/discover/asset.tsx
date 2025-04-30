@@ -45,7 +45,7 @@ export default function ExpoAssetScreen() {
 
   // 渲染资源信息项
   const renderAssetInfo = (asset: Asset, index: number) => (
-    <View key={index} className="mb-4 p-4 bg-gray-50 rounded-lg flex-col gap-3 text-secondary-foreground">
+    <View key={index} className="mb-4 p-4 bg-gray-50 rounded-lg flex-col gap-3 text-muted-foreground">
       <Text>资源 #{index + 1}</Text>
       <Text>{asset.uri}</Text>
       {asset.localUri && (
@@ -117,10 +117,10 @@ export default function ExpoAssetScreen() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+      <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
         <View className="mb-6">
           <Text className="text-2xl font-bold mb-2">资源管理</Text>
-          <Text className="text-secondary-foreground">在应用中加载和管理各类静态资源文件。</Text>
+          <Text className="text-muted-foreground">在应用中加载和管理各类静态资源文件。</Text>
         </View>
 
         <ActivityIndicator color="#0891b2" />
@@ -131,14 +131,14 @@ export default function ExpoAssetScreen() {
 
   if (error) {
     return (
-      <View className="flex-1 p-6 m-6 items-center justify-center bg-muted rounded-lg">
+      <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
         <Text className="text-center text-destructive">{error || '-'}</Text>
       </View>
     );
   }
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <Text className="font-bold mb-2">预加载的资源:</Text>
       {loadedAssets.map(renderAssetInfo)}
 

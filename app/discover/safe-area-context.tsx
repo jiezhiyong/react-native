@@ -7,10 +7,10 @@ export default function SafeAreaContextScreen() {
   return (
     <>
       <SafeAreaView className="flex-1">
-        <View className="flex-1 p-6">
+        <View className="flex-1 p-5">
           <View className="mb-6">
             <Text className="text-2xl font-bold mb-2">Safe Area Context</Text>
-            <Text className="text-secondary-foreground">使用和配置 Safe Area Context 相关功能。</Text>
+            <Text className="text-muted-foreground">使用和配置 Safe Area Context 相关功能。</Text>
           </View>
 
           <View className="bg-muted rounded-lg p-4">

@@ -120,10 +120,10 @@ export default function ExpoMailComposerScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-6">
+    <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">邮件编辑器</Text>
-        <Text className="text-secondary-foreground">在应用中创建和发送电子邮件。</Text>
+        <Text className="text-muted-foreground">在应用中创建和发送电子邮件。</Text>
       </View>
 
       {/* 可用性状态 */}

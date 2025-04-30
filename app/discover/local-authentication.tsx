@@ -95,14 +95,14 @@ export default function LocalAuthenticationScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">本地认证</Text>
-        <Text className="text-secondary-foreground">使用设备的生物识别或密码进行本地身份验证。</Text>
+        <Text className="text-muted-foreground">使用设备的生物识别或密码进行本地身份验证。</Text>
       </View>
 
       <Card className="p-4 mb-4 bg-muted">
-        <Text className="text-lg font-medium mb-2">支持情况</Text>
+        <Text className="font-medium mb-2">支持情况</Text>
         <View className="flex-row items-center mb-2">
           <Text>设备支持生物识别: </Text>
           {isCompatible ? <Text className="text-green-500">支持</Text> : <Text className="text-red-500">不支持</Text>}
@@ -125,7 +125,7 @@ export default function LocalAuthenticationScreen() {
       </Card>
 
       <Card className="p-4 bg-muted rounded-lg mb-4">
-        <Text className="text-lg font-medium mb-2">认证结果</Text>
+        <Text className="font-medium mb-2">认证结果</Text>
         <Text>{authResult || '...'}</Text>
       </Card>
 

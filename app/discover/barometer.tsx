@@ -57,7 +57,7 @@ export default function BarometerScreen() {
 
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">气压计</Text>
-        <Text className="text-secondary-foreground">使用设备气压计传感器监测环境气压变化。</Text>
+        <Text className="text-muted-foreground">使用设备气压计传感器监测环境气压变化。</Text>
       </View>;
     };
   }, []);
@@ -69,9 +69,9 @@ export default function BarometerScreen() {
   const formattedAltitude = data.relativeAltitude ? data.relativeAltitude.toFixed(2) : '不可用';
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       {/* 当前气压数据 */}
-      <View className="bg-blue-50 rounded-xl p-6 mb-6 items-center">
+      <View className="bg-blue-50 rounded-xl p-5 mb-6 items-center">
         <View className="flex-row items-center justify-center mb-2">
           <Text className="text-lg font-medium ml-2 text-gray-700">当前气压 (hPa)</Text>
         </View>

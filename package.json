@@ -227,6 +227,7 @@
     "jest-expo": "~52.0.6",
     "prettier": "^3.5.3",
     "source-map-explorer": "^2.5.3",
+    "stripe": "^18.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },

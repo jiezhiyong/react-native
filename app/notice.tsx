@@ -113,7 +113,7 @@ const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) =>
         <Text className={`text-base font-medium ${item.isRead ? 'text-gray-700' : 'text-blue-700'}`}>{item.title}</Text>
         {!item.isRead && <View className="bg-red-500 w-2 h-2 rounded-full" />}
       </View>
-      <Text className="text-secondary-foreground mb-2" numberOfLines={2}>
+      <Text className="text-muted-foreground mb-2" numberOfLines={2}>
         {item.content}
       </Text>
       <Text className="text-xs text-gray-400">{format(parseISO(item.createdAt), 'yyyy-MM-dd HH:mm')}</Text>
@@ -125,7 +125,7 @@ const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) =>
 const DateGroupHeader = ({ title }: { title: string }) => (
   <View className="flex-row items-center py-2 mb-2">
     <CalendarClock size={16} color="#6b7280" />
-    <Text className="text-sm font-medium text-gray-500 ml-2">{title}</Text>
+    <Text className="text-sm font-medium text-muted-foreground ml-2">{title}</Text>
   </View>
 );
 

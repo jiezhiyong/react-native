@@ -64,10 +64,10 @@ export default function ExpoSecureStoreScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">安全存储</Text>
-        <Text className="text-secondary-foreground">使用安全存储来保存敏感信息，如令牌、密码等。</Text>
+        <Text className="text-muted-foreground">使用安全存储来保存敏感信息，如令牌、密码等。</Text>
       </View>
 
       {/* 输入区域 */}

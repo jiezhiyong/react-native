@@ -48,10 +48,10 @@ export default function ExpoClipboardScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">剪贴板</Text>
-        <Text className="text-secondary-foreground">读取和写入设备剪贴板的数据。</Text>
+        <Text className="text-muted-foreground">读取和写入设备剪贴板的数据。</Text>
       </View>
 
       {/* 复制到剪贴板 */}

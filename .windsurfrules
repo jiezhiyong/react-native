@@ -20,7 +20,7 @@
 8. 性能优化：避免不必要的渲染和大型依赖
 9. 良好的错误处理机制
 10. 图标优先使用 lucide-react-native
-11. 样式颜色尽量使用 tailwindcss 的预定义颜色变量, 比如背景色使用 bg-background, 灰色文字使用 text-secondary-foreground
+11. 样式颜色尽量使用 tailwindcss 的预定义颜色变量, 比如背景色使用 bg-background, 灰色文字使用 text-muted-foreground
 12. 使用 pnpm 管理依赖
 13. 组件尽量使用 shadcn/ui, 目录在 ~/components/ui/*, 如：按钮使用 ~/components/ui/button 而不是 TouchableOpacity, Text 使用 ~/components/ui/text, 输入框使用 ~/components/ui/input
 14. 不用关心 import rule 顺序的问题

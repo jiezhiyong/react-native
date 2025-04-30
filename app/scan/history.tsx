@@ -142,7 +142,7 @@ export default function HistoryScreen() {
                 <Text className="text-gray-800 font-medium" numberOfLines={1}>
                   {item.content}
                 </Text>
-                <Text className="text-gray-500 text-xs mt-1">{formatDate(item.timestamp)}</Text>
+                <Text className="text-muted-foreground text-xs mt-1">{formatDate(item.timestamp)}</Text>
               </View>
             </View>
           </View>
@@ -178,13 +178,13 @@ export default function HistoryScreen() {
               {item.content}
             </Text>
             <View className="flex-row justify-between items-center mt-1">
-              <Text className="text-gray-500 text-xs">{formatDate(item.timestamp)}</Text>
+              <Text className="text-muted-foreground text-xs">{formatDate(item.timestamp)}</Text>
               {item.isUrl ? (
                 <Text className="text-blue-500 text-xs">链接</Text>
               ) : (
                 <TouchableOpacity onPress={() => copyToClipboard(item.content)} className="flex-row items-center">
                   <Copy size={12} color="#6b7280" />
-                  <Text className="text-gray-500 text-xs ml-1">复制</Text>
+                  <Text className="text-muted-foreground text-xs ml-1">复制</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -197,9 +197,9 @@ export default function HistoryScreen() {
 
   // 空状态渲染
   const renderEmptyState = () => (
-    <View className="flex-1 justify-center items-center p-6">
+    <View className="flex-1 justify-center items-center p-5">
       <FileX size={120} color="#6b7280" />
-      <Text className="text-gray-500 text-center mt-4 text-base">暂无扫描记录</Text>
+      <Text className="text-muted-foreground text-center mt-4 text-base">暂无扫描记录</Text>
       <Text className="text-gray-400 text-center mt-2 text-sm">扫描二维码后会自动保存在这里</Text>
       <TouchableOpacity onPress={() => router.push('/scan')} className="mt-6 bg-blue-500 py-3 px-6 rounded-full">
         <Text className="text-white font-medium">去扫描</Text>

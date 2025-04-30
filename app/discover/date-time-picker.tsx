@@ -99,10 +99,10 @@ export default function DateTimePickerScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">日期时间选择器</Text>
-        <Text className="text-secondary-foreground">实现交互式的日期和时间选择控件。</Text>
+        <Text className="text-muted-foreground">实现交互式的日期和时间选择控件。</Text>
       </View>
 
       {/* 日期选择卡片 */}

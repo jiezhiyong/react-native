@@ -30,10 +30,10 @@ export default function ExpoImageScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">图像显示</Text>
-        <Text className="text-secondary-foreground">加载和显示各种来源的图像内容。</Text>
+        <Text className="text-muted-foreground">加载和显示各种来源的图像内容。</Text>
       </View>
 
       <View className="mb-6 flex-col gap-3">

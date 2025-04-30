@@ -92,10 +92,10 @@ export default function AppleAuthenticationScreen() {
   };
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">Apple 登录</Text>
-        <Text className="text-secondary-foreground">集成 Apple 的身份验证服务，为用户提供安全便捷的登录方式。</Text>
+        <Text className="text-muted-foreground">集成 Apple 的身份验证服务，为用户提供安全便捷的登录方式。</Text>
       </View>
 
       <View className="mb-6 bg-muted dark:bg-gray-800 rounded-lg p-4 flex-col gap-3">
@@ -127,7 +127,7 @@ export default function AppleAuthenticationScreen() {
       {/* 用户信息显示 */}
       {userInfo && (
         <View className="bg-green-50 border border-green-300 dark:bg-green-800 rounded-lg p-4">
-          <Text className="text-lg font-medium mb-2">用户信息</Text>
+          <Text className="font-medium mb-2">用户信息</Text>
           <Text>ID: {userInfo.user}</Text>
           {userInfo.email && <Text>邮箱: {userInfo.email}</Text>}
           {userInfo.fullName && (
@@ -138,7 +138,7 @@ export default function AppleAuthenticationScreen() {
         </View>
       )}
 
-      <Text className="text-sm text-secondary-foreground dark:text-gray-400 mt-4">
+      <Text className="text-sm text-muted-foreground dark:text-gray-400 mt-4">
         说明: Apple 登录在模拟器上可能无法正常工作，需要在真机上测试。
         首次登录时会提供全名和邮箱，后续登录可能不再提供。
       </Text>
