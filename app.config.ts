@@ -18,11 +18,11 @@ const getUniqueIdentifier = () => {
 
 const getAppName = () => {
   if (IS_DEV) {
-    return 'Chat QA (Dev)';
+    return 'ChatQA (Dev)';
   } else if (IS_TEST) {
-    return 'Chat QA (Test)';
+    return 'ChatQA (Test)';
   }
-  return 'Chat QA';
+  return 'ChatQA';
 };
 
 // 以 .ts 格式复写 app.json
@@ -49,6 +49,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   assetBundlePatterns: ['**/*'],
   android: {
+    scheme: 'qachat',
     versionCode: VERSION_CODE,
     package: getUniqueIdentifier(),
     softwareKeyboardLayoutMode: 'pan',
@@ -146,7 +147,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   plugins: [
     ['./plugins/withAndroidQueries.js', {}],
     ['expo-secure-store', {}],
-    ['expo-localization', {}],
     ['expo-asset', {}],
     ['expo-background-task', {}],
     ['expo-build-properties', {}],

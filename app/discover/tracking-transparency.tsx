@@ -1,7 +1,9 @@
+import { PermissionStatus } from 'expo-modules-core';
 import * as TrackingTransparency from 'expo-tracking-transparency';
 import { useTrackingPermissions } from 'expo-tracking-transparency';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
+import { InfoItemCol } from '~/components/InfoItem';
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
 
@@ -18,19 +20,18 @@ export default function ExpoTrackingTransparencyScreen() {
       </View>
 
       <View className="flex-1">
-        <View className="mb-6 p-4 bg-muted rounded-lg gap-2">
-          <Text>是否可用: {String(TrackingTransparency.isAvailable())}</Text>
-          <Text>当前跟踪状态: {String(status?.granted)}</Text>
-          <Text>广告 ID: {String(TrackingTransparency.getAdvertisingId())}</Text>
-        </View>
-        <Text className="text-muted-foreground">
+        <InfoItemCol label="是否可用" value={String(TrackingTransparency.isAvailable())} />
+        <InfoItemCol label="当前跟踪状态" value={String(status?.granted)} />
+        <InfoItemCol label="广告 ID" value={String(TrackingTransparency.getAdvertisingId())} />
+
+        <Text className="text-muted-foreground mt-6">
           注意：未开启 `允许App请求跟踪`，不会触发请求权限；
           系统会记住用户的选项，除非用户卸载并重新安装应用在设备上，否则不会再次提示。
         </Text>
       </View>
 
-      <Button onPress={requestPermission}>
-        <Text>请求跟踪权限</Text>
+      <Button onPress={requestPermission} disabled={status?.status === PermissionStatus.GRANTED}>
+        <Text className="capitalize">请求权限 ({status?.status})</Text>
       </Button>
     </View>
   );

@@ -3,7 +3,7 @@ import { ApplicationReleaseType } from 'expo-application';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { InfoItem } from '~/components/InfoItem';
+import { InfoItemCol } from '~/components/InfoItem';
 import { Text } from '~/components/ui/text';
 
 /**
@@ -139,20 +139,20 @@ export default function ExpoApplicationScreen() {
         <Text className="text-muted-foreground">获取和显示应用程序的基本信息和状态。</Text>
       </View>
 
-      <InfoItem label="应用名称" value={appInfo.applicationName} />
-      <InfoItem label="应用ID" value={appInfo.applicationId} />
-      <InfoItem label="应用版本" value={appInfo.nativeApplicationVersion} />
-      <InfoItem label="构建版本" value={appInfo.nativeBuildVersion} />
-      <InfoItem label="安装时间" value={appInfo.installationTime} />
-      <InfoItem label="安装来源" value={appInfo.installReferrer} />
-      <InfoItem label="Android ID" value={appInfo.androidId} />
-      <InfoItem
+      <InfoItemCol label="应用名称" value={appInfo.applicationName} />
+      <InfoItemCol label="应用ID" value={appInfo.applicationId} />
+      <InfoItemCol label="应用版本" value={appInfo.nativeApplicationVersion} />
+      <InfoItemCol label="构建版本" value={appInfo.nativeBuildVersion} />
+      <InfoItemCol label="安装时间" value={appInfo.installationTime} />
+      <InfoItemCol label="安装来源" value={appInfo.installReferrer} />
+      <InfoItemCol label="Android ID" value={appInfo.androidId} />
+      <InfoItemCol
         label="iOS 应用发布类型"
         value={`${appInfo.iosApplicationReleaseType}, ${ApplicationReleaseType[appInfo.iosApplicationReleaseType]}`}
       />
-      <InfoItem label="iOS ID For Vendor (IDFV)" value={appInfo.iosIdForVendor} />
-      <InfoItem label="iOS 推送通知服务环境" value={appInfo.iosPushNotificationServiceEnvironment} />
-      <InfoItem label="最后更新时间" value={appInfo.lastUpdateTime} />
+      <InfoItemCol label="iOS ID For Vendor (IDFV)" value={appInfo.iosIdForVendor} />
+      <InfoItemCol label="iOS 推送通知服务环境" value={appInfo.iosPushNotificationServiceEnvironment} />
+      <InfoItemCol label="最后更新时间" value={appInfo.lastUpdateTime} />
     </ScrollView>
   );
 }

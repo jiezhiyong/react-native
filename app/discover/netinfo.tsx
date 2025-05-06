@@ -1,8 +1,9 @@
 import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
 import * as Location from 'expo-location';
 import { useState } from 'react';
-import { Alert, ScrollView, View } from 'react-native';
+import { Alert, View } from 'react-native';
 
+import { InfoItemCol } from '~/components/InfoItem';
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
 import { useEffectAsync } from '~/hooks/use-effect-async';
@@ -51,33 +52,24 @@ export default function ExpoNetInfoScreen() {
 
   const details: any = netinfoState?.details;
   return (
-    <ScrollView className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">网络信息</Text>
         <Text className="text-muted-foreground">获取和监控设备的网络连接状态。</Text>
       </View>
 
       {/* 网络状态卡片 */}
-      <View className="border border-input bg-muted rounded-lg p-5 mb-6">
-        <Text>链接状态：{netinfoState?.isConnected ? '已连接' : '未连接'}</Text>
-        <Text>连接类型：{netinfoState?.type || '未知'}</Text>
-
-        <Text className="mt-4">
-          SSID：{details?.ssid || '?'} (定位权限：{String(locationForegroundStatusGranted)})
-        </Text>
-        <Text>BSSID：{details?.bssid || ''}</Text>
-        <Text>信号强度(%)：{details?.strength || '?'}</Text>
-        <Text>频率(MHz)：{details?.frequency || '?'}</Text>
-
-        <Text className="mt-4">运营商：{details?.carrier || '?'}</Text>
-        <Text>蜂窝类型：{details?.cellularGeneration || '?'}</Text>
-        <Text>信号强度(%)：{details?.strength || '?'}</Text>
+      <View className="flex-1">
+        <InfoItemCol label="连接状态" value={netinfoState?.isConnected ? '已连接' : '未连接'} />
+        <InfoItemCol label="连接类型" value={netinfoState?.type} />
+        <InfoItemCol label={`SSID (定位权限：${String(locationForegroundStatusGranted)})`} value={details?.ssid} />
+        <InfoItemCol label="BSSID" value={details?.bssid} />
+        <InfoItemCol label="信号强度(%)" value={details?.strength} />
+        <InfoItemCol label="频率(MHz)" value={details?.frequency} />
+        <InfoItemCol label="运营商" value={details?.carrier} />
+        <InfoItemCol label="蜂窝类型" value={details?.cellularGeneration} />
+        <Text className="">{JSON.stringify(details, null, 2)}</Text>
       </View>
-
-      {/* 操作按钮 */}
-      <Button onPress={checkNetworkStatus}>
-        <Text>刷新网络状态</Text>
-      </Button>
-    </ScrollView>
+    </View>
   );
 }

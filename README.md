@@ -147,7 +147,7 @@ npx setup-safari # 自动将捆绑标识符注册到 Apple 帐户，为 ID 分�
 
 ```sh
 npx expo install --check # 检查依赖
-npx expo-doctor # 检查配置
+npx expo-doctor@latest # 检查配置
 npx react-compiler-healthcheck@latest # 检查项目与 React 编译器的兼容性
 ```
 

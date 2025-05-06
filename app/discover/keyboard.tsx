@@ -42,7 +42,7 @@ export default function TabTwoScreen() {
     <View style={styles.container}>
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">键盘控制</Text>
-        <Text className="text-secondary-foreground">管理和响应屏幕键盘的显示和隐藏。</Text>
+        <Text className="text-muted-foreground">管理和响应屏幕键盘的显示和隐藏。</Text>
       </View>
 
       <FlatList

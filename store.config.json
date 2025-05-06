@@ -3,10 +3,13 @@
   "apple": {
     "info": {
       "zh-CN": {
-        "title": "Chat QA",
+        "title": "ChatQA",
         "subtitle": "Your self-made awesome app",
         "description": "The most awesome app you have ever seen",
-        "keywords": ["awesome", "app"],
+        "keywords": [
+          "awesome",
+          "app"
+        ],
         "marketingUrl": "https://qachat.expo.app",
         "supportUrl": "https://qachat.expo.app/support",
         "privacyPolicyUrl": "https://qachat.expo.app/privacy-policy"

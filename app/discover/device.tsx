@@ -1,12 +1,12 @@
 import * as Device from 'expo-device';
+import { DeviceType } from 'expo-device';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import { InfoItemRow } from '~/components/InfoItem';
+import { Card } from '~/components/ui/card';
 import { toast } from '~/components/ui/sonner';
-
-import { Button } from '../../components/ui/button';
-import { Card } from '../../components/ui/card';
-import { Text } from '../../components/ui/text';
+import { Text } from '~/components/ui/text';
 
 export default function ExpoDeviceScreen() {
   const [deviceInfo, setDeviceInfo] = useState<{
@@ -49,6 +49,10 @@ export default function ExpoDeviceScreen() {
     platformFeatures: [],
   });
 
+  useEffect(() => {
+    getDeviceInfo();
+  }, []);
+
   // 获取设备信息
   const getDeviceInfo = async () => {
     try {
@@ -57,25 +61,6 @@ export default function ExpoDeviceScreen() {
 
       // 获取平台功能列表
       const platformFeatures = await Device.getPlatformFeaturesAsync();
-
-      // 格式化设备类型
-      let deviceTypeString = '未知';
-      switch (Device.deviceType) {
-        case Device.DeviceType.PHONE:
-          deviceTypeString = '手机';
-          break;
-        case Device.DeviceType.TABLET:
-          deviceTypeString = '平板';
-          break;
-        case Device.DeviceType.DESKTOP:
-          deviceTypeString = '桌面';
-          break;
-        case Device.DeviceType.TV:
-          deviceTypeString = '电视';
-          break;
-        default:
-          deviceTypeString = '未知';
-      }
 
       // 格式化内存大小，转换为可读性更好的格式（GB或MB）
       let formattedMemory = null;
@@ -95,7 +80,7 @@ export default function ExpoDeviceScreen() {
         manufacturer: Device.manufacturer,
         modelName: Device.modelName,
         modelId: Device.modelId,
-        deviceType: deviceTypeString,
+        deviceType: DeviceType[Device.deviceType as any],
         designName: Device.designName,
         productName: Device.productName,
         deviceYearClass: Device.deviceYearClass,
@@ -109,26 +94,11 @@ export default function ExpoDeviceScreen() {
         isRooted,
         platformFeatures,
       });
-
-      toast.success('设备信息已更新');
     } catch (error) {
       console.error('获取设备信息失败:', error);
       toast.error('获取设备信息失败');
     }
   };
-
-  // 组件加载时获取设备信息
-  useEffect(() => {
-    getDeviceInfo();
-  }, []);
-
-  // 信息项组件
-  const InfoItem = ({ label, value }: { label: string; value: string | number | null | boolean }) => (
-    <View className="mb-2 flex-row justify-between">
-      <Text className="font-medium">{label}:</Text>
-      <Text className="text-muted-foreground">{value !== null && value !== undefined ? String(value) : '不可用'}</Text>
-    </View>
-  );
 
   return (
     <ScrollView className="flex-1 p-5">
@@ -139,43 +109,43 @@ export default function ExpoDeviceScreen() {
 
       {/* 基本设备信息 */}
       <Card className="p-4 mb-4">
-        <Text className="text-lg font-medium mb-4">基本设备信息</Text>
-        <InfoItem label="是否为真实设备" value={deviceInfo.isDevice ? '是' : '否'} />
-        <InfoItem label="品牌" value={deviceInfo.brand} />
-        <InfoItem label="制造商" value={deviceInfo.manufacturer} />
-        <InfoItem label="型号名称" value={deviceInfo.modelName} />
-        <InfoItem label="型号ID" value={deviceInfo.modelId} />
-        <InfoItem label="设备类型" value={deviceInfo.deviceType} />
-        <InfoItem label="设备名称" value={deviceInfo.deviceName} />
-        <InfoItem label="设备年份等级" value={deviceInfo.deviceYearClass} />
+        <Text className="text-lg font-medium mb-2">基本设备信息</Text>
+        <InfoItemRow label="是否为真实设备" value={deviceInfo.isDevice ? '是' : '否'} />
+        <InfoItemRow label="品牌" value={deviceInfo.brand} />
+        <InfoItemRow label="制造商" value={deviceInfo.manufacturer} />
+        <InfoItemRow label="型号名称" value={deviceInfo.modelName} />
+        <InfoItemRow label="型号ID" value={deviceInfo.modelId} />
+        <InfoItemRow label="设备类型" value={deviceInfo.deviceType} />
+        <InfoItemRow label="设备名称" value={deviceInfo.deviceName} />
+        <InfoItemRow label="设备年份等级" value={deviceInfo.deviceYearClass} />
       </Card>
 
       {/* 系统信息 */}
       <Card className="p-4 mb-4">
-        <Text className="text-lg font-medium mb-4">系统信息</Text>
-        <InfoItem label="操作系统" value={deviceInfo.osName} />
-        <InfoItem label="操作系统版本" value={deviceInfo.osVersion} />
-        <InfoItem label="构建ID" value={deviceInfo.osBuildId} />
-        <InfoItem label="内部构建ID" value={deviceInfo.osInternalBuildId} />
-        <InfoItem label="是否已Root/越狱" value={deviceInfo.isRooted ? '是' : '否'} />
+        <Text className="text-lg font-medium mb-2">系统信息</Text>
+        <InfoItemRow label="操作系统" value={deviceInfo.osName} />
+        <InfoItemRow label="操作系统版本" value={deviceInfo.osVersion} />
+        <InfoItemRow label="构建ID" value={deviceInfo.osBuildId} />
+        <InfoItemRow label="内部构建ID" value={deviceInfo.osInternalBuildId} />
+        <InfoItemRow label="是否已Root/越狱" value={deviceInfo.isRooted ? '是' : '否'} />
       </Card>
 
       {/* 硬件信息 */}
       <Card className="p-4 mb-4">
-        <Text className="text-lg font-medium mb-4">硬件信息</Text>
-        <InfoItem label="总内存" value={deviceInfo.totalMemory} />
-        <InfoItem label="支持的CPU架构" value={deviceInfo.supportedCpuArchitectures?.join(', ') || null} />
-        <InfoItem label="设计名称" value={deviceInfo.designName} />
-        <InfoItem label="产品名称" value={deviceInfo.productName} />
+        <Text className="text-lg font-medium mb-2">硬件信息</Text>
+        <InfoItemRow label="总内存" value={deviceInfo.totalMemory} />
+        <InfoItemRow label="支持的CPU架构" value={deviceInfo.supportedCpuArchitectures?.join(', ') || null} />
+        <InfoItemRow label="设计名称" value={deviceInfo.designName} />
+        <InfoItemRow label="产品名称" value={deviceInfo.productName} />
       </Card>
 
       {/* 平台功能 */}
-      <Card className="p-4 mb-4">
+      <Card className="p-4 mb-[1]">
         <Text className="font-medium mb-2">平台功能</Text>
         <Text className="text-muted-foreground mb-2">
           {deviceInfo.platformFeatures && deviceInfo.platformFeatures.length > 0
             ? '支持的平台功能列表:'
-            : '此平台不支持功能列表查询或无可用功能'}
+            : '此平台不支持功能列表查询, 或无可用功能'}
         </Text>
         {deviceInfo.platformFeatures && deviceInfo.platformFeatures.length > 0 ? (
           <View className="bg-card-foreground/5 p-3 rounded-md">
@@ -192,11 +162,6 @@ export default function ExpoDeviceScreen() {
           </View>
         ) : null}
       </Card>
-
-      {/* 刷新按钮 */}
-      <Button onPress={getDeviceInfo}>
-        <Text>刷新设备信息</Text>
-      </Button>
     </ScrollView>
   );
 }
