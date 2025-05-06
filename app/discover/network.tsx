@@ -1,9 +1,9 @@
+import { useNetInfo } from '@react-native-community/netinfo';
 import * as Network from 'expo-network';
 import { useNetworkState } from 'expo-network';
 import { useCallback, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
 import { useEffectAsync } from '~/hooks/use-effect-async';
 
@@ -15,6 +15,10 @@ interface NetworkInfo {
 export default function ExpoNetworkScreen() {
   const networkState = useNetworkState();
 
+  const netInfo = useNetInfo({
+    shouldFetchWiFiSSID: true,
+  });
+
   const [networkInfo, setNetworkInfo] = useState<NetworkInfo>({
     ipAddress: null,
     isAirplaneMode: null,
@@ -25,8 +29,7 @@ export default function ExpoNetworkScreen() {
       const ip = await Network.getIpAddressAsync();
       setNetworkInfo((prev) => ({ ...prev, ipAddress: ip }));
     } catch (error) {
-      Alert.alert('错误', '获取IP地址失败: ' + error);
-    } finally {
+      console.error(error);
     }
   }, []);
 
@@ -35,8 +38,7 @@ export default function ExpoNetworkScreen() {
       const isEnabled = await Network.isAirplaneModeEnabledAsync();
       setNetworkInfo((prev) => ({ ...prev, isAirplaneMode: isEnabled }));
     } catch (error) {
-      Alert.alert('错误', '检查飞行模式失败: ' + error);
-    } finally {
+      console.error(error);
     }
   }, []);
 
@@ -52,21 +54,17 @@ export default function ExpoNetworkScreen() {
         <Text className="text-muted-foreground">访问设备网络信息的库，如 IP 地址、MAC 地址和飞行模式状态</Text>
       </View>
 
-      <View className="bg-muted p-4 rounded-lg mb-4 flex gap-1">
-        <Text>网络类型: {networkState.type || '未知'}</Text>
-        <Text>是否已连接: {String(networkState.isConnected)}</Text>
-        <Text>是否可访问互联网: {String(networkState.isInternetReachable)}</Text>
-        <Text>IP地址: {networkInfo.ipAddress || '未知'}</Text>
-        <Text>飞行模式: {String(networkInfo.isAirplaneMode || '未知')}</Text>
+      <Text className="text-lg font-medium mb-2">expo-network</Text>
+
+      <View className="bg-muted rounded-lg p-4 mb-4">
+        <Text>{JSON.stringify({ ...networkState, ...networkInfo }, null, 2)}</Text>
       </View>
 
-      <View className="flex-row gap-3">
-        <Button onPress={getIpAddress} className="flex-1">
-          <Text>获取IP地址</Text>
-        </Button>
-        <Button onPress={checkAirplaneMode} className="flex-1">
-          <Text>检查飞行模式</Text>
-        </Button>
+      <Text className="text-lg font-medium mb-2">@react-native-community/netinfo</Text>
+      <View className="flex-1">
+        <View className="bg-muted rounded-lg p-4">
+          <Text>{JSON.stringify(netInfo, null, 2)}</Text>
+        </View>
       </View>
     </View>
   );

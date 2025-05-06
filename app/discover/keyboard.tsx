@@ -1,10 +1,10 @@
-import { FlatList, Platform, StatusBar, StyleSheet, TextInput, View } from 'react-native';
-import { useKeyboardHandler } from 'react-native-keyboard-controller';
+import { View } from 'react-native';
+import { KeyboardAwareScrollView, useKeyboardHandler } from 'react-native-keyboard-controller';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
-import { MessageItem } from '~/components/MessageItem';
+import { Input } from '~/components/ui/input';
+import { Skeleton } from '~/components/ui/skeleton';
 import { Text } from '~/components/ui/text';
-import { messages } from '~/mocks/messages';
 
 const PADDING_BOTTOM = 20;
 
@@ -28,8 +28,9 @@ const useGradualAnimation = () => {
   return { height };
 };
 
-export default function TabTwoScreen() {
+export default function KeyboardScreen() {
   const { height } = useGradualAnimation();
+  console.log(height);
 
   const fakeView = useAnimatedStyle(() => {
     return {
@@ -39,44 +40,30 @@ export default function TabTwoScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View className="mb-6">
-        <Text className="text-2xl font-bold mb-2">键盘控制</Text>
-        <Text className="text-muted-foreground">管理和响应屏幕键盘的显示和隐藏。</Text>
-      </View>
+    <KeyboardAwareScrollView bottomOffset={20}>
+      <View className="flex-1 px-5 pt-5">
+        <View className="mb-6">
+          <Text className="text-2xl font-bold mb-2">键盘</Text>
+          <Text className="text-muted-foreground">管理和响应屏幕键盘的显示和隐藏。</Text>
+        </View>
 
-      <FlatList
-        data={messages}
-        renderItem={({ item }) => <MessageItem message={item} />}
-        keyExtractor={(item) => item.createdAt.toString()}
-        contentContainerStyle={styles.listStyle}
-        keyboardDismissMode="on-drag"
-        inverted
-      />
-      <TextInput placeholder="Type a message..." style={styles.textInput} />
-      <Animated.View style={fakeView} />
-    </View>
+        <View className="flex-1">
+          <Skeleton className="w-full h-10 rounded-lg mb-3" />
+          <Skeleton className="w-2/5 h-10 rounded-lg mb-3" />
+          <Skeleton className="w-4/5 h-10 rounded-lg mb-6" />
+
+          <Skeleton className="w-full h-10 rounded-lg mb-3" />
+          <Skeleton className="w-2/5 h-10 rounded-lg mb-3" />
+          <Skeleton className="w-4/5 h-10 rounded-lg mb-6" />
+
+          <Skeleton className="w-full h-10 rounded-lg mb-3" />
+          <Skeleton className="w-2/5 h-10 rounded-lg mb-3" />
+          <Skeleton className="w-4/5 h-10 rounded-lg mb-6" />
+
+          <Input placeholder="Type a message..." className="mb-3" />
+          <Input placeholder="Type a message..." />
+        </View>
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-  },
-  listStyle: {
-    padding: 16,
-    gap: 16,
-  },
-  textInput: {
-    width: '95%',
-    height: 45,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: '#d8d8d8',
-    backgroundColor: '#fff',
-    padding: 8,
-    alignSelf: 'center',
-    marginBottom: 8,
-  },
-});

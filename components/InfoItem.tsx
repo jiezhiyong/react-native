@@ -13,7 +13,7 @@ export const InfoItemCol = ({ label, value }: { label: string; value?: string | 
 
 export const InfoItemRow = ({ label, value }: { label: string; value?: string | number | boolean | null }) => {
   return (
-    <View className="flex-row gap-3 justify-between py-2 border-b border-gray-100">
+    <View className="flex-row gap-1 justify-between py-3 border-b border-gray-100">
       <Text className="text-muted-foreground">{label}</Text>
       <Text className="font-medium">{value ? String(value) : '-'}</Text>
     </View>

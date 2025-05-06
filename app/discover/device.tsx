@@ -141,7 +141,7 @@ export default function ExpoDeviceScreen() {
 
       {/* 平台功能 */}
       <Card className="p-4 mb-[1]">
-        <Text className="font-medium mb-2">平台功能</Text>
+        <Text className="text-lg font-medium mb-2">平台功能</Text>
         <Text className="text-muted-foreground mb-2">
           {deviceInfo.platformFeatures && deviceInfo.platformFeatures.length > 0
             ? '支持的平台功能列表:'

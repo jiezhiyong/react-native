@@ -8,7 +8,7 @@ const config = getSentryExpoConfig(__dirname, {
 });
 
 // 库与 Metro ES 模块解析不兼容问题：https://github.com/expo/expo/discussions/36551
-config.resolver.unstable_enablePackageExports = false;
+// config.resolver.unstable_enablePackageExports = false;
 
 // 添加路径别名配置
 config.resolver.extraNodeModules = {

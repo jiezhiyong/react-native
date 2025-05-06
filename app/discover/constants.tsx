@@ -2,11 +2,12 @@ import Constants from 'expo-constants';
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 
+import { InfoItemRow } from '~/components/InfoItem';
+
 import { Text } from '../../components/ui/text';
 
 export default function ExpoConstantsScreen() {
   // 设备和系统信息
-
   const deviceName = Constants.deviceName || '未知';
   const statusBarHeight = Constants.statusBarHeight || 0;
   const sessionId = Constants.sessionId || '未知';
@@ -55,11 +56,8 @@ export default function ExpoConstantsScreen() {
           <View className="">
             <Text className="text-lg font-bold">{card.title}</Text>
             <View className="">
-              {card.items.map((item, itemIndex) => (
-                <View key={itemIndex} className="py-3 flex-row justify-between border-b border-border gap-5">
-                  <Text className="text-muted-foreground">{item.label}</Text>
-                  <Text className="text-foreground">{String(item.value)}</Text>
-                </View>
+              {card.items.map((item) => (
+                <InfoItemRow label={item.label} value={String(item.value)} />
               ))}
             </View>
           </View>
@@ -67,8 +65,9 @@ export default function ExpoConstantsScreen() {
       ))}
 
       <View className="">
-        <Text className="text-sm text-muted-foreground">
-          注意：某些信息在不同环境下可能显示为"未知"，这是正常现象。在生产环境和开发环境中，某些常量值可能会有所不同。
+        <Text className="text-lg font-bold mb-2">注意：</Text>
+        <Text className="text-muted-foreground">
+          某些信息在不同环境下可能显示为"未知"，在生产环境和开发环境中，某些常量值可能会有所不同。
         </Text>
       </View>
     </ScrollView>

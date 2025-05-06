@@ -14,13 +14,7 @@ const demos: { name: string; desc: string; supports: string }[] = [
     desc: '原生应用 ID、应用名称和构建版本等信息',
     supports: 'Android, iOS, Web',
   },
-  { name: 'cellular', desc: '用户蜂窝服务提供商的信息', supports: 'Android, iOS, Web' },
-  { name: 'tracking-transparency', desc: '跟踪', supports: 'Android, iOS' },
   { name: 'device', desc: '物理设备系统信息', supports: 'Android, iOS, Web' },
-  { name: 'netinfo', desc: '访问网络信息', supports: 'Android, iOS, Web' },
-  { name: 'network', desc: '访问设备网络信息', supports: 'Android, iOS, Web' },
-
-  { name: 'constants', desc: '常量', supports: 'Android, iOS, Web' },
 
   // 常用
   { name: 'webview', desc: 'WebView', supports: 'Android, iOS' },
@@ -96,6 +90,10 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'gl', desc: '渲染 2D 和 3D 图形', supports: 'Android, iOS, Web' },
 
   // 其他
+  { name: 'cellular', desc: '用户蜂窝服务提供商的信息', supports: 'Android, iOS, Web' },
+  { name: 'tracking-transparency', desc: '跟踪', supports: 'Android, iOS' },
+  { name: 'network', desc: '访问设备网络信息', supports: 'Android, iOS, Web' },
+  { name: 'constants', desc: '常量', supports: 'Android, iOS, Web' },
   { name: 'apple-authentication', desc: '为 iOS 提供 Apple 身份验证', supports: 'iOS' },
   { name: 'auth-session', desc: '基于浏览器的身份验证', supports: 'Android, iOS, Web' },
   { name: 'intent-launcher', desc: '意图启动器', supports: 'Android' },
