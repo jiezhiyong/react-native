@@ -153,7 +153,7 @@ export default function FlashListScreen() {
     <View className="flex-1 px-6 pt-6">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">高性能列表</Text>
-        <Text className="text-muted-foreground">使用 FlashList 实现高性能的长列表渲染。</Text>
+        <Text className="text-muted-foreground">使用 FlashList 实现高性能的长列表渲染</Text>
       </View>
 
       <Button onPress={handleRefresh} disabled={isLoading} className="mb-4">
