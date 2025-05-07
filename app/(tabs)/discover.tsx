@@ -119,7 +119,7 @@ export default function HomeScreen() {
 
   return (
     <Animated.FlatList
-      className="px-5 pt-5 flex-1 bg-muted/60"
+      className="px-5 pt-5 flex-1 bg-muted/80"
       data={demos}
       onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: discoverScrollY } } }], {
         useNativeDriver: false,

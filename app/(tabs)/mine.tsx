@@ -107,7 +107,7 @@ const QuickLinksSection = () => {
   };
 
   return (
-    <View className="bg-background rounded-lg mx-5 mb-5 p-4">
+    <View className="bg-background rounded-lg mx-5 mb-5 px-4 py-6">
       <View className="flex-row justify-between mb-5">
         {quickLinks[0].map((item, index) => (
           <TouchableOpacity
@@ -117,12 +117,12 @@ const QuickLinksSection = () => {
             onPress={() => handleQuickLinkPress(item)}
           >
             <View
-              className="w-9 h-9 rounded-full items-center justify-center mb-1"
+              className="w-10 h-10 rounded-full items-center justify-center mb-1"
               style={{ backgroundColor: `${item.iconColor}15` }}
             >
               <IconComponent name={item.icon} size={20} color={item.iconColor} />
             </View>
-            <Text className="text-xs text-center">{item.title}</Text>
+            <Text className="text-sm text-center">{item.title}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -135,12 +135,12 @@ const QuickLinksSection = () => {
             onPress={() => handleQuickLinkPress(item)}
           >
             <View
-              className="w-9 h-9 rounded-full items-center justify-center mb-1"
+              className="w-10 h-10 rounded-full items-center justify-center mb-1"
               style={{ backgroundColor: `${item.iconColor}15` }}
             >
               <IconComponent name={item.icon} size={20} color={item.iconColor} />
             </View>
-            <Text className="text-xs text-center">{item.title}</Text>
+            <Text className="text-sm text-center">{item.title}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -161,7 +161,7 @@ const OtherEntriesSection = () => {
     <View className="bg-background rounded-lg px-4 mb-5 mx-5">
       {otherEntries.map((item, index) => (
         <React.Fragment key={index}>
-          <TouchableOpacity className="flex-row items-center py-3" onPress={() => handleEntryPress(item)}>
+          <TouchableOpacity className="flex-row items-center py-4" onPress={() => handleEntryPress(item)}>
             <View
               className="w-8 h-8 rounded-full items-center justify-center mr-3"
               style={{ backgroundColor: `${item.iconColor}15` }}
@@ -192,7 +192,7 @@ export default function MinePage() {
 
   return (
     <Animated.ScrollView
-      className="flex-1 bg-muted/60"
+      className="flex-1 bg-muted/80"
       onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: mineScrollY } } }], { useNativeDriver: false })}
       scrollEventThrottle={16}
     >
