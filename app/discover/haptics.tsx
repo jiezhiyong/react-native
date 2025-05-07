@@ -46,11 +46,11 @@ export default function ExpoHapticsScreen() {
     <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">触觉反馈</Text>
-        <Text className="text-muted-foreground">使用触觉反馈增强用户交互体验，为不同的操作提供适当的振动反馈。</Text>
+        <Text className="text-muted-foreground">使用触觉反馈增强用户交互体验，为不同的操作提供适当的振动反馈</Text>
       </View>
 
-      <View className="flex-col gap-3">
-        <Text className="text-lg font-bold">触觉强度</Text>
+      <Text className="text-lg font-medium mb-2">触觉强度</Text>
+      <View className="gap-3">
         <Button onPress={triggerLightHaptic}>
           <Text>轻度反馈</Text>
         </Button>
@@ -62,27 +62,27 @@ export default function ExpoHapticsScreen() {
         </Button>
       </View>
 
-      <Separator className="my-4" />
+      <Separator className="mt-6 mb-5" />
 
-      <View className="flex-col gap-3">
-        <Text className="text-lg font-bold">系统通知反馈</Text>
-        <Text className="text-sm text-muted-foreground">iOS 设备会触发不同类型的系统通知反馈</Text>
-        <Button className="w-full bg-green-600" onPress={triggerSuccessHaptic}>
+      <Text className="text-lg font-medium">系统通知反馈</Text>
+      <Text className="text-sm text-muted-foreground mb-2">iOS 设备会触发不同类型的系统通知反馈</Text>
+      <View className="gap-3">
+        <Button className="bg-green-600" onPress={triggerSuccessHaptic}>
           <Text>成功反馈</Text>
         </Button>
-        <Button className="w-full bg-yellow-600" onPress={triggerWarningHaptic}>
+        <Button className="bg-yellow-600" onPress={triggerWarningHaptic}>
           <Text>警告反馈</Text>
         </Button>
-        <Button className="w-full bg-red-600" onPress={triggerErrorHaptic}>
+        <Button className="bg-red-600" onPress={triggerErrorHaptic}>
           <Text>错误反馈</Text>
         </Button>
       </View>
 
-      <Separator className="my-4" />
+      <Separator className="mt-6 mb-5" />
 
-      <View className="flex-col gap-3">
-        <Text className="text-lg font-bold">选择反馈</Text>
-        <Text className="text-sm text-muted-foreground">轻微的触觉反馈，适用于用户选择项目时</Text>
+      <Text className="text-lg font-medium">选择反馈</Text>
+      <Text className="text-sm text-muted-foreground mb-2">轻微的触觉反馈，适用于用户选择项目时</Text>
+      <View className="gap-3">
         <Button onPress={triggerSelectionHaptic}>
           <Text>选择反馈</Text>
         </Button>

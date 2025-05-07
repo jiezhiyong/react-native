@@ -494,7 +494,7 @@ export default function OnlineServiceScreen() {
 
           <View className="flex-1 flex-row items-center bg-muted rounded-full px-4">
             <TextInput
-              className="flex-1 py-2 text-base"
+              className="flex-1 py-2"
               placeholder="请输入消息..."
               value={inputText}
               onChangeText={setInputText}

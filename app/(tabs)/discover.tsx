@@ -30,7 +30,6 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'safe-area-context', desc: '安全区域上下文', supports: 'Android, iOS, Web' },
   { name: 'notifications', desc: '推送通知', supports: 'Android (device), iOS (device)' },
   { name: 'screen-capture', desc: '屏幕保护', supports: 'Android, iOS' },
-  { name: 'navigation-bar', desc: '访问 Android 原生导航栏各种交互', supports: 'Android' },
   { name: 'status-bar', desc: '状态栏', supports: 'Android, iOS, Web' },
   { name: 'stripe', desc: '支付', supports: 'Android, iOS' },
   { name: 'updates', desc: '更新', supports: 'Android, iOS' },
@@ -100,6 +99,7 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'local-authentication', desc: '通过面部或指纹扫描验证用户', supports: 'Android, iOS' },
   { name: 'mail-composer', desc: '使用系统特定 UI 来编写和发送电子邮件', supports: 'Android, iOS (device), Web' },
   { name: 'store-review', desc: '应用内评论', supports: 'Android, iOS' },
+  { name: 'navigation-bar', desc: '访问 Android 原生导航栏各种交互', supports: 'Android' },
 ];
 
 export default function HomeScreen() {

@@ -31,7 +31,7 @@ export default function ExpoWebBrowserScreen() {
   const openAuthSession = async () => {
     try {
       setError('');
-      const result = await WebBrowser.openAuthSessionAsync('https://expo.dev', 'expo://');
+      const result = await WebBrowser.openAuthSessionAsync('https://expo.dev/login', 'expo://');
       setBrowserResult(JSON.stringify(result, null, 2));
     } catch (error) {
       setError(`打开认证页面失败: ${(error as Error).message}`);
@@ -39,39 +39,42 @@ export default function ExpoWebBrowserScreen() {
   };
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">内置浏览器</Text>
-        <Text className="text-muted-foreground">使用内置浏览器打开网页。</Text>
+        <Text className="text-muted-foreground">使用内置浏览器打开网页</Text>
       </View>
 
-      {/* 打开浏览器 */}
-      <View className="mb-6 gap-3">
-        <Button onPress={openBrowser}>
-          <Text>打开内置浏览器</Text>
-        </Button>
-
-        <Button onPress={openAuthSession}>
-          <Text>打开认证页面</Text>
-        </Button>
-      </View>
-
-      {/* 浏览器结果 */}
-      {browserResult ? (
-        <View className="mb-6">
-          <Text className="font-medium mb-2">打开浏览器结果</Text>
-          <View className="bg-muted rounded-lg p-4">
-            <Text className="text-muted-foreground">{browserResult}</Text>
+      <View className="flex-1">
+        {/* 浏览器结果 */}
+        {browserResult ? (
+          <View className="mb-6">
+            <Text className="text-lg font-medium mb-2">结果</Text>
+            <View className="bg-muted rounded-lg p-4">
+              <Text className="text-muted-foreground">{browserResult}</Text>
+            </View>
           </View>
-        </View>
-      ) : null}
+        ) : null}
 
-      {/* 错误提示 */}
-      {error ? (
-        <View className="bg-destructive/10 rounded-lg p-4">
-          <Text className="text-destructive">{error}</Text>
-        </View>
-      ) : null}
+        {/* 错误提示 */}
+        {error ? (
+          <>
+            <Text className="text-lg font-medium mb-2">错误</Text>
+            <View className="bg-destructive/10 rounded-lg p-4">
+              <Text className="text-destructive">{error}</Text>
+            </View>
+          </>
+        ) : null}
+
+        {/* TODO: 待实现 */}
+        {/* <Button onPress={openAuthSession}>
+          <Text>打开认证页面</Text>
+        </Button> */}
+      </View>
+
+      <Button onPress={openBrowser}>
+        <Text>打开内置浏览器</Text>
+      </Button>
     </View>
   );
 }

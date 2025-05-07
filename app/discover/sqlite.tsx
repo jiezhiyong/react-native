@@ -151,12 +151,12 @@
 //     <View className="flex-1 px-6 pt-6">
 //       <View className="mb-6">
 //         <Text className="text-2xl font-bold mb-2">SQLite 数据库</Text>
-//         <Text className="text-muted-foreground">在应用中使用 SQLite 进行结构化数据存储。</Text>
+//         <Text className="text-muted-foreground">在应用中使用 SQLite 进行结构化数据存储</Text>
 //       </View>
 
 //       {/* 添加新任务 */}
 //       <View>
-//         <Text className="font-medium mb-2">添加任务</Text>
+//         <Text className="text-lg font-medium mb-2">添加任务</Text>
 //         <Button onPress={addTodo} className="mb-6">
 //           <Text>添加</Text>
 //         </Button>
@@ -171,7 +171,7 @@
 
 //       {/* 任务列表 */}
 //       <View className="flex-1">
-//         <Text className="font-medium mb-2">任务列表</Text>
+//         <Text className="text-lg font-medium mb-2">任务列表</Text>
 //         <FlatList
 //           data={todos}
 //           renderItem={renderTodo}

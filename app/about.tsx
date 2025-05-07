@@ -18,7 +18,7 @@ const AboutItem = ({ title, desc, onPress }: AboutItemProps) => {
       activeOpacity={0.7}
     >
       <View className="flex-row items-center gap-3 flex-1">
-        <Text className="text-base text-gray-800 flex-1">{title}</Text>
+        <Text className="text-gray-800 flex-1">{title}</Text>
         {desc && <Text className="text-xs text-muted-foreground">{desc}</Text>}
       </View>
       <ChevronRight size={20} color="#ccc" />

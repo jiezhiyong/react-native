@@ -2,8 +2,6 @@ import * as DocumentPicker from 'expo-document-picker';
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { toast } from '~/components/ui/sonner';
-
 import { Button } from '../../components/ui/button';
 import { Card } from '../../components/ui/card';
 import { Text } from '../../components/ui/text';
@@ -27,13 +25,10 @@ export default function ExpoDocumentPickerScreen() {
       // 判断用户是否成功选择了文件
       if (!result.canceled) {
         setSingleDocument(result);
-        toast.success('文件选择成功');
       } else {
-        toast.info('用户取消了文件选择');
       }
     } catch (error) {
       console.error('选择文件时出错:', error);
-      toast.error('选择文件失败');
     }
   };
 
@@ -50,13 +45,9 @@ export default function ExpoDocumentPickerScreen() {
       // 判断用户是否成功选择了文件
       if (!result.canceled) {
         setMultipleDocuments(result);
-        toast.success(`已选择 ${result.assets.length} 个文件`);
-      } else {
-        toast.info('用户取消了文件选择');
       }
     } catch (error) {
       console.error('选择多个文件时出错:', error);
-      toast.error('选择文件失败');
     }
   };
 
@@ -72,13 +63,9 @@ export default function ExpoDocumentPickerScreen() {
       // 判断用户是否成功选择了文件
       if (!result.canceled) {
         setSingleDocument(result);
-        toast.success('图片选择成功');
-      } else {
-        toast.info('用户取消了图片选择');
       }
     } catch (error) {
       console.error('选择图片时出错:', error);
-      toast.error('选择图片失败');
     }
   };
 
@@ -94,13 +81,9 @@ export default function ExpoDocumentPickerScreen() {
       // 判断用户是否成功选择了文件
       if (!result.canceled) {
         setSingleDocument(result);
-        toast.success('PDF文件选择成功');
-      } else {
-        toast.info('用户取消了PDF选择');
       }
     } catch (error) {
       console.error('选择PDF时出错:', error);
-      toast.error('选择PDF失败');
     }
   };
 
@@ -127,28 +110,25 @@ export default function ExpoDocumentPickerScreen() {
       </View>
 
       {/* 按钮区域 */}
-      <Card className="p-4">
-        <Text className="font-medium mb-4">选择文件</Text>
-        <View className="flex gap-4">
-          <Button onPress={pickSingleDocument}>
-            <Text>选择单个文件</Text>
-          </Button>
-          <Button onPress={pickMultipleDocuments}>
-            <Text>选择多个文件</Text>
-          </Button>
+      <View className="flex gap-3">
+        <Button onPress={pickSingleDocument}>
+          <Text>选择单个文件</Text>
+        </Button>
+        <Button onPress={pickMultipleDocuments}>
+          <Text>选择多个文件</Text>
+        </Button>
 
-          <Button onPress={pickImageDocument}>
-            <Text>选择图片</Text>
-          </Button>
-          <Button onPress={pickPDFDocument}>
-            <Text>选择PDF</Text>
-          </Button>
-        </View>
-      </Card>
+        <Button onPress={pickImageDocument}>
+          <Text>选择图片</Text>
+        </Button>
+        <Button onPress={pickPDFDocument}>
+          <Text>选择PDF</Text>
+        </Button>
+      </View>
 
       {/* 单文件选择结果 */}
       {singleDocument && !singleDocument.canceled && singleDocument.assets && singleDocument.assets.length > 0 && (
-        <Card className="p-4 mt-4 flex-col gap-3">
+        <Card className="p-4 mt-6 flex-col gap-3">
           <Text className="font-medium">单文件选择结果</Text>
           <View className="bg-card-foreground/5 p-4 rounded-md">
             <Text className="text-sm">文件名: {singleDocument.assets[0].name}</Text>
@@ -163,7 +143,7 @@ export default function ExpoDocumentPickerScreen() {
         !multipleDocuments.canceled &&
         multipleDocuments.assets &&
         multipleDocuments.assets.length > 0 && (
-          <Card className="p-4 mt-4 flex-col gap-3">
+          <Card className="p-4 mt-6 flex-col gap-3">
             <Text className="font-medium">多文件选择结果 ({multipleDocuments.assets.length} 个文件)</Text>
             {multipleDocuments.assets.map((doc, index) => (
               <View key={index} className="bg-card-foreground/5 p-4 rounded-md flex-col gap-1">

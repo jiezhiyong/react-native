@@ -46,7 +46,7 @@ export default function ExpoScreenCaptureScreen() {
   }, []);
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">屏幕保护</Text>
         <Text className="text-muted-foreground mb-4">
@@ -54,23 +54,25 @@ export default function ExpoScreenCaptureScreen() {
         </Text>
       </View>
 
-      {/* 屏幕截图保护状态和控制 */}
-      <View className="p-4 bg-muted rounded-lg mb-6 flex gap-3">
-        <Text className="text-lg font-medium">屏幕截图保护状态: {isProtectionEnabled ? '已启用' : '已禁用'}</Text>
-        <Text>可用状态: {isAvailable ? '可用' : '不可用'}</Text>
-        <Text>权限状态: {status?.granted ? '已授予' : '未授予'}</Text>
+      <View className="flex-1">
+        {/* 屏幕截图保护状态和控制 */}
+        <Text className="text-lg font-medium mb-2">屏幕截图保护状态: {isProtectionEnabled ? '已启用' : '已禁用'}</Text>
+        <View className="p-4 bg-muted rounded-lg mb-6 flex gap-3">
+          <Text>可用状态: {isAvailable ? '可用' : '不可用'}</Text>
+          <Text>权限状态: {status?.granted ? '已授予权限' : '未授予权限'}</Text>
+        </View>
+
+        {/* 屏幕截图监听器信息 */}
+        <Text className="text-lg font-medium mb-2">屏幕截图监听器</Text>
+        <View className="p-4 bg-muted rounded-lg mb-6 flex gap-3">
+          <Text>截图次数: {screenshotCount}</Text>
+          <Text className="mt-1">上次截图时间: {lastScreenshotTime || '-'}</Text>
+        </View>
       </View>
 
-      <Button onPress={toggleProtection} className="mb-6">
+      <Button onPress={toggleProtection} variant={isProtectionEnabled ? 'destructive' : 'default'}>
         <Text>{isProtectionEnabled ? '禁用屏幕截图保护' : '启用屏幕截图保护'}</Text>
       </Button>
-
-      {/* 屏幕截图监听器信息 */}
-      <View className="p-4 bg-muted rounded-lg flex gap-3">
-        <Text className="text-lg font-medium">屏幕截图监听器</Text>
-        <Text>截图次数: {screenshotCount}</Text>
-        <Text className="mt-1">上次截图时间: {lastScreenshotTime || '?'}</Text>
-      </View>
     </View>
   );
 }

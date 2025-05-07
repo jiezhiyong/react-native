@@ -47,7 +47,7 @@ const AlertTitle = React.forwardRef<React.ElementRef<typeof Text>, React.Compone
   ({ className, ...props }, ref) => (
     <Text
       ref={ref}
-      className={cn('pl-7 mb-1 font-medium text-base leading-none tracking-tight text-foreground', className)}
+      className={cn('pl-7 mb-1 font-medium leading-none tracking-tight text-foreground', className)}
       {...props}
     />
   )

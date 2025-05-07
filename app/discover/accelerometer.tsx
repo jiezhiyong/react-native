@@ -66,7 +66,7 @@ export default function AccelerometerScreen() {
       // 注意：Accelerometer在大多数设备上不需要明确的权限
       // 但在某些特定设备或平台上可能需要
       // 例如在Web上需要用户交互后调用
-      const { granted, canAskAgain, expires, status } = await Accelerometer.requestPermissionsAsync();
+      const { granted, canAskAgain } = await Accelerometer.requestPermissionsAsync();
 
       // 权限获取成功后订阅数据
       if (granted) {
@@ -126,14 +126,14 @@ export default function AccelerometerScreen() {
   };
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">加速度计</Text>
-        <Text className="text-muted-foreground">使用设备加速度计感应设备的运动和方向变化。</Text>
+        <Text className="text-muted-foreground">使用设备加速度计感应设备的运动和方向变化</Text>
       </View>
 
       {/* 状态信息 */}
-      <View className="mb-6 p-4 bg-muted dark:bg-gray-800 rounded-lg flex-col gap-3">
+      <View className="mb-6 p-4 bg-muted dark:bg-gray-800 rounded-lg flex-col gap-2">
         <Text className="text-gray-700 dark:text-gray-300">
           是否支持加速度计:&nbsp;
           {subscription.isAvailable === null ? '检查中 ...' : String(subscription.isAvailable)}
@@ -143,7 +143,7 @@ export default function AccelerometerScreen() {
       </View>
 
       {/* 数据显示 */}
-      <View className="mb-6">
+      <View className="flex-1">
         <View className="flex-row justify-between items-center mb-2 p-3 bg-blue-50 dark:bg-blue-900 rounded-lg">
           <Text>X轴</Text>
           <Text className="text-lg font-medium text-blue-600 dark:text-blue-400">{formatData(data.x)}</Text>

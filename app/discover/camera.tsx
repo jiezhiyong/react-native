@@ -181,15 +181,15 @@ export default function ExpoCameraScreen() {
   };
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
-        <Text className="text-2xl font-bold mb-2">相机功能</Text>
-        <Text className="text-muted-foreground">使用设备相机拍摄照片和录制视频，并支持保存到相册。</Text>
+        <Text className="text-2xl font-bold mb-2">相机</Text>
+        <Text className="text-muted-foreground">使用设备相机拍摄照片和录制视频，并支持保存到相册</Text>
       </View>
 
       <CameraView
         ref={cameraRef}
-        style={{ flex: 1, width: '100%' }}
+        style={{ flex: 1, width: '100%', borderRadius: 8, overflow: 'hidden' }}
         mode={mode}
         facing={facing}
         flash={flash}

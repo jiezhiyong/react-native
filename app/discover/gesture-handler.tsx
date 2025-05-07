@@ -7,7 +7,7 @@ import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSpring, withTi
 import { create } from 'zustand';
 
 import { Button } from '~/components/ui/button';
-import { Card, CardContent } from '~/components/ui/card';
+import { Card } from '~/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { Text } from '~/components/ui/text';
 
@@ -15,17 +15,12 @@ import { Text } from '~/components/ui/text';
 interface GestureState {
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  resetGestures: () => void;
 }
 
 // 使用 zustand 创建状态管理
 const useGestureStore = create<GestureState>((set) => ({
   activeTab: 'tap',
   setActiveTab: (tab: string) => set({ activeTab: tab }),
-  resetGestures: () => {
-    // 这里只更新状态，具体的重置操作在组件内部处理
-    set({ activeTab: 'tap' });
-  },
 }));
 
 // 拖拽手势示例
@@ -73,14 +68,13 @@ const DraggableCard: React.FC = () => {
 
   return (
     <GestureDetector gesture={composedGestures}>
-      <Animated.View
-        className="w-[150px] h-[100px] bg-white rounded-[10px] items-center justify-center p-5 shadow-md"
-        style={animatedStyle}
-      >
-        <View className="flex-row items-center justify-center">
-          <Move size={40} className="text-primary" />
-        </View>
-        <Text className="text-sm text-center mt-2 text-muted-foreground">双击可放大/缩小</Text>
+      <Animated.View className="w-[200px] items-center justify-center" style={animatedStyle}>
+        <Card className="p-6 w-full">
+          <View className="flex-row items-center justify-center">
+            <Move size={40} />
+          </View>
+          <Text className="text-center mt-4 text-lg font-bold">双击可放大/缩小</Text>
+        </Card>
       </Animated.View>
     </GestureDetector>
   );
@@ -122,12 +116,10 @@ const TapCard: React.FC = () => {
   return (
     <GestureDetector gesture={tapGesture}>
       <Animated.View style={[animatedStyle]}>
-        <Card className="p-4 items-center justify-center">
-          <CardContent className="p-5 items-center">
-            <Hand size={40} />
-            <Text className="text-lg font-bold text-center mt-4">点击手势示例（单击增加，双击重置）</Text>
-            <Text className="text-base text-center mt-2 text-muted-foreground">点击次数: {taps}</Text>
-          </CardContent>
+        <Card className="p-6 items-center justify-center w-[200px] mx-auto">
+          <Hand size={40} />
+          <Text className="text-lg font-bold text-center mt-4">单击增加，双击重置</Text>
+          <Text className="text-center mt-2 text-muted-foreground">点击次数: {taps}</Text>
         </Card>
       </Animated.View>
     </GestureDetector>
@@ -174,10 +166,10 @@ const PinchRotateCard: React.FC = () => {
       <Animated.View style={[animatedStyle, { alignItems: 'center' }]}>
         <Image
           source={require('~/assets/images/icon.png')}
-          style={{ width: 200, height: 200, borderRadius: 10 }}
+          style={{ width: 200, height: 200, borderRadius: 8 }}
           contentFit="cover"
         />
-        <Text className="text-sm text-center mt-2 text-muted-foreground">使用两指进行缩放和旋转</Text>
+        <Text className="text-center mt-3 text-muted-foreground">使用两指进行缩放和旋转</Text>
       </Animated.View>
     </GestureDetector>
   );
@@ -220,7 +212,7 @@ const LongPressCard: React.FC = () => {
       <GestureDetector gesture={longPress}>
         <Animated.View style={[styles.box, animatedStyle]}></Animated.View>
       </GestureDetector>
-      <Text className="text-sm text-center mt-2 text-muted-foreground">长按方块改变颜色</Text>
+      <Text className="text-center mt-3 text-muted-foreground">长按方块改变颜色</Text>
     </View>
   );
 };
@@ -248,7 +240,7 @@ const SwipeToDeleteCard: React.FC = () => {
         <View className="items-center py-6">
           <Text className="text-muted-foreground">所有项目已删除</Text>
           <Button
-            className="mt-4"
+            className="mt-3"
             onPress={() =>
               setItems([
                 { id: 1, name: '项目 1' },
@@ -258,7 +250,7 @@ const SwipeToDeleteCard: React.FC = () => {
               ])
             }
           >
-            <Text>重置</Text>
+            <Text>重置项目</Text>
           </Button>
         </View>
       )}
@@ -309,7 +301,7 @@ const SwipeableItem: React.FC<{ item: { id: number; name: string }; onDelete: ()
   });
 
   return (
-    <View className="w-full my-1 overflow-hidden">
+    <View className="w-full overflow-hidden">
       {/* 背景删除按钮 */}
       <Animated.View
         style={[
@@ -336,7 +328,7 @@ const SwipeableItem: React.FC<{ item: { id: number; name: string }; onDelete: ()
       {/* 可滑动的项目 */}
       <GestureDetector gesture={panGesture}>
         <Animated.View style={[animatedStyle]}>
-          <Card className="p-4 flex-row items-center" style={{ height: itemHeight }}>
+          <Card className="p-4 flex-row items-center mb-3" style={{ height: itemHeight }}>
             <Text>{item.name}</Text>
           </Card>
         </Animated.View>
@@ -347,7 +339,7 @@ const SwipeableItem: React.FC<{ item: { id: number; name: string }; onDelete: ()
 
 // 主组件
 export default function GestureHandlerScreen() {
-  const { activeTab, setActiveTab, resetGestures } = useGestureStore();
+  const { activeTab, setActiveTab } = useGestureStore();
 
   // 切换标签页
   const handleTabChange = (value: string) => {
@@ -358,15 +350,11 @@ export default function GestureHandlerScreen() {
     <GestureHandlerRootView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">手势处理</Text>
-        <Text className="text-muted-foreground">识别和响应用户的各种触摸手势操作。</Text>
+        <Text className="text-muted-foreground">识别和响应用户的各种触摸手势操作</Text>
       </View>
 
-      <Button onPress={resetGestures} className="mb-4">
-        <Text>重置所有手势</Text>
-      </Button>
-
-      <Tabs value={activeTab} onValueChange={handleTabChange} className="mb-6">
-        <TabsList className="mb-4 flex-row justify-start">
+      <Tabs value={activeTab} onValueChange={handleTabChange}>
+        <TabsList className="mb-12">
           <TabsTrigger value="tap">
             <Text>点击</Text>
           </TabsTrigger>
@@ -416,9 +404,9 @@ export default function GestureHandlerScreen() {
 
 const styles = StyleSheet.create({
   box: {
-    width: 100,
-    height: 100,
-    borderRadius: 20,
+    width: 200,
+    height: 200,
+    borderRadius: 8,
     cursor: 'pointer',
   },
 });

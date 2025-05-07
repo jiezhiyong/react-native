@@ -7,10 +7,6 @@ import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Text } from '~/components/ui/text';
 
-const STORAGE_KEYS = {
-  LAST_VISIT: 'last_visit',
-};
-
 // 存储数据封装函数
 async function storeData(key: string, value: string) {
   try {
@@ -19,7 +15,6 @@ async function storeData(key: string, value: string) {
     return true;
   } catch (error) {
     console.error(`[AsyncStorage] 存储 ${key} 失败:`, error);
-    Alert.alert('存储失败', `无法存储数据: ${error instanceof Error ? error.message : String(error)}`);
     return false;
   }
 }
@@ -32,7 +27,6 @@ async function removeData(key: string) {
     return true;
   } catch (error) {
     console.error(`[AsyncStorage] 删除 ${key} 失败:`, error);
-    Alert.alert('删除失败', `无法删除数据: ${error instanceof Error ? error.message : String(error)}`);
     return false;
   }
 }
@@ -46,7 +40,6 @@ async function getAllData(): Promise<[string, string | null][]> {
     return [...items]; // 转换为可变数组
   } catch (error) {
     console.error('[AsyncStorage] 获取所有键值对失败:', error);
-    Alert.alert('获取失败', `无法获取所有数据: ${error instanceof Error ? error.message : String(error)}`);
     return [];
   }
 }
@@ -59,13 +52,11 @@ async function clearAllData() {
     return true;
   } catch (error) {
     console.error('[AsyncStorage] 清除所有数据失败:', error);
-    Alert.alert('清除失败', `无法清除数据: ${error instanceof Error ? error.message : String(error)}`);
     return false;
   }
 }
 
 export default function AsyncStorageScreen() {
-  const [lastVisit, setLastVisit] = useState<string>('');
   const [allItems, setAllItems] = useState<[string, string | null][]>([]);
   const [inputKey, setInputKey] = useState('abc');
   const [inputValue, setInputValue] = useState('123');
@@ -76,11 +67,6 @@ export default function AsyncStorageScreen() {
       // 获取所有数据
       const items = await getAllData();
       setAllItems(items);
-
-      // 保存访问时间
-      const now = new Date().toLocaleString();
-      await storeData(STORAGE_KEYS.LAST_VISIT, now);
-      setLastVisit(now);
     };
 
     loadData();
@@ -94,7 +80,6 @@ export default function AsyncStorageScreen() {
     }
 
     if (await storeData(inputKey, inputValue)) {
-      Alert.alert('保存成功', `已保存键 "${inputKey}" 的值`);
       const items = await getAllData();
       setAllItems(items);
     }
@@ -129,11 +114,6 @@ export default function AsyncStorageScreen() {
             // 重置状态
             setAllItems([]);
 
-            // 设置新的访问时间
-            const now = new Date().toLocaleString();
-            await storeData(STORAGE_KEYS.LAST_VISIT, now);
-            setLastVisit(now);
-
             // 刷新所有数据
             const items = await getAllData();
             setAllItems(items);
@@ -147,20 +127,14 @@ export default function AsyncStorageScreen() {
     <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">异步存储</Text>
-        <Text className="text-muted-foreground">使用异步存储来持久化保存应用数据。</Text>
-      </View>
-
-      {/* 访问时间示例 */}
-      <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">
-        <Text className="text-lg font-bold mb-3">最后访问时间</Text>
-        <Text>{lastVisit}</Text>
+        <Text className="text-muted-foreground">使用异步存储来持久化保存应用数据</Text>
       </View>
 
       {/* 自定义键值对 */}
       <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">
-        <Text className="text-lg font-bold mb-3">添加键值对</Text>
+        <Text className="text-lg font-bold mb-2">添加键值对</Text>
         <View className="flex-row mb-3 gap-3">
-          <Input className="flex-1" value={inputKey} onChangeText={setInputKey} placeholder="键名" />
+          <Input className="flex-[1]" value={inputKey} onChangeText={setInputKey} placeholder="键名" />
           <Input className="flex-[2]" value={inputValue} onChangeText={setInputValue} placeholder="值" />
         </View>
         <Button onPress={handleSaveCustomItem}>
@@ -200,7 +174,7 @@ export default function AsyncStorageScreen() {
               </View>
             ))
           ) : (
-            <Text className="text-center text-gray-400 py-4">没有存储的数据</Text>
+            <Text className="text-center text-gray-400 pt-3">-</Text>
           )}
         </View>
 

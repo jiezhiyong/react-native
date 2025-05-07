@@ -9,11 +9,12 @@ export default function SafeAreaContextScreen() {
       <SafeAreaView className="flex-1">
         <View className="flex-1 p-5">
           <View className="mb-6">
-            <Text className="text-2xl font-bold mb-2">Safe Area Context</Text>
-            <Text className="text-muted-foreground">使用和配置 Safe Area Context 相关功能。</Text>
+            <Text className="text-2xl font-bold mb-2">安全区域上下文</Text>
+            <Text className="text-muted-foreground">使用和配置 Safe Area Context 相关功能</Text>
           </View>
 
           <View className="bg-muted rounded-lg p-4">
+            <Text className="text-lg font-medium mb-2">useSafeAreaInsets</Text>
             <Text className="text-sm">{JSON.stringify(insets, null, 2)}</Text>
           </View>
         </View>

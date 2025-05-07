@@ -124,7 +124,7 @@ export default function ExpoLocationScreen() {
     const date = new Date(timestamp);
 
     return (
-      <View className="flex-col gap-1">
+      <View className="flex-col gap-2">
         <Text>纬度: {coords.latitude}</Text>
         <Text>经度: {coords.longitude}</Text>
         <Text>海拔: {coords.altitude !== null ? `${coords.altitude.toFixed(2)}米` : '未知'}</Text>
@@ -140,7 +140,7 @@ export default function ExpoLocationScreen() {
     <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">位置服务</Text>
-        <Text className="text-muted-foreground">获取和跟踪设备的地理位置信息。</Text>
+        <Text className="text-muted-foreground">获取和跟踪设备的地理位置信息</Text>
       </View>
 
       <View className="mb-6 bg-muted rounded-lg p-4">
@@ -149,28 +149,16 @@ export default function ExpoLocationScreen() {
       </View>
 
       <View className="space-y-4">
-        <Button
-          className="flex-row items-center justify-center space-x-2 mb-2"
-          onPress={getCurrentLocation}
-          disabled={isWatching}
-        >
+        <Button className="mb-3" onPress={getCurrentLocation} disabled={isWatching}>
           {loading ? <ActivityIndicator /> : <Text>获取当前位置</Text>}
         </Button>
 
         {!isWatching ? (
-          <Button
-            className="flex-row items-center justify-center space-x-2"
-            onPress={startLocationUpdates}
-            variant="outline"
-          >
+          <Button onPress={startLocationUpdates} variant="outline">
             <Text>开始位置监听</Text>
           </Button>
         ) : (
-          <Button
-            className="flex-row items-center justify-center space-x-2"
-            onPress={stopLocationUpdates}
-            variant="destructive"
-          >
+          <Button onPress={stopLocationUpdates} variant="destructive">
             <Text>停止位置监听</Text>
           </Button>
         )}

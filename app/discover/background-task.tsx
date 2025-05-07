@@ -1,3 +1,4 @@
+// TODO: 待完成
 import * as BackgroundTask from 'expo-background-task';
 import * as TaskManager from 'expo-task-manager';
 import { useEffect, useState } from 'react';
@@ -7,7 +8,7 @@ import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
 
 // 定义任务名称常量
-const BACKGROUND_TASK_NAME = 'BACKGROUND_SYNC_TASK';
+const BACKGROUND_TASK_NAME = 'background-location-sync-task';
 
 // 定义后台任务 - 必须在模块作用域定义
 TaskManager.defineTask(BACKGROUND_TASK_NAME, async () => {
@@ -117,11 +118,6 @@ export default function ExpoBackgroundTaskScreen() {
     }, 5000);
 
     return () => clearInterval(intervalId);
-
-    <View className="mb-6">
-      <Text className="text-2xl font-bold mb-2">后台任务</Text>
-      <Text className="text-muted-foreground">在应用进入后台时执行特定任务和操作。</Text>
-    </View>;
   }, []);
 
   // 处理注册任务
@@ -129,7 +125,6 @@ export default function ExpoBackgroundTaskScreen() {
     if (await registerBackgroundTask()) {
       const status = await getTaskStatus();
       setTaskStatus(status);
-      Alert.alert('注册成功', `后台任务 ${BACKGROUND_TASK_NAME} 已成功注册`);
     }
   };
 
@@ -138,31 +133,37 @@ export default function ExpoBackgroundTaskScreen() {
     if (await unregisterBackgroundTask()) {
       const status = await getTaskStatus();
       setTaskStatus(status);
-      Alert.alert('取消注册成功', `后台任务 ${BACKGROUND_TASK_NAME} 已取消注册`);
     }
   };
 
   return (
-    <View className="flex-1 p-5">
-      {/* 状态信息 */}
-      <View className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200 gap-3">
-        <Text className="text-lg font-bold">当前状态</Text>
-        <View className="flex-row gap-3">
-          <Text className="font-medium w-[90px]">任务名称:</Text>
-          <Text className="flex-1">{taskStatus.taskName}</Text>
-        </View>
-        <View className="flex-row gap-3">
-          <Text className="font-medium w-[90px]">是否已注册:</Text>
-          <Text className="flex-1">{taskStatus.isRegistered ? '已注册' : '未注册'}</Text>
-        </View>
-        <View className="flex-row gap-3">
-          <Text className="font-medium w-[90px]">最后检查时间:</Text>
-          <Text className="flex-1">{lastUpdateTime.toLocaleString()}</Text>
+    <View className="flex-1 px-5 pt-5">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">后台任务</Text>
+        <Text className="text-muted-foreground">在应用进入后台时执行特定任务和操作</Text>
+      </View>
+
+      <View className="flex-1">
+        {/* 状态信息 */}
+        <Text className="text-lg font-medium mb-2">当前状态</Text>
+        <View className="bg-muted p-4 rounded-lg mb-6 gap-3">
+          <View className="flex-row gap-3">
+            <Text>当前任务名称:</Text>
+            <Text className="flex-1">{taskStatus.taskName}</Text>
+          </View>
+          <View className="flex-row gap-3">
+            <Text>是否已经注册:</Text>
+            <Text className="flex-1">{taskStatus.isRegistered ? '已注册' : '未注册'}</Text>
+          </View>
+          <View className="flex-row gap-3">
+            <Text>最后检查时间:</Text>
+            <Text className="flex-1">{lastUpdateTime.toLocaleString()}</Text>
+          </View>
         </View>
       </View>
 
       {/* 操作按钮 */}
-      <View className="flex-col gap-4">
+      <View>
         {taskStatus.isRegistered ? (
           <Button variant="destructive" onPress={handleUnregisterTask}>
             <Text>取消注册任务</Text>

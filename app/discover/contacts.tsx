@@ -1,7 +1,7 @@
 import * as Contacts from 'expo-contacts';
 import { PermissionStatus } from 'expo-modules-core';
-import React, { useState } from 'react';
-import { ActivityIndicator, FlatList, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Alert, FlatList, View } from 'react-native';
 
 import { toast } from '~/components/ui/sonner';
 
@@ -25,6 +25,10 @@ export default function ExpoContactsScreen() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  useEffect(() => {
+    requestContactsPermission();
+  }, []);
+
   // 请求联系人权限
   const requestContactsPermission = async () => {
     setLoading(true);
@@ -33,7 +37,6 @@ export default function ExpoContactsScreen() {
       setHasPermission(status === PermissionStatus.GRANTED);
 
       if (status === PermissionStatus.GRANTED) {
-        toast.success('成功获取通讯录权限');
         fetchContacts();
       } else {
         toast.error('未获得通讯录权限');
@@ -66,7 +69,6 @@ export default function ExpoContactsScreen() {
           }));
 
         setContacts(filteredContacts);
-        toast.success(`成功获取 ${filteredContacts.length} 个联系人`);
       } else {
         setContacts([]);
         toast.info('未找到联系人');
@@ -81,52 +83,70 @@ export default function ExpoContactsScreen() {
 
   // 渲染单个联系人
   const renderContactItem = ({ item }: { item: ContactItem }) => (
-    <Card className="mb-2 p-3 bg-card flex-row items-center gap-3">
-      <Text className="font-medium text-green-700">{item.name}</Text>
-      {item.phoneNumbers && item.phoneNumbers.length > 0 ? (
-        item.phoneNumbers.map((phone, index) => (
-          <Text key={phone.id || index} className="text-sm">
-            {phone.number}
-          </Text>
-        ))
-      ) : (
-        <Text className="text-sm mt-1">没有电话号码</Text>
-      )}
+    <Card className="mb-3 p-3 bg-card">
+      <Text className="font-medium text-muted-foreground">{item.name}</Text>
+      <View className="flex-row flex-wrap">
+        {item.phoneNumbers && item.phoneNumbers.length > 0 ? (
+          item.phoneNumbers.map((phone, index) => (
+            <Text key={phone.id || index} className="font-medium text-lg">
+              {phone.digits || phone.number}
+              {index < (item.phoneNumbers || []).length - 1 ? '、' : ''}
+            </Text>
+          ))
+        ) : (
+          <Text>-</Text>
+        )}
+      </View>
     </Card>
   );
 
+  const presentContactPickerAsync = async () => {
+    try {
+      const contact = await Contacts.presentContactPickerAsync();
+      if (contact) {
+        const { phoneNumbers, firstName = '', lastName = '' } = contact;
+        Alert.alert('Result', `${firstName}${lastName}：${phoneNumbers?.[0].digits}`);
+      }
+    } catch (error) {
+      console.error('获取联系人数据出错:', error);
+      toast.error('获取联系人失败');
+    }
+  };
+
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">联系人</Text>
-        <Text className="text-muted-foreground">访问和管理设备通讯录中的联系人信息。</Text>
+        <Text className="text-muted-foreground">访问和管理设备通讯录中的联系人信息</Text>
       </View>
 
-      <Button className="mb-4" onPress={requestContactsPermission} disabled={loading}>
-        {loading ? (
-          <ActivityIndicator color="white" />
+      <View className="flex-1">
+        {hasPermission === false ? (
+          <Card className="p-4 bg-muted">
+            <Text>需要获取通讯录权限才能使用此功能</Text>
+          </Card>
+        ) : contacts.length > 0 ? (
+          <FlatList
+            className="mb-3"
+            data={contacts}
+            renderItem={renderContactItem}
+            keyExtractor={(item) => item.id}
+            ListHeaderComponent={<Text className="mb-2 font-medium text-lg">共 {contacts.length} 个联系人</Text>}
+          />
+        ) : hasPermission ? (
+          <Card className="p-4 bg-muted">
+            <Text>未找到联系人数据</Text>
+          </Card>
         ) : (
-          <Text>{hasPermission ? '重新获取联系人' : '请求联系人权限'}</Text>
+          <Card className="p-4 bg-muted">
+            <Text>...</Text>
+          </Card>
         )}
-      </Button>
+      </View>
 
-      {hasPermission === false ? (
-        <Card className="p-4 bg-muted">
-          <Text>需要获取通讯录权限才能使用此功能</Text>
-        </Card>
-      ) : contacts.length > 0 ? (
-        <FlatList
-          data={contacts}
-          renderItem={renderContactItem}
-          keyExtractor={(item) => item.id}
-          className="mt-4"
-          ListHeaderComponent={<Text className="mb-2">共 {contacts.length} 个联系人</Text>}
-        />
-      ) : hasPermission ? (
-        <Card className="p-4 bg-muted">
-          <Text>未找到联系人数据</Text>
-        </Card>
-      ) : null}
+      <Button onPress={presentContactPickerAsync} disabled={loading}>
+        {loading ? <ActivityIndicator color="white" /> : <Text>选择联系人</Text>}
+      </Button>
     </View>
   );
 }

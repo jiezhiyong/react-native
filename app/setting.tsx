@@ -19,7 +19,7 @@ const SettingItem = ({ title, desc, icon, onPress }: SettingItemProps) => {
     >
       <View className="flex-row items-center flex-1 gap-3">
         {icon}
-        <Text className="text-base text-gray-800 flex-1">{title}</Text>
+        <Text className="text-gray-800 flex-1">{title}</Text>
         {desc && <Text className="text-sm text-gray-400">{desc}</Text>}
       </View>
       <ChevronRight size={20} color="#ccc" />

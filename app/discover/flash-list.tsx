@@ -1,5 +1,5 @@
 import { FlashList } from '@shopify/flash-list';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { create } from 'zustand';
 
@@ -103,27 +103,15 @@ const useListStore = create<ListState>((set, get) => ({
 
 // 列表项渲染组件
 const ListItemCard: React.FC<{ item: ListItem }> = ({ item }) => {
-  const categoryColors = useMemo(
-    () => ({
-      news: 'bg-blue-100 text-blue-800',
-      article: 'bg-green-100 text-green-800',
-      video: 'bg-purple-100 text-purple-800',
-    }),
-    []
-  );
-
   return (
-    <Card className="mb-2">
-      <CardHeader className="px-4 py-2 pb-0">
-        <CardTitle className="text-base font-medium">{item.title}</CardTitle>
+    <Card className="mb-3">
+      <CardHeader className="p-5">
+        <CardTitle className="font-medium">{item.title}</CardTitle>
       </CardHeader>
-      <CardContent className="px-4 py-2">
-        <Text className="text-sm text-muted-foreground">{item.description}</Text>
+      <CardContent className="px-5">
+        <Text className="text-muted-foreground">{item.description}</Text>
         <View className="flex-row justify-between mt-2 items-center">
-          <Text className="text-xs text-muted-foreground">{item.timestamp}</Text>
-          <View className={`px-2 py-1 rounded-full ${categoryColors[item.category]}`}>
-            <Text className="text-xs">{item.category}</Text>
-          </View>
+          <Text className="text-sm text-muted-foreground">{item.timestamp}</Text>
         </View>
       </CardContent>
     </Card>
@@ -134,12 +122,7 @@ const ListItemCard: React.FC<{ item: ListItem }> = ({ item }) => {
 const ListFooter: React.FC<{ loading: boolean }> = ({ loading }) => {
   if (!loading) return null;
 
-  return (
-    <View className="py-4 flex items-center justify-center">
-      <ActivityIndicator size="small" color="#0284c7" />
-      <Text className="text-sm text-muted-foreground mt-2">加载更多...</Text>
-    </View>
-  );
+  return <ActivityIndicator size="small" />;
 };
 
 // 主要组件
@@ -190,13 +173,12 @@ export default function FlashListScreen() {
         keyExtractor={(item) => item.id}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
-        ListFooterComponent={<ListFooter loading={isLoading} />}
+        ListFooterComponent={<ListFooter loading={isLoading && items.length > 0} />}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           isLoading ? (
             <View className="flex-1 justify-center items-center py-20">
-              <ActivityIndicator size="large" color="#0284c7" />
-              <Text className="mt-2">加载中...</Text>
+              <ActivityIndicator size="small" />
             </View>
           ) : (
             <View className="flex-1 justify-center items-center py-20">

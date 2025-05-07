@@ -128,7 +128,7 @@ export default function ExpoMailComposerScreen() {
 
       {/* 可用性状态 */}
       <View className="mb-4 flex-row items-center">
-        <Text className="text-base mr-2">邮件功能状态:</Text>
+        <Text className="mr-2">邮件功能状态:</Text>
         {isAvailable === null ? (
           <Text>正在检查...</Text>
         ) : isAvailable ? (

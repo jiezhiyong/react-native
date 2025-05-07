@@ -19,7 +19,7 @@ const PermissionItem = ({ title, description, icon, status, onPress, last }: Per
       <TouchableOpacity className="flex gap-3" activeOpacity={0.7} onPress={onPress}>
         <View className="flex-row items-center flex-1 gap-3">
           <View className="items-center justify-center">{icon}</View>
-          <Text className="text-base text-gray-800 flex-1">{title}</Text>
+          <Text className="text-gray-800 flex-1">{title}</Text>
           <View className="flex-row items-center gap-1">
             <Text className="text-gray-400">{status === 'enabled' ? '已开启' : '去设置'}</Text>
             <ChevronRight size={18} color="#ccc" />

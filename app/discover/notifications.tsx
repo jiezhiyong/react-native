@@ -1,3 +1,4 @@
+// TODO: 推送通知未生效？
 import Constants from 'expo-constants';
 import * as Device from 'expo-device';
 import { PermissionStatus } from 'expo-modules-core';
@@ -140,20 +141,20 @@ export default function App() {
   }, []);
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">通知系统</Text>
-        <Text className="text-muted-foreground">创建和管理本地和推送通知。</Text>
+        <Text className="text-muted-foreground">创建和管理本地和推送通知</Text>
       </View>
 
-      <Text className="font-medium mb-2">Push token</Text>
-      <Text className="mb-6">{expoPushToken}</Text>
+      <View className="flex-1">
+        <Text className="text-lg font-medium mb-2">Push token</Text>
+        <Text className="mb-6 text-muted-foreground">{expoPushToken}</Text>
 
-      <Text className="font-medium mb-2">收到消息</Text>
-      <View className="mb-6 bg-muted p-4 rounded-lg">
-        <Text>标题: {(notification && notification.request.content.title) || '未收到消息'} </Text>
-        <Text>内容: {(notification && notification.request.content.body) || '未收到消息'}</Text>
-        <Text>数据: {(notification && JSON.stringify(notification.request.content.data)) || '未收到消息'}</Text>
+        <Text className="text-lg font-medium mb-2">收到消息</Text>
+        <View className="mb-6 bg-muted p-4 rounded-lg gap-3">
+          <Text>{JSON.stringify(notification?.request.content, null, 2) || '-'}</Text>
+        </View>
       </View>
 
       <Button
@@ -161,7 +162,7 @@ export default function App() {
           await sendPushNotification(expoPushToken);
         }}
       >
-        <Text>Send Notification</Text>
+        <Text>发送通知</Text>
       </Button>
     </View>
   );

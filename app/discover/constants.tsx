@@ -48,7 +48,7 @@ export default function ExpoConstantsScreen() {
     <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">常量和配置</Text>
-        <Text className="text-muted-foreground">访问和使用设备和平台相关的常量信息。</Text>
+        <Text className="text-muted-foreground">访问和使用设备和平台相关的常量信息</Text>
       </View>
 
       {cards.map((card, index) => (

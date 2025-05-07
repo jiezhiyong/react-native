@@ -104,7 +104,7 @@ export default function ExpoDeviceScreen() {
     <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">设备信息</Text>
-        <Text className="text-muted-foreground">获取设备型号、操作系统和硬件规格等详细信息。</Text>
+        <Text className="text-muted-foreground">获取设备型号、操作系统和硬件规格等详细信息</Text>
       </View>
 
       {/* 基本设备信息 */}

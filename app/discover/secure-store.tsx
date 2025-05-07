@@ -73,12 +73,12 @@ export default function ExpoSecureStoreScreen() {
       {/* 输入区域 */}
       <View className="flex gap-3 mb-6">
         <View>
-          <Text className="text-base font-medium mb-2">键</Text>
+          <Text className="font-medium mb-2">键</Text>
           <Input placeholder="输入键名" value={key} onChangeText={setKey} />
         </View>
 
         <View>
-          <Text className="text-base font-medium mb-2">值</Text>
+          <Text className="font-medium mb-2">值</Text>
           <Input placeholder="输入要保存的值" value={value} onChangeText={setValue} secureTextEntry />
         </View>
       </View>

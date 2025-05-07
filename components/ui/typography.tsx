@@ -73,7 +73,7 @@ H4.displayName = 'H4';
 
 const P = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
-  return <Component className={cn('text-base text-foreground web:select-text', className)} ref={ref} {...props} />;
+  return <Component className={cn('text-foreground web:select-text', className)} ref={ref} {...props} />;
 });
 
 P.displayName = 'P';
@@ -85,7 +85,7 @@ const BlockQuote = React.forwardRef<TextRef, SlottableTextProps>(({ className, a
       // @ts-ignore - role of blockquote renders blockquote element on the web
       role={Platform.OS === 'web' ? 'blockquote' : undefined}
       className={cn(
-        'mt-6 native:mt-4 border-l-2 border-border pl-6 native:pl-3 text-base text-foreground italic web:select-text',
+        'mt-6 native:mt-4 border-l-2 border-border pl-6 native:pl-3 text-foreground italic web:select-text',
         className
       )}
       ref={ref}

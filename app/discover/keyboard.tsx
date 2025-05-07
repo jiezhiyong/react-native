@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { KeyboardAwareScrollView, useKeyboardHandler } from 'react-native-keyboard-controller';
+import { KeyboardAwareScrollView, KeyboardToolbar, useKeyboardHandler } from 'react-native-keyboard-controller';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
 import { Input } from '~/components/ui/input';
@@ -40,11 +40,11 @@ export default function KeyboardScreen() {
   }, []);
 
   return (
-    <KeyboardAwareScrollView bottomOffset={20}>
-      <View className="flex-1 px-5 pt-5">
+    <View className="flex-1 px-5 pt-5">
+      <KeyboardAwareScrollView bottomOffset={10}>
         <View className="mb-6">
           <Text className="text-2xl font-bold mb-2">键盘</Text>
-          <Text className="text-muted-foreground">管理和响应屏幕键盘的显示和隐藏。</Text>
+          <Text className="text-muted-foreground">管理和响应屏幕键盘的显示和隐藏</Text>
         </View>
 
         <View className="flex-1">
@@ -63,7 +63,7 @@ export default function KeyboardScreen() {
           <Input placeholder="Type a message..." className="mb-3" />
           <Input placeholder="Type a message..." />
         </View>
-      </View>
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
+    </View>
   );
 }

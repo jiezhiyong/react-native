@@ -16,7 +16,7 @@
 //     <View className="flex-1 px-6 pt-6">
 //       <View className="mb-6">
 //         <Text className="text-2xl font-bold mb-2">视图分页器</Text>
-//         <Text className="text-muted-foreground">使用视图分页器组件。</Text>
+//         <Text className="text-muted-foreground">使用视图分页器组件</Text>
 //       </View>
 
 //       <View className="flex-1">

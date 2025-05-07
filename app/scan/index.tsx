@@ -294,7 +294,7 @@ export default function ScanScreen() {
 //           className="absolute bottom-[100px] left-1/4 right-1/4 bg-blue-500 py-3 rounded-lg items-center"
 //           onPress={() => setScanned(false)}
 //         >
-//           <Text className="text-white text-base font-medium">重新扫描</Text>
+//           <Text className="text-white font-medium">重新扫描</Text>
 //         </TouchableOpacity>
 //       )}
 //     </View>

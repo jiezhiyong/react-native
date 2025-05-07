@@ -16,7 +16,6 @@ export default function ExpoClipboardScreen() {
   const copyToClipboard = async () => {
     try {
       await Clipboard.setStringAsync(inputText);
-      toast.success('文本已复制到剪贴板');
     } catch (error) {
       toast.error('复制到剪贴板失败');
       console.error('复制到剪贴板失败:', error);
@@ -28,7 +27,6 @@ export default function ExpoClipboardScreen() {
     try {
       const text = await Clipboard.getStringAsync();
       setClipboardText(text);
-      toast.success('已从剪贴板读取文本');
     } catch (error) {
       toast.error('从剪贴板读取失败');
       console.error('从剪贴板读取失败:', error);
@@ -40,7 +38,6 @@ export default function ExpoClipboardScreen() {
     try {
       await Clipboard.setStringAsync('');
       setClipboardText('');
-      toast.success('剪贴板已清空');
     } catch (error) {
       toast.error('清空剪贴板失败');
       console.error('清空剪贴板失败:', error);
@@ -51,50 +48,43 @@ export default function ExpoClipboardScreen() {
     <View className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">剪贴板</Text>
-        <Text className="text-muted-foreground">读取和写入设备剪贴板的数据。</Text>
+        <Text className="text-muted-foreground">读取和写入设备剪贴板的数据</Text>
       </View>
 
       {/* 复制到剪贴板 */}
       <View className="mb-6">
-        <Text className="text-xl font-medium mb-2">复制到剪贴板</Text>
-        <View className="mb-6">
-          <Input
-            className="border border-input rounded-md p-3 mb-2 text-foreground"
-            value={inputText}
-            onChangeText={setInputText}
-            multiline
-            numberOfLines={3}
-            style={{ textAlignVertical: 'top' }}
-            placeholder="输入要复制的文本..."
-            placeholderTextColor="#9CA3AF"
-          />
-          <Button onPress={copyToClipboard}>
-            <Text>复制到剪贴板</Text>
-          </Button>
-        </View>
+        <Text className="text-lg font-medium mb-2">复制到剪贴板</Text>
+        <Input
+          className="border border-input rounded-md p-3 mb-3 text-foreground"
+          value={inputText}
+          onChangeText={setInputText}
+          multiline
+          numberOfLines={3}
+          style={{ textAlignVertical: 'top' }}
+          placeholder="输入要复制的文本..."
+          placeholderTextColor="#9CA3AF"
+        />
+        <Button onPress={copyToClipboard}>
+          <Text>复制到剪贴板</Text>
+        </Button>
       </View>
 
       {/* 从剪贴板读取 */}
       <View className="mb-6">
-        <Text className="text-xl font-medium mb-2">从剪贴板读取</Text>
-        <View className="mb-2">
-          <Button onPress={getFromClipboard} className="mb-2">
-            <Text>读取剪贴板内容</Text>
-          </Button>
-
-          <View className="border border-input rounded-md p-4 bg-card min-h-[100px]">
-            <Text className="text-foreground">{clipboardText ? clipboardText : ''}</Text>
-          </View>
+        <Text className="text-lg font-medium mb-2">从剪贴板读取</Text>
+        <View className="border border-input rounded-md p-4 bg-card min-h-[100px] mb-3">
+          <Text className="text-foreground">{clipboardText ? clipboardText : ''}</Text>
         </View>
+        <Button onPress={getFromClipboard}>
+          <Text>读取剪贴板</Text>
+        </Button>
       </View>
 
       {/* 清空剪贴板 */}
-      <View className="mb-6">
-        <Text className="text-xl font-medium mb-2">高级操作</Text>
-        <Button variant="destructive" onPress={clearClipboard}>
-          <Text className="text-destructive-foreground">清空剪贴板</Text>
-        </Button>
-      </View>
+      <Text className="text-lg font-medium mb-2">高级操作</Text>
+      <Button variant="destructive" onPress={clearClipboard}>
+        <Text className="text-destructive-foreground">清空剪贴板</Text>
+      </Button>
     </View>
   );
 }

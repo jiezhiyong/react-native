@@ -42,7 +42,7 @@ export default function ExpoStatusBarScreen() {
 
       {/* 状态栏控制 */}
       <View className="mb-6">
-        <Text className="font-medium mb-2">状态栏控制</Text>
+        <Text className="text-lg font-medium mb-2">状态栏控制</Text>
         <View className="gap-3">
           {/* 可见性控制 */}
           <Button onPress={toggleVisibility}>
@@ -57,7 +57,7 @@ export default function ExpoStatusBarScreen() {
       </View>
 
       <View className="mb-6">
-        <Text className="font-medium mb-2">仅限 Android</Text>
+        <Text className="text-lg font-medium mb-2">仅限 Android</Text>
         <View className="gap-3">
           {/* 背景颜色控制 */}
           <Button onPress={toggleBackgroundColor} disabled={Platform.OS !== 'android'}>

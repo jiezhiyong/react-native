@@ -114,7 +114,7 @@ const SelectLabel = React.forwardRef<SelectPrimitive.LabelRef, SelectPrimitive.L
     <SelectPrimitive.Label
       ref={ref}
       className={cn(
-        'py-1.5 native:pb-2 pl-8 native:pl-10 pr-2 text-popover-foreground text-sm native:text-base font-semibold',
+        'py-1.5 native:pb-2 pl-8 native:pl-10 pr-2 text-popover-foreground text-sm native:font-semibold',
         className
       )}
       {...props}
@@ -139,7 +139,7 @@ const SelectItem = React.forwardRef<SelectPrimitive.ItemRef, SelectPrimitive.Ite
           <Check size={16} strokeWidth={3} className="text-popover-foreground" />
         </SelectPrimitive.ItemIndicator>
       </View>
-      <SelectPrimitive.ItemText className="text-sm native:text-lg text-popover-foreground native:text-base web:group-focus:text-accent-foreground" />
+      <SelectPrimitive.ItemText className="text-sm native:text-lg text-popover-foreground native:web:group-focus:text-accent-foreground" />
     </SelectPrimitive.Item>
   )
 );

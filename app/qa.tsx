@@ -114,7 +114,7 @@ const QuestionItem = ({
         onPress={onToggle}
         activeOpacity={0.7}
       >
-        <Text className="flex-1 text-base font-medium text-gray-800">{item.question}</Text>
+        <Text className="flex-1 font-medium text-gray-800">{item.question}</Text>
         <View className="ml-2">
           {isExpanded ? <ChevronUp size={20} color="#6b7280" /> : <ChevronDown size={20} color="#6b7280" />}
         </View>
@@ -204,7 +204,7 @@ export default function QaScreen() {
         <View className="flex-row items-center bg-muted rounded-full px-4 mb-4">
           <Search size={20} color="#9ca3af" />
           <TextInput
-            className="flex-1 py-2 px-3 text-base"
+            className="flex-1 py-2 px-3"
             placeholder="搜索问题"
             value={searchQuery}
             onChangeText={setSearchQuery}
