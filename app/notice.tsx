@@ -231,7 +231,7 @@ export default function NoticeScreen() {
   }, [loading, refreshing]);
 
   return (
-    <View className="flex-1 bg-white px-4 pb-1 pt-2">
+    <View className="flex-1 bg-background px-4 pb-1 pt-2">
       <Stack.Screen
         options={{
           title: '消息中心',

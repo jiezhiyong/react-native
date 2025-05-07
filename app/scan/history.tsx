@@ -128,7 +128,7 @@ export default function HistoryScreen() {
       // 编辑模式下禁用滑动删除
       if (isEditing) {
         return (
-          <View className="bg-white border-b border-gray-100 p-4">
+          <View className="bg-background border-b border-gray-100 p-4">
             <View className="flex-row items-center">
               <TouchableOpacity onPress={() => toggleSelect(item.id)} className="mr-3">
                 {selectedItems.includes(item.id) ? (
@@ -165,7 +165,7 @@ export default function HistoryScreen() {
           }}
         >
           <TouchableOpacity
-            className="bg-white border-b border-gray-100 p-4"
+            className="bg-background border-b border-gray-100 p-4"
             onPress={() => {
               if (item.isUrl) {
                 openUrl(item.content);
@@ -212,7 +212,7 @@ export default function HistoryScreen() {
       <StatusBar style="dark" />
 
       {/* 头部导航栏 */}
-      <View className="bg-white pt-12 pb-4 border-b border-gray-200">
+      <View className="bg-background pt-12 pb-4 border-b border-gray-200">
         <View className="flex-row items-center justify-center px-4">
           <TouchableOpacity onPress={() => router.back()} className="absolute left-4 top-1">
             <ArrowLeft size={24} color="#000" />
@@ -248,7 +248,7 @@ export default function HistoryScreen() {
 
       {/* 编辑模式下的底部工具栏 */}
       {isEditing && history.length > 0 && (
-        <View className="bg-white border-t border-gray-200 p-4 flex-row justify-between items-center">
+        <View className="bg-background border-t border-gray-200 p-4 flex-row justify-between items-center">
           <TouchableOpacity onPress={toggleSelectAll} className="flex-row items-center">
             {selectedItems.length === history.length ? (
               <CheckCircle size={20} color="#3b82f6" fill="#3b82f6" />

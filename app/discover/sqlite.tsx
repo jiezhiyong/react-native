@@ -131,7 +131,7 @@
 //   };
 
 //   const renderTodo = ({ item, index }: { item: Todo; index: number }) => (
-//     <View className="flex-row items-center justify-between bg-white rounded-lg mb-2 gap-2">
+//     <View className="flex-row items-center justify-between bg-background rounded-lg mb-2 gap-2">
 //       <Button className="flex-row items-center flex-1 gap-2" onPress={() => toggleTodo(item.id)} variant="outline">
 //         <Ionicons
 //           name={item.completed ? 'checkbox' : 'square-outline'}

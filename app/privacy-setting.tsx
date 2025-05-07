@@ -59,7 +59,7 @@ const PrivacyItem = ({
 };
 
 const PrivacyGroup = ({ children }: { children: React.ReactNode }) => {
-  return <View className="bg-white rounded-xl overflow-hidden mb-4">{children}</View>;
+  return <View className="bg-background rounded-xl overflow-hidden mb-4">{children}</View>;
 };
 
 export default function PrivacySettingScreen() {

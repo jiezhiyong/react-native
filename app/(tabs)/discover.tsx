@@ -1,11 +1,12 @@
 import { useRouter } from 'expo-router';
 import { Terminal } from 'lucide-react-native';
 import * as React from 'react';
-import { FlatList, TouchableOpacity } from 'react-native';
+import { Animated, TouchableOpacity } from 'react-native';
 
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { Text } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
+import { useScrollStore } from '~/store/scroll';
 
 const demos: { name: string; desc: string; supports: string }[] = [
   // 设备信息等
@@ -105,10 +106,25 @@ const demos: { name: string; desc: string; supports: string }[] = [
 export default function HomeScreen() {
   const router = useRouter();
 
+  const { discoverScrollY, updateDiscoverScroll } = useScrollStore();
+
+  // 设置滚动监听
+  React.useEffect(() => {
+    const id = discoverScrollY.addListener(({ value }) => {
+      updateDiscoverScroll(value);
+    });
+
+    return () => discoverScrollY.removeListener(id);
+  }, []);
+
   return (
-    <FlatList
-      className="px-5 pt-5 flex-1"
+    <Animated.FlatList
+      className="px-5 pt-5 flex-1 bg-muted/60"
       data={demos}
+      onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: discoverScrollY } } }], {
+        useNativeDriver: false,
+      })}
+      scrollEventThrottle={16}
       renderItem={({ item, index }) => (
         <TouchableOpacity
           className={cn('mb-2', index === demos.length - 1 && 'mb-5')}

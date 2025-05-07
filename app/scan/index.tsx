@@ -166,7 +166,7 @@ export default function ScanScreen() {
 //         }}
 //       >
 //         <View className="flex-1 justify-center items-center bg-black/50">
-//           <View className="m-5 bg-white p-5 rounded-2xl w-10/12">
+//           <View className="m-5 bg-background p-5 rounded-2xl w-10/12">
 //             <View className="items-center mb-4">
 //               <CheckCircle2 size={50} color="#4ade80" />
 //               <Text className="text-xl font-bold mt-2">扫描成功</Text>

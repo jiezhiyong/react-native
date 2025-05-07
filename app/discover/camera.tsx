@@ -224,7 +224,7 @@ export default function ExpoCameraScreen() {
             <View
               className={cn(
                 'size-12 rounded-full',
-                mode === 'picture' && 'bg-white',
+                mode === 'picture' && 'bg-background',
                 mode === 'video' && 'bg-red-400',
                 recording && 'size-6 rounded-sm'
               )}

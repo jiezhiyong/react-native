@@ -1,8 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
-import React from 'react';
+import * as React from 'react';
 
 import { HapticTab } from '~/components/HapticTab';
+import { DiscoverHeader, HomeHeader, MineHeader } from '~/components/ui/custom-header';
 import TabBarBackground from '~/components/ui/TabBarBackground';
 import { useColorScheme } from '~/hooks/useColorScheme';
 
@@ -14,18 +15,20 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: colorScheme === 'dark' ? '#fff' : '#000',
         tabBarHideOnKeyboard: true,
+        headerTitleAllowFontScaling: true,
         tabBarButton: HapticTab,
         headerStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: '',
         },
         headerShown: true,
         headerShadowVisible: false,
-        headerTintColor: '#fff',
+        headerTintColor: '',
         tabBarStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: '',
         },
         animation: 'none',
         tabBarBackground: TabBarBackground,
+        headerTransparent: false,
       }}
     >
       <Tabs.Screen
@@ -35,6 +38,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'disc' : 'disc-outline'} color={color} size={24} />
           ),
+          headerShown: true,
+          header: () => <HomeHeader />,
         }}
       />
       <Tabs.Screen
@@ -44,6 +49,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'person' : 'person-outline'} color={color} size={24} />
           ),
+          headerShown: true,
+          header: () => <MineHeader />,
         }}
       />
       <Tabs.Screen
@@ -53,6 +60,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'planet' : 'planet-outline'} color={color} size={24} />
           ),
+          headerShown: true,
+          header: () => <DiscoverHeader />,
         }}
       />
     </Tabs>

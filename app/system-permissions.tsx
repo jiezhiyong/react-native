@@ -48,7 +48,7 @@ export default function SystemPermissionsScreen() {
           </Text>
         </View>
 
-        <View className="bg-white rounded-xl mx-4 mb-4">
+        <View className="bg-background rounded-xl mx-4 mb-4">
           <PermissionItem
             title="通讯录权限"
             description="用户调取您主动选取的通讯录内的联系人信息，以帮助您快速完成信息填写，不会保存您的通讯录内容"

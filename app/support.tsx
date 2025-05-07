@@ -34,11 +34,11 @@ export default function HelpScreen() {
         <Text className="text-3xl font-bold mt-1">我们能提供什么帮助?</Text>
       </View>
 
-      <View className="bg-white rounded-xl mx-4 overflow-hidden">
+      <View className="bg-background rounded-xl mx-4 overflow-hidden">
         <HelpOption title="消息中心" onPress={() => router.push('/notice')} />
       </View>
 
-      <View className="bg-white rounded-xl mx-4 overflow-hidden">
+      <View className="bg-background rounded-xl mx-4 overflow-hidden">
         <HelpOption title="常见问题" onPress={() => router.push('/qa')} />
         <HelpOption title="投诉 / 反馈 / 建议" onPress={() => router.push('/feedback')} />
       </View>

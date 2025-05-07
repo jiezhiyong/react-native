@@ -201,7 +201,7 @@ export default function ExpoCalendarScreen() {
             <View
               className={cn('p-3 mb-2 rounded-lg border border-gray-200 flex-row items-center gap-3', {
                 'bg-blue-50 border-blue-300': selectedCalendar?.id === calendar.id,
-                'bg-white border-gray-200': selectedCalendar?.id !== calendar.id,
+                'bg-background border-gray-200': selectedCalendar?.id !== calendar.id,
               })}
             >
               <View style={{ backgroundColor: calendar.color }} className="h-6 w-6 rounded-full" />
@@ -230,7 +230,7 @@ export default function ExpoCalendarScreen() {
             <Text>暂无事件</Text>
           ) : (
             events.map((event) => (
-              <View key={event.id} className="px-3 pt-1 pb-3 mb-2 rounded-lg bg-white border border-gray-200">
+              <View key={event.id} className="px-3 pt-1 pb-3 mb-2 rounded-lg bg-background border border-gray-200">
                 <View className="flex-row justify-between items-center">
                   <Text className="font-medium">{event.title}</Text>
                   <Button

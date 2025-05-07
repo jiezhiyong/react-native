@@ -98,7 +98,7 @@ export default function DestroyAccountScreen() {
   };
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-background">
       <Stack.Screen
         options={{
           title: '账户注销',
@@ -131,7 +131,7 @@ export default function DestroyAccountScreen() {
                 onBlur={onBlur}
                 secureTextEntry
                 editable={!isSubmitting}
-                className={cn('bg-white', !!errors.password && 'border-red-500')}
+                className={cn('bg-background', !!errors.password && 'border-red-500')}
               />
             )}
           />

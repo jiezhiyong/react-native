@@ -8,7 +8,7 @@ import { ScrollView, Text, View } from 'react-native';
  */
 export default function PrivacyPolicyScreen() {
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-background">
       <Stack.Screen
         options={{
           title: '隐私政策',

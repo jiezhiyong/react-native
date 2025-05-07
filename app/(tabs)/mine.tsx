@@ -1,30 +1,10 @@
 import { useRouter } from 'expo-router';
-import {
-  Bell,
-  ChevronRight,
-  ClipboardList,
-  Clock,
-  CreditCard,
-  Headphones,
-  Heart,
-  HelpCircle,
-  Info,
-  MapPin,
-  MessageSquare,
-  QrCode,
-  Settings,
-  ShoppingCart,
-  Star,
-  Ticket,
-  User,
-  Users,
-  Wallet,
-} from 'lucide-react-native';
+import { Bell, ChevronRight, Headphones, HelpCircle, Info, MessageSquare, User } from 'lucide-react-native';
 import React from 'react';
-import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
 
 import { useAuth } from '~/store/auth';
+import { useScrollStore } from '~/store/scroll';
 
 interface ItemEntry {
   title: string;
@@ -36,24 +16,23 @@ interface ItemEntry {
 // 快捷入口数据
 const quickLinks: ItemEntry[][] = [
   [
-    { title: '订单管理', icon: 'ClipboardList', iconColor: '#4f46e5' },
-    { title: '收货地址', icon: 'MapPin', iconColor: '#0891b2' },
-    { title: '我的收藏', icon: 'Heart', iconColor: '#e11d48' },
-    { title: '优惠券', icon: 'Ticket', iconColor: '#f59e0b' },
-    { title: '我的积分', icon: 'Star', iconColor: '#f97316' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#4f46e5', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#0891b2', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#e11d48', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#f59e0b', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#f97316', route: '/notice' },
   ],
   [
-    { title: '邀请好友', icon: 'Users', iconColor: '#8b5cf6' },
-    { title: '我的钱包', icon: 'Wallet', iconColor: '#10b981' },
-    { title: '购物车', icon: 'ShoppingCart', iconColor: '#6366f1' },
-    { title: '历史浏览', icon: 'Clock', iconColor: '#0ea5e9' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#ec4899' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#8b5cf6', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#10b981', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#6366f1', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#0ea5e9', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#ec4899', route: '/notice' },
   ],
 ];
 
 // 其他入口数据
 const otherEntries: ItemEntry[] = [
-  { title: '银行卡管理', icon: 'CreditCard', iconColor: '#6366f1' },
   { title: '帮助中心', icon: 'HelpCircle', iconColor: '#10b981', route: '/support' },
   { title: '意见反馈', icon: 'MessageSquare', iconColor: '#f59e0b', route: '/feedback' },
   { title: '关于我们', icon: 'Info', iconColor: '#0ea5e9', route: '/about' },
@@ -64,28 +43,8 @@ const IconComponent = ({ name, size = 24, color = '#555' }: { name: string; size
   const props = { size, color, strokeWidth: 2 };
 
   switch (name) {
-    case 'ClipboardList':
-      return <ClipboardList {...props} />;
-    case 'MapPin':
-      return <MapPin {...props} />;
-    case 'Heart':
-      return <Heart {...props} />;
-    case 'Ticket':
-      return <Ticket {...props} />;
-    case 'Star':
-      return <Star {...props} />;
-    case 'Users':
-      return <Users {...props} />;
-    case 'Wallet':
-      return <Wallet {...props} />;
-    case 'ShoppingCart':
-      return <ShoppingCart {...props} />;
-    case 'Clock':
-      return <Clock {...props} />;
     case 'Bell':
       return <Bell {...props} />;
-    case 'CreditCard':
-      return <CreditCard {...props} />;
     case 'HelpCircle':
       return <HelpCircle {...props} />;
     case 'MessageSquare':
@@ -96,8 +55,6 @@ const IconComponent = ({ name, size = 24, color = '#555' }: { name: string; size
       return <Info {...props} />;
     case 'ChevronRight':
       return <ChevronRight {...props} />;
-    case 'User':
-      return <User {...props} />;
     default:
       return <Info {...props} />;
   }
@@ -106,12 +63,14 @@ const IconComponent = ({ name, size = 24, color = '#555' }: { name: string; size
 // 头部组件：用户信息或登录注册按钮
 const UserHeader = () => {
   const router = useRouter();
-  const { session, avatar, name, mobile, signOut } = useAuth();
+  const { session, name, mobile, signOut } = useAuth();
 
   if (session) {
     return (
-      <View className="flex-row items-center p-4">
-        <Image source={{ uri: avatar || '' }} className="w-12 h-12 rounded-full bg-muted" />
+      <View className="flex-row items-center px-4 py-6">
+        <View className="border border-border rounded-full p-1">
+          <Image source={require('~/assets/images/icon.png')} className="w-12 h-12 rounded-full bg-muted" />
+        </View>
         <View className="ml-4">
           <Text className="text-lg font-bold">{name}</Text>
           <Text className="text-muted-foreground">{mobile || '未绑定手机号'}</Text>
@@ -140,12 +99,15 @@ const UserHeader = () => {
 
 // 快捷入口组件
 const QuickLinksSection = () => {
+  const router = useRouter();
   const handleQuickLinkPress = (item: ItemEntry) => {
-    Alert.alert('功能开发中', `您点击了：${item.title}`);
+    if (item.route) {
+      router.push(item.route as any);
+    }
   };
 
   return (
-    <View className="bg-white rounded-lg mx-4 mb-4 p-4">
+    <View className="bg-background rounded-lg mx-5 mb-5 p-4">
       <View className="flex-row justify-between mb-5">
         {quickLinks[0].map((item, index) => (
           <TouchableOpacity
@@ -192,13 +154,11 @@ const OtherEntriesSection = () => {
   const handleEntryPress = (item: ItemEntry) => {
     if (item.route) {
       router.push(item.route as any);
-    } else {
-      Alert.alert('功能开发中', `您点击了：${item.title}`);
     }
   };
 
   return (
-    <View className="bg-white rounded-lg px-4 mb-4 mx-4">
+    <View className="bg-background rounded-lg px-4 mb-5 mx-5">
       {otherEntries.map((item, index) => (
         <React.Fragment key={index}>
           <TouchableOpacity className="flex-row items-center py-3" onPress={() => handleEntryPress(item)}>
@@ -219,56 +179,33 @@ const OtherEntriesSection = () => {
 };
 
 export default function MinePage() {
-  const router = useRouter();
-  const handleTopIconPress = (action: string) => {
-    switch (action) {
-      case 'scan':
-        router.push('/scan');
-        break;
-      case 'settings':
-        router.push('/setting');
-        break;
-      case 'service':
-        router.push('/online-service');
-        break;
-      case 'notice':
-        router.push('/notice');
-        break;
-      default:
-        break;
-    }
-  };
+  const { mineScrollY, updateMineScroll } = useScrollStore();
+
+  // 设置滚动监听
+  React.useEffect(() => {
+    const id = mineScrollY.addListener(({ value }) => {
+      updateMineScroll(value);
+    });
+
+    return () => mineScrollY.removeListener(id);
+  }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-muted">
-      {/* 顶部图标栏 - 放置在导航栏上方 */}
-      <View className="flex-row justify-end px-4 py-2 bg-white">
-        <TouchableOpacity className="p-2" onPress={() => handleTopIconPress('scan')}>
-          <QrCode size={20} color="#333" strokeWidth={2} />
-        </TouchableOpacity>
-        <TouchableOpacity className="p-2" onPress={() => handleTopIconPress('settings')}>
-          <Settings size={20} color="#333" strokeWidth={2} />
-        </TouchableOpacity>
-        <TouchableOpacity className="p-2" onPress={() => handleTopIconPress('service')}>
-          <Headphones size={20} color="#333" strokeWidth={2} />
-        </TouchableOpacity>
-        <TouchableOpacity className="p-2" onPress={() => handleTopIconPress('notice')}>
-          <Bell size={20} color="#333" strokeWidth={2} />
-        </TouchableOpacity>
+    <Animated.ScrollView
+      className="flex-1 bg-muted/60"
+      onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: mineScrollY } } }], { useNativeDriver: false })}
+      scrollEventThrottle={16}
+    >
+      {/* 顶部用户信息区域 */}
+      <View className="mx-4 mt-5 rounded-lg bg-background mb-5">
+        <UserHeader />
       </View>
 
-      <ScrollView>
-        {/* 顶部用户信息区域 */}
-        <View className="bg-white m-4 rounded-lg">
-          <UserHeader />
-        </View>
+      {/* 中间快捷入口区域 */}
+      <QuickLinksSection />
 
-        {/* 中间快捷入口区域 */}
-        <QuickLinksSection />
-
-        {/* 底部其他入口区域 */}
-        <OtherEntriesSection />
-      </ScrollView>
-    </SafeAreaView>
+      {/* 底部其他入口区域 */}
+      <OtherEntriesSection />
+    </Animated.ScrollView>
   );
 }

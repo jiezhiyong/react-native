@@ -53,7 +53,7 @@ export default function AboutScreen() {
   return (
     <SafeAreaView className="flex-1 bg-muted p-4">
       {/* 应用信息 */}
-      <View className="items-center justify-center py-10 bg-white rounded-xl">
+      <View className="items-center justify-center py-10 bg-background rounded-xl">
         <View className="w-20 h-20 rounded-xl overflow-hidden mb-4 bg-muted items-center justify-center">
           <Image source={require('../assets/images/icon.png')} className="flex-1" resizeMode="contain" />
         </View>
@@ -62,7 +62,7 @@ export default function AboutScreen() {
       </View>
 
       {/* 功能列表 */}
-      <View className="bg-white mt-4 rounded-xl">
+      <View className="bg-background mt-4 rounded-xl">
         <AboutItem
           title="检查更新"
           desc={isUpdateAvailable ? '有新版本' : '已是最新版本'}

@@ -110,7 +110,7 @@ const QuestionItem = ({
   return (
     <View className="mb-2 border border-gray-100 rounded-lg overflow-hidden">
       <TouchableOpacity
-        className="flex-row items-center justify-between p-4 bg-white"
+        className="flex-row items-center justify-between p-4 bg-background"
         onPress={onToggle}
         activeOpacity={0.7}
       >
@@ -191,7 +191,7 @@ export default function QaScreen() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-background">
       <Stack.Screen
         options={{
           title: '常见问题',

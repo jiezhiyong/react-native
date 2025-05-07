@@ -32,7 +32,7 @@ interface SettingGroupProps {
 }
 
 const SettingGroup = ({ children }: SettingGroupProps) => {
-  return <View className="bg-white rounded-xl mx-4 my-2 overflow-hidden">{children}</View>;
+  return <View className="bg-background rounded-xl mx-4 my-2 overflow-hidden">{children}</View>;
 };
 
 export default function SettingScreen() {

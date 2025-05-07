@@ -181,7 +181,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
                 </View>
               )}
               <View className="absolute inset-0 items-center justify-center bg-black bg-opacity-20">
-                <View className="w-12 h-12 rounded-full bg-white bg-opacity-70 items-center justify-center">
+                <View className="w-12 h-12 rounded-full bg-background bg-opacity-70 items-center justify-center">
                   <View className="w-0 h-0 ml-1 border-t-8 border-t-transparent border-l-12 border-l-primary border-b-8 border-b-transparent" />
                 </View>
               </View>
@@ -294,7 +294,7 @@ const MediaPicker = ({
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible} onRequestClose={onClose}>
       <View className="flex-1 justify-end bg-black bg-opacity-50">
-        <View className="bg-white rounded-t-3xl p-5">
+        <View className="bg-background rounded-t-3xl p-5">
           <View className="flex-row justify-between items-center mb-5">
             <Text className="text-lg font-medium">选择媒体</Text>
             <TouchableOpacity onPress={onClose} className="p-1">
@@ -455,7 +455,7 @@ export default function OnlineServiceScreen() {
 
   return (
     <KeyboardAvoidingView
-      className="flex-1 bg-white"
+      className="flex-1 bg-background"
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
     >

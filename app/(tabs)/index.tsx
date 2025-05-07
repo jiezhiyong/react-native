@@ -1,102 +1,48 @@
-import { A } from '@expo/html-elements';
-import * as Linking from 'expo-linking';
-import { Link, usePathname, useRouter } from 'expo-router';
-import * as WebBrowser from 'expo-web-browser';
+import { useRouter } from 'expo-router';
 import * as React from 'react';
-import { Image, Platform, ScrollView, View } from 'react-native';
+import { Animated, View } from 'react-native';
 
-import { LanguageToggle } from '~/components/LanguageToggle';
-import { Button } from '~/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
 import { Text } from '~/components/ui/text';
 import { useI18nContext } from '~/i18n/i18n-react';
-// import MyModule from '~/modules/my-module';
+import { useScrollStore } from '~/store/scroll';
 
 export default function HomeScreen() {
-  const pathname = usePathname();
   const router = useRouter();
 
+  const { homeScrollY, updateHomeScroll } = useScrollStore();
   const { LL, locale } = useI18nContext();
-  const [containerSize, setContainerSize] = React.useState<{ width: number; height: number } | null>(null);
 
-  // ios 模拟器或设备上打开后一直触发 console ？
-  // if (Platform.OS === 'ios') {
-  //   console.log('Hello on iOS');
-  // }
+  // 设置滚动监听
+  React.useEffect(() => {
+    const id = homeScrollY.addListener(({ value }) => {
+      updateHomeScroll(value);
+    });
 
-  // if (process.env.NODE_ENV === 'development') {
-  //   console.log('Hello in development');
-  // }
+    return () => homeScrollY.removeListener(id);
+  }, []);
 
+  // 使用从_layout.tsx导出的动画值
   return (
-    <ScrollView>
-      <View className="flex-1 gap-3 p-5 bg-secondary/30">
-        {/* <Text>{LL.HI({ name: 'React Native', locale })}</Text> */}
-        {/* <LanguageToggle /> */}
-
-        <View style={{ $$css: true, _: 'bg-slate-100 rounded-xl p-3' }}>
-          <Text style={{ $$css: true, _: 'text-lg font-medium' }}>Tailwind + React Native web elements</Text>
-        </View>
-
-        <Button onPress={() => router.navigate('/discover')}>
-          <Text>Go to Discover</Text>
-        </Button>
-
-        <Text>登录</Text>
-        <Button onPress={() => router.navigate('/login')}>
-          <Text>Go to Login</Text>
-        </Button>
-
-        <Button onPress={() => router.navigate('/(protected)/bill')}>
-          <Text>Go to Protected Page Bill</Text>
-        </Button>
-
-        <Text>导航</Text>
-        <Button onPress={() => router.navigate('/products')}>
-          <Text>Go to Products</Text>
-        </Button>
-
-        <Link href={`/products/${20}?name=abc`} asChild withAnchor>
-          <Button>
-            <Text>view products</Text>
-          </Button>
-        </Link>
-
-        <Text>使用默认浏览器打开URL</Text>
-        <Button onPress={() => Linking.openURL('https://expo.dev')}>
-          <Text>expo-linking-api</Text>
-        </Button>
-
-        <Link href="https://expo.dev" asChild>
-          <Button>
-            <Text>expo-routers-link-component</Text>
-          </Button>
-        </Link>
-
-        <Button variant="outline">
-          <A href="https://expo.dev">@expo/html-elements</A>
-        </Button>
-
-        <Button onPress={() => WebBrowser.openBrowserAsync('https://expo.dev')}>
-          <Text>WebBrowser</Text>
-        </Button>
-
-        <Button onPress={() => Linking.openURL('mailto:support@expo.dev')}>
-          <Text>mailto</Text>
-        </Button>
-
-        <Button onPress={() => Linking.openURL('tel:+123456789')}>
-          <Text>tel</Text>
-        </Button>
-
-        <Button onPress={() => Linking.openURL('sms:+123456789')}>
-          <Text>sms</Text>
-        </Button>
-
-        <Text>Expo Modules API</Text>
-        {/* <Text>{MyModule.hello()}</Text> */}
-
-        <Image source={require('~/assets/images/react-logo.png')} />
+    <Animated.ScrollView
+      className="flex-1"
+      onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: homeScrollY } } }], { useNativeDriver: false })}
+      scrollEventThrottle={16}
+    >
+      <View className="px-4 mt-4">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
+          <Card key={item} className="mb-4">
+            <CardHeader>
+              <CardTitle>内容卡片 {item}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Text className="text-muted-foreground">
+                这是一个示例卡片，用于演示滚动效果。当你向上滚动时，Header的背景图片会逐渐变为白色。
+              </Text>
+            </CardContent>
+          </Card>
+        ))}
       </View>
-    </ScrollView>
+    </Animated.ScrollView>
   );
 }

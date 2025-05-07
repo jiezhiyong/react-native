@@ -38,7 +38,7 @@ export default function FeedbackScreen() {
       <SafeAreaView className="flex-1 bg-muted">
         <ScrollView className="flex-1">
           {/* 问题标签 */}
-          <View className="p-4 bg-white">
+          <View className="p-4 bg-background">
             <Text className="text-lg">请选择问题标签</Text>
             <Text className="text-xs text-gray-400 mb-4">精准分类，处理更快</Text>
 
@@ -55,7 +55,7 @@ export default function FeedbackScreen() {
           </View>
 
           {/* 反馈内容 */}
-          <View className="mt-4 p-4 bg-white">
+          <View className="mt-4 p-4 bg-background">
             <View className="flex-row items-center mb-4">
               <Text className="text-red-500 mr-1">*</Text>
               <Text className="text-lg">反馈标题与内容</Text>
@@ -84,7 +84,7 @@ export default function FeedbackScreen() {
           </View>
 
           {/* 上传照片 */}
-          <View className="mt-4 p-4 bg-white">
+          <View className="mt-4 p-4 bg-background">
             <Text className="text-lg">上传照片</Text>
             <Text className="text-xs text-gray-400 mb-4">
               上传操作入口，报错提示截图、手机系统版本截图等信息，最多可上传10张，图像尺寸小于1M
