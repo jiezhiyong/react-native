@@ -197,7 +197,7 @@ export default function MinePage() {
       scrollEventThrottle={16}
     >
       {/* 顶部用户信息区域 */}
-      <View className="mx-4 mt-5 rounded-lg bg-background mb-5">
+      <View className="mx-5 mt-5 rounded-lg bg-background mb-5">
         <UserHeader />
       </View>
 

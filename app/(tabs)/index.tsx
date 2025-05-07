@@ -29,7 +29,7 @@ export default function HomeScreen() {
       onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: homeScrollY } } }], { useNativeDriver: false })}
       scrollEventThrottle={16}
     >
-      <View className="px-4 mt-4">
+      <View className="px-5 mt-5">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
           <Card key={item} className="mb-4">
             <CardHeader>

@@ -1,7 +1,6 @@
 import Constants from 'expo-constants';
 import { LinearGradient } from 'expo-linear-gradient';
 import { usePathname, useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import { Bell, Headphones, QrCode, Settings } from 'lucide-react-native';
 import React from 'react';
 import {
@@ -42,20 +41,6 @@ export function CustomHeader({
 
   const { width } = useWindowDimensions();
 
-  // 根据滚动位置计算透明度
-  const headerOpacity = scrollY.interpolate({
-    inputRange: [0, 100],
-    outputRange: [0, 1],
-    extrapolate: 'clamp',
-  });
-
-  // 计算标题的透明度，滚动时才显示
-  const titleOpacity = scrollY.interpolate({
-    inputRange: [0, 60],
-    outputRange: [0, 1],
-    extrapolate: 'clamp',
-  });
-
   // 计算渐变背景的颜色变化
   const gradientOpacity = scrollY.interpolate({
     inputRange: [0, 100],
@@ -76,34 +61,7 @@ export function CustomHeader({
   const useDarkStyle = Number((scrollY as any)._value) >= BREAK_POINT;
   return (
     <>
-      <StatusBar style={useDarkStyle ? 'dark' : 'light'} />
-      <Animated.View
-        className="absolute top-0 left-0 right-0 z-10"
-        style={{
-          height: headerHeight,
-          backgroundColor: 'white',
-          opacity: headerOpacity,
-          paddingTop: statusBarHeight,
-        }}
-      >
-        <View className="flex-row items-center justify-center px-4 h-14">
-          <Animated.View style={{ opacity: titleOpacity }}>
-            <Text className="text-lg font-bold">{title}</Text>
-          </Animated.View>
-          <View className="flex-1" />
-          <View className="flex-row">
-            {rightButtons.map((button, index) => (
-              <TouchableOpacity
-                key={index}
-                className="ml-3 w-10 h-10 items-center justify-center"
-                onPress={button.onPress}
-              >
-                {button.icon}
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-      </Animated.View>
+      {/* <StatusBar style={useDarkStyle ? 'dark' : 'light'} /> */}
 
       {/* 渐变背景或图片背景 */}
       <Animated.View
@@ -133,7 +91,7 @@ export function CustomHeader({
           height: headerHeight,
         }}
       >
-        <View className="flex-row items-center justify-between px-4 h-14">
+        <View className="flex-row items-center justify-between px-5 h-full">
           <Animated.View>
             <Text className="text-xl font-bold" style={{ color: useDarkStyle ? '#000' : '#fff' }}>
               {title}
@@ -143,7 +101,7 @@ export function CustomHeader({
             {rightButtons.map((button, index) => (
               <TouchableOpacity
                 key={index}
-                className="ml-3 w-10 h-10 items-center justify-center"
+                className="gap-3 size-10 items-center justify-center"
                 onPress={button.onPress}
               >
                 {button.icon}
