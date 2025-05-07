@@ -79,24 +79,25 @@ export default function ReanimatedScreen() {
         <Text className="text-muted-foreground">使用 Reanimated 创建流畅的高性能动画效果。</Text>
       </View>
 
-      <View className="space-y-8">
-        {/* 基本动画 */}
-        <View className="flex gap-3 mb-6">
-          <Text className="text-lg font-medium">基本动画</Text>
-          <Animated.View className="w-20 h-20 bg-blue-500 rounded-lg" style={animatedStyle} />
-          <Button onPress={isAnimating ? stopBasicAnimation : startBasicAnimation}>
-            <Text className="text-white ml-2">{isAnimating ? '停止动画' : '开始动画'}</Text>
-          </Button>
-        </View>
+      {/* 基本动画 */}
+      <Text className="text-lg font-medium mb-2">基本动画</Text>
+      <View className="flex gap-3 mb-6">
+        <Animated.View className="w-20 h-20 bg-blue-500 rounded-lg" style={animatedStyle} />
+        <Button
+          onPress={isAnimating ? stopBasicAnimation : startBasicAnimation}
+          variant={isAnimating ? 'destructive' : 'default'}
+        >
+          <Text className="text-white ml-2">{isAnimating ? '停止动画' : '开始动画'}</Text>
+        </Button>
+      </View>
 
-        {/* 手势动画 */}
-        <View className="flex gap-3">
-          <Text className="text-lg font-medium">手势动画</Text>
-          <Text className="text-muted-foreground">尝试拖动方块，松开后会回到原位</Text>
-          <GestureDetector gesture={gesture}>
-            <Animated.View className="w-20 h-20 bg-green-500 rounded-lg" style={gestureStyle} />
-          </GestureDetector>
-        </View>
+      {/* 手势动画 */}
+      <Text className="text-lg font-medium">手势动画</Text>
+      <Text className="text-muted-foreground mb-2">尝试拖动方块，松开后会回到原位</Text>
+      <View className="flex gap-3">
+        <GestureDetector gesture={gesture}>
+          <Animated.View className="w-20 h-20 bg-green-500 rounded-lg" style={gestureStyle} />
+        </GestureDetector>
       </View>
     </View>
   );

@@ -27,12 +27,12 @@ export default function ExpoSmsScreen() {
   return (
     <View className="flex-1 p-5">
       <View className="mb-6">
-        <Text className="text-2xl font-bold mb-2">短信功能</Text>
+        <Text className="text-2xl font-bold mb-2">短信</Text>
         <Text className="text-muted-foreground">在应用中发送和处理短信。</Text>
       </View>
 
       <View className="mb-6">
-        <Text className="font-medium mb-2">手机号码</Text>
+        <Text className="text-lg font-medium mb-2">手机号</Text>
         <Input
           placeholder="请输入手机号码"
           value={phoneNumber}
@@ -42,7 +42,7 @@ export default function ExpoSmsScreen() {
       </View>
 
       <View className="mb-6">
-        <Text className="font-medium mb-2">短信内容</Text>
+        <Text className="text-lg font-medium mb-2">内容</Text>
         <Textarea placeholder="请输入短信内容" value={message} onChangeText={setMessage} />
       </View>
 

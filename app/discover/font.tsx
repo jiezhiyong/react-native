@@ -12,19 +12,17 @@ const sampleTextLatin = 'The quick brown fox jumps over the lazy dog.';
 // 字体示例组件
 const FontSample: React.FC<{ name: string }> = ({ name }) => {
   return (
-    <Card className="mb-4 border-border">
-      <CardHeader className="px-4 py-2">
+    <Card className="mb-6 border-border">
+      <CardHeader>
         <CardTitle className="flex-row items-center">
           <Text className="font-medium">{name}</Text>
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 py-2">
-        <Text style={{ fontFamily: name }} className="mb-2">
+      <CardContent>
+        <Text style={{ fontFamily: name }} className="mb-3">
           {sampleText}
         </Text>
-        <Text style={{ fontFamily: name }} className="text-base">
-          {sampleTextLatin}
-        </Text>
+        <Text style={{ fontFamily: name }}>{sampleTextLatin}</Text>
       </CardContent>
     </Card>
   );
@@ -48,8 +46,8 @@ export default function ExpoFontScreen() {
       </View>
 
       {fontError && (
-        <View className="bg-destructive/10 p-3 rounded-md mb-4">
-          <Text className="text-destructive">字体加载失败: {fontError?.message}</Text>
+        <View className="bg-destructive/10 p-4 rounded-lg mb-6">
+          <Text className="text-destructive">{fontError?.message}</Text>
         </View>
       )}
 

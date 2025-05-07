@@ -95,39 +95,41 @@ export default function LocalAuthenticationScreen() {
   };
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">本地认证</Text>
         <Text className="text-muted-foreground">使用设备的生物识别或密码进行本地身份验证。</Text>
       </View>
 
-      <Card className="p-4 mb-4 bg-muted">
-        <Text className="font-medium mb-2">支持情况</Text>
-        <View className="flex-row items-center mb-2">
-          <Text>设备支持生物识别: </Text>
-          {isCompatible ? <Text className="text-green-500">支持</Text> : <Text className="text-red-500">不支持</Text>}
-        </View>
-
-        {enrolledLevel !== null && (
-          <View className="mb-2">
-            <Text>已注册的安全级别: {securityLevelDesc[enrolledLevel.toString()]}</Text>
+      <View className="flex-1">
+        <Card className="p-4 mb-4 bg-muted">
+          <Text className="text-lg font-medium mb-2">支持情况</Text>
+          <View className="flex-row items-center mb-2">
+            <Text>设备支持生物识别: </Text>
+            {isCompatible ? <Text className="text-green-500">支持</Text> : <Text className="text-red-500">不支持</Text>}
           </View>
-        )}
 
-        {authTypes.length > 0 && (
-          <View className="flex-row mb-2">
-            <Text className="mb-1">支持的认证类型: </Text>
-            {authTypes.map((type, index) => (
-              <Text key={index}>{getAuthTypeName(type)}</Text>
-            ))}
-          </View>
-        )}
-      </Card>
+          {enrolledLevel !== null && (
+            <View className="mb-2">
+              <Text>已注册的安全级别: {securityLevelDesc[enrolledLevel.toString()]}</Text>
+            </View>
+          )}
 
-      <Card className="p-4 bg-muted rounded-lg mb-4">
-        <Text className="font-medium mb-2">认证结果</Text>
-        <Text>{authResult || '...'}</Text>
-      </Card>
+          {authTypes.length > 0 && (
+            <View className="flex-row">
+              <Text className="mb-1">支持的认证类型: </Text>
+              {authTypes.map((type, index) => (
+                <Text key={index}>{getAuthTypeName(type)}</Text>
+              ))}
+            </View>
+          )}
+        </Card>
+
+        <Card className="p-4 bg-muted rounded-lg mb-4">
+          <Text className="text-lg font-medium mb-2">认证结果</Text>
+          <Text>{authResult || '...'}</Text>
+        </Card>
+      </View>
 
       <Button disabled={!isCompatible || isAuthenticating} onPress={authenticate}>
         <Text>{isAuthenticating ? '正在验证...' : '使用生物识别验证'}</Text>

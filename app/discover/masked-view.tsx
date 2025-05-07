@@ -16,7 +16,7 @@ export default function ExpoMaskedViewScreen() {
       case 'circle':
         return (
           <MaskedView
-            style={{ width: 200, height: 200 }}
+            style={{ width: 200, height: 200, backgroundColor: '#eaeaea', borderRadius: 200 }}
             maskElement={<View className="w-full h-full rounded-full bg-black" />}
           >
             <Image
@@ -29,7 +29,7 @@ export default function ExpoMaskedViewScreen() {
       case 'gradient':
         return (
           <MaskedView
-            style={{ width: 200, height: 200 }}
+            style={{ width: 200, height: 200, backgroundColor: '#eaeaea', borderRadius: 10 }}
             maskElement={
               <LinearGradient
                 colors={['transparent', 'black', 'transparent']}
@@ -52,7 +52,7 @@ export default function ExpoMaskedViewScreen() {
             style={{ width: width - 48, height: 100 }}
             maskElement={
               <View className="w-full h-full items-center justify-center">
-                <Text className="text-4xl font-bold text-black">MASKED VIEW</Text>
+                <Text className="text-5xl font-bold text-black">MASKED VIEW</Text>
               </View>
             }
           >

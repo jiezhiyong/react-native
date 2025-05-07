@@ -15,7 +15,7 @@ export default function ExpoSliderScreen() {
 
       {/* 基本滑块 */}
       <View className="mb-6">
-        <Text className="font-medium mb-2">基本滑块, {basicValue.toFixed(1)}</Text>
+        <Text className="text-lg font-medium mb-2">基本滑块, {basicValue.toFixed(1)}</Text>
         <View className="rounded-lg p-4 bg-muted">
           <Slider
             style={{ width: '100%', height: 40 }}
@@ -32,7 +32,7 @@ export default function ExpoSliderScreen() {
 
       {/* 带步长的滑块 */}
       <View className="mb-6">
-        <Text className="font-medium mb-2">带步长的滑块, {stepValue}</Text>
+        <Text className="text-lg font-medium mb-2">带步长的滑块, {stepValue}</Text>
         <View className="rounded-lg p-4 bg-muted">
           <Slider
             style={{ width: '100%', height: 40 }}

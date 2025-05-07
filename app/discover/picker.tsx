@@ -11,6 +11,26 @@ export default function PickerScreen() {
     { label: 'Python', value: 'python' },
     { label: 'Java', value: 'java' },
     { label: 'C++', value: 'cpp' },
+    { label: 'C', value: 'c' },
+    { label: 'C#', value: 'csharp' },
+    { label: 'Go', value: 'go' },
+    { label: 'Rust', value: 'rust' },
+    { label: 'Swift', value: 'swift' },
+    { label: 'Kotlin', value: 'kotlin' },
+    { label: 'R', value: 'r' },
+    { label: 'Racket', value: 'racket' },
+    { label: 'Ruby', value: 'ruby' },
+    { label: 'Scala', value: 'scala' },
+    { label: 'Shell', value: 'shell' },
+    { label: 'Solidity', value: 'solidity' },
+    { label: 'SQL', value: 'sql' },
+    { label: 'V', value: 'v' },
+    { label: 'Verilog', value: 'verilog' },
+    { label: 'Vue', value: 'vue' },
+    { label: 'WebAssembly', value: 'wasm' },
+    { label: 'XML', value: 'xml' },
+    { label: 'YAML', value: 'yaml' },
+    { label: 'Zig', value: 'zig' },
   ];
 
   return (
@@ -21,7 +41,7 @@ export default function PickerScreen() {
       </View>
 
       {/* 语言选择器 */}
-      <Text className="font-medium mb-2">选择编程语言</Text>
+      <Text className="text-lg font-medium mb-2">选择编程语言</Text>
       <View className="bg-muted rounded-lg">
         <Picker selectedValue={selectedLanguage} onValueChange={(itemValue) => setSelectedLanguage(itemValue)}>
           {languages.map((language) => (

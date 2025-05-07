@@ -34,27 +34,18 @@ export default function ExpoStoreReviewScreen() {
   };
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">应用商店评分</Text>
         <Text className="text-muted-foreground">提示用户在应用商店对应用进行评分和评价。</Text>
       </View>
 
-      {/* 检查可用性 */}
-      <View className="mb-8">
-        <Text className="font-medium mb-2">检查可用性</Text>
-        <Button onPress={checkAvailability}>
-          <Text>检查评分功能是否可用 ({isAvailable ? '可用' : '不可用'})</Text>
-        </Button>
-      </View>
+      <View className="flex-1 bg-muted rounded-lg mb-6"></View>
 
       {/* 请求评分 */}
-      <View className="mb-8">
-        <Text className="font-medium mb-2">请求评分</Text>
-        <Button onPress={requestReview} disabled={!isAvailable}>
-          <Text>请求评分</Text>
-        </Button>
-      </View>
+      <Button onPress={requestReview} disabled={!isAvailable}>
+        <Text>请求评分 ({isAvailable ? '可用' : '不可用'})</Text>
+      </Button>
     </View>
   );
 }

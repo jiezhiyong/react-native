@@ -15,8 +15,8 @@ export default function RouteDetailScreen() {
         <Text className="text-muted-foreground">使用和配置 Router 相关功能。</Text>
       </View>
 
-      <Text className="font-medium mb-2">接收到的参数</Text>
-      <View className="bg-muted rounded-lg p-4">
+      <Text className="font-medium mb-2 text-lg">接收到的参数</Text>
+      <View className="bg-muted rounded-lg p-4 min-h-24">
         <Text>{JSON.stringify(params)}</Text>
       </View>
       <Button className="mt-4" onPress={() => router.back()}>

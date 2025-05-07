@@ -55,7 +55,7 @@ export default function ExpoClipboardScreen() {
       <View className="mb-6">
         <Text className="text-lg font-medium mb-2">复制到剪贴板</Text>
         <Input
-          className="border border-input rounded-md p-3 mb-3 text-foreground"
+          className="border border-input rounded-lg p-3 mb-3 text-foreground"
           value={inputText}
           onChangeText={setInputText}
           multiline
@@ -72,7 +72,7 @@ export default function ExpoClipboardScreen() {
       {/* 从剪贴板读取 */}
       <View className="mb-6">
         <Text className="text-lg font-medium mb-2">从剪贴板读取</Text>
-        <View className="border border-input rounded-md p-4 bg-card min-h-[100px] mb-3">
+        <View className="border border-input rounded-lg p-4 bg-card min-h-[100px] mb-3">
           <Text className="text-foreground">{clipboardText ? clipboardText : ''}</Text>
         </View>
         <Button onPress={getFromClipboard}>

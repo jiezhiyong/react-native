@@ -85,7 +85,7 @@ export default function ExpoLinkingScreen() {
 
         <View>
           <Button className="flex-row justify-center items-center space-x-2" onPress={checkCanOpenUrl}>
-            <Text>检查URL是否可以打开</Text>
+            <Text>检查URL是否可以打开 (expo.dev)</Text>
           </Button>
         </View>
       </View>

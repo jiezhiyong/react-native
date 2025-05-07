@@ -75,13 +75,38 @@ export default function ExpoImagePickerScreen() {
   };
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">图像选择器</Text>
         <Text className="text-muted-foreground">从设备相册选择图片或直接拍摄新照片。</Text>
       </View>
 
-      <View className="flex-row flex-wrap gap-3 mb-6">
+      <View className="flex-1">
+        {images.length > 0 ? (
+          <>
+            <View className="flex-col gap-3 mb-6">
+              {images.map((uri, index) => (
+                <Image
+                  key={index}
+                  source={{ uri }}
+                  style={{ height: 150, borderRadius: 6, borderWidth: 1, borderColor: 'rgba(0, 0, 0, 0.1)' }}
+                  contentFit="cover"
+                />
+              ))}
+            </View>
+
+            <Button onPress={clearImages} variant="destructive">
+              <Text>清除图片</Text>
+            </Button>
+          </>
+        ) : (
+          <View className="items-center justify-center bg-muted rounded-lg p-4">
+            <Text className="text-muted-foreground">尚未选择任何图片</Text>
+          </View>
+        )}
+      </View>
+
+      <View className="flex-row flex-wrap gap-3">
         <Button className="flex-1" onPress={takePicture}>
           <Text>拍摄照片</Text>
         </Button>
@@ -89,29 +114,6 @@ export default function ExpoImagePickerScreen() {
           <Text>选择图片</Text>
         </Button>
       </View>
-
-      {images.length > 0 ? (
-        <>
-          <View className="flex-col gap-3 mb-6">
-            {images.map((uri, index) => (
-              <Image
-                key={index}
-                source={{ uri }}
-                style={{ height: 150, borderRadius: 6, borderWidth: 1, borderColor: 'rgba(0, 0, 0, 0.1)' }}
-                contentFit="cover"
-              />
-            ))}
-          </View>
-
-          <Button onPress={clearImages} variant="destructive">
-            <Text>清除图片</Text>
-          </Button>
-        </>
-      ) : (
-        <View className="items-center justify-center">
-          <Text className="text-muted-foreground">尚未选择任何图片</Text>
-        </View>
-      )}
     </View>
   );
 }

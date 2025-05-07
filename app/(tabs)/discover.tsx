@@ -38,7 +38,9 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'task-manager', desc: '任务管理器', supports: 'Android, iOS' },
 
   // UI组件
+  { name: 'image-picker', desc: '从手机相册选择图片和视频或使用相机拍照', supports: 'Android, iOS, Web' },
   { name: 'flash-list', desc: '快速且性能优异的渲染列表方式', supports: 'Android, iOS, Web' },
+  { name: 'reanimated', desc: '创建平滑、强大和可维护动画', supports: 'Android, iOS, Web' },
   { name: 'date-time-picker', desc: '选择日期和时间的组件', supports: 'Android, iOS' },
   { name: 'document-picker', desc: '从用户设备上的可用提供者中选择文档', supports: 'Android, iOS, Web' },
   { name: 'blur', desc: '模糊视图效果', supports: 'Android, iOS, Web' },
@@ -47,11 +49,9 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'checkbox', desc: '基本复选框', supports: 'Android, iOS, Web' },
   { name: 'linear-gradient', desc: '渲染渐变视图', supports: 'Android, iOS, Web' },
   { name: 'masked-view', desc: '显示与遮罩元素中渲染的视图重叠的像素', supports: 'Android, iOS' },
-  { name: 'svg', desc: 'SVG', supports: 'Android, iOS, Web' },
   { name: 'view-pager', desc: '视图页', supports: 'Android, iOS' },
   { name: 'slider', desc: '滑块控件', supports: 'Android, iOS, Web' },
   { name: 'segmented-control', desc: '分段控制', supports: 'Android, iOS, Web' },
-  { name: 'reanimated', desc: '创建平滑、强大和可维护动画', supports: 'Android, iOS, Web' },
   { name: 'linking', desc: '创建和打开通用深链', supports: 'Android, iOS, Web' },
   { name: 'router', desc: '路由器', supports: 'Android, iOS, Web' },
   { name: 'router-ui', desc: '路由 UI', supports: 'Android, iOS, Web' },
@@ -81,12 +81,12 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'font', desc: '在运行时加载字体', supports: 'Android, iOS, Web' },
   { name: 'image', desc: '访问 Android 系统振动效果和 iOS 触觉引擎', supports: 'Android, iOS, Web' },
   { name: 'image-manipulator', desc: '操作本地文件系统上图像', supports: 'Android, iOS, Web' },
-  { name: 'image-picker', desc: '从手机相册选择图片和视频或使用相机拍照', supports: 'Android, iOS, Web' },
   { name: 'media-library', desc: '访问设备媒体库', supports: 'Android, iOS' },
   { name: 'video', desc: '视频', supports: 'Android, iOS, Web' },
   { name: 'video-thumbnails', desc: '视频缩略图', supports: 'Android, iOS' },
   { name: 'file-system', desc: '访问设备本地文件系统', supports: 'Android, iOS' },
   { name: 'gl', desc: '渲染 2D 和 3D 图形', supports: 'Android, iOS, Web' },
+  { name: 'svg', desc: 'SVG', supports: 'Android, iOS, Web' },
 
   // 其他
   { name: 'cellular', desc: '用户蜂窝服务提供商的信息', supports: 'Android, iOS, Web' },
@@ -95,10 +95,10 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'constants', desc: '常量', supports: 'Android, iOS, Web' },
   { name: 'apple-authentication', desc: '为 iOS 提供 Apple 身份验证', supports: 'iOS' },
   { name: 'auth-session', desc: '基于浏览器的身份验证', supports: 'Android, iOS, Web' },
-  { name: 'intent-launcher', desc: '意图启动器', supports: 'Android' },
   { name: 'local-authentication', desc: '通过面部或指纹扫描验证用户', supports: 'Android, iOS' },
   { name: 'mail-composer', desc: '使用系统特定 UI 来编写和发送电子邮件', supports: 'Android, iOS (device), Web' },
   { name: 'store-review', desc: '应用内评论', supports: 'Android, iOS' },
+  { name: 'intent-launcher', desc: '意图启动器', supports: 'Android' },
   { name: 'navigation-bar', desc: '访问 Android 原生导航栏各种交互', supports: 'Android' },
 ];
 

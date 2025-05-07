@@ -189,7 +189,7 @@ export default function GLScreen() {
         <GLView style={{ flex: 1 }} onContextCreate={onContextCreate} />
       </View>
 
-      <Text className="font-medium mb-2">选择形状：</Text>
+      <Text className="text-lg font-medium mb-2">选择形状：</Text>
       <View className="flex-row gap-3 mb-4">
         <Button variant={currentShape === 'torus' ? 'default' : 'outline'} onPress={() => setCurrentShape('torus')}>
           <Text>圆环</Text>
@@ -199,7 +199,7 @@ export default function GLScreen() {
         </Button>
       </View>
 
-      <Text className="font-medium mb-2">旋转速度：</Text>
+      <Text className="text-lg font-medium mb-2">旋转速度：</Text>
       <View className="flex-row gap-3">
         <Button variant={rotationSpeed === 'fast' ? 'default' : 'outline'} onPress={() => setRotationSpeed('fast')}>
           <Text>快速</Text>

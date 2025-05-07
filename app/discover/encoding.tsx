@@ -41,7 +41,6 @@ export default function EncodingScreen() {
       // 更新状态并自动填充解码输入
       setEncodedResult(hexString);
       setDecodeInput(hexString);
-      toast.success('文本编码成功');
     } catch (error) {
       console.error('编码时出错:', error);
       toast.error('编码失败');
@@ -78,7 +77,6 @@ export default function EncodingScreen() {
 
       // 更新状态
       setDecodedResult(decoded);
-      toast.success('解码成功');
     } catch (error) {
       console.error('解码时出错:', error);
       toast.error('解码失败');
@@ -93,52 +91,48 @@ export default function EncodingScreen() {
       </View>
 
       {/* 编码区域 */}
-      <Card className="p-4 mb-4">
-        <Text className="font-medium mb-2">文本编码 - TextEncoder</Text>
-        <Text className="text-muted-foreground text-sm mb-3">
-          将输入的文本编码为UTF-8字节序列，并显示为十六进制字符串
-        </Text>
-        <Input
-          value={inputText}
-          onChangeText={(text) => setInputText(text)}
-          placeholder="输入要编码的文本"
-          className="mb-3"
-        />
-        <Button onPress={encodeText} className="mb-2">
-          <Text>编码为UTF-8</Text>
-        </Button>
+      <Text className="text-lg font-medium">文本编码 - TextEncoder</Text>
+      <Text className="text-muted-foreground text-sm mb-2">将输入的文本编码为UTF-8字节序列，显示为十六进制字符串</Text>
+      <Input
+        value={inputText}
+        onChangeText={(text) => setInputText(text)}
+        placeholder="输入要编码的文本"
+        className="mb-3"
+      />
+      <Button onPress={encodeText} className="mb-3">
+        <Text>编码为UTF-8</Text>
+      </Button>
 
-        {encodedResult ? (
-          <View className="bg-card-foreground/5 p-3 rounded-md mt-2">
-            <Text className="font-medium mb-1">编码结果 (十六进制):</Text>
+      {encodedResult ? (
+        <View>
+          <Text className="text-lg font-medium mb-2">编码结果:</Text>
+          <View className="bg-card-foreground/5 p-3 rounded-lg">
             <Text className="text-muted-foreground break-all text-xs">{encodedResult}</Text>
           </View>
-        ) : null}
-      </Card>
+        </View>
+      ) : null}
 
       {/* 解码区域 */}
-      <Card className="p-4 mb-4">
-        <Text className="font-medium mb-2">字节解码 - TextDecoder</Text>
-        <Text className="text-muted-foreground text-sm mb-3">
-          将十六进制字符串解码为文本（格式为用空格分隔的十六进制值，如: "48 65 6c 6c 6f"）
-        </Text>
-        <Textarea
-          value={decodeInput}
-          onChangeText={(text) => setDecodeInput(text)}
-          placeholder="输入十六进制字节序列，用空格分隔"
-          className="mb-3"
-        />
-        <Button onPress={decodeBytes} className="mb-2">
-          <Text>解码为文本</Text>
-        </Button>
+      <Text className="text-lg font-medium mt-6">字节解码 - TextDecoder</Text>
+      <Text className="text-muted-foreground text-sm mb-2">将十六进制字符串解码为文本</Text>
+      <Textarea
+        value={decodeInput}
+        onChangeText={(text) => setDecodeInput(text)}
+        placeholder="输入十六进制字节序列，用空格分隔"
+        className="mb-3"
+      />
+      <Button onPress={decodeBytes} className="mb-3">
+        <Text>解码为文本</Text>
+      </Button>
 
-        {decodedResult ? (
-          <View className="bg-card-foreground/5 p-3 rounded-md mt-2">
-            <Text className="font-medium mb-1">解码结果:</Text>
+      {decodedResult ? (
+        <View>
+          <Text className="text-lg font-medium mb-2">解码结果:</Text>
+          <View className="bg-card-foreground/5 p-3 rounded-lg">
             <Text className="text-muted-foreground">{decodedResult}</Text>
           </View>
-        ) : null}
-      </Card>
+        </View>
+      ) : null}
     </ScrollView>
   );
 }

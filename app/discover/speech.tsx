@@ -56,11 +56,12 @@ export default function ExpoSpeechScreen() {
     <View className="flex-1 px-6 pt-6 flex">
       <View className="flex-1">
         <View className="mb-6">
-          <Text className="text-2xl font-bold mb-2">语音识别</Text>
-          <Text className="text-muted-foreground">语音转换为文本。</Text>
+          <Text className="text-2xl font-bold mb-2">语音播报</Text>
+          <Text className="text-muted-foreground">文本转换为语音。</Text>
         </View>
 
         {/* 输入框 */}
+        <Text className="text-lg font-medium mb-2">播报内容</Text>
         <Textarea value={text} onChangeText={setText} />
 
         {/* 错误提示 */}

@@ -30,29 +30,26 @@ export default function ExpoSvgScreen() {
   };
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">Svg</Text>
         <Text className="text-muted-foreground">使用 SVG 图形和动画</Text>
       </View>
 
-      <View>
+      <View className="flex-1">
         <View className="bg-muted rounded-lg p-4 items-center">
           <Svg width={300} height={200}>
             {/* 圆形 */}
             <AnimatedCircle cx="150" cy="100" fill="#169fe6" animatedProps={animatedCircleProps} />
           </Svg>
         </View>
+      </View>
 
-        {/* 控制按钮 */}
-        <View className="gap-3 mt-3">
-          <Button
-            onPress={isAnimated ? resetAnimation : startAnimation}
-            variant={isAnimated ? 'destructive' : 'default'}
-          >
-            <Text>{isAnimated ? '重置' : '开始动画'}</Text>
-          </Button>
-        </View>
+      {/* 控制按钮 */}
+      <View className="gap-3 mt-3">
+        <Button onPress={isAnimated ? resetAnimation : startAnimation} variant={isAnimated ? 'destructive' : 'default'}>
+          <Text>{isAnimated ? '重置' : '开始动画'}</Text>
+        </Button>
       </View>
     </View>
   );

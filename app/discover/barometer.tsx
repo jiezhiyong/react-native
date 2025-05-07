@@ -54,11 +54,6 @@ export default function BarometerScreen() {
     // 组件卸载时取消订阅
     return () => {
       stopMonitoring();
-
-      <View className="mb-6">
-        <Text className="text-2xl font-bold mb-2">气压计</Text>
-        <Text className="text-muted-foreground">使用设备气压计传感器监测环境气压变化。</Text>
-      </View>;
     };
   }, []);
 
@@ -70,6 +65,11 @@ export default function BarometerScreen() {
 
   return (
     <View className="flex-1 p-5">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">气压计</Text>
+        <Text className="text-muted-foreground">使用设备气压计传感器监测环境气压变化。</Text>
+      </View>
+
       {/* 当前气压数据 */}
       <View className="bg-blue-50 rounded-xl p-5 mb-6 items-center">
         <View className="flex-row items-center justify-center mb-2">

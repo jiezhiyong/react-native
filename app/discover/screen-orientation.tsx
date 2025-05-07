@@ -74,26 +74,27 @@ export default function ExpoScreenOrientationScreen() {
   };
 
   return (
-    <View className="flex-1 p-5">
+    <View className="flex-1 px-5 pt-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">屏幕方向</Text>
         <Text className="text-muted-foreground">控制和响应设备屏幕方向的变化。</Text>
       </View>
 
       {/* 当前方向显示 */}
-      <View className="bg-muted rounded-lg p-4 mb-6">
-        <Text>当前屏幕方向: {getOrientationText(currentOrientation)}</Text>
-        <Text>状态: {isLocked ? '已手动锁定' : '未手动锁定'}</Text>
+      <View className="flex-1">
+        <View className="bg-muted rounded-lg p-4 mb-6 gap-3">
+          <Text>当前屏幕方向: {getOrientationText(currentOrientation)}</Text>
+          <Text>状态: {isLocked ? '已手动锁定' : '未手动锁定'}</Text>
+        </View>
       </View>
 
       {/* 方向控制按钮 */}
-      <View className="flex gap-3">
-        <Button
-          onPress={currentOrientation === ScreenOrientation.Orientation.PORTRAIT_UP ? lockToLandscape : lockToPortrait}
-        >
-          <Text>{currentOrientation === ScreenOrientation.Orientation.PORTRAIT_UP ? '切换横屏' : '切换竖屏'}</Text>
-        </Button>
-      </View>
+      <Button
+        onPress={currentOrientation === ScreenOrientation.Orientation.PORTRAIT_UP ? lockToLandscape : lockToPortrait}
+        variant={currentOrientation === ScreenOrientation.Orientation.PORTRAIT_UP ? 'default' : 'destructive'}
+      >
+        <Text>{currentOrientation === ScreenOrientation.Orientation.PORTRAIT_UP ? '切换横屏' : '切换竖屏'}</Text>
+      </Button>
     </View>
   );
 }

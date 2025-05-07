@@ -1,3 +1,4 @@
+// TODO: 待完成
 // import { Ionicons } from '@expo/vector-icons';
 // import * as SQLite from 'expo-sqlite';
 // import { useEffect, useState } from 'react';

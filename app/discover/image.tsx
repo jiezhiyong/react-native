@@ -36,8 +36,8 @@ export default function ExpoImageScreen() {
         <Text className="text-muted-foreground">加载和显示各种来源的图像内容。</Text>
       </View>
 
+      <Text className="text-lg font-medium mb-2">基本图像（当前模式: {getCurrentFitLabel()}）</Text>
       <View className="mb-6 flex-col gap-3">
-        <Text className="text-lg font-medium">基本图像（当前模式: {getCurrentFitLabel()}）</Text>
         <Image
           source={require('~/assets/images/react-logo.png')}
           style={{ minHeight: 150, borderRadius: 6, backgroundColor: '#eaeaea' }}
@@ -49,8 +49,8 @@ export default function ExpoImageScreen() {
         </Button>
       </View>
 
+      <Text className="text-lg font-medium mb-2">图像背景 (ImageBackground)</Text>
       <View className="flex-col gap-3">
-        <Text className="text-lg font-medium">图像背景 (ImageBackground)</Text>
         <ImageBackground
           source={require('~/assets/images/icon-512.png')}
           contentFit="cover"

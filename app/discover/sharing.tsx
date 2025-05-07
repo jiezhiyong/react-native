@@ -24,7 +24,7 @@ export default function ExpoSharingScreen() {
       // 分享图片
       await Sharing.shareAsync(uri);
     } catch (error: any) {
-      setShareResult(JSON.stringify(error));
+      setShareResult(JSON.stringify(error, null, 2));
     } finally {
       setLoading(false);
     }
@@ -40,7 +40,7 @@ export default function ExpoSharingScreen() {
       // 分享文件
       await Sharing.shareAsync(fileUri);
     } catch (error: any) {
-      setShareResult(JSON.stringify(error));
+      setShareResult(JSON.stringify(error, null, 2));
     } finally {
       setLoading(false);
     }
@@ -49,22 +49,13 @@ export default function ExpoSharingScreen() {
   return (
     <View className="flex-1 p-5">
       <View className="mb-6">
-        <Text className="text-2xl font-bold mb-2">分享功能</Text>
+        <Text className="text-2xl font-bold mb-2">分享</Text>
         <Text className="text-muted-foreground">实现应用内容的分享功能。</Text>
       </View>
 
-      {shareResult && (
-        <View className="mb-6">
-          <Text className="font-medium mb-2">分享结果</Text>
-          <View className="bg-muted rounded-lg p-4">
-            <Text className="text-muted-foreground">{shareResult}</Text>
-          </View>
-        </View>
-      )}
-
       {/* 分享图片 */}
       <View className="mb-6">
-        <Text className="font-medium mb-2">分享图片</Text>
+        <Text className="text-lg font-medium mb-2">分享图片</Text>
         <Image source={{ uri: imageUrl }} className="w-full h-40 rounded-lg mb-3" />
         <Button onPress={shareImage} disabled={loading}>
           {loading ? <ActivityIndicator /> : <Text>分享图片</Text>}
@@ -73,11 +64,20 @@ export default function ExpoSharingScreen() {
 
       {/* 分享文件 */}
       <View className="mb-6">
-        <Text className="font-medium mb-2">分享文件</Text>
+        <Text className="text-lg font-medium mb-2">分享文件</Text>
         <Button onPress={shareFile} disabled={loading}>
           {loading ? <ActivityIndicator /> : <Text>分享文件</Text>}
         </Button>
       </View>
+
+      {shareResult && (
+        <View className="mb-6">
+          <Text className="text-lg font-medium mb-2">分享结果</Text>
+          <View className="bg-muted rounded-lg p-4">
+            <Text className="text-muted-foreground">{shareResult}</Text>
+          </View>
+        </View>
+      )}
     </View>
   );
 }

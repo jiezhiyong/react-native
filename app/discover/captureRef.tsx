@@ -80,7 +80,11 @@ export default function CaptureRefScreen() {
         collapsable={false} // 在Android上必须设置为false
       >
         <View className="items-center mb-4 rounded-lg overflow-hidden">
-          <Image source={require('~/assets/images/icon.png')} style={{ width: 300, height: 200 }} contentFit="cover" />
+          <Image
+            source={require('~/assets/images/icon.png')}
+            style={{ width: '100%', height: 200 }}
+            contentFit="cover"
+          />
         </View>
         <Text className="font-medium mb-2">使用 captureRef 捕获视图</Text>
         <Text className="text-muted-foreground">

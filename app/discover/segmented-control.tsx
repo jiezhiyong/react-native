@@ -6,8 +6,7 @@ import { Text } from '~/components/ui/text';
 
 export default function ExpoSegmentedControlScreen() {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [value, setValue] = useState('选项一');
-  const segments = ['选项一', '选项二', '选项三'];
+  const [value, setValue] = useState('账户');
 
   const handleChange = (event: { nativeEvent: { selectedSegmentIndex: number; value: string } }) => {
     setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
@@ -23,9 +22,9 @@ export default function ExpoSegmentedControlScreen() {
 
       {/* 基本使用示例 */}
       <View className="mb-6">
-        <Text className="font-medium mb-2">基本使用, {value}</Text>
+        <Text className="text-lg font-medium mb-2">基本使用, {value}</Text>
         <SegmentedControl
-          values={segments}
+          values={['账户', '密码', '其他']}
           selectedIndex={selectedIndex}
           onChange={handleChange}
           backgroundColor=""
@@ -37,9 +36,10 @@ export default function ExpoSegmentedControlScreen() {
 
       {/* 禁用状态示例 */}
       <View>
-        <Text className="font-medium mb-2">禁用状态</Text>
+        <Text className="text-lg font-medium mb-2">禁用状态</Text>
         <SegmentedControl
-          values={['账户', '密码']}
+          values={['账户', '密码', '其他']}
+          selectedIndex={0}
           enabled={false}
           tintColor="#fff"
           fontStyle={{ color: '#71717a' }}

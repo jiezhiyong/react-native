@@ -1,3 +1,4 @@
+// TODO: 取消打印触发屏幕横屏
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { useState } from 'react';
@@ -77,6 +78,7 @@ export default function ExpoPrintScreen() {
         <Text className="text-muted-foreground">打印为PDF文件或直接打印。</Text>
       </View>
 
+      <Text className="text-lg font-medium mb-2">内容</Text>
       <Textarea
         className="mb-6"
         multiline

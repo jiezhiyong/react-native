@@ -1,6 +1,7 @@
+import * as ImagePicker from 'expo-image-picker';
 import * as MailComposer from 'expo-mail-composer';
 import { useEffect, useState } from 'react';
-import { Alert, Platform, ScrollView, View } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
@@ -43,8 +44,6 @@ export default function ExpoMailComposerScreen() {
         Alert.alert('成功', '邮件已发送');
       } else if (result.status === 'saved') {
         Alert.alert('成功', '邮件已保存为草稿');
-      } else if (result.status === 'cancelled') {
-        Alert.alert('提示', '已取消发送邮件');
       }
     } catch (error) {
       Alert.alert('错误', '发送邮件时发生错误');
@@ -95,26 +94,22 @@ export default function ExpoMailComposerScreen() {
     }
 
     try {
-      // 注意：在实际应用中，您需要处理文件访问和临时文件创建
-      // 这里使用的是示例文件路径，实际使用时需要替换为实际文件路径
-      const dummyAttachment = [
-        Platform.OS === 'ios'
-          ? 'file:///var/mobile/Containers/Data/Application/.../sample.pdf' // iOS 示例路径
-          : 'file:///storage/emulated/0/Download/.../sample.pdf', // Android 示例路径
-      ];
+      const imagePickerResult = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ['images'],
+      });
 
       const result = await MailComposer.composeAsync({
         subject: subject,
         body: body,
         recipients: recipients.split(',').map((email) => email.trim()),
-        attachments: dummyAttachment,
+        attachments: [imagePickerResult.assets![0].uri],
       });
 
       if (result.status === 'sent') {
         Alert.alert('成功', '带附件的邮件已发送');
       }
     } catch (error) {
-      Alert.alert('错误', '发送带附件的邮件时发生错误');
+      Alert.alert('错误', (error as Error).message);
       console.error('发送带附件邮件错误:', error);
     }
   };
@@ -126,41 +121,27 @@ export default function ExpoMailComposerScreen() {
         <Text className="text-muted-foreground">在应用中创建和发送电子邮件。</Text>
       </View>
 
-      {/* 可用性状态 */}
-      <View className="mb-4 flex-row items-center">
-        <Text className="mr-2">邮件功能状态:</Text>
-        {isAvailable === null ? (
-          <Text>正在检查...</Text>
-        ) : isAvailable ? (
-          <Text className="text-green-500">可用</Text>
-        ) : (
-          <Text className="text-red-500">不可用</Text>
-        )}
-      </View>
-
       {/* 邮件设置表单 */}
       <View className="mb-6">
         <View className="mb-4">
-          <Text className="mb-1">收件人:</Text>
+          <Text className="text-lg font-medium mb-2">收件人:</Text>
           <Input value={recipients} onChangeText={setRecipients} placeholder="输入邮箱地址，多个地址用逗号分隔" />
         </View>
 
         <View className="mb-4">
-          <Text className="mb-1">主题:</Text>
+          <Text className="text-lg font-medium mb-2">主题:</Text>
           <Input value={subject} onChangeText={setSubject} placeholder="邮件主题" />
         </View>
 
-        <View className="mb-2">
-          <Text className="mb-1">正文:</Text>
-          <Textarea
-            value={body}
-            onChangeText={setBody}
-            placeholder="邮件正文"
-            multiline
-            numberOfLines={4}
-            textAlignVertical="top"
-          />
-        </View>
+        <Text className="text-lg font-medium mb-2">正文:</Text>
+        <Textarea
+          value={body}
+          onChangeText={setBody}
+          placeholder="邮件正文"
+          multiline
+          numberOfLines={4}
+          textAlignVertical="top"
+        />
       </View>
 
       {/* 操作按钮区 */}

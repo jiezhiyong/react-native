@@ -161,7 +161,7 @@ export default function FlashListScreen() {
       </Button>
 
       {error ? (
-        <View className="bg-red-100 p-3 rounded-md mb-4">
+        <View className="bg-red-100 p-3 rounded-lg mb-4">
           <Text className="text-destructive">{error}</Text>
         </View>
       ) : null}

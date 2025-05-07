@@ -19,7 +19,6 @@ export default function ExpoSecureStoreScreen() {
 
     try {
       await SecureStore.setItemAsync(key, value);
-      Alert.alert('成功', '数据已安全保存');
       setStoredValue(value);
     } catch (error) {
       console.error('保存失败:', error);
@@ -38,8 +37,6 @@ export default function ExpoSecureStoreScreen() {
       setStoredValue(result);
       if (result === null) {
         Alert.alert('提示', '未找到对应的值');
-      } else {
-        Alert.alert('成功', '数据已读取');
       }
     } catch (error) {
       console.error('读取失败:', error);
@@ -56,7 +53,6 @@ export default function ExpoSecureStoreScreen() {
     try {
       await SecureStore.deleteItemAsync(key);
       setStoredValue(null);
-      Alert.alert('成功', '数据已删除');
     } catch (error) {
       console.error('删除失败:', error);
       Alert.alert('错误', '删除数据失败');
@@ -71,19 +67,20 @@ export default function ExpoSecureStoreScreen() {
       </View>
 
       {/* 输入区域 */}
-      <View className="flex gap-3 mb-6">
+      <View className="flex gap-6 mb-6">
         <View>
-          <Text className="font-medium mb-2">键</Text>
+          <Text className="text-lg font-medium mb-2">键</Text>
           <Input placeholder="输入键名" value={key} onChangeText={setKey} />
         </View>
 
         <View>
-          <Text className="font-medium mb-2">值</Text>
+          <Text className="text-lg font-medium mb-2">值</Text>
           <Input placeholder="输入要保存的值" value={value} onChangeText={setValue} secureTextEntry />
         </View>
       </View>
 
       {/* 操作按钮 */}
+      <Text className="text-lg font-medium mb-2">操作</Text>
       <View className="flex gap-3 mb-6">
         <Button onPress={saveValue}>
           <Text>保存</Text>
@@ -100,9 +97,11 @@ export default function ExpoSecureStoreScreen() {
 
       {/* 存储的值显示 */}
       {storedValue !== null && (
-        <View className="bg-muted rounded-lg p-4">
-          <Text className="font-medium mb-2">存储的值</Text>
-          <Text>{storedValue}</Text>
+        <View>
+          <Text className="text-lg font-medium mb-2">结果</Text>
+          <View className="bg-muted rounded-lg p-4">
+            <Text>{storedValue}</Text>
+          </View>
         </View>
       )}
     </View>

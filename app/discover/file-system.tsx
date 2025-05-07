@@ -1,3 +1,4 @@
+// TODO: 待完成
 import { View } from 'react-native';
 
 import { Text } from '~/components/ui/text';
@@ -10,8 +11,8 @@ export default function FileSystemScreen() {
         <Text className="text-muted-foreground">在应用中进行文件和目录的创建、读取和管理。</Text>
       </View>
 
-      <View className="items-center justify-center flex-1">
-        <Text className="text-muted-foreground">功能开发中...</Text>
+      <View className="items-center justify-center flex-1 bg-muted rounded-lg">
+        <Text className="text-muted-foreground">功能开发中</Text>
       </View>
     </View>
   );

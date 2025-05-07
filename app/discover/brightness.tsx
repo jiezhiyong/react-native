@@ -96,12 +96,12 @@ export default function ExpoBrightnessScreen() {
       </View>
 
       <View className="mb-6">
-        <Text className="font-bold mb-2">当前设备亮度</Text>
+        <Text className="text-lg font-medium mb-2">当前设备亮度</Text>
         <Text className="text-3xl font-medium">{Math.round(brightness * 100)}%</Text>
       </View>
 
       <View className="mb-6">
-        <Text className="font-bold mb-2">调整亮度</Text>
+        <Text className="text-lg font-medium mb-2">调整亮度</Text>
         <Slider
           value={brightness}
           onValueChange={handleBrightnessChange}
@@ -124,7 +124,7 @@ export default function ExpoBrightnessScreen() {
       </Button>
 
       <View>
-        <Text className="font-bold mb-2">注意</Text>
+        <Text className="text-lg font-medium mb-2">注意</Text>
         <Text className="text-sm text-muted-foreground">1. 在Android上，应用关闭后亮度会恢复为系统亮度。</Text>
         <Text className="text-sm text-muted-foreground">2. 在iOS上，应用关闭或设备锁屏后亮度会恢复为系统亮度。</Text>
       </View>

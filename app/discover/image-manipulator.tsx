@@ -71,8 +71,8 @@ export default function ExpoImageManipulatorScreen() {
         <Text className="text-muted-foreground">对图像进行裁剪、旋转和调整等编辑操作。</Text>
       </View>
 
-      <View className="mb-2">
-        <Text className="text-lg mb-2 font-medium">原始图片</Text>
+      <View className="mb-3">
+        <Text className="text-lg mb-2 font-medium">图片</Text>
         <Image source={{ uri: image }} contentFit="cover" style={{ height: 200, borderRadius: 6 }} />
       </View>
 

@@ -104,8 +104,8 @@ export default function ExpoPedometerScreen() {
       </View>
 
       <View className="space-y-6">
-        <View className="p-5 bg-muted rounded-lg mb-6 items-center">
-          <Text className="mb-2">今日步数</Text>
+        <View className="py-10 bg-muted rounded-lg mb-6 items-center">
+          <Text className="mb-2 text-muted-foreground">今日步数</Text>
           <Text className="text-4xl font-bold">{stepCount.toLocaleString()}</Text>
         </View>
 

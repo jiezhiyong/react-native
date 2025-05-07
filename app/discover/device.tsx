@@ -148,7 +148,7 @@ export default function ExpoDeviceScreen() {
             : '此平台不支持功能列表查询, 或无可用功能'}
         </Text>
         {deviceInfo.platformFeatures && deviceInfo.platformFeatures.length > 0 ? (
-          <View className="bg-card-foreground/5 p-3 rounded-md">
+          <View className="bg-card-foreground/5 p-3 rounded-lg">
             {deviceInfo.platformFeatures.slice(0, 10).map((feature, index) => (
               <Text key={index} className="text-xs text-muted-foreground mb-1">
                 • {feature}

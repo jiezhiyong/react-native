@@ -59,19 +59,21 @@ export default function ExpoVideoThumbnailsScreen() {
 
       {/* 视频选择 */}
       <View className="mb-6">
-        <Text className="font-medium mb-2">视频选择</Text>
+        <Text className="text-lg font-medium mb-2">视频选择</Text>
         <Button onPress={pickVideo}>
           <Text>从相册选择视频</Text>
         </Button>
         {videoUri ? (
-          <Text className="text-muted-foreground mt-2">{videoUri.substring(videoUri.lastIndexOf('/') + 1)}</Text>
+          <Text className="text-sm text-muted-foreground mt-2">
+            {videoUri.substring(videoUri.lastIndexOf('/') + 1)}
+          </Text>
         ) : null}
       </View>
 
       {/* 生成缩略图 */}
       {videoUri && (
-        <View className="mb-6">
-          <Text className="font-medium mb-2">生成缩略图</Text>
+        <View className="mb-3">
+          <Text className="text-lg font-medium mb-2">生成缩略图</Text>
           <Button onPress={generateThumbnail}>
             <Text>生成缩略图</Text>
           </Button>
@@ -81,7 +83,6 @@ export default function ExpoVideoThumbnailsScreen() {
       {/* 缩略图预览 */}
       {thumbnailUri ? (
         <View className="mb-6">
-          <Text className="font-medium mb-2">缩略图预览</Text>
           <Image
             source={{ uri: thumbnailUri }}
             style={{ width: '100%', height: 150 }}

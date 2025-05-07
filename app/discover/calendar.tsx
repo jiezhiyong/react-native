@@ -38,6 +38,8 @@ export default function ExpoCalendarScreen() {
     try {
       const calendarsList = await Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT);
       setCalendars(calendarsList);
+      setSelectedCalendar(calendarsList[0]);
+      fetchEvents(calendarsList[0].id);
     } catch (error) {
       console.error('获取日历失败：', error);
       Alert.alert('错误', '获取日历列表时出现错误');
@@ -68,7 +70,7 @@ export default function ExpoCalendarScreen() {
       fetchCalendars();
     } catch (error) {
       console.error('创建日历失败：', error);
-      Alert.alert('错误', '创建日历时出现错误');
+      Alert.alert('错误', (error as Error).message);
     }
   };
 
@@ -111,7 +113,7 @@ export default function ExpoCalendarScreen() {
       fetchEvents(selectedCalendar.id);
     } catch (error) {
       console.error('创建事件失败：', error);
-      Alert.alert('错误', '创建事件时出现错误');
+      Alert.alert('错误', (error as Error).message);
     }
   };
 
@@ -163,19 +165,6 @@ export default function ExpoCalendarScreen() {
     getCalendarPermissions();
   }, []);
 
-  if (hasPermission === null) {
-    return (
-      <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
-        <View className="mb-6">
-          <Text className="text-2xl font-bold mb-2">日历功能</Text>
-          <Text className="text-muted-foreground">访问和管理设备上的日历事件和提醒。</Text>
-        </View>
-
-        <Text className="text-center">正在请求日历权限...</Text>
-      </View>
-    );
-  }
-
   if (hasPermission === false) {
     return (
       <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
@@ -189,6 +178,11 @@ export default function ExpoCalendarScreen() {
 
   return (
     <ScrollView className="flex-1 p-5">
+      <View className="mb-6">
+        <Text className="text-2xl font-bold mb-2">日历功能</Text>
+        <Text className="text-muted-foreground">访问和管理设备上的日历事件和提醒。</Text>
+      </View>
+
       {/* 日历列表 */}
       <View className="flex-row justify-between items-center mb-2">
         <Text className="text-lg font-medium">日历列表</Text>
@@ -228,7 +222,6 @@ export default function ExpoCalendarScreen() {
           <Text>创建事件</Text>
         </Button>
       </View>
-      {selectedCalendar ? null : <Text>请先选择一个日历</Text>}
 
       {/* 事件列表 */}
       {selectedCalendar && (
@@ -237,8 +230,8 @@ export default function ExpoCalendarScreen() {
             <Text>暂无事件</Text>
           ) : (
             events.map((event) => (
-              <View key={event.id} className="p-3 mb-2 rounded-lg bg-white border border-gray-200">
-                <View className="flex-row justify-between">
+              <View key={event.id} className="px-3 pt-1 pb-3 mb-2 rounded-lg bg-white border border-gray-200">
+                <View className="flex-row justify-between items-center">
                   <Text className="font-medium">{event.title}</Text>
                   <Button
                     onPress={() => deleteEvent(event.id)}
@@ -249,7 +242,7 @@ export default function ExpoCalendarScreen() {
                     <Trash color="red" size={20} />
                   </Button>
                 </View>
-                <Text className="text-xs text-muted-foreground mt-1">
+                <Text className="text-xs text-muted-foreground">
                   {event.allDay ? '全天事件' : `时间: ${event.startDate} - ${event.endDate}`}
                 </Text>
                 {event.location && <Text className="text-xs text-muted-foreground mt-1">地点: {event.location}</Text>}

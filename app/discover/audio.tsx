@@ -2,7 +2,7 @@ import Slider from '@react-native-community/slider';
 import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { Pause, Play, Volume1, Volume2 } from 'lucide-react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
@@ -187,15 +187,14 @@ export default function ExpoAudioScreen() {
         <Text className="text-muted-foreground">在应用中播放、暂停和控制音频内容。</Text>
       </View>
 
-      <View className="p-4 bg-gray-50 rounded-lg mb-4">
-        <Text className="font-bold mb-2">音频源选择</Text>
+      <Text className="text-lg font-medium mb-2">音频源选择</Text>
+      <View className="p-4 bg-muted rounded-lg mb-6">
         <View className="flex-row flex-wrap gap-3">
           {audioSources.map((source, index) => (
             <Button
               key={index}
               variant={selectedSource.uri === source.uri ? 'default' : 'outline'}
               onPress={() => loadAudio(source)}
-              className="mb-2"
               size="sm"
             >
               <Text>{source.name}</Text>
@@ -204,78 +203,69 @@ export default function ExpoAudioScreen() {
         </View>
       </View>
 
-      <View className="p-4 bg-gray-50 rounded-lg">
-        {/* 播放进度 */}
-        <Text className="font-bold mb-4">
-          播放进度, {status?.playing ? '播放中' : '已暂停'} {status?.isBuffering ? ' (缓冲中)' : ''}
-        </Text>
-        <View className="mb-4">
-          <Slider
-            value={getProgress()}
-            onValueChange={(value) => seekAudio(value)}
-            step={0.01}
-            minimumValue={0}
-            maximumValue={1}
-            style={{ width: '100%', height: 40 }}
-            minimumTrackTintColor="#0891b2"
-            maximumTrackTintColor="#cccccc"
-            thumbTintColor="#0891b2"
-          />
-          <View className="flex-row justify-between mt-1">
-            <Text className="text-muted-foreground text-xs">{formatTime(status?.currentTime)}</Text>
-            <Text className="text-muted-foreground text-xs">{formatTime(status?.duration)}</Text>
-          </View>
-        </View>
-
-        {/* 音量控制 */}
-        <Text className="font-bold mb-4">音量控制, {Math.round(volume * 100)}%</Text>
-        <View className="mb-4">
-          <View className="flex-row items-center mb-2">
-            <Volume1 size={16} color="gray" />
-            <View className="flex-1 mx-2">
-              <Slider
-                value={volume}
-                onValueChange={adjustVolume}
-                step={0.01}
-                minimumValue={0}
-                maximumValue={1}
-                style={{ width: '100%', height: 40 }}
-                minimumTrackTintColor="#0891b2"
-                maximumTrackTintColor="#cccccc"
-                thumbTintColor="#0891b2"
-              />
-            </View>
-            <Volume2 size={16} color="gray" />
-          </View>
-        </View>
-
-        {/* 播放控制 */}
-        <View className="flex-row justify-center items-center space-x-4 my-4">
-          <Button
-            onPress={togglePlayPause}
-            className="w-14 h-14 rounded-full justify-center items-center"
-            size="icon"
-            disabled={isLoading || status?.isBuffering}
-          >
-            {status?.playing ? <Pause size={24} color="#fff" /> : <Play size={24} color="#fff" />}
-          </Button>
+      {/* 播放进度 */}
+      <Text className="text-lg font-medium mb-2">
+        播放进度, {status?.playing ? '播放中' : '已暂停'} {status?.isBuffering ? ' (缓冲中)' : ''}
+      </Text>
+      <View className="p-4 bg-muted rounded-lg mb-6">
+        <Slider
+          value={getProgress()}
+          onValueChange={(value) => seekAudio(value)}
+          step={0.01}
+          minimumValue={0}
+          maximumValue={1}
+          style={{ width: '100%', height: 40 }}
+          minimumTrackTintColor="#0891b2"
+          maximumTrackTintColor="#cccccc"
+          thumbTintColor="#0891b2"
+        />
+        <View className="flex-row justify-between mt-1">
+          <Text className="text-muted-foreground text-xs">{formatTime(status?.currentTime)}</Text>
+          <Text className="text-muted-foreground text-xs">{formatTime(status?.duration)}</Text>
         </View>
       </View>
 
-      {error && (
-        <View className="p-4 bg-red-50 rounded-lg items-center">
-          <Text className="text-red-500">{error || '加载音频失败'}</Text>
-          <Button onPress={() => setError(null)} className="mt-4 self-center" variant="outline" size="sm">
-            <Text>清除错误</Text>
-          </Button>
+      {/* 音量控制 */}
+      <Text className="text-lg font-medium mb-2">音量控制, {Math.round(volume * 100)}%</Text>
+      <View className="p-4 bg-muted rounded-lg mb-6">
+        <View className="flex-row items-center">
+          <Volume1 size={16} color="gray" />
+          <View className="flex-1 mx-2">
+            <Slider
+              value={volume}
+              onValueChange={adjustVolume}
+              step={0.01}
+              minimumValue={0}
+              maximumValue={1}
+              style={{ width: '100%', height: 40 }}
+              minimumTrackTintColor="#0891b2"
+              maximumTrackTintColor="#cccccc"
+              thumbTintColor="#0891b2"
+            />
+          </View>
+          <Volume2 size={16} color="gray" />
         </View>
-      )}
+      </View>
 
-      {isLoading && (
-        <View className="items-center justify-center p-8">
-          <ActivityIndicator size="large" color="#0891b2" />
-          <Text className="mt-2">加载音频中...</Text>
-        </View>
+      {/* 播放控制 */}
+      <View className="flex-row justify-center items-center space-x-4 mb-6">
+        <Button
+          onPress={togglePlayPause}
+          className="w-14 h-14 rounded-full justify-center items-center"
+          size="icon"
+          disabled={isLoading || status?.isBuffering}
+        >
+          {status?.playing ? <Pause size={24} color="#fff" /> : <Play size={24} color="#fff" />}
+        </Button>
+      </View>
+
+      {error && (
+        <>
+          <Text className="text-lg font-medium mb-2">错误提示</Text>
+          <View className="p-4 bg-destructive/10 rounded-lg">
+            <Text className="text-destructive">{error || '加载音频失败'}</Text>
+          </View>
+        </>
       )}
     </View>
   );

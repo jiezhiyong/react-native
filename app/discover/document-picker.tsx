@@ -130,7 +130,7 @@ export default function ExpoDocumentPickerScreen() {
       {singleDocument && !singleDocument.canceled && singleDocument.assets && singleDocument.assets.length > 0 && (
         <Card className="p-4 mt-6 flex-col gap-3">
           <Text className="font-medium">单文件选择结果</Text>
-          <View className="bg-card-foreground/5 p-4 rounded-md">
+          <View className="bg-card-foreground/5 p-4 rounded-lg">
             <Text className="text-sm">文件名: {singleDocument.assets[0].name}</Text>
             <Text className="text-sm">文件大小: {formatFileSize(singleDocument.assets[0].size)}</Text>
             <Text className="text-sm">MIME类型: {singleDocument.assets[0].mimeType || '未知'}</Text>
@@ -146,7 +146,7 @@ export default function ExpoDocumentPickerScreen() {
           <Card className="p-4 mt-6 flex-col gap-3">
             <Text className="font-medium">多文件选择结果 ({multipleDocuments.assets.length} 个文件)</Text>
             {multipleDocuments.assets.map((doc, index) => (
-              <View key={index} className="bg-card-foreground/5 p-4 rounded-md flex-col gap-1">
+              <View key={index} className="bg-card-foreground/5 p-4 rounded-lg flex-col gap-1">
                 <Text className="text-sm">文件名: {doc.name}</Text>
                 <Text className="text-sm">文件大小: {formatFileSize(doc.size)}</Text>
                 <Text className="text-sm">MIME类型: {doc.mimeType || '未知'}</Text>

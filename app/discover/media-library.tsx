@@ -109,7 +109,7 @@ export default function ExpoMediaLibraryScreen() {
 
       {selectedAlbum && (
         <>
-          <Text className="text-lg font-bold mb-2">选择的相册: {selectedAlbum.title}</Text>
+          <Text className="text-lg font-medium mb-2">选择的相册: {selectedAlbum.title}</Text>
           <FlatList
             data={assets}
             numColumns={3}
@@ -123,7 +123,7 @@ export default function ExpoMediaLibraryScreen() {
 
       {selectedAsset && (
         <>
-          <Text className="text-lg font-bold mb-2">选择的图片: {selectedAsset.fileName}</Text>
+          <Text className="text-lg font-medium mb-2">选择的图片: {selectedAsset.fileName}</Text>
           <Image source={{ uri: selectedAsset.uri }} className="h-32 p-1 border rounded-lg" resizeMode="cover" />
         </>
       )}

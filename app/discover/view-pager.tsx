@@ -1,3 +1,4 @@
+// TODO: 引发WEB端崩溃
 // import { useState } from 'react';
 // import { StyleSheet, View } from 'react-native';
 // import { usePagerView } from 'react-native-pager-view';
@@ -31,7 +32,7 @@
 //         >
 //           {colors.map((color, index) => (
 //             <View key={index} style={[styles.page, { backgroundColor: color }]}>
-//               <Text className="text-2xl font-bold">{index + 1}</Text>
+//               <Text className="text-2xl font-bold">{index}</Text>
 //             </View>
 //           ))}
 //         </AnimatedPagerView>
@@ -48,7 +49,7 @@
 //       </View>
 
 //       {/* 控制按钮 */}
-//       <View className="flex-row px-4 gap-3">
+//       <View className="flex-row gap-3">
 //         <Button
 //           className="flex-1"
 //           disabled={currentPage === 0}
