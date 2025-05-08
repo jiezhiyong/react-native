@@ -28,6 +28,7 @@ import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
 import TypesafeI18n from '~/i18n/i18n-react';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
+import { useScrollStore } from '~/store/scroll';
 
 // Construct a new integration instance. This is needed to communicate between the integration and React
 const navigationIntegration = Sentry.reactNavigationIntegration({
@@ -101,8 +102,10 @@ function RootLayout() {
 
   const hasMounted = React.useRef(false);
 
+  const { statusBarStyle } = useScrollStore();
   const { colorScheme, isDarkColorScheme } = useColorScheme();
   const { isUpdatePending } = Updates.useUpdates();
+
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
   // Capture the NavigationContainer ref and register it with the integration.
@@ -172,7 +175,8 @@ function RootLayout() {
             <GestureHandlerRootView>
               {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
               {/* <TypesafeI18n locale={'zh'}> */}
-              <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+              <StatusBar style={statusBarStyle} />
+              {/* <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} /> */}
               <Stack>
                 <Stack.Screen
                   name="(tabs)"

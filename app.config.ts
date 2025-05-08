@@ -42,14 +42,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     reactCompiler: true,
     typedRoutes: true,
   },
-  splash: {
-    image: './assets/images/splash.png',
-    resizeMode: 'contain',
-    backgroundColor: '#ffffff',
-  },
+  // splash: {
+  //   image: './assets/images/splash.png',
+  //   resizeMode: 'contain',
+  //   backgroundColor: '#ffffff',
+  // },
   assetBundlePatterns: ['**/*'],
   android: {
-    scheme: 'qachat',
+    // scheme: 'qachat',
     versionCode: VERSION_CODE,
     package: getUniqueIdentifier(),
     softwareKeyboardLayoutMode: 'pan',
@@ -192,11 +192,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-splash-screen',
       {
-        backgroundColor: '#232323',
+        backgroundColor: '#26292e',
         image: './assets/images/splash-icon.png',
         dark: {
           image: './assets/images/splash-icon-dark.png',
-          backgroundColor: '#000000',
+          backgroundColor: '#26292e',
         },
         imageWidth: 200,
       },

@@ -26,7 +26,7 @@ interface CustomHeaderProps {
   }[];
 }
 
-const BREAK_POINT = 50;
+export const BREAK_POINT = 50;
 
 export function CustomHeader({
   title,

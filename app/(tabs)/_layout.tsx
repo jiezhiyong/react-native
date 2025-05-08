@@ -3,12 +3,29 @@ import { Tabs } from 'expo-router';
 import * as React from 'react';
 
 import { HapticTab } from '~/components/HapticTab';
-import { DiscoverHeader, HomeHeader, MineHeader } from '~/components/ui/custom-header';
+import { BREAK_POINT, DiscoverHeader, HomeHeader, MineHeader } from '~/components/ui/custom-header';
 import TabBarBackground from '~/components/ui/TabBarBackground';
 import { useColorScheme } from '~/hooks/useColorScheme';
+import { useScrollStore } from '~/store/scroll';
 
 export default function TabLayout() {
   const { colorScheme } = useColorScheme();
+  const { setActiveTab, homeScrollValue, mineScrollValue, discoverScrollValue, setStatusBarStyle } = useScrollStore();
+
+  // 根据当前tab的滚动值设置状态栏样式
+  const handleTabPress = (tab: 'home' | 'mine' | 'discover') => {
+    setActiveTab(tab);
+
+    setTimeout(() => {
+      if (tab === 'home') {
+        setStatusBarStyle(homeScrollValue > BREAK_POINT ? 'dark' : 'light');
+      } else if (tab === 'mine') {
+        setStatusBarStyle(mineScrollValue > BREAK_POINT ? 'dark' : 'light');
+      } else if (tab === 'discover') {
+        setStatusBarStyle(discoverScrollValue > BREAK_POINT ? 'dark' : 'light');
+      }
+    }, 0);
+  };
 
   return (
     <Tabs
@@ -21,7 +38,7 @@ export default function TabLayout() {
           backgroundColor: '',
         },
         headerShown: true,
-        headerShadowVisible: true,
+        headerShadowVisible: false,
         headerTintColor: '',
         tabBarStyle: {
           backgroundColor: '',
@@ -29,6 +46,14 @@ export default function TabLayout() {
         animation: 'none',
         tabBarBackground: TabBarBackground,
         headerTransparent: false,
+      }}
+      screenListeners={{
+        tabPress: (e) => {
+          const route = e.target?.split('-')[0];
+          if (route === 'index') handleTabPress('home');
+          else if (route === 'mine') handleTabPress('mine');
+          else if (route === 'discover') handleTabPress('discover');
+        },
       }}
     >
       <Tabs.Screen

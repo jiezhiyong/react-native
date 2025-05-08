@@ -1,3 +1,4 @@
+import { StatusBarStyle } from 'expo-status-bar';
 import { Animated } from 'react-native';
 import { create } from 'zustand';
 
@@ -16,6 +17,14 @@ interface ScrollState {
   updateHomeScroll: (value: number) => void;
   updateMineScroll: (value: number) => void;
   updateDiscoverScroll: (value: number) => void;
+
+  // 状态栏样式
+  statusBarStyle: StatusBarStyle;
+  setStatusBarStyle: (style: StatusBarStyle) => void;
+
+  // 当前激活的tab
+  activeTab: 'home' | 'mine' | 'discover';
+  setActiveTab: (tab: 'home' | 'mine' | 'discover') => void;
 }
 
 export const useScrollStore = create<ScrollState>((set) => ({
@@ -33,4 +42,12 @@ export const useScrollStore = create<ScrollState>((set) => ({
   updateHomeScroll: (value) => set({ homeScrollValue: value }),
   updateMineScroll: (value) => set({ mineScrollValue: value }),
   updateDiscoverScroll: (value) => set({ discoverScrollValue: value }),
+
+  // 状态栏默认为light
+  statusBarStyle: 'light',
+  setStatusBarStyle: (style) => set({ statusBarStyle: style }),
+
+  // 默认激活tab为home
+  activeTab: 'home',
+  setActiveTab: (tab) => set({ activeTab: tab }),
 }));

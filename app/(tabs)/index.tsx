@@ -1,8 +1,10 @@
 import { useRouter } from 'expo-router';
+import { setStatusBarStyle } from 'expo-status-bar';
 import * as React from 'react';
 import { Animated, View } from 'react-native';
 
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
+import { BREAK_POINT } from '~/components/ui/custom-header';
 import { Text } from '~/components/ui/text';
 import { useI18nContext } from '~/i18n/i18n-react';
 import { useScrollStore } from '~/store/scroll';
@@ -10,17 +12,20 @@ import { useScrollStore } from '~/store/scroll';
 export default function HomeScreen() {
   const router = useRouter();
 
-  const { homeScrollY, updateHomeScroll } = useScrollStore();
+  const { homeScrollY, updateHomeScroll, activeTab } = useScrollStore();
   const { LL, locale } = useI18nContext();
 
   // 设置滚动监听
   React.useEffect(() => {
     const id = homeScrollY.addListener(({ value }) => {
       updateHomeScroll(value);
+      if (activeTab === 'home') {
+        setStatusBarStyle(value > BREAK_POINT ? 'dark' : 'light');
+      }
     });
 
     return () => homeScrollY.removeListener(id);
-  }, []);
+  }, [activeTab]);
 
   // 使用从_layout.tsx导出的动画值
   return (

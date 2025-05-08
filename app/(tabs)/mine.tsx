@@ -1,8 +1,10 @@
 import { useRouter } from 'expo-router';
+import { setStatusBarStyle } from 'expo-status-bar';
 import { Bell, ChevronRight, Headphones, HelpCircle, Info, MessageSquare, User } from 'lucide-react-native';
 import React from 'react';
 import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
 
+import { BREAK_POINT } from '~/components/ui/custom-header';
 import { useAuth } from '~/store/auth';
 import { useScrollStore } from '~/store/scroll';
 
@@ -179,16 +181,19 @@ const OtherEntriesSection = () => {
 };
 
 export default function MinePage() {
-  const { mineScrollY, updateMineScroll } = useScrollStore();
+  const { mineScrollY, updateMineScroll, activeTab } = useScrollStore();
 
   // 设置滚动监听
   React.useEffect(() => {
     const id = mineScrollY.addListener(({ value }) => {
       updateMineScroll(value);
+      if (activeTab === 'mine') {
+        setStatusBarStyle(value > BREAK_POINT ? 'dark' : 'light');
+      }
     });
 
     return () => mineScrollY.removeListener(id);
-  }, []);
+  }, [activeTab]);
 
   return (
     <Animated.ScrollView
