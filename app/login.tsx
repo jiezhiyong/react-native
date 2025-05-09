@@ -2,9 +2,10 @@ import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import { Link, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Platform, StyleSheet, TextInput, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 
 import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
 import { Text } from '~/components/ui/text';
 import { useAuth } from '~/store/auth';
 
@@ -91,89 +92,39 @@ export default function LoginScreen() {
 
   const isPresented = router.canGoBack();
   return (
-    <View style={styles.container}>
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+    <View className="flex-1 p-5 gap-5">
+      <StatusBar style="dark" />
 
-      <TextInput style={styles.input} placeholder="用户名" value={username} onChangeText={setUsername} />
+      <Input placeholder="用户名" value={username} onChangeText={setUsername} />
 
-      <TextInput style={styles.input} placeholder="密码" secureTextEntry value={password} onChangeText={setPassword} />
+      <Input placeholder="密码" secureTextEntry value={password} onChangeText={setPassword} />
 
       <Button onPress={handleLogin} className="w-full flex-row items-center gap-3" disabled={isLoading}>
         {isLoading ? <ActivityIndicator size="small" color="#fff" /> : <Text>登录</Text>}
       </Button>
 
-      <View style={styles.divider}>
-        <View style={styles.dividerLine} />
-        <Text style={styles.dividerText} className="text-xs">
-          或
-        </Text>
-        <View style={styles.dividerLine} />
+      <View className="flex-row items-center">
+        <View className="flex-1 h-px bg-muted" />
+        <Text className="text-sm">或</Text>
+        <View className="flex-1 h-px bg-muted" />
       </View>
 
-      <Button disabled={!request || isLoading} onPress={() => promptAsync()} className="w-full" variant="outline">
+      <Button
+        disabled={!request || isLoading}
+        onPress={() => promptAsync()}
+        className="w-full border"
+        variant="secondary"
+      >
         <Text>GitHub 登录</Text>
       </Button>
 
       {isPresented && (
         <Link href="../" asChild>
-          <Button variant="ghost" className="mt-6">
-            <Text className="text-xs">返回</Text>
+          <Button variant="ghost">
+            <Text className="text-sm">返回</Text>
           </Button>
         </Link>
       )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 20,
-  },
-  input: {
-    width: '100%',
-    height: 50,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-  },
-  loginButton: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#2196F3',
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  oauthButton: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#333',
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  divider: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 20,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#ddd',
-  },
-  dividerText: {
-    marginHorizontal: 10,
-    color: '#999',
-  },
-});

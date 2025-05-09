@@ -1,7 +1,9 @@
 import { Stack } from 'expo-router';
 import { ChevronDown, ChevronUp, Search } from 'lucide-react-native';
 import React, { useCallback, useMemo, useState } from 'react';
-import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+
+import { Input } from '~/components/ui/input';
 
 // 定义问题类型
 interface Question {
@@ -203,8 +205,8 @@ export default function QaScreen() {
         {/* 搜索框 */}
         <View className="flex-row items-center bg-muted rounded-full px-4 mb-4">
           <Search size={20} color="#9ca3af" />
-          <TextInput
-            className="flex-1 py-2 px-3"
+          <Input
+            className="flex-1 py-2 px-3 border-0 bg-transparent"
             placeholder="搜索问题"
             value={searchQuery}
             onChangeText={setSearchQuery}

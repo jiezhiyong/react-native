@@ -116,19 +116,18 @@ const quickQuestions: QuickQuestion[] = [
 
 // 播放新消息提示音
 async function playNewMessageSound() {
-  try {
-    // 使用Expo Audio加载并播放声音
-    const { sound } = await Audio.Sound.createAsync(require('../assets/notification.mp3'), { shouldPlay: true });
-
-    // 播放完成后释放资源
-    sound.setOnPlaybackStatusUpdate((status) => {
-      if (status.isLoaded && status.didJustFinish) {
-        sound.unloadAsync();
-      }
-    });
-  } catch (error) {
-    console.error('无法播放提示音:', error);
-  }
+  // try {
+  //   // 使用Expo Audio加载并播放声音
+  //   const { sound } = await Audio.Sound.createAsync(require('../assets/notification.mp3'), { shouldPlay: true });
+  //   // 播放完成后释放资源
+  //   sound.setOnPlaybackStatusUpdate((status) => {
+  //     if (status.isLoaded && status.didJustFinish) {
+  //       sound.unloadAsync();
+  //     }
+  //   });
+  // } catch (error) {
+  //   console.error('无法播放提示音:', error);
+  // }
 }
 
 // 消息气泡组件
@@ -478,11 +477,13 @@ export default function OnlineServiceScreen() {
 
         {/* 常见问题快捷入口 */}
         <View className="px-4 py-2">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row items-center gap-3">
-            <Text className="text-sm text-muted-foreground">常见问题：</Text>
-            {quickQuestions.map((q) => (
-              <QuickQuestionButton key={q.id} question={q} onPress={() => handleQuickQuestionPress(q.question)} />
-            ))}
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View className="flex-row items-center gap-3">
+              <Text className="text-sm text-muted-foreground">常见问题：</Text>
+              {quickQuestions.map((q) => (
+                <QuickQuestionButton key={q.id} question={q} onPress={() => handleQuickQuestionPress(q.question)} />
+              ))}
+            </View>
           </ScrollView>
         </View>
 

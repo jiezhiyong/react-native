@@ -27,7 +27,6 @@ export default function HomeScreen() {
     return () => homeScrollY.removeListener(id);
   }, [activeTab]);
 
-  // 使用从_layout.tsx导出的动画值
   return (
     <Animated.ScrollView
       className="flex-1"

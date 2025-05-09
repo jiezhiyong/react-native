@@ -1,18 +1,12 @@
 import { useRouter } from 'expo-router';
 import { Plus } from 'lucide-react-native';
 import React, { useState } from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 
 import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
 import { Text } from '~/components/ui/text';
+import { Textarea } from '~/components/ui/textarea';
 
 const feedbackTypes = ['异常报错', '投诉', '意见反馈', '授信问题', '借款问题', '还款问题', '其他'];
 type FeedbackType = (typeof feedbackTypes)[number];
@@ -61,25 +55,22 @@ export default function FeedbackScreen() {
               <Text className="text-lg">反馈标题与内容</Text>
             </View>
 
-            <TextInput
-              className="bg-muted p-3 rounded-md mb-3"
+            <Input
+              className="mb-3"
               placeholder="标题（最多30个字）"
               maxLength={30}
               value={title}
               onChangeText={setTitle}
             />
 
-            <View className="bg-muted rounded-md mb-1 min-h-[160px]">
-              <TextInput
-                className="flex-1 p-3"
-                placeholder="您的建议是我们改进的动力"
-                multiline
-                textAlignVertical="top"
-                value={content}
-                onChangeText={setContent}
-                maxLength={300}
-              />
-            </View>
+            <Textarea
+              className="mb-3 min-h-[160px]"
+              placeholder="您的建议是我们改进的动力"
+              textAlignVertical="top"
+              value={content}
+              onChangeText={setContent}
+              maxLength={300}
+            />
             <Text className="text-right text-gray-400">{content.length}/300</Text>
           </View>
 

@@ -78,7 +78,8 @@ const UserHeader = () => {
           <Text className="text-muted-foreground">{mobile || '未绑定手机号'}</Text>
         </View>
         <View className="ml-auto">
-          <TouchableOpacity onPress={signOut}>
+          <TouchableOpacity onPress={signOut} className="flex-row items-center">
+            <Text className="text-sm">登出</Text>
             <ChevronRight size={20} color="#999" />
           </TouchableOpacity>
         </View>
