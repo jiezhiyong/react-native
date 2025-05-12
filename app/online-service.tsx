@@ -2,7 +2,7 @@ import { Audio } from 'expo-av';
 import * as ImagePicker from 'expo-image-picker';
 import { Stack, useRouter } from 'expo-router';
 import * as VideoThumbnails from 'expo-video-thumbnails';
-import { Camera, Image as ImageIcon, Mic, Plus, Send, X } from 'lucide-react-native';
+import { Camera, Image as ImageIcon, Mic, Play, Plus, Send, X } from 'lucide-react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
@@ -13,14 +13,14 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
-  Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { create } from 'zustand';
 
+import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
+import { Text } from '~/components/ui/text';
 
 // 消息类型定义
 type MessageType = 'text' | 'image' | 'video' | 'system';
@@ -142,7 +142,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
   const router = useRouter();
 
   // 处理图片点击查看
-  const handleImagePress = () => {
+  const handleMediaPress = () => {
     if (message.mediaUrl && (message.type === 'image' || message.type === 'video')) {
       router.push({
         pathname: '/media-viewer',
@@ -163,17 +163,17 @@ const MessageBubble = ({ message }: { message: Message }) => {
     <View className={`flex-row max-w-[85%] my-2 ${isUser ? 'self-end' : 'self-start'}`}>
       {!isUser && <Image source={require('~/assets/images/icon.png')} className="size-10 rounded-full mr-3" />}
 
-      <View className={`p-4 rounded-3xl ${isUser ? 'bg-primary rounded-tr-none' : 'bg-muted rounded-tl-none'}`}>
-        {message.type === 'text' && <Text className={isUser ? 'text-white' : 'text-gray-800'}>{message.content}</Text>}
+      <View className={`p-4 rounded-3xl ${isUser ? 'bg-cyan-300 rounded-tr-none' : 'bg-muted rounded-tl-none'}`}>
+        {message.type === 'text' && <Text>{message.content}</Text>}
 
         {message.type === 'image' && message.mediaUrl && (
-          <TouchableOpacity onPress={handleImagePress} activeOpacity={0.8}>
+          <TouchableOpacity onPress={handleMediaPress} activeOpacity={0.8}>
             <Image source={{ uri: message.mediaUrl }} className="w-48 h-48 rounded-md" resizeMode="cover" />
           </TouchableOpacity>
         )}
 
         {message.type === 'video' && message.mediaUrl && (
-          <TouchableOpacity onPress={handleImagePress} activeOpacity={0.8}>
+          <TouchableOpacity onPress={handleMediaPress} activeOpacity={0.8}>
             <View className="relative w-48 h-48 rounded-md overflow-hidden">
               {message.thumbnailUrl ? (
                 <Image source={{ uri: message.thumbnailUrl }} className="w-full h-full" resizeMode="cover" />
@@ -182,16 +182,16 @@ const MessageBubble = ({ message }: { message: Message }) => {
                   <ActivityIndicator color="#0066FF" />
                 </View>
               )}
-              <View className="absolute inset-0 items-center justify-center bg-black bg-opacity-20">
-                <View className="w-12 h-12 rounded-full bg-background bg-opacity-70 items-center justify-center">
-                  <View className="w-0 h-0 ml-1 border-t-8 border-t-transparent border-l-12 border-l-primary border-b-8 border-b-transparent" />
+              <View className="absolute inset-0 items-center justify-center bg-black/20">
+                <View className="w-12 h-12 rounded-full bg-background/50 items-center justify-center">
+                  <Play color="#000" size={24} />
                 </View>
               </View>
             </View>
           </TouchableOpacity>
         )}
 
-        <Text className={`text-sm mt-1 ${isUser ? 'text-white text-opacity-70' : 'text-muted-foreground'}`}>
+        <Text className={`text-sm mt-1 text-muted-foreground`}>
           {new Date(message.timestamp).toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
@@ -296,41 +296,41 @@ const MediaPicker = ({
 
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible} onRequestClose={onClose}>
-      <View className="flex-1 justify-end bg-black/50">
+      <View className="flex-1 justify-end shadow-md">
         <View className="bg-background rounded-t-3xl p-5">
-          <View className="flex-row justify-between items-center mb-5">
+          <View className="flex-row justify-between items-center mb-6">
             <Text className="text-lg font-medium">选择媒体</Text>
             <TouchableOpacity onPress={onClose} className="p-1">
               <X size={24} color="#6B7280" />
             </TouchableOpacity>
           </View>
 
-          <View className="flex-row justify-around mb-8">
+          <View className="flex-row justify-around mb-10">
             <TouchableOpacity className="items-center" onPress={handleTakePhoto}>
               <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
-                <Camera size={28} color="#3B82F6" />
+                <Camera size={28} />
               </View>
-              <Text className="text-sm text-gray-700">拍照</Text>
+              <Text className="text-gray-700">拍照</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickImage}>
               <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
-                <ImageIcon size={28} color="#3B82F6" />
+                <ImageIcon size={28} />
               </View>
-              <Text className="text-sm text-gray-700">图片</Text>
+              <Text className="text-gray-700">图片</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickVideo}>
               <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
-                <Mic size={28} color="#3B82F6" />
+                <Mic size={28} />
               </View>
-              <Text className="text-sm text-gray-700">视频</Text>
+              <Text className="text-gray-700">视频</Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity className="bg-muted rounded-lg py-3 items-center" onPress={onClose}>
-            <Text className="text-gray-700 font-medium">取消</Text>
-          </TouchableOpacity>
+          <Button onPress={onClose} variant="outline" className="mb-6">
+            <Text>取消</Text>
+          </Button>
         </View>
       </View>
     </Modal>
