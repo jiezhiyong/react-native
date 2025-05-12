@@ -16,7 +16,7 @@ export default function ExpoVideoThumbnailsScreen() {
     try {
       setError('');
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+        mediaTypes: ['videos'],
         allowsEditing: true,
         quality: 1,
       });

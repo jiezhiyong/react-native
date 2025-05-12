@@ -32,13 +32,13 @@ const PrivacyItem = ({
 
   return (
     <TouchableOpacity
-      className="py-4 px-5"
+      className="px-5 py-4"
       activeOpacity={hasSwitch ? 1 : 0.7}
       onPress={hasSwitch ? undefined : onPress}
     >
       <View className="flex-row justify-between items-center">
         <View className="flex-1 pr-4">
-          <Text className="font-medium text-gray-800">{title}</Text>
+          <Text className="font-medium text-lg text-gray-800">{title}</Text>
           {description && <Text className="text-sm text-muted-foreground mt-1">{description}</Text>}
         </View>
 
@@ -66,7 +66,7 @@ export default function PrivacySettingScreen() {
   const router = useRouter();
   return (
     <SafeAreaView className="flex-1 bg-muted">
-      <ScrollView className="flex-1 p-4">
+      <ScrollView className="flex-1 p-5">
         {/* 个性化推荐组 */}
         <PrivacyGroup>
           <PrivacyItem

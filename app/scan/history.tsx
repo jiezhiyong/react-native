@@ -200,7 +200,7 @@ export default function HistoryScreen() {
     <View className="flex-1 justify-center items-center p-5">
       <FileX size={120} color="#6b7280" />
       <Text className="text-muted-foreground text-center mt-4">暂无扫描记录</Text>
-      <Text className="text-gray-400 text-center mt-2 text-sm">扫描二维码后会自动保存在这里</Text>
+      <Text className="text-secondary-foreground text-center mt-2 text-sm">扫描二维码后会自动保存在这里</Text>
       <TouchableOpacity onPress={() => router.push('/scan')} className="mt-6 bg-blue-500 py-3 px-6 rounded-full">
         <Text className="text-white font-medium">去扫描</Text>
       </TouchableOpacity>

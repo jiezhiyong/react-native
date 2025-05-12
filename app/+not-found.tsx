@@ -30,7 +30,7 @@ export default function NotFoundScreen() {
 
         {/* 错误代码 */}
         <View className="py-2 px-6 bg-muted rounded-full mb-8">
-          <Text className="text-gray-400 text-sm">错误代码: 404</Text>
+          <Text className="text-secondary-foreground text-sm">错误代码: 404</Text>
         </View>
 
         {/* 按钮区域 */}

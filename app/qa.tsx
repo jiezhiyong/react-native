@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import { ChevronDown, ChevronUp, Search } from 'lucide-react-native';
 import React, { useCallback, useMemo, useState } from 'react';
-import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import { Input } from '~/components/ui/input';
 
@@ -110,7 +110,7 @@ const QuestionItem = ({
   onToggle: () => void;
 }) => {
   return (
-    <View className="mb-2 border border-gray-100 rounded-lg overflow-hidden">
+    <View className="mt-2 border border-gray-200 rounded-lg overflow-hidden">
       <TouchableOpacity
         className="flex-row items-center justify-between p-4 bg-background"
         onPress={onToggle}
@@ -123,7 +123,7 @@ const QuestionItem = ({
       </TouchableOpacity>
 
       {isExpanded && (
-        <View className="p-4 bg-gray-50 border-t border-gray-100">
+        <View className="p-4 bg-muted border-t border-gray-100">
           <Text className="text-muted-foreground leading-6">{item.answer}</Text>
         </View>
       )}
@@ -193,15 +193,14 @@ export default function QaScreen() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <View className="flex-1 bg-background">
+    <SafeAreaView style={{ flex: 1 }} className="bg-background">
       <Stack.Screen
         options={{
           title: '常见问题',
-          headerShadowVisible: false,
         }}
       />
 
-      <View className="px-4 pt-4 pb-2">
+      <View className="px-5 pt-5 pb-3">
         {/* 搜索框 */}
         <View className="flex-row items-center bg-muted rounded-full px-4 mb-4">
           <Search size={20} color="#9ca3af" />
@@ -215,7 +214,7 @@ export default function QaScreen() {
         </View>
 
         {/* 分类标签 */}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-4">
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <CategoryTag
             category={{ id: 'all', name: '全部' }}
             isSelected={selectedCategory === 'all'}
@@ -249,9 +248,9 @@ export default function QaScreen() {
         />
       ) : (
         <View className="flex-1 justify-center items-center px-4">
-          <Text className="text-gray-400 text-lg">未找到相关问题，请尝试其他关键词</Text>
+          <Text className="text-secondary-foreground text-lg">未找到相关问题，请尝试其他关键词</Text>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 }

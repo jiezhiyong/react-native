@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Modal,
   Platform,
+  SafeAreaView,
   ScrollView,
   Text,
   TextInput,
@@ -18,6 +19,8 @@ import {
   View,
 } from 'react-native';
 import { create } from 'zustand';
+
+import { Input } from '~/components/ui/input';
 
 // 消息类型定义
 type MessageType = 'text' | 'image' | 'video' | 'system';
@@ -150,17 +153,17 @@ const MessageBubble = ({ message }: { message: Message }) => {
 
   if (isSystem) {
     return (
-      <View className="my-2 px-4 py-2 rounded-lg self-center bg-muted">
-        <Text className="text-xs text-muted-foreground">{message.content}</Text>
+      <View className="my-2 px-5 py-3 rounded-lg self-center bg-muted/50">
+        <Text className="text-sm text-muted-foreground">{message.content}</Text>
       </View>
     );
   }
 
   return (
     <View className={`flex-row max-w-[85%] my-2 ${isUser ? 'self-end' : 'self-start'}`}>
-      {!isUser && <Image source={{ uri: agentAvatar }} className="w-8 h-8 rounded-full mr-2" />}
+      {!isUser && <Image source={require('~/assets/images/icon.png')} className="size-10 rounded-full mr-3" />}
 
-      <View className={`p-3 rounded-lg ${isUser ? 'bg-primary rounded-tr-none' : 'bg-muted rounded-tl-none'}`}>
+      <View className={`p-4 rounded-3xl ${isUser ? 'bg-primary rounded-tr-none' : 'bg-muted rounded-tl-none'}`}>
         {message.type === 'text' && <Text className={isUser ? 'text-white' : 'text-gray-800'}>{message.content}</Text>}
 
         {message.type === 'image' && message.mediaUrl && (
@@ -188,16 +191,17 @@ const MessageBubble = ({ message }: { message: Message }) => {
           </TouchableOpacity>
         )}
 
-        <Text className={`text-xs mt-1 ${isUser ? 'text-white text-opacity-70' : 'text-muted-foreground'}`}>
+        <Text className={`text-sm mt-1 ${isUser ? 'text-white text-opacity-70' : 'text-muted-foreground'}`}>
           {new Date(message.timestamp).toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
+            second: '2-digit',
           })}
         </Text>
       </View>
 
       {isUser && (
-        <Image source={{ uri: 'https://picsum.photos/200?random=user' }} className="w-8 h-8 rounded-full ml-2" />
+        <Image source={{ uri: 'https://picsum.photos/200?random=user' }} className="size-10 rounded-full ml-3" />
       )}
     </View>
   );
@@ -232,7 +236,7 @@ const MediaPicker = ({
   const handlePickImage = async () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        mediaTypes: ['images'],
         allowsEditing: true,
         quality: 0.8,
       });
@@ -250,7 +254,7 @@ const MediaPicker = ({
   const handlePickVideo = async () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+        mediaTypes: ['videos'],
         allowsEditing: true,
         quality: 0.8,
       });
@@ -274,7 +278,7 @@ const MediaPicker = ({
       }
 
       const result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        mediaTypes: ['images'],
         allowsEditing: true,
         quality: 0.8,
       });
@@ -292,7 +296,7 @@ const MediaPicker = ({
 
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible} onRequestClose={onClose}>
-      <View className="flex-1 justify-end bg-black bg-opacity-50">
+      <View className="flex-1 justify-end bg-black/50">
         <View className="bg-background rounded-t-3xl p-5">
           <View className="flex-row justify-between items-center mb-5">
             <Text className="text-lg font-medium">选择媒体</Text>
@@ -461,11 +465,22 @@ export default function OnlineServiceScreen() {
       <Stack.Screen
         options={{
           title: '在线客服',
-          headerShadowVisible: false,
         }}
       />
 
-      <View className="flex-1">
+      {/* 常见问题快捷入口 */}
+      <View className="px-5 py-2 pt-5">
+        <Text className="font-medium mb-3">常见问题：</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View className="flex-row items-center gap-3">
+            {quickQuestions.map((q) => (
+              <QuickQuestionButton key={q.id} question={q} onPress={() => handleQuickQuestionPress(q.question)} />
+            ))}
+          </View>
+        </ScrollView>
+      </View>
+
+      <SafeAreaView className="flex-1">
         {/* 聊天区域 */}
         <FlatList
           ref={flatListRef}
@@ -475,54 +490,38 @@ export default function OnlineServiceScreen() {
           contentContainerStyle={{ paddingHorizontal: 16, paddingVertical: 12 }}
         />
 
-        {/* 常见问题快捷入口 */}
-        <View className="px-4 py-2">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View className="flex-row items-center gap-3">
-              <Text className="text-sm text-muted-foreground">常见问题：</Text>
-              {quickQuestions.map((q) => (
-                <QuickQuestionButton key={q.id} question={q} onPress={() => handleQuickQuestionPress(q.question)} />
-              ))}
-            </View>
-          </ScrollView>
-        </View>
+        {/* 加载指示器 */}
+        {isLoading && (
+          <View className="py-3 px-4 rounded-lg flex-row items-center justify-center">
+            <ActivityIndicator size="small" color="#3B82F6" />
+            <Text className="ml-2 text-gray-700 text-sm">正在输入 ...</Text>
+          </View>
+        )}
 
         {/* 输入框区域 */}
-        <View className="px-4 py-2 border-t border-gray-200 flex-row items-center">
+        <View className="px-5 py-3 border-t border-gray-100 flex-row items-center">
           <TouchableOpacity className="mr-2 p-2" onPress={() => setShowMediaPicker(true)}>
-            <Plus size={24} color="#3B82F6" />
+            <Plus size={24} />
           </TouchableOpacity>
 
-          <View className="flex-1 flex-row items-center bg-muted rounded-full px-4">
-            <TextInput
-              className="flex-1 py-2"
+          <View className="flex-1 bg-muted rounded-full px-2">
+            <Input
+              className="border-0 bg-transparent"
               placeholder="请输入消息..."
               value={inputText}
               onChangeText={setInputText}
-              multiline
-              maxLength={500}
             />
           </View>
 
           <TouchableOpacity
-            className={`ml-2 p-2 rounded-full ${inputText.trim() ? 'bg-primary' : 'bg-gray-300'}`}
+            className={`ml-3 p-2 rounded-full size-10 justify-center ${inputText.trim() ? 'bg-primary' : 'bg-gray-300'}`}
             onPress={sendTextMessage}
             disabled={!inputText.trim()}
           >
             <Send size={20} color="#fff" />
           </TouchableOpacity>
         </View>
-
-        {/* 加载指示器 */}
-        {isLoading && (
-          <View className="absolute left-4 bottom-20">
-            <View className="bg-gray-200 p-2 rounded-lg flex-row items-center">
-              <ActivityIndicator size="small" color="#3B82F6" />
-              <Text className="ml-2 text-gray-700 text-sm">正在输入...</Text>
-            </View>
-          </View>
-        )}
-      </View>
+      </SafeAreaView>
 
       {/* 媒体选择器 */}
       <MediaPicker

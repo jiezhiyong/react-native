@@ -105,11 +105,11 @@ export default function DestroyAccountScreen() {
         }}
       />
 
-      <ScrollView className="flex-1 px-4 py-6">
+      <View className="flex-1 p-5">
         <Text className="text-2xl font-bold mb-6">账户注销</Text>
 
-        <View className="mb-10 p-4 bg-amber-50 rounded-lg border border-amber-200">
-          <View className="flex-row items-start">
+        <View className="mb-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
+          <View className="flex-row gap-2">
             <Info size={20} color="#B45309" className="mr-2 mt-1" />
             <Text className="flex-1 text-amber-800">
               注销账户将永久删除您的所有数据，包括个人信息、历史记录和关联服务。此操作无法撤销。
@@ -119,7 +119,7 @@ export default function DestroyAccountScreen() {
 
         {/* 密码验证 */}
         <View className="space-y-2 mb-6">
-          <Text className="text-sm font-medium text-gray-700">请输入您的密码以确认身份</Text>
+          <Text className="font-medium mb-2">请输入您的密码以确认身份</Text>
           <Controller
             control={control}
             name="password"
@@ -131,11 +131,10 @@ export default function DestroyAccountScreen() {
                 onBlur={onBlur}
                 secureTextEntry
                 editable={!isSubmitting}
-                className={cn('bg-background', !!errors.password && 'border-red-500')}
+                className={cn('bg-background', !!errors.password && 'border-destructive')}
               />
             )}
           />
-          {errors.password && <Text className="text-sm text-red-500">{errors.password.message}</Text>}
         </View>
 
         {/* 确认选项 */}
@@ -146,20 +145,19 @@ export default function DestroyAccountScreen() {
             render={({ field: { onChange, value } }) => (
               <View className="flex-row items-start">
                 <Checkbox checked={value} onCheckedChange={onChange} disabled={isSubmitting} />
-                <Text className={cn('flex-1 ml-2 text-gray-700 text-sm', errors.confirmDestroy ? 'text-red-500' : '')}>
+                <Text className={cn('flex-1 ml-2 text-gray-700', errors.confirmDestroy ? 'text-destructive' : '')}>
                   我理解注销账户将永久删除我的所有数据，且此操作不可逆转
                 </Text>
               </View>
             )}
           />
-          {errors.confirmDestroy && <Text className="text-sm text-red-500 ml-6">{errors.confirmDestroy.message}</Text>}
         </View>
 
         {/* 提交按钮 */}
         <Button variant="destructive" onPress={handleSubmit(onSubmit)} disabled={isSubmitting} className="mt-2">
           {isSubmitting ? <ActivityIndicator size="small" color="#fff" className="mr-2" /> : <Text>注销我的账户</Text>}
         </Button>
-      </ScrollView>
+      </View>
     </View>
   );
 }

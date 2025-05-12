@@ -3,7 +3,7 @@ import { zhCN } from 'date-fns/locale';
 import { Stack } from 'expo-router';
 import { CalendarClock, Mail } from 'lucide-react-native';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, SafeAreaView, Text, View } from 'react-native';
 import { create } from 'zustand';
 
 // 定义消息类型
@@ -108,7 +108,7 @@ const getDateGroup = (dateStr: string): string => {
 // 消息项组件
 const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) => {
   return (
-    <View className={`p-4 mb-3 rounded-lg ${item.isRead ? 'bg-gray-50' : 'bg-blue-50'}`} onTouchEnd={onPress}>
+    <View className={`p-4 mt-3 rounded-lg ${item.isRead ? 'bg-gray-50' : 'bg-blue-50'}`} onTouchEnd={onPress}>
       <View className="flex-row items-center justify-between mb-2">
         <Text className={`font-medium ${item.isRead ? 'text-gray-700' : 'text-blue-700'}`}>{item.title}</Text>
         {!item.isRead && <View className="bg-red-500 w-2 h-2 rounded-full" />}
@@ -116,14 +116,14 @@ const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) =>
       <Text className="text-muted-foreground mb-2" numberOfLines={2}>
         {item.content}
       </Text>
-      <Text className="text-xs text-gray-400">{format(parseISO(item.createdAt), 'yyyy-MM-dd HH:mm')}</Text>
+      <Text className="text-xs text-secondary-foreground">{format(parseISO(item.createdAt), 'yyyy-MM-dd HH:mm')}</Text>
     </View>
   );
 };
 
 // 日期分组标题组件
 const DateGroupHeader = ({ title }: { title: string }) => (
-  <View className="flex-row items-center py-2 mb-2">
+  <View className="flex-row items-center py-2 mt-2">
     <CalendarClock size={16} color="#6b7280" />
     <Text className="text-sm font-medium text-muted-foreground ml-2">{title}</Text>
   </View>
@@ -198,8 +198,8 @@ export default function NoticeScreen() {
     ({ item }: { item: GroupedNotices }) => (
       <View>
         <DateGroupHeader title={item.date} />
-        {item.data.map((notice) => (
-          <NoticeItem key={notice.id} item={notice} onPress={() => handleNoticePress(notice.id)} />
+        {item.data.map((notice, index) => (
+          <NoticeItem key={index} item={notice} onPress={() => handleNoticePress(notice.id)} />
         ))}
       </View>
     ),
@@ -212,8 +212,7 @@ export default function NoticeScreen() {
 
     return (
       <View className="py-4 flex-row justify-center">
-        <ActivityIndicator size="small" color="#3b82f6" />
-        <Text className="ml-2 text-blue-500">加载更多...</Text>
+        <ActivityIndicator size="small" />
       </View>
     );
   }, [loading, refreshing]);
@@ -225,34 +224,33 @@ export default function NoticeScreen() {
     return (
       <View className="flex-1 justify-center items-center py-10">
         <Mail size={48} color="#d1d5db" />
-        <Text className="mt-4 text-gray-400">暂无消息通知</Text>
+        <Text className="mt-4 text-secondary-foreground">暂无消息通知</Text>
       </View>
     );
   }, [loading, refreshing]);
 
   return (
-    <View className="flex-1 bg-background px-4 pb-1 pt-2">
-      <Stack.Screen
-        options={{
-          title: '消息中心',
-          headerShadowVisible: false,
-        }}
-      />
+    <SafeAreaView style={{ flex: 1 }}>
+      <View className="flex-1 bg-background px-5 pb-1 pt-2">
+        <Stack.Screen
+          options={{
+            title: '消息中心',
+          }}
+        />
 
-      <FlatList
-        className="flex-1"
-        data={groupedNotices}
-        renderItem={renderSection}
-        keyExtractor={(item) => item.date}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#3b82f6']} tintColor="#3b82f6" />
-        }
-        onEndReached={loadMore}
-        onEndReachedThreshold={0.2}
-        ListFooterComponent={renderFooter}
-        ListEmptyComponent={renderEmpty}
-      />
-    </View>
+        <FlatList
+          className="flex-1"
+          data={groupedNotices}
+          renderItem={renderSection}
+          keyExtractor={(item) => item.date}
+          showsVerticalScrollIndicator={false}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          onEndReached={loadMore}
+          onEndReachedThreshold={0.2}
+          ListFooterComponent={renderFooter}
+          ListEmptyComponent={renderEmpty}
+        />
+      </View>
+    </SafeAreaView>
   );
 }

@@ -138,7 +138,7 @@
 //           size={20}
 //           color={item.completed ? '#10B981' : '#6B7280'}
 //         />
-//         <Text className={`flex-1 ${item.completed ? 'line-through text-gray-400' : 'text-gray-800'}`}>
+//         <Text className={`flex-1 ${item.completed ? 'line-through text-secondary-foreground' : 'text-gray-800'}`}>
 //           {index + 1}. {item.text}
 //         </Text>
 //       </Button>

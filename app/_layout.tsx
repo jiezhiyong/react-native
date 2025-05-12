@@ -177,12 +177,16 @@ function RootLayout() {
               {/* <TypesafeI18n locale={'zh'}> */}
               <StatusBar style={statusBarStyle} />
               {/* <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} /> */}
-              <Stack>
+              <Stack
+                screenOptions={{
+                  headerShadowVisible: false,
+                }}
+              >
                 <Stack.Screen
                   name="(tabs)"
                   options={{
                     headerShown: false,
-                    title: 'Starter Tabs',
+                    title: '',
                     headerRight: () => <ThemeToggle />,
                   }}
                 />

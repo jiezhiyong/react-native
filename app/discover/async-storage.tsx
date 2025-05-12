@@ -174,7 +174,7 @@ export default function AsyncStorageScreen() {
               </View>
             ))
           ) : (
-            <Text className="text-center text-gray-400 pt-3">-</Text>
+            <Text className="text-center text-secondary-foreground pt-3">-</Text>
           )}
         </View>
 

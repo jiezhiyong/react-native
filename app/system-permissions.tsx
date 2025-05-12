@@ -15,13 +15,13 @@ interface PermissionItemProps {
 
 const PermissionItem = ({ title, description, icon, status, onPress, last }: PermissionItemProps) => {
   return (
-    <View className={cn('px-4 pt-3 pb-0', last && 'pb-3')}>
+    <View className={cn('px-5 pt-4 pb-0', last && 'pb-4')}>
       <TouchableOpacity className="flex gap-3" activeOpacity={0.7} onPress={onPress}>
         <View className="flex-row items-center flex-1 gap-3">
           <View className="items-center justify-center">{icon}</View>
-          <Text className="text-gray-800 flex-1">{title}</Text>
+          <Text className="text-gray-800 text-lg flex-1">{title}</Text>
           <View className="flex-row items-center gap-1">
-            <Text className="text-gray-400">{status === 'enabled' ? '已开启' : '去设置'}</Text>
+            <Text className="text-secondary-foreground">{status === 'enabled' ? '已开启' : '去设置'}</Text>
             <ChevronRight size={18} color="#ccc" />
           </View>
         </View>
@@ -29,11 +29,12 @@ const PermissionItem = ({ title, description, icon, status, onPress, last }: Per
           <Text className="text-xs text-muted-foreground">{description}</Text>
         </View>
       </TouchableOpacity>
-      {last ? null : <View className="h-px bg-muted mt-3" />}
+      {last ? null : <View className="h-px bg-muted mt-4" />}
     </View>
   );
 };
 
+// TODO: 打开APP权限设置
 export default function SystemPermissionsScreen() {
   const handlePermissionPress = (permissionName: string) => {
     console.log(`处理权限设置: ${permissionName}`);
@@ -41,14 +42,12 @@ export default function SystemPermissionsScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-muted">
-      <ScrollView className="flex-1">
-        <View className="p-4">
-          <Text className="text-muted-foreground text-sm">
-            为了向您提供更好的用户体验，我们在特定场景需要向您申请以下手机系统权限
-          </Text>
-        </View>
+      <ScrollView className="flex-1 p-5">
+        <Text className="text-muted-foreground text-sm mb-4">
+          为了向您提供更好的用户体验，我们在特定场景需要向您申请以下手机系统权限
+        </Text>
 
-        <View className="bg-background rounded-xl mx-4 mb-4">
+        <View className="bg-background rounded-xl">
           <PermissionItem
             title="通讯录权限"
             description="用户调取您主动选取的通讯录内的联系人信息，以帮助您快速完成信息填写，不会保存您的通讯录内容"

@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 import * as Updates from 'expo-updates';
 import { ChevronRight } from 'lucide-react-native';
 import React, { useEffect } from 'react';
-import { Image, Linking, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Linking, Text, TouchableOpacity, View } from 'react-native';
 
 interface AboutItemProps {
   title: string;
@@ -14,12 +14,12 @@ const AboutItem = ({ title, desc, onPress }: AboutItemProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="flex-row items-center justify-between py-4 px-4 border-b border-gray-100"
+      className="flex-row items-center justify-between p-5 border-b border-gray-100"
       activeOpacity={0.7}
     >
       <View className="flex-row items-center gap-3 flex-1">
-        <Text className="text-gray-800 flex-1">{title}</Text>
-        {desc && <Text className="text-xs text-muted-foreground">{desc}</Text>}
+        <Text className="flex-1">{title}</Text>
+        {desc && <Text className="text-muted-foreground">{desc}</Text>}
       </View>
       <ChevronRight size={20} color="#ccc" />
     </TouchableOpacity>
@@ -51,7 +51,7 @@ export default function AboutScreen() {
   }, [isUpdatePending]);
 
   return (
-    <SafeAreaView className="flex-1 bg-muted p-4">
+    <View className="flex-1 bg-muted p-5">
       {/* 应用信息 */}
       <View className="items-center justify-center py-10 bg-background rounded-xl">
         <View className="w-20 h-20 rounded-xl overflow-hidden mb-4 bg-muted items-center justify-center">
@@ -78,15 +78,16 @@ export default function AboutScreen() {
             }
           }}
         />
+        {/* TODO: 去评分 */}
         <AboutItem title="去评分" onPress={() => Linking.openURL('https://apps.apple.com/cn/app/id414478124')} />
         <AboutItem title="联系电话" desc="400 123 4567" onPress={() => Linking.openURL('tel://4001234567')} />
       </View>
 
       {/* 底部信息 */}
       <View className="items-center px-6 py-8">
-        <Text className="text-xs text-gray-400 mb-1">ICP备案信息：沪ICP备 12344324241621A</Text>
-        <Text className="text-xs text-gray-400 mb-4">网络科技有限公司 版权所有</Text>
+        <Text className="text-sm text-secondary-foreground mb-1">ICP备案信息：沪ICP备 12344324241621A</Text>
+        <Text className="text-sm text-secondary-foreground mb-4">网络科技有限公司 版权所有</Text>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }

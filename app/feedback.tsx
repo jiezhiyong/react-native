@@ -32,9 +32,9 @@ export default function FeedbackScreen() {
       <SafeAreaView className="flex-1 bg-muted">
         <ScrollView className="flex-1">
           {/* 问题标签 */}
-          <View className="p-4 bg-background">
-            <Text className="text-lg">请选择问题标签</Text>
-            <Text className="text-xs text-gray-400 mb-4">精准分类，处理更快</Text>
+          <View className="p-5 bg-background">
+            <Text className="text-lg font-bold">请选择问题标签</Text>
+            <Text className="text-sm text-secondary-foreground mb-4">精准分类，处理更快</Text>
 
             <View className="flex-row flex-wrap gap-3">
               {feedbackTypes.map((type) => (
@@ -49,10 +49,10 @@ export default function FeedbackScreen() {
           </View>
 
           {/* 反馈内容 */}
-          <View className="mt-4 p-4 bg-background">
+          <View className="mt-3 p-5 bg-background">
             <View className="flex-row items-center mb-4">
               <Text className="text-red-500 mr-1">*</Text>
-              <Text className="text-lg">反馈标题与内容</Text>
+              <Text className="text-lg font-bold">反馈标题与内容</Text>
             </View>
 
             <Input
@@ -64,20 +64,20 @@ export default function FeedbackScreen() {
             />
 
             <Textarea
-              className="mb-3 min-h-[160px]"
+              className="mb-3 min-h-[100px]"
               placeholder="您的建议是我们改进的动力"
               textAlignVertical="top"
               value={content}
               onChangeText={setContent}
               maxLength={300}
             />
-            <Text className="text-right text-gray-400">{content.length}/300</Text>
+            <Text className="text-right text-secondary-foreground">{content.length}/300</Text>
           </View>
 
           {/* 上传照片 */}
-          <View className="mt-4 p-4 bg-background">
-            <Text className="text-lg">上传照片</Text>
-            <Text className="text-xs text-gray-400 mb-4">
+          <View className="mt-3 p-5 bg-background">
+            <Text className="text-lg font-bold">上传照片</Text>
+            <Text className="text-sm text-secondary-foreground mb-4">
               上传操作入口，报错提示截图、手机系统版本截图等信息，最多可上传10张，图像尺寸小于1M
             </Text>
 
@@ -87,7 +87,7 @@ export default function FeedbackScreen() {
           </View>
 
           {/* 提交按钮 */}
-          <View className="p-4">
+          <View className="p-5">
             <Button className="py-4 rounded-full" onPress={handleSubmit}>
               <Text>提交</Text>
             </Button>

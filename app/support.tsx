@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import React from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 interface HelpOptionProps {
   title: string;
@@ -12,7 +12,7 @@ interface HelpOptionProps {
 const HelpOption = ({ title, onPress, isExternal = false }: HelpOptionProps) => {
   return (
     <TouchableOpacity
-      className="flex-row items-center justify-between p-4 border-b border-gray-100"
+      className="flex-row items-center justify-between p-5 border-b border-gray-100"
       activeOpacity={0.7}
       onPress={onPress}
     >
@@ -28,20 +28,20 @@ export default function HelpScreen() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex-1 bg-muted gap-4 pt-8">
-      <View className="px-4">
+    <View className="flex-1 gap-4 px-5 pt-8 bg-muted">
+      <View className="">
         <Text className="text-2xl text-muted-foreground">您好 👋</Text>
         <Text className="text-3xl font-bold mt-1">我们能提供什么帮助?</Text>
       </View>
 
-      <View className="bg-background rounded-xl mx-4 overflow-hidden">
+      <View className="bg-background rounded-xl overflow-hidden">
         <HelpOption title="消息中心" onPress={() => router.push('/notice')} />
       </View>
 
-      <View className="bg-background rounded-xl mx-4 overflow-hidden">
+      <View className="bg-background rounded-xl overflow-hidden">
         <HelpOption title="常见问题" onPress={() => router.push('/qa')} />
         <HelpOption title="投诉 / 反馈 / 建议" onPress={() => router.push('/feedback')} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
