@@ -1,6 +1,6 @@
 import { FlashList } from '@shopify/flash-list';
 import React, { useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, RefreshControl, View } from 'react-native';
 import { create } from 'zustand';
 
 import { Button } from '~/components/ui/button';
@@ -156,10 +156,6 @@ export default function FlashListScreen() {
         <Text className="text-muted-foreground">使用 FlashList 实现高性能的长列表渲染</Text>
       </View>
 
-      <Button onPress={handleRefresh} disabled={isLoading} className="mb-4">
-        {refreshing ? <ActivityIndicator color="white" /> : <Text>刷新数据</Text>}
-      </Button>
-
       {error ? (
         <View className="bg-red-100 p-3 rounded-lg mb-4">
           <Text className="text-destructive">{error}</Text>
@@ -175,6 +171,7 @@ export default function FlashListScreen() {
         onEndReachedThreshold={0.5}
         ListFooterComponent={<ListFooter loading={isLoading && items.length > 0} />}
         showsVerticalScrollIndicator={false}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
         ListEmptyComponent={
           isLoading ? (
             <View className="flex-1 justify-center items-center py-20">

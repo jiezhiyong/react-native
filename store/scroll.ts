@@ -27,7 +27,7 @@ interface ScrollState {
   setActiveTab: (tab: 'home' | 'mine' | 'discover') => void;
 }
 
-export const useScrollStore = create<ScrollState>((set) => ({
+export const useTabsScrollStore = create<ScrollState>((set) => ({
   // 初始化动画值
   homeScrollY: new Animated.Value(0),
   mineScrollY: new Animated.Value(0),

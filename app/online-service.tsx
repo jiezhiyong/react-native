@@ -1,4 +1,5 @@
-import { Audio } from 'expo-av';
+import * as Audio from 'expo-audio';
+import { PLAYBACK_STATUS_UPDATE } from 'expo-audio';
 import * as ImagePicker from 'expo-image-picker';
 import { Stack, useRouter } from 'expo-router';
 import * as VideoThumbnails from 'expo-video-thumbnails';
@@ -47,7 +48,6 @@ interface CustomerServiceStore {
   isChatting: boolean;
   isLoading: boolean;
   agentName: string;
-  agentAvatar: string;
   addMessage: (message: Omit<Message, 'id' | 'timestamp'>) => void;
   startChat: () => void;
   simulateAgentReply: (content: string, type?: MessageType, mediaUrl?: string) => void;
@@ -58,7 +58,6 @@ const useCustomerServiceStore = create<CustomerServiceStore>((set, get) => ({
   isChatting: false,
   isLoading: false,
   agentName: '客服小助手',
-  agentAvatar: 'https://picsum.photos/200',
 
   addMessage: (message) => {
     const newMessage: Message = {
@@ -80,14 +79,16 @@ const useCustomerServiceStore = create<CustomerServiceStore>((set, get) => ({
   startChat: () => {
     set({ isChatting: true });
 
-    // 添加系统欢迎消息
-    const welcomeMessage: Omit<Message, 'id' | 'timestamp'> = {
-      content: `您好，我是${get().agentName}，很高兴为您服务。`,
-      type: 'text',
-      sender: 'agent',
-    };
+    // 添加系统欢迎消息，如果重复进入页面，不重复显示
+    if (get().messages.length === 0) {
+      const welcomeMessage: Omit<Message, 'id' | 'timestamp'> = {
+        content: `您好，我是${get().agentName}，很高兴为您服务。`,
+        type: 'text',
+        sender: 'agent',
+      };
 
-    get().addMessage(welcomeMessage);
+      get().addMessage(welcomeMessage);
+    }
   },
 
   simulateAgentReply: (content, type = 'text', mediaUrl) => {
@@ -119,18 +120,23 @@ const quickQuestions: QuickQuestion[] = [
 
 // 播放新消息提示音
 async function playNewMessageSound() {
-  // try {
-  //   // 使用Expo Audio加载并播放声音
-  //   const { sound } = await Audio.Sound.createAsync(require('../assets/notification.mp3'), { shouldPlay: true });
-  //   // 播放完成后释放资源
-  //   sound.setOnPlaybackStatusUpdate((status) => {
-  //     if (status.isLoaded && status.didJustFinish) {
-  //       sound.unloadAsync();
-  //     }
-  //   });
-  // } catch (error) {
-  //   console.error('无法播放提示音:', error);
-  // }
+  try {
+    // 创建一个音频播放器
+    const player = Audio.createAudioPlayer(require('~/assets/audios/received-message.mp3'));
+
+    // 监听播放完成事件, 播放完成后释放资源
+    const subscribe = player.addListener(PLAYBACK_STATUS_UPDATE, (status: Audio.AudioStatus) => {
+      if (status.didJustFinish) {
+        player.release();
+        subscribe.remove();
+      }
+    });
+
+    // 播放系统默认提示音
+    await player.play();
+  } catch (error) {
+    console.error(`播放提示音失败: ${(error as Error)?.message}`);
+  }
 }
 
 // 消息气泡组件
@@ -138,7 +144,6 @@ const MessageBubble = ({ message }: { message: Message }) => {
   const isUser = message.sender === 'user';
   const isSystem = message.sender === 'system';
 
-  const { agentAvatar } = useCustomerServiceStore();
   const router = useRouter();
 
   // 处理图片点击查看
@@ -200,9 +205,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
         </Text>
       </View>
 
-      {isUser && (
-        <Image source={{ uri: 'https://picsum.photos/200?random=user' }} className="size-10 rounded-full ml-3" />
-      )}
+      {isUser && <Image source={require('~/assets/images/avatar.jpg')} className="size-10 rounded-full ml-3" />}
     </View>
   );
 };
@@ -346,15 +349,6 @@ export default function OnlineServiceScreen() {
   // 初始化聊天
   useEffect(() => {
     startChat();
-
-    // 添加系统消息，显示使用指引
-    setTimeout(() => {
-      addMessage({
-        content: '您可以输入文字、发送图片或视频来咨询问题，也可以从下方选择常见问题',
-        type: 'system',
-        sender: 'system',
-      });
-    }, 1500);
 
     // 请求权限
     (async () => {

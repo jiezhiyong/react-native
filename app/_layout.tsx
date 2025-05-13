@@ -28,7 +28,7 @@ import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
 import TypesafeI18n from '~/i18n/i18n-react';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
-import { useScrollStore } from '~/store/scroll';
+import { useTabsScrollStore } from '~/store/scroll';
 
 // Construct a new integration instance. This is needed to communicate between the integration and React
 const navigationIntegration = Sentry.reactNavigationIntegration({
@@ -102,7 +102,7 @@ function RootLayout() {
 
   const hasMounted = React.useRef(false);
 
-  const { statusBarStyle } = useScrollStore();
+  const { statusBarStyle } = useTabsScrollStore();
   const { colorScheme, isDarkColorScheme } = useColorScheme();
   const { isUpdatePending } = Updates.useUpdates();
 

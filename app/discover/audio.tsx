@@ -14,6 +14,7 @@ import { Text } from '~/components/ui/text';
 export default function ExpoAudioScreen() {
   // 音频源示例
   const audioSources = [
+    { name: 'Sample 0', uri: require('~/assets/audios/received-message.mp3') },
     { name: 'Sample 1', uri: require('~/assets/audios/sample-3s.mp3') },
     { name: 'Sample 2', uri: require('~/assets/audios/sample-9s.mp3') },
     { name: 'Sample 3 (404)', uri: 'https://abc.com/mp3/example.mp3' },
@@ -96,11 +97,12 @@ export default function ExpoAudioScreen() {
         return;
       }
 
-      if (status?.playing) {
+      if (status?.playing && !status?.didJustFinish) {
         console.log('暂停音频');
         await player.pause();
       } else {
         console.log('播放音频');
+        await player.seekTo(0);
         await player.play();
       }
     } catch (error) {
@@ -255,7 +257,11 @@ export default function ExpoAudioScreen() {
           size="icon"
           disabled={isLoading || status?.isBuffering}
         >
-          {status?.playing ? <Pause size={24} color="#fff" /> : <Play size={24} color="#fff" />}
+          {status?.playing && !status?.didJustFinish ? (
+            <Pause size={24} color="#fff" />
+          ) : (
+            <Play size={24} color="#fff" />
+          )}
         </Button>
       </View>
 

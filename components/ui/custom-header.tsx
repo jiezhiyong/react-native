@@ -1,6 +1,6 @@
 import Constants from 'expo-constants';
 import { LinearGradient } from 'expo-linear-gradient';
-import { usePathname, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { Bell, Headphones, QrCode, Settings } from 'lucide-react-native';
 import React from 'react';
 import {
@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 import { Text } from '~/components/ui/text';
-import { useScrollStore } from '~/store/scroll';
+import { useTabsScrollStore } from '~/store/scroll';
 
 interface CustomHeaderProps {
   title: string;
@@ -24,6 +24,7 @@ interface CustomHeaderProps {
     icon: React.ReactNode;
     onPress: () => void;
   }[];
+  gradientColors?: string[];
 }
 
 export const BREAK_POINT = 50;
@@ -33,11 +34,10 @@ export function CustomHeader({
   scrollY = new Animated.Value(0),
   backgroundImageSource,
   rightButtons = [],
+  gradientColors = ['#3b82f6', '#2563eb'],
 }: CustomHeaderProps) {
   const statusBarHeight = Constants.statusBarHeight || 0;
   const headerHeight = (Platform.OS === 'ios' ? 44 : 56) + statusBarHeight;
-
-  const pathname = usePathname();
 
   const { width } = useWindowDimensions();
 
@@ -48,15 +48,7 @@ export function CustomHeader({
     extrapolate: 'clamp',
   });
 
-  // 判断当前路由，为不同页面提供不同的渐变颜色
-  const getGradientColors = () => {
-    if (pathname.includes('mine')) {
-      return ['#ff9a9e', '#fad0c4'];
-    } else if (pathname.includes('discover')) {
-      return ['#10b981', '#059669'];
-    }
-    return ['#3b82f6', '#2563eb'];
-  };
+  // 使用传入的渐变颜色，而不是基于路径判断
 
   const useDarkStyle = Number((scrollY as any)._value) >= BREAK_POINT;
   return (
@@ -75,7 +67,7 @@ export function CustomHeader({
           <Image source={backgroundImageSource} className="w-full h-full" style={{ width }} resizeMode="cover" />
         ) : (
           <LinearGradient
-            colors={getGradientColors() as any}
+            colors={gradientColors as any}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={{ height: headerHeight }}
@@ -117,7 +109,7 @@ export function CustomHeader({
 // 首页专用的Header组件
 export function HomeHeader() {
   const router = useRouter();
-  const { homeScrollY } = useScrollStore();
+  const { homeScrollY } = useTabsScrollStore();
 
   const useDarkStyle = Number((homeScrollY as any)._value) >= BREAK_POINT;
   const rightButtons = [
@@ -137,6 +129,7 @@ export function HomeHeader() {
       scrollY={homeScrollY}
       backgroundImageSource={require('~/assets/images/home-header-bg.jpg')}
       rightButtons={rightButtons}
+      gradientColors={['#3b82f6', '#2563eb']}
     />
   );
 }
@@ -144,7 +137,7 @@ export function HomeHeader() {
 // 我的页面专用的Header组件
 export function MineHeader() {
   const router = useRouter();
-  const { mineScrollY } = useScrollStore();
+  const { mineScrollY } = useTabsScrollStore();
 
   const useDarkStyle = Number((mineScrollY as any)._value) >= BREAK_POINT;
   const rightButtons = [
@@ -166,13 +159,20 @@ export function MineHeader() {
     },
   ];
 
-  return <CustomHeader title="我的" scrollY={mineScrollY} rightButtons={rightButtons} />;
+  return (
+    <CustomHeader
+      title="我的"
+      scrollY={mineScrollY}
+      rightButtons={rightButtons}
+      gradientColors={['#ff9a9e', '#fad0c4']}
+    />
+  );
 }
 
 // 发现页面专用的Header组件
 export function DiscoverHeader() {
   const router = useRouter();
-  const { discoverScrollY } = useScrollStore();
+  const { discoverScrollY } = useTabsScrollStore();
 
   const useDarkStyle = Number((discoverScrollY as any)._value) >= BREAK_POINT;
   const rightButtons = [
@@ -182,5 +182,12 @@ export function DiscoverHeader() {
     },
   ];
 
-  return <CustomHeader title="发现" scrollY={discoverScrollY} rightButtons={rightButtons} />;
+  return (
+    <CustomHeader
+      title="发现"
+      scrollY={discoverScrollY}
+      rightButtons={rightButtons}
+      gradientColors={['#10b981', '#059669']}
+    />
+  );
 }

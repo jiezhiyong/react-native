@@ -1,30 +1,34 @@
-import { ResizeMode, Video } from 'expo-av';
-import * as FileSystem from 'expo-file-system';
+import { File } from 'expo-file-system/next';
 import * as MediaLibrary from 'expo-media-library';
 import { PermissionStatus } from 'expo-modules-core';
-import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import * as Sharing from 'expo-sharing';
-import { ArrowLeft, Download, Share2, X } from 'lucide-react-native';
+import { useVideoPlayer, VideoView } from 'expo-video';
+import { Download, Share2 } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Image,
   Platform,
   SafeAreaView,
-  StatusBar,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
 export default function MediaViewerScreen() {
-  const router = useRouter();
   const params = useLocalSearchParams<{ url: string; type: string }>();
   const { url, type } = params;
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [, setMediaStatus] = useState<'idle' | 'playing' | 'paused'>('idle');
   const [hasPermission, setHasPermission] = useState(false);
+
+  // 初始化视频播放器
+  const player = useVideoPlayer(url, (player) => {
+    player.loop = false;
+    player.play();
+  });
 
   // 检查权限
   useEffect(() => {
@@ -36,20 +40,14 @@ export default function MediaViewerScreen() {
     })();
   }, []);
 
-  // 关闭查看器
-  const handleClose = () => {
-    router.back();
-  };
-
   // 处理媒体加载完成
   const handleMediaLoad = () => {
     setIsLoading(false);
   };
 
   // 处理媒体加载错误
-  const handleMediaError = (error: any) => {
-    console.error('媒体加载失败:', error);
-    setError('无法加载媒体内容');
+  const handleMediaError = (error: string) => {
+    setError(error);
     setIsLoading(false);
   };
 
@@ -72,31 +70,13 @@ export default function MediaViewerScreen() {
 
       setIsLoading(true);
 
-      // 创建临时文件
-      const fileExtension = url.split('.').pop() || (type === 'image' ? 'jpg' : 'mp4');
-      const fileUri = `${FileSystem.cacheDirectory}temp_media.${fileExtension}`;
-
-      // 下载文件
-      const downloadResult = await FileSystem.downloadAsync(url, fileUri);
-
-      if (downloadResult.status !== 200) {
-        setError('下载媒体失败');
-        setIsLoading(false);
-        return;
-      }
-
       // 保存到媒体库
-      const asset = await MediaLibrary.saveToLibraryAsync(fileUri);
-      console.log('媒体已保存到设备:', asset);
-
-      // 清理临时文件
-      await FileSystem.deleteAsync(fileUri, { idempotent: true });
-
+      const file = new File(url);
+      await MediaLibrary.saveToLibraryAsync(file.uri);
       setIsLoading(false);
       alert('媒体已成功保存到设备');
     } catch (err) {
-      console.error('保存媒体失败:', err);
-      setError('保存媒体时出错');
+      setError((err as Error)?.message);
       setIsLoading(false);
     }
   };
@@ -119,76 +99,47 @@ export default function MediaViewerScreen() {
         return;
       }
 
-      // 创建临时文件
-      const fileExtension = url.split('.').pop() || (type === 'image' ? 'jpg' : 'mp4');
-      const fileUri = `${FileSystem.cacheDirectory}temp_share.${fileExtension}`;
-
-      // 下载文件
-      const downloadResult = await FileSystem.downloadAsync(url, fileUri);
-
-      if (downloadResult.status !== 200) {
-        setError('下载媒体失败');
-        setIsLoading(false);
-        return;
-      }
-
       // 分享文件
-      await Sharing.shareAsync(fileUri);
-
-      // 清理临时文件
-      await FileSystem.deleteAsync(fileUri, { idempotent: true });
+      const file = new File(url);
+      await Sharing.shareAsync(file.uri);
 
       setIsLoading(false);
     } catch (err) {
-      console.error('分享媒体失败:', err);
-      setError('分享媒体时出错');
+      setError(err instanceof Error ? err.message : String(err));
       setIsLoading(false);
     }
   };
 
   return (
     <SafeAreaView className="flex-1 bg-black">
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
-
-      {/* 顶部导航栏 */}
       <Stack.Screen
         options={{
-          headerShown: false,
+          title: '媒体预览',
+          headerRight: () => (
+            <View className="flex-row">
+              <TouchableOpacity className="items-center justify-center mr-4" onPress={handleDownload}>
+                <Download size={20} />
+              </TouchableOpacity>
+
+              <TouchableOpacity className="items-center justify-center" onPress={handleShare}>
+                <Share2 size={20} />
+              </TouchableOpacity>
+            </View>
+          ),
         }}
       />
 
-      <View className="absolute top-0 left-0 right-0 z-10 flex-row justify-between items-center p-4">
-        <TouchableOpacity
-          className="w-10 h-10 rounded-full bg-black bg-opacity-50 items-center justify-center"
-          onPress={handleClose}
-        >
-          {Platform.OS === 'ios' ? <X size={24} color="#fff" /> : <ArrowLeft size={24} color="#fff" />}
-        </TouchableOpacity>
-
-        <View className="flex-row">
-          <TouchableOpacity
-            className="w-10 h-10 rounded-full bg-black bg-opacity-50 items-center justify-center mr-2"
-            onPress={handleDownload}
-          >
-            <Download size={20} color="#fff" />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className="w-10 h-10 rounded-full bg-black bg-opacity-50 items-center justify-center"
-            onPress={handleShare}
-          >
-            <Share2 size={20} color="#fff" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
       {/* 媒体内容 */}
       <View className="flex-1 justify-center items-center">
-        {isLoading && <ActivityIndicator size="large" color="#fff" />}
+        {isLoading && (
+          <View className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 bg-black/70 p-4 rounded-lg">
+            <ActivityIndicator color="#fff" />
+          </View>
+        )}
 
         {error && (
-          <View className="p-4 bg-red-500 bg-opacity-70 rounded-lg">
-            <Text className="text-white text-center">{error}</Text>
+          <View className="p-4 rounded-lg bg-destructive/70">
+            <Text className="text-center text-white">{error}</Text>
           </View>
         )}
 
@@ -203,29 +154,22 @@ export default function MediaViewerScreen() {
         )}
 
         {url && type === 'video' && !error && (
-          <Video
-            source={{ uri: url }}
-            className="w-full h-full"
-            resizeMode={ResizeMode.CONTAIN}
-            useNativeControls
-            shouldPlay
-            isLooping
-            onPlaybackStatusUpdate={(status) => {
-              if (status.isLoaded) {
-                if (status.isPlaying) {
-                  setMediaStatus('playing');
-                } else {
-                  setMediaStatus('paused');
-                }
-                if (isLoading) {
-                  setIsLoading(false);
-                }
-              }
-            }}
-            onError={() => handleMediaError('视频加载失败')}
-          />
+          <View style={styles.videoContainer}>
+            <VideoView style={styles.video} player={player} allowsPictureInPicture />
+          </View>
         )}
       </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  videoContainer: {
+    width: '100%',
+    aspectRatio: 16 / 9,
+  },
+  video: {
+    width: '100%',
+    height: '100%',
+  },
+});

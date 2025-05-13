@@ -6,7 +6,7 @@ import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
 
 import { BREAK_POINT } from '~/components/ui/custom-header';
 import { useAuth } from '~/store/auth';
-import { useScrollStore } from '~/store/scroll';
+import { useTabsScrollStore } from '~/store/scroll';
 
 interface ItemEntry {
   title: string;
@@ -182,7 +182,7 @@ const OtherEntriesSection = () => {
 };
 
 export default function MinePage() {
-  const { mineScrollY, updateMineScroll, activeTab } = useScrollStore();
+  const { mineScrollY, updateMineScroll, activeTab } = useTabsScrollStore();
 
   // 设置滚动监听
   React.useEffect(() => {

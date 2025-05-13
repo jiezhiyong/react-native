@@ -8,7 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { BREAK_POINT } from '~/components/ui/custom-header';
 import { Text } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
-import { useScrollStore } from '~/store/scroll';
+import { useTabsScrollStore } from '~/store/scroll';
 
 const demos: { name: string; desc: string; supports: string }[] = [
   // 设备信息等
@@ -108,7 +108,7 @@ const demos: { name: string; desc: string; supports: string }[] = [
 export default function HomeScreen() {
   const router = useRouter();
 
-  const { discoverScrollY, updateDiscoverScroll, activeTab } = useScrollStore();
+  const { discoverScrollY, updateDiscoverScroll, activeTab } = useTabsScrollStore();
 
   // 设置滚动监听
   React.useEffect(() => {

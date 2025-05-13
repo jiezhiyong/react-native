@@ -1,22 +1,41 @@
 import { useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import * as React from 'react';
-import { Animated, View } from 'react-native';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Animated, Image, RefreshControl, View } from 'react-native';
+import { ResponsiveGrid } from 'react-native-flexible-grid';
 
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
 import { BREAK_POINT } from '~/components/ui/custom-header';
-import { Text } from '~/components/ui/text';
-import { useI18nContext } from '~/i18n/i18n-react';
-import { useScrollStore } from '~/store/scroll';
+import { sleep } from '~/lib/utils';
+import { useTabsScrollStore } from '~/store/scroll';
+
+interface DataProp {
+  id: number;
+  widthRatio?: number;
+  heightRatio?: number;
+  imageUrl?: string;
+}
 
 export default function HomeScreen() {
-  const router = useRouter();
+  const [data, setData] = useState<DataProp[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const { homeScrollY, updateHomeScroll, activeTab } = useScrollStore();
-  const { LL, locale } = useI18nContext();
+  const { homeScrollY, updateHomeScroll, activeTab } = useTabsScrollStore();
+
+  let idCounter = useRef(0);
+
+  // 处理下拉刷新
+  const handleRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await sleep(1500);
+    const initData = getData(1);
+    setData(initData);
+    setRefreshing(false);
+  }, []);
 
   // 设置滚动监听
-  React.useEffect(() => {
+  useEffect(() => {
     const id = homeScrollY.addListener(({ value }) => {
       updateHomeScroll(value);
       if (activeTab === 'home') {
@@ -25,28 +44,93 @@ export default function HomeScreen() {
     });
 
     return () => homeScrollY.removeListener(id);
-  }, [activeTab]);
+  }, [activeTab, homeScrollY, updateHomeScroll]);
+
+  // 检测滚动
+  const handleScroll = useCallback(
+    (event: any) => {
+      Animated.event([{ nativeEvent: { contentOffset: { y: homeScrollY } } }], {
+        useNativeDriver: false,
+      })(event);
+    },
+    [homeScrollY]
+  );
+
+  // 获取 Mock 数据
+  const getData = (repeatedTimes: number) => {
+    const originalData = [
+      { widthRatio: 1, heightRatio: 4 },
+      { widthRatio: 1, heightRatio: 3 },
+      { widthRatio: 1, heightRatio: 4 },
+      { widthRatio: 1, heightRatio: 5 },
+      { widthRatio: 1, heightRatio: 5 },
+      { widthRatio: 1, heightRatio: 3 },
+    ];
+
+    let clonedData: DataProp[] = [];
+    for (let i = 0; i < repeatedTimes; i++) {
+      const newData = originalData.map((item) => ({
+        ...item,
+        id: ++idCounter.current,
+      }));
+      clonedData = [...clonedData, ...newData];
+    }
+
+    return clonedData;
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    if (isLoadingMore) return;
+    setIsLoadingMore(true);
+
+    await sleep(1500);
+    const newData = getData(1);
+    setData((prevData) => [...prevData, ...newData]);
+    setIsLoadingMore(false);
+  };
+
+  const renderFooter = () => {
+    if (!isLoadingMore) return null;
+    return (
+      <View className="py-4">
+        <ActivityIndicator />
+      </View>
+    );
+  };
+
+  const renderItem = ({ item }: { item: DataProp }) => {
+    return (
+      <View className="flex-1 w-full px-1 pt-2">
+        <Image
+          source={require('~/assets/images/home-header-bg.jpg')}
+          className="w-full h-full rounded-xl border border-border p-1"
+          resizeMode="cover"
+        />
+      </View>
+    );
+  };
 
   return (
-    <Animated.ScrollView
-      className="flex-1"
-      onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: homeScrollY } } }], { useNativeDriver: false })}
-      scrollEventThrottle={16}
-    >
-      <View className="px-5 mt-5">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-          <Card key={item} className="mb-4">
-            <CardHeader>
-              <CardTitle>内容卡片 {item}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Text className="text-muted-foreground">
-                这是一个示例卡片，用于演示滚动效果。当你向上滚动时，Header的背景图片会逐渐变为白色。
-              </Text>
-            </CardContent>
-          </Card>
-        ))}
-      </View>
-    </Animated.ScrollView>
+    <ResponsiveGrid
+      keyExtractor={(item: DataProp) => item.id.toString()}
+      onScroll={handleScroll}
+      scrollEventInterval={16}
+      maxItemsPerColumn={2}
+      data={data}
+      renderItem={renderItem}
+      itemUnitHeight={80}
+      HeaderComponent={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+      FooterComponent={renderFooter}
+      onEndReached={loadData}
+      onEndReachedThreshold={0.2}
+      style={{
+        paddingTop: 16,
+        paddingHorizontal: 16,
+      }}
+    />
   );
 }

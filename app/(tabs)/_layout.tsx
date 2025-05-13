@@ -6,11 +6,12 @@ import { HapticTab } from '~/components/HapticTab';
 import { BREAK_POINT, DiscoverHeader, HomeHeader, MineHeader } from '~/components/ui/custom-header';
 import TabBarBackground from '~/components/ui/TabBarBackground';
 import { useColorScheme } from '~/hooks/useColorScheme';
-import { useScrollStore } from '~/store/scroll';
+import { useTabsScrollStore } from '~/store/scroll';
 
 export default function TabLayout() {
   const { colorScheme } = useColorScheme();
-  const { setActiveTab, homeScrollValue, mineScrollValue, discoverScrollValue, setStatusBarStyle } = useScrollStore();
+  const { setActiveTab, homeScrollValue, mineScrollValue, discoverScrollValue, setStatusBarStyle } =
+    useTabsScrollStore();
 
   // 根据当前tab的滚动值设置状态栏样式
   const handleTabPress = (tab: 'home' | 'mine' | 'discover') => {
