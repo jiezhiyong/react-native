@@ -104,7 +104,7 @@ export default function HomeScreen() {
 
   const renderItem = ({ item }: { item: DataProp }) => {
     return (
-      <View className="flex-1 w-full px-1 pt-2">
+      <View className="flex-1 w-full px-1 pt-2 bg-red-100">
         <Image
           source={require('~/assets/images/home-header-bg.jpg')}
           className="w-full h-full rounded-xl border border-border p-1"
