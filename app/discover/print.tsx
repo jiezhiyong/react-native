@@ -1,4 +1,3 @@
-// TODO: 取消打印触发屏幕横屏
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { useState } from 'react';

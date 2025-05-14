@@ -66,7 +66,7 @@ export default function ExpoWebBrowserScreen() {
           </>
         ) : null}
 
-        {/* TODO: 待实现 */}
+        {/* TODO: 待实现 WebBrowser.openAuthSessionAsync */}
         {/* <Button onPress={openAuthSession}>
           <Text>打开认证页面</Text>
         </Button> */}

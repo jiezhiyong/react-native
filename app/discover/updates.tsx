@@ -1,4 +1,4 @@
-// TODO: 待完成
+// TODO: 待完成 updates
 import * as Updates from 'expo-updates';
 import { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';

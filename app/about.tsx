@@ -1,19 +1,22 @@
 import Constants from 'expo-constants';
+import * as StoreReview from 'expo-store-review';
 import * as Updates from 'expo-updates';
 import { ChevronRight } from 'lucide-react-native';
-import React, { useEffect } from 'react';
-import { Image, Linking, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Image, Linking, Text, TouchableOpacity, View } from 'react-native';
 
 interface AboutItemProps {
   title: string;
   desc?: string;
   onPress?: () => void;
+  loading?: boolean;
 }
 
-const AboutItem = ({ title, desc, onPress }: AboutItemProps) => {
+const AboutItem = ({ title, desc, onPress, loading }: AboutItemProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={loading}
       className="flex-row items-center justify-between p-5 border-b border-gray-100"
       activeOpacity={0.7}
     >
@@ -21,7 +24,7 @@ const AboutItem = ({ title, desc, onPress }: AboutItemProps) => {
         <Text className="flex-1">{title}</Text>
         {desc && <Text className="text-muted-foreground">{desc}</Text>}
       </View>
-      <ChevronRight size={20} color="#ccc" />
+      {loading ? <ActivityIndicator /> : <ChevronRight size={20} color="#ccc" />}
     </TouchableOpacity>
   );
 };
@@ -42,6 +45,7 @@ export default function AboutScreen() {
   const appName = Constants.expoConfig?.name || '?';
 
   const { isUpdateAvailable, isUpdatePending } = Updates.useUpdates();
+  const [isRequestingReviewLoading, setIsRequestingReviewLoading] = useState(false);
 
   useEffect(() => {
     if (isUpdatePending) {
@@ -49,6 +53,21 @@ export default function AboutScreen() {
       Updates.reloadAsync();
     }
   }, [isUpdatePending]);
+
+  const requestReview = async () => {
+    try {
+      setIsRequestingReviewLoading(true);
+      if (await StoreReview.hasAction()) {
+        await StoreReview.requestReview();
+      } else {
+        alert('无法请求评分');
+      }
+    } catch (error) {
+      alert((error as Error).message);
+    } finally {
+      setIsRequestingReviewLoading(false);
+    }
+  };
 
   return (
     <View className="flex-1 bg-muted p-5">
@@ -63,6 +82,7 @@ export default function AboutScreen() {
 
       {/* 功能列表 */}
       <View className="bg-background mt-4 rounded-xl">
+        {/* TODO: 检查更新 */}
         <AboutItem
           title="检查更新"
           desc={isUpdateAvailable ? '有新版本' : '已是最新版本'}
@@ -78,8 +98,7 @@ export default function AboutScreen() {
             }
           }}
         />
-        {/* TODO: 去评分 */}
-        <AboutItem title="去评分" onPress={() => Linking.openURL('https://apps.apple.com/cn/app/id414478124')} />
+        <AboutItem title="评分" onPress={() => requestReview()} loading={isRequestingReviewLoading} />
         <AboutItem title="联系电话" desc="400 123 4567" onPress={() => Linking.openURL('tel://4001234567')} />
       </View>
 

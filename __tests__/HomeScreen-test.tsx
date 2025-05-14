@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react-native';
 
-import HomeScreen, { CustomText } from '~/app/test/jest';
+import HomeScreen, { CustomText } from '~/app/jest';
 
 describe('<HomeScreen />', () => {
   test('Text renders correctly on HomeScreen', () => {

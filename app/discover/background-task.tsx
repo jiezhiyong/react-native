@@ -1,4 +1,4 @@
-// TODO: 待完成
+// TODO: 待完成 expo-background-task
 import * as BackgroundTask from 'expo-background-task';
 import * as TaskManager from 'expo-task-manager';
 import { useEffect, useState } from 'react';

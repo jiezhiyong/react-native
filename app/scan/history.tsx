@@ -1,15 +1,59 @@
 import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import * as Clipboard from 'expo-clipboard';
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { ArrowLeft, CheckCircle, Copy, FileX, Trash2 } from 'lucide-react-native';
-import React, { useCallback, useRef, useState } from 'react';
-import { Alert, FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { Circle, CircleCheck, FileX, Trash2 } from 'lucide-react-native';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { Alert, FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
+
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
 
 import { type ScanHistoryItem, useScanHistoryStore } from '../../store/scan-history';
+
+// 编辑工具栏组件的属性接口
+interface EditToolbarProps {
+  selectedItems: string[];
+  historyLength: number;
+  toggleSelectAll: () => void;
+  handleBatchDelete: () => void;
+}
+
+// 底部编辑工具栏组件
+const EditToolbar: React.FC<EditToolbarProps> = React.memo(
+  ({ selectedItems, historyLength, toggleSelectAll, handleBatchDelete }) => {
+    // 计算是否全选和是否有选中项
+    const isAllSelected = selectedItems.length === historyLength;
+    const hasSelectedItems = selectedItems.length > 0;
+
+    return (
+      <View className="pl-5 pr-3 pt-3 flex-row justify-between items-center border-t border-gray-100">
+        <TouchableOpacity onPress={toggleSelectAll} className="flex-row items-center gap-2">
+          {isAllSelected ? (
+            <CircleCheck size={20} strokeWidth={1.5} />
+          ) : (
+            <Circle size={20} strokeWidth={1.5} color="#eaeaea" />
+          )}
+          <Text>全选</Text>
+        </TouchableOpacity>
+
+        <Button
+          variant="destructive"
+          onPress={handleBatchDelete}
+          disabled={!hasSelectedItems}
+          className="rounded-full min-w-28"
+        >
+          <Text className="text-white font-medium">删除</Text>
+        </Button>
+      </View>
+    );
+  }
+);
+
+// 设置组件的displayName
+EditToolbar.displayName = 'EditToolbar';
 
 export default function HistoryScreen() {
   const router = useRouter();
@@ -23,10 +67,10 @@ export default function HistoryScreen() {
   const openedRowRef = useRef<Swipeable | null>(null);
 
   // 复制内容到剪贴板
-  const copyToClipboard = async (content: string) => {
+  const copyToClipboard = useCallback(async (content: string) => {
     await Clipboard.setStringAsync(content);
     Alert.alert('复制成功', '内容已复制到剪贴板');
-  };
+  }, []);
 
   // 打开URL
   const openUrl = useCallback(
@@ -61,7 +105,7 @@ export default function HistoryScreen() {
   );
 
   // 批量删除选中的历史记录
-  const handleBatchDelete = () => {
+  const handleBatchDelete = useCallback(() => {
     if (selectedItems.length === 0) {
       Alert.alert('提示', '请先选择要删除的记录');
       return;
@@ -82,191 +126,207 @@ export default function HistoryScreen() {
         style: 'destructive',
       },
     ]);
-  };
+  }, [selectedItems, history.length, removeMultipleHistory]);
 
   // 切换选中状态
-  const toggleSelect = (id: string) => {
+  const toggleSelect = useCallback((id: string) => {
     setSelectedItems((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
-  };
+  }, []);
 
   // 全选/取消全选
-  const toggleSelectAll = () => {
+  const toggleSelectAll = useCallback(() => {
     if (selectedItems.length === history.length) {
       setSelectedItems([]);
     } else {
       setSelectedItems(history.map((item) => item.id));
     }
-  };
-
-  // 渲染右滑删除按钮
-  const renderRightActions = useCallback(
-    (id: string) => {
-      return (
-        <Animated.View className="flex-row" entering={FadeInRight} exiting={FadeOutRight}>
-          <TouchableOpacity
-            className="bg-red-500 w-20 h-full justify-center items-center"
-            onPress={() => handleDelete(id)}
-          >
-            <Trash2 color="white" size={24} />
-            <Text className="text-white mt-1">删除</Text>
-          </TouchableOpacity>
-        </Animated.View>
-      );
-    },
-    [handleDelete]
-  );
+  }, [selectedItems.length, history]);
 
   // 格式化时间
-  const formatDate = (timestamp: number) => {
+  const formatDate = useCallback((timestamp: number) => {
     const date = new Date(timestamp);
     return format(date, 'yyyy-MM-dd', { locale: zhCN });
-  };
+  }, []);
+
+  // 单个记录项组件接口
+  interface HistoryItemProps {
+    item: ScanHistoryItem;
+    isEditing: boolean;
+    isSelected: boolean;
+    onToggleSelect: (id: string) => void;
+    onOpen: (content: string, isUrl: boolean) => void;
+    onDelete: (id: string) => void;
+    formatDateFn: (timestamp: number) => string;
+  }
+
+  // 单个记录项组件
+  const HistoryItem: React.FC<HistoryItemProps> = React.memo((props) => {
+    const { item, isEditing, isSelected, onToggleSelect, onOpen, onDelete, formatDateFn } = props;
+
+    // 处理点击事件
+    function handlePress() {
+      if (isEditing) {
+        onToggleSelect(item.id);
+        return;
+      }
+
+      onOpen(item.content, item.isUrl);
+    }
+
+    // 处理删除事件
+    function handleDeleteItem() {
+      onDelete(item.id);
+    }
+
+    return (
+      <View className="flex-row ml-5 mr-3 gap-3 items-center overflow-hidden border-b border-gray-100">
+        <TouchableOpacity className="flex-1 py-3 items-center flex-row gap-3 overflow-hidden" onPress={handlePress}>
+          {isEditing && (
+            <>
+              {isSelected ? (
+                <CircleCheck size={20} strokeWidth={1.5} />
+              ) : (
+                <Circle size={20} strokeWidth={1.5} color="#eaeaea" />
+              )}
+            </>
+          )}
+
+          <View>
+            <Text className="font-medium" numberOfLines={1}>
+              {item.content}
+            </Text>
+            <View className="flex-row justify-between items-center mt-1">
+              <Text className="text-muted-foreground text-xs">{formatDateFn(item.timestamp)}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        {isEditing && (
+          <Button variant="ghost" onPress={handleDeleteItem} size="icon" className="shrink-0">
+            <Trash2 size={18} strokeWidth={1.5} color="red" />
+          </Button>
+        )}
+      </View>
+    );
+  });
+
+  // 设置单项组件的displayName
+  HistoryItem.displayName = 'HistoryItem';
+
+  // 打开内容
+  const handleOpenContent = useCallback(
+    (content: string, isUrl: boolean) => {
+      if (isUrl) {
+        openUrl(content);
+      } else {
+        copyToClipboard(content);
+      }
+    },
+    [openUrl, copyToClipboard]
+  );
 
   // 单个记录项目的渲染函数
   const renderItem = useCallback(
     ({ item }: { item: ScanHistoryItem }) => {
-      // 编辑模式下禁用滑动删除
-      if (isEditing) {
-        return (
-          <View className="bg-background border-b border-gray-100 p-4">
-            <View className="flex-row items-center">
-              <TouchableOpacity onPress={() => toggleSelect(item.id)} className="mr-3">
-                {selectedItems.includes(item.id) ? (
-                  <CheckCircle size={24} color="#3b82f6" fill="#3b82f6" />
-                ) : (
-                  <View className="w-6 h-6 rounded-full border-2 border-gray-300" />
-                )}
-              </TouchableOpacity>
-
-              <View className="flex-1">
-                <Text className="text-gray-800 font-medium" numberOfLines={1}>
-                  {item.content}
-                </Text>
-                <Text className="text-muted-foreground text-xs mt-1">{formatDate(item.timestamp)}</Text>
-              </View>
-            </View>
-          </View>
-        );
-      }
-
-      // 正常模式下支持滑动删除
+      const isSelected = selectedItems.includes(item.id);
       return (
-        <Swipeable
-          renderRightActions={() => renderRightActions(item.id)}
-          onSwipeableOpen={() => {
-            if (openedRowRef.current && openedRowRef.current !== null) {
-              openedRowRef.current.close();
-            }
-          }}
-          ref={(ref) => {
-            if (ref) {
-              openedRowRef.current = ref;
-            }
-          }}
-        >
-          <TouchableOpacity
-            className="bg-background border-b border-gray-100 p-4"
-            onPress={() => {
-              if (item.isUrl) {
-                openUrl(item.content);
-              } else {
-                copyToClipboard(item.content);
-              }
-            }}
-          >
-            <Text className="text-gray-800 font-medium" numberOfLines={1}>
-              {item.content}
-            </Text>
-            <View className="flex-row justify-between items-center mt-1">
-              <Text className="text-muted-foreground text-xs">{formatDate(item.timestamp)}</Text>
-              {item.isUrl ? (
-                <Text className="text-blue-500 text-xs">链接</Text>
-              ) : (
-                <TouchableOpacity onPress={() => copyToClipboard(item.content)} className="flex-row items-center">
-                  <Copy size={12} color="#6b7280" />
-                  <Text className="text-muted-foreground text-xs ml-1">复制</Text>
-                </TouchableOpacity>
-              )}
-            </View>
-          </TouchableOpacity>
-        </Swipeable>
+        <HistoryItem
+          item={item}
+          isEditing={isEditing}
+          isSelected={isSelected}
+          onToggleSelect={toggleSelect}
+          onOpen={handleOpenContent}
+          onDelete={handleDelete}
+          formatDateFn={formatDate}
+        />
       );
     },
-    [isEditing, selectedItems, openedRowRef, openUrl, renderRightActions]
+    [isEditing, selectedItems, toggleSelect, handleOpenContent, handleDelete, formatDate, HistoryItem]
   );
 
   // 空状态渲染
-  const renderEmptyState = () => (
-    <View className="flex-1 justify-center items-center p-5">
-      <FileX size={120} color="#6b7280" />
-      <Text className="text-muted-foreground text-center mt-4">暂无扫描记录</Text>
-      <Text className="text-secondary-foreground text-center mt-2 text-sm">扫描二维码后会自动保存在这里</Text>
-      <TouchableOpacity onPress={() => router.push('/scan')} className="mt-6 bg-blue-500 py-3 px-6 rounded-full">
-        <Text className="text-white font-medium">去扫描</Text>
-      </TouchableOpacity>
-    </View>
+  const renderEmptyState = useCallback(
+    () => (
+      <View className="flex-1 justify-center items-center p-5">
+        <FileX size={120} color="#6b7280" />
+        <Text className="text-muted-foreground text-center mt-4">暂无扫描记录</Text>
+        <Text className="text-secondary-foreground text-center mt-2 text-sm">扫描二维码后会自动保存在这里</Text>
+        <TouchableOpacity onPress={() => router.back()} className="mt-6 bg-blue-500 py-3 px-6 rounded-full">
+          <Text className="text-white font-medium">去扫描</Text>
+        </TouchableOpacity>
+      </View>
+    ),
+    [router]
   );
 
+  // 编辑切换处理
+  const handleToggleEdit = useCallback(() => {
+    if (isEditing) {
+      setIsEditing(false);
+      setSelectedItems([]);
+    } else {
+      setIsEditing(true);
+    }
+  }, [isEditing]);
+
+  // 头部编辑按钮
+  const headerRight = useMemo(() => {
+    // 当历史记录为空时不显示按钮
+    if (history.length === 0) return undefined;
+
+    // 定义头部编辑按钮组件
+    function HeaderRightButton() {
+      return (
+        <TouchableOpacity onPress={handleToggleEdit}>
+          <Text className="text-blue-500 font-medium">{isEditing ? '取消' : '编辑'}</Text>
+        </TouchableOpacity>
+      );
+    }
+
+    return HeaderRightButton;
+  }, [history.length, isEditing, handleToggleEdit]);
+
+  // 缓存FlatList配置
+  const flatListProps = useMemo(
+    () => ({
+      keyExtractor: (item: ScanHistoryItem) => item.id,
+      data: history,
+      renderItem,
+      contentContainerStyle: { flexGrow: 1 } as const,
+      ListEmptyComponent: renderEmptyState,
+    }),
+    [history, renderItem, renderEmptyState]
+  );
+
+  // 缓存EditToolbar组件
+  const editToolbar = useMemo(() => {
+    if (!isEditing || history.length === 0) return null;
+
+    return (
+      <EditToolbar
+        selectedItems={selectedItems}
+        historyLength={history.length}
+        toggleSelectAll={toggleSelectAll}
+        handleBatchDelete={handleBatchDelete}
+      />
+    );
+  }, [isEditing, history.length, selectedItems, toggleSelectAll, handleBatchDelete]);
+
   return (
-    <View className="flex-1 bg-gray-50">
+    <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="dark" />
-
-      {/* 头部导航栏 */}
-      <View className="bg-background pt-12 pb-4 border-b border-gray-200">
-        <View className="flex-row items-center justify-center px-4">
-          <TouchableOpacity onPress={() => router.back()} className="absolute left-4 top-1">
-            <ArrowLeft size={24} color="#000" />
-          </TouchableOpacity>
-          <Text className="text-black font-medium text-lg">历史记录</Text>
-
-          {history.length > 0 && (
-            <TouchableOpacity
-              onPress={() => {
-                if (isEditing) {
-                  setIsEditing(false);
-                  setSelectedItems([]);
-                } else {
-                  setIsEditing(true);
-                }
-              }}
-              className="absolute right-4 top-1"
-            >
-              <Text className="text-blue-500 font-medium">{isEditing ? '取消' : '编辑'}</Text>
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-
-      {/* 列表内容 */}
-      <FlatList
-        data={history}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{ flexGrow: 1 }}
-        ListEmptyComponent={renderEmptyState}
+      <Stack.Screen
+        options={{
+          title: '历史记录',
+          headerRight: headerRight,
+        }}
       />
 
-      {/* 编辑模式下的底部工具栏 */}
-      {isEditing && history.length > 0 && (
-        <View className="bg-background border-t border-gray-200 p-4 flex-row justify-between items-center">
-          <TouchableOpacity onPress={toggleSelectAll} className="flex-row items-center">
-            {selectedItems.length === history.length ? (
-              <CheckCircle size={20} color="#3b82f6" fill="#3b82f6" />
-            ) : (
-              <View className="w-5 h-5 rounded-full border-2 border-gray-300" />
-            )}
-            <Text className="ml-2 text-gray-700">全选</Text>
-          </TouchableOpacity>
+      {/* 列表内容 */}
+      <FlatList {...flatListProps} />
 
-          <TouchableOpacity
-            onPress={handleBatchDelete}
-            className={`px-6 py-2 rounded-full ${selectedItems.length > 0 ? 'bg-red-500' : 'bg-gray-300'}`}
-            disabled={selectedItems.length === 0}
-          >
-            <Text className="text-white font-medium">删除</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-    </View>
+      {/* 编辑模式下的底部工具栏 */}
+      {editToolbar}
+    </SafeAreaView>
   );
 }

@@ -1,4 +1,4 @@
-// TODO: 待完成
+// TODO: 待完成 stripe
 // import {
 //   confirmPlatformPayPayment,
 //   isPlatformPaySupported,

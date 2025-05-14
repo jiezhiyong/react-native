@@ -1,11 +1,12 @@
 import { useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
-import { Terminal } from 'lucide-react-native';
+import { Search, Terminal, X } from 'lucide-react-native';
 import * as React from 'react';
-import { Animated, TouchableOpacity } from 'react-native';
+import { Animated, TouchableOpacity, View } from 'react-native';
 
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { BREAK_POINT } from '~/components/ui/custom-header';
+import { Input } from '~/components/ui/input';
 import { Text } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
 import { useTabsScrollStore } from '~/store/scroll';
@@ -107,6 +108,8 @@ const demos: { name: string; desc: string; supports: string }[] = [
 
 export default function HomeScreen() {
   const router = useRouter();
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [filteredDemos, setFilteredDemos] = React.useState(demos);
 
   const { discoverScrollY, updateDiscoverScroll, activeTab } = useTabsScrollStore();
 
@@ -122,17 +125,62 @@ export default function HomeScreen() {
     return () => discoverScrollY.removeListener(id);
   }, [activeTab]);
 
+  // 处理搜索逻辑
+  React.useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setFilteredDemos(demos);
+      return;
+    }
+
+    const query = searchQuery.toLowerCase();
+    const filtered = demos.filter(
+      (item) =>
+        item.name.toLowerCase().includes(query) ||
+        item.desc.toLowerCase().includes(query) ||
+        item.supports.toLowerCase().includes(query)
+    );
+    setFilteredDemos(filtered);
+  }, [searchQuery]);
+
+  // 清除搜索
+  const handleClearSearch = () => {
+    setSearchQuery('');
+  };
+
   return (
     <Animated.FlatList
       className="px-5 pt-5 flex-1 bg-muted/80"
-      data={demos}
+      data={filteredDemos}
       onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: discoverScrollY } } }], {
         useNativeDriver: false,
       })}
       scrollEventThrottle={16}
+      ListHeaderComponent={
+        <View className="mb-4">
+          <View className="flex-row items-center bg-background rounded-md border border-input">
+            <View className="pl-3">
+              <Search size={18} color="#9ca3af" />
+            </View>
+            <Input
+              className="flex-1 border-0 bg-transparent"
+              placeholder="搜索功能、描述或平台..."
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+            />
+            {searchQuery.length > 0 && (
+              <TouchableOpacity className="pr-3" onPress={handleClearSearch}>
+                <X size={18} color="#9ca3af" />
+              </TouchableOpacity>
+            )}
+          </View>
+          {filteredDemos.length === 0 && (
+            <Text className="text-center mt-4 text-muted-foreground">没有找到匹配的项目</Text>
+          )}
+        </View>
+      }
       renderItem={({ item, index }) => (
         <TouchableOpacity
-          className={cn('mb-2', index === demos.length - 1 && 'mb-5')}
+          className={cn('mb-2', index === filteredDemos.length - 1 && 'mb-5')}
           onPress={() => router.navigate(`/discover/${item.name}` as any)}
         >
           <Alert icon={Terminal}>

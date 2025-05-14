@@ -198,8 +198,6 @@ npx react-native bundle --platform ios --dev true --entry-file index.js --bundle
 
 ## 待办事项
 
-- All sdk demo
-- Webview
 - PDF预览器
 - Webview sdk
 - 包含调试面板，但不包含 dev-client 的 Test 变体包
