@@ -413,9 +413,6 @@ importers:
       react-native-device-info:
         specifier: ^14.0.4
         version: 14.0.4(react-native@0.76.9(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@react-native-community/cli@18.0.0(typescript@5.3.3))(@types/react@18.3.21)(encoding@0.1.13)(react@18.3.1))
-      react-native-flexible-grid:
-        specifier: ^0.2.4
-        version: 0.2.4(react-native@0.76.9(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@react-native-community/cli@18.0.0(typescript@5.3.3))(@types/react@18.3.21)(encoding@0.1.13)(react@18.3.1))(react@18.3.1)
       react-native-gesture-handler:
         specifier: ~2.20.2
         version: 2.20.2(react-native@0.76.9(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@react-native-community/cli@18.0.0(typescript@5.3.3))(@types/react@18.3.21)(encoding@0.1.13)(react@18.3.1))(react@18.3.1)
@@ -7453,12 +7450,6 @@ packages:
       react-native: '*'
       react-native-gesture-handler: '>= 2.0.0'
       react-native-reanimated: '>= 2.0.0'
-
-  react-native-flexible-grid@0.2.4:
-    resolution: {integrity: sha512-iZ3csxv5mqERZ/1dRoXW6gHgHdBjWFC2zYS1+ZYmEhsEUoEx2Q2BeDIt/4FznSq+D2arlnDHHQWswHJWfAX43w==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
 
   react-native-gesture-handler@2.20.2:
     resolution: {integrity: sha512-HqzFpFczV4qCnwKlvSAvpzEXisL+Z9fsR08YV5LfJDkzuArMhBu2sOoSPUF/K62PCoAb+ObGlTC83TKHfUd0vg==}
@@ -17463,11 +17454,6 @@ snapshots:
       react-native-gesture-handler: 2.20.2(react-native@0.76.9(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@react-native-community/cli@18.0.0(typescript@5.3.3))(@types/react@18.3.21)(encoding@0.1.13)(react@18.3.1))(react@18.3.1)
       react-native-reanimated: 3.16.2(@babel/core@7.26.10)(react-native@0.76.9(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@react-native-community/cli@18.0.0(typescript@5.3.3))(@types/react@18.3.21)(encoding@0.1.13)(react@18.3.1))(react@18.3.1)
       use-latest-callback: 0.2.3(react@18.3.1)
-
-  react-native-flexible-grid@0.2.4(react-native@0.76.9(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@react-native-community/cli@18.0.0(typescript@5.3.3))(@types/react@18.3.21)(encoding@0.1.13)(react@18.3.1))(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-      react-native: 0.76.9(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@react-native-community/cli@18.0.0(typescript@5.3.3))(@types/react@18.3.21)(encoding@0.1.13)(react@18.3.1)
 
   react-native-gesture-handler@2.20.2(react-native@0.76.9(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@react-native-community/cli@18.0.0(typescript@5.3.3))(@types/react@18.3.21)(encoding@0.1.13)(react@18.3.1))(react@18.3.1):
     dependencies:
