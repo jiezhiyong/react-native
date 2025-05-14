@@ -20,6 +20,7 @@ export default function HomeScreen() {
   const [data, setData] = useState<DataItem[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isNoMore, setIsNoMore] = useState(false);
 
   const { homeScrollY, updateHomeScroll, activeTab } = useTabsScrollStore();
 
@@ -92,30 +93,30 @@ export default function HomeScreen() {
     setIsLoadingMore(false);
   };
 
+  const calculateItemHeight = (item: DataItem) => {
+    return 8 + 2 + 24 + 150 + 49 * item.skeletonNum;
+  };
+
   const renderFooter = () => {
-    if (!isLoadingMore) return null;
     return (
       <View className="py-4">
-        <ActivityIndicator />
+        {isNoMore ? (
+          <Text className="text-center text-sm text-muted-foreground">没有更多了</Text>
+        ) : (
+          <ActivityIndicator />
+        )}
       </View>
     );
   };
 
-  const renderItem = ({ item }: { item: DataItem }) => {
+  const renderItem = useCallback(({ item }: { item: DataItem }) => {
     return (
-      <View className="px-1 pt-2">
+      <View className="px-1 pt-2" style={{ height: calculateItemHeight(item) }}>
         <View className="flex-1 w-full overflow-hidden rounded-xl border border-border p-3">
-          <View className="w-full aspect-square">
-            <Image
-              source={require('~/assets/images/home-header-bg.jpg')}
-              className="w-full h-auto"
-              style={{ aspectRatio: 1, borderRadius: 6 }}
-              contentFit="cover"
-            />
-          </View>
+          <View className="w-full aspect-square bg-muted rounded-md" style={{ height: 150 }} />
 
           {Array.from({ length: item.skeletonNum }).map((_, index) => (
-            <View key={index}>
+            <View key={index} style={{ height: 50 }}>
               <Skeleton className="w-full h-5 rounded-md mt-2" />
               <Skeleton className="w-3/5 h-5 rounded-md mt-2" />
             </View>
@@ -123,15 +124,17 @@ export default function HomeScreen() {
         </View>
       </View>
     );
-  };
+  }, []);
 
   return (
     <MasonryFlashList
       keyExtractor={(item) => item.id.toString()}
       onScroll={handleScroll}
+      scrollEventThrottle={16}
       refreshing={refreshing}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
       onEndReached={loadData}
+      onEndReachedThreshold={0.5}
       data={data}
       numColumns={2}
       renderItem={renderItem}
@@ -147,7 +150,11 @@ export default function HomeScreen() {
       }
       ListEmptyComponent={null}
       contentContainerStyle={{ paddingHorizontal: 16 }}
-      optimizeItemArrangement={false}
+      estimatedItemSize={274}
+      optimizeItemArrangement={true}
+      overrideItemLayout={(layoutObject, sourceData) => {
+        layoutObject.size = calculateItemHeight(sourceData);
+      }}
     />
   );
 }

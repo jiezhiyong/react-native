@@ -219,12 +219,12 @@ export default function NoticeScreen() {
 
   // 渲染空状态
   const renderEmpty = useCallback(() => {
-    if (loading && !refreshing) return null;
+    if (loading || refreshing) return null;
 
     return (
       <View className="flex-1 justify-center items-center py-10">
         <Mail size={48} color="#d1d5db" />
-        <Text className="mt-4 text-secondary-foreground">暂无消息通知</Text>
+        <Text className="mt-4 text-secondary-foreground">暂无消息</Text>
       </View>
     );
   }, [loading, refreshing]);
