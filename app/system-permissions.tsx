@@ -1,14 +1,21 @@
-import { Camera, ChevronRight, Image, MapPin, Mic, UserRound } from 'lucide-react-native';
-import React from 'react';
-import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import * as Audio from 'expo-audio';
+import * as Camera from 'expo-camera';
+import * as Contacts from 'expo-contacts';
+import * as Linking from 'expo-linking';
+import * as Location from 'expo-location';
+import * as MediaLibrary from 'expo-media-library';
+import { Camera as CameraIcon, ChevronRight, Image, MapPin, Mic, UserRound } from 'lucide-react-native';
+import React, { useState } from 'react';
+import { Button, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
+import { useEffectAsync } from '~/hooks/use-effect-async';
 import { cn } from '~/lib/utils';
 
 interface PermissionItemProps {
   title: string;
   description: string;
   icon: React.ReactNode;
-  status: 'enabled' | 'disabled';
+  status?: boolean;
   onPress: () => void;
   last?: boolean;
 }
@@ -21,7 +28,9 @@ const PermissionItem = ({ title, description, icon, status, onPress, last }: Per
           <View className="items-center justify-center">{icon}</View>
           <Text className="text-gray-800 text-lg flex-1">{title}</Text>
           <View className="flex-row items-center gap-1">
-            <Text className="text-secondary-foreground">{status === 'enabled' ? '已开启' : '去设置'}</Text>
+            <Text className={cn('text-secondary-foreground', status ? 'text-green-500' : 'text-red-500')}>
+              {status ? '已开启' : '去设置'}
+            </Text>
             <ChevronRight size={18} color="#ccc" />
           </View>
         </View>
@@ -34,10 +43,29 @@ const PermissionItem = ({ title, description, icon, status, onPress, last }: Per
   );
 };
 
-// TODO: 打开APP权限设置
 export default function SystemPermissionsScreen() {
-  const handlePermissionPress = (permissionName: string) => {
-    console.log(`处理权限设置: ${permissionName}`);
+  const [mediaLibraryPermissionResponse, requestMediaLibraryPermission] = MediaLibrary.usePermissions();
+  const [cameraPermissionResponse, requestCameraPermission] = Camera.useCameraPermissions();
+  const [locationPermissionResponse, requestLocationPermission] = Location.useForegroundPermissions();
+  const [contactsPermissionResponse, setContactsPermissionResponse] = useState<Camera.PermissionResponse | null>(null);
+  const [audioPermissionResponse, setAudioPermissionResponse] = useState<Audio.PermissionResponse | null>(null);
+
+  // 查询相关权限的状态
+  useEffectAsync(async () => {
+    Promise.all([Contacts.getPermissionsAsync(), Audio.getRecordingPermissionsAsync()]).then(
+      ([contactsPermission, audioPermission]) => {
+        setContactsPermissionResponse(contactsPermission);
+        setAudioPermissionResponse(audioPermission);
+      }
+    );
+  }, []);
+
+  const handlePermissionPress = async () => {
+    try {
+      await Linking.openSettings();
+    } catch (error) {
+      console.error('无法打开设置页面', error);
+    }
   };
 
   return (
@@ -47,45 +75,49 @@ export default function SystemPermissionsScreen() {
           为了向您提供更好的用户体验，我们在特定场景需要向您申请以下手机系统权限
         </Text>
 
+        <Button onPress={requestMediaLibraryPermission}>
+          <Text>申请权限</Text>
+        </Button>
+
         <View className="bg-background rounded-xl">
           <PermissionItem
             title="通讯录权限"
             description="用户调取您主动选取的通讯录内的联系人信息，以帮助您快速完成信息填写，不会保存您的通讯录内容"
             icon={<UserRound size={20} color="#4f46e5" />}
-            status="disabled"
-            onPress={() => handlePermissionPress('contacts')}
+            status={contactsPermissionResponse?.granted}
+            onPress={Contacts.requestPermissionsAsync}
           />
 
           <PermissionItem
             title="相册权限"
             description="读取、写入照片以使用扫码即查及反馈功能"
             icon={<Image size={20} color="#0891b2" />}
-            status="disabled"
-            onPress={() => handlePermissionPress('photos')}
+            status={mediaLibraryPermissionResponse?.granted}
+            onPress={requestMediaLibraryPermission}
           />
 
           <PermissionItem
             title="相机权限"
             description="用于您的人脸识别、上传照片、图像识别以帮助您完成借款申请，或便于您反馈查看"
-            icon={<Camera size={20} color="#f59e0b" />}
-            status="enabled"
-            onPress={() => handlePermissionPress('camera')}
+            icon={<CameraIcon size={20} color="#f59e0b" />}
+            status={cameraPermissionResponse?.granted}
+            onPress={requestCameraPermission}
           />
 
           <PermissionItem
             title="麦克风权限"
             description="主要用于活体识别时声音检测"
             icon={<Mic size={20} color="#10b981" />}
-            status="disabled"
-            onPress={() => handlePermissionPress('microphone')}
+            status={audioPermissionResponse?.granted}
+            onPress={Audio.requestRecordingPermissionsAsync}
           />
 
           <PermissionItem
             title="位置权限"
             description="用于进行账户安全管理及身份识别，对贷款真实性进行评估，防控账户盗用风险及电话诈骗风险"
             icon={<MapPin size={20} color="#ef4444" />}
-            status="disabled"
-            onPress={() => handlePermissionPress('location')}
+            status={locationPermissionResponse?.granted}
+            onPress={requestLocationPermission}
             last
           />
         </View>
