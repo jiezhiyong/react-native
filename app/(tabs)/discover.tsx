@@ -123,7 +123,7 @@ export default function HomeScreen() {
     });
 
     return () => discoverScrollY.removeListener(id);
-  }, [activeTab]);
+  }, [activeTab, discoverScrollY, updateDiscoverScroll]);
 
   // 处理搜索逻辑
   React.useEffect(() => {

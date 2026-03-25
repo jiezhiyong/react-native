@@ -1,4 +1,4 @@
-import { File } from 'expo-file-system/next';
+import { File } from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import { PermissionStatus } from 'expo-modules-core';
 import { Stack, useLocalSearchParams } from 'expo-router';

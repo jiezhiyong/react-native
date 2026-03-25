@@ -34,7 +34,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: colorScheme === 'dark' ? '#fff' : '#000',
         tabBarHideOnKeyboard: true,
         headerTitleAllowFontScaling: true,
-        tabBarButton: HapticTab,
+        tabBarButton: HapticTab as any,
         headerStyle: {
           backgroundColor: '',
         },

@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 import * as MediaLibrary from 'expo-media-library';
 import { Camera as CameraIcon, ChevronRight, Image, MapPin, Mic, UserRound } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { Button, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import { useEffectAsync } from '~/hooks/use-effect-async';
 import { cn } from '~/lib/utils';
@@ -75,9 +75,9 @@ export default function SystemPermissionsScreen() {
           为了向您提供更好的用户体验，我们在特定场景需要向您申请以下手机系统权限
         </Text>
 
-        <Button onPress={requestMediaLibraryPermission}>
-          <Text>申请权限</Text>
-        </Button>
+        <Pressable className="bg-primary p-3 rounded-lg" onPress={requestMediaLibraryPermission}>
+          <Text className="text-primary-foreground text-center font-medium">申请权限</Text>
+        </Pressable>
 
         <View className="bg-background rounded-xl">
           <PermissionItem

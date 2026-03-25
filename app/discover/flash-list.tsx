@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { ActivityIndicator, RefreshControl, View } from 'react-native';
 import { create } from 'zustand';
 
-import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
 import { Text } from '~/components/ui/text';
 import { sleep } from '~/lib/utils';
@@ -165,7 +164,6 @@ export default function FlashListScreen() {
       <FlashList
         data={items}
         renderItem={({ item }) => <ListItemCard item={item} />}
-        estimatedItemSize={160}
         keyExtractor={(item) => item.id}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}

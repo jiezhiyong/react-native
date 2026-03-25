@@ -17,19 +17,15 @@ export default function RouteScreen() {
 
       <View className="flex gap-3">
         <Button
-          onPress={() =>
-            // eg:
-            // router.push('/discover/router-detail');
-
-            router.push({
-              pathname: '/discover/router-detail',
-              params: { id: '123', name: '张三' },
-            })
-          }
+          onPress={() => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            router.push({ pathname: '/discover/router-detail', params: { id: '123', name: '张三' } } as any);
+          }}
         >
           <Text>使用 router.push()</Text>
         </Button>
 
+        {/* @ts-ignore - router-detail.tsx exists but not in generated types yet */}
         <Link href="/discover/router-detail" asChild>
           <Button>
             <Text>使用 Link 组件</Text>

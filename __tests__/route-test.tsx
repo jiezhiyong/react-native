@@ -1,6 +1,15 @@
 import { renderRouter, screen } from 'expo-router/testing-library';
 import { View } from 'react-native';
 
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace jest {
+    interface Matchers<R> {
+      toHavePathname(pathname: string): R;
+    }
+  }
+}
+
 /**
  * 路由渲染测试
  * https://docs.expo.dev/router/reference/testing/

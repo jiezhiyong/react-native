@@ -16,4 +16,4 @@ class MyModule extends NativeModule<MyModuleEvents> {
   }
 }
 
-export default registerWebModule(MyModule);
+export default registerWebModule(MyModule, 'MyModule');

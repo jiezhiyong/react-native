@@ -1,5 +1,4 @@
 import * as Audio from 'expo-audio';
-import { PLAYBACK_STATUS_UPDATE } from 'expo-audio';
 import * as ImagePicker from 'expo-image-picker';
 import { Stack, useRouter } from 'expo-router';
 import * as VideoThumbnails from 'expo-video-thumbnails';
@@ -22,6 +21,8 @@ import { create } from 'zustand';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Text } from '~/components/ui/text';
+
+const PLAYBACK_STATUS_UPDATE = 'playbackStatusUpdate';
 
 // 消息类型定义
 type MessageType = 'text' | 'image' | 'video' | 'system';

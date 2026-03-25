@@ -89,7 +89,7 @@ export default function ExpoContactsScreen() {
         {item.phoneNumbers && item.phoneNumbers.length > 0 ? (
           item.phoneNumbers.map((phone, index) => (
             <Text key={phone.id || index} className="font-medium text-lg">
-              {phone.digits || phone.number}
+              {phone.number}
               {index < (item.phoneNumbers || []).length - 1 ? '、' : ''}
             </Text>
           ))

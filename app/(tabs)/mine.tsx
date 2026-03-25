@@ -194,7 +194,7 @@ export default function MinePage() {
     });
 
     return () => mineScrollY.removeListener(id);
-  }, [activeTab]);
+  }, [activeTab, mineScrollY, updateMineScroll]);
 
   return (
     <Animated.ScrollView
