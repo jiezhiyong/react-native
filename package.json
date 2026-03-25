@@ -15,6 +15,8 @@
     "build:android:debug": "APP_VARIANT=test NO_MINIFY=true ENABLE_DEBUG_PANEL=true FORCE_DEV_MODE=false expo prebuild -p android && cd android && ./gradlew assembleDebug",
     "build:ios:debug": "APP_VARIANT=test NO_MINIFY=true ENABLE_DEBUG_PANEL=true FORCE_DEV_MODE=false expo prebuild -p ios && cd ios && xcodebuild -workspace ChatQA.xcworkspace -scheme ChatQA -configuration Debug -archivePath build/ChatQA.xcarchive archive",
     "test": "jest --watchAll",
+    "test:e2e": "maestro test e2e/",
+    "test:e2e:single": "maestro test",
     "lint": "npx eslint app components lib store modules --ignore-pattern '**/node_modules/**' --fix --max-warnings 999",
     "typecheck": "tsc",
     "format": "eslint --fix . && prettier --write --ignore-unknown .",

@@ -1,0 +1,68 @@
+---
+name: 02_navigation
+description: Tab 导航功能测试
+
+# 启动应用
+appId: com.jiezhiyong.qachat.dev
+
+---
+
+# 启动应用
+- launchApp
+
+# 等待应用启动完成
+- extendedWaitUntil:
+    visible: "Home"
+    timeout: 10000
+
+# 验证初始状态 - 应该在 Home tab
+- assertVisible: "Home"
+- takeScreenshot: "02_home_tab.png"
+
+# 导航到 Discover tab
+- tapOn: "Discover"
+- waitForAnimationToEnd
+
+# 验证 Discover 页面加载
+- extendedWaitUntil:
+    visible: "Discover"
+    timeout: 5000
+- takeScreenshot: "02_discover_tab.png"
+
+# 验证 Discover 页面内容
+- assertVisible: "Discover"
+
+# 导航到 Mine tab
+- tapOn: "Mine"
+- waitForAnimationToEnd
+
+# 验证 Mine 页面加载
+- extendedWaitUntil:
+    visible: "Mine"
+    timeout: 5000
+- takeScreenshot: "02_mine_tab.png"
+
+# 验证 Mine 页面内容
+- assertVisible: "Mine"
+
+# 返回到 Home tab
+- tapOn: "Home"
+- waitForAnimationToEnd
+
+# 验证回到 Home 页面
+- extendedWaitUntil:
+    visible: "Home"
+    timeout: 5000
+- takeScreenshot: "02_back_to_home.png"
+
+# 测试快速切换 Tab
+- tapOn: "Discover"
+- waitForAnimationToEnd
+- tapOn: "Mine"
+- waitForAnimationToEnd
+- tapOn: "Home"
+- waitForAnimationToEnd
+
+# 最终验证
+- assertVisible: "Home"
+- takeScreenshot: "02_navigation_complete.png"

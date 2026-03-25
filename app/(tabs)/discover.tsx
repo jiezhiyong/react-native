@@ -20,6 +20,18 @@ const demos: { name: string; desc: string; supports: string }[] = [
   },
   { name: 'device', desc: '物理设备系统信息', supports: 'Android, iOS, Web' },
 
+  // 新增功能 Demo
+  { name: 'app-state', desc: 'AppState 和 Appearance 监听，应用状态与主题变化', supports: 'Android, iOS, Web' },
+  { name: 'websocket', desc: 'WebSocket 实时通信，消息收发与重连', supports: 'Android, iOS, Web' },
+  { name: 'file-download', desc: '文件下载进度监控，支持取消和重试', supports: 'Android, iOS, Web' },
+  { name: 'vibration', desc: '震动与触觉反馈，Vibration API 和 Haptics 对比', supports: 'Android, iOS' },
+  { name: 'maps', desc: '地图显示，当前位置标记，自定义标记和地图类型切换', supports: 'Android, iOS, Web' },
+  { name: 'file-upload', desc: '文件上传进度监控，支持取消和重试', supports: 'Android, iOS, Web' },
+  { name: 'network-info', desc: '网络状态监听，连接类型和网络详细信息', supports: 'Android, iOS, Web' },
+
+  // 监控与分析
+  { name: 'sentry', desc: 'Sentry 错误监控与性能分析演示', supports: 'Android, iOS, Web' },
+
   // 常用
   { name: 'webview', desc: 'WebView', supports: 'Android, iOS' },
   { name: 'keyboard', desc: '键盘', supports: 'Android, iOS, Web' },

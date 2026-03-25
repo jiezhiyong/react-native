@@ -76,3 +76,42 @@
 - 保留discover页面的ESLint warnings（演示代码，不影响核心功能）
 - 使用pnpm overrides而非yarn resolutions处理依赖冲突
 - 优先修复核心业务代码，demo代码warnings可保留
+
+---
+
+## 新任务计划（2026-03-25）
+
+### Phase 6: Sentry 集成
+**状态**: complete ✅
+**完成内容**:
+- ✅ 激活 Sentry.init()，配置 DSN
+- ✅ 新建 app/discover/sentry.tsx（完整可交互 demo）
+- ✅ 添加到 discover 页面入口
+
+### Phase 7: 缺失功能 Demo（第一批）
+**状态**: complete ✅
+**完成内容**:
+- ✅ app/discover/app-state.tsx（AppState + Appearance）
+- ✅ app/discover/websocket.tsx（WebSocket echo demo）
+- ✅ app/discover/file-download.tsx（文件下载进度）
+- ✅ app/discover/vibration.tsx（震动 + Haptics 对比）
+
+### Phase 8: Maestro E2E 测试配置
+**状态**: in_progress
+**内容**:
+- [ ] 创建 e2e/ 目录和测试文件
+- [ ] 基础导航、Tab 切换、主题切换测试
+- [ ] README 和 package.json scripts
+
+### Phase 9: 缺失功能 Demo（第二批）
+**状态**: complete ✅
+**完成内容**:
+- ✅ app/discover/maps.tsx（expo-maps/react-native-maps 地图 + 标记 + 定位）
+- ✅ app/discover/file-upload.tsx（文件上传进度 demo with expo-file-system）
+- ✅ app/discover/network-info.tsx（网络信息 demo with @react-native-community/netinfo）
+
+### Phase 10: 提交 + PR
+**状态**: pending
+**内容**:
+- [ ] 所有变更提交到新分支
+- [ ] 创建 PR

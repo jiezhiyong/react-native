@@ -1,0 +1,100 @@
+---
+name: 04_theme
+description: 主题切换功能测试
+
+# 启动应用
+appId: com.jiezhiyong.qachat.dev
+
+---
+
+# 启动应用
+- launchApp
+
+# 等待应用启动完成
+- extendedWaitUntil:
+    visible: "Home"
+    timeout: 10000
+
+# 截图记录初始状态（记录当前主题）
+- takeScreenshot: "04_initial_theme.png"
+
+# 测试应用状态切换来间接测试主题功能
+# 导航到 Discover 页面进入 app-state demo 来测试主题
+- tapOn: "Discover"
+- waitForAnimationToEnd
+
+# 搜索 app-state 功能
+- tapOn: "搜索功能、描述或平台..."
+- inputText: "app-state"
+- waitForAnimationToEnd
+
+# 验证搜索结果并点击
+- assertVisible: "app-state"
+- takeScreenshot: "04_search_app_state.png"
+
+# 进入 app-state 页面
+- tapOn: "app-state"
+- waitForAnimationToEnd
+
+# 等待页面加载
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# 截图记录 app-state 页面
+- takeScreenshot: "04_app_state_page.png"
+
+# 在 app-state 页面中应该有主题相关的功能
+# 查找主题切换相关的按钮或文本
+- scroll:
+    direction: DOWN
+    speed: 30
+
+# 继续滚动查看页面内容
+- scroll:
+    direction: DOWN
+    speed: 30
+
+# 截图记录页面内容
+- takeScreenshot: "04_app_state_content.png"
+
+# 测试应用前后台切换（这会触发 AppState 变化）
+- runScript: |
+    mobile.device.openDeepLink("settings://");
+
+# 等待系统设置打开
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# 返回应用
+- runScript: |
+    mobile.device.openApp("com.jiezhiyong.qachat.dev");
+
+# 等待应用重新获得焦点
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# 截图记录应用恢复状态
+- takeScreenshot: "04_app_resumed.png"
+
+# 返回到主页面
+- pressKey: "Back"
+- waitForAnimationToEnd
+
+- pressKey: "Back"
+- waitForAnimationToEnd
+
+# 验证返回到 Discover 页面
+- extendedWaitUntil:
+    visible: "Discover"
+    timeout: 5000
+
+# 导航回 Home
+- tapOn: "Home"
+- waitForAnimationToEnd
+
+# 最终验证和截图
+- extendedWaitUntil:
+    visible: "Home"
+    timeout: 5000
+
+- takeScreenshot: "04_theme_test_complete.png"

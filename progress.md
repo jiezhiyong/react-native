@@ -2,6 +2,39 @@
 
 ## 2026-03-25
 
+### 任务4: 新增缺失功能 Demo（第一批）✅
+**状态**: 完成 ✅
+
+#### 新增的4个Demo页面
+1. ✅ **AppState + Appearance Demo** (`app/discover/app-state.tsx`)
+   - AppState 监听：显示当前状态（active/background/inactive），记录状态切换历史
+   - Appearance 监听：检测系统颜色方案（light/dark），实时响应系统主题变化
+   - 实时状态展示和历史记录功能
+
+2. ✅ **WebSocket Demo** (`app/discover/websocket.tsx`)
+   - 使用公共 WebSocket echo 服务（wss://echo.websocket.events）
+   - 连接/断开控制，发送消息和接收消息功能
+   - 消息记录列表（发送/接收用不同颜色区分）
+   - 连接状态指示和自动重连逻辑
+
+3. ✅ **文件下载进度 Demo** (`app/discover/file-download.tsx`)
+   - 使用 expo-file-system/legacy 下载公共文件
+   - 实时显示下载进度条、速度计算和预计剩余时间
+   - 支持取消下载、文件管理和错误处理
+   - 下载完成后展示文件详情
+
+4. ✅ **Vibration Demo** (`app/discover/vibration.tsx`)
+   - React Native Vibration API：简单震动、自定义时长、震动模式
+   - Expo Haptics API：轻微/中等/强烈触感、成功/警告/错误通知、选择反馈
+   - 平台兼容性说明和操作历史记录
+
+#### 技术实现亮点
+- ✅ 所有页面使用 ScrollView + Card 布局，风格与现有 discover 页面一致
+- ✅ 使用 NativeWind 样式和 TypeScript 严格类型
+- ✅ 已将4个新 demo 添加到 `app/(tabs)/discover.tsx` 的列表中
+- ✅ 修复所有 TypeScript 类型错误，通过 `tsc --noEmit` 检查
+- ✅ 通过 ESLint 检查，无新增 error（仅有少量可接受的 warning）
+
 ### Phase 5: 最终依赖对齐 ✅
 **状态**: 完成 ✅
 
@@ -118,3 +151,39 @@
 - 修复主要tab页面的React Hooks依赖问题
 - 清理未使用的导入和变量
 - 识别出重复依赖和版本不匹配问题（已处理）
+
+### Phase 9: 新增缺失功能 Demo（第二批）✅
+**状态**: 完成 ✅
+
+#### 新增的3个Demo页面
+1. ✅ **Maps Demo** (`app/discover/maps.tsx`)
+   - expo-location 获取当前位置，位置权限申请处理
+   - 地图类型切换（standard/satellite/hybrid）和缩放控制按钮
+   - 上海地标标记（外滩、豫园、东方明珠塔）显示和交互
+   - react-native-maps fallback：提示安装指南，显示当前区域信息
+   - 地图信息实时展示（中心点、缩放级别、地图类型）
+
+2. ✅ **File Upload Progress Demo** (`app/discover/file-upload.tsx`)
+   - expo-image-picker 选择图片，展示文件详细信息
+   - expo-file-system uploadAsync 上传到 httpbin.org 测试接口
+   - 实时上传进度条、取消上传功能和上传状态管理
+   - 上传结果展示：成功/失败状态和服务器响应详情
+   - 文件信息展示：名称、大小、类型、尺寸
+
+3. ✅ **Network Info Demo** (`app/discover/network-info.tsx`)
+   - @react-native-community/netinfo 实时网络监听
+   - 网络类型识别（wifi/cellular/none/ethernet等）和连接质量判断
+   - 网络详细信息：SSID、IP地址、信号强度、运营商等
+   - 连接历史记录（最近10次变化）和手动刷新功能
+   - 实时状态指示器和连接状态图标
+
+#### 技术实现亮点
+- ✅ 所有页面使用 ScrollView + Card 布局，风格与现有 discover 页面一致
+- ✅ 使用 NativeWind 样式和 TypeScript 严格类型
+- ✅ 已将3个新 demo 添加到 `app/(tabs)/discover.tsx` 的列表中
+- ✅ 修复所有 TypeScript 类型错误，通过 `tsc --noEmit` 检查（0错误）
+- ✅ 通过 ESLint 检查，无新增 error（仅有少量可接受的 warning）
+- ✅ 处理 react-native-maps 可选依赖：提供 fallback UI 和安装指导
+- ✅ 正确处理 NetInfo 类型兼容性：null 值适配
+
+---

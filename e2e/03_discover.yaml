@@ -1,0 +1,92 @@
+---
+name: 03_discover
+description: Discover 页面功能测试
+
+# 启动应用
+appId: com.jiezhiyong.qachat.dev
+
+---
+
+# 启动应用
+- launchApp
+
+# 等待应用启动完成
+- extendedWaitUntil:
+    visible: "Home"
+    timeout: 10000
+
+# 导航到 Discover tab
+- tapOn: "Discover"
+- waitForAnimationToEnd
+
+# 等待 Discover 页面完全加载
+- extendedWaitUntil:
+    visible: "Discover"
+    timeout: 5000
+
+# 截图记录 Discover 页面
+- takeScreenshot: "03_discover_page.png"
+
+# 测试搜索功能
+- tapOn: "搜索功能、描述或平台..."
+- inputText: "sentry"
+- waitForAnimationToEnd
+
+# 验证搜索结果
+- assertVisible: "sentry"
+- takeScreenshot: "03_search_sentry.png"
+
+# 清除搜索
+- tapOn:
+    id: "clear-search-button"
+- waitForAnimationToEnd
+
+# 验证搜索已清除，显示完整列表
+- assertVisible: "application"
+- assertVisible: "device"
+
+# 滚动浏览列表
+- scroll:
+    direction: DOWN
+    speed: 50
+
+# 继续滚动
+- scroll:
+    direction: DOWN
+    speed: 50
+
+# 截图记录滚动后的状态
+- takeScreenshot: "03_scrolled_list.png"
+
+# 点击进入 Sentry demo 页面
+- scroll:
+    direction: UP
+    speed: 50
+
+# 重新搜索 sentry
+- tapOn: "搜索功能、描述或平台..."
+- inputText: "sentry"
+- waitForAnimationToEnd
+
+# 点击 sentry 项目
+- tapOn: "sentry"
+- waitForAnimationToEnd
+
+# 等待页面加载
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# 截图记录 Sentry 页面
+- takeScreenshot: "03_sentry_demo.png"
+
+# 返回到 Discover 页面
+- pressKey: "Back"
+- waitForAnimationToEnd
+
+# 验证返回到 Discover 页面
+- extendedWaitUntil:
+    visible: "Discover"
+    timeout: 5000
+
+# 最终截图
+- takeScreenshot: "03_discover_complete.png"
