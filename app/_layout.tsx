@@ -5,14 +5,12 @@ import { useReactQueryDevTools } from '@dev-plugins/react-query';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import * as Sentry from '@sentry/react-native';
-import { focusManager, onlineManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { isRunningInExpoGo } from 'expo';
 import Constants from 'expo-constants';
-import * as Network from 'expo-network';
 import { Stack, useNavigationContainerRef } from 'expo-router';
 import Head from 'expo-router/head';
 import { StatusBar } from 'expo-status-bar';
-import * as Updates from 'expo-updates';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
@@ -25,7 +23,6 @@ import { Toaster } from '~/components/ui/sonner';
 import { DebugPanel } from '~/debug-panel';
 import { useColorScheme } from '~/hooks/useColorScheme';
 import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
-import TypesafeI18n from '~/i18n/i18n-react';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
 import { useTabsScrollStore } from '~/store/scroll';
@@ -96,7 +93,7 @@ function onAppStateChange(status: AppStateStatus) {
 }
 
 function RootLayout() {
-  const navigationRef = useNavigationContainerRef();
+  const navigationRef = useNavigationContainerRef() as any;
   useReactNavigationDevTools(navigationRef);
   useReactQueryDevTools(queryClient);
 
@@ -104,7 +101,6 @@ function RootLayout() {
 
   const { statusBarStyle } = useTabsScrollStore();
   const { colorScheme, isDarkColorScheme } = useColorScheme();
-  const { isUpdatePending } = Updates.useUpdates();
 
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 

@@ -36,6 +36,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   version: '1.0.0',
   orientation: 'portrait',
   userInterfaceStyle: 'automatic',
+  // @ts-expect-error newArchEnabled not in ExpoConfig type but valid in expo SDK 55
   newArchEnabled: true,
   jsEngine: 'hermes',
   experiments: {
@@ -145,7 +146,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
 
   plugins: [
-    ['./plugins/withAndroidQueries.js', {}],
+    ['./plugins/withAndroidQueries.cjs', {}],
     ['expo-secure-store', {}],
     ['expo-asset', {}],
     ['expo-background-task', {}],
@@ -286,5 +287,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         enableGooglePay: false,
       },
     ],
+    ['@react-native-community/datetimepicker', {}],
+    ['expo-mail-composer', {}],
+    ['expo-sharing', {}],
   ],
 });

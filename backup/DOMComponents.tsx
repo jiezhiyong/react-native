@@ -3,6 +3,9 @@
 import { Link } from 'expo-router';
 import { useEffect } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const ReactNativeWebView: any;
+
 /**
  * Demo - 在 Expo 原生应用中使用 React DOM - https://docs.expo.dev/guides/dom-components
  * 性能不如原生视图, 应主要用于渲染富文本、markdown、WebGL, 或设置页面、帮助页面等访问频率较低的部分

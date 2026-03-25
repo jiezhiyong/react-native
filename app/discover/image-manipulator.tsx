@@ -73,7 +73,7 @@ export default function ExpoImageManipulatorScreen() {
 
       <View className="mb-3">
         <Text className="text-lg mb-2 font-medium">图片</Text>
-        <Image source={{ uri: image }} contentFit="cover" style={{ height: 200, borderRadius: 6 }} />
+        <Image source={{ uri: image! }} contentFit="cover" style={{ height: 200, borderRadius: 6 }} />
       </View>
 
       <Button className="mb-6" onPress={pickImage}>

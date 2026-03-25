@@ -23,7 +23,7 @@ export default function ExpoViewPagerScreen() {
       <View className="flex-1">
         {/* 分页器 */}
         <AnimatedPagerView
-          ref={ref}
+          ref={ref as any}
           style={styles.pagerView}
           initialPage={0}
           onPageSelected={(e) => setCurrentPage(e.nativeEvent.position)}

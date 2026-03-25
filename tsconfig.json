@@ -3,9 +3,12 @@
   "compilerOptions": {
     "strict": true,
     "module": "esnext",
+    "skipLibCheck": true,
+    "types": ["react-native", "jest"],
     "paths": {
       "~/*": ["./*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "nativewind-env.d.ts", "index.js"]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "nativewind-env.d.ts", "index.js"],
+  "exclude": ["backup/**", "coverage/**", "dist/**", "node_modules/**", "android/**", "ios/**"]
 }

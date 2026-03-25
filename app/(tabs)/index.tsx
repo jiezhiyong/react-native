@@ -1,4 +1,4 @@
-import { MasonryFlashList } from '@shopify/flash-list';
+import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 import { setStatusBarStyle } from 'expo-status-bar';
 import * as React from 'react';
@@ -20,7 +20,7 @@ export default function HomeScreen() {
   const [data, setData] = useState<DataItem[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [isNoMore, setIsNoMore] = useState(false);
+  const [isNoMore] = useState(false);
 
   const { homeScrollY, updateHomeScroll, activeTab } = useTabsScrollStore();
 
@@ -79,11 +79,7 @@ export default function HomeScreen() {
     return clonedData;
   };
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     if (isLoadingMore) return;
     setIsLoadingMore(true);
 
@@ -91,7 +87,11 @@ export default function HomeScreen() {
     const newData = getData();
     setData((prevData) => [...prevData, ...newData]);
     setIsLoadingMore(false);
-  };
+  }, [isLoadingMore]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const calculateItemHeight = (item: DataItem) => {
     return 8 + 2 + 24 + 150 + 49 * item.skeletonNum;
@@ -127,8 +127,8 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <MasonryFlashList
-      keyExtractor={(item) => item.id.toString()}
+    <FlashList
+      keyExtractor={(item: any) => item.id.toString()}
       onScroll={handleScroll}
       scrollEventThrottle={16}
       refreshing={refreshing}
@@ -150,11 +150,6 @@ export default function HomeScreen() {
       }
       ListEmptyComponent={null}
       contentContainerStyle={{ paddingHorizontal: 16 }}
-      estimatedItemSize={274}
-      optimizeItemArrangement={true}
-      overrideItemLayout={(layoutObject, sourceData) => {
-        layoutObject.size = calculateItemHeight(sourceData);
-      }}
     />
   );
 }

@@ -28,7 +28,7 @@ export default function ExpoVideoScreen() {
       {/* 视频播放器 */}
       <View className="mb-6">
         <View style={styles.videoContainer}>
-          <VideoView style={styles.video} player={player} allowsFullscreen allowsPictureInPicture />
+          <VideoView style={styles.video} player={player} />
         </View>
 
         {/* 控制按钮 */}

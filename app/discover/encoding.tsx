@@ -5,7 +5,6 @@ import { toast } from '~/components/ui/sonner';
 import { Textarea } from '~/components/ui/textarea';
 
 import { Button } from '../../components/ui/button';
-import { Card } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
 import { Text } from '../../components/ui/text';
 

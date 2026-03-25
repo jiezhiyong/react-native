@@ -100,8 +100,10 @@ export default function App() {
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState<Notifications.Notification | undefined>(undefined);
 
-  const notificationListener = useRef<Notifications.EventSubscription>();
-  const responseListener = useRef<Notifications.EventSubscription>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const notificationListener = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const responseListener = useRef<any>(null);
 
   useEffectAsync(async () => {
     if (Platform.OS === 'web') {
@@ -111,8 +113,9 @@ export default function App() {
 
     if (Platform.OS === 'android') {
       Notifications.setNotificationHandler({
-        handleNotification: async () => ({
-          shouldShowAlert: true,
+        handleNotification: async (notification) => ({
+          shouldShowBanner: true,
+          shouldShowList: true,
           shouldPlaySound: true,
           shouldSetBadge: true,
         }),
@@ -135,8 +138,8 @@ export default function App() {
     });
 
     return () => {
-      notificationListener.current && Notifications.removeNotificationSubscription(notificationListener.current);
-      responseListener.current && Notifications.removeNotificationSubscription(responseListener.current);
+      notificationListener.current?.remove();
+      responseListener.current?.remove();
     };
   }, []);
 

@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { KeyboardAwareScrollView, KeyboardToolbar, useKeyboardHandler } from 'react-native-keyboard-controller';
-import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { KeyboardAwareScrollView, useKeyboardHandler } from 'react-native-keyboard-controller';
+import { useSharedValue } from 'react-native-reanimated';
 
 import { Input } from '~/components/ui/input';
 import { Skeleton } from '~/components/ui/skeleton';
@@ -31,13 +31,6 @@ const useGradualAnimation = () => {
 export default function KeyboardScreen() {
   const { height } = useGradualAnimation();
   console.log(height);
-
-  const fakeView = useAnimatedStyle(() => {
-    return {
-      height: Math.abs(height.value),
-      marginBottom: height.value > 0 ? 0 : PADDING_BOTTOM,
-    };
-  }, []);
 
   return (
     <View className="flex-1 px-5 pt-5">

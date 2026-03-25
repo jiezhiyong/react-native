@@ -1,4 +1,4 @@
-import * as FileSystem from 'expo-file-system';
+import { downloadAsync, File, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { useState } from 'react';
 import { ActivityIndicator, Image, View } from 'react-native';
@@ -15,15 +15,12 @@ export default function ExpoSharingScreen() {
   const shareImage = async () => {
     try {
       setLoading(true);
-      // 创建一个临时图片文件
-      const fileUri = `${FileSystem.cacheDirectory}temp-image.jpg`;
+      const cacheDir = Paths.cache;
+      const tempFile = new File(cacheDir, 'temp-image.jpg');
 
-      // 下载图片
-      const { uri } = await FileSystem.downloadAsync(imageUrl, fileUri);
-
-      // 分享图片
-      await Sharing.shareAsync(uri);
-    } catch (error: any) {
+      await downloadAsync(imageUrl, tempFile.uri);
+      await Sharing.shareAsync(tempFile.uri);
+    } catch (error: unknown) {
       setShareResult(JSON.stringify(error, null, 2));
     } finally {
       setLoading(false);
@@ -33,13 +30,13 @@ export default function ExpoSharingScreen() {
   const shareFile = async () => {
     try {
       setLoading(true);
-      // 创建一个临时文本文件
-      const fileUri = `${FileSystem.cacheDirectory}temp-file.txt`;
-      await FileSystem.writeAsStringAsync(fileUri, '这是一个测试文件内容');
+      const cacheDir = Paths.cache;
+      const tempFile = new File(cacheDir, 'temp-file.txt');
+      await tempFile.create();
+      await tempFile.write('这是一个测试文件内容');
 
-      // 分享文件
-      await Sharing.shareAsync(fileUri);
-    } catch (error: any) {
+      await Sharing.shareAsync(tempFile.uri);
+    } catch (error: unknown) {
       setShareResult(JSON.stringify(error, null, 2));
     } finally {
       setLoading(false);
