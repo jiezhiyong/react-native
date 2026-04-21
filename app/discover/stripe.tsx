@@ -1,4 +1,9 @@
-// TODO: 待完成 stripe
+import UnsupportScreen from '~/components/Unsupport';
+
+export default function ExpoStripeScreenFallback() {
+  return <UnsupportScreen />;
+}
+
 // import {
 //   confirmPlatformPayPayment,
 //   isPlatformPaySupported,

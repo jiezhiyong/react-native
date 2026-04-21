@@ -24,7 +24,6 @@ npx @react-native-reusables/cli@latest add
 ### 重要组件 & 工具
 
 - [Expo SDK](https://docs.expo.dev/versions/latest/sdk/expo)
-
 - [react-native-reusables](https://rnr-docs.vercel.app)
 - [React Native Vision Camera](https://react-native-vision-camera.com)
 - [keyboard](https://kirillzyusko.github.io/react-native-keyboard-controller)
@@ -46,7 +45,7 @@ npx @react-native-reusables/cli@latest add
 - [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n)
 - [sentry](https://docs.sentry.io/platforms/react-native)
 - [react-native-gifted-charts](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts)
-
+- [react-native-edge-to-edge](https://github.com/zoontek/react-native-edge-to-edge)
 - [...](https://reactnative.directory)
 
 ## 创建本地开发版本 Development Build（依赖 Development servers）

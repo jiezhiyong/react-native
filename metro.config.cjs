@@ -7,9 +7,6 @@ const config = getSentryExpoConfig(__dirname, {
   isCSSEnabled: true,
 });
 
-// 库与 Metro ES 模块解析不兼容问题：https://github.com/expo/expo/discussions/36551
-// config.resolver.unstable_enablePackageExports = false;
-
 // 添加路径别名配置
 config.resolver.extraNodeModules = {
   '~': path.resolve(__dirname),
@@ -29,11 +26,11 @@ config.transformer.minifierConfig = {
 
     ...(process.env.NO_MINIFY === 'true' // 可以通过环境变量控制是否压缩代码及__DEV__状态
       ? {
-          dead_code: false,
-          global_defs: {
-            __DEV__: process.env.FORCE_DEV_MODE === 'true', // 明确设置__DEV__的值，根据FORCE_DEV_MODE环境变量
-          },
-        }
+        dead_code: false,
+        global_defs: {
+          __DEV__: process.env.FORCE_DEV_MODE === 'true', // 明确设置__DEV__的值，根据FORCE_DEV_MODE环境变量
+        },
+      }
       : {}),
   },
 };
@@ -41,4 +38,13 @@ config.transformer.minifierConfig = {
 // Adds support for `.db` files for SQLite databases
 config.resolver.assetExts.push(...['db', 'mp3', 'ttf', 'obj', 'png', 'jpg']);
 
-module.exports = withNativeWind(config, { input: './global.css' });
+const wrapped = withNativeWind(config, { input: './global.css' });
+// 必须在 withNativeWind 之后设置：否则会被 css-interop / nativewind 合并配置覆盖。
+// 关闭 package.exports 可减少 three 等库在 Metro 下的 exports 解析告警与歧义。
+// https://github.com/expo/expo/discussions/36551
+wrapped.resolver = {
+  ...wrapped.resolver,
+  unstable_enablePackageExports: false,
+};
+
+module.exports = wrapped;

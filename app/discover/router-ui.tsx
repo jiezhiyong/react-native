@@ -1,1 +1,5 @@
-// TODO: 待实现 route-ui
+import UnsupportScreen from '~/components/Unsupport';
+
+export default function ExpoRouterUiScreenFallback() {
+  return <UnsupportScreen />;
+}
