@@ -22,24 +22,25 @@ When local docs and code disagree, trust the repository code first.
 - Project usage notes: `README.md`
 - EAS-specific notes: `README - EAS.md`
 
-## Expo Official LLM Docs
+## External Docs (Fetch On Demand Only)
 
-Use Expo's official LLM docs as the first external reference for framework guidance:
+**Do not pre-fetch these URLs.** Only fetch when checked-in code and training data cannot resolve the question — for example, an ambiguous API signature, an SDK 55-specific behavior, or an unfamiliar config plugin option.
 
-- General Expo, Router, workflow, config plugins, native modules, debugging:
-  `https://docs.expo.dev/llms-full.txt`
-- EAS build, submit, update, credentials, workflows:
-  `https://docs.expo.dev/llms-eas.txt`
-- SDK API reference and module usage:
-  `https://docs.expo.dev/llms-sdk.txt`
+### When and What to Fetch
 
-How to use them:
+| Trigger                                               | Fetch URL                                                                          |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Expo module API unclear (params, return type, events) | `https://docs.expo.dev/llms-sdk.txt`                                               |
+| EAS build / submit / update / credentials question    | `https://docs.expo.dev/llms-eas.txt`                                               |
+| Expo Router, config plugins, native modules, workflow | `https://docs.expo.dev/llms.txt` (index) → then the specific page URL listed there |
+| React Native core API unclear                         | `https://reactnative.dev/llms.txt` (index) → then the specific page URL            |
 
-1. Prefer `llms-sdk.txt` when answering API usage questions about a specific Expo module.
-2. Prefer `llms-eas.txt` for build, submit, credentials, update, or CI/CD questions.
-3. Prefer `llms-full.txt` for broader Expo workflow, Router, config plugin, or project structure guidance.
-4. Do not paste entire upstream sections into repo docs. Summarize only the parts that affect this codebase.
-5. If Expo docs conflict with checked-in code, explain the conflict and follow the repository's current implementation unless the task is explicitly an upgrade.
+### Fetch Strategy
+
+1. **Fetch the index first** (`llms.txt`) — it is small and lists individual page URLs.
+2. **Fetch only the one relevant page** from the index instead of the full doc.
+3. **Avoid fetching full aggregated docs** (`llms-full.txt`, `llms-sdk.txt`) unless the task spans multiple modules with no other resolution path.
+4. If upstream docs conflict with checked-in code, explain the conflict and follow the repository's current implementation unless the task is explicitly an upgrade.
 
 ## Core Commands
 
@@ -70,9 +71,12 @@ pnpm build:ios:debug
 ```bash
 pnpm lint
 pnpm typecheck
-pnpm test
+pnpm test                    # Interactive watch mode (local development)
+pnpm test -- --watchAll=false  # Non-interactive mode (CI / agent runs)
 pnpm test:e2e
+pnpm test:e2e:single <path>  # Run a single Maestro test file
 pnpm format
+pnpm generate-i18n
 ```
 
 ### Analysis
@@ -89,15 +93,21 @@ pnpm analyze:android
 
 - `app/`: Expo Router routes, including tab routes, protected routes, and feature screens
 - `components/`: reusable UI components and primitives
+- `constants/`: shared constants (for example `Colors.ts`)
 - `lib/`: helpers, constants, utilities
 - `store/`: Zustand stores
 - `hooks/`: custom hooks
 - `assets/`: images, fonts, and static assets
+- `i18n/`: typesafe-i18n locale files and generated typing utilities
+- `modules/`: local Expo native modules (for example `my-module`)
+- `debug-panel/`: debug-only panel module with its own components and hooks
 - `plugins/`: local Expo config plugins
 - `e2e/`: Maestro E2E tests
 
 ### Repo-Specific Patterns
 
+- `i18n/` uses typesafe-i18n; after changing locale files, run `pnpm generate-i18n`.
+- `modules/my-module` is a local Expo native module; changes there may require `pnpm prebuild[:variant]`.
 - Routing is file-based through Expo Router under `app/`.
 - App behavior changes by `APP_VARIANT`.
 - Native configuration is driven by `app.config.ts`, not a checked-in `app.json`.
