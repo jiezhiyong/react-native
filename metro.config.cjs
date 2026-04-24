@@ -42,9 +42,25 @@ const wrapped = withNativeWind(config, { input: './global.css' });
 // 必须在 withNativeWind 之后设置：否则会被 css-interop / nativewind 合并配置覆盖。
 // 关闭 package.exports 可减少 three 等库在 Metro 下的 exports 解析告警与歧义。
 // https://github.com/expo/expo/discussions/36551
+const previousResolveRequest = wrapped.resolver?.resolveRequest;
 wrapped.resolver = {
   ...wrapped.resolver,
   unstable_enablePackageExports: false,
+  // three 的 exports 将子路径指到无扩展名文件，实际文件为 *.js，直接解析会触发 Metro 的 package exports 回退 WARN
+  resolveRequest: (context, moduleName, platform) => {
+    if (
+      previousResolveRequest &&
+      typeof moduleName === 'string' &&
+      moduleName.startsWith('three/examples/jsm/') &&
+      !/\.(m?js|cjs|json)$/.test(moduleName)
+    ) {
+      return previousResolveRequest(context, `${moduleName}.js`, platform);
+    }
+    if (previousResolveRequest) {
+      return previousResolveRequest(context, moduleName, platform);
+    }
+    return context.resolveRequest(context, moduleName, platform);
+  },
 };
 
 module.exports = wrapped;

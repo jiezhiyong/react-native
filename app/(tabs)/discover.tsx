@@ -1,15 +1,15 @@
 import { useRouter } from 'expo-router';
-import { setStatusBarStyle } from 'expo-status-bar';
-import { Search, Terminal, X } from 'lucide-react-native';
+import { Bell, Search, Terminal, X } from 'lucide-react-native';
 import * as React from 'react';
-import { Animated, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { BREAK_POINT } from '~/components/ui/custom-header';
 import { Input } from '~/components/ui/input';
+import { ScrollHeader } from '~/components/ui/scroll-header';
 import { Text } from '~/components/ui/text';
+import { useScrollHeader } from '~/hooks/useScrollHeader';
 import { cn } from '~/lib/utils';
-import { useTabsScrollStore } from '~/store/scroll';
 
 const demos: { name: string; desc: string; supports: string }[] = [
   // 设备信息等
@@ -123,21 +123,11 @@ export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filteredDemos, setFilteredDemos] = React.useState(demos);
 
-  const { discoverScrollY, updateDiscoverScroll, activeTab } = useTabsScrollStore();
+  const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
+  const c = isDarkStyle ? '#000' : '#fff';
 
-  // 设置滚动监听
-  React.useEffect(() => {
-    const id = discoverScrollY.addListener(({ value }) => {
-      updateDiscoverScroll(value);
-      if (activeTab === 'discover') {
-        setStatusBarStyle(value > BREAK_POINT ? 'dark' : 'light');
-      }
-    });
+  const rightButtons = [{ icon: <Bell size={20} color={c} />, onPress: () => router.push('/notice' as any) }];
 
-    return () => discoverScrollY.removeListener(id);
-  }, [activeTab, discoverScrollY, updateDiscoverScroll]);
-
-  // 处理搜索逻辑
   React.useEffect(() => {
     if (searchQuery.trim() === '') {
       setFilteredDemos(demos);
@@ -154,58 +144,65 @@ export default function HomeScreen() {
     setFilteredDemos(filtered);
   }, [searchQuery]);
 
-  // 清除搜索
   const handleClearSearch = () => {
     setSearchQuery('');
   };
 
   return (
-    <Animated.FlatList
-      className="px-5 pt-5 flex-1 bg-muted/80"
-      data={filteredDemos}
-      onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: discoverScrollY } } }], {
-        useNativeDriver: false,
-      })}
-      scrollEventThrottle={16}
-      ListHeaderComponent={
-        <View className="mb-4">
-          <View className="flex-row items-center bg-background rounded-md border border-input">
-            <View className="pl-3">
-              <Search size={18} color="#9ca3af" />
+    <View className="flex-1">
+      <ScrollHeader
+        title="发现"
+        scrollY={scrollY}
+        gradientColors={['#10b981', '#059669']}
+        rightButtons={rightButtons}
+      />
+      <Animated.FlatList
+        className="px-5 flex-1 bg-muted/80"
+        data={filteredDemos}
+        keyExtractor={(item) => item.name}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        contentContainerStyle={{ paddingTop: headerHeight + 20, paddingBottom: 16 }}
+        ListHeaderComponent={
+          <View className="mb-4">
+            <View className="flex-row items-center bg-background rounded-md border border-input">
+              <View className="pl-3">
+                <Search size={18} color="#9ca3af" />
+              </View>
+              <Input
+                className="flex-1 border-0 bg-transparent"
+                placeholder="搜索功能、描述或平台..."
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+              />
+              {searchQuery.length > 0 && (
+                <TouchableOpacity className="pr-3" onPress={handleClearSearch}>
+                  <X size={18} color="#9ca3af" />
+                </TouchableOpacity>
+              )}
             </View>
-            <Input
-              className="flex-1 border-0 bg-transparent"
-              placeholder="搜索功能、描述或平台..."
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-            />
-            {searchQuery.length > 0 && (
-              <TouchableOpacity className="pr-3" onPress={handleClearSearch}>
-                <X size={18} color="#9ca3af" />
-              </TouchableOpacity>
+            {filteredDemos.length === 0 && (
+              <Text className="text-center mt-4 text-muted-foreground">没有找到匹配的项目</Text>
             )}
           </View>
-          {filteredDemos.length === 0 && (
-            <Text className="text-center mt-4 text-muted-foreground">没有找到匹配的项目</Text>
-          )}
-        </View>
-      }
-      renderItem={({ item, index }) => (
-        <TouchableOpacity
-          className={cn('mb-2', index === filteredDemos.length - 1 && 'mb-5')}
-          onPress={() => router.navigate(`/discover/${item.name}` as any)}
-        >
-          <Alert icon={Terminal}>
-            <AlertTitle className="capitalize">
-              <Text>
-                {index + 1}. {item.name}
-              </Text>
-              <Text className="text-green-500 text-sm"> - {item.supports}</Text>
-            </AlertTitle>
-            <AlertDescription className="text-muted-foreground">{item.desc}</AlertDescription>
-          </Alert>
-        </TouchableOpacity>
-      )}
-    />
+        }
+        renderItem={({ item, index }) => (
+          <TouchableOpacity
+            className={cn('mb-2', index === filteredDemos.length - 1 && 'mb-5')}
+            onPress={() => router.navigate(`/discover/${item.name}` as any)}
+          >
+            <Alert icon={Terminal}>
+              <AlertTitle className="capitalize">
+                <Text>
+                  {index + 1}. {item.name}
+                </Text>
+                <Text className="text-green-500 text-sm"> - {item.supports}</Text>
+              </AlertTitle>
+              <AlertDescription className="text-muted-foreground">{item.desc}</AlertDescription>
+            </Alert>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
   );
 }

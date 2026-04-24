@@ -36,8 +36,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   version: '1.0.0',
   orientation: 'portrait',
   userInterfaceStyle: 'automatic',
-  // @ts-expect-error newArchEnabled not in ExpoConfig type but valid in expo SDK 55
-  newArchEnabled: true,
   jsEngine: 'hermes',
   experiments: {
     reactCompiler: true,
@@ -147,6 +145,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 
   plugins: [
     ['./plugins/withAndroidQueries.cjs', {}],
+    ['expo-font', {}],
+    ['expo-image', {}],
+    ['expo-sqlite', {}],
+    ['expo-web-browser', {}],
     ['expo-secure-store', {}],
     ['expo-asset', {}],
     ['expo-background-task', {}],

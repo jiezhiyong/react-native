@@ -1,15 +1,19 @@
 import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
-import { setStatusBarStyle } from 'expo-status-bar';
+import { useRouter } from 'expo-router';
+import { Bell, Headphones } from 'lucide-react-native';
 import * as React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, RefreshControl, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 
-import { BREAK_POINT } from '~/components/ui/custom-header';
+import { ScrollHeader } from '~/components/ui/scroll-header';
 import { Skeleton } from '~/components/ui/skeleton';
 import { Text } from '~/components/ui/text';
+import { useScrollHeader } from '~/hooks/useScrollHeader';
 import { sleep } from '~/lib/utils';
-import { useTabsScrollStore } from '~/store/scroll';
+
+const ReanimatedFlashList = Animated.createAnimatedComponent(FlashList) as unknown as typeof FlashList;
 
 interface DataItem {
   id: number;
@@ -17,48 +21,25 @@ interface DataItem {
 }
 
 export default function HomeScreen() {
+  const router = useRouter();
   const [data, setData] = useState<DataItem[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isNoMore] = useState(false);
+  const isRefreshingRef = useRef(false);
+  const isLoadingMoreRef = useRef(false);
 
-  const { homeScrollY, updateHomeScroll, activeTab } = useTabsScrollStore();
+  const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
+  const iconColor = isDarkStyle ? '#000' : '#fff';
 
-  let idCounter = useRef(0);
+  const rightButtons = [
+    { icon: <Headphones size={20} color={iconColor} />, onPress: () => router.push('/online-service' as any) },
+    { icon: <Bell size={20} color={iconColor} />, onPress: () => router.push('/notice' as any) },
+  ];
 
-  // 处理下拉刷新
-  const handleRefresh = useCallback(async () => {
-    setRefreshing(true);
-    await sleep(1500);
-    const initData = getData();
-    setData(initData);
-    setRefreshing(false);
-  }, []);
+  const idCounter = useRef(0);
 
-  // 设置滚动监听
-  useEffect(() => {
-    const id = homeScrollY.addListener(({ value }) => {
-      updateHomeScroll(value);
-      if (activeTab === 'home') {
-        setStatusBarStyle(value > BREAK_POINT ? 'dark' : 'light');
-      }
-    });
-
-    return () => homeScrollY.removeListener(id);
-  }, [activeTab, homeScrollY, updateHomeScroll]);
-
-  // 检测滚动
-  const handleScroll = useCallback(
-    (event: any) => {
-      Animated.event([{ nativeEvent: { contentOffset: { y: homeScrollY } } }], {
-        useNativeDriver: false,
-      })(event);
-    },
-    [homeScrollY]
-  );
-
-  // 获取 Mock 数据
-  const getData = () => {
+  const getData = useCallback(() => {
     const originalData = [
       { skeletonNum: 1 },
       { skeletonNum: 3 },
@@ -68,36 +49,51 @@ export default function HomeScreen() {
       { skeletonNum: 3 },
     ];
 
-    let clonedData: DataItem[] = [];
     const newData = originalData.map((item) => ({
       ...item,
       id: ++idCounter.current,
       skeletonNum: item.skeletonNum,
     }));
-    clonedData = [...clonedData, ...newData];
-
-    return clonedData;
-  };
+    return newData;
+  }, []);
 
   const loadData = useCallback(async () => {
-    if (isLoadingMore) return;
+    if (isRefreshingRef.current || isLoadingMoreRef.current || isNoMore) return;
+    isLoadingMoreRef.current = true;
     setIsLoadingMore(true);
 
-    await sleep(1500);
-    const newData = getData();
-    setData((prevData) => [...prevData, ...newData]);
-    setIsLoadingMore(false);
-  }, [isLoadingMore]);
+    try {
+      await sleep(1500);
+      const newData = getData();
+      setData((prevData) => [...prevData, ...newData]);
+    } finally {
+      isLoadingMoreRef.current = false;
+      setIsLoadingMore(false);
+    }
+  }, [getData, isNoMore]);
+
+  const handleRefresh = useCallback(async () => {
+    if (isRefreshingRef.current) return;
+    isRefreshingRef.current = true;
+    setRefreshing(true);
+
+    try {
+      await sleep(1500);
+      const initData = getData();
+      setData(initData);
+    } finally {
+      isRefreshingRef.current = false;
+      setRefreshing(false);
+    }
+  }, [getData]);
 
   useEffect(() => {
     loadData();
   }, [loadData]);
 
-  const calculateItemHeight = (item: DataItem) => {
-    return 8 + 2 + 24 + 150 + 49 * item.skeletonNum;
-  };
-
   const renderFooter = () => {
+    if (!isLoadingMore && !isNoMore) return null;
+
     return (
       <View className="py-4">
         {isNoMore ? (
@@ -111,14 +107,14 @@ export default function HomeScreen() {
 
   const renderItem = useCallback(({ item }: { item: DataItem }) => {
     return (
-      <View className="px-1 pt-2" style={{ height: calculateItemHeight(item) }}>
-        <View className="flex-1 w-full overflow-hidden rounded-xl border border-border p-3">
+      <View className="px-1 pt-2">
+        <View className="w-full overflow-hidden rounded-xl border border-border p-3">
           <View className="w-full aspect-square bg-muted rounded-md" style={{ height: 150 }} />
 
           {Array.from({ length: item.skeletonNum }).map((_, index) => (
-            <View key={index} style={{ height: 50 }}>
-              <Skeleton className="w-full h-5 rounded-md mt-2" />
-              <Skeleton className="w-3/5 h-5 rounded-md mt-2" />
+            <View key={index}>
+              <Skeleton className="w-full h-5 rounded-md mt-1" />
+              <Skeleton className="w-3/5 h-5 rounded-md mt-1" />
             </View>
           ))}
         </View>
@@ -127,29 +123,40 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <FlashList
-      keyExtractor={(item: any) => item.id.toString()}
-      onScroll={handleScroll}
-      scrollEventThrottle={16}
-      refreshing={refreshing}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-      onEndReached={loadData}
-      onEndReachedThreshold={0.5}
-      data={data}
-      numColumns={2}
-      renderItem={renderItem}
-      ListFooterComponent={renderFooter}
-      ListHeaderComponent={
-        <View className="w-full rounded-xl overflow-hidden pt-5 pb-1 px-1">
-          <Image
-            source={require('~/assets/images/home-header-bg.jpg')}
-            style={{ height: 120, borderRadius: 6 }}
-            contentFit="cover"
-          />
-        </View>
-      }
-      ListEmptyComponent={null}
-      contentContainerStyle={{ paddingHorizontal: 16 }}
-    />
+    <View className="flex-1">
+      <ScrollHeader
+        title="首页"
+        scrollY={scrollY}
+        backgroundImageSource={require('~/assets/images/home-header-bg.jpg')}
+        rightButtons={rightButtons}
+        gradientColors={['#3b82f6', '#2563eb']}
+      />
+      <ReanimatedFlashList
+        keyExtractor={(item: any) => item.id.toString()}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        onEndReached={loadData}
+        onEndReachedThreshold={0.5}
+        progressViewOffset={headerHeight}
+        data={data}
+        masonry
+        numColumns={2}
+        renderItem={renderItem}
+        ListFooterComponent={renderFooter}
+        ListHeaderComponent={
+          <View className="w-full rounded-xl overflow-hidden pt-5 pb-1 px-1">
+            <Image
+              source={require('~/assets/images/home-header-bg.jpg')}
+              style={{ height: 120, borderRadius: 6 }}
+              contentFit="cover"
+            />
+          </View>
+        }
+        ListEmptyComponent={null}
+        contentContainerStyle={{ paddingTop: headerHeight, paddingHorizontal: 16 }}
+      />
+    </View>
   );
 }

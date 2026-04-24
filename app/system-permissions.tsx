@@ -6,7 +6,8 @@ import * as Location from 'expo-location';
 import * as MediaLibrary from 'expo-media-library';
 import { Camera as CameraIcon, ChevronRight, Image, MapPin, Mic, UserRound } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useEffectAsync } from '~/hooks/use-effect-async';
 import { cn } from '~/lib/utils';

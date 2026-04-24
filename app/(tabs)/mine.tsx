@@ -1,12 +1,22 @@
 import { useRouter } from 'expo-router';
-import { setStatusBarStyle } from 'expo-status-bar';
-import { Bell, ChevronRight, Headphones, HelpCircle, Info, MessageSquare, User } from 'lucide-react-native';
+import {
+  Bell,
+  ChevronRight,
+  Headphones,
+  HelpCircle,
+  Info,
+  MessageSquare,
+  QrCode,
+  Settings,
+  User,
+} from 'lucide-react-native';
 import React from 'react';
-import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 
-import { BREAK_POINT } from '~/components/ui/custom-header';
+import { ScrollHeader } from '~/components/ui/scroll-header';
+import { useScrollHeader } from '~/hooks/useScrollHeader';
 import { useAuth } from '~/store/auth';
-import { useTabsScrollStore } from '~/store/scroll';
 
 interface ItemEntry {
   title: string;
@@ -19,14 +29,12 @@ interface ItemEntry {
 const quickLinks: ItemEntry[][] = [
   [
     { title: '消息通知', icon: 'Bell', iconColor: '#4f46e5', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#0891b2', route: '/notice' },
     { title: '消息通知', icon: 'Bell', iconColor: '#e11d48', route: '/notice' },
     { title: '消息通知', icon: 'Bell', iconColor: '#f59e0b', route: '/notice' },
     { title: '消息通知', icon: 'Bell', iconColor: '#f97316', route: '/notice' },
   ],
   [
     { title: '消息通知', icon: 'Bell', iconColor: '#8b5cf6', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#10b981', route: '/notice' },
     { title: '消息通知', icon: 'Bell', iconColor: '#6366f1', route: '/notice' },
     { title: '消息通知', icon: 'Bell', iconColor: '#0ea5e9', route: '/notice' },
     { title: '消息通知', icon: 'Bell', iconColor: '#ec4899', route: '/notice' },
@@ -182,36 +190,37 @@ const OtherEntriesSection = () => {
 };
 
 export default function MinePage() {
-  const { mineScrollY, updateMineScroll, activeTab } = useTabsScrollStore();
+  const router = useRouter();
+  const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
+  const c = isDarkStyle ? '#000' : '#fff';
 
-  // 设置滚动监听
-  React.useEffect(() => {
-    const id = mineScrollY.addListener(({ value }) => {
-      updateMineScroll(value);
-      if (activeTab === 'mine') {
-        setStatusBarStyle(value > BREAK_POINT ? 'dark' : 'light');
-      }
-    });
-
-    return () => mineScrollY.removeListener(id);
-  }, [activeTab, mineScrollY, updateMineScroll]);
+  const rightButtons = [
+    { icon: <QrCode size={20} color={c} />, onPress: () => router.push('/scan' as any) },
+    { icon: <Settings size={20} color={c} />, onPress: () => router.push('/setting' as any) },
+    { icon: <Headphones size={20} color={c} />, onPress: () => router.push('/online-service' as any) },
+    { icon: <Bell size={20} color={c} />, onPress: () => router.push('/notice' as any) },
+  ];
 
   return (
-    <Animated.ScrollView
-      className="flex-1 bg-muted/80"
-      onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: mineScrollY } } }], { useNativeDriver: false })}
-      scrollEventThrottle={16}
-    >
-      {/* 顶部用户信息区域 */}
-      <View className="mx-5 mt-5 rounded-lg bg-background mb-5">
-        <UserHeader />
-      </View>
-
-      {/* 中间快捷入口区域 */}
-      <QuickLinksSection />
-
-      {/* 底部其他入口区域 */}
-      <OtherEntriesSection />
-    </Animated.ScrollView>
+    <View className="flex-1">
+      <ScrollHeader
+        title="我的"
+        scrollY={scrollY}
+        gradientColors={['#ff9a9e', '#fad0c4']}
+        rightButtons={rightButtons}
+      />
+      <Animated.ScrollView
+        className="flex-1 bg-muted/80"
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        contentContainerStyle={{ paddingTop: headerHeight }}
+      >
+        <View className="mx-5 mt-5 rounded-lg bg-background mb-5">
+          <UserHeader />
+        </View>
+        <QuickLinksSection />
+        <OtherEntriesSection />
+      </Animated.ScrollView>
+    </View>
   );
 }

@@ -10,13 +10,13 @@ import { isRunningInExpoGo } from 'expo';
 import Constants from 'expo-constants';
 import { Stack, useNavigationContainerRef } from 'expo-router';
 import Head from 'expo-router/head';
-import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
 import type { AppStateStatus } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { ThemeToggle } from '~/components/ThemeToggle';
 import { Toaster } from '~/components/ui/sonner';
@@ -25,8 +25,6 @@ import { useColorScheme } from '~/hooks/useColorScheme';
 import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
-import { useTabsScrollStore } from '~/store/scroll';
-
 // Construct a new integration instance. This is needed to communicate between the integration and React
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !isRunningInExpoGo(),
@@ -99,7 +97,6 @@ function RootLayout() {
 
   const hasMounted = React.useRef(false);
 
-  const { statusBarStyle } = useTabsScrollStore();
   const { colorScheme, isDarkColorScheme } = useColorScheme();
 
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
@@ -165,14 +162,13 @@ function RootLayout() {
   return (
     <>
       {showDebugPanel ? <DebugPanel /> : null}
-      <KeyboardProvider>
+      <SafeAreaProvider>
+        <KeyboardProvider>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
             <GestureHandlerRootView>
               {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
               {/* <TypesafeI18n locale={'zh'}> */}
-              <StatusBar style={statusBarStyle} />
-              {/* <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} /> */}
               <Stack
                 screenOptions={{
                   headerShadowVisible: false,
@@ -210,7 +206,8 @@ function RootLayout() {
             {/* </TypesafeI18n> */}
           </ThemeProvider>
         </QueryClientProvider>
-      </KeyboardProvider>
+        </KeyboardProvider>
+      </SafeAreaProvider>
 
       {/* 苹果接力 https://docs.expo.dev/router/advanced/apple-handoff/ */}
       <Head>

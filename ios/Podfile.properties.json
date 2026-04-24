@@ -4,5 +4,7 @@
   "newArchEnabled": "true",
   "apple.extraPods": "[]",
   "apple.ccacheEnabled": "false",
-  "apple.privacyManifestAggregationEnabled": "true"
+  "apple.privacyManifestAggregationEnabled": "true",
+  "ios.forceStaticLinking": "[]",
+  "expo-image.disable-libdav1d": "false"
 }

@@ -13,7 +13,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>Chat QA</string>
+    <string>ChatQA (Dev)</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -38,7 +38,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>qachat</string>
-          <string>com.jiezhiyong.qachat</string>
+          <string>com.jiezhiyong.qachat.dev</string>
         </array>
       </dict>
       <dict>
@@ -59,6 +59,28 @@
     <key>LSApplicationQueriesSchemes</key>
     <array>
       <string>uber</string>
+      <string>airmail</string>
+      <string>message</string>
+      <string>bluemail</string>
+      <string>canary</string>
+      <string>edisonmail</string>
+      <string>szn-email</string>
+      <string>fastmail</string>
+      <string>x-gmxmail-netid-v1</string>
+      <string>googlegmail</string>
+      <string>mailrumail</string>
+      <string>ms-outlook</string>
+      <string>protonmail</string>
+      <string>ctxmail</string>
+      <string>readdle-spark</string>
+      <string>superhuman</string>
+      <string>telekommail</string>
+      <string>tutanota</string>
+      <string>x-webdemail-netid-v1</string>
+      <string>ymail</string>
+      <string>yandexmail</string>
+      <string>appcenter-f45b4c0b-75c9-2d01-7ab6-41f6a6015be2</string>
+      <string>mymail-mailto</string>
     </array>
     <key>LSMinimumSystemVersion</key>
     <string>12.0</string>
@@ -71,6 +93,10 @@
       <key>NSAllowsLocalNetworking</key>
       <true/>
     </dict>
+    <key>NSBonjourServices</key>
+    <array>
+      <string>_expo._tcp</string>
+    </array>
     <key>NSCalendarsFullAccessUsageDescription</key>
     <string>允许 $(PRODUCT_NAME) 访问您的日历，以便为您创建和管理活动提醒</string>
     <key>NSCalendarsUsageDescription</key>
@@ -81,6 +107,8 @@
     <string>允许 $(PRODUCT_NAME) 访问您的联系人，以便您可以轻松分享内容给朋友</string>
     <key>NSFaceIDUsageDescription</key>
     <string>允许 $(PRODUCT_NAME) 使用面容 ID 功能，以便您快速安全地登录</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>Expo Dev Launcher uses the local network to discover and connect to development servers running on your computer.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>允许 $(PRODUCT_NAME) 使用您的位置信息，以便为您提供位置相关服务</string>
     <key>NSLocationAlwaysUsageDescription</key>

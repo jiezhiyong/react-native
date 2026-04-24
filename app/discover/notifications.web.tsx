@@ -1,5 +1,5 @@
 import UnsupportScreen from '~/components/Unsupport';
 
-export default function App() {
+export default function NotificationsNativeWeb() {
   return <UnsupportScreen />;
 }
