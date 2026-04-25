@@ -1,11 +1,11 @@
 /* eslint-disable import/first */
 import { LogBox } from 'react-native';
 
-// react-native-web：Tailwind/NativeWind 的 shadow-* 在部分路径仍会映射为 shadow* 样式属性
-LogBox.ignoreLogs([
-  'props.pointerEvents is deprecated. Use style.pointerEvents',
-  'shadow* style props are deprecated. Use "boxShadow"',
-]);
+/**
+ * 主要用于 React Native LogBox UI
+ * 不适合屏蔽 React Native Web 直接输出到浏览器 console 的 warning。
+ */
+LogBox.ignoreLogs(['']);
 
 // 注册 Expo Router 入口
 import 'expo-router/entry';

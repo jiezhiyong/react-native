@@ -6,47 +6,8 @@ This is an [Expo](https://expo.dev) project template. doc: [Expo documentation](
 
 ```bash
 pnpm install # 安装依赖
-pnpm start:dev # 启动开发模式, --clear (清除 bundler 缓存)
+pnpm start:dev --clear # 启动开发模式 (可选清除 bundler 缓存)
 ```
-
-### 添加插件
-
-```sh
-npx expo install <plugin-name>
-```
-
-### 添加 shadcn/ui 组件
-
-```sh
-npx @react-native-reusables/cli@latest add
-```
-
-### 重要组件 & 工具
-
-- [Expo SDK](https://docs.expo.dev/versions/latest/sdk/expo)
-- [react-native-reusables](https://rnr-docs.vercel.app)
-- [React Native Vision Camera](https://react-native-vision-camera.com)
-- [keyboard](https://kirillzyusko.github.io/react-native-keyboard-controller)
-- [tanstack-query](https://tanstack.com/query/v4)
-- [react-hook-form](https://react-hook-form.com)
-- [react-native-bottom-sheet](https://gorhom.dev/react-native-bottom-sheet)
-- [flash-list](https://shopify.github.io/flash-list)
-- [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler)
-- [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)
-- [react-native-safe-area-context](https://appandflow.github.io/react-native-safe-area-context)
-- [react-native-device-info](https://github.com/react-native-device-info/react-native-device-info)
-- [react-native-modal](https://github.com/react-native-modal/react-native-modal)
-- [react-navigation](https://reactnavigation.org)
-- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv)
-- [async-storage](https://react-native-async-storage.github.io/async-storage/docs/usage/)
-- [fbflipper](https://fbflipper.com)
-- [react-native-app-link](https://github.com/FiberJW/react-native-app-link)
-- [uri-scheme](https://github.com/expo/expo/tree/main/packages/uri-scheme#readme)
-- [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n)
-- [sentry](https://docs.sentry.io/platforms/react-native)
-- [react-native-gifted-charts](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts)
-- [react-native-edge-to-edge](https://github.com/zoontek/react-native-edge-to-edge)
-- [...](https://reactnative.directory)
 
 ## 创建本地开发版本 Development Build（依赖 Development servers）
 
@@ -154,6 +115,45 @@ EXPO_UNSTABLE_ATLAS=true npx expo start --no-dev # 将开发模式更改为生�
 EXPO_UNSTABLE_ATLAS=true npx expo export & npx expo-atlas .expo/atlas.jsonl # 使用 Atlas 与 npx expo export 结合
 ```
 
+### 添加插件
+
+```sh
+npx expo install <plugin-name>
+```
+
+### 添加 shadcn/ui 组件
+
+```sh
+npx @react-native-reusables/cli@latest add
+```
+
+### 重要组件 & 工具
+
+- [Expo SDK](https://docs.expo.dev/versions/latest/sdk/expo)
+- [react-native-reusables](https://rnr-docs.vercel.app)
+- [React Native Vision Camera](https://react-native-vision-camera.com)
+- [keyboard](https://kirillzyusko.github.io/react-native-keyboard-controller)
+- [tanstack-query](https://tanstack.com/query/v4)
+- [react-hook-form](https://react-hook-form.com)
+- [react-native-bottom-sheet](https://gorhom.dev/react-native-bottom-sheet)
+- [flash-list](https://shopify.github.io/flash-list)
+- [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler)
+- [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)
+- [react-native-safe-area-context](https://appandflow.github.io/react-native-safe-area-context)
+- [react-native-device-info](https://github.com/react-native-device-info/react-native-device-info)
+- [react-native-modal](https://github.com/react-native-modal/react-native-modal)
+- [react-navigation](https://reactnavigation.org)
+- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv)
+- [async-storage](https://react-native-async-storage.github.io/async-storage/docs/usage/)
+- [fbflipper](https://fbflipper.com)
+- [react-native-app-link](https://github.com/FiberJW/react-native-app-link)
+- [uri-scheme](https://github.com/expo/expo/tree/main/packages/uri-scheme#readme)
+- [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n)
+- [sentry](https://docs.sentry.io/platforms/react-native)
+- [react-native-gifted-charts](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts)
+- [react-native-edge-to-edge](https://github.com/zoontek/react-native-edge-to-edge)
+- [...](https://reactnative.directory)
+
 ## 参考文档
 
 - [Expo Go](https://expo.dev/go)
@@ -196,7 +196,7 @@ npx react-native bundle --platform ios --dev true --entry-file index.js --bundle
 ## 待办事项
 
 - PDF预览器
-- Webview sdk
+- Webview sdk: 域名白名单、版本支持检测、回退携带数据、ntv_new ...
 - 包含调试面板，但不包含 dev-client 的 Test 变体包
 - 网络请求封装
 - Sentry

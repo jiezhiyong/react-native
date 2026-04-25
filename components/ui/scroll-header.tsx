@@ -100,7 +100,6 @@ export function ScrollHeader({
       }}
     >
       <Animated.View
-        pointerEvents="none"
         style={[
           {
             position: 'absolute',
@@ -109,14 +108,17 @@ export function ScrollHeader({
             right: 0,
             height: totalHeight,
             zIndex: 0,
+            pointerEvents: 'none',
           },
           solidBarStyle,
         ]}
       />
 
       <Animated.View
-        style={[{ position: 'absolute', top: 0, left: 0, right: 0, height: totalHeight, zIndex: 0 }, overlayStyle]}
-        pointerEvents="none"
+        style={[
+          { position: 'absolute', top: 0, left: 0, right: 0, height: totalHeight, zIndex: 0, pointerEvents: 'none' },
+          overlayStyle,
+        ]}
       >
         {backgroundImageSource ? (
           <Image

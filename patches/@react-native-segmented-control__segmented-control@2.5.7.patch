@@ -1,0 +1,19 @@
+diff --git a/js/SegmentedControl.js b/js/SegmentedControl.js
+index 4a3a6a7e540bcad6117107faaa0f865bb11ad91c..6fe07d5ae3f7c5cc3eb9df7616d17894f0fc8a1e 100644
+--- a/js/SegmentedControl.js
++++ b/js/SegmentedControl.js
+@@ -177,13 +177,7 @@ const styles = StyleSheet.create({
+     left: 2,
+     borderWidth: 0.5,
+     borderColor: 'rgba(0,0,0,0.04)',
+-    shadowColor: '#000',
+-    shadowOffset: {
+-      width: 0,
+-      height: 1,
+-    },
+-    shadowOpacity: 0.22,
+-    shadowRadius: 2.22,
++    boxShadow: '0px 1px 2.22px rgba(0, 0, 0, 0.22)',
+     elevation: 3,
+   },
+   segmentsContainer: {

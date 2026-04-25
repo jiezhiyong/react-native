@@ -5,9 +5,9 @@ import { Bell, Headphones } from 'lucide-react-native';
 import * as React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator } from '@/components/ActivityIndicator';
 import Animated from 'react-native-reanimated';
 
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { ScrollHeader } from '@/components/ui/scroll-header';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Text } from '@/components/ui/text';
@@ -149,9 +149,8 @@ export default function HomeScreen() {
         ListHeaderComponent={
           <View className="w-full rounded-xl overflow-hidden pt-5 pb-1 px-1">
             <Image
-              className="rounded-xl"
+              className="rounded-xl h-[120px]"
               source={require('@/assets/images/home-header-bg.jpg')}
-              style={{ height: 120 }}
               contentFit="cover"
             />
           </View>

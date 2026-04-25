@@ -247,7 +247,9 @@
       "@sentry/cli"
     ],
     "patchedDependencies": {
-      "react-native-css-interop@0.2.3": "patches/react-native-css-interop@0.2.3.patch"
+      "react-native-css-interop@0.2.3": "patches/react-native-css-interop@0.2.3.patch",
+      "@react-native-segmented-control/segmented-control@2.5.7": "patches/@react-native-segmented-control__segmented-control@2.5.7.patch",
+      "@react-navigation/bottom-tabs@7.15.7": "patches/@react-navigation__bottom-tabs@7.15.7.patch"
     }
   },
   "private": true

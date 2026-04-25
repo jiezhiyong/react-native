@@ -45,5 +45,8 @@
       "iconColour": "#8bc34a"
     }
   },
-  "java.compile.nullAnalysis.mode": "disabled"
+  "search.exclude": {
+    "**/dist": true,
+    "**/coverage": true
+  }
 }
