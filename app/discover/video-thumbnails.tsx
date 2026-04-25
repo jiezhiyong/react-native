@@ -1,7 +1,8 @@
+import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import * as VideoThumbnails from 'expo-video-thumbnails';
 import { useState } from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -86,7 +87,7 @@ export default function ExpoVideoThumbnailsScreen() {
           <Image
             source={{ uri: thumbnailUri }}
             style={{ width: '100%', height: 150 }}
-            resizeMode="cover"
+            contentFit="cover"
             className="border p-1 rounded-lg"
           />
         </View>

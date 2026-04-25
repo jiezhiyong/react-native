@@ -1,26 +1,17 @@
 import * as Audio from 'expo-audio';
+import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { Stack, useRouter } from 'expo-router';
 import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Camera, Image as ImageIcon, Mic, Play, Plus, Send, X } from 'lucide-react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  FlatList,
-  Image,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, KeyboardAvoidingView, Modal, Platform, ScrollView, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { create } from 'zustand';
 
-import { Button } from '@/components/ui/button';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
-import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 const PLAYBACK_STATUS_UPDATE = 'playbackStatusUpdate';
 
@@ -174,7 +165,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
 
         {message.type === 'image' && message.mediaUrl && (
           <TouchableOpacity onPress={handleMediaPress} activeOpacity={0.8}>
-            <Image source={{ uri: message.mediaUrl }} className="w-48 h-48 rounded-md" resizeMode="cover" />
+            <Image source={{ uri: message.mediaUrl }} className="w-48 h-48 rounded-md" contentFit="cover" />
           </TouchableOpacity>
         )}
 
@@ -182,7 +173,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
           <TouchableOpacity onPress={handleMediaPress} activeOpacity={0.8}>
             <View className="relative w-48 h-48 rounded-md overflow-hidden">
               {message.thumbnailUrl ? (
-                <Image source={{ uri: message.thumbnailUrl }} className="w-full h-full" resizeMode="cover" />
+                <Image source={{ uri: message.thumbnailUrl }} className="w-full h-full" contentFit="cover" />
               ) : (
                 <View className="w-full h-full bg-muted items-center justify-center">
                   <ActivityIndicator color="#c96442" />
@@ -309,32 +300,28 @@ const MediaPicker = ({
             </TouchableOpacity>
           </View>
 
-          <View className="flex-row justify-around mb-10">
+          <View className="flex-row justify-around text-primary">
             <TouchableOpacity className="items-center" onPress={handleTakePhoto}>
-              <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
+              <View className="w-14 h-14 rounded-full bg-primary/20 items-center justify-center mb-2">
                 <Camera size={28} />
               </View>
               <Text className="text-foreground">拍照</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickImage}>
-              <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
+              <View className="w-14 h-14 rounded-full bg-primary/20 items-center justify-center mb-2">
                 <ImageIcon size={28} />
               </View>
               <Text className="text-foreground">图片</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickVideo}>
-              <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
+              <View className="w-14 h-14 rounded-full bg-primary/20 items-center justify-center mb-2">
                 <Mic size={28} />
               </View>
               <Text className="text-foreground">视频</Text>
             </TouchableOpacity>
           </View>
-
-          <Button onPress={onClose} variant="outline" className="mb-6">
-            <Text>取消</Text>
-          </Button>
         </View>
       </View>
     </Modal>

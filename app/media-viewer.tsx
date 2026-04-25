@@ -1,4 +1,5 @@
 import { File } from 'expo-file-system';
+import { Image } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
 import { PermissionStatus } from 'expo-modules-core';
 import { Stack, useLocalSearchParams } from 'expo-router';
@@ -6,9 +7,10 @@ import * as Sharing from 'expo-sharing';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { Download, Share2 } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 export default function MediaViewerScreen() {
   const params = useLocalSearchParams<{ url: string; type: string }>();
@@ -140,7 +142,7 @@ export default function MediaViewerScreen() {
           <Image
             source={{ uri: url }}
             className="w-full h-full"
-            resizeMode="contain"
+            contentFit="contain"
             onLoad={handleMediaLoad}
             onError={() => handleMediaError('图片加载失败')}
           />

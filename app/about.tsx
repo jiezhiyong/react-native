@@ -1,9 +1,11 @@
 import Constants from 'expo-constants';
+import { Image } from 'expo-image';
 import * as StoreReview from 'expo-store-review';
 import * as Updates from 'expo-updates';
 import { ChevronRight } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import { Image, Linking, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, Text, TouchableOpacity, View } from 'react-native';
+
 import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 interface AboutItemProps {
@@ -75,7 +77,7 @@ export default function AboutScreen() {
       {/* 应用信息 */}
       <View className="items-center justify-center py-10 bg-card rounded-xl border border-border">
         <View className="w-20 h-20 rounded-xl overflow-hidden mb-4 bg-muted items-center justify-center">
-          <Image source={require('../assets/images/icon.png')} className="flex-1" resizeMode="contain" />
+          <Image source={require('../assets/images/icon.png')} className="flex-1" contentFit="contain" />
         </View>
         <Text className="text-xl font-medium mb-1 text-foreground">{appName}</Text>
         <Text className="text-muted-foreground">Version {appVersion}</Text>

@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import {
   Bell,
@@ -11,7 +12,7 @@ import {
   User,
 } from 'lucide-react-native';
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { ScrollHeader } from '@/components/ui/scroll-header';

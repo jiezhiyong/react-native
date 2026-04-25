@@ -1,8 +1,9 @@
 import { Asset } from 'expo-asset';
+import { Image } from 'expo-image';
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, View } from 'react-native';
-import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { ScrollView, View } from 'react-native';
 
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
@@ -51,7 +52,7 @@ export default function ExpoAssetScreen() {
         {asset.name}.{asset.type} ({asset.width || '?'} x {asset.height || '?'})
       </Text>
       {asset.localUri && (
-        <Image source={{ uri: asset.localUri }} className="w-20 h-20 rounded bg-muted" resizeMode="contain" />
+        <Image source={{ uri: asset.localUri }} className="w-20 h-20 rounded bg-muted" contentFit="contain" />
       )}
     </View>
   );
@@ -107,7 +108,7 @@ export default function ExpoAssetScreen() {
             {downloadedAsset.height || '?'})
           </Text>
           {downloadedAsset.localUri && (
-            <Image source={{ uri: downloadedAsset.localUri }} className="w-20 h-20 rounded" resizeMode="contain" />
+            <Image source={{ uri: downloadedAsset.localUri }} className="w-20 h-20 rounded" contentFit="contain" />
           )}
         </View>
       ) : (
