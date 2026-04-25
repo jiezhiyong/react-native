@@ -115,14 +115,14 @@ export default function NetworkInfoDemo() {
     if (type === 'wifi' && details?.strength !== undefined) {
       const strength = details.strength;
       if (strength > -50) return { quality: 'Excellent', color: 'text-green-600' };
-      if (strength > -60) return { quality: 'Good', color: 'text-blue-600' };
+      if (strength > -60) return { quality: 'Good', color: 'text-primary' };
       if (strength > -70) return { quality: 'Fair', color: 'text-yellow-600' };
       return { quality: 'Poor', color: 'text-red-600' };
     }
     if (type === 'cellular') {
-      return { quality: 'Cellular', color: 'text-blue-600' };
+      return { quality: 'Cellular', color: 'text-primary' };
     }
-    return { quality: 'Unknown', color: 'text-gray-600' };
+    return { quality: 'Unknown', color: 'text-muted-foreground' };
   };
 
   const getNetworkTypeLabel = (type: NetInfoStateType): string => {

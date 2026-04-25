@@ -11,10 +11,10 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-transparent bg-primary web:hover:opacity-80 active:opacity-80',
-        secondary: 'border-transparent bg-secondary web:hover:opacity-80 active:opacity-80',
-        destructive: 'border-transparent bg-destructive web:hover:opacity-80 active:opacity-80',
-        outline: 'text-foreground',
+        default: 'border-transparent bg-primary web:hover:opacity-85 active:opacity-85',
+        secondary: 'border-transparent bg-secondary web:hover:bg-accent active:bg-accent',
+        destructive: 'border-transparent bg-destructive web:hover:opacity-85 active:opacity-85',
+        outline: 'bg-card text-foreground',
       },
     },
     defaultVariants: {
@@ -23,7 +23,7 @@ const badgeVariants = cva(
   }
 );
 
-const badgeTextVariants = cva('text-xs font-semibold ', {
+const badgeTextVariants = cva('text-xs font-medium ', {
   variants: {
     variant: {
       default: 'text-primary-foreground',

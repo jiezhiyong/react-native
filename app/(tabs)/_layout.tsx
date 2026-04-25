@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { HapticTab } from '~/components/HapticTab';
 import TabBarBackground from '~/components/ui/TabBarBackground';
+import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/hooks/useColorScheme';
 
 export default function TabLayout() {
@@ -12,7 +13,8 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colorScheme === 'dark' ? '#fff' : '#000',
+        tabBarActiveTintColor: colorScheme === 'dark' ? NAV_THEME.dark.primary : NAV_THEME.light.primary,
+        tabBarInactiveTintColor: colorScheme === 'dark' ? '#87867f' : '#5e5d59',
         tabBarHideOnKeyboard: true,
         headerTitleAllowFontScaling: true,
         tabBarButton: HapticTab as any,

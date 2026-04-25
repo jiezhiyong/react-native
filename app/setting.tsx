@@ -15,15 +15,15 @@ const SettingItem = ({ title, desc, icon, onPress }: SettingItemProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="flex-row items-center justify-between p-5 border-b border-gray-100"
+      className="flex-row items-center justify-between p-5 border-b border-border"
       activeOpacity={0.7}
     >
       <View className="flex-row items-center flex-1 gap-3">
         {icon}
-        <Text className="text-gray-800 flex-1">{title}</Text>
+        <Text className="text-foreground flex-1">{title}</Text>
         {desc && <Text className="text-secondary-foreground">{desc}</Text>}
       </View>
-      <ChevronRight size={20} color="#ccc" />
+      <ChevronRight size={20} color="#87867f" />
     </TouchableOpacity>
   );
 };
@@ -33,14 +33,14 @@ interface SettingGroupProps {
 }
 
 const SettingGroup = ({ children }: SettingGroupProps) => {
-  return <View className="bg-background rounded-xl my-2 overflow-hidden">{children}</View>;
+  return <View className="bg-card rounded-xl my-2 overflow-hidden border border-border">{children}</View>;
 };
 
 export default function SettingScreen() {
   const router = useRouter();
   return (
-    <SafeAreaView className="flex-1 bg-muted">
-      <ScrollView className="flex-1 p-5" showsVerticalScrollIndicator={false}>
+    <SafeAreaView className="flex-1 bg-background">
+      <ScrollView className="flex-1 px-5 py-5" showsVerticalScrollIndicator={false}>
         <SettingGroup>
           <SettingItem title="营业执照" onPress={() => Alert.alert('该功能暂未实现')} />
           <SettingItem title="隐私设置" onPress={() => router.push('/privacy-setting')} />

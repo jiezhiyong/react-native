@@ -96,7 +96,7 @@ export default function ExpoAssetScreen() {
     <>
       {isDownloading ? (
         <View className="items-center">
-          <ActivityIndicator color="#0891b2" />
+          <ActivityIndicator color="#c96442" />
           <Text className="mt-2">下载中: {Math.round(downloadProgress * 100)}%</Text>
         </View>
       ) : downloadedAsset ? (
@@ -120,7 +120,7 @@ export default function ExpoAssetScreen() {
   if (isLoading) {
     return (
       <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
-        <ActivityIndicator color="#0891b2" />
+        <ActivityIndicator color="#c96442" />
         <Text className="mt-2">加载资源中...</Text>
       </View>
     );

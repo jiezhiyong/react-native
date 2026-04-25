@@ -30,12 +30,12 @@ const EditToolbar: React.FC<EditToolbarProps> = React.memo(
     const hasSelectedItems = selectedItems.length > 0;
 
     return (
-      <View className="pl-5 pr-3 pt-3 flex-row justify-between items-center border-t border-gray-100">
+      <View className="pl-5 pr-3 pt-3 flex-row justify-between items-center border-t border-border bg-background">
         <TouchableOpacity onPress={toggleSelectAll} className="flex-row items-center gap-2">
           {isAllSelected ? (
             <CircleCheck size={20} strokeWidth={1.5} />
           ) : (
-            <Circle size={20} strokeWidth={1.5} color="#eaeaea" />
+            <Circle size={20} strokeWidth={1.5} color="#d1cfc5" />
           )}
           <Text>全选</Text>
         </TouchableOpacity>
@@ -44,9 +44,9 @@ const EditToolbar: React.FC<EditToolbarProps> = React.memo(
           variant="destructive"
           onPress={handleBatchDelete}
           disabled={!hasSelectedItems}
-          className="rounded-full min-w-28"
+          className="rounded-xl min-w-28"
         >
-          <Text className="text-white font-medium">删除</Text>
+          <Text className="text-primary-foreground font-medium">删除</Text>
         </Button>
       </View>
     );
@@ -180,14 +180,14 @@ export default function HistoryScreen() {
     }
 
     return (
-      <View className="flex-row ml-5 mr-3 gap-3 items-center overflow-hidden border-b border-gray-100">
+      <View className="flex-row mx-5 gap-3 items-center overflow-hidden border-b border-border">
         <TouchableOpacity className="flex-1 py-3 items-center flex-row gap-3 overflow-hidden" onPress={handlePress}>
           {isEditing && (
             <>
               {isSelected ? (
                 <CircleCheck size={20} strokeWidth={1.5} />
               ) : (
-                <Circle size={20} strokeWidth={1.5} color="#eaeaea" />
+                <Circle size={20} strokeWidth={1.5} color="#d1cfc5" />
               )}
             </>
           )}
@@ -204,7 +204,7 @@ export default function HistoryScreen() {
 
         {isEditing && (
           <Button variant="ghost" onPress={handleDeleteItem} size="icon" className="shrink-0">
-            <Trash2 size={18} strokeWidth={1.5} color="red" />
+            <Trash2 size={18} strokeWidth={1.5} color="#b53333" />
           </Button>
         )}
       </View>
@@ -249,11 +249,11 @@ export default function HistoryScreen() {
   const renderEmptyState = useCallback(
     () => (
       <View className="flex-1 justify-center items-center p-5">
-        <FileX size={120} color="#6b7280" />
+        <FileX size={120} color="#87867f" />
         <Text className="text-muted-foreground text-center mt-4">暂无扫描记录</Text>
         <Text className="text-secondary-foreground text-center mt-2 text-sm">扫描二维码后会自动保存在这里</Text>
-        <TouchableOpacity onPress={() => router.back()} className="mt-6 bg-blue-500 py-3 px-6 rounded-full">
-          <Text className="text-white font-medium">去扫描</Text>
+        <TouchableOpacity onPress={() => router.back()} className="mt-6 bg-primary py-3 px-6 rounded-xl">
+          <Text className="text-primary-foreground font-medium">去扫描</Text>
         </TouchableOpacity>
       </View>
     ),
@@ -279,7 +279,7 @@ export default function HistoryScreen() {
     function HeaderRightButton() {
       return (
         <TouchableOpacity onPress={handleToggleEdit}>
-          <Text className="text-blue-500 font-medium">{isEditing ? '取消' : '编辑'}</Text>
+          <Text className="text-primary font-medium">{isEditing ? '取消' : '编辑'}</Text>
         </TouchableOpacity>
       );
     }
@@ -314,7 +314,7 @@ export default function HistoryScreen() {
   }, [isEditing, history.length, selectedItems, toggleSelectAll, handleBatchDelete]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView className="flex-1 bg-background">
       <StatusBar style="dark" />
       <Stack.Screen
         options={{

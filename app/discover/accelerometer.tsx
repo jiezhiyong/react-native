@@ -133,13 +133,13 @@ export default function AccelerometerScreen() {
       </View>
 
       {/* 状态信息 */}
-      <View className="mb-6 p-4 bg-muted dark:bg-gray-800 rounded-lg flex-col gap-2">
-        <Text className="text-gray-700 dark:text-gray-300">
+      <View className="mb-6 p-4 bg-muted rounded-lg flex-col gap-2">
+        <Text className="text-foreground">
           是否支持加速度计:&nbsp;
           {subscription.isAvailable === null ? '检查中 ...' : String(subscription.isAvailable)}
         </Text>
-        <Text className="text-gray-700 dark:text-gray-300">监听状态:&nbsp; {String(subscription.isSubscribed)}</Text>
-        <Text className="text-gray-700 dark:text-gray-300">更新间隔:&nbsp; {updateInterval} ms</Text>
+        <Text className="text-foreground">监听状态:&nbsp; {String(subscription.isSubscribed)}</Text>
+        <Text className="text-foreground">更新间隔:&nbsp; {updateInterval} ms</Text>
       </View>
 
       {/* 数据显示 */}

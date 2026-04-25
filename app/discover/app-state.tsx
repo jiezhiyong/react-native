@@ -108,7 +108,7 @@ export default function AppStateScreen() {
 
   // 获取主题颜色
   const getColorSchemeColor = (scheme: ColorSchemeName | 'initial') => {
-    if (scheme === 'dark') return 'text-blue-600';
+    if (scheme === 'dark') return 'text-primary';
     if (scheme === 'light') return 'text-yellow-600';
     return 'text-muted-foreground';
   };
@@ -133,7 +133,7 @@ export default function AppStateScreen() {
         {appStateHistory.length > 0 ? (
           <View className="space-y-2">
             {appStateHistory.map((item, index) => (
-              <View key={index} className="border-b border-gray-100 pb-2">
+              <View key={index} className="border-b border-border pb-2">
                 <View className="flex-row justify-between items-center">
                   <Text className="text-sm text-muted-foreground">{formatTime(item.timestamp)}</Text>
                   <View className="flex-row items-center">
@@ -158,7 +158,7 @@ export default function AppStateScreen() {
         {themeHistory.length > 0 ? (
           <View className="space-y-2">
             {themeHistory.map((item, index) => (
-              <View key={index} className="border-b border-gray-100 pb-2">
+              <View key={index} className="border-b border-border pb-2">
                 <View className="flex-row justify-between items-center">
                   <Text className="text-sm text-muted-foreground">{formatTime(item.timestamp)}</Text>
                   <View className="flex-row items-center">

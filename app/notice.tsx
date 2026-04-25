@@ -109,10 +109,15 @@ const getDateGroup = (dateStr: string): string => {
 // 消息项组件
 const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) => {
   return (
-    <View className={`p-4 mt-3 rounded-lg ${item.isRead ? 'bg-gray-50' : 'bg-blue-50'}`} onTouchEnd={onPress}>
+    <View
+      className={`p-4 mt-3 rounded-xl border ${
+        item.isRead ? 'bg-card border-border' : 'bg-primary/10 border-primary/20'
+      }`}
+      onTouchEnd={onPress}
+    >
       <View className="flex-row items-center justify-between mb-2">
-        <Text className={`font-medium ${item.isRead ? 'text-gray-700' : 'text-blue-700'}`}>{item.title}</Text>
-        {!item.isRead && <View className="bg-red-500 w-2 h-2 rounded-full" />}
+        <Text className={`font-medium ${item.isRead ? 'text-foreground' : 'text-primary'}`}>{item.title}</Text>
+        {!item.isRead && <View className="bg-primary w-2 h-2 rounded-full" />}
       </View>
       <Text className="text-muted-foreground mb-2" numberOfLines={2}>
         {item.content}
@@ -125,7 +130,7 @@ const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) =>
 // 日期分组标题组件
 const DateGroupHeader = ({ title }: { title: string }) => (
   <View className="flex-row items-center py-2 mt-2">
-    <CalendarClock size={16} color="#6b7280" />
+    <CalendarClock size={16} color="#87867f" />
     <Text className="text-sm font-medium text-muted-foreground ml-2">{title}</Text>
   </View>
 );
@@ -224,14 +229,14 @@ export default function NoticeScreen() {
 
     return (
       <View className="flex-1 justify-center items-center py-10">
-        <Mail size={48} color="#d1d5db" />
+        <Mail size={48} color="#d1cfc5" />
         <Text className="mt-4 text-secondary-foreground">暂无消息</Text>
       </View>
     );
   }, [loading, refreshing]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView className="flex-1 bg-background">
       <View className="flex-1 bg-background px-5 pb-1 pt-2">
         <Stack.Screen
           options={{

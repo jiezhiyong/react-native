@@ -76,7 +76,7 @@ export default function CaptureRefScreen() {
       {/* 这个视图将被捕获 */}
       <View
         ref={viewRef}
-        className="rounded-xl p-5 shadow-md mb-6 border border-gray-200 bg-background"
+        className="rounded-xl p-5 shadow-md mb-6 border border-border bg-background"
         collapsable={false} // 在Android上必须设置为false
       >
         <View className="items-center mb-4 rounded-lg overflow-hidden">

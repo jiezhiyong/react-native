@@ -26,11 +26,11 @@ config.transformer.minifierConfig = {
 
     ...(process.env.NO_MINIFY === 'true' // 可以通过环境变量控制是否压缩代码及__DEV__状态
       ? {
-        dead_code: false,
-        global_defs: {
-          __DEV__: process.env.FORCE_DEV_MODE === 'true', // 明确设置__DEV__的值，根据FORCE_DEV_MODE环境变量
-        },
-      }
+          dead_code: false,
+          global_defs: {
+            __DEV__: process.env.FORCE_DEV_MODE === 'true', // 明确设置__DEV__的值，根据FORCE_DEV_MODE环境变量
+          },
+        }
       : {}),
   },
 };

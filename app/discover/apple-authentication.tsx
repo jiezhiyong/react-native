@@ -100,11 +100,11 @@ export default function AppleAuthenticationScreen() {
 
       <ScrollView className="flex-1">
         <View className="mb-6 bg-muted rounded-lg p-4 gap-3">
-          <Text className="text-gray-700 dark:text-gray-300">
+          <Text className="text-foreground">
             身份验证状态: {isAppleAuthAvailable === null ? '检查中...' : isAppleAuthAvailable ? '可用' : '不可用'}
           </Text>
 
-          <Text className="text-gray-700 dark:text-gray-300">登录凭证状态: {credentialState || '未登录'}</Text>
+          <Text className="text-foreground">登录凭证状态: {credentialState || '未登录'}</Text>
         </View>
 
         {/* 用户信息显示 */}

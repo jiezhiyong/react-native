@@ -229,7 +229,9 @@
 <a name='L164'></a><a href='#L164'>164</a>
 <a name='L165'></a><a href='#L165'>165</a>
 <a name='L166'></a><a href='#L166'>166</a>
-<a name='L167'></a><a href='#L167'>167</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -399,9 +401,10 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-import { Check } from '~/lib/icons/Check';
-import { ChevronDown } from '~/lib/icons/ChevronDown';
-import { ChevronUp } from '~/lib/icons/ChevronUp';
+&nbsp;
+import { Check } from '~/icons/Check';
+import { ChevronDown } from '~/icons/ChevronDown';
+import { ChevronUp } from '~/icons/ChevronUp';
 import { cn } from '~/lib/utils';
 &nbsp;
 type Option = SelectPrimitive.Option;
@@ -417,7 +420,7 @@ const SelectTrigger = <span class="cstat-no" title="statement not covered" >Reac
 <span class="cstat-no" title="statement not covered" >    &lt;SelectPrimitive.Trigger</span>
       ref={ref}
       className={cn(
-        'flex flex-row h-10 native:h-12 items-center text-sm justify-between rounded-md border border-input bg-background px-3 py-2 web:ring-offset-background text-muted-foreground web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 [&amp;&gt;span]:line-clamp-1',
+        'flex flex-row h-10 native:h-12 items-center text-sm justify-between rounded-xl border border-input bg-card px-3 py-2 web:ring-offset-background text-muted-foreground web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 [&amp;&gt;span]:line-clamp-1',
         props.disabled &amp;&amp; 'web:cursor-not-allowed opacity-50',
         className
       )}
@@ -477,7 +480,7 @@ const SelectContent = <span class="cstat-no" title="statement not covered" >Reac
           &lt;SelectPrimitive.Content
             ref={ref}
             className={cn(
-              'relative z-50 max-h-96 min-w-[8rem] rounded-md border border-border bg-popover shadow-md shadow-foreground/10 py-2 px-1 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+              'relative z-50 max-h-96 min-w-[8rem] rounded-xl border border-border bg-popover shadow-md shadow-foreground/10 py-2 px-1 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
               position === 'popper' &amp;&amp;
                 'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
               open ? 'web:zoom-in-95 web:animate-in web:fade-in-0' : 'web:zoom-out-95 web:animate-out web:fade-out-0',
@@ -510,7 +513,7 @@ const SelectLabel = <span class="cstat-no" title="statement not covered" >React.
 <span class="cstat-no" title="statement not covered" >    &lt;SelectPrimitive.Label</span>
       ref={ref}
       className={cn(
-        'py-1.5 native:pb-2 pl-8 native:pl-10 pr-2 text-popover-foreground text-sm native:text-base font-semibold',
+        'py-1.5 native:pb-2 pl-8 native:pl-10 pr-2 text-popover-foreground text-sm native:font-medium',
         className
       )}
       {...props}
@@ -524,7 +527,7 @@ const SelectItem = <span class="cstat-no" title="statement not covered" >React.f
 <span class="cstat-no" title="statement not covered" >    &lt;SelectPrimitive.Item</span>
       ref={ref}
       className={cn(
-        'relative web:group flex flex-row w-full web:cursor-default web:select-none items-center rounded-sm py-1.5 native:py-2 pl-8 native:pl-10 pr-2 web:hover:bg-accent/50 active:bg-accent web:outline-none web:focus:bg-accent',
+        'relative web:group flex flex-row w-full web:cursor-default web:select-none items-center rounded-lg py-1.5 native:py-2 pl-8 native:pl-10 pr-2 web:hover:bg-accent/50 active:bg-accent web:outline-none web:focus:bg-accent',
         props.disabled &amp;&amp; 'web:pointer-events-none opacity-50',
         className
       )}
@@ -535,7 +538,7 @@ const SelectItem = <span class="cstat-no" title="statement not covered" >React.f
           &lt;Check size={16} strokeWidth={3} className="text-popover-foreground" /&gt;
         &lt;/SelectPrimitive.ItemIndicator&gt;
       &lt;/View&gt;
-      &lt;SelectPrimitive.ItemText className="text-sm native:text-lg text-popover-foreground native:text-base web:group-focus:text-accent-foreground" /&gt;
+      &lt;SelectPrimitive.ItemText className="text-sm native:text-lg text-popover-foreground native:web:group-focus:text-accent-foreground" /&gt;
     &lt;/SelectPrimitive.Item&gt;
   )
 );
@@ -568,7 +571,7 @@ export {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-03T10:03:39.159Z
+                at 2026-04-24T15:35:16.711Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

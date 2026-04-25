@@ -39,35 +39,35 @@ const PrivacyItem = ({
     >
       <View className="flex-row justify-between items-center">
         <View className="flex-1 pr-4">
-          <Text className="font-medium text-lg text-gray-800">{title}</Text>
+          <Text className="font-medium text-lg text-foreground">{title}</Text>
           {description && <Text className="text-sm text-muted-foreground mt-1">{description}</Text>}
         </View>
 
         {hasSwitch && (
           <Switch
-            trackColor={{ false: '#e5e5e5', true: '#4ade80' }}
-            thumbColor={'#ffffff'}
-            ios_backgroundColor="#e5e5e5"
+            trackColor={{ false: '#e8e6dc', true: '#c96442' }}
+            thumbColor={'#faf9f5'}
+            ios_backgroundColor="#e8e6dc"
             onValueChange={toggleSwitch}
             value={isEnabled}
           />
         )}
 
-        {hasChevron && <ChevronRight size={20} color="#ccc" />}
+        {hasChevron && <ChevronRight size={20} color="#87867f" />}
       </View>
     </TouchableOpacity>
   );
 };
 
 const PrivacyGroup = ({ children }: { children: React.ReactNode }) => {
-  return <View className="bg-background rounded-xl overflow-hidden mb-4">{children}</View>;
+  return <View className="bg-card rounded-xl overflow-hidden mb-4 border border-border">{children}</View>;
 };
 
 export default function PrivacySettingScreen() {
   const router = useRouter();
   return (
-    <SafeAreaView className="flex-1 bg-muted">
-      <ScrollView className="flex-1 p-5">
+    <SafeAreaView className="flex-1 bg-background">
+      <ScrollView className="flex-1 px-5 py-5">
         {/* 个性化推荐组 */}
         <PrivacyGroup>
           <PrivacyItem
@@ -76,7 +76,7 @@ export default function PrivacySettingScreen() {
             hasSwitch
             defaultValue={true}
           />
-          <View className="h-px bg-muted mx-4" />
+          <View className="h-px bg-border mx-4" />
 
           <PrivacyItem
             title="个性化广告推荐"
@@ -99,7 +99,7 @@ export default function PrivacySettingScreen() {
         {/* 隐私协议组 */}
         <PrivacyGroup>
           <PrivacyItem title="隐私协议授权" description="授权后可享受会员相关服务" hasSwitch defaultValue={true} />
-          <View className="h-px bg-muted mx-4" />
+          <View className="h-px bg-border mx-4" />
 
           <PrivacyItem title="隐私政策条款" hasChevron onPress={() => router.push('/privacy-policy')} />
         </PrivacyGroup>

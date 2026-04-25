@@ -176,7 +176,7 @@ export default function WebSocketScreen() {
   // 获取连接状态颜色
   const getStatusColor = (status: ConnectionStatus) => {
     const colorMap: Record<ConnectionStatus, string> = {
-      disconnected: 'text-gray-500',
+      disconnected: 'text-muted-foreground',
       connecting: 'text-yellow-600',
       connected: 'text-green-600',
       error: 'text-red-600',
@@ -198,13 +198,13 @@ export default function WebSocketScreen() {
   const getMessageStyle = (type: Message['type']) => {
     switch (type) {
       case 'sent':
-        return 'bg-blue-100 border-blue-200 self-end';
+        return 'bg-primary/10 border-primary/20 self-end';
       case 'received':
         return 'bg-green-100 border-green-200 self-start';
       case 'system':
-        return 'bg-gray-100 border-gray-200 self-center';
+        return 'bg-muted border-border self-center';
       default:
-        return 'bg-gray-100 border-gray-200';
+        return 'bg-muted border-border';
     }
   };
 

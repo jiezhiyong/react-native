@@ -53,7 +53,7 @@ export function ScrollHeader({
   threshold = SCROLL_HEADER_DEFAULT_THRESHOLD,
   backgroundImageSource,
   rightButtons = [],
-  gradientColors = ['#3b82f6', '#2563eb'] as const,
+  gradientColors = ['#c96442', '#d9b9a5'] as const,
   startTransparent = true,
   className,
 }: ScrollHeaderProps) {
@@ -65,10 +65,10 @@ export function ScrollHeader({
 
   const solidBarStyle = useAnimatedStyle(() => {
     if (!startTransparent) {
-      return { backgroundColor: '#ffffff' };
+      return { backgroundColor: '#faf9f5' };
     }
     return {
-      backgroundColor: interpolateColor(scrollY.value, input, ['rgba(255,255,255,0)', '#ffffff']),
+      backgroundColor: interpolateColor(scrollY.value, input, ['rgba(250,249,245,0)', '#faf9f5']),
     };
   }, [startTransparent, threshold]);
 
@@ -81,7 +81,7 @@ export function ScrollHeader({
 
   const titleStyle = useAnimatedStyle(
     () => ({
-      color: interpolateColor(scrollY.value, input, ['#ffffff', '#000000']),
+      color: interpolateColor(scrollY.value, input, ['#faf9f5', '#141413']),
     }),
     [threshold]
   );
@@ -144,7 +144,7 @@ export function ScrollHeader({
           position: 'relative',
         }}
       >
-        <Animated.Text style={[titleStyle, { fontSize: 20, fontWeight: '700' }]}>{title}</Animated.Text>
+        <Animated.Text style={[titleStyle, { fontSize: 20, fontWeight: '600' }]}>{title}</Animated.Text>
         <View className="flex-row">
           {rightButtons.map((button, index) => (
             <TouchableOpacity

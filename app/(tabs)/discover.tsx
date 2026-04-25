@@ -124,7 +124,7 @@ export default function HomeScreen() {
   const [filteredDemos, setFilteredDemos] = React.useState(demos);
 
   const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
-  const c = isDarkStyle ? '#000' : '#fff';
+  const c = isDarkStyle ? '#141413' : '#faf9f5';
 
   const rightButtons = [{ icon: <Bell size={20} color={c} />, onPress: () => router.push('/notice' as any) }];
 
@@ -153,11 +153,11 @@ export default function HomeScreen() {
       <ScrollHeader
         title="发现"
         scrollY={scrollY}
-        gradientColors={['#10b981', '#059669']}
+        gradientColors={['#c96442', '#a8563b']}
         rightButtons={rightButtons}
       />
       <Animated.FlatList
-        className="px-5 flex-1 bg-muted/80"
+        className="px-5 flex-1 bg-background"
         data={filteredDemos}
         keyExtractor={(item) => item.name}
         onScroll={scrollHandler}
@@ -165,9 +165,9 @@ export default function HomeScreen() {
         contentContainerStyle={{ paddingTop: headerHeight + 20, paddingBottom: 16 }}
         ListHeaderComponent={
           <View className="mb-4">
-            <View className="flex-row items-center bg-background rounded-md border border-input">
+            <View className="flex-row items-center bg-card rounded-xl border border-input">
               <View className="pl-3">
-                <Search size={18} color="#9ca3af" />
+                <Search size={18} color="#87867f" />
               </View>
               <Input
                 className="flex-1 border-0 bg-transparent"
@@ -177,7 +177,7 @@ export default function HomeScreen() {
               />
               {searchQuery.length > 0 && (
                 <TouchableOpacity className="pr-3" onPress={handleClearSearch}>
-                  <X size={18} color="#9ca3af" />
+                  <X size={18} color="#87867f" />
                 </TouchableOpacity>
               )}
             </View>
@@ -196,7 +196,7 @@ export default function HomeScreen() {
                 <Text>
                   {index + 1}. {item.name}
                 </Text>
-                <Text className="text-green-500 text-sm"> - {item.supports}</Text>
+                <Text className="text-primary text-sm"> - {item.supports}</Text>
               </AlertTitle>
               <AlertDescription className="text-muted-foreground">{item.desc}</AlertDescription>
             </Alert>

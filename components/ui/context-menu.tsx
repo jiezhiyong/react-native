@@ -62,7 +62,7 @@ const ContextMenuSubContent = React.forwardRef<
     />
   );
 });
-ContextMenuSubContent.displayName = ContextMenuPrimitive.SubContent.displayName;
+ContextMenuSubContent.displayName = 'ContextMenuSubContent';
 
 const ContextMenuContent = React.forwardRef<
   ContextMenuPrimitive.ContentRef,

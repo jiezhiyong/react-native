@@ -314,8 +314,8 @@ export default function FileDownloadScreen() {
   // 获取状态颜色
   const getStatusColor = (status: DownloadInfo['status']) => {
     const colorMap: Record<DownloadInfo['status'], string> = {
-      idle: 'text-gray-500',
-      downloading: 'text-blue-600',
+      idle: 'text-muted-foreground',
+      downloading: 'text-primary',
       completed: 'text-green-600',
       error: 'text-red-600',
       cancelled: 'text-orange-600',
@@ -336,7 +336,7 @@ export default function FileDownloadScreen() {
       <Card className="p-4 mb-4">
         <Text className="text-lg font-medium mb-3">可下载文件</Text>
         {DOWNLOAD_FILES.map((file, index) => (
-          <View key={file.name} className="border-b border-gray-100 pb-3 mb-3 last:border-b-0 last:mb-0">
+          <View key={file.name} className="border-b border-border pb-3 mb-3 last:border-b-0 last:mb-0">
             <View className="flex-row justify-between items-start mb-2">
               <View className="flex-1">
                 <Text className="font-medium">{file.name}</Text>
@@ -369,7 +369,7 @@ export default function FileDownloadScreen() {
         {Object.entries(downloads).length > 0 ? (
           <View className="space-y-4">
             {Object.entries(downloads).map(([fileName, downloadInfo]) => (
-              <View key={fileName} className="border border-gray-200 rounded-lg p-3">
+              <View key={fileName} className="border border-border rounded-lg p-3">
                 <View className="flex-row justify-between items-start mb-2">
                   <Text className="font-medium flex-1">{fileName}</Text>
                   <Text className={`text-sm ${getStatusColor(downloadInfo.status)}`}>

@@ -14,7 +14,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#faf9f5',
     alignItems: 'center',
     justifyContent: 'center',
   },

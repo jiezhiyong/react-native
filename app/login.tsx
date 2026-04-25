@@ -92,7 +92,7 @@ export default function LoginScreen() {
 
   const isPresented = router.canGoBack();
   return (
-    <View className="flex-1 p-5 gap-5">
+    <View className="flex-1 bg-background p-5 gap-5">
       <StatusBar style="dark" />
 
       <Input placeholder="用户名" value={username} onChangeText={setUsername} />
@@ -100,12 +100,12 @@ export default function LoginScreen() {
       <Input placeholder="密码" secureTextEntry value={password} onChangeText={setPassword} />
 
       <Button onPress={handleLogin} className="w-full flex-row items-center gap-3" disabled={isLoading}>
-        {isLoading ? <ActivityIndicator size="small" color="#fff" /> : <Text>登录</Text>}
+        {isLoading ? <ActivityIndicator size="small" color="#faf9f5" /> : <Text>登录</Text>}
       </Button>
 
       <View className="flex-row items-center">
         <View className="flex-1 h-px bg-muted" />
-        <Text className="text-sm">或</Text>
+        <Text className="text-sm mx-3 text-muted-foreground">或</Text>
         <View className="flex-1 h-px bg-muted" />
       </View>
 

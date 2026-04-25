@@ -361,7 +361,7 @@ export default function VibrationScreen() {
         {vibrationHistory.length > 0 ? (
           <View className="space-y-2">
             {vibrationHistory.map((item) => (
-              <View key={item.id} className="border border-gray-200 rounded-lg p-3">
+              <View key={item.id} className="border border-border rounded-lg p-3">
                 <View className="flex-row justify-between items-start mb-1">
                   <Text className="font-medium text-sm">
                     {item.type === 'vibration' ? '📳 Vibration' : '🔄 Haptics'}

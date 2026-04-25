@@ -1,18 +1,18 @@
 export const NAV_THEME = {
   light: {
-    background: 'hsl(0 0% 100%)', // background
-    border: 'hsl(240 5.9% 90%)', // border
-    card: 'hsl(0 0% 100%)', // card
-    notification: 'hsl(0 84.2% 60.2%)', // destructive
-    primary: 'hsl(240 5.9% 10%)', // primary
-    text: 'hsl(240 10% 3.9%)', // foreground
+    background: 'hsl(50 29% 95%)', // background
+    border: 'hsl(45 25% 92%)', // border
+    card: 'hsl(48 33% 97%)', // card
+    notification: 'hsl(0 56% 45%)', // destructive
+    primary: 'hsl(15 55% 52%)', // primary
+    text: 'hsl(60 3% 8%)', // foreground
   },
   dark: {
-    background: 'hsl(240 10% 3.9%)', // background
-    border: 'hsl(240 3.7% 15.9%)', // border
-    card: 'hsl(240 10% 3.9%)', // card
-    notification: 'hsl(0 72% 51%)', // destructive
-    primary: 'hsl(0 0% 98%)', // primary
-    text: 'hsl(0 0% 98%)', // foreground
+    background: 'hsl(60 3% 8%)', // background
+    border: 'hsl(45 3% 24%)', // border
+    card: 'hsl(60 2% 18%)', // card
+    notification: 'hsl(0 56% 45%)', // destructive
+    primary: 'hsl(15 55% 52%)', // primary
+    text: 'hsl(48 33% 97%)', // foreground
   },
 };

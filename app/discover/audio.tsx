@@ -217,9 +217,9 @@ export default function ExpoAudioScreen() {
           minimumValue={0}
           maximumValue={1}
           style={{ width: '100%', height: 40 }}
-          minimumTrackTintColor="#0891b2"
-          maximumTrackTintColor="#cccccc"
-          thumbTintColor="#0891b2"
+          minimumTrackTintColor="#c96442"
+          maximumTrackTintColor="#e8e6dc"
+          thumbTintColor="#c96442"
         />
         <View className="flex-row justify-between mt-1">
           <Text className="text-muted-foreground text-xs">{formatTime(status?.currentTime)}</Text>
@@ -240,9 +240,9 @@ export default function ExpoAudioScreen() {
               minimumValue={0}
               maximumValue={1}
               style={{ width: '100%', height: 40 }}
-              minimumTrackTintColor="#0891b2"
-              maximumTrackTintColor="#cccccc"
-              thumbTintColor="#0891b2"
+              minimumTrackTintColor="#c96442"
+              maximumTrackTintColor="#e8e6dc"
+              thumbTintColor="#c96442"
             />
           </View>
           <Volume2 size={16} color="gray" />
@@ -258,9 +258,9 @@ export default function ExpoAudioScreen() {
           disabled={isLoading || status?.isBuffering}
         >
           {status?.playing && !status?.didJustFinish ? (
-            <Pause size={24} color="#fff" />
+            <Pause size={24} color="#faf9f5" />
           ) : (
-            <Play size={24} color="#fff" />
+            <Play size={24} color="#faf9f5" />
           )}
         </Button>
       </View>

@@ -19,7 +19,7 @@ export default function ProtectedLayout() {
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#c96442" />
       </View>
     );
   }
@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#f5f4ed',
   },
 });

@@ -28,28 +28,28 @@ interface ItemEntry {
 // 快捷入口数据
 const quickLinks: ItemEntry[][] = [
   [
-    { title: '消息通知', icon: 'Bell', iconColor: '#4f46e5', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#e11d48', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#f59e0b', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#f97316', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#c96442', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#b53333', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#a66f3a', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#d97757', route: '/notice' },
   ],
   [
-    { title: '消息通知', icon: 'Bell', iconColor: '#8b5cf6', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#6366f1', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#0ea5e9', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#ec4899', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#7f6f46', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#8b7358', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#5f6f52', route: '/notice' },
+    { title: '消息通知', icon: 'Bell', iconColor: '#9c5f4b', route: '/notice' },
   ],
 ];
 
 // 其他入口数据
 const otherEntries: ItemEntry[] = [
-  { title: '帮助中心', icon: 'HelpCircle', iconColor: '#10b981', route: '/support' },
-  { title: '意见反馈', icon: 'MessageSquare', iconColor: '#f59e0b', route: '/feedback' },
-  { title: '关于我们', icon: 'Info', iconColor: '#0ea5e9', route: '/about' },
+  { title: '帮助中心', icon: 'HelpCircle', iconColor: '#5f6f52', route: '/support' },
+  { title: '意见反馈', icon: 'MessageSquare', iconColor: '#c96442', route: '/feedback' },
+  { title: '关于我们', icon: 'Info', iconColor: '#8b7358', route: '/about' },
 ];
 
 // 图标组件
-const IconComponent = ({ name, size = 24, color = '#555' }: { name: string; size?: number; color?: string }) => {
+const IconComponent = ({ name, size = 24, color = '#5e5d59' }: { name: string; size?: number; color?: string }) => {
   const props = { size, color, strokeWidth: 2 };
 
   switch (name) {
@@ -88,7 +88,7 @@ const UserHeader = () => {
         <View className="ml-auto">
           <TouchableOpacity onPress={signOut} className="flex-row items-center">
             <Text className="text-sm">登出</Text>
-            <ChevronRight size={20} color="#999" />
+            <ChevronRight size={20} color="#87867f" />
           </TouchableOpacity>
         </View>
       </View>
@@ -99,11 +99,11 @@ const UserHeader = () => {
     <View className="flex-row items-center justify-between p-4">
       <TouchableOpacity className="flex-row items-center" onPress={() => router.push('/login')}>
         <View className="w-12 h-12 rounded-full bg-muted items-center justify-center">
-          <User size={24} color="#999" strokeWidth={1.5} />
+          <User size={24} color="#87867f" strokeWidth={1.5} />
         </View>
         <Text className="ml-4 text-lg font-bold">登录/注册</Text>
       </TouchableOpacity>
-      <ChevronRight size={20} color="#999" />
+      <ChevronRight size={20} color="#87867f" />
     </View>
   );
 };
@@ -118,7 +118,7 @@ const QuickLinksSection = () => {
   };
 
   return (
-    <View className="bg-background rounded-lg mx-5 mb-5 px-4 py-6">
+    <View className="bg-card rounded-xl mx-5 mb-5 px-4 py-6 border border-border">
       <View className="flex-row justify-between mb-5">
         {quickLinks[0].map((item, index) => (
           <TouchableOpacity
@@ -169,7 +169,7 @@ const OtherEntriesSection = () => {
   };
 
   return (
-    <View className="bg-background rounded-lg px-4 mb-5 mx-5">
+    <View className="bg-card rounded-xl px-4 mb-5 mx-5 border border-border">
       {otherEntries.map((item, index) => (
         <React.Fragment key={index}>
           <TouchableOpacity className="flex-row items-center py-4" onPress={() => handleEntryPress(item)}>
@@ -180,9 +180,9 @@ const OtherEntriesSection = () => {
               <IconComponent name={item.icon} size={18} color={item.iconColor} />
             </View>
             <Text className="flex-1">{item.title}</Text>
-            <ChevronRight size={20} color="#999" />
+            <ChevronRight size={20} color="#87867f" />
           </TouchableOpacity>
-          {index < otherEntries.length - 1 && <View className="border-b border-gray-100" />}
+          {index < otherEntries.length - 1 && <View className="border-b border-border" />}
         </React.Fragment>
       ))}
     </View>
@@ -192,7 +192,7 @@ const OtherEntriesSection = () => {
 export default function MinePage() {
   const router = useRouter();
   const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
-  const c = isDarkStyle ? '#000' : '#fff';
+  const c = isDarkStyle ? '#141413' : '#faf9f5';
 
   const rightButtons = [
     { icon: <QrCode size={20} color={c} />, onPress: () => router.push('/scan' as any) },
@@ -206,16 +206,16 @@ export default function MinePage() {
       <ScrollHeader
         title="我的"
         scrollY={scrollY}
-        gradientColors={['#ff9a9e', '#fad0c4']}
+        gradientColors={['#c96442', '#d9b9a5']}
         rightButtons={rightButtons}
       />
       <Animated.ScrollView
-        className="flex-1 bg-muted/80"
+        className="flex-1 bg-background"
         onScroll={scrollHandler}
         scrollEventThrottle={16}
         contentContainerStyle={{ paddingTop: headerHeight }}
       >
-        <View className="mx-5 mt-5 rounded-lg bg-background mb-5">
+        <View className="mx-5 mt-5 rounded-xl bg-card border border-border mb-5">
           <UserHeader />
         </View>
         <QuickLinksSection />

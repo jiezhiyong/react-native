@@ -169,7 +169,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
     <View className={`flex-row max-w-[85%] my-2 ${isUser ? 'self-end' : 'self-start'}`}>
       {!isUser && <Image source={require('~/assets/images/icon.png')} className="size-10 rounded-full mr-3" />}
 
-      <View className={`p-4 rounded-3xl ${isUser ? 'bg-cyan-300 rounded-tr-none' : 'bg-muted rounded-tl-none'}`}>
+      <View className={`p-4 rounded-3xl ${isUser ? 'bg-primary/15 rounded-tr-none' : 'bg-card rounded-tl-none'}`}>
         {message.type === 'text' && <Text>{message.content}</Text>}
 
         {message.type === 'image' && message.mediaUrl && (
@@ -184,13 +184,13 @@ const MessageBubble = ({ message }: { message: Message }) => {
               {message.thumbnailUrl ? (
                 <Image source={{ uri: message.thumbnailUrl }} className="w-full h-full" resizeMode="cover" />
               ) : (
-                <View className="w-full h-full bg-gray-300 items-center justify-center">
-                  <ActivityIndicator color="#0066FF" />
+                <View className="w-full h-full bg-muted items-center justify-center">
+                  <ActivityIndicator color="#c96442" />
                 </View>
               )}
               <View className="absolute inset-0 items-center justify-center bg-black/20">
                 <View className="w-12 h-12 rounded-full bg-background/50 items-center justify-center">
-                  <Play color="#000" size={24} />
+                  <Play color="#141413" size={24} />
                 </View>
               </View>
             </View>
@@ -215,11 +215,11 @@ const MessageBubble = ({ message }: { message: Message }) => {
 const QuickQuestionButton = ({ question, onPress }: { question: QuickQuestion; onPress: () => void }) => {
   return (
     <TouchableOpacity
-      className="bg-gray-50 border border-gray-200 rounded-full px-4 py-2"
+      className="bg-card border border-border rounded-full px-4 py-2"
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <Text className="text-sm text-gray-700" numberOfLines={1}>
+      <Text className="text-sm text-foreground" numberOfLines={1}>
         {question.question}
       </Text>
     </TouchableOpacity>
@@ -301,11 +301,11 @@ const MediaPicker = ({
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible} onRequestClose={onClose}>
       <View className="flex-1 justify-end shadow-md">
-        <View className="bg-background rounded-t-3xl p-5">
+        <View className="bg-card rounded-t-3xl p-5 border border-border">
           <View className="flex-row justify-between items-center mb-6">
             <Text className="text-lg font-medium">选择媒体</Text>
             <TouchableOpacity onPress={onClose} className="p-1">
-              <X size={24} color="#6B7280" />
+              <X size={24} color="#87867f" />
             </TouchableOpacity>
           </View>
 
@@ -314,21 +314,21 @@ const MediaPicker = ({
               <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
                 <Camera size={28} />
               </View>
-              <Text className="text-gray-700">拍照</Text>
+              <Text className="text-foreground">拍照</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickImage}>
               <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
                 <ImageIcon size={28} />
               </View>
-              <Text className="text-gray-700">图片</Text>
+              <Text className="text-foreground">图片</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickVideo}>
               <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
                 <Mic size={28} />
               </View>
-              <Text className="text-gray-700">视频</Text>
+              <Text className="text-foreground">视频</Text>
             </TouchableOpacity>
           </View>
 
@@ -488,13 +488,13 @@ export default function OnlineServiceScreen() {
         {/* 加载指示器 */}
         {isLoading && (
           <View className="py-3 px-4 rounded-lg flex-row items-center justify-center">
-            <ActivityIndicator size="small" color="#3B82F6" />
-            <Text className="ml-2 text-gray-700 text-sm">正在输入 ...</Text>
+            <ActivityIndicator size="small" color="#c96442" />
+            <Text className="ml-2 text-muted-foreground text-sm">正在输入 ...</Text>
           </View>
         )}
 
         {/* 输入框区域 */}
-        <View className="px-5 py-3 border-t border-gray-100 flex-row items-center">
+        <View className="px-5 py-3 border-t border-border flex-row items-center bg-background">
           <TouchableOpacity className="mr-2 p-2" onPress={() => setShowMediaPicker(true)}>
             <Plus size={24} />
           </TouchableOpacity>
@@ -509,11 +509,11 @@ export default function OnlineServiceScreen() {
           </View>
 
           <TouchableOpacity
-            className={`ml-3 p-2 rounded-full size-10 justify-center ${inputText.trim() ? 'bg-primary' : 'bg-gray-300'}`}
+            className={`ml-3 p-2 rounded-full size-10 justify-center ${inputText.trim() ? 'bg-primary' : 'bg-muted'}`}
             onPress={sendTextMessage}
             disabled={!inputText.trim()}
           >
-            <Send size={20} color="#fff" />
+            <Send size={20} color="#faf9f5" />
           </TouchableOpacity>
         </View>
       </SafeAreaView>

@@ -125,7 +125,7 @@ export default function MediaViewerScreen() {
       <View className="flex-1 justify-center items-center">
         {isLoading && (
           <View className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 bg-black/70 p-4 rounded-lg">
-            <ActivityIndicator color="#fff" />
+            <ActivityIndicator color="#faf9f5" />
           </View>
         )}
 

@@ -192,8 +192,8 @@ export default function ScanScreenNative() {
     return (
       <View className="flex-1 justify-center items-center bg-gray-900 p-4">
         <Text className="text-white text-xl mb-4 text-center">需要相机权限来扫描二维码</Text>
-        <TouchableOpacity onPress={requestPermission} className="bg-blue-500 px-6 py-3 rounded-lg">
-          <Text className="text-white font-medium">授权访问</Text>
+        <TouchableOpacity onPress={requestPermission} className="bg-primary px-6 py-3 rounded-xl">
+          <Text className="text-primary-foreground font-medium">授权访问</Text>
         </TouchableOpacity>
       </View>
     );

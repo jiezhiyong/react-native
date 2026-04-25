@@ -219,7 +219,9 @@
 <a name='L154'></a><a href='#L154'>154</a>
 <a name='L155'></a><a href='#L155'>155</a>
 <a name='L156'></a><a href='#L156'>156</a>
-<a name='L157'></a><a href='#L157'>157</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -379,6 +381,7 @@
 import type { SlottableTextProps, TextRef } from '@rn-primitives/types';
 import * as React from 'react';
 import { Platform, Text as RNText } from 'react-native';
+&nbsp;
 import { cn } from '~/lib/utils';
 &nbsp;
 const H1 = <span class="cstat-no" title="statement not covered" >React.forwardRef&lt;TextRef, SlottableTextProps&gt;(<span class="fstat-no" title="function not covered" >({</span> className, asChild = <span class="branch-0 cbranch-no" title="branch not covered" >false,</span> ...props }, ref) =&gt; {</span>
@@ -388,7 +391,7 @@ const H1 = <span class="cstat-no" title="statement not covered" >React.forwardRe
       role="heading"
       aria-level="1"
       className={cn(
-        'web:scroll-m-20 text-4xl text-foreground font-extrabold tracking-tight lg:text-5xl web:select-text',
+        'web:scroll-m-20 text-4xl text-foreground font-medium leading-tight lg:text-5xl web:select-text',
         className
       )}
       ref={ref}
@@ -406,7 +409,7 @@ const H2 = <span class="cstat-no" title="statement not covered" >React.forwardRe
       role="heading"
       aria-level="2"
       className={cn(
-        'web:scroll-m-20 border-b border-border pb-2 text-3xl text-foreground font-semibold tracking-tight first:mt-0 web:select-text',
+        'web:scroll-m-20 border-b border-border pb-2 text-3xl text-foreground font-medium leading-tight first:mt-0 web:select-text',
         className
       )}
       ref={ref}
@@ -423,7 +426,7 @@ const H3 = <span class="cstat-no" title="statement not covered" >React.forwardRe
     &lt;Component
       role="heading"
       aria-level="3"
-      className={cn('web:scroll-m-20 text-2xl text-foreground font-semibold tracking-tight web:select-text', className)}
+      className={cn('web:scroll-m-20 text-2xl text-foreground font-medium leading-tight web:select-text', className)}
       ref={ref}
       {...props}
     /&gt;
@@ -438,7 +441,7 @@ const H4 = <span class="cstat-no" title="statement not covered" >React.forwardRe
     &lt;Component
       role="heading"
       aria-level="4"
-      className={cn('web:scroll-m-20 text-xl text-foreground font-semibold tracking-tight web:select-text', className)}
+      className={cn('web:scroll-m-20 text-xl text-foreground font-medium leading-tight web:select-text', className)}
       ref={ref}
       {...props}
     /&gt;
@@ -449,7 +452,7 @@ const H4 = <span class="cstat-no" title="statement not covered" >React.forwardRe
 &nbsp;
 const P = <span class="cstat-no" title="statement not covered" >React.forwardRef&lt;TextRef, SlottableTextProps&gt;(<span class="fstat-no" title="function not covered" >({</span> className, asChild = <span class="branch-0 cbranch-no" title="branch not covered" >false,</span> ...props }, ref) =&gt; {</span>
   const Component = <span class="cstat-no" title="statement not covered" >asChild ? Slot.Text : RNText;</span>
-<span class="cstat-no" title="statement not covered" >  return &lt;Component className={cn('text-base text-foreground web:select-text', className)} ref={ref} {...props} /&gt;;</span>
+<span class="cstat-no" title="statement not covered" >  return &lt;Component className={cn('text-foreground leading-relaxed web:select-text', className)} ref={ref} {...props} /&gt;;</span>
 });
 &nbsp;
 <span class="cstat-no" title="statement not covered" >P.displayName = 'P';</span>
@@ -461,7 +464,7 @@ const BlockQuote = <span class="cstat-no" title="statement not covered" >React.f
       // @ts-ignore - role of blockquote renders blockquote element on the web
       role={Platform.OS === 'web' ? 'blockquote' : undefined}
       className={cn(
-        'mt-6 native:mt-4 border-l-2 border-border pl-6 native:pl-3 text-base text-foreground italic web:select-text',
+        'mt-6 native:mt-4 border-l-2 border-border pl-6 native:pl-3 text-foreground italic web:select-text',
         className
       )}
       ref={ref}
@@ -492,7 +495,7 @@ const Code = <span class="cstat-no" title="statement not covered" >React.forward
 &nbsp;
 const Lead = <span class="cstat-no" title="statement not covered" >React.forwardRef&lt;TextRef, SlottableTextProps&gt;(<span class="fstat-no" title="function not covered" >({</span> className, asChild = <span class="branch-0 cbranch-no" title="branch not covered" >false,</span> ...props }, ref) =&gt; {</span>
   const Component = <span class="cstat-no" title="statement not covered" >asChild ? Slot.Text : RNText;</span>
-<span class="cstat-no" title="statement not covered" >  return &lt;Component className={cn('text-xl text-muted-foreground web:select-text', className)} ref={ref} {...props} /&gt;;</span>
+<span class="cstat-no" title="statement not covered" >  return &lt;Component className={cn('text-xl leading-relaxed text-muted-foreground web:select-text', className)} ref={ref} {...props} /&gt;;</span>
 });
 &nbsp;
 <span class="cstat-no" title="statement not covered" >Lead.displayName = 'Lead';</span>
@@ -501,7 +504,7 @@ const Large = <span class="cstat-no" title="statement not covered" >React.forwar
   const Component = <span class="cstat-no" title="statement not covered" >asChild ? Slot.Text : RNText;</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;Component
-      className={cn('text-xl text-foreground font-semibold web:select-text', className)}
+      className={cn('text-xl text-foreground font-medium web:select-text', className)}
       ref={ref}
       {...props}
     /&gt;
@@ -514,7 +517,7 @@ const Small = <span class="cstat-no" title="statement not covered" >React.forwar
   const Component = <span class="cstat-no" title="statement not covered" >asChild ? Slot.Text : RNText;</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;Component
-      className={cn('text-sm text-foreground font-medium leading-none web:select-text', className)}
+      className={cn('text-sm text-foreground font-medium leading-tight web:select-text', className)}
       ref={ref}
       {...props}
     /&gt;
@@ -538,7 +541,7 @@ export { BlockQuote, Code, H1, H2, H3, H4, Large, Lead, Muted, P, Small };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-03T10:03:39.159Z
+                at 2026-04-24T15:35:16.711Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

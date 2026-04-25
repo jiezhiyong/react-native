@@ -56,7 +56,6 @@ npx expo install expo-dev-client # 安装开发客户端
 
 ```sh
 pnpm prebuild:dev -p <android | ios> # 使用 Prebuild 生成原生 Android 和 iOS 目录
-npx pod-install # 安装 iOS 依赖，按需运行
 ```
 
 ```sh

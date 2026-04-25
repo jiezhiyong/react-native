@@ -25,7 +25,7 @@ function Skeleton({ className, ...props }: Omit<React.ComponentPropsWithoutRef<t
 
   return (
     <Animated.View style={style} {...props}>
-      <View className={cn('rounded-md bg-secondary dark:bg-muted', className)} />
+      <View className={cn('rounded-lg bg-secondary/80 dark:bg-muted', className)} />
     </Animated.View>
   );
 }

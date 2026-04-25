@@ -30,11 +30,11 @@ export default function FeedbackScreen() {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1">
-      <SafeAreaView className="flex-1 bg-muted">
-        <ScrollView className="flex-1">
+      <SafeAreaView className="flex-1 bg-background">
+        <ScrollView className="flex-1 px-5 py-5">
           {/* 问题标签 */}
-          <View className="p-5 bg-background">
-            <Text className="text-lg font-bold">请选择问题标签</Text>
+          <View className="p-5 bg-card rounded-xl border border-border">
+            <Text className="text-lg font-medium">请选择问题标签</Text>
             <Text className="text-sm text-secondary-foreground mb-4">精准分类，处理更快</Text>
 
             <View className="flex-row flex-wrap gap-3">
@@ -50,10 +50,10 @@ export default function FeedbackScreen() {
           </View>
 
           {/* 反馈内容 */}
-          <View className="mt-3 p-5 bg-background">
+          <View className="mt-4 p-5 bg-card rounded-xl border border-border">
             <View className="flex-row items-center mb-4">
-              <Text className="text-red-500 mr-1">*</Text>
-              <Text className="text-lg font-bold">反馈标题与内容</Text>
+              <Text className="text-destructive mr-1">*</Text>
+              <Text className="text-lg font-medium">反馈标题与内容</Text>
             </View>
 
             <Input
@@ -76,20 +76,20 @@ export default function FeedbackScreen() {
           </View>
 
           {/* 上传照片 */}
-          <View className="mt-3 p-5 bg-background">
-            <Text className="text-lg font-bold">上传照片</Text>
+          <View className="mt-4 p-5 bg-card rounded-xl border border-border">
+            <Text className="text-lg font-medium">上传照片</Text>
             <Text className="text-sm text-secondary-foreground mb-4">
               上传操作入口，报错提示截图、手机系统版本截图等信息，最多可上传10张，图像尺寸小于1M
             </Text>
 
-            <TouchableOpacity className="w-20 h-20 bg-muted items-center justify-center rounded-md">
-              <Plus size={24} color="#999" />
+            <TouchableOpacity className="w-20 h-20 bg-muted items-center justify-center rounded-xl border border-border">
+              <Plus size={24} color="#87867f" />
             </TouchableOpacity>
           </View>
 
           {/* 提交按钮 */}
-          <View className="p-5">
-            <Button className="py-4 rounded-full" onPress={handleSubmit}>
+          <View className="py-5">
+            <Button className="py-4 rounded-xl" onPress={handleSubmit}>
               <Text>提交</Text>
             </Button>
           </View>
@@ -108,10 +108,10 @@ interface TypeButtonProps {
 const TypeButton = ({ title, isSelected, onPress }: TypeButtonProps) => {
   return (
     <TouchableOpacity
-      className={`py-1.5 px-3 rounded-full ${isSelected ? 'bg-primary' : 'bg-muted'}`}
+      className={`py-1.5 px-3 rounded-full border ${isSelected ? 'border-primary bg-primary' : 'border-border bg-muted'}`}
       onPress={onPress}
     >
-      <Text className={`text-sm ${isSelected ? 'text-white' : 'text-gray-700'}`}>{title}</Text>
+      <Text className={`text-sm ${isSelected ? 'text-primary-foreground' : 'text-secondary-foreground'}`}>{title}</Text>
     </TouchableOpacity>
   );
 };

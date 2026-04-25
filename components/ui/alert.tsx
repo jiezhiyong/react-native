@@ -8,12 +8,12 @@ import { Text } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
 
 const alertVariants = cva(
-  'relative bg-background w-full rounded-lg border border-border p-4 shadow shadow-foreground/10',
+  'relative bg-card w-full rounded-xl border border-border p-4 shadow-sm shadow-foreground/5',
   {
     variants: {
       variant: {
         default: '',
-        destructive: 'border-destructive',
+        destructive: 'border-destructive bg-destructive/10',
       },
     },
     defaultVariants: {
@@ -47,7 +47,7 @@ const AlertTitle = React.forwardRef<React.ElementRef<typeof Text>, React.Compone
   ({ className, ...props }, ref) => (
     <Text
       ref={ref}
-      className={cn('pl-7 mb-1 font-medium leading-none tracking-tight text-foreground', className)}
+      className={cn('pl-7 mb-1 font-medium leading-tight text-foreground', className)}
       {...props}
     />
   )
@@ -56,7 +56,7 @@ AlertTitle.displayName = 'AlertTitle';
 
 const AlertDescription = React.forwardRef<React.ElementRef<typeof Text>, React.ComponentPropsWithoutRef<typeof Text>>(
   ({ className, ...props }, ref) => (
-    <Text ref={ref} className={cn('pl-7 text-sm leading-relaxed text-foreground', className)} {...props} />
+    <Text ref={ref} className={cn('pl-7 text-sm leading-relaxed text-muted-foreground', className)} {...props} />
   )
 );
 AlertDescription.displayName = 'AlertDescription';

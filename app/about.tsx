@@ -17,14 +17,14 @@ const AboutItem = ({ title, desc, onPress, loading }: AboutItemProps) => {
     <TouchableOpacity
       onPress={onPress}
       disabled={loading}
-      className="flex-row items-center justify-between p-5 border-b border-gray-100"
+      className="flex-row items-center justify-between p-5 border-b border-border"
       activeOpacity={0.7}
     >
       <View className="flex-row items-center gap-3 flex-1">
         <Text className="flex-1">{title}</Text>
         {desc && <Text className="text-muted-foreground">{desc}</Text>}
       </View>
-      {loading ? <ActivityIndicator /> : <ChevronRight size={20} color="#ccc" />}
+      {loading ? <ActivityIndicator /> : <ChevronRight size={20} color="#87867f" />}
     </TouchableOpacity>
   );
 };
@@ -70,18 +70,18 @@ export default function AboutScreen() {
   };
 
   return (
-    <View className="flex-1 bg-muted p-5">
+    <View className="flex-1 bg-background p-5">
       {/* 应用信息 */}
-      <View className="items-center justify-center py-10 bg-background rounded-xl">
+      <View className="items-center justify-center py-10 bg-card rounded-xl border border-border">
         <View className="w-20 h-20 rounded-xl overflow-hidden mb-4 bg-muted items-center justify-center">
           <Image source={require('../assets/images/icon.png')} className="flex-1" resizeMode="contain" />
         </View>
-        <Text className="text-xl font-bold mb-1">{appName}</Text>
+        <Text className="text-xl font-medium mb-1 text-foreground">{appName}</Text>
         <Text className="text-muted-foreground">Version {appVersion}</Text>
       </View>
 
       {/* 功能列表 */}
-      <View className="bg-background mt-4 rounded-xl">
+      <View className="bg-card mt-4 rounded-xl border border-border overflow-hidden">
         {/* TODO: 检查更新 */}
         <AboutItem
           title="检查更新"

@@ -30,7 +30,7 @@ export default function HomeScreen() {
   const isLoadingMoreRef = useRef(false);
 
   const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
-  const iconColor = isDarkStyle ? '#000' : '#fff';
+  const iconColor = isDarkStyle ? '#141413' : '#faf9f5';
 
   const rightButtons = [
     { icon: <Headphones size={20} color={iconColor} />, onPress: () => router.push('/online-service' as any) },
@@ -129,7 +129,7 @@ export default function HomeScreen() {
         scrollY={scrollY}
         backgroundImageSource={require('~/assets/images/home-header-bg.jpg')}
         rightButtons={rightButtons}
-        gradientColors={['#3b82f6', '#2563eb']}
+        gradientColors={['#c96442', '#d97757']}
       />
       <ReanimatedFlashList
         keyExtractor={(item: any) => item.id.toString()}
@@ -155,7 +155,7 @@ export default function HomeScreen() {
           </View>
         }
         ListEmptyComponent={null}
-        contentContainerStyle={{ paddingTop: headerHeight, paddingHorizontal: 16 }}
+        contentContainerStyle={{ paddingTop: headerHeight + 12, paddingHorizontal: 20, paddingBottom: 20 }}
       />
     </View>
   );
