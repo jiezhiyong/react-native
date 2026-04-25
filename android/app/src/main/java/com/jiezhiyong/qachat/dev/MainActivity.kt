@@ -1,4 +1,4 @@
-package com.jiezhiyong.qachat
+package com.jiezhiyong.qachat.dev
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

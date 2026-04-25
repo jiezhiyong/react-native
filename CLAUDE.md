@@ -126,6 +126,12 @@ pnpm analyze:android
 - If a change affects generated native projects, note whether `pnpm prebuild[:variant]` should be rerun.
 - Do not edit generated native files unless the task explicitly requires native changes and the generated output is intended to be checked in.
 
+### Patches, Plugins, And Special-Case Logic
+
+- When adding or changing `patches/`, local Expo config plugins in `plugins/`, or code paths introduced for special-case behavior, document the background in the same change: why the workaround/plugin exists, what upstream or platform behavior it addresses, and when it can be removed or revisited.
+- Include a follow-up plan for these changes, such as verification steps, cleanup conditions, upstream issue tracking, or migration notes after dependency/SDK upgrades.
+- Avoid adding opaque workaround code without nearby comments or repository documentation that future agents can use to understand the intent.
+
 ### Variants
 
 `APP_VARIANT` controls bundle identifiers, app name, and debug behavior:

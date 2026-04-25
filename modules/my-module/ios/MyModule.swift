@@ -10,10 +10,10 @@ public class MyModule: Module {
     // The module will be accessible from `requireNativeModule('MyModule')` in JavaScript.
     Name("MyModule")
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants([
-      "PI": Double.pi
-    ])
+    // Sets a constant property on the module.
+    Constant("PI") {
+      Double.pi
+    }
 
     // Defines event names that the module can send to JavaScript.
     Events("onChange")

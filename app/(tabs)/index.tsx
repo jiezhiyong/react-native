@@ -15,7 +15,6 @@ import { useScrollHeader } from '@/hooks/useScrollHeader';
 import { sleep } from '@/lib/utils';
 
 const ReanimatedFlashList = Animated.createAnimatedComponent(FlashList) as unknown as typeof FlashList;
-
 interface DataItem {
   id: number;
   skeletonNum: number;
