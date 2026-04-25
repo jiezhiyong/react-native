@@ -2,8 +2,8 @@ import { Image, ImageBackground } from 'expo-image';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // 不同的图片填充模式
 const CONTENT_FITS = [
@@ -39,7 +39,7 @@ export default function ExpoImageScreen() {
       <Text className="text-lg font-medium mb-2">基本图像（当前模式: {getCurrentFitLabel()}）</Text>
       <View className="mb-6 flex-col gap-3">
         <Image
-          source={require('~/assets/images/react-logo.png')}
+          source={require('@/assets/images/react-logo.png')}
           style={{ minHeight: 150, borderRadius: 6, backgroundColor: '#eaeaea' }}
           contentFit={currentFit as any}
           transition={500}
@@ -52,7 +52,7 @@ export default function ExpoImageScreen() {
       <Text className="text-lg font-medium mb-2">图像背景 (ImageBackground)</Text>
       <View className="flex-col gap-3">
         <ImageBackground
-          source={require('~/assets/images/icon-512.png')}
+          source={require('@/assets/images/icon-512.png')}
           contentFit="cover"
           style={{ borderRadius: 6, overflow: 'hidden' }}
         >

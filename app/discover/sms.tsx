@@ -2,10 +2,10 @@ import * as SMS from 'expo-sms';
 import { useState } from 'react';
 import { Alert, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
-import { Textarea } from '~/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function ExpoSmsScreen() {
   const [phoneNumber, setPhoneNumber] = useState('17302170907');

@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 
-import { Text } from '~/components/ui/text';
+import { Text } from '@/components/ui/text';
 
 export const InfoItemCol = ({ label, value }: { label: string; value?: string | number | boolean | null }) => {
   return (

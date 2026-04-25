@@ -1,4 +1,4 @@
-import UnsupportScreen from '~/components/Unsupport';
+import UnsupportScreen from '@/components/Unsupport';
 
 export default function ExpoStripeScreenFallback() {
   return <UnsupportScreen />;
@@ -15,9 +15,9 @@ export default function ExpoStripeScreenFallback() {
 // import { useState } from 'react';
 // import { ActivityIndicator, Alert, View } from 'react-native';
 
-// import { Button } from '~/components/ui/button';
-// import { Text } from '~/components/ui/text';
-// import { useEffectAsync } from '~/hooks/use-effect-async';
+// import { Button } from '@/components/ui/button';
+// import { Text } from '@/components/ui/text';
+// import { useEffectAsync } from '@/hooks/use-effect-async';
 
 // export default function ExpoStripeScreen() {
 //   const { initPaymentSheet, presentPaymentSheet } = useStripe();

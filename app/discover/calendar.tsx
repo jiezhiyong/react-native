@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Platform, ScrollView, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { cn } from '~/lib/utils';
+import { cn } from '@/lib/utils';
 
 import { Button } from '../../components/ui/button';
 import { Text } from '../../components/ui/text';

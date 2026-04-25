@@ -3,9 +3,9 @@ import { Pedometer } from 'expo-sensors';
 import { useState } from 'react';
 import { Alert, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { useEffectAsync } from '~/hooks/use-effect-async';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useEffectAsync } from '@/hooks/use-effect-async';
 
 export default function ExpoPedometerScreen() {
   const [isAvailable, setIsAvailable] = useState<boolean>(false);

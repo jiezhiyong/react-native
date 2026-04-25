@@ -6,13 +6,13 @@ import { Controller, useForm } from 'react-hook-form';
 import { ActivityIndicator, Alert, View } from 'react-native';
 import * as z from 'zod';
 
-import { Button } from '~/components/ui/button';
-import { Checkbox } from '~/components/ui/checkbox';
-import { Input } from '~/components/ui/input';
-import { toast } from '~/components/ui/sonner';
-import { Text } from '~/components/ui/text';
-import { cn } from '~/lib/utils';
-import { useAuthStore } from '~/store/auth';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { toast } from '@/components/ui/sonner';
+import { Text } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
+import { useAuthStore } from '@/store/auth';
 
 // 定义表单验证模式
 const destroyAccountSchema = z.object({
@@ -155,7 +155,11 @@ export default function DestroyAccountScreen() {
 
         {/* 提交按钮 */}
         <Button variant="destructive" onPress={handleSubmit(onSubmit)} disabled={isSubmitting} className="mt-2">
-          {isSubmitting ? <ActivityIndicator size="small" color="#faf9f5" className="mr-2" /> : <Text>注销我的账户</Text>}
+          {isSubmitting ? (
+            <ActivityIndicator size="small" color="#faf9f5" className="mr-2" />
+          ) : (
+            <Text>注销我的账户</Text>
+          )}
         </Button>
       </View>
     </View>

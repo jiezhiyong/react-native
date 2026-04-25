@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Appearance, AppState, AppStateStatus, ColorSchemeName, ScrollView, View } from 'react-native';
 
-import { InfoItemRow } from '~/components/InfoItem';
-import { Card } from '~/components/ui/card';
-import { Text } from '~/components/ui/text';
+import { InfoItemRow } from '@/components/InfoItem';
+import { Card } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 
 interface StateHistoryItem {
   timestamp: Date;

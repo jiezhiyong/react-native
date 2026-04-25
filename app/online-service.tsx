@@ -18,9 +18,9 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { create } from 'zustand';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
 
 const PLAYBACK_STATUS_UPDATE = 'playbackStatusUpdate';
 
@@ -123,7 +123,7 @@ const quickQuestions: QuickQuestion[] = [
 async function playNewMessageSound() {
   try {
     // 创建一个音频播放器
-    const player = Audio.createAudioPlayer(require('~/assets/audios/received-message.mp3'));
+    const player = Audio.createAudioPlayer(require('@/assets/audios/received-message.mp3'));
 
     // 监听播放完成事件, 播放完成后释放资源
     const subscribe = player.addListener(PLAYBACK_STATUS_UPDATE, (status: Audio.AudioStatus) => {
@@ -167,7 +167,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
 
   return (
     <View className={`flex-row max-w-[85%] my-2 ${isUser ? 'self-end' : 'self-start'}`}>
-      {!isUser && <Image source={require('~/assets/images/icon.png')} className="size-10 rounded-full mr-3" />}
+      {!isUser && <Image source={require('@/assets/images/icon.png')} className="size-10 rounded-full mr-3" />}
 
       <View className={`p-4 rounded-3xl ${isUser ? 'bg-primary/15 rounded-tr-none' : 'bg-card rounded-tl-none'}`}>
         {message.type === 'text' && <Text>{message.content}</Text>}
@@ -206,7 +206,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
         </Text>
       </View>
 
-      {isUser && <Image source={require('~/assets/images/avatar.jpg')} className="size-10 rounded-full ml-3" />}
+      {isUser && <Image source={require('@/assets/images/avatar.jpg')} className="size-10 rounded-full ml-3" />}
     </View>
   );
 };

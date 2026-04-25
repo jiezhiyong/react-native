@@ -3,8 +3,8 @@ import * as Sharing from 'expo-sharing';
 import { useState } from 'react';
 import { ActivityIndicator, Image, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 const imageUrl = 'https://qachat.expo.app/assets/assets/images/background-image.503001f14bb7b8fe48a4e318ad07e910.png';
 

@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { ActivityIndicator, RefreshControl, View } from 'react-native';
 import { create } from 'zustand';
 
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
-import { Text } from '~/components/ui/text';
-import { sleep } from '~/lib/utils';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
+import { sleep } from '@/lib/utils';
 
 // 定义列表项类型
 interface ListItem {

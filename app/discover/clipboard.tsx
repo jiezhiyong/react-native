@@ -2,7 +2,7 @@ import * as Clipboard from 'expo-clipboard';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import { toast } from '~/components/ui/sonner';
+import { toast } from '@/components/ui/sonner';
 
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';

@@ -14,9 +14,9 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { ScrollHeader } from '~/components/ui/scroll-header';
-import { useScrollHeader } from '~/hooks/useScrollHeader';
-import { useAuth } from '~/store/auth';
+import { ScrollHeader } from '@/components/ui/scroll-header';
+import { useScrollHeader } from '@/hooks/useScrollHeader';
+import { useAuth } from '@/store/auth';
 
 interface ItemEntry {
   title: string;
@@ -79,7 +79,7 @@ const UserHeader = () => {
     return (
       <View className="flex-row items-center px-4 py-6">
         <View className="border border-border rounded-full p-1">
-          <Image source={require('~/assets/images/icon.png')} className="w-12 h-12 rounded-full bg-muted" />
+          <Image source={require('@/assets/images/icon.png')} className="w-12 h-12 rounded-full bg-muted" />
         </View>
         <View className="ml-4">
           <Text className="text-lg font-bold">{name}</Text>

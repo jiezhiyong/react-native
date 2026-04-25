@@ -8,7 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { cn } from '~/lib/utils';
+import { cn } from '@/lib/utils';
 
 const duration = 1000;
 
@@ -25,7 +25,7 @@ function Skeleton({ className, ...props }: Omit<React.ComponentPropsWithoutRef<t
 
   return (
     <Animated.View style={style} {...props}>
-      <View className={cn('rounded-lg bg-secondary/80 dark:bg-muted', className)} />
+      <View className={cn('rounded-sm bg-primary/20', className)} />
     </Animated.View>
   );
 }

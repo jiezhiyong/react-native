@@ -245,7 +245,10 @@
   "pnpm": {
     "ignoredBuiltDependencies": [
       "@sentry/cli"
-    ]
+    ],
+    "patchedDependencies": {
+      "react-native-css-interop@0.2.3": "patches/react-native-css-interop@0.2.3.patch"
+    }
   },
   "private": true
 }

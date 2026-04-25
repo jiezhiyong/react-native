@@ -2,8 +2,8 @@ import { Asset } from 'expo-asset';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, ScrollView, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 /**
  * Expo Asset 示例屏幕

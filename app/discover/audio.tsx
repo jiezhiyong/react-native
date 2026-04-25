@@ -4,8 +4,8 @@ import { Pause, Play, Volume1, Volume2 } from 'lucide-react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 /**
  * Expo Audio 示例组件
@@ -14,9 +14,9 @@ import { Text } from '~/components/ui/text';
 export default function ExpoAudioScreen() {
   // 音频源示例
   const audioSources = [
-    { name: 'Sample 0', uri: require('~/assets/audios/received-message.mp3') },
-    { name: 'Sample 1', uri: require('~/assets/audios/sample-3s.mp3') },
-    { name: 'Sample 2', uri: require('~/assets/audios/sample-9s.mp3') },
+    { name: 'Sample 0', uri: require('@/assets/audios/received-message.mp3') },
+    { name: 'Sample 1', uri: require('@/assets/audios/sample-3s.mp3') },
+    { name: 'Sample 2', uri: require('@/assets/audios/sample-9s.mp3') },
     { name: 'Sample 3 (404)', uri: 'https://abc.com/mp3/example.mp3' },
   ];
   const [selectedSource, setSelectedSource] = useState(audioSources[0]);

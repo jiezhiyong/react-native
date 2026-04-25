@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { useAuth } from '~/store/auth';
+import { useAuth } from '@/store/auth';
 
 export default function ProtectedBill() {
   const { signOut } = useAuth();

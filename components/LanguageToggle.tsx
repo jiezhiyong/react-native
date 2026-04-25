@@ -1,11 +1,11 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 
-import { Text } from '~/components/ui/text';
-import { useI18nContext } from '~/i18n/i18n-react';
-import { Locales } from '~/i18n/i18n-types';
-import { loadLocale } from '~/i18n/i18n-util.sync';
-import { cn } from '~/lib/utils';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
+import { Locales } from '@/i18n/i18n-types';
+import { loadLocale } from '@/i18n/i18n-util.sync';
+import { cn } from '@/lib/utils';
 
 export function LanguageToggle() {
   const { locale, setLocale } = useI18nContext();

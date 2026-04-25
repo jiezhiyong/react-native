@@ -2,10 +2,10 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 import * as React from 'react';
 
-import { HapticTab } from '~/components/HapticTab';
-import TabBarBackground from '~/components/ui/TabBarBackground';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/hooks/useColorScheme';
+import { HapticTab } from '@/components/HapticTab';
+import TabBarBackground from '@/components/ui/TabBarBackground';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { NAV_THEME } from '@/lib/theme';
 
 export default function TabLayout() {
   const { colorScheme } = useColorScheme();
@@ -13,7 +13,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colorScheme === 'dark' ? NAV_THEME.dark.primary : NAV_THEME.light.primary,
+        tabBarActiveTintColor: colorScheme === 'dark' ? NAV_THEME.dark.colors.primary : NAV_THEME.light.colors.primary,
         tabBarInactiveTintColor: colorScheme === 'dark' ? '#87867f' : '#5e5d59',
         tabBarHideOnKeyboard: true,
         headerTitleAllowFontScaling: true,

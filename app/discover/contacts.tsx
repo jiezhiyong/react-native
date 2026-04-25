@@ -3,7 +3,7 @@ import { PermissionStatus } from 'expo-modules-core';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, FlatList, View } from 'react-native';
 
-import { toast } from '~/components/ui/sonner';
+import { toast } from '@/components/ui/sonner';
 
 import { Button } from '../../components/ui/button';
 import { Card } from '../../components/ui/card';

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 
-import { InfoItemRow } from '~/components/InfoItem';
-import { Button } from '~/components/ui/button';
-import { Card } from '~/components/ui/card';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
+import { InfoItemRow } from '@/components/InfoItem';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
 
 interface Message {
   id: string;

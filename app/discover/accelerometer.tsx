@@ -2,8 +2,8 @@ import { Accelerometer } from 'expo-sensors';
 import React, { useEffect, useState } from 'react';
 import { Alert, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // 加速度计数据接口
 interface AccelerometerData {

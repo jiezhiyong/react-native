@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../index.html">All files</a> / <a href="index.html">react-native/app</a> online-service.tsx</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>0/118</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/77</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>0/30</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>0/113</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -1141,9 +1141,9 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { create } from 'zustand';
 &nbsp;
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
 &nbsp;
 const PLAYBACK_STATUS_UPDATE = <span class="cstat-no" title="statement not covered" >'playbackStatusUpdate';</span>
 &nbsp;
@@ -1246,7 +1246,7 @@ const quickQuestions: QuickQuestion[] = <span class="cstat-no" title="statement 
 async function <span class="fstat-no" title="function not covered" >playNewMessageSound(</span>) {
 <span class="cstat-no" title="statement not covered" >  try {</span>
     // 创建一个音频播放器
-    const player = <span class="cstat-no" title="statement not covered" >Audio.createAudioPlayer(require('~/assets/audios/received-message.mp3'));</span>
+    const player = <span class="cstat-no" title="statement not covered" >Audio.createAudioPlayer(require('@/assets/audios/received-message.mp3'));</span>
 &nbsp;
     // 监听播放完成事件, 播放完成后释放资源
     const subscribe = <span class="cstat-no" title="statement not covered" >player.addListener(PLAYBACK_STATUS_UPDATE, <span class="fstat-no" title="function not covered" >(s</span>tatus: Audio.AudioStatus) =&gt; {</span>
@@ -1290,7 +1290,7 @@ const MessageBubble = <span class="cstat-no" title="statement not covered" ><spa
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;View className={`flex-row max-w-[85%] my-2 ${isUser ? 'self-end' : 'self-start'}`}&gt;
-      {!isUser &amp;&amp; &lt;Image source={require('~/assets/images/icon.png')} className="size-10 rounded-full mr-3" /&gt;}
+      {!isUser &amp;&amp; &lt;Image source={require('@/assets/images/icon.png')} className="size-10 rounded-full mr-3" /&gt;}
 &nbsp;
       &lt;View className={`p-4 rounded-3xl ${isUser ? 'bg-primary/15 rounded-tr-none' : 'bg-card rounded-tl-none'}`}&gt;
         {message.type === 'text' &amp;&amp; &lt;Text&gt;{message.content}&lt;/Text&gt;}
@@ -1329,7 +1329,7 @@ const MessageBubble = <span class="cstat-no" title="statement not covered" ><spa
         &lt;/Text&gt;
       &lt;/View&gt;
 &nbsp;
-      {isUser &amp;&amp; &lt;Image source={require('~/assets/images/avatar.jpg')} className="size-10 rounded-full ml-3" /&gt;}
+      {isUser &amp;&amp; &lt;Image source={require('@/assets/images/avatar.jpg')} className="size-10 rounded-full ml-3" /&gt;}
     &lt;/View&gt;
   );
 };
@@ -1669,4 +1669,3 @@ export default function <span class="fstat-no" title="function not covered" >Onl
         <script src="../../block-navigation.js"></script>
     </body>
 </html>
-    

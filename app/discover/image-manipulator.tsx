@@ -6,11 +6,11 @@ import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // 默认图片
-const defaultImage = Asset.fromModule(require('~/assets/images/icon.png'));
+const defaultImage = Asset.fromModule(require('@/assets/images/icon.png'));
 
 // https://docs.expo.dev/versions/latest/sdk/imagemanipulator/
 export default function ExpoImageManipulatorScreen() {

@@ -2,9 +2,9 @@ import * as ScreenCapture from 'expo-screen-capture';
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { useEffectAsync } from '~/hooks/use-effect-async';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useEffectAsync } from '@/hooks/use-effect-async';
 
 export default function ExpoScreenCaptureScreen() {
   // 自动阻止屏幕截图（组件加载时启动保护，卸载时移除保护）

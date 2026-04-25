@@ -3,8 +3,8 @@ import { ApplicationReleaseType } from 'expo-application';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { InfoItemCol } from '~/components/InfoItem';
-import { Text } from '~/components/ui/text';
+import { InfoItemCol } from '@/components/InfoItem';
+import { Text } from '@/components/ui/text';
 
 /**
  * Expo Application 演示屏幕

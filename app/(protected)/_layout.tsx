@@ -1,7 +1,7 @@
 import { Redirect, Stack } from 'expo-router';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
-import { useAuth } from '~/store/auth';
+import { useAuth } from '@/store/auth';
 
 export const unstable_settings = {
   initialRouteName: 'bill',

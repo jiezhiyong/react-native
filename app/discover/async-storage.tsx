@@ -3,9 +3,9 @@ import { RefreshCcw } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
 
 // 存储数据封装函数
 async function storeData(key: string, value: string) {

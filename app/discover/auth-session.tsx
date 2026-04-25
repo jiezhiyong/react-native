@@ -1,8 +1,8 @@
 import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoAuthSessionScreen() {
   const router = useRouter();

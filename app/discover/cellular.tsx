@@ -4,9 +4,9 @@ import { PermissionStatus } from 'expo-modules-core';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import { InfoItemCol } from '~/components/InfoItem';
-import { toast } from '~/components/ui/sonner';
-import { useEffectAsync } from '~/hooks/use-effect-async';
+import { InfoItemCol } from '@/components/InfoItem';
+import { toast } from '@/components/ui/sonner';
+import { useEffectAsync } from '@/hooks/use-effect-async';
 
 import { Button } from '../../components/ui/button';
 import { Text } from '../../components/ui/text';

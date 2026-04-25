@@ -1,10 +1,10 @@
 import { Pressable, View } from 'react-native';
 
-import { useColorScheme } from '~/hooks/useColorScheme';
-import { MoonStar } from '~/icons/MoonStar';
-import { Sun } from '~/icons/Sun';
-import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
-import { cn } from '~/lib/utils';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { MoonStar } from '@/icons/MoonStar';
+import { Sun } from '@/icons/Sun';
+import { setAndroidNavigationBar } from '@/lib/android-navigation-bar';
+import { cn } from '@/lib/utils';
 
 export function ThemeToggle() {
   const { isDarkColorScheme, setColorScheme } = useColorScheme();

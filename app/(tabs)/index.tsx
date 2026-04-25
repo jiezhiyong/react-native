@@ -7,11 +7,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { ScrollHeader } from '~/components/ui/scroll-header';
-import { Skeleton } from '~/components/ui/skeleton';
-import { Text } from '~/components/ui/text';
-import { useScrollHeader } from '~/hooks/useScrollHeader';
-import { sleep } from '~/lib/utils';
+import { ScrollHeader } from '@/components/ui/scroll-header';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Text } from '@/components/ui/text';
+import { useScrollHeader } from '@/hooks/useScrollHeader';
+import { NAV_THEME } from '@/lib/theme';
+import { sleep } from '@/lib/utils';
 
 const ReanimatedFlashList = Animated.createAnimatedComponent(FlashList) as unknown as typeof FlashList;
 
@@ -99,7 +100,7 @@ export default function HomeScreen() {
         {isNoMore ? (
           <Text className="text-center text-sm text-muted-foreground">没有更多了</Text>
         ) : (
-          <ActivityIndicator />
+          <ActivityIndicator color={NAV_THEME.light.colors.primary} />
         )}
       </View>
     );
@@ -108,13 +109,13 @@ export default function HomeScreen() {
   const renderItem = useCallback(({ item }: { item: DataItem }) => {
     return (
       <View className="px-1 pt-2">
-        <View className="w-full overflow-hidden rounded-xl border border-border p-3">
-          <View className="w-full aspect-square bg-muted rounded-md" style={{ height: 150 }} />
+        <View className="w-full overflow-hidden rounded-xl border border-primary/20 p-3">
+          <View className="w-full aspect-square bg-primary/20 rounded-md" style={{ height: 150 }} />
 
           {Array.from({ length: item.skeletonNum }).map((_, index) => (
             <View key={index}>
-              <Skeleton className="w-full h-5 rounded-md mt-1" />
-              <Skeleton className="w-3/5 h-5 rounded-md mt-1" />
+              <Skeleton className="w-full h-5 mt-1" />
+              <Skeleton className="w-3/5 h-5 mt-1" />
             </View>
           ))}
         </View>
@@ -127,7 +128,7 @@ export default function HomeScreen() {
       <ScrollHeader
         title="首页"
         scrollY={scrollY}
-        backgroundImageSource={require('~/assets/images/home-header-bg.jpg')}
+        backgroundImageSource={require('@/assets/images/home-header-bg.jpg')}
         rightButtons={rightButtons}
         gradientColors={['#c96442', '#d97757']}
       />
@@ -148,8 +149,9 @@ export default function HomeScreen() {
         ListHeaderComponent={
           <View className="w-full rounded-xl overflow-hidden pt-5 pb-1 px-1">
             <Image
-              source={require('~/assets/images/home-header-bg.jpg')}
-              style={{ height: 120, borderRadius: 6 }}
+              className="rounded-xl"
+              source={require('@/assets/images/home-header-bg.jpg')}
+              style={{ height: 120 }}
               contentFit="cover"
             />
           </View>

@@ -4,10 +4,10 @@ import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
-import { useAuth } from '~/store/auth';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
+import { useAuth } from '@/store/auth';
 
 // GitHub OAuth 配置
 const githubClientId = 'Ov23li3LwycXQxfxkQGv';

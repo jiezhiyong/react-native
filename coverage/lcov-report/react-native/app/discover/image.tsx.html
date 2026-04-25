@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../../index.html">All files</a> / <a href="index.html">react-native/app/discover</a> image.tsx</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>0/11</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/2</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>0/5</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>0/9</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -199,8 +199,8 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 &nbsp;
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 &nbsp;
 // 不同的图片填充模式
 const CONTENT_FITS = <span class="cstat-no" title="statement not covered" >[</span>
@@ -236,7 +236,7 @@ export default function <span class="fstat-no" title="function not covered" >Exp
       &lt;Text className="text-lg font-medium mb-2"&gt;基本图像（当前模式: {getCurrentFitLabel()}）&lt;/Text&gt;
       &lt;View className="mb-6 flex-col gap-3"&gt;
         &lt;Image
-          source={require('~/assets/images/react-logo.png')}
+          source={require('@/assets/images/react-logo.png')}
           style={{ minHeight: 150, borderRadius: 6, backgroundColor: '#eaeaea' }}
           contentFit={currentFit as any}
           transition={500}
@@ -249,7 +249,7 @@ export default function <span class="fstat-no" title="function not covered" >Exp
       &lt;Text className="text-lg font-medium mb-2"&gt;图像背景 (ImageBackground)&lt;/Text&gt;
       &lt;View className="flex-col gap-3"&gt;
         &lt;ImageBackground
-          source={require('~/assets/images/icon-512.png')}
+          source={require('@/assets/images/icon-512.png')}
           contentFit="cover"
           style={{ borderRadius: 6, overflow: 'hidden' }}
         &gt;
@@ -280,4 +280,3 @@ export default function <span class="fstat-no" title="function not covered" >Exp
         <script src="../../../block-navigation.js"></script>
     </body>
 </html>
-    

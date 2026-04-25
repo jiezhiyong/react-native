@@ -2,8 +2,8 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoScreenOrientationScreen() {
   const [currentOrientation, setCurrentOrientation] = useState<ScreenOrientation.Orientation | null>(null);

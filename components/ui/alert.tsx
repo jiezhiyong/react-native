@@ -4,23 +4,20 @@ import type { LucideIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { View, type ViewProps } from 'react-native';
 
-import { Text } from '~/components/ui/text';
-import { cn } from '~/lib/utils';
+import { Text } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
 
-const alertVariants = cva(
-  'relative bg-card w-full rounded-xl border border-border p-4 shadow-sm shadow-foreground/5',
-  {
-    variants: {
-      variant: {
-        default: '',
-        destructive: 'border-destructive bg-destructive/10',
-      },
+const alertVariants = cva('relative bg-card w-full rounded-xl border border-border p-4 shadow-sm shadow-foreground/5', {
+  variants: {
+    variant: {
+      default: '',
+      destructive: 'border-destructive bg-destructive/10',
     },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+});
 
 const Alert = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -45,11 +42,7 @@ Alert.displayName = 'Alert';
 
 const AlertTitle = React.forwardRef<React.ElementRef<typeof Text>, React.ComponentPropsWithoutRef<typeof Text>>(
   ({ className, ...props }, ref) => (
-    <Text
-      ref={ref}
-      className={cn('pl-7 mb-1 font-medium leading-tight text-foreground', className)}
-      {...props}
-    />
+    <Text ref={ref} className={cn('pl-7 mb-1 font-medium leading-tight text-foreground', className)} {...props} />
   )
 );
 AlertTitle.displayName = 'AlertTitle';

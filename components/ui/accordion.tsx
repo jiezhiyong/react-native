@@ -13,9 +13,9 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { TextClassContext } from '~/components/ui/text';
-import { ChevronDown } from '~/lib/icons/ChevronDown';
-import { cn } from '~/lib/utils';
+import { TextClassContext } from '@/components/ui/text';
+import { ChevronDown } from '@/lib/icons/ChevronDown';
+import { cn } from '@/lib/utils';
 
 const Accordion = React.forwardRef<AccordionPrimitive.RootRef, AccordionPrimitive.RootProps>(
   ({ children, ...props }, ref) => {

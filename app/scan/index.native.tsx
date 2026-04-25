@@ -11,9 +11,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Camera, Code, useCameraDevice, useCameraPermission, useCodeScanner } from 'react-native-vision-camera';
 import validator from 'validator';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { useScanHistoryStore } from '~/store/scan-history';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useScanHistoryStore } from '@/store/scan-history';
 
 export default function ScanScreenNative() {
   const [scanned, setScanned] = useState(false);

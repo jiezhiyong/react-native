@@ -3,7 +3,7 @@ import type { SlottableTextProps, TextRef } from '@rn-primitives/types';
 import * as React from 'react';
 import { Platform, Text as RNText } from 'react-native';
 
-import { cn } from '~/lib/utils';
+import { cn } from '@/lib/utils';
 
 const H1 = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
@@ -73,7 +73,9 @@ H4.displayName = 'H4';
 
 const P = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
-  return <Component className={cn('text-foreground leading-relaxed web:select-text', className)} ref={ref} {...props} />;
+  return (
+    <Component className={cn('text-foreground leading-relaxed web:select-text', className)} ref={ref} {...props} />
+  );
 });
 
 P.displayName = 'P';
@@ -116,7 +118,13 @@ Code.displayName = 'Code';
 
 const Lead = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
-  return <Component className={cn('text-xl leading-relaxed text-muted-foreground web:select-text', className)} ref={ref} {...props} />;
+  return (
+    <Component
+      className={cn('text-xl leading-relaxed text-muted-foreground web:select-text', className)}
+      ref={ref}
+      {...props}
+    />
+  );
 });
 
 Lead.displayName = 'Lead';
@@ -124,11 +132,7 @@ Lead.displayName = 'Lead';
 const Large = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
   return (
-    <Component
-      className={cn('text-xl text-foreground font-medium web:select-text', className)}
-      ref={ref}
-      {...props}
-    />
+    <Component className={cn('text-xl text-foreground font-medium web:select-text', className)} ref={ref} {...props} />
   );
 });
 

@@ -6,10 +6,10 @@ import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-g
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import { create } from 'zustand';
 
-import { Button } from '~/components/ui/button';
-import { Card } from '~/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Text } from '@/components/ui/text';
 
 // 定义手势状态
 interface GestureState {
@@ -165,7 +165,7 @@ const PinchRotateCard: React.FC = () => {
     <GestureDetector gesture={composedGestures}>
       <Animated.View style={[animatedStyle, { alignItems: 'center' }]}>
         <Image
-          source={require('~/assets/images/icon.png')}
+          source={require('@/assets/images/icon.png')}
           style={{ width: 200, height: 200, borderRadius: 8 }}
           contentFit="cover"
         />

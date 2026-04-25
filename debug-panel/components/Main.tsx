@@ -124,7 +124,7 @@ export function Main() {
       >
         <Image
           style={{ width: 40, height: 40, transform: 'rotate(-30deg)' }}
-          source={require('~/assets/images/debug.png')}
+          source={require('@/assets/images/debug.png')}
         />
       </Pressable>
 
@@ -151,7 +151,7 @@ export function Main() {
                     <View>
                       <View height="xl" width="xl" overflow="hidden" bg="secondary" rounded="medium">
                         <Image
-                          source={require('~/assets/images/icon.png')}
+                          source={require('@/assets/images/icon.png')}
                           style={{ flex: 1, width: '100%', resizeMode: 'contain' }}
                         />
                       </View>

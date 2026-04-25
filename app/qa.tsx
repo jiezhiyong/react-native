@@ -4,7 +4,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Input } from '~/components/ui/input';
+import { Input } from '@/components/ui/input';
 
 // 定义问题类型
 interface Question {

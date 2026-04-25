@@ -3,10 +3,10 @@ import * as MailComposer from 'expo-mail-composer';
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
-import { Textarea } from '~/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
+import { Textarea } from '@/components/ui/textarea';
 
 // https://docs.expo.dev/versions/latest/sdk/mail-composer/
 export default function ExpoMailComposerScreen() {

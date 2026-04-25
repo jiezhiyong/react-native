@@ -1,7 +1,7 @@
 import { useKeepAwake } from 'expo-keep-awake';
 import { View } from 'react-native';
 
-import { Text } from '~/components/ui/text';
+import { Text } from '@/components/ui/text';
 
 // https://docs.expo.dev/versions/latest/sdk/keep-awake/
 export default function ExpoKeepAwakeScreen() {

@@ -4,8 +4,8 @@ import * as TaskManager from 'expo-task-manager';
 import { useEffect, useState } from 'react';
 import { Alert, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // 定义任务名称常量
 const BACKGROUND_TASK_NAME = 'background-location-sync-task';

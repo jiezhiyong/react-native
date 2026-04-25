@@ -3,10 +3,10 @@ import { DeviceType } from 'expo-device';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { InfoItemRow } from '~/components/InfoItem';
-import { Card } from '~/components/ui/card';
-import { toast } from '~/components/ui/sonner';
-import { Text } from '~/components/ui/text';
+import { InfoItemRow } from '@/components/InfoItem';
+import { Card } from '@/components/ui/card';
+import { toast } from '@/components/ui/sonner';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoDeviceScreen() {
   const [deviceInfo, setDeviceInfo] = useState<{

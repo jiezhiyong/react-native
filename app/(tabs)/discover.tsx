@@ -4,12 +4,12 @@ import * as React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Input } from '~/components/ui/input';
-import { ScrollHeader } from '~/components/ui/scroll-header';
-import { Text } from '~/components/ui/text';
-import { useScrollHeader } from '~/hooks/useScrollHeader';
-import { cn } from '~/lib/utils';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Input } from '@/components/ui/input';
+import { ScrollHeader } from '@/components/ui/scroll-header';
+import { Text } from '@/components/ui/text';
+import { useScrollHeader } from '@/hooks/useScrollHeader';
+import { cn } from '@/lib/utils';
 
 const demos: { name: string; desc: string; supports: string }[] = [
   // 设备信息等
@@ -153,16 +153,16 @@ export default function HomeScreen() {
       <ScrollHeader
         title="发现"
         scrollY={scrollY}
-        gradientColors={['#c96442', '#a8563b']}
+        gradientColors={['#c96442', '#d9b9a5']}
         rightButtons={rightButtons}
       />
       <Animated.FlatList
-        className="px-5 flex-1 bg-background"
+        className="flex-1 bg-background"
         data={filteredDemos}
         keyExtractor={(item) => item.name}
         onScroll={scrollHandler}
         scrollEventThrottle={16}
-        contentContainerStyle={{ paddingTop: headerHeight + 20, paddingBottom: 16 }}
+        contentContainerStyle={{ paddingTop: headerHeight + 20, paddingHorizontal: 20 }}
         ListHeaderComponent={
           <View className="mb-4">
             <View className="flex-row items-center bg-card rounded-xl border border-input">

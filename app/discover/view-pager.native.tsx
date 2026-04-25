@@ -2,8 +2,8 @@
 // import { StyleSheet, View } from 'react-native';
 // import { usePagerView } from 'react-native-pager-view';
 
-// import { Button } from '~/components/ui/button';
-// import { Text } from '~/components/ui/text';
+// import { Button } from '@/components/ui/button';
+// import { Text } from '@/components/ui/text';
 
 // const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD'];
 

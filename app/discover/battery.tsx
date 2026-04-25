@@ -1,8 +1,8 @@
 import * as Battery from 'expo-battery';
 import { View } from 'react-native';
 
-import { InfoItemRow } from '~/components/InfoItem';
-import { Text } from '~/components/ui/text';
+import { InfoItemRow } from '@/components/InfoItem';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoBatteryScreen() {
   const { lowPowerMode, batteryLevel, batteryState } = Battery.usePowerState();

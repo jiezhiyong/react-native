@@ -4,8 +4,8 @@ import { useNetworkState } from 'expo-network';
 import { useCallback, useState } from 'react';
 import { View } from 'react-native';
 
-import { Text } from '~/components/ui/text';
-import { useEffectAsync } from '~/hooks/use-effect-async';
+import { Text } from '@/components/ui/text';
+import { useEffectAsync } from '@/hooks/use-effect-async';
 
 interface NetworkInfo {
   ipAddress: string | null;

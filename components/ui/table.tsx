@@ -1,8 +1,8 @@
 import * as TablePrimitive from '@rn-primitives/table';
 import * as React from 'react';
 
-import { TextClassContext } from '~/components/ui/text';
-import { cn } from '~/lib/utils';
+import { TextClassContext } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
 
 const Table = React.forwardRef<TablePrimitive.RootRef, TablePrimitive.RootProps>(({ className, ...props }, ref) => (
   <TablePrimitive.Root ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...props} />

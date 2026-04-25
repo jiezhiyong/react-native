@@ -2,8 +2,8 @@ import * as StoreReview from 'expo-store-review';
 import { useEffect, useState } from 'react';
 import { Alert, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoStoreReviewScreen() {
   const [isAvailable, setIsAvailable] = useState(false);

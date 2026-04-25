@@ -11,7 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { SCROLL_HEADER_DEFAULT_THRESHOLD } from '~/hooks/useScrollHeader';
+import { SCROLL_HEADER_DEFAULT_THRESHOLD } from '@/hooks/useScrollHeader';
 
 const IOS_BAR = 44;
 const ANDROID_BAR = 56;

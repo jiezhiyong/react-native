@@ -5,9 +5,9 @@ import * as Notifications from 'expo-notifications';
 import { useRef, useState } from 'react';
 import { Alert, Platform, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { useEffectAsync } from '~/hooks/use-effect-async';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useEffectAsync } from '@/hooks/use-effect-async';
 
 /**
  * 推送通知

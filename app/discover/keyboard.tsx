@@ -2,9 +2,9 @@ import { View } from 'react-native';
 import { KeyboardAwareScrollView, useKeyboardHandler } from 'react-native-keyboard-controller';
 import { useSharedValue } from 'react-native-reanimated';
 
-import { Input } from '~/components/ui/input';
-import { Skeleton } from '~/components/ui/skeleton';
-import { Text } from '~/components/ui/text';
+import { Input } from '@/components/ui/input';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Text } from '@/components/ui/text';
 
 const PADDING_BOTTOM = 20;
 

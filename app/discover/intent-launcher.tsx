@@ -1,8 +1,8 @@
 import * as IntentLauncher from 'expo-intent-launcher';
 import { Platform, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // 常用设置页面（仅适用于 Android）
 const SETTINGS_PAGES = [

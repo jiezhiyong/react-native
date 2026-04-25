@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  react-native-css-interop@0.2.3:
+    hash: b5d3a958ec238bc2880b22e82a414cdbf538378f2eaa9fbda4e260f9fa119643
+    path: patches/react-native-css-interop@0.2.3.patch
+
 importers:
 
   .:
@@ -16354,7 +16359,7 @@ snapshots:
     dependencies:
       comment-json: 4.2.5
       debug: 4.4.3
-      react-native-css-interop: 0.2.3(0690af27bdc3bab8a1cf0aea10b2d52e)
+      react-native-css-interop: 0.2.3(patch_hash=b5d3a958ec238bc2880b22e82a414cdbf538378f2eaa9fbda4e260f9fa119643)(0690af27bdc3bab8a1cf0aea10b2d52e)
       tailwindcss: 3.4.19(ts-node@10.9.2(@types/node@22.14.0)(typescript@5.9.3))
     transitivePeerDependencies:
       - react
@@ -16804,7 +16809,7 @@ snapshots:
 
   react-is@19.2.4: {}
 
-  react-native-css-interop@0.2.3(0690af27bdc3bab8a1cf0aea10b2d52e):
+  react-native-css-interop@0.2.3(patch_hash=b5d3a958ec238bc2880b22e82a414cdbf538378f2eaa9fbda4e260f9fa119643)(0690af27bdc3bab8a1cf0aea10b2d52e):
     dependencies:
       '@babel/helper-module-imports': 7.28.6
       '@babel/traverse': 7.29.0

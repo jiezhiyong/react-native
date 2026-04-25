@@ -9,8 +9,8 @@ import React, { useState } from 'react';
 import { Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useEffectAsync } from '~/hooks/use-effect-async';
-import { cn } from '~/lib/utils';
+import { useEffectAsync } from '@/hooks/use-effect-async';
+import { cn } from '@/lib/utils';
 
 interface PermissionItemProps {
   title: string;

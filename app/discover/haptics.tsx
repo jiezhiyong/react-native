@@ -2,9 +2,9 @@ import * as Haptics from 'expo-haptics';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Separator } from '~/components/ui/separator';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoHapticsScreen() {
   // 触发轻度触觉反馈

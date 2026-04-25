@@ -2,11 +2,11 @@ import * as Haptics from 'expo-haptics';
 import React, { useRef, useState } from 'react';
 import { Alert, Platform, ScrollView, Vibration, View } from 'react-native';
 
-import { InfoItemRow } from '~/components/InfoItem';
-import { Button } from '~/components/ui/button';
-import { Card } from '~/components/ui/card';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
+import { InfoItemRow } from '@/components/InfoItem';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
 
 interface VibrationHistory {
   id: string;

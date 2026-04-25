@@ -4,8 +4,8 @@ import * as MediaLibrary from 'expo-media-library';
 import { useEffect, useState } from 'react';
 import { Alert, FlatList, Image, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoMediaLibraryScreen() {
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();

@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../../index.html">All files</a> / <a href="index.html">react-native/app/discover</a> blur.tsx</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>0/3</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/4</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>0/3</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>0/3</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -174,7 +174,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { BlurView } from 'expo-blur';
 import { Image, Platform, View } from 'react-native';
 &nbsp;
-import { Text } from '~/components/ui/text';
+import { Text } from '@/components/ui/text';
 &nbsp;
 export default function <span class="fstat-no" title="function not covered" >ExpoBlurScreen(</span>) {
 <span class="cstat-no" title="statement not covered" >  return (</span>
@@ -189,7 +189,7 @@ export default function <span class="fstat-no" title="function not covered" >Exp
       &lt;View className="flex-row justify-between mb-6"&gt;
         {[15, 30, 75, 100].map(<span class="fstat-no" title="function not covered" >(l</span>evel) =&gt; (
 <span class="cstat-no" title="statement not covered" >          &lt;View key={level} className="relative size-24 overflow-hidden rounded-lg"&gt;</span>
-            &lt;Image source={require('~/assets/images/icon.png')} className="absolute w-full h-full" resizeMode="cover" /&gt;
+            &lt;Image source={require('@/assets/images/icon.png')} className="absolute w-full h-full" resizeMode="cover" /&gt;
             &lt;BlurView
               intensity={level}
               className="absolute w-full h-full"
@@ -208,7 +208,7 @@ export default function <span class="fstat-no" title="function not covered" >Exp
       &lt;View className="flex-row justify-between"&gt;
         {[15, 30, 75, 100].map(<span class="fstat-no" title="function not covered" >(l</span>evel) =&gt; (
 <span class="cstat-no" title="statement not covered" >          &lt;View key={level} className="relative size-24 overflow-hidden rounded-lg"&gt;</span>
-            &lt;Image source={require('~/assets/images/icon.png')} className="absolute w-full h-full" resizeMode="cover" /&gt;
+            &lt;Image source={require('@/assets/images/icon.png')} className="absolute w-full h-full" resizeMode="cover" /&gt;
             &lt;BlurView
               intensity={level}
               tint="dark"
@@ -244,4 +244,3 @@ export default function <span class="fstat-no" title="function not covered" >Exp
         <script src="../../../block-navigation.js"></script>
     </body>
 </html>
-    

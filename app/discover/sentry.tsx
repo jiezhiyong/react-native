@@ -3,11 +3,11 @@ import { AlertCircle, Bug, Info, Target, Timer, User, Zap } from 'lucide-react-n
 import React, { useEffect, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Text } from '@/components/ui/text';
 
 interface ErrorInfo {
   message?: string;

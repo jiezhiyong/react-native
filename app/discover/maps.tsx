@@ -5,8 +5,8 @@ import { Alert, ScrollView, Text, View } from 'react-native';
 // import MapView, { Marker, Region, MapType } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Button } from '~/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 // Fallback types when react-native-maps is not available
 type MapType = 'standard' | 'satellite' | 'hybrid';

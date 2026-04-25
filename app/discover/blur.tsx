@@ -1,7 +1,7 @@
 import { BlurView } from 'expo-blur';
 import { Image, Platform, View } from 'react-native';
 
-import { Text } from '~/components/ui/text';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoBlurScreen() {
   return (
@@ -16,7 +16,7 @@ export default function ExpoBlurScreen() {
       <View className="flex-row justify-between mb-6">
         {[15, 30, 75, 100].map((level) => (
           <View key={level} className="relative size-24 overflow-hidden rounded-lg">
-            <Image source={require('~/assets/images/icon.png')} className="absolute w-full h-full" resizeMode="cover" />
+            <Image source={require('@/assets/images/icon.png')} className="absolute w-full h-full" resizeMode="cover" />
             <BlurView
               intensity={level}
               className="absolute w-full h-full"
@@ -35,7 +35,7 @@ export default function ExpoBlurScreen() {
       <View className="flex-row justify-between">
         {[15, 30, 75, 100].map((level) => (
           <View key={level} className="relative size-24 overflow-hidden rounded-lg">
-            <Image source={require('~/assets/images/icon.png')} className="absolute w-full h-full" resizeMode="cover" />
+            <Image source={require('@/assets/images/icon.png')} className="absolute w-full h-full" resizeMode="cover" />
             <BlurView
               intensity={level}
               tint="dark"

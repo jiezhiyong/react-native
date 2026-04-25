@@ -2,11 +2,11 @@ import * as FileSystem from 'expo-file-system/legacy';
 import React, { useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 
-import { InfoItemRow } from '~/components/InfoItem';
-import { Button } from '~/components/ui/button';
-import { Card } from '~/components/ui/card';
-import { Progress } from '~/components/ui/progress';
-import { Text } from '~/components/ui/text';
+import { InfoItemRow } from '@/components/InfoItem';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Text } from '@/components/ui/text';
 
 interface DownloadInfo {
   url: string;

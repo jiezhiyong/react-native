@@ -16,8 +16,8 @@ import {
   TorusGeometry,
 } from 'three';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function GLScreen() {
   const [currentShape, setCurrentShape] = useState<'box' | 'torus'>('torus');

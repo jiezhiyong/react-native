@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
 
-import { cn } from '~/lib/utils';
+import { cn } from '@/lib/utils';
 
 const { width } = Dimensions.get('window');
 

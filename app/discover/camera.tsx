@@ -5,7 +5,7 @@ import { Camera, SwitchCamera, Video, Zap, ZapOff } from 'lucide-react-native';
 import { useRef, useState } from 'react';
 import { Alert, Pressable, TouchableOpacity, View } from 'react-native';
 
-import { cn } from '~/lib/utils';
+import { cn } from '@/lib/utils';
 
 import { Button } from '../../components/ui/button';
 import { Text } from '../../components/ui/text';

@@ -1,4 +1,4 @@
-import '~/global.css';
+import '@/global.css';
 
 import { useReactNavigationDevTools } from '@dev-plugins/react-navigation';
 import { useReactQueryDevTools } from '@dev-plugins/react-query';
@@ -18,13 +18,14 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { ThemeToggle } from '~/components/ThemeToggle';
-import { Toaster } from '~/components/ui/sonner';
-import { DebugPanel } from '~/debug-panel';
-import { useColorScheme } from '~/hooks/useColorScheme';
-import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
-import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
-import { NAV_THEME } from '~/lib/constants';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { Toaster } from '@/components/ui/sonner';
+import { DebugPanel } from '@/debug-panel';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect';
+import { setAndroidNavigationBar } from '@/lib/android-navigation-bar';
+import { NAV_THEME } from '@/lib/theme';
+
 // Construct a new integration instance. This is needed to communicate between the integration and React
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !isRunningInExpoGo(),
@@ -42,11 +43,11 @@ Sentry.init({
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
-  colors: NAV_THEME.light,
+  colors: NAV_THEME.light.colors,
 };
 const DARK_THEME: Theme = {
   ...DarkTheme,
-  colors: NAV_THEME.dark,
+  colors: NAV_THEME.dark.colors,
 };
 
 export const unstable_settings = {
@@ -164,48 +165,48 @@ function RootLayout() {
       {showDebugPanel ? <DebugPanel /> : null}
       <SafeAreaProvider>
         <KeyboardProvider>
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-            <GestureHandlerRootView>
-              {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
-              {/* <TypesafeI18n locale={'zh'}> */}
-              <Stack
-                screenOptions={{
-                  headerShadowVisible: false,
-                }}
-              >
-                <Stack.Screen
-                  name="(tabs)"
-                  options={{
-                    headerShown: false,
-                    title: '',
-                    headerRight: () => <ThemeToggle />,
+          <QueryClientProvider client={queryClient}>
+            <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+              <GestureHandlerRootView>
+                {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
+                {/* <TypesafeI18n locale={'zh'}> */}
+                <Stack
+                  screenOptions={{
+                    headerShadowVisible: false,
                   }}
-                />
-                <Stack.Screen
-                  name="login"
-                  options={{
-                    presentation: 'modal',
-                    title: '登录',
-                    headerShown: true,
-                  }}
-                />
-                <Stack.Screen
-                  name="(protected)"
-                  options={{
-                    headerShown: true,
-                    title: '受保护内容',
-                  }}
-                />
-                <Stack.Screen name="+not-found" />
-              </Stack>
-              <PortalHost />
+                >
+                  <Stack.Screen
+                    name="(tabs)"
+                    options={{
+                      headerShown: false,
+                      title: '',
+                      headerRight: () => <ThemeToggle />,
+                    }}
+                  />
+                  <Stack.Screen
+                    name="login"
+                    options={{
+                      presentation: 'modal',
+                      title: '登录',
+                      headerShown: true,
+                    }}
+                  />
+                  <Stack.Screen
+                    name="(protected)"
+                    options={{
+                      headerShown: true,
+                      title: '受保护内容',
+                    }}
+                  />
+                  <Stack.Screen name="+not-found" />
+                </Stack>
+                <PortalHost />
 
-              <Toaster />
-            </GestureHandlerRootView>
-            {/* </TypesafeI18n> */}
-          </ThemeProvider>
-        </QueryClientProvider>
+                <Toaster />
+              </GestureHandlerRootView>
+              {/* </TypesafeI18n> */}
+            </ThemeProvider>
+          </QueryClientProvider>
         </KeyboardProvider>
       </SafeAreaProvider>
 

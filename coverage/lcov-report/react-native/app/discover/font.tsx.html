@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../../index.html">All files</a> / <a href="index.html">react-native/app/discover</a> font.tsx</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>0/8</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/4</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>0/2</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>0/8</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -185,8 +185,8 @@
 import React from 'react';
 import { View } from 'react-native';
 &nbsp;
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
-import { Text } from '~/components/ui/text';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 &nbsp;
 // 字体示例文本
 const sampleText = <span class="cstat-no" title="statement not covered" >'人生若只如初见，何事秋风悲画扇。等闲变却故人心，却道故人心易变。';</span>
@@ -213,7 +213,7 @@ const FontSample: React.FC&lt;{ name: string }&gt; = <span class="cstat-no" titl
 &nbsp;
 export default function <span class="fstat-no" title="function not covered" >ExpoFontScreen(</span>) {
   const [fontsLoaded, fontError] = <span class="cstat-no" title="statement not covered" >useFonts({</span>
-    spaceMono: require('~/assets/fonts/SpaceMono-Regular.ttf'),
+    spaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
 &nbsp;
   // 如果字体未加载完成，返回 null 不渲染内容
@@ -259,4 +259,3 @@ export default function <span class="fstat-no" title="function not covered" >Exp
         <script src="../../../block-navigation.js"></script>
     </body>
 </html>
-    

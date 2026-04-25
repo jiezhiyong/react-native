@@ -3,8 +3,8 @@
 // import { useEffect, useState } from 'react';
 // import { FlatList, View } from 'react-native';
 
-// import { Button } from '~/components/ui/button';
-// import { Text } from '~/components/ui/text';
+// import { Button } from '@/components/ui/button';
+// import { Text } from '@/components/ui/text';
 
 // interface Todo {
 //   id: number;

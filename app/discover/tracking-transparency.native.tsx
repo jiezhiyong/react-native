@@ -3,9 +3,9 @@ import * as TrackingTransparency from 'expo-tracking-transparency';
 import { useTrackingPermissions } from 'expo-tracking-transparency';
 import { View } from 'react-native';
 
-import { InfoItemCol } from '~/components/InfoItem';
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { InfoItemCol } from '@/components/InfoItem';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoTrackingTransparencyScreenNative() {
   const [status, requestPermission] = useTrackingPermissions();

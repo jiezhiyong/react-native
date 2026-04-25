@@ -4,9 +4,9 @@ import { PermissionStatus } from 'expo-modules-core';
 import { useEffect, useState } from 'react';
 import { Platform, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { sleep } from '~/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { sleep } from '@/lib/utils';
 
 export default function ExpoBrightnessScreen() {
   const [brightness, setBrightness] = useState<number>(0);

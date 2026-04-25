@@ -3,8 +3,8 @@ import * as Updates from 'expo-updates';
 import { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoUpdatesScreen() {
   const [isChecking, setIsChecking] = useState(false);

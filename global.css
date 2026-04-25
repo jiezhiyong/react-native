@@ -1,5 +1,5 @@
 /**
- * 注意：如果更改了主题色，需相应更新 ~/lib/constants.ts
+ * 注意：如果更改了主题色，需相应更新 @/lib/theme.ts
  */
 
 @tailwind base;
@@ -27,6 +27,7 @@
     --border: 45 25% 92%;
     --input: 48 21% 89%;
     --ring: 207 82% 57%;
+    --radius: 12px;
   }
 
   .dark:root {
@@ -49,6 +50,7 @@
     --border: 45 3% 24%;
     --input: 45 3% 24%;
     --ring: 15 63% 60%;
+    --radius: 12px;
   }
 
   html,

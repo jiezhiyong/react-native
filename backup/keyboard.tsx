@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { Input } from '~/components/ui/input';
-import { useKeyboard } from '~/lib/keyboard';
+import { Input } from '@/components/ui/input';
+import { useKeyboard } from '@/lib/keyboard';
 
 function Example() {
   const { isKeyboardVisible, keyboardHeight, dismissKeyboard } = useKeyboard();

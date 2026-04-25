@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { useRefreshOnFocus } from '~/hooks/useRefreshOnFocus';
+import { useRefreshOnFocus } from '@/hooks/useRefreshOnFocus';
 
 /**
  * 屏幕聚焦时刷新

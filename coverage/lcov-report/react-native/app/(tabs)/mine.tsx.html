@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../../index.html">All files</a> / <a href="index.html">react-native/app/(tabs)</a> mine.tsx</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>0/46</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/21</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>0/18</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>0/46</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -531,9 +531,9 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 &nbsp;
-import { ScrollHeader } from '~/components/ui/scroll-header';
-import { useScrollHeader } from '~/hooks/useScrollHeader';
-import { useAuth } from '~/store/auth';
+import { ScrollHeader } from '@/components/ui/scroll-header';
+import { useScrollHeader } from '@/hooks/useScrollHeader';
+import { useAuth } from '@/store/auth';
 &nbsp;
 interface ItemEntry {
   title: string;
@@ -596,7 +596,7 @@ const UserHeader = <span class="cstat-no" title="statement not covered" ><span c
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;View className="flex-row items-center px-4 py-6"&gt;
         &lt;View className="border border-border rounded-full p-1"&gt;
-          &lt;Image source={require('~/assets/images/icon.png')} className="w-12 h-12 rounded-full bg-muted" /&gt;
+          &lt;Image source={require('@/assets/images/icon.png')} className="w-12 h-12 rounded-full bg-muted" /&gt;
         &lt;/View&gt;
         &lt;View className="ml-4"&gt;
           &lt;Text className="text-lg font-bold"&gt;{name}&lt;/Text&gt;
@@ -760,4 +760,3 @@ export default function <span class="fstat-no" title="function not covered" >Min
         <script src="../../../block-navigation.js"></script>
     </body>
 </html>
-    
