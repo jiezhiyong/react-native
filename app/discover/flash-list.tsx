@@ -1,6 +1,7 @@
 import { FlashList } from '@shopify/flash-list';
 import React, { useState } from 'react';
-import { ActivityIndicator, RefreshControl, View } from 'react-native';
+import { RefreshControl, View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { create } from 'zustand';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

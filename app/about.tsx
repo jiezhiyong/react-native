@@ -3,7 +3,8 @@ import * as StoreReview from 'expo-store-review';
 import * as Updates from 'expo-updates';
 import { ChevronRight } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, Linking, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Linking, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 interface AboutItemProps {
   title: string;

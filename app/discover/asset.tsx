@@ -1,6 +1,7 @@
 import { Asset } from 'expo-asset';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, ScrollView, View } from 'react-native';
+import { Image, ScrollView, View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -96,7 +97,7 @@ export default function ExpoAssetScreen() {
     <>
       {isDownloading ? (
         <View className="items-center">
-          <ActivityIndicator color="#c96442" />
+          <ActivityIndicator />
           <Text className="mt-2">下载中: {Math.round(downloadProgress * 100)}%</Text>
         </View>
       ) : downloadedAsset ? (
@@ -120,7 +121,7 @@ export default function ExpoAssetScreen() {
   if (isLoading) {
     return (
       <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
-        <ActivityIndicator color="#c96442" />
+        <ActivityIndicator />
         <Text className="mt-2">加载资源中...</Text>
       </View>
     );

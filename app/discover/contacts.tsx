@@ -1,7 +1,8 @@
 import * as Contacts from 'expo-contacts';
 import { PermissionStatus } from 'expo-modules-core';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, FlatList, View } from 'react-native';
+import { Alert, FlatList, View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 import { toast } from '@/components/ui/sonner';
 

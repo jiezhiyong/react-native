@@ -5,7 +5,6 @@ import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Camera, Image as ImageIcon, Mic, Play, Plus, Send, X } from 'lucide-react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  ActivityIndicator,
   FlatList,
   Image,
   KeyboardAvoidingView,
@@ -21,6 +20,7 @@ import { create } from 'zustand';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 const PLAYBACK_STATUS_UPDATE = 'playbackStatusUpdate';
 

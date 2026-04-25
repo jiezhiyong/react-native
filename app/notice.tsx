@@ -3,7 +3,8 @@ import { zhCN } from 'date-fns/locale';
 import { Stack } from 'expo-router';
 import { CalendarClock, Mail } from 'lucide-react-native';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-native';
+import { FlatList, RefreshControl, Text, View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { create } from 'zustand';
 

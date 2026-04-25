@@ -1,5 +1,6 @@
 import { Redirect, Stack } from 'expo-router';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 import { useAuth } from '@/store/auth';
 
@@ -19,7 +20,7 @@ export default function ProtectedLayout() {
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#c96442" />
+        <ActivityIndicator size="large" />
       </View>
     );
   }

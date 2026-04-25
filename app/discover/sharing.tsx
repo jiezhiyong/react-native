@@ -1,7 +1,8 @@
 import { downloadAsync, File, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { useState } from 'react';
-import { ActivityIndicator, Image, View } from 'react-native';
+import { Image, View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';

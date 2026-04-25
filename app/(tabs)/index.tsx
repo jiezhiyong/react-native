@@ -4,14 +4,14 @@ import { useRouter } from 'expo-router';
 import { Bell, Headphones } from 'lucide-react-native';
 import * as React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import Animated from 'react-native-reanimated';
 
 import { ScrollHeader } from '@/components/ui/scroll-header';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Text } from '@/components/ui/text';
 import { useScrollHeader } from '@/hooks/useScrollHeader';
-import { NAV_THEME } from '@/lib/theme';
 import { sleep } from '@/lib/utils';
 
 const ReanimatedFlashList = Animated.createAnimatedComponent(FlashList) as unknown as typeof FlashList;
@@ -100,7 +100,7 @@ export default function HomeScreen() {
         {isNoMore ? (
           <Text className="text-center text-sm text-muted-foreground">没有更多了</Text>
         ) : (
-          <ActivityIndicator color={NAV_THEME.light.colors.primary} />
+          <ActivityIndicator />
         )}
       </View>
     );

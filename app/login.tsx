@@ -2,7 +2,8 @@ import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import { Link, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

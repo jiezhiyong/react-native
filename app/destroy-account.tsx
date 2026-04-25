@@ -3,7 +3,8 @@ import { router, Stack } from 'expo-router';
 import { Info } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ActivityIndicator, Alert, View } from 'react-native';
+import { Alert, View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';

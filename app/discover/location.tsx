@@ -1,7 +1,8 @@
 import * as Location from 'expo-location';
 import { PermissionStatus } from 'expo-modules-core';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
