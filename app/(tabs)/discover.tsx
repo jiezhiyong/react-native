@@ -149,6 +149,7 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'store-review', desc: '应用内评论', supports: 'Android, iOS' },
   { name: 'intent-launcher', desc: '意图启动器', supports: 'Android' },
   { name: 'navigation-bar', desc: '访问 Android 原生导航栏各种交互', supports: 'Android' },
+  { name: 'react-native-bottom-shee', desc: '', supports: 'Android, iOS, Web' },
 ];
 
 function getPlatformSupports(supports: string): PlatformSupport[] {
