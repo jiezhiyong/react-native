@@ -2,7 +2,6 @@ import { useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import React from 'react';
 import { ScrollView, Switch, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Text } from '@/components/ui/text';
 
@@ -68,7 +67,7 @@ const PrivacyGroup = ({ children }: { children: React.ReactNode }) => {
 export default function PrivacySettingScreen() {
   const router = useRouter();
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <View className="flex-1 bg-background">
       <ScrollView className="flex-1 px-5 py-5">
         {/* 个性化推荐组 */}
         <PrivacyGroup>
@@ -106,6 +105,6 @@ export default function PrivacySettingScreen() {
           <PrivacyItem title="隐私政策条款" hasChevron onPress={() => router.push('/privacy-policy')} />
         </PrivacyGroup>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }

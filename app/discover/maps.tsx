@@ -1,10 +1,8 @@
 import * as Location from 'expo-location';
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
-
 // Note: react-native-maps may need to be installed via 'npx expo install react-native-maps'
 // import MapView, { Marker, Region, MapType } from 'react-native-maps';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -139,7 +137,7 @@ export default function MapsDemo() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <View className="flex-1 bg-background">
       <ScrollView className="flex-1">
         <View className="p-4">
           <Card>
@@ -260,6 +258,6 @@ export default function MapsDemo() {
           </Card>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }

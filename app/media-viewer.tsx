@@ -109,7 +109,7 @@ export default function MediaViewerScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-black">
+    <SafeAreaView edges={['bottom']} className="flex-1 bg-black">
       <Stack.Screen
         options={{
           title: LL.routes.mediaViewer(),

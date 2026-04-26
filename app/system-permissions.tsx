@@ -62,6 +62,7 @@ export default function SystemPermissionsScreen() {
     );
   }, []);
 
+  // TODO: ?
   const handlePermissionPress = async () => {
     try {
       await Linking.openSettings();
@@ -71,7 +72,7 @@ export default function SystemPermissionsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
       <ScrollView className="flex-1 px-5 py-5">
         <Text className="text-muted-foreground text-sm mb-4">
           为了向您提供更好的用户体验，我们在特定场景需要向您申请以下手机系统权限

@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Text } from '@/components/ui/text';
@@ -14,7 +14,7 @@ export default function PrivacyPolicyScreen() {
   const { LL } = useI18nContext();
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <View className="flex-1 bg-background">
       <Stack.Screen
         options={{
           title: LL.routes.privacyPolicy(),
@@ -78,11 +78,11 @@ export default function PrivacyPolicyScreen() {
         <Text className="mb-4">我们可能会不时更新此隐私政策。我们会通过在应用中发布新的隐私政策来通知您任何变更。</Text>
 
         <Text className="font-medium text-lg mb-2">{LL.privacy.section8()}</Text>
-        <Text className="mb-6">
+        <Text className="mb-12">
           如果您对本隐私政策有任何疑问或建议，请通过以下方式联系我们：
           {'\n'}电子邮件：privacy@yourcompany.com
         </Text>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }

@@ -75,10 +75,13 @@ export default function HistoryScreen() {
   const openedRowRef = useRef<Swipeable | null>(null);
 
   // 复制内容到剪贴板
-  const copyToClipboard = useCallback(async (content: string) => {
-    await Clipboard.setStringAsync(content);
-    Alert.alert(LL.common.copied(), LL.common.contentCopied());
-  }, [LL]);
+  const copyToClipboard = useCallback(
+    async (content: string) => {
+      await Clipboard.setStringAsync(content);
+      Alert.alert(LL.common.copied(), LL.common.contentCopied());
+    },
+    [LL]
+  );
 
   // 打开URL
   const openUrl = useCallback(
@@ -119,21 +122,25 @@ export default function HistoryScreen() {
       return;
     }
 
-    Alert.alert(LL.scanHistory.deleteConfirmTitle(), LL.scanHistory.deleteSelectedConfirm({ count: selectedItems.length }), [
-      { text: LL.common.cancel(), style: 'cancel' },
-      {
-        text: LL.common.delete(),
-        onPress: () => {
-          removeMultipleHistory(selectedItems);
-          setSelectedItems([]);
-          // 如果删除后没有记录了，退出编辑模式
-          if (history.length === selectedItems.length) {
-            setIsEditing(false);
-          }
+    Alert.alert(
+      LL.scanHistory.deleteConfirmTitle(),
+      LL.scanHistory.deleteSelectedConfirm({ count: selectedItems.length }),
+      [
+        { text: LL.common.cancel(), style: 'cancel' },
+        {
+          text: LL.common.delete(),
+          onPress: () => {
+            removeMultipleHistory(selectedItems);
+            setSelectedItems([]);
+            // 如果删除后没有记录了，退出编辑模式
+            if (history.length === selectedItems.length) {
+              setIsEditing(false);
+            }
+          },
+          style: 'destructive',
         },
-        style: 'destructive',
-      },
-    ]);
+      ]
+    );
   }, [LL, selectedItems, history.length, removeMultipleHistory]);
 
   // 切换选中状态
@@ -334,7 +341,7 @@ export default function HistoryScreen() {
   }, [isEditing, history.length, selectedItems, toggleSelectAll, handleBatchDelete]);
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
       <StatusBar style="dark" />
       <Stack.Screen
         options={{

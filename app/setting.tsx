@@ -2,7 +2,6 @@ import { Stack, useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import React from 'react';
 import { Alert, ScrollView, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Text } from '@/components/ui/text';
 import { useI18nContext } from '@/i18n/i18n-react';
@@ -43,7 +42,7 @@ export default function SettingScreen() {
   const router = useRouter();
   const { LL } = useI18nContext();
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <View className="flex-1 bg-background">
       <Stack.Screen
         options={{
           title: LL.routes.settings(),
@@ -70,23 +69,39 @@ export default function SettingScreen() {
         <SettingGroup>
           <SettingItem
             title={LL.settings.personalInfoCollectionUse()}
-            onPress={() => Alert.alert(LL.common.notImplemented())}
+            onPress={() => {
+              router.push({
+                pathname: '/pdf-viewer',
+                params: {
+                  url: '',
+                },
+              });
+            }}
           />
           <SettingItem
             title={LL.settings.personalInfoThirdPartySharing()}
-            onPress={() => Alert.alert(LL.common.notImplemented())}
+            onPress={() => {
+              router.push('/pdf-viewer?url=');
+            }}
           />
           <SettingItem
             title={LL.settings.systemPermissionUsage()}
-            onPress={() => Alert.alert(LL.common.notImplemented())}
+            onPress={() => {
+              router.push('/pdf-viewer?url=');
+            }}
           />
-          <SettingItem title={LL.settings.algorithmFiling()} onPress={() => Alert.alert(LL.common.notImplemented())} />
+          <SettingItem
+            title={LL.settings.algorithmFiling()}
+            onPress={() => {
+              router.push('/pdf-viewer?url=');
+            }}
+          />
         </SettingGroup>
 
         <SettingGroup>
           <SettingItem title={LL.settings.deleteAccount()} onPress={() => router.push('/destroy-account')} />
         </SettingGroup>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }

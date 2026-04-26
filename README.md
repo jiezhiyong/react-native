@@ -195,14 +195,10 @@ npx react-native bundle --platform ios --dev true --entry-file index.js --bundle
 
 ## TODO: 待办事项
 
-- PDF预览器
 - Webview sdk: 回退携带数据、ntv_new ...
 - 包含调试面板，但不包含 dev-client 的 Test 变体包
-- 网络请求封装
+- 网络请求封装，支持网络加解密
 - Sentry
-- 网络加解密封装
-- i18n
-- theme
 - 应用宝
 - 地图
 - 人脸识别

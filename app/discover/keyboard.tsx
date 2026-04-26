@@ -15,8 +15,7 @@ const useGradualAnimation = () => {
     {
       onMove: (e) => {
         'worklet';
-        // set height to min 10
-        height.value = Math.max(e.height, PADDING_BOTTOM);
+        height.value = Math.max(e.height, PADDING_BOTTOM); // set height to min 10
       },
       onEnd: (e) => {
         'worklet';
@@ -30,7 +29,7 @@ const useGradualAnimation = () => {
 
 export default function KeyboardScreen() {
   const { height } = useGradualAnimation();
-  console.log(height);
+  console.log('height', height);
 
   return (
     <View className="flex-1 px-5 pt-5">

@@ -464,7 +464,7 @@ export default function OnlineServiceScreen() {
         </ScrollView>
       </View>
 
-      <SafeAreaView className="flex-1">
+      <SafeAreaView edges={['bottom']} className="flex-1">
         {/* 聊天区域 */}
         <FlatList
           ref={flatListRef}

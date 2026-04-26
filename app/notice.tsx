@@ -269,7 +269,7 @@ export default function NoticeScreen() {
   }, [LL, loading, refreshing]);
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
       <View className="flex-1 bg-background px-5 pb-1 pt-2">
         <Stack.Screen
           options={{

@@ -297,6 +297,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ['@react-native-community/datetimepicker', {}],
     ['expo-mail-composer', {}],
     ['expo-sharing', {}],
+    ['@config-plugins/react-native-blob-util', {}],
+    ['@config-plugins/react-native-pdf', {}],
     ...(ENABLE_IOS_CAPABILITIES ? IOS_CAPABILITY_PLUGINS : []),
     ...(ENABLE_IOS_CAPABILITIES ? [] : DEV_SIMULATOR_PLUGINS),
   ],

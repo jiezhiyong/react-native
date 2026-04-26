@@ -30,5 +30,9 @@ export default function DiscoverLayout() {
     return inner;
   }
 
-  return <SafeAreaView className="flex-1">{inner}</SafeAreaView>;
+  return (
+    <SafeAreaView edges={['bottom']} className="flex-1">
+      {inner}
+    </SafeAreaView>
+  );
 }

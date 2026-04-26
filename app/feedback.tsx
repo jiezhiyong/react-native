@@ -32,7 +32,7 @@ export default function FeedbackScreen() {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1">
-      <SafeAreaView className="flex-1 bg-background">
+      <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
         <ScrollView className="flex-1 px-5 py-5">
           {/* 问题标签 */}
           <View className="p-5 bg-card rounded-xl border border-border">
@@ -80,9 +80,7 @@ export default function FeedbackScreen() {
           {/* 上传照片 */}
           <View className="mt-4 p-5 bg-card rounded-xl border border-border">
             <Text className="text-lg font-medium">{LL.feedback.uploadPhotos()}</Text>
-            <Text className="text-sm text-secondary-foreground mb-4">
-              {LL.feedback.uploadPhotosDescription()}
-            </Text>
+            <Text className="text-sm text-secondary-foreground mb-4">{LL.feedback.uploadPhotosDescription()}</Text>
 
             <TouchableOpacity className="w-20 h-20 bg-muted items-center justify-center rounded-xl border border-border">
               <Plus size={24} color="#87867f" />

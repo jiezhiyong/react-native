@@ -2,7 +2,6 @@ import { Stack, useRouter } from 'expo-router';
 import { AlertCircle } from 'lucide-react-native';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -15,7 +14,7 @@ export default function NotFoundScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <View className="flex-1 bg-background">
       <Stack.Screen options={{ headerShown: false }} />
 
       <View className="flex-1 items-center p-8">
@@ -45,6 +44,6 @@ export default function NotFoundScreen() {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
