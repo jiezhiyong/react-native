@@ -94,19 +94,15 @@ const UserHeader = () => {
 const QuickLinksSection = () => {
   const router = useRouter();
   const { LL } = useI18nContext();
-  const quickLinks: ItemEntry[][] = [
-    [
-      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#c96442', route: '/notice' },
-      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#b53333', route: '/notice' },
-      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#a66f3a', route: '/notice' },
-      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#d97757', route: '/notice' },
-    ],
-    [
-      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#7f6f46', route: '/notice' },
-      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#8b7358', route: '/notice' },
-      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#5f6f52', route: '/notice' },
-      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#9c5f4b', route: '/notice' },
-    ],
+  const quickLinks: ItemEntry[] = [
+    { title: LL.mine.notification(), icon: 'Bell', iconColor: '#c96442', route: '/notice' },
+    { title: LL.mine.notification(), icon: 'Bell', iconColor: '#b53333', route: '/notice' },
+    { title: LL.mine.notification(), icon: 'Bell', iconColor: '#a66f3a', route: '/notice' },
+    { title: LL.mine.notification(), icon: 'Bell', iconColor: '#d97757', route: '/notice' },
+    { title: LL.mine.notification(), icon: 'Bell', iconColor: '#7f6f46', route: '/notice' },
+    { title: LL.mine.notification(), icon: 'Bell', iconColor: '#8b7358', route: '/notice' },
+    { title: LL.mine.notification(), icon: 'Bell', iconColor: '#5f6f52', route: '/notice' },
+    { title: LL.mine.notification(), icon: 'Bell', iconColor: '#9c5f4b', route: '/notice' },
   ];
   const handleQuickLinkPress = (item: ItemEntry) => {
     if (item.route) {
@@ -116,12 +112,12 @@ const QuickLinksSection = () => {
 
   return (
     <View className="bg-card rounded-xl mx-5 mb-5 px-4 py-6 border border-border">
-      <View className="flex-row justify-between mb-5">
-        {quickLinks[0].map((item, index) => (
+      <View className="flex-row justify-between gap-5 flex-wrap">
+        {quickLinks.map((item, index) => (
           <TouchableOpacity
             key={index}
             className="items-center"
-            style={{ width: '18%' }}
+            style={{ width: '20%' }}
             onPress={() => handleQuickLinkPress(item)}
           >
             <View
@@ -130,25 +126,7 @@ const QuickLinksSection = () => {
             >
               <IconComponent name={item.icon} size={20} color={item.iconColor} />
             </View>
-            <Text className="text-sm text-center">{item.title}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View className="flex-row justify-between">
-        {quickLinks[1].map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            className="items-center"
-            style={{ width: '18%' }}
-            onPress={() => handleQuickLinkPress(item)}
-          >
-            <View
-              className="w-10 h-10 rounded-full items-center justify-center mb-1"
-              style={{ backgroundColor: `${item.iconColor}15` }}
-            >
-              <IconComponent name={item.icon} size={20} color={item.iconColor} />
-            </View>
-            <Text className="text-sm text-center">{item.title}</Text>
+            <Text className="text-sm text-center whitespace-nowrap">{item.title}</Text>
           </TouchableOpacity>
         ))}
       </View>

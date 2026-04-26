@@ -54,6 +54,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'planet' : 'planet-outline'} color={color} size={24} />
           ),
+          tabBarBadge: 2,
         }}
       />
     </Tabs>
