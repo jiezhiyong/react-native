@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/react-native';
-import { AlertCircle, Bug, Info, Target, Timer, User, Zap } from 'lucide-react-native';
+import { AlertCircle, Bug, Info, Settings, Target, Timer, User, Zap } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 
@@ -191,17 +191,17 @@ function SentryScreen() {
     <ScrollView className="flex-1 p-5">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">Sentry 错误监控演示</Text>
-        <Text className="text-muted-foreground">展示 Sentry SDK 的错误捕获、性能监控和上下文管理功能</Text>
+        <Text className="text-muted-foreground">展示 Sentry SDK 的错误捕获、性能监控和上下文管理</Text>
       </View>
 
       {/* 操作结果显示 */}
       {operationResult ? (
         <Card className="mb-4">
           <CardHeader>
-            <CardTitle className="text-sm flex-row items-center">
-              <Info size={16} className="mr-2" />
-              操作结果
-            </CardTitle>
+            <View className="flex-row items-center gap-2">
+              <Info size={20} />
+              <Text className="text-2xl">操作结果</Text>
+            </View>
           </CardHeader>
           <CardContent>
             <Text className="text-sm">{operationResult}</Text>
@@ -212,10 +212,10 @@ function SentryScreen() {
       {/* 1. 错误触发 */}
       <Card className="mb-4">
         <CardHeader>
-          <CardTitle className="flex-row items-center">
-            <Bug size={20} className="mr-2" />
-            错误触发
-          </CardTitle>
+          <View className="flex-row items-center gap-2">
+            <Bug size={20} />
+            <Text className="text-2xl">错误触发</Text>
+          </View>
           <CardDescription>手动触发错误，测试 Sentry 自动捕获</CardDescription>
         </CardHeader>
         <CardContent>
@@ -228,10 +228,10 @@ function SentryScreen() {
       {/* 2. 异常捕获 */}
       <Card className="mb-4">
         <CardHeader>
-          <CardTitle className="flex-row items-center">
-            <AlertCircle size={20} className="mr-2" />
-            异常捕获
-          </CardTitle>
+          <View className="flex-row items-center gap-2">
+            <AlertCircle size={20} />
+            <Text className="text-2xl">异常捕获</Text>
+          </View>
           <CardDescription>使用 Sentry.captureException() 手动捕获异常</CardDescription>
         </CardHeader>
         <CardContent>
@@ -244,17 +244,14 @@ function SentryScreen() {
       {/* 3. 自定义消息 */}
       <Card className="mb-4">
         <CardHeader>
-          <CardTitle className="flex-row items-center">
-            <Info size={20} className="mr-2" />
-            自定义消息
-          </CardTitle>
-          <CardDescription>使用 Sentry.captureMessage() 发送自定义信息</CardDescription>
+          <View className="flex-row items-center gap-2">
+            <Info size={20} />
+            <Text className="text-2xl">自定义消息</Text>
+          </View>
+          <CardDescription>使用 Sentry.captureMessage 发送自定义信息</CardDescription>
         </CardHeader>
         <CardContent className="gap-3">
-          <View>
-            <Label>消息内容</Label>
-            <Input value={message} onChangeText={setMessage} placeholder="输入要发送的消息..." />
-          </View>
+          <Input value={message} onChangeText={setMessage} placeholder="输入要发送的消息..." />
           <Button onPress={captureMessage} className="w-full">
             <Text>发送消息</Text>
           </Button>
@@ -264,17 +261,14 @@ function SentryScreen() {
       {/* 4. Breadcrumb 追踪 */}
       <Card className="mb-4">
         <CardHeader>
-          <CardTitle className="flex-row items-center">
-            <Target size={20} className="mr-2" />
-            Breadcrumb 追踪
-          </CardTitle>
+          <View className="flex-row items-center gap-2">
+            <Target size={20} />
+            <Text className="text-2xl">Breadcrumb 追踪</Text>
+          </View>
           <CardDescription>添加用户操作路径记录</CardDescription>
         </CardHeader>
         <CardContent className="gap-3">
-          <View>
-            <Label>Breadcrumb 消息</Label>
-            <Input value={breadcrumbMessage} onChangeText={setBreadcrumbMessage} placeholder="描述用户操作..." />
-          </View>
+          <Input value={breadcrumbMessage} onChangeText={setBreadcrumbMessage} placeholder="描述用户操作..." />
           <Button onPress={addBreadcrumb} variant="secondary" className="w-full">
             <Text>添加 Breadcrumb</Text>
           </Button>
@@ -284,18 +278,18 @@ function SentryScreen() {
       {/* 5. 用户上下文 */}
       <Card className="mb-4">
         <CardHeader>
-          <CardTitle className="flex-row items-center">
-            <User size={20} className="mr-2" />
-            用户上下文
-          </CardTitle>
+          <View className="flex-row items-center gap-2">
+            <User size={20} />
+            <Text className="text-2xl">用户上下文</Text>
+          </View>
           <CardDescription>设置当前用户信息，便于问题追踪</CardDescription>
         </CardHeader>
         <CardContent className="gap-3">
-          <View>
+          <View className="gap-2">
             <Label>用户 ID</Label>
             <Input value={userId} onChangeText={setUserId} placeholder="用户 ID..." />
           </View>
-          <View>
+          <View className="gap-2">
             <Label>用户邮箱</Label>
             <Input value={userEmail} onChangeText={setUserEmail} placeholder="用户邮箱..." />
           </View>
@@ -313,18 +307,18 @@ function SentryScreen() {
       {/* 6. 标签设置 */}
       <Card className="mb-4">
         <CardHeader>
-          <CardTitle className="flex-row items-center">
-            <Target size={20} className="mr-2" />
-            标签设置
-          </CardTitle>
+          <View className="flex-row items-center gap-2">
+            <Target size={20} />
+            <Text className="text-2xl">标签设置</Text>
+          </View>
           <CardDescription>为错误事件添加自定义标签，便于分类和过滤</CardDescription>
         </CardHeader>
         <CardContent className="gap-3">
-          <View>
+          <View className="gap-2">
             <Label>标签键</Label>
             <Input value={tagKey} onChangeText={setTagKey} placeholder="标签键..." />
           </View>
-          <View>
+          <View className="gap-2">
             <Label>标签值</Label>
             <Input value={tagValue} onChangeText={setTagValue} placeholder="标签值..." />
           </View>
@@ -337,10 +331,10 @@ function SentryScreen() {
       {/* 7. 性能追踪 */}
       <Card className="mb-4">
         <CardHeader>
-          <CardTitle className="flex-row items-center">
-            <Timer size={20} className="mr-2" />
-            性能追踪
-          </CardTitle>
+          <View className="flex-row items-center gap-2">
+            <Timer size={20} />
+            <Text className="text-2xl">性能追踪</Text>
+          </View>
           <CardDescription>使用 startSpan 追踪应用性能</CardDescription>
         </CardHeader>
         <CardContent>
@@ -351,37 +345,33 @@ function SentryScreen() {
       </Card>
 
       {/* ErrorBoundary 演示说明 */}
-      <Card className="mb-6">
+      <Card className="mb-4">
         <CardHeader>
-          <CardTitle className="flex-row items-center">
-            <Zap size={20} className="mr-2" />
-            ErrorBoundary
-          </CardTitle>
-          <CardDescription>
-            Sentry ErrorBoundary 已在应用根级别配置 (app/_layout.tsx)，会自动捕获 React 组件错误
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <View className="p-3 bg-muted rounded-lg">
-            <Text className="text-sm text-muted-foreground">export default Sentry.wrap(RootLayout);</Text>
+          <View className="flex-row items-center gap-2">
+            <Zap size={20} />
+            <Text className="text-2xl">ErrorBoundary</Text>
           </View>
-        </CardContent>
+          <CardDescription>Sentry ErrorBoundary 已在应用根级别配置，会自动捕获 React 组件错误</CardDescription>
+        </CardHeader>
       </Card>
 
       {/* 配置信息 */}
-      <Card className="mb-6">
+      <Card>
         <CardHeader>
-          <CardTitle>当前配置</CardTitle>
+          <View className="flex-row items-center gap-2">
+            <Settings size={20} />
+            <Text className="text-2xl">当前配置</Text>
+          </View>
         </CardHeader>
         <CardContent className="gap-2">
-          <View className="flex-row">
-            <Text className="font-medium w-16">DSN:</Text>
+          <View className="flex-row items-center gap-2">
+            <Text className="font-medium">EXPO_PUBLIC_SENTRY_DSN:</Text>
             <Text className="flex-1 text-xs text-muted-foreground">
               {process.env.EXPO_PUBLIC_SENTRY_DSN ? '已配置 ✅' : '未配置 ❌'}
             </Text>
           </View>
-          <View className="flex-row">
-            <Text className="font-medium w-16">Debug:</Text>
+          <View className="flex-row items-center gap-2">
+            <Text className="font-medium">Debug:</Text>
             <Text className="flex-1 text-xs text-muted-foreground">
               {process.env.NODE_ENV === 'development' ? '开启 🔍' : '关闭 🔇'}
             </Text>
