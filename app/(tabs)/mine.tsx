@@ -12,11 +12,13 @@ import {
   User,
 } from 'lucide-react-native';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { ScrollHeader } from '@/components/ui/scroll-header';
+import { Text } from '@/components/ui/text';
 import { useScrollHeader } from '@/hooks/useScrollHeader';
+import { useI18nContext } from '@/i18n/i18n-react';
 import { useAuth } from '@/store/auth';
 
 interface ItemEntry {
@@ -27,28 +29,6 @@ interface ItemEntry {
 }
 
 // 快捷入口数据
-const quickLinks: ItemEntry[][] = [
-  [
-    { title: '消息通知', icon: 'Bell', iconColor: '#c96442', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#b53333', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#a66f3a', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#d97757', route: '/notice' },
-  ],
-  [
-    { title: '消息通知', icon: 'Bell', iconColor: '#7f6f46', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#8b7358', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#5f6f52', route: '/notice' },
-    { title: '消息通知', icon: 'Bell', iconColor: '#9c5f4b', route: '/notice' },
-  ],
-];
-
-// 其他入口数据
-const otherEntries: ItemEntry[] = [
-  { title: '帮助中心', icon: 'HelpCircle', iconColor: '#5f6f52', route: '/support' },
-  { title: '意见反馈', icon: 'MessageSquare', iconColor: '#c96442', route: '/feedback' },
-  { title: '关于我们', icon: 'Info', iconColor: '#8b7358', route: '/about' },
-];
-
 // 图标组件
 const IconComponent = ({ name, size = 24, color = '#5e5d59' }: { name: string; size?: number; color?: string }) => {
   const props = { size, color, strokeWidth: 2 };
@@ -74,6 +54,7 @@ const IconComponent = ({ name, size = 24, color = '#5e5d59' }: { name: string; s
 // 头部组件：用户信息或登录注册按钮
 const UserHeader = () => {
   const router = useRouter();
+  const { LL } = useI18nContext();
   const { session, name, mobile, signOut } = useAuth();
 
   if (session) {
@@ -84,11 +65,11 @@ const UserHeader = () => {
         </View>
         <View className="ml-4">
           <Text className="text-lg font-bold">{name}</Text>
-          <Text className="text-muted-foreground">{mobile || '未绑定手机号'}</Text>
+          <Text className="text-muted-foreground">{mobile || LL.mine.phoneNotLinked()}</Text>
         </View>
         <View className="ml-auto">
           <TouchableOpacity onPress={signOut} className="flex-row items-center">
-            <Text className="text-sm">登出</Text>
+            <Text className="text-sm">{LL.mine.signOut()}</Text>
             <ChevronRight size={20} color="#87867f" />
           </TouchableOpacity>
         </View>
@@ -102,7 +83,7 @@ const UserHeader = () => {
         <View className="w-12 h-12 rounded-full bg-muted items-center justify-center">
           <User size={24} color="#87867f" strokeWidth={1.5} />
         </View>
-        <Text className="ml-4 text-lg font-bold">登录/注册</Text>
+        <Text className="ml-4 text-lg font-bold">{LL.mine.loginOrRegister()}</Text>
       </TouchableOpacity>
       <ChevronRight size={20} color="#87867f" />
     </View>
@@ -112,6 +93,21 @@ const UserHeader = () => {
 // 快捷入口组件
 const QuickLinksSection = () => {
   const router = useRouter();
+  const { LL } = useI18nContext();
+  const quickLinks: ItemEntry[][] = [
+    [
+      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#c96442', route: '/notice' },
+      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#b53333', route: '/notice' },
+      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#a66f3a', route: '/notice' },
+      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#d97757', route: '/notice' },
+    ],
+    [
+      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#7f6f46', route: '/notice' },
+      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#8b7358', route: '/notice' },
+      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#5f6f52', route: '/notice' },
+      { title: LL.mine.notification(), icon: 'Bell', iconColor: '#9c5f4b', route: '/notice' },
+    ],
+  ];
   const handleQuickLinkPress = (item: ItemEntry) => {
     if (item.route) {
       router.push(item.route as any);
@@ -163,6 +159,12 @@ const QuickLinksSection = () => {
 // 其他入口组件
 const OtherEntriesSection = () => {
   const router = useRouter();
+  const { LL } = useI18nContext();
+  const otherEntries: ItemEntry[] = [
+    { title: LL.mine.helpCenter(), icon: 'HelpCircle', iconColor: '#5f6f52', route: '/support' },
+    { title: LL.mine.feedback(), icon: 'MessageSquare', iconColor: '#c96442', route: '/feedback' },
+    { title: LL.mine.about(), icon: 'Info', iconColor: '#8b7358', route: '/about' },
+  ];
   const handleEntryPress = (item: ItemEntry) => {
     if (item.route) {
       router.push(item.route as any);
@@ -192,6 +194,7 @@ const OtherEntriesSection = () => {
 
 export default function MinePage() {
   const router = useRouter();
+  const { LL } = useI18nContext();
   const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
   const c = isDarkStyle ? '#141413' : '#faf9f5';
 
@@ -205,7 +208,7 @@ export default function MinePage() {
   return (
     <View className="flex-1">
       <ScrollHeader
-        title="我的"
+        title={LL.tabs.mine()}
         scrollY={scrollY}
         gradientColors={['#c96442', '#d9b9a5']}
         rightButtons={rightButtons}

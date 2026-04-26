@@ -5,10 +5,12 @@ import * as React from 'react';
 import { HapticTab } from '@/components/HapticTab';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useI18nContext } from '@/i18n/i18n-react';
 import { NAV_THEME } from '@/lib/theme';
 
 export default function TabLayout() {
   const { colorScheme } = useColorScheme();
+  const { LL } = useI18nContext();
 
   return (
     <Tabs
@@ -30,7 +32,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: LL.tabs.home(),
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'disc' : 'disc-outline'} color={color} size={24} />
           ),
@@ -39,7 +41,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="mine"
         options={{
-          title: 'Mine',
+          title: LL.tabs.mine(),
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'person' : 'person-outline'} color={color} size={24} />
           ),
@@ -48,7 +50,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="discover"
         options={{
-          title: 'Discover',
+          title: LL.tabs.discover(),
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'planet' : 'planet-outline'} color={color} size={24} />
           ),

@@ -4,14 +4,15 @@ import { Info } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert, View } from 'react-native';
-import { ActivityIndicator } from '@/components/ActivityIndicator';
 import * as z from 'zod';
 
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/components/ui/sonner';
 import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth';
 
@@ -30,6 +31,7 @@ type DestroyAccountFormValues = z.infer<typeof destroyAccountSchema>;
  * 展示应用的销毁账号内容
  */
 export default function DestroyAccountScreen() {
+  const { LL } = useI18nContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { signOut } = useAuthStore();
 
@@ -102,7 +104,7 @@ export default function DestroyAccountScreen() {
     <View className="flex-1 bg-background">
       <Stack.Screen
         options={{
-          title: '账户注销',
+          title: LL.routes.destroyAccount(),
         }}
       />
 

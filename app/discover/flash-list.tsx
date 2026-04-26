@@ -1,9 +1,9 @@
 import { FlashList } from '@shopify/flash-list';
 import React, { useState } from 'react';
 import { RefreshControl, View } from 'react-native';
-import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { create } from 'zustand';
 
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
 import { sleep } from '@/lib/utils';

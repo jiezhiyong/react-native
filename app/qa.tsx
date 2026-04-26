@@ -1,10 +1,12 @@
 import { Stack } from 'expo-router';
 import { ChevronDown, ChevronUp, Search } from 'lucide-react-native';
 import React, { useCallback, useMemo, useState } from 'react';
-import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, ScrollView, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 
 // 定义问题类型
 interface Question {
@@ -156,6 +158,7 @@ const CategoryTag = ({
 };
 
 export default function QaScreen() {
+  const { LL } = useI18nContext();
   // 状态
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -199,7 +202,7 @@ export default function QaScreen() {
     <SafeAreaView style={{ flex: 1 }} className="bg-background">
       <Stack.Screen
         options={{
-          title: '常见问题',
+          title: LL.routes.qa(),
         }}
       />
 
@@ -209,7 +212,7 @@ export default function QaScreen() {
           <Search size={20} color="#87867f" />
           <Input
             className="flex-1 py-2 px-3 border-0 bg-transparent"
-            placeholder="搜索问题"
+            placeholder={LL.qa.searchPlaceholder()}
             value={searchQuery}
             onChangeText={setSearchQuery}
             placeholderTextColor="#87867f"
@@ -219,7 +222,7 @@ export default function QaScreen() {
         {/* 分类标签 */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <CategoryTag
-            category={{ id: 'all', name: '全部' }}
+            category={{ id: 'all', name: LL.qa.all() }}
             isSelected={selectedCategory === 'all'}
             onPress={() => handleCategoryPress('all')}
           />
@@ -251,7 +254,7 @@ export default function QaScreen() {
         />
       ) : (
         <View className="flex-1 justify-center items-center px-4">
-          <Text className="text-secondary-foreground text-lg">未找到相关问题，请尝试其他关键词</Text>
+          <Text className="text-secondary-foreground text-lg">{LL.qa.noResults()}</Text>
         </View>
       )}
     </SafeAreaView>

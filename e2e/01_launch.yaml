@@ -6,26 +6,25 @@ description: 应用启动和基础UI验证测试
 appId: com.jiezhiyong.qachat.dev
 
 ---
-
 # 启动应用并等待加载完成
 - launchApp
 
 # 等待应用启动完成
 - extendedWaitUntil:
-    visible: "Home"
+    visible: 'Home'
     timeout: 10000
 
 # 验证底部 Tab 栏是否可见
-- assertVisible: "Home"
-- assertVisible: "Discover"
-- assertVisible: "Mine"
+- assertVisible: 'Home'
+- assertVisible: 'Discover'
+- assertVisible: 'Mine'
 
 # 验证当前在 Home tab
 - assertVisible:
-    id: "home-tab"
+    id: 'home-tab'
 
 # 截图记录当前状态
-- takeScreenshot: "01_app_launched.png"
+- takeScreenshot: '01_app_launched.png'
 
 # 等待一下确保UI完全加载
 - waitForAnimationToEnd
@@ -36,4 +35,4 @@ appId: com.jiezhiyong.qachat.dev
     speed: 50
 
 # 再次截图验证滚动后的状态
-- takeScreenshot: "01_home_scrolled.png"
+- takeScreenshot: '01_home_scrolled.png'

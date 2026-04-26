@@ -3,8 +3,9 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
-import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, TouchableOpacity, View } from 'react-native';
 
+import { Text } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 
 const { width } = Dimensions.get('window');

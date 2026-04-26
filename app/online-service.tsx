@@ -12,6 +12,7 @@ import { create } from 'zustand';
 import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 
 const PLAYBACK_STATUS_UPDATE = 'playbackStatusUpdate';
 
@@ -329,6 +330,7 @@ const MediaPicker = ({
 };
 
 export default function OnlineServiceScreen() {
+  const { LL } = useI18nContext();
   const [inputText, setInputText] = useState('');
   const [showMediaPicker, setShowMediaPicker] = useState(false);
   const flatListRef = useRef<FlatList>(null);
@@ -446,7 +448,7 @@ export default function OnlineServiceScreen() {
     >
       <Stack.Screen
         options={{
-          title: '在线客服',
+          title: LL.routes.onlineService(),
         }}
       />
 

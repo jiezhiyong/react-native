@@ -24,8 +24,11 @@ import { Toaster } from '@/components/ui/sonner';
 import { DebugPanel } from '@/debug-panel';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect';
+import TypesafeI18n, { useI18nContext } from '@/i18n/i18n-react';
+import { loadAllLocales } from '@/i18n/i18n-util.sync';
 import { setAndroidNavigationBar } from '@/lib/android-navigation-bar';
 import { NAV_THEME } from '@/lib/theme';
+import { useCurrentLocale } from '@/store/locale';
 
 // Construct a new integration instance. This is needed to communicate between the integration and React
 const navigationIntegration = Sentry.reactNavigationIntegration({
@@ -50,6 +53,8 @@ const DARK_THEME: Theme = {
   ...DarkTheme,
   colors: NAV_THEME.dark.colors,
 };
+
+loadAllLocales();
 
 export const unstable_settings = {
   initialRouteName: '(tabs)',
@@ -92,6 +97,48 @@ function onAppStateChange(status: AppStateStatus) {
   }
 }
 
+function AppStack() {
+  const { LL } = useI18nContext();
+
+  return (
+    <>
+      <Stack
+        screenOptions={{
+          headerShadowVisible: false,
+        }}
+      >
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: false,
+            title: '',
+            headerRight: () => <ThemeToggle />,
+          }}
+        />
+        <Stack.Screen
+          name="login"
+          options={{
+            presentation: 'modal',
+            title: LL.routes.login(),
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen
+          name="(protected)"
+          options={{
+            headerShown: true,
+            title: LL.routes.protected(),
+          }}
+        />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+      <PortalHost />
+
+      <Toaster />
+    </>
+  );
+}
+
 function RootLayout() {
   const navigationRef = useNavigationContainerRef() as any;
   useReactNavigationDevTools(navigationRef);
@@ -100,6 +147,7 @@ function RootLayout() {
   const hasMounted = React.useRef(false);
 
   const { colorScheme, isDarkColorScheme } = useColorScheme();
+  const locale = useCurrentLocale();
 
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
@@ -169,43 +217,10 @@ function RootLayout() {
           <QueryClientProvider client={queryClient}>
             <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
               <GestureHandlerRootView>
-                {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
-                {/* <TypesafeI18n locale={'zh'}> */}
-                <Stack
-                  screenOptions={{
-                    headerShadowVisible: false,
-                  }}
-                >
-                  <Stack.Screen
-                    name="(tabs)"
-                    options={{
-                      headerShown: false,
-                      title: '',
-                      headerRight: () => <ThemeToggle />,
-                    }}
-                  />
-                  <Stack.Screen
-                    name="login"
-                    options={{
-                      presentation: 'modal',
-                      title: '登录',
-                      headerShown: true,
-                    }}
-                  />
-                  <Stack.Screen
-                    name="(protected)"
-                    options={{
-                      headerShown: true,
-                      title: '受保护内容',
-                    }}
-                  />
-                  <Stack.Screen name="+not-found" />
-                </Stack>
-                <PortalHost />
-
-                <Toaster />
+                <TypesafeI18n locale={locale}>
+                  <AppStack />
+                </TypesafeI18n>
               </GestureHandlerRootView>
-              {/* </TypesafeI18n> */}
             </ThemeProvider>
           </QueryClientProvider>
         </KeyboardProvider>

@@ -1,7 +1,7 @@
 import { Redirect, Stack } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
-import { ActivityIndicator } from '@/components/ActivityIndicator';
 
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { useAuth } from '@/store/auth';
 
 export const unstable_settings = {

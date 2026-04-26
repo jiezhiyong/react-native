@@ -7,12 +7,15 @@ import * as Sharing from 'expo-sharing';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { Download, Share2 } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 
 export default function MediaViewerScreen() {
+  const { LL } = useI18nContext();
   const params = useLocalSearchParams<{ url: string; type: string }>();
   const { url, type } = params;
   const [isLoading, setIsLoading] = useState(false);
@@ -109,7 +112,7 @@ export default function MediaViewerScreen() {
     <SafeAreaView className="flex-1 bg-black">
       <Stack.Screen
         options={{
-          title: '媒体预览',
+          title: LL.routes.mediaViewer(),
           headerRight: () => (
             <View className="flex-row">
               <TouchableOpacity className="items-center justify-center mr-4" onPress={handleDownload}>

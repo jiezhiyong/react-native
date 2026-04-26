@@ -22,8 +22,9 @@ export function getScrollHeaderRowHeight() {
 }
 
 export interface ScrollHeaderRightButton {
-  icon: React.ReactNode;
-  onPress: () => void;
+  icon?: React.ReactNode;
+  onPress?: () => void;
+  element?: React.ReactNode;
 }
 
 export interface ScrollHeaderProps {
@@ -148,15 +149,19 @@ export function ScrollHeader({
       >
         <Animated.Text style={[titleStyle, { fontSize: 20, fontWeight: '600' }]}>{title}</Animated.Text>
         <View className="flex-row">
-          {rightButtons.map((button, index) => (
-            <TouchableOpacity
-              key={index}
-              className="gap-3 size-10 items-center justify-center"
-              onPress={button.onPress}
-            >
-              {button.icon}
-            </TouchableOpacity>
-          ))}
+          {rightButtons.map((button, index) =>
+            button.element ? (
+              <React.Fragment key={index}>{button.element}</React.Fragment>
+            ) : (
+              <TouchableOpacity
+                key={index}
+                className="gap-3 size-10 items-center justify-center"
+                onPress={button.onPress}
+              >
+                {button.icon}
+              </TouchableOpacity>
+            )
+          )}
         </View>
       </View>
     </View>

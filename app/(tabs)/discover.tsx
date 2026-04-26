@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollHeader } from '@/components/ui/scroll-header';
 import { Text } from '@/components/ui/text';
 import { useScrollHeader } from '@/hooks/useScrollHeader';
+import { useI18nContext } from '@/i18n/i18n-react';
 import { cn } from '@/lib/utils';
 
 const demos: { name: string; desc: string; supports: string }[] = [
@@ -120,6 +121,7 @@ const demos: { name: string; desc: string; supports: string }[] = [
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { LL } = useI18nContext();
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filteredDemos, setFilteredDemos] = React.useState(demos);
 
@@ -151,7 +153,7 @@ export default function HomeScreen() {
   return (
     <View className="flex-1">
       <ScrollHeader
-        title="发现"
+        title={LL.tabs.discover()}
         scrollY={scrollY}
         gradientColors={['#c96442', '#d9b9a5']}
         rightButtons={rightButtons}
@@ -171,7 +173,7 @@ export default function HomeScreen() {
               </View>
               <Input
                 className="flex-1 border-0 bg-transparent"
-                placeholder="搜索功能、描述或平台..."
+                placeholder={LL.discover.searchPlaceholder()}
                 value={searchQuery}
                 onChangeText={setSearchQuery}
               />
@@ -182,7 +184,7 @@ export default function HomeScreen() {
               )}
             </View>
             {filteredDemos.length === 0 && (
-              <Text className="text-center mt-4 text-muted-foreground">没有找到匹配的项目</Text>
+              <Text className="text-center mt-4 text-muted-foreground">{LL.discover.noResults()}</Text>
             )}
           </View>
         }

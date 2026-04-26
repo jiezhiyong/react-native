@@ -13,6 +13,7 @@ import validator from 'validator';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 import { useScanHistoryStore } from '@/store/scan-history';
 
 export default function ScanScreenNative() {
@@ -24,6 +25,7 @@ export default function ScanScreenNative() {
   const insets = useSafeAreaInsets();
   const cameraRef = useRef<Camera>(null);
   const router = useRouter();
+  const { LL } = useI18nContext();
 
   // 使用react-native-vision-camera的权限hook
   const { hasPermission, requestPermission } = useCameraPermission();
@@ -79,7 +81,7 @@ export default function ScanScreenNative() {
   // 复制文本到剪贴板
   const copyToClipboard = () => {
     Clipboard.setString(scannedData);
-    Alert.alert('复制成功', '内容已复制到剪贴板');
+    Alert.alert(LL.common.copied(), LL.common.contentCopied());
     setModalVisible(false);
   };
 
@@ -88,7 +90,7 @@ export default function ScanScreenNative() {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (status !== PermissionStatus.GRANTED) {
-      Alert.alert('需要权限', '请允许访问相册以选择图片');
+      Alert.alert(LL.scan.albumPermissionTitle(), LL.scan.albumPermissionMessage());
       return;
     }
 
@@ -105,7 +107,7 @@ export default function ScanScreenNative() {
       }
 
       // 显示加载中提示
-      Alert.alert('处理中', '正在识别图片中的二维码...');
+      Alert.alert(LL.scan.processingTitle(), LL.scan.processingMessage());
 
       try {
         const codeReader = new BrowserQRCodeReader();
@@ -133,11 +135,11 @@ export default function ScanScreenNative() {
       } catch (error) {
         // 解析失败
         console.error('二维码解析失败', error);
-        Alert.alert('识别失败', '无法识别图片中的二维码，请确保图片清晰且包含有效的二维码');
+        Alert.alert(LL.scan.recognitionFailedTitle(), LL.scan.recognitionFailedMessage());
       }
     } catch (error) {
       console.error('选择图片失败', error);
-      Alert.alert('错误', '选择图片时发生错误');
+      Alert.alert(LL.common.error(), LL.scan.imagePickError());
     }
   };
 
@@ -166,7 +168,7 @@ export default function ScanScreenNative() {
           <View className="m-5 bg-background p-5 rounded-2xl w-10/12">
             <View className="items-center mb-4">
               <CheckCircle2 size={50} color="#4ade80" />
-              <Text className="text-xl font-bold mt-2">扫描内容</Text>
+              <Text className="text-xl font-bold mt-2">{LL.scan.contentTitle()}</Text>
             </View>
 
             <View className="p-4 rounded-lg mb-5 border-green-500 border">
@@ -175,10 +177,10 @@ export default function ScanScreenNative() {
 
             <View className="flex-row gap-3">
               <Button onPress={copyToClipboard} className="flex-1 rounded-full">
-                <Text>复制</Text>
+                <Text>{LL.scan.copy()}</Text>
               </Button>
               <Button onPress={() => setModalVisible(false)} className="flex-1 rounded-full" variant="secondary">
-                <Text>关闭</Text>
+                <Text>{LL.scan.close()}</Text>
               </Button>
             </View>
           </View>
@@ -191,9 +193,9 @@ export default function ScanScreenNative() {
   if (!hasPermission) {
     return (
       <View className="flex-1 justify-center items-center bg-gray-900 p-4">
-        <Text className="text-white text-xl mb-4 text-center">需要相机权限来扫描二维码</Text>
+        <Text className="text-white text-xl mb-4 text-center">{LL.scan.cameraPermission()}</Text>
         <TouchableOpacity onPress={requestPermission} className="bg-primary px-6 py-3 rounded-xl">
-          <Text className="text-primary-foreground font-medium">授权访问</Text>
+          <Text className="text-primary-foreground font-medium">{LL.scan.grantAccess()}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -203,7 +205,7 @@ export default function ScanScreenNative() {
   if (!device) {
     return (
       <View className="flex-1 justify-center items-center bg-gray-900 p-4">
-        <Text className="text-white text-xl text-center">找不到可用的摄像头设备</Text>
+        <Text className="text-white text-xl text-center">{LL.scan.noCamera()}</Text>
       </View>
     );
   }
@@ -213,14 +215,14 @@ export default function ScanScreenNative() {
       <StatusBar style="dark" />
       <Stack.Screen
         options={{
-          title: '扫描',
+          title: LL.routes.scan(),
         }}
       />
 
       {/* 相机容器 */}
       <View className="flex-1">
         <Text className="text-white w-full text-center p-5 absolute top-0 z-10 font-medium">
-          将二维码放置在框内，即可自动扫描。
+          {LL.scan.instruction()}
         </Text>
 
         <Camera
@@ -265,7 +267,7 @@ export default function ScanScreenNative() {
           <View className="size-14 rounded-full bg-black/60 justify-center items-center mb-2">
             <LampDesk size={20} color={torch ? 'yellow' : 'white'} />
           </View>
-          <Text className="text-white text-xs">闪光灯</Text>
+          <Text className="text-white text-xs">{LL.scan.flashlight()}</Text>
         </TouchableOpacity>
 
         {/* 从相册选择按钮 */}
@@ -273,7 +275,7 @@ export default function ScanScreenNative() {
           <View className="size-14 rounded-full bg-black/60 justify-center items-center mb-2">
             <ImagePlus size={20} color="white" />
           </View>
-          <Text className="text-white text-xs">从相册选择</Text>
+          <Text className="text-white text-xs">{LL.scan.chooseFromAlbum()}</Text>
         </TouchableOpacity>
 
         {/* 历史记录按钮 */}
@@ -281,7 +283,7 @@ export default function ScanScreenNative() {
           <View className="size-14 rounded-full bg-black/60 justify-center items-center mb-2">
             <History size={20} color="white" />
           </View>
-          <Text className="text-white text-xs">历史记录</Text>
+          <Text className="text-white text-xs">{LL.scan.history()}</Text>
         </TouchableOpacity>
       </View>
 
@@ -295,7 +297,7 @@ export default function ScanScreenNative() {
           className="absolute bottom-[120px] left-1/2 -translate-x-1/2"
           onPress={() => setScanned(false)}
         >
-          <Text className="font-medium">重新扫描</Text>
+          <Text className="font-medium">{LL.scan.scanAgain()}</Text>
         </Button>
       )}
     </View>

@@ -1,12 +1,14 @@
 import * as Location from 'expo-location';
 import { useEffect, useState } from 'react';
-import { Alert, ScrollView, Text, View } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
+
 // Note: react-native-maps may need to be installed via 'npx expo install react-native-maps'
 // import MapView, { Marker, Region, MapType } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 
 // Fallback types when react-native-maps is not available
 type MapType = 'standard' | 'satellite' | 'hybrid';

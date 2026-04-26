@@ -45,6 +45,11 @@
       "iconColour": "#8bc34a"
     }
   },
+  "files.readonlyInclude": {
+    "i18n/i18n-react.tsx": true,
+    "i18n/i18n-types.ts": true,
+    "i18n/i18n-util.**": true
+  },
   "search.exclude": {
     "**/dist": true,
     "**/coverage": true

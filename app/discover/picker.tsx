@@ -1,6 +1,8 @@
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+
+import { Text } from '@/components/ui/text';
 
 export default function PickerScreen() {
   const [selectedLanguage, setSelectedLanguage] = useState('javascript');

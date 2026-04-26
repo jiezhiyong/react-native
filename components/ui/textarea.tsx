@@ -13,11 +13,11 @@ const Textarea = React.forwardRef<React.ElementRef<typeof TextInput>, TextInputP
           props.editable === false && 'opacity-50 web:cursor-not-allowed',
           className
         )}
+        {...props}
         placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
         multiline={multiline}
         numberOfLines={numberOfLines}
         textAlignVertical="top"
-        {...props}
       />
     );
   }

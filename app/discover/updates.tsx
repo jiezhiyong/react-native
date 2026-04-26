@@ -2,8 +2,8 @@
 import * as Updates from 'expo-updates';
 import { useState } from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator } from '@/components/ActivityIndicator';
 
+import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 

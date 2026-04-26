@@ -166,7 +166,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   >
     <View className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <View className="bg-foreground h-2 w-2 rounded-full" />
+        <View className="bg-primary h-2 w-2 rounded-full" />
       </DropdownMenuPrimitive.ItemIndicator>
     </View>
     <>{children}</>

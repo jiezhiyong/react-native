@@ -55,10 +55,10 @@ After removing the patch, verify by running the dev server and editing a file th
 `@react-native-segmented-control/segmented-control@2.5.7` defines the web slider shadow with deprecated React Native Web style props:
 
 ```js
-shadowColor
-shadowOffset
-shadowOpacity
-shadowRadius
+shadowColor;
+shadowOffset;
+shadowOpacity;
+shadowRadius;
 ```
 
 React Native Web warns in development when these props are preprocessed:
@@ -74,7 +74,7 @@ React Native Web warns in development when these props are preprocessed:
 The patch replaces the deprecated `shadow*` style props with the equivalent `boxShadow` value:
 
 ```js
-boxShadow: '0px 1px 2.22px rgba(0, 0, 0, 0.22)'
+boxShadow: '0px 1px 2.22px rgba(0, 0, 0, 0.22)';
 ```
 
 The existing `elevation` value is left intact for native Android behavior.

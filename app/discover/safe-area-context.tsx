@@ -1,5 +1,7 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { Text } from '@/components/ui/text';
 
 export default function SafeAreaContextScreen() {
   const insets = useSafeAreaInsets();

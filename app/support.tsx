@@ -1,7 +1,9 @@
 import { useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+
+import { Text } from '@/components/ui/text';
 
 interface HelpOptionProps {
   title: string;

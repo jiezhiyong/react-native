@@ -1,10 +1,11 @@
 import NetInfo, { NetInfoState, NetInfoStateType } from '@react-native-community/netinfo';
 import { useEffect, useState } from 'react';
-import { RefreshControl, ScrollView, Text, View } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 
 interface NetworkDetails {
   type: NetInfoStateType;

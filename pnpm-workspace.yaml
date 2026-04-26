@@ -1,11 +1,11 @@
 packages:
-  - "."
+  - '.'
 
 nodeLinker: hoisted
 enablePrePostScripts: true
 shamefullyHoist: true
 publicHoistPattern:
-  - "*@babel/runtime*"
-  - "*metro*"
-  - "*react*"
-  - "*expo*"
+  - '*@babel/runtime*'
+  - '*metro*'
+  - '*react*'
+  - '*expo*'

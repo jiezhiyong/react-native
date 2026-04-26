@@ -1,8 +1,11 @@
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import React from 'react';
-import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 
 interface SettingItemProps {
   title: string;
@@ -38,28 +41,50 @@ const SettingGroup = ({ children }: SettingGroupProps) => {
 
 export default function SettingScreen() {
   const router = useRouter();
+  const { LL } = useI18nContext();
   return (
     <SafeAreaView className="flex-1 bg-background">
+      <Stack.Screen
+        options={{
+          title: LL.routes.settings(),
+        }}
+      />
       <ScrollView className="flex-1 px-5 py-5" showsVerticalScrollIndicator={false}>
         <SettingGroup>
-          <SettingItem title="营业执照" onPress={() => Alert.alert('该功能暂未实现')} />
-          <SettingItem title="隐私设置" onPress={() => router.push('/privacy-setting')} />
+          <SettingItem title={LL.settings.businessLicense()} onPress={() => Alert.alert(LL.common.notImplemented())} />
+          <SettingItem title={LL.settings.privacySettings()} onPress={() => router.push('/privacy-setting')} />
         </SettingGroup>
 
         <SettingGroup>
-          <SettingItem title="清除缓存" desc="1M" onPress={() => Alert.alert('该功能暂未实现')} />
-          <SettingItem title="网络诊断" onPress={() => Alert.alert('该功能暂未实现')} />
+          <SettingItem
+            title={LL.settings.clearCache()}
+            desc={LL.settings.cacheSize()}
+            onPress={() => Alert.alert(LL.common.notImplemented())}
+          />
+          <SettingItem
+            title={LL.settings.networkDiagnostics()}
+            onPress={() => Alert.alert(LL.common.notImplemented())}
+          />
         </SettingGroup>
 
         <SettingGroup>
-          <SettingItem title="个人信息收集与使用清单" onPress={() => Alert.alert('该功能暂未实现')} />
-          <SettingItem title="个人信息收集与第三方共享清单" onPress={() => Alert.alert('该功能暂未实现')} />
-          <SettingItem title="系统权限使用清单" onPress={() => Alert.alert('该功能暂未实现')} />
-          <SettingItem title="互联网信息服务算法备案" onPress={() => Alert.alert('该功能暂未实现')} />
+          <SettingItem
+            title={LL.settings.personalInfoCollectionUse()}
+            onPress={() => Alert.alert(LL.common.notImplemented())}
+          />
+          <SettingItem
+            title={LL.settings.personalInfoThirdPartySharing()}
+            onPress={() => Alert.alert(LL.common.notImplemented())}
+          />
+          <SettingItem
+            title={LL.settings.systemPermissionUsage()}
+            onPress={() => Alert.alert(LL.common.notImplemented())}
+          />
+          <SettingItem title={LL.settings.algorithmFiling()} onPress={() => Alert.alert(LL.common.notImplemented())} />
         </SettingGroup>
 
         <SettingGroup>
-          <SettingItem title="账户注销" onPress={() => router.push('/destroy-account')} />
+          <SettingItem title={LL.settings.deleteAccount()} onPress={() => router.push('/destroy-account')} />
         </SettingGroup>
       </ScrollView>
     </SafeAreaView>

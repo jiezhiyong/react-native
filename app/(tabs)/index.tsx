@@ -8,10 +8,12 @@ import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { LanguageMenuToggle } from '@/components/LanguageToggle';
 import { ScrollHeader } from '@/components/ui/scroll-header';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Text } from '@/components/ui/text';
 import { useScrollHeader } from '@/hooks/useScrollHeader';
+import { useI18nContext } from '@/i18n/i18n-react';
 import { sleep } from '@/lib/utils';
 
 const ReanimatedFlashList = Animated.createAnimatedComponent(FlashList) as unknown as typeof FlashList;
@@ -22,6 +24,7 @@ interface DataItem {
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { LL } = useI18nContext();
   const [data, setData] = useState<DataItem[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -35,8 +38,8 @@ export default function HomeScreen() {
   const rightButtons = [
     { icon: <Headphones size={20} color={iconColor} />, onPress: () => router.push('/online-service' as any) },
     { icon: <Bell size={20} color={iconColor} />, onPress: () => router.push('/notice' as any) },
+    { element: <LanguageMenuToggle iconColor={iconColor} /> },
   ];
-
   const idCounter = useRef(0);
 
   const getData = useCallback(() => {
@@ -97,7 +100,7 @@ export default function HomeScreen() {
     return (
       <View className="py-4">
         {isNoMore ? (
-          <Text className="text-center text-sm text-muted-foreground">没有更多了</Text>
+          <Text className="text-center text-sm text-muted-foreground">{LL.home.noMore()}</Text>
         ) : (
           <ActivityIndicator />
         )}
@@ -125,7 +128,7 @@ export default function HomeScreen() {
   return (
     <View className="flex-1">
       <ScrollHeader
-        title="首页"
+        title={LL.tabs.home()}
         scrollY={scrollY}
         backgroundImageSource={require('@/assets/images/home-header-bg.jpg')}
         rightButtons={rightButtons}
