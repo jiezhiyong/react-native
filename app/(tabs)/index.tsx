@@ -9,6 +9,7 @@ import Animated from 'react-native-reanimated';
 
 import { ActivityIndicator } from '@/components/ActivityIndicator';
 import { LanguageMenuToggle } from '@/components/LanguageToggle';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { ScrollHeader } from '@/components/ui/scroll-header';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Text } from '@/components/ui/text';
@@ -39,6 +40,7 @@ export default function HomeScreen() {
     { icon: <Headphones size={20} color={iconColor} />, onPress: () => router.push('/online-service' as any) },
     { icon: <Bell size={20} color={iconColor} />, onPress: () => router.push('/notice' as any) },
     { element: <LanguageMenuToggle iconColor={iconColor} /> },
+    { element: <ThemeToggle iconColor={iconColor} /> },
   ];
   const idCounter = useRef(0);
 

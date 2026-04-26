@@ -19,7 +19,6 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { Toaster } from '@/components/ui/sonner';
 import { DebugPanel } from '@/debug-panel';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -112,7 +111,6 @@ function AppStack() {
           options={{
             headerShown: false,
             title: '',
-            headerRight: () => <ThemeToggle />,
           }}
         />
         <Stack.Screen

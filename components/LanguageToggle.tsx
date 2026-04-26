@@ -71,12 +71,12 @@ export function LanguageMenuToggle({ iconColor = '#141413' }: LanguageMenuToggle
         >
           {({ pressed }) => (
             <View className={cn('size-10 items-center justify-center', pressed && 'opacity-70')}>
-              <Languages color={iconColor} size={20} strokeWidth={1.5} />
+              <Languages color={iconColor} size={20} />
             </View>
           )}
         </Pressable>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" sideOffset={12}>
+      <DropdownMenuContent align="center" sideOffset={12}>
         <DropdownMenuRadioGroup
           style={{ maxHeight: 300 }}
           className="overflow-y-auto"
