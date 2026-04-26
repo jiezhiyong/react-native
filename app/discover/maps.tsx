@@ -145,9 +145,9 @@ export default function MapsDemo() {
               <CardTitle>Maps Demo</CardTitle>
               <CardDescription>Interactive map with current location, custom markers, and controls</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="gap-4">
               {/* Location Status */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Location Status</Text>
                 <View className="bg-muted p-3 rounded-lg">
                   {errorMsg ? (
@@ -163,7 +163,7 @@ export default function MapsDemo() {
               </View>
 
               {/* Map Type Controls */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Map Type</Text>
                 <View className="flex-row flex-wrap gap-2">
                   {MAP_TYPES.map(({ type, label }) => (
@@ -180,7 +180,7 @@ export default function MapsDemo() {
               </View>
 
               {/* Map View */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Map View</Text>
                 <View className="h-80 rounded-lg overflow-hidden bg-muted border border-border">
                   {isMapAvailable ? (
@@ -197,7 +197,7 @@ export default function MapsDemo() {
                         To enable real maps, install react-native-maps:{'\n'}
                         npx expo install react-native-maps
                       </Text>
-                      <View className="space-y-2 w-full">
+                      <View className="gap-2 w-full">
                         <Text className="text-sm font-medium text-center">Current Region:</Text>
                         <Text className="text-xs text-muted-foreground text-center">
                           {region.latitude.toFixed(6)}, {region.longitude.toFixed(6)}
@@ -212,7 +212,7 @@ export default function MapsDemo() {
               </View>
 
               {/* Map Controls */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Controls</Text>
                 <View className="flex-row flex-wrap gap-2">
                   <Button variant="outline" size="sm" onPress={handleZoomIn}>
@@ -228,9 +228,9 @@ export default function MapsDemo() {
               </View>
 
               {/* Map Info */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Map Info</Text>
-                <View className="bg-muted p-3 rounded-lg space-y-1">
+                <View className="bg-muted p-3 rounded-lg gap-1">
                   <Text className="text-sm">
                     Center: {region.latitude.toFixed(6)}, {region.longitude.toFixed(6)}
                   </Text>
@@ -240,9 +240,9 @@ export default function MapsDemo() {
               </View>
 
               {/* Landmarks List */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Shanghai Landmarks</Text>
-                <View className="space-y-2">
+                <View className="gap-2">
                   {SHANGHAI_LANDMARKS.map((landmark) => (
                     <View key={landmark.id} className="bg-muted p-3 rounded-lg">
                       <Text className="font-medium text-sm">{landmark.title}</Text>

@@ -121,7 +121,7 @@ export default function DestroyAccountScreen() {
         </View>
 
         {/* 密码验证 */}
-        <View className="space-y-2 mb-6">
+        <View className="gap-2 mb-6">
           <Text className="font-medium mb-2">请输入您的密码以确认身份</Text>
           <Controller
             control={control}
@@ -141,7 +141,7 @@ export default function DestroyAccountScreen() {
         </View>
 
         {/* 确认选项 */}
-        <View className="space-y-2 mb-1">
+        <View className="gap-2 mb-1">
           <Controller
             control={control}
             name="confirmDestroy"

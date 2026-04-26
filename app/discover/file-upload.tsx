@@ -180,9 +180,9 @@ export default function FileUploadDemo() {
               <CardTitle>File Upload Progress Demo</CardTitle>
               <CardDescription>Upload images with real-time progress tracking using expo-file-system</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="gap-4">
               {/* File Selection */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">File Selection</Text>
                 <Button onPress={pickImage} disabled={uploadState.isUploading}>
                   <Text className="text-primary-foreground">
@@ -193,9 +193,9 @@ export default function FileUploadDemo() {
 
               {/* File Information */}
               {selectedFile && (
-                <View className="space-y-2">
+                <View className="gap-2">
                   <Text className="text-sm font-medium">File Information</Text>
-                  <View className="bg-muted p-3 rounded-lg space-y-2">
+                  <View className="bg-muted p-3 rounded-lg gap-2">
                     <View className="flex-row justify-between">
                       <Text className="text-sm font-medium">Name:</Text>
                       <Text className="text-sm text-muted-foreground flex-1 text-right">{selectedFile.name}</Text>
@@ -222,7 +222,7 @@ export default function FileUploadDemo() {
 
               {/* Upload Controls */}
               {selectedFile && (
-                <View className="space-y-2">
+                <View className="gap-2">
                   <Text className="text-sm font-medium">Upload Controls</Text>
                   <View className="flex-row gap-2">
                     <Button onPress={uploadFile} disabled={uploadState.isUploading} className="flex-1">
@@ -246,9 +246,9 @@ export default function FileUploadDemo() {
 
               {/* Upload Progress */}
               {(uploadState.isUploading || uploadState.progress > 0) && (
-                <View className="space-y-2">
+                <View className="gap-2">
                   <Text className="text-sm font-medium">Upload Progress</Text>
-                  <View className="space-y-2">
+                  <View className="gap-2">
                     <Progress value={uploadState.progress} className="h-2" />
                     <Text className="text-sm text-center text-muted-foreground">
                       {uploadState.progress.toFixed(0)}%
@@ -262,7 +262,7 @@ export default function FileUploadDemo() {
 
               {/* Upload Status */}
               {(uploadState.error || uploadState.result) && (
-                <View className="space-y-2">
+                <View className="gap-2">
                   <Text className="text-sm font-medium">Upload Status</Text>
                   {uploadState.error ? (
                     <View className="bg-destructive/10 border border-destructive/20 p-3 rounded-lg">
@@ -287,7 +287,7 @@ export default function FileUploadDemo() {
 
               {/* Response Details */}
               {uploadState.result && (
-                <View className="space-y-2">
+                <View className="gap-2">
                   <Text className="text-sm font-medium">Response Details</Text>
                   <ScrollView className="bg-muted p-3 rounded-lg max-h-32" nestedScrollEnabled>
                     <Text className="text-xs text-muted-foreground font-mono">
@@ -298,9 +298,9 @@ export default function FileUploadDemo() {
               )}
 
               {/* Instructions */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Instructions</Text>
-                <View className="bg-muted p-3 rounded-lg space-y-1">
+                <View className="bg-muted p-3 rounded-lg gap-1">
                   <Text className="text-sm">1. Select an image from your library</Text>
                   <Text className="text-sm">2. Review file information</Text>
                   <Text className="text-sm">3. Start upload and watch progress</Text>

@@ -149,6 +149,7 @@ Be careful not to hardcode environment-specific values that bypass this variant 
 3. Add shared logic to `hooks/`, `lib/`, or `store/` instead of duplicating it in route files.
 4. Keep TypeScript strict and avoid introducing `any` without a strong reason.
 5. Preserve existing styling patterns with NativeWind and the current design system.
+6. For NativeWind spacing on native UI, do not use `space-x-*` or `space-y-*`; use `gap-*` when supported, or explicit child margins such as `mt-*` / `ml-*`.
 
 ### Testing Expectations
 

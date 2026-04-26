@@ -32,7 +32,7 @@ export default function ExpoVideoScreen() {
         </View>
 
         {/* 控制按钮 */}
-        <View className="mt-6 space-x-4 gap-3">
+        <View className="mt-6 gap-4 gap-3">
           <Button
             variant={isPlaying ? 'destructive' : 'default'}
             onPress={() => {

@@ -367,7 +367,7 @@ export default function FileDownloadScreen() {
         </View>
 
         {Object.entries(downloads).length > 0 ? (
-          <View className="space-y-4">
+          <View className="gap-4">
             {Object.entries(downloads).map(([fileName, downloadInfo]) => (
               <View key={fileName} className="border border-border rounded-lg p-3">
                 <View className="flex-row justify-between items-start mb-2">
@@ -444,7 +444,7 @@ export default function FileDownloadScreen() {
       {/* 功能说明 */}
       <Card className="p-4 mb-6">
         <Text className="text-lg font-medium mb-3">功能说明</Text>
-        <View className="space-y-2">
+        <View className="gap-2">
           <Text className="text-sm text-muted-foreground">
             • <Text className="font-medium">进度监控</Text>：实时显示下载进度百分比
           </Text>

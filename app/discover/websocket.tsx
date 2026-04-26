@@ -284,7 +284,7 @@ export default function WebSocketScreen() {
         </View>
 
         {messages.length > 0 ? (
-          <View className="space-y-2 max-h-80">
+          <View className="gap-2 max-h-80">
             {messages.slice(0, 20).map((message) => (
               <View key={message.id} className={`p-3 rounded-lg border ${getMessageStyle(message.type)}`}>
                 <View className="flex-row justify-between items-start mb-1">
@@ -310,7 +310,7 @@ export default function WebSocketScreen() {
       {/* 使用说明 */}
       <Card className="p-4 mb-6">
         <Text className="text-lg font-medium mb-3">功能说明</Text>
-        <View className="space-y-2">
+        <View className="gap-2">
           <Text className="text-sm text-muted-foreground">
             • <Text className="font-medium">连接管理</Text>：手动连接/断开 WebSocket
           </Text>

@@ -235,7 +235,7 @@ export default function VibrationScreen() {
         <Text className="text-lg font-medium mb-3">React Native Vibration API</Text>
         <Text className="text-sm text-muted-foreground mb-4">原生震动 API，支持简单震动和自定义模式</Text>
 
-        <View className="space-y-3">
+        <View className="gap-3">
           <Button onPress={handleSimpleVibration} className="w-full">
             <Text>简单震动</Text>
           </Button>
@@ -292,7 +292,7 @@ export default function VibrationScreen() {
           高级触觉反馈 API，提供更丰富的反馈类型（主要支持 iOS）
         </Text>
 
-        <View className="space-y-4">
+        <View className="gap-4">
           <View>
             <Text className="text-sm font-medium mb-2">冲击反馈（Impact Feedback）</Text>
             <View className="flex-row gap-2">
@@ -334,7 +334,7 @@ export default function VibrationScreen() {
         <Text className="text-lg font-medium mb-3">平台兼容性</Text>
         <InfoItemRow label="当前平台" value={Platform.OS} />
         <InfoItemRow label="平台版本" value={Platform.Version} />
-        <View className="mt-3 space-y-2">
+        <View className="mt-3 gap-2">
           <Text className="text-sm text-muted-foreground">
             • <Text className="font-medium">Android</Text>：完整支持 Vibration API，基础支持 Haptics
           </Text>
@@ -359,7 +359,7 @@ export default function VibrationScreen() {
         </View>
 
         {vibrationHistory.length > 0 ? (
-          <View className="space-y-2">
+          <View className="gap-2">
             {vibrationHistory.map((item) => (
               <View key={item.id} className="border border-border rounded-lg p-3">
                 <View className="flex-row justify-between items-start mb-1">
@@ -383,7 +383,7 @@ export default function VibrationScreen() {
       {/* 使用说明 */}
       <Card className="p-4 mb-6">
         <Text className="text-lg font-medium mb-3">使用说明</Text>
-        <View className="space-y-2">
+        <View className="gap-2">
           <Text className="text-sm text-muted-foreground">
             • <Text className="font-medium">Vibration API</Text>：React Native 原生震动接口
           </Text>

@@ -152,13 +152,13 @@ export default function NetworkInfoDemo() {
               <CardTitle>Network Info Demo</CardTitle>
               <CardDescription>Real-time network status and connection details using NetInfo</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="gap-4">
               {/* Connection Status */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Current Connection Status</Text>
                 <View className="bg-muted p-3 rounded-lg">
                   {networkState ? (
-                    <View className="space-y-2">
+                    <View className="gap-2">
                       <View className="flex-row items-center justify-between">
                         <Text className="text-sm font-medium">Status</Text>
                         <View className="flex-row items-center gap-2">
@@ -207,9 +207,9 @@ export default function NetworkInfoDemo() {
 
               {/* Network Details */}
               {networkState?.details && (
-                <View className="space-y-2">
+                <View className="gap-2">
                   <Text className="text-sm font-medium">Network Details</Text>
-                  <View className="bg-muted p-3 rounded-lg space-y-2">
+                  <View className="bg-muted p-3 rounded-lg gap-2">
                     {networkState.type === 'wifi' && networkState.details && (
                       <>
                         {networkState.details.ssid && (
@@ -295,7 +295,7 @@ export default function NetworkInfoDemo() {
               )}
 
               {/* Controls */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Controls</Text>
                 <View className="flex-row gap-2">
                   <Button onPress={handleRefresh} disabled={refreshing} className="flex-1">
@@ -312,12 +312,12 @@ export default function NetworkInfoDemo() {
 
               {/* Network History */}
               {networkHistory.length > 0 && (
-                <View className="space-y-2">
+                <View className="gap-2">
                   <Text className="text-sm font-medium">Connection History</Text>
-                  <View className="space-y-2 max-h-64">
-                    <ScrollView nestedScrollEnabled className="space-y-2">
+                  <View className="gap-2 max-h-64">
+                    <ScrollView nestedScrollEnabled>
                       {networkHistory.map((entry, index) => (
-                        <View key={index} className="bg-muted p-3 rounded-lg">
+                        <View key={index} className="bg-muted p-3 rounded-lg mb-2">
                           <View className="flex-row items-center justify-between">
                             <Text className="text-sm font-medium">{getNetworkTypeLabel(entry.type)}</Text>
                             <Text className="text-sm text-muted-foreground">
@@ -346,9 +346,9 @@ export default function NetworkInfoDemo() {
               )}
 
               {/* Instructions */}
-              <View className="space-y-2">
+              <View className="gap-2">
                 <Text className="text-sm font-medium">Instructions</Text>
-                <View className="bg-muted p-3 rounded-lg space-y-1">
+                <View className="bg-muted p-3 rounded-lg gap-1">
                   <Text className="text-sm">• Real-time network monitoring is active</Text>
                   <Text className="text-sm">• Try switching between WiFi/cellular/airplane mode</Text>
                   <Text className="text-sm">• Pull to refresh for manual update</Text>

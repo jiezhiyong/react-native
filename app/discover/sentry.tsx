@@ -250,7 +250,7 @@ function SentryScreen() {
           </CardTitle>
           <CardDescription>使用 Sentry.captureMessage() 发送自定义信息</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="gap-3">
           <View>
             <Label>消息内容</Label>
             <Input value={message} onChangeText={setMessage} placeholder="输入要发送的消息..." />
@@ -270,7 +270,7 @@ function SentryScreen() {
           </CardTitle>
           <CardDescription>添加用户操作路径记录</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="gap-3">
           <View>
             <Label>Breadcrumb 消息</Label>
             <Input value={breadcrumbMessage} onChangeText={setBreadcrumbMessage} placeholder="描述用户操作..." />
@@ -290,7 +290,7 @@ function SentryScreen() {
           </CardTitle>
           <CardDescription>设置当前用户信息，便于问题追踪</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="gap-3">
           <View>
             <Label>用户 ID</Label>
             <Input value={userId} onChangeText={setUserId} placeholder="用户 ID..." />
@@ -299,7 +299,7 @@ function SentryScreen() {
             <Label>用户邮箱</Label>
             <Input value={userEmail} onChangeText={setUserEmail} placeholder="用户邮箱..." />
           </View>
-          <View className="flex-row space-x-2">
+          <View className="flex-row gap-2">
             <Button onPress={setUserContext} className="flex-1">
               <Text>设置用户</Text>
             </Button>
@@ -319,7 +319,7 @@ function SentryScreen() {
           </CardTitle>
           <CardDescription>为错误事件添加自定义标签，便于分类和过滤</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="gap-3">
           <View>
             <Label>标签键</Label>
             <Input value={tagKey} onChangeText={setTagKey} placeholder="标签键..." />
@@ -373,7 +373,7 @@ function SentryScreen() {
         <CardHeader>
           <CardTitle>当前配置</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="gap-2">
           <View className="flex-row">
             <Text className="font-medium w-16">DSN:</Text>
             <Text className="flex-1 text-xs text-muted-foreground">

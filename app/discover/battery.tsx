@@ -8,7 +8,7 @@ export default function ExpoBatteryScreen() {
   const { lowPowerMode, batteryLevel, batteryState } = Battery.usePowerState();
 
   return (
-    <View className="flex-1 p-5 space-y-4">
+    <View className="flex-1 p-5 gap-4">
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">电池状态</Text>
         <Text className="text-muted-foreground">监控设备电池状态和电量水平变化。</Text>

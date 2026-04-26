@@ -250,7 +250,7 @@ export default function ExpoAudioScreen() {
       </View>
 
       {/* 播放控制 */}
-      <View className="flex-row justify-center items-center space-x-4 mb-6">
+      <View className="flex-row justify-center items-center gap-4 mb-6">
         <Button
           onPress={togglePlayPause}
           className="w-14 h-14 rounded-full justify-center items-center"

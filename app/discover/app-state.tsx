@@ -131,7 +131,7 @@ export default function AppStateScreen() {
       <Card className="p-4 mb-4">
         <Text className="text-lg font-medium mb-3">应用状态变化历史</Text>
         {appStateHistory.length > 0 ? (
-          <View className="space-y-2">
+          <View className="gap-2">
             {appStateHistory.map((item, index) => (
               <View key={index} className="border-b border-border pb-2">
                 <View className="flex-row justify-between items-center">
@@ -156,7 +156,7 @@ export default function AppStateScreen() {
       <Card className="p-4 mb-6">
         <Text className="text-lg font-medium mb-3">系统主题变化历史</Text>
         {themeHistory.length > 0 ? (
-          <View className="space-y-2">
+          <View className="gap-2">
             {themeHistory.map((item, index) => (
               <View key={index} className="border-b border-border pb-2">
                 <View className="flex-row justify-between items-center">
@@ -180,7 +180,7 @@ export default function AppStateScreen() {
       {/* 使用说明 */}
       <Card className="p-4 mb-6">
         <Text className="text-lg font-medium mb-3">使用说明</Text>
-        <View className="space-y-2">
+        <View className="gap-2">
           <Text className="text-sm text-muted-foreground">
             • <Text className="font-medium">应用状态监听</Text>：切换应用到后台/前台观察状态变化
           </Text>
