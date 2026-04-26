@@ -1,3 +1,4 @@
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useRouter } from 'expo-router';
 import { Bell, Search, Terminal, X } from 'lucide-react-native';
 import * as React from 'react';
@@ -11,6 +12,37 @@ import { Text } from '@/components/ui/text';
 import { useScrollHeader } from '@/hooks/useScrollHeader';
 import { useI18nContext } from '@/i18n/i18n-react';
 import { cn } from '@/lib/utils';
+
+type Platform = 'android' | 'ios' | 'h5';
+type PlatformSupport = {
+  platform: Platform;
+  deviceOnly?: boolean;
+};
+
+const platformMeta: Record<
+  Platform,
+  {
+    icon: React.ComponentProps<typeof FontAwesome>['name'];
+    label: string;
+    searchAliases: string[];
+  }
+> = {
+  android: {
+    icon: 'android',
+    label: 'Android',
+    searchAliases: ['android'],
+  },
+  ios: {
+    icon: 'apple',
+    label: 'iOS',
+    searchAliases: ['ios', 'iphone', 'ipad', 'apple'],
+  },
+  h5: {
+    icon: 'html5',
+    label: 'H5',
+    searchAliases: ['h5', 'web'],
+  },
+};
 
 const demos: { name: string; desc: string; supports: string }[] = [
   // 设备信息等
@@ -119,6 +151,56 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'navigation-bar', desc: '访问 Android 原生导航栏各种交互', supports: 'Android' },
 ];
 
+function getPlatformSupports(supports: string): PlatformSupport[] {
+  return supports.split(',').map((support) => {
+    const value = support.trim();
+    const normalized = value.toLowerCase();
+
+    if (normalized.startsWith('android')) {
+      return { platform: 'android', deviceOnly: normalized.includes('device') };
+    }
+
+    if (normalized.startsWith('ios')) {
+      return { platform: 'ios', deviceOnly: normalized.includes('device') };
+    }
+
+    return { platform: 'h5' };
+  });
+}
+
+function getSupportSearchText(supports: string) {
+  return getPlatformSupports(supports)
+    .flatMap((support) => {
+      const aliases = platformMeta[support.platform].searchAliases;
+      return support.deviceOnly ? [...aliases, 'device', 'real device', '实机', '真机'] : aliases;
+    })
+    .join(' ');
+}
+
+function PlatformSupportIcons({ supports }: { supports: string }) {
+  return (
+    <View className="pl-2 mb-1 flex-row flex-wrap gap-1">
+      {getPlatformSupports(supports).map((support) => {
+        const meta = platformMeta[support.platform];
+        const iconColor =
+          support.platform === 'android' ? '#3ddc84' : support.platform === 'ios' ? '#87867f' : '#e34f26';
+        const key = `${support.platform}-${support.deviceOnly ? 'device' : 'base'}`;
+
+        return (
+          <View
+            key={key}
+            accessibilityLabel={`${meta.label}${support.deviceOnly ? ' 实机' : ''}`}
+            className="relative h-6 min-w-6 flex-row items-center justify-center rounded-md border border-border bg-background px-1.5"
+          >
+            <FontAwesome name={meta.icon} size={14} color={iconColor} />
+            {support.deviceOnly && <Text className="text-[9px] leading-3 text-primary">&nbsp;实机</Text>}
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
 export default function HomeScreen() {
   const router = useRouter();
   const { LL } = useI18nContext();
@@ -141,7 +223,7 @@ export default function HomeScreen() {
       (item) =>
         item.name.toLowerCase().includes(query) ||
         item.desc.toLowerCase().includes(query) ||
-        item.supports.toLowerCase().includes(query)
+        getSupportSearchText(item.supports).includes(query)
     );
     setFilteredDemos(filtered);
   }, [searchQuery]);
@@ -195,10 +277,10 @@ export default function HomeScreen() {
           >
             <Alert icon={Terminal}>
               <AlertTitle className="capitalize">
-                <Text>
+                <Text className="text-primary">
                   {index + 1}. {item.name}
                 </Text>
-                <Text className="text-primary text-sm"> - {item.supports}</Text>
+                <PlatformSupportIcons supports={item.supports} />
               </AlertTitle>
               <AlertDescription className="text-muted-foreground">{item.desc}</AlertDescription>
             </Alert>
