@@ -8,51 +8,18 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
 
-interface VibrationHistory {
-  id: string;
-  timestamp: Date;
-  type: 'vibration' | 'haptics';
-  method: string;
-  parameters?: any;
-}
-
 export default function VibrationScreen() {
   const [isVibrating, setIsVibrating] = useState(false);
   const [customDuration, setCustomDuration] = useState('1000');
   const [customPattern, setCustomPattern] = useState('100,200,300');
-  const [vibrationHistory, setVibrationHistory] = useState<VibrationHistory[]>([]);
 
   const vibrationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // 添加到历史记录
-  const addToHistory = (type: 'vibration' | 'haptics', method: string, parameters?: any) => {
-    const historyItem: VibrationHistory = {
-      id: Date.now().toString(),
-      timestamp: new Date(),
-      type,
-      method,
-      parameters,
-    };
-
-    setVibrationHistory((prev) => [historyItem, ...prev.slice(0, 9)]); // 保留最新10条
-  };
-
-  // 格式化时间
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('zh-CN', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    });
-  };
 
   // 原生 Vibration API 方法
   const handleSimpleVibration = () => {
     try {
       Vibration.vibrate();
-      addToHistory('vibration', 'vibrate', { duration: 'default' });
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '设备不支持震动功能');
     }
   };
@@ -67,14 +34,12 @@ export default function VibrationScreen() {
 
       if (Platform.OS === 'android') {
         Vibration.vibrate(duration);
-        addToHistory('vibration', 'vibrate', { duration });
       } else {
         // iOS 只支持固定时长的震动
         Vibration.vibrate();
-        addToHistory('vibration', 'vibrate', { duration: 'default (iOS)' });
         Alert.alert('提示', 'iOS 只支持默认时长震动');
       }
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '震动失败');
     }
   };
@@ -98,14 +63,12 @@ export default function VibrationScreen() {
 
       if (Platform.OS === 'android') {
         Vibration.vibrate(pattern);
-        addToHistory('vibration', 'vibrate', { pattern });
       } else {
         // iOS 不支持自定义模式
         Vibration.vibrate();
-        addToHistory('vibration', 'vibrate', { pattern: 'default (iOS)' });
         Alert.alert('提示', 'iOS 不支持自定义震动模式，使用默认震动');
       }
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '震动失败');
     }
   };
@@ -122,7 +85,6 @@ export default function VibrationScreen() {
       if (Platform.OS === 'android') {
         // Android 支持无限重复
         Vibration.vibrate([100, 100], true);
-        addToHistory('vibration', 'vibrate', { repeat: true });
       } else {
         // iOS 模拟连续震动
         const vibrationPattern = () => {
@@ -130,9 +92,8 @@ export default function VibrationScreen() {
           vibrationTimeoutRef.current = setTimeout(vibrationPattern, 200);
         };
         vibrationPattern();
-        addToHistory('vibration', 'vibrate (continuous simulation)', { repeat: true });
       }
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '启动连续震动失败');
       setIsVibrating(false);
     }
@@ -146,8 +107,7 @@ export default function VibrationScreen() {
         vibrationTimeoutRef.current = null;
       }
       setIsVibrating(false);
-      addToHistory('vibration', 'cancel', {});
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '停止震动失败');
     }
   };
@@ -156,8 +116,7 @@ export default function VibrationScreen() {
   const handleLightHaptic = async () => {
     try {
       await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-      addToHistory('haptics', 'impactAsync', { style: 'Light' });
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '设备不支持触觉反馈');
     }
   };
@@ -165,8 +124,7 @@ export default function VibrationScreen() {
   const handleMediumHaptic = async () => {
     try {
       await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-      addToHistory('haptics', 'impactAsync', { style: 'Medium' });
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '设备不支持触觉反馈');
     }
   };
@@ -174,8 +132,7 @@ export default function VibrationScreen() {
   const handleHeavyHaptic = async () => {
     try {
       await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-      addToHistory('haptics', 'impactAsync', { style: 'Heavy' });
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '设备不支持触觉反馈');
     }
   };
@@ -183,8 +140,7 @@ export default function VibrationScreen() {
   const handleSuccessHaptic = async () => {
     try {
       await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      addToHistory('haptics', 'notificationAsync', { type: 'Success' });
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '设备不支持触觉反馈');
     }
   };
@@ -192,8 +148,7 @@ export default function VibrationScreen() {
   const handleWarningHaptic = async () => {
     try {
       await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-      addToHistory('haptics', 'notificationAsync', { type: 'Warning' });
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '设备不支持触觉反馈');
     }
   };
@@ -201,8 +156,7 @@ export default function VibrationScreen() {
   const handleErrorHaptic = async () => {
     try {
       await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-      addToHistory('haptics', 'notificationAsync', { type: 'Error' });
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '设备不支持触觉反馈');
     }
   };
@@ -210,15 +164,9 @@ export default function VibrationScreen() {
   const handleSelectionHaptic = async () => {
     try {
       await Haptics.selectionAsync();
-      addToHistory('haptics', 'selectionAsync', {});
-    } catch (error) {
+    } catch {
       Alert.alert('错误', '设备不支持触觉反馈');
     }
-  };
-
-  // 清空历史记录
-  const clearHistory = () => {
-    setVibrationHistory([]);
   };
 
   return (
@@ -345,39 +293,6 @@ export default function VibrationScreen() {
             • <Text className="font-medium">Web</Text>：浏览器限制，可能不支持震动
           </Text>
         </View>
-      </Card>
-
-      {/* 操作历史 */}
-      <Card className="p-4 mb-6">
-        <View className="flex-row justify-between items-center mb-3">
-          <Text className="text-lg font-medium">操作历史 ({vibrationHistory.length})</Text>
-          {vibrationHistory.length > 0 && (
-            <Button variant="outline" size="sm" onPress={clearHistory}>
-              <Text>清空</Text>
-            </Button>
-          )}
-        </View>
-
-        {vibrationHistory.length > 0 ? (
-          <View className="gap-2">
-            {vibrationHistory.map((item) => (
-              <View key={item.id} className="border border-border rounded-lg p-3">
-                <View className="flex-row justify-between items-start mb-1">
-                  <Text className="font-medium text-sm">
-                    {item.type === 'vibration' ? '📳 Vibration' : '🔄 Haptics'}
-                  </Text>
-                  <Text className="text-xs text-muted-foreground">{formatTime(item.timestamp)}</Text>
-                </View>
-                <Text className="text-sm text-muted-foreground">方法：{item.method}</Text>
-                {item.parameters && (
-                  <Text className="text-xs text-muted-foreground mt-1">参数：{JSON.stringify(item.parameters)}</Text>
-                )}
-              </View>
-            ))}
-          </View>
-        ) : (
-          <Text className="text-center text-muted-foreground py-8">暂无操作记录，点击上方按钮体验震动效果</Text>
-        )}
       </Card>
 
       {/* 使用说明 */}

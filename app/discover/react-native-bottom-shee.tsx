@@ -1,8 +1,11 @@
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { sleep } from '@/lib/utils';
+
 const App = () => {
+  const [refreshing, setRefreshing] = useState(false);
   const data = useMemo(
     () =>
       Array(50)
@@ -13,8 +16,13 @@ const App = () => {
   const snapPoints = useMemo(() => ['25%', '50%', '75%'], []);
 
   // callbacks
-  const handleRefresh = useCallback(() => {
-    console.log('handleRefresh');
+  const handleRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await sleep(1000);
+    } finally {
+      setRefreshing(false);
+    }
   }, []);
 
   // render
@@ -34,7 +42,7 @@ const App = () => {
           keyExtractor={(i) => i}
           renderItem={renderItem}
           contentContainerStyle={styles.contentContainer}
-          refreshing={false}
+          refreshing={refreshing}
           onRefresh={handleRefresh}
         />
       </BottomSheet>
@@ -48,9 +56,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     backgroundColor: 'white',
+    padding: 12,
   },
   itemContainer: {
-    padding: 12,
+    padding: 18,
     margin: 6,
     backgroundColor: '#eee',
     borderRadius: 8,
