@@ -12,13 +12,14 @@ import {
   User,
 } from 'lucide-react-native';
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Platform, RefreshControl, TouchableOpacity, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { ScrollHeader } from '@/components/ui/scroll-header';
 import { Text } from '@/components/ui/text';
 import { useScrollHeader } from '@/hooks/useScrollHeader';
 import { useI18nContext } from '@/i18n/i18n-react';
+import { sleep } from '@/lib/utils';
 import { useAuth } from '@/store/auth';
 
 interface ItemEntry {
@@ -173,6 +174,7 @@ const OtherEntriesSection = () => {
 export default function MinePage() {
   const router = useRouter();
   const { LL } = useI18nContext();
+  const [refreshing, setRefreshing] = React.useState(false);
   const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
   const c = isDarkStyle ? '#141413' : '#faf9f5';
 
@@ -182,6 +184,16 @@ export default function MinePage() {
     { icon: <Headphones size={20} color={c} />, onPress: () => router.push('/online-service' as any) },
     { icon: <Bell size={20} color={c} />, onPress: () => router.push('/notice' as any) },
   ];
+
+  const handleRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+
+    try {
+      await sleep(600);
+    } finally {
+      setRefreshing(false);
+    }
+  }, []);
 
   return (
     <View className="flex-1">
@@ -195,7 +207,11 @@ export default function MinePage() {
         className="flex-1 bg-background"
         onScroll={scrollHandler}
         scrollEventThrottle={16}
-        contentContainerStyle={{ paddingTop: headerHeight }}
+        contentContainerStyle={{ paddingTop: Platform.OS === 'ios' ? 0 : headerHeight }}
+        contentInset={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
+        contentOffset={Platform.OS === 'ios' ? { x: 0, y: -headerHeight } : undefined}
+        scrollIndicatorInsets={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
       >
         <View className="mx-5 mt-5 rounded-xl bg-card border border-border mb-5">
           <UserHeader />

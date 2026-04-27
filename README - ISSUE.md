@@ -20,3 +20,15 @@
 
 - Q: iOS Debug 构建时 `Upload Debug Symbols to Sentry` 每次都执行
 - A: 已通过 `plugins/withSentryDsymUpload.cjs` 限制为仅在 Release 或 CI 构建上传 dSYM。本地 Debug 构建仍会进入 Xcode build phase，但脚本会立即跳过，不再执行实际上传；Release/CI 仍保留 dSYM 上传能力。
+
+- Q: iOS / Expo Go 中 `RefreshControl` 在自定义绝对定位 `ScrollHeader` 页面不显示，或被灵动岛/状态栏/顶部 Header 遮住
+- A: 原因是 `ScrollHeader` 使用 `position: 'absolute'` 覆盖在列表上方，而 iOS 下 `RefreshControl` 的原生位置仍从滚动视图顶部开始计算。`progressViewOffset` 在 `FlatList`、`ScrollView`、`FlashList` 以及自定义/动画包装组合中表现不稳定，可能需要反复改成 `headerHeight * 3`、`headerHeight * 4` 才暂时可见。稳定方案是不要依赖 `progressViewOffset`，而是在 iOS 上给滚动容器设置真实顶部 inset：
+
+  ```tsx
+  contentInset={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
+  contentOffset={Platform.OS === 'ios' ? { x: 0, y: -headerHeight } : undefined}
+  scrollIndicatorInsets={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
+  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+  ```
+
+  同时把 iOS 下 `contentContainerStyle.paddingTop` 改为页面自身需要的间距，不再额外叠加 `headerHeight`；Android 仍可保留原来的 `paddingTop: headerHeight + ...`。这样 `RefreshControl` 会从安全区和自定义 Header 下方出现，避免被遮挡。

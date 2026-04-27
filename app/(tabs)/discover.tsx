@@ -2,7 +2,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useRouter } from 'expo-router';
 import { Bell, Search, Terminal, X } from 'lucide-react-native';
 import * as React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { RefreshControl, Platform as RNPlatform, TouchableOpacity, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -11,7 +11,7 @@ import { ScrollHeader } from '@/components/ui/scroll-header';
 import { Text } from '@/components/ui/text';
 import { useScrollHeader } from '@/hooks/useScrollHeader';
 import { useI18nContext } from '@/i18n/i18n-react';
-import { cn } from '@/lib/utils';
+import { cn, sleep } from '@/lib/utils';
 
 type Platform = 'android' | 'ios' | 'h5';
 type PlatformSupport = {
@@ -178,6 +178,20 @@ function getSupportSearchText(supports: string) {
     .join(' ');
 }
 
+function getFilteredDemos(searchQuery: string) {
+  if (searchQuery.trim() === '') {
+    return demos;
+  }
+
+  const query = searchQuery.toLowerCase();
+  return demos.filter(
+    (item) =>
+      item.name.toLowerCase().includes(query) ||
+      item.desc.toLowerCase().includes(query) ||
+      getSupportSearchText(item.supports).includes(query)
+  );
+}
+
 function PlatformSupportIcons({ supports }: { supports: string }) {
   return (
     <View className="pl-2 mb-1 flex-row flex-wrap gap-1">
@@ -207,6 +221,7 @@ export default function HomeScreen() {
   const { LL } = useI18nContext();
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filteredDemos, setFilteredDemos] = React.useState(demos);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
   const c = isDarkStyle ? '#141413' : '#faf9f5';
@@ -214,19 +229,18 @@ export default function HomeScreen() {
   const rightButtons = [{ icon: <Bell size={20} color={c} />, onPress: () => router.push('/notice' as any) }];
 
   React.useEffect(() => {
-    if (searchQuery.trim() === '') {
-      setFilteredDemos(demos);
-      return;
-    }
+    setFilteredDemos(getFilteredDemos(searchQuery));
+  }, [searchQuery]);
 
-    const query = searchQuery.toLowerCase();
-    const filtered = demos.filter(
-      (item) =>
-        item.name.toLowerCase().includes(query) ||
-        item.desc.toLowerCase().includes(query) ||
-        getSupportSearchText(item.supports).includes(query)
-    );
-    setFilteredDemos(filtered);
+  const handleRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+
+    try {
+      await sleep(600);
+      setFilteredDemos(getFilteredDemos(searchQuery));
+    } finally {
+      setRefreshing(false);
+    }
   }, [searchQuery]);
 
   const handleClearSearch = () => {
@@ -247,7 +261,14 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.name}
         onScroll={scrollHandler}
         scrollEventThrottle={16}
-        contentContainerStyle={{ paddingTop: headerHeight + 20, paddingHorizontal: 20 }}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+        contentInset={RNPlatform.OS === 'ios' ? { top: headerHeight } : undefined}
+        contentOffset={RNPlatform.OS === 'ios' ? { x: 0, y: -headerHeight } : undefined}
+        scrollIndicatorInsets={RNPlatform.OS === 'ios' ? { top: headerHeight } : undefined}
+        contentContainerStyle={{
+          paddingTop: RNPlatform.OS === 'ios' ? 20 : headerHeight + 20,
+          paddingHorizontal: 20,
+        }}
         ListHeaderComponent={
           <View className="mb-4">
             <View className="flex-row items-center bg-card rounded-xl border border-input">
