@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 /** 与 ScrollHeader 默认一致：在此滚动距离内完成背景/文字颜色过渡 */
 export const SCROLL_HEADER_DEFAULT_THRESHOLD = 100;
+const DEFAULT_STATUS_BAR_STYLE = 'dark';
 
 function getHeaderRowHeight() {
   return Platform.OS === 'ios' ? 44 : 56;
@@ -59,6 +60,10 @@ export function useScrollHeader(options?: UseScrollHeaderOptions) {
   useFocusEffect(
     useCallback(() => {
       setStatusBarStyle(lastRef.current ? 'dark' : 'light');
+
+      return () => {
+        setStatusBarStyle(DEFAULT_STATUS_BAR_STYLE);
+      };
     }, [])
   );
 

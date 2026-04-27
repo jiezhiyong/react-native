@@ -11,6 +11,7 @@ import { isRunningInExpoGo } from 'expo';
 import Constants from 'expo-constants';
 import { Stack, useNavigationContainerRef } from 'expo-router';
 import Head from 'expo-router/head';
+import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
@@ -209,6 +210,7 @@ function RootLayout() {
 
   return (
     <>
+      <StatusBar style="dark" />
       {showDebugPanel ? <DebugPanel /> : null}
       <SafeAreaProvider>
         <KeyboardProvider>
