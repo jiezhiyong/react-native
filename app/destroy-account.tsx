@@ -108,8 +108,8 @@ export default function DestroyAccountScreen() {
         }}
       />
 
-      <View className="flex-1 p-5">
-        <Text className="text-2xl font-medium mb-6">账户注销</Text>
+      <View className="flex-1 px-5 py-8">
+        <Text className="text-2xl font-medium mb-6">账户注销 👋</Text>
 
         <View className="mb-6 p-4 bg-primary/10 rounded-xl border border-primary/20">
           <View className="flex-row gap-2">
@@ -147,7 +147,7 @@ export default function DestroyAccountScreen() {
             name="confirmDestroy"
             render={({ field: { onChange, value } }) => (
               <View className="flex-row items-start">
-                <Checkbox checked={value} onCheckedChange={onChange} disabled={isSubmitting} />
+                <Checkbox checked={value} onCheckedChange={onChange} disabled={isSubmitting} className="mt-[2px]" />
                 <Text className={cn('flex-1 ml-2 text-foreground', errors.confirmDestroy ? 'text-destructive' : '')}>
                   我理解注销账户将永久删除我的所有数据，且此操作不可逆转
                 </Text>

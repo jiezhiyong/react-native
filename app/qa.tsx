@@ -2,6 +2,7 @@ import { Stack } from 'expo-router';
 import { ChevronDown, ChevronUp, Search } from 'lucide-react-native';
 import React, { useCallback, useMemo, useState } from 'react';
 import { FlatList, ScrollView, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
@@ -198,7 +199,7 @@ export default function QaScreen() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <View style={{ flex: 1 }} className="bg-background">
+    <SafeAreaView edges={['bottom']} style={{ flex: 1 }} className="bg-background">
       <Stack.Screen
         options={{
           title: LL.routes.qa(),
@@ -256,6 +257,6 @@ export default function QaScreen() {
           <Text className="text-secondary-foreground text-lg">{LL.qa.noResults()}</Text>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 }

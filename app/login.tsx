@@ -97,6 +97,10 @@ export default function LoginScreen() {
   return (
     <View className="flex-1 bg-background p-5 gap-5">
       <StatusBar style="dark" />
+      <View className="">
+        <Text className="text-2xl text-muted-foreground">您好 👋</Text>
+        <Text className="text-3xl font-medium mt-1 text-foreground">欢迎回来，请登录～</Text>
+      </View>
 
       <Input placeholder={LL.login.usernamePlaceholder()} value={username} onChangeText={setUsername} />
 

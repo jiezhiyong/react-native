@@ -15,7 +15,7 @@ export default function NotFoundScreen() {
 
   return (
     <View className="flex-1 bg-background">
-      <Stack.Screen options={{ headerShown: false }} />
+      <Stack.Screen options={{ headerShown: true, title: '404' }} />
 
       <View className="flex-1 items-center p-8">
         {/* 错误图标 */}

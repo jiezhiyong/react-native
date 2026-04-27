@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 import * as MediaLibrary from 'expo-media-library';
 import { Camera as CameraIcon, ChevronRight, Image, MapPin, Mic, UserRound } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { Pressable, ScrollView, TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Text } from '@/components/ui/text';
@@ -74,13 +74,10 @@ export default function SystemPermissionsScreen() {
   return (
     <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
       <ScrollView className="flex-1 px-5 py-5">
-        <Text className="text-muted-foreground text-sm mb-4">
+        <Text className="text-2xl text-muted-foreground">您好 👋</Text>
+        <Text className="font-medium mt-1 text-foreground">
           为了向您提供更好的用户体验，我们在特定场景需要向您申请以下手机系统权限
         </Text>
-
-        <Pressable className="bg-primary p-3 rounded-xl" onPress={requestMediaLibraryPermission}>
-          <Text className="text-primary-foreground text-center font-medium">申请权限</Text>
-        </Pressable>
 
         <View className="bg-card rounded-xl border border-border mt-4">
           <PermissionItem

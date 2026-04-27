@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { Bell, Headphones } from 'lucide-react-native';
 import * as React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { View } from 'react-native';
+import { RefreshControl, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { ActivityIndicator } from '@/components/ActivityIndicator';
@@ -113,7 +113,7 @@ export default function HomeScreen() {
   const renderItem = useCallback(({ item }: { item: DataItem }) => {
     return (
       <View className="px-1 pt-2">
-        <View className="w-full overflow-hidden rounded-xl border border-primary/20 p-3">
+        <View className="w-full overflow-hidden rounded-xl border border-primary/20 p-3 bg-card">
           <View className="w-full aspect-square bg-primary/20 rounded-md" style={{ height: 150 }} />
 
           {Array.from({ length: item.skeletonNum }).map((_, index) => (
@@ -128,7 +128,7 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-background">
       <ScrollHeader
         title={LL.tabs.home()}
         scrollY={scrollY}
@@ -140,6 +140,7 @@ export default function HomeScreen() {
         keyExtractor={(item: any) => item.id.toString()}
         onScroll={scrollHandler}
         scrollEventThrottle={16}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadData} />}
         refreshing={refreshing}
         onRefresh={handleRefresh}
         onEndReached={loadData}
