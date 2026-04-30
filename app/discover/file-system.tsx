@@ -1,7 +1,7 @@
 // TODO: 待完成 expo-file-system/next
 import { View } from 'react-native';
 
-import { Text } from '~/components/ui/text';
+import { Text } from '@/components/ui/text';
 
 export default function FileSystemScreen() {
   return (

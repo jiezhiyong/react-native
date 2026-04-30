@@ -1,10 +1,10 @@
 import { Stack, useRouter } from 'expo-router';
 import { AlertCircle } from 'lucide-react-native';
 import React from 'react';
-import { SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function NotFoundScreen() {
   const router = useRouter();
@@ -14,17 +14,17 @@ export default function NotFoundScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
-      <Stack.Screen options={{ headerShown: false }} />
+    <View className="flex-1 bg-background">
+      <Stack.Screen options={{ headerShown: true, title: '404' }} />
 
       <View className="flex-1 items-center p-8">
         {/* 错误图标 */}
         <View className="items-center justify-center w-32 h-32 rounded-full mb-8 bg-destructive/5">
-          <AlertCircle size={64} color="red" />
+          <AlertCircle size={64} color="#b53333" />
         </View>
 
         {/* 错误信息 */}
-        <Text className="text-3xl font-bold text-center mb-2">找不到页面</Text>
+        <Text className="text-3xl font-medium text-center mb-2">找不到页面</Text>
 
         <Text className="text-muted-foreground text-center mb-2">抱歉，您访问的页面不存在</Text>
 
@@ -44,6 +44,6 @@ export default function NotFoundScreen() {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }

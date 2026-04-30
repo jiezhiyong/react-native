@@ -1,4 +1,5 @@
-import '~/global.css';
+import '@/global.css';
+import '@/lib/nativewind';
 
 import { useReactNavigationDevTools } from '@dev-plugins/react-navigation';
 import { useReactQueryDevTools } from '@dev-plugins/react-query';
@@ -17,39 +18,43 @@ import { AppState, Platform } from 'react-native';
 import type { AppStateStatus } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { ThemeToggle } from '~/components/ThemeToggle';
-import { Toaster } from '~/components/ui/sonner';
-import { DebugPanel } from '~/debug-panel';
-import { useColorScheme } from '~/hooks/useColorScheme';
-import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
-import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
-import { NAV_THEME } from '~/lib/constants';
-import { useTabsScrollStore } from '~/store/scroll';
+import { Toaster } from '@/components/ui/sonner';
+import { DebugPanel } from '@/debug-panel';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect';
+import TypesafeI18n, { useI18nContext } from '@/i18n/i18n-react';
+import { loadAllLocales } from '@/i18n/i18n-util.sync';
+import { setAndroidNavigationBar } from '@/lib/android-navigation-bar';
+import { NAV_THEME } from '@/lib/theme';
+import { useCurrentLocale } from '@/store/locale';
 
 // Construct a new integration instance. This is needed to communicate between the integration and React
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !isRunningInExpoGo(),
 });
 
-// Sentry.init({
-//   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
-//   debug: process.env.NODE_ENV === 'development',
-//   sendDefaultPii: true,
-//   tracesSampleRate: 1.0,
-//   profilesSampleRate: 1.0,
-//   integrations: [navigationIntegration],
-//   enableNativeFramesTracking: !isRunningInExpoGo(),
-// });
+Sentry.init({
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+  debug: process.env.NODE_ENV === 'development',
+  sendDefaultPii: true,
+  tracesSampleRate: 1.0,
+  profilesSampleRate: 1.0,
+  integrations: [navigationIntegration],
+  enableNativeFramesTracking: !isRunningInExpoGo(),
+});
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
-  colors: NAV_THEME.light,
+  colors: NAV_THEME.light.colors,
 };
 const DARK_THEME: Theme = {
   ...DarkTheme,
-  colors: NAV_THEME.dark,
+  colors: NAV_THEME.dark.colors,
 };
+
+loadAllLocales();
 
 export const unstable_settings = {
   initialRouteName: '(tabs)',
@@ -92,6 +97,47 @@ function onAppStateChange(status: AppStateStatus) {
   }
 }
 
+function AppStack() {
+  const { LL } = useI18nContext();
+
+  return (
+    <>
+      <Stack
+        screenOptions={{
+          headerShadowVisible: false,
+        }}
+      >
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: false,
+            title: '',
+          }}
+        />
+        <Stack.Screen
+          name="login"
+          options={{
+            presentation: 'modal',
+            title: LL.routes.login(),
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen
+          name="(protected)"
+          options={{
+            headerShown: true,
+            title: LL.routes.protected(),
+          }}
+        />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+      <PortalHost />
+
+      <Toaster />
+    </>
+  );
+}
+
 function RootLayout() {
   const navigationRef = useNavigationContainerRef() as any;
   useReactNavigationDevTools(navigationRef);
@@ -99,8 +145,8 @@ function RootLayout() {
 
   const hasMounted = React.useRef(false);
 
-  const { statusBarStyle } = useTabsScrollStore();
   const { colorScheme, isDarkColorScheme } = useColorScheme();
+  const locale = useCurrentLocale();
 
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
@@ -164,53 +210,21 @@ function RootLayout() {
 
   return (
     <>
+      <StatusBar style="dark" />
       {showDebugPanel ? <DebugPanel /> : null}
-      <KeyboardProvider>
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-            <GestureHandlerRootView>
-              {/* TODO: TypeError: Cannot read property 'prototype' of undefined */}
-              {/* <TypesafeI18n locale={'zh'}> */}
-              <StatusBar style={statusBarStyle} />
-              {/* <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} /> */}
-              <Stack
-                screenOptions={{
-                  headerShadowVisible: false,
-                }}
-              >
-                <Stack.Screen
-                  name="(tabs)"
-                  options={{
-                    headerShown: false,
-                    title: '',
-                    headerRight: () => <ThemeToggle />,
-                  }}
-                />
-                <Stack.Screen
-                  name="login"
-                  options={{
-                    presentation: 'modal',
-                    title: '登录',
-                    headerShown: true,
-                  }}
-                />
-                <Stack.Screen
-                  name="(protected)"
-                  options={{
-                    headerShown: true,
-                    title: '受保护内容',
-                  }}
-                />
-                <Stack.Screen name="+not-found" />
-              </Stack>
-              <PortalHost />
-
-              <Toaster />
-            </GestureHandlerRootView>
-            {/* </TypesafeI18n> */}
-          </ThemeProvider>
-        </QueryClientProvider>
-      </KeyboardProvider>
+      <SafeAreaProvider>
+        <KeyboardProvider>
+          <QueryClientProvider client={queryClient}>
+            <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+              <GestureHandlerRootView>
+                <TypesafeI18n locale={locale}>
+                  <AppStack />
+                </TypesafeI18n>
+              </GestureHandlerRootView>
+            </ThemeProvider>
+          </QueryClientProvider>
+        </KeyboardProvider>
+      </SafeAreaProvider>
 
       {/* 苹果接力 https://docs.expo.dev/router/advanced/apple-handoff/ */}
       <Head>

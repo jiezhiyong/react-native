@@ -1,6 +1,7 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
-import { useAuth } from '~/store/auth';
+import { Text } from '@/components/ui/text';
+import { useAuth } from '@/store/auth';
 
 export default function ProtectedBill() {
   const { signOut } = useAuth();
@@ -27,27 +28,31 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#f5f4ed',
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '500',
+    color: '#141413',
     marginBottom: 20,
   },
   description: {
     fontSize: 16,
+    lineHeight: 24,
     textAlign: 'center',
+    color: '#5e5d59',
     marginBottom: 30,
   },
   button: {
-    backgroundColor: '#f44336',
+    backgroundColor: '#c96442',
     paddingVertical: 12,
     paddingHorizontal: 32,
-    borderRadius: 8,
+    borderRadius: 12,
   },
   buttonText: {
-    color: 'white',
+    color: '#faf9f5',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
 });

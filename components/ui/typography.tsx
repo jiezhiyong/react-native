@@ -3,7 +3,7 @@ import type { SlottableTextProps, TextRef } from '@rn-primitives/types';
 import * as React from 'react';
 import { Platform, Text as RNText } from 'react-native';
 
-import { cn } from '~/lib/utils';
+import { cn } from '@/lib/utils';
 
 const H1 = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
@@ -12,7 +12,7 @@ const H1 = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild =
       role="heading"
       aria-level="1"
       className={cn(
-        'web:scroll-m-20 text-4xl text-foreground font-extrabold tracking-tight lg:text-5xl web:select-text',
+        'web:scroll-m-20 text-4xl text-foreground font-medium leading-tight lg:text-5xl web:select-text',
         className
       )}
       ref={ref}
@@ -30,7 +30,7 @@ const H2 = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild =
       role="heading"
       aria-level="2"
       className={cn(
-        'web:scroll-m-20 border-b border-border pb-2 text-3xl text-foreground font-semibold tracking-tight first:mt-0 web:select-text',
+        'web:scroll-m-20 border-b border-border pb-2 text-3xl text-foreground font-medium leading-tight first:mt-0 web:select-text',
         className
       )}
       ref={ref}
@@ -47,7 +47,7 @@ const H3 = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild =
     <Component
       role="heading"
       aria-level="3"
-      className={cn('web:scroll-m-20 text-2xl text-foreground font-semibold tracking-tight web:select-text', className)}
+      className={cn('web:scroll-m-20 text-2xl text-foreground font-medium leading-tight web:select-text', className)}
       ref={ref}
       {...props}
     />
@@ -62,7 +62,7 @@ const H4 = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild =
     <Component
       role="heading"
       aria-level="4"
-      className={cn('web:scroll-m-20 text-xl text-foreground font-semibold tracking-tight web:select-text', className)}
+      className={cn('web:scroll-m-20 text-xl text-foreground font-medium leading-tight web:select-text', className)}
       ref={ref}
       {...props}
     />
@@ -73,7 +73,9 @@ H4.displayName = 'H4';
 
 const P = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
-  return <Component className={cn('text-foreground web:select-text', className)} ref={ref} {...props} />;
+  return (
+    <Component className={cn('text-foreground leading-relaxed web:select-text', className)} ref={ref} {...props} />
+  );
 });
 
 P.displayName = 'P';
@@ -116,7 +118,13 @@ Code.displayName = 'Code';
 
 const Lead = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
-  return <Component className={cn('text-xl text-muted-foreground web:select-text', className)} ref={ref} {...props} />;
+  return (
+    <Component
+      className={cn('text-xl leading-relaxed text-muted-foreground web:select-text', className)}
+      ref={ref}
+      {...props}
+    />
+  );
 });
 
 Lead.displayName = 'Lead';
@@ -124,11 +132,7 @@ Lead.displayName = 'Lead';
 const Large = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
   return (
-    <Component
-      className={cn('text-xl text-foreground font-semibold web:select-text', className)}
-      ref={ref}
-      {...props}
-    />
+    <Component className={cn('text-xl text-foreground font-medium web:select-text', className)} ref={ref} {...props} />
   );
 });
 
@@ -138,7 +142,7 @@ const Small = React.forwardRef<TextRef, SlottableTextProps>(({ className, asChil
   const Component = asChild ? Slot.Text : RNText;
   return (
     <Component
-      className={cn('text-sm text-foreground font-medium leading-none web:select-text', className)}
+      className={cn('text-sm text-foreground font-medium leading-tight web:select-text', className)}
       ref={ref}
       {...props}
     />

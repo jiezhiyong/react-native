@@ -4,8 +4,8 @@ import { Pause, Play, Volume1, Volume2 } from 'lucide-react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 /**
  * Expo Audio 示例组件
@@ -14,9 +14,9 @@ import { Text } from '~/components/ui/text';
 export default function ExpoAudioScreen() {
   // 音频源示例
   const audioSources = [
-    { name: 'Sample 0', uri: require('~/assets/audios/received-message.mp3') },
-    { name: 'Sample 1', uri: require('~/assets/audios/sample-3s.mp3') },
-    { name: 'Sample 2', uri: require('~/assets/audios/sample-9s.mp3') },
+    { name: 'Sample 0', uri: require('@/assets/audios/received-message.mp3') },
+    { name: 'Sample 1', uri: require('@/assets/audios/sample-3s.mp3') },
+    { name: 'Sample 2', uri: require('@/assets/audios/sample-9s.mp3') },
     { name: 'Sample 3 (404)', uri: 'https://abc.com/mp3/example.mp3' },
   ];
   const [selectedSource, setSelectedSource] = useState(audioSources[0]);
@@ -217,9 +217,9 @@ export default function ExpoAudioScreen() {
           minimumValue={0}
           maximumValue={1}
           style={{ width: '100%', height: 40 }}
-          minimumTrackTintColor="#0891b2"
-          maximumTrackTintColor="#cccccc"
-          thumbTintColor="#0891b2"
+          minimumTrackTintColor="#c96442"
+          maximumTrackTintColor="#e8e6dc"
+          thumbTintColor="#c96442"
         />
         <View className="flex-row justify-between mt-1">
           <Text className="text-muted-foreground text-xs">{formatTime(status?.currentTime)}</Text>
@@ -240,9 +240,9 @@ export default function ExpoAudioScreen() {
               minimumValue={0}
               maximumValue={1}
               style={{ width: '100%', height: 40 }}
-              minimumTrackTintColor="#0891b2"
-              maximumTrackTintColor="#cccccc"
-              thumbTintColor="#0891b2"
+              minimumTrackTintColor="#c96442"
+              maximumTrackTintColor="#e8e6dc"
+              thumbTintColor="#c96442"
             />
           </View>
           <Volume2 size={16} color="gray" />
@@ -250,7 +250,7 @@ export default function ExpoAudioScreen() {
       </View>
 
       {/* 播放控制 */}
-      <View className="flex-row justify-center items-center space-x-4 mb-6">
+      <View className="flex-row justify-center items-center gap-4 mb-6">
         <Button
           onPress={togglePlayPause}
           className="w-14 h-14 rounded-full justify-center items-center"
@@ -258,9 +258,9 @@ export default function ExpoAudioScreen() {
           disabled={isLoading || status?.isBuffering}
         >
           {status?.playing && !status?.didJustFinish ? (
-            <Pause size={24} color="#fff" />
+            <Pause size={24} color="#faf9f5" />
           ) : (
-            <Play size={24} color="#fff" />
+            <Play size={24} color="#faf9f5" />
           )}
         </Button>
       </View>

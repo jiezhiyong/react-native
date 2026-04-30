@@ -2,7 +2,7 @@ import SegmentedControl from '@react-native-segmented-control/segmented-control'
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { Text } from '~/components/ui/text';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoSegmentedControlScreen() {
   const [selectedIndex, setSelectedIndex] = useState(0);

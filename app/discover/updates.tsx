@@ -1,10 +1,11 @@
 // TODO: 待完成 updates
 import * as Updates from 'expo-updates';
 import { useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoUpdatesScreen() {
   const [isChecking, setIsChecking] = useState(false);

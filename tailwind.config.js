@@ -42,6 +42,12 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
+      borderRadius: {
+        lg: 'var(--radius)',
+        xl: 'calc(var(--radius) + 2px)',
+        md: 'calc(var(--radius) - 4px)',
+        sm: 'calc(var(--radius) - 6px)',
+      },
       borderWidth: {
         hairline: hairlineWidth(),
       },
@@ -60,6 +66,9 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
+  },
+  future: {
+    hoverOnlyWhenSupported: true,
   },
   plugins: [require('tailwindcss-animate')],
 };

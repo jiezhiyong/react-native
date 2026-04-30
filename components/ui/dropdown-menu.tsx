@@ -2,12 +2,12 @@ import * as DropdownMenuPrimitive from '@rn-primitives/dropdown-menu';
 import * as React from 'react';
 import { Platform, type StyleProp, StyleSheet, Text, type TextProps, View, type ViewStyle } from 'react-native';
 
-import { TextClassContext } from '~/components/ui/text';
-import { Check } from '~/lib/icons/Check';
-import { ChevronDown } from '~/lib/icons/ChevronDown';
-import { ChevronRight } from '~/lib/icons/ChevronRight';
-import { ChevronUp } from '~/lib/icons/ChevronUp';
-import { cn } from '~/lib/utils';
+import { TextClassContext } from '@/components/ui/text';
+import { Check } from '@/lib/icons/Check';
+import { ChevronDown } from '@/lib/icons/ChevronDown';
+import { ChevronRight } from '@/lib/icons/ChevronRight';
+import { ChevronUp } from '@/lib/icons/ChevronUp';
+import { cn } from '@/lib/utils';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 
@@ -68,7 +68,7 @@ const DropdownMenuSubContent = React.forwardRef<
     />
   );
 });
-DropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName;
+DropdownMenuSubContent.displayName = 'DropdownMenuSubContent';
 
 const DropdownMenuContent = React.forwardRef<
   DropdownMenuPrimitive.ContentRef,
@@ -166,7 +166,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   >
     <View className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <View className="bg-foreground h-2 w-2 rounded-full" />
+        <View className="bg-primary h-2 w-2 rounded-full" />
       </DropdownMenuPrimitive.ItemIndicator>
     </View>
     <>{children}</>

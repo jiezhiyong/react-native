@@ -6,6 +6,9 @@ const VERSION_CODE = 1;
 const IS_DEV = process.env.APP_VARIANT === 'development';
 const IS_TEST = process.env.APP_VARIANT === 'test';
 const ngrokUrl = `${process.env.EXPO_TUNNEL_SUBDOMAIN}.ngrok.io`;
+const ENABLE_IOS_CAPABILITIES = !IS_DEV || process.env.EXPO_ENABLE_IOS_CAPABILITIES === 'true';
+const IOS_CAPABILITY_PLUGINS: ExpoConfig['plugins'] = [['expo-apple-authentication', {}]];
+const DEV_SIMULATOR_PLUGINS: ExpoConfig['plugins'] = [['./plugins/withDevSimulatorEntitlements.cjs', {}]];
 
 const getUniqueIdentifier = () => {
   if (IS_DEV) {
@@ -36,8 +39,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   version: '1.0.0',
   orientation: 'portrait',
   userInterfaceStyle: 'automatic',
-  // @ts-expect-error newArchEnabled not in ExpoConfig type but valid in expo SDK 55
-  newArchEnabled: true,
   jsEngine: 'hermes',
   experiments: {
     reactCompiler: true,
@@ -110,7 +111,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     buildNumber: String(VERSION_CODE),
     bundleIdentifier: getUniqueIdentifier(),
     supportsTablet: true,
-    usesAppleSignIn: true,
+    usesAppleSignIn: ENABLE_IOS_CAPABILITIES,
     googleServicesFile: process.env.GOOGLE_SERVICES_INFO_PLIST ?? './GoogleService-Info.plist',
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
@@ -132,14 +133,16 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         },
       ],
     },
-    associatedDomains: [
-      `applinks:${ngrokUrl}`,
-      `activitycontinuation:${ngrokUrl}`,
-      `webcredentials:${ngrokUrl}`,
-      `applinks:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
-      `activitycontinuation:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
-      `webcredentials:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
-    ],
+    associatedDomains: ENABLE_IOS_CAPABILITIES
+      ? [
+          `applinks:${ngrokUrl}`,
+          `activitycontinuation:${ngrokUrl}`,
+          `webcredentials:${ngrokUrl}`,
+          `applinks:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
+          `activitycontinuation:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
+          `webcredentials:${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
+        ]
+      : undefined,
     entitlements: {
       'com.apple.developer.networking.wifi-info': true,
     },
@@ -147,12 +150,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 
   plugins: [
     ['./plugins/withAndroidQueries.cjs', {}],
+    ['expo-font', {}],
+    ['expo-image', {}],
+    ['expo-sqlite', {}],
+    ['expo-web-browser', {}],
     ['expo-secure-store', {}],
     ['expo-asset', {}],
     ['expo-background-task', {}],
     ['expo-build-properties', {}],
     ['expo-localization', {}],
-    ['expo-apple-authentication', {}],
     [
       'expo-router',
       {
@@ -160,6 +166,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         origin: `https://${process.env.EXPO_TUNNEL_SUBDOMAIN}`,
       },
     ],
+    ['./plugins/withSentryDsymUpload.cjs', {}],
     [
       '@sentry/react-native/expo',
       {
@@ -290,5 +297,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ['@react-native-community/datetimepicker', {}],
     ['expo-mail-composer', {}],
     ['expo-sharing', {}],
+    ['@config-plugins/react-native-blob-util', {}],
+    ['@config-plugins/react-native-pdf', {}],
+    ...(ENABLE_IOS_CAPABILITIES ? IOS_CAPABILITY_PLUGINS : []),
+    ...(ENABLE_IOS_CAPABILITIES ? [] : DEV_SIMULATOR_PLUGINS),
   ],
 });

@@ -1,9 +1,11 @@
 import { Asset } from 'expo-asset';
+import { Image } from 'expo-image';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, ScrollView, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 /**
  * Expo Asset 示例屏幕
@@ -50,7 +52,7 @@ export default function ExpoAssetScreen() {
         {asset.name}.{asset.type} ({asset.width || '?'} x {asset.height || '?'})
       </Text>
       {asset.localUri && (
-        <Image source={{ uri: asset.localUri }} className="w-20 h-20 rounded bg-muted" resizeMode="contain" />
+        <Image source={{ uri: asset.localUri }} className="w-20 h-20 rounded bg-muted" contentFit="contain" />
       )}
     </View>
   );
@@ -96,7 +98,7 @@ export default function ExpoAssetScreen() {
     <>
       {isDownloading ? (
         <View className="items-center">
-          <ActivityIndicator color="#0891b2" />
+          <ActivityIndicator />
           <Text className="mt-2">下载中: {Math.round(downloadProgress * 100)}%</Text>
         </View>
       ) : downloadedAsset ? (
@@ -106,7 +108,7 @@ export default function ExpoAssetScreen() {
             {downloadedAsset.height || '?'})
           </Text>
           {downloadedAsset.localUri && (
-            <Image source={{ uri: downloadedAsset.localUri }} className="w-20 h-20 rounded" resizeMode="contain" />
+            <Image source={{ uri: downloadedAsset.localUri }} className="w-20 h-20 rounded" contentFit="contain" />
           )}
         </View>
       ) : (
@@ -120,7 +122,7 @@ export default function ExpoAssetScreen() {
   if (isLoading) {
     return (
       <View className="flex-1 p-5 m-6 items-center justify-center bg-muted rounded-lg">
-        <ActivityIndicator color="#0891b2" />
+        <ActivityIndicator />
         <Text className="mt-2">加载资源中...</Text>
       </View>
     );

@@ -11,8 +11,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 const { width } = Dimensions.get('window');
 

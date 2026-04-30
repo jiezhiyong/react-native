@@ -1,11 +1,12 @@
+import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { ImagePickerAsset } from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import { useEffect, useState } from 'react';
-import { Alert, FlatList, Image, View } from 'react-native';
+import { Alert, FlatList, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoMediaLibraryScreen() {
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
@@ -115,7 +116,7 @@ export default function ExpoMediaLibraryScreen() {
             numColumns={3}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <Image source={{ uri: item.uri }} className="flex-1 h-32 m-1 p-1 border rounded-lg" resizeMode="cover" />
+              <Image source={{ uri: item.uri }} className="flex-1 h-32 m-1 p-1 border rounded-lg" contentFit="cover" />
             )}
           />
         </>
@@ -124,7 +125,7 @@ export default function ExpoMediaLibraryScreen() {
       {selectedAsset && (
         <>
           <Text className="text-lg font-medium mb-2">选择的图片: {selectedAsset.fileName}</Text>
-          <Image source={{ uri: selectedAsset.uri }} className="h-32 p-1 border rounded-lg" resizeMode="cover" />
+          <Image source={{ uri: selectedAsset.uri }} className="h-32 p-1 border rounded-lg" contentFit="cover" />
         </>
       )}
     </View>

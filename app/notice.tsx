@@ -1,10 +1,18 @@
 import { format, isThisMonth, isThisWeek, isToday, isYesterday, parseISO } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
+import type { Locale } from 'date-fns';
+import { enUS, zhCN } from 'date-fns/locale';
 import { Stack } from 'expo-router';
 import { CalendarClock, Mail } from 'lucide-react-native';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, RefreshControl, SafeAreaView, Text, View } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { create } from 'zustand';
+
+import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
+import type { Locales } from '@/i18n/i18n-types';
+import { useCurrentLocale } from '@/store/locale';
 
 // 定义消息类型
 interface Notice {
@@ -94,24 +102,43 @@ const useNoticeStore = create<NoticeStore>((set, get) => ({
 }));
 
 // 获取日期分组标签
-const getDateGroup = (dateStr: string): string => {
+const dateFnsLocales = {
+  en: enUS,
+  zh: zhCN,
+} satisfies Record<Locales, Locale>;
+
+const monthFormats = {
+  en: 'MMMM yyyy',
+  zh: 'yyyy年MM月',
+} satisfies Record<Locales, string>;
+
+const getDateGroup = (
+  dateStr: string,
+  locale: Locales,
+  labels: { today: string; yesterday: string; thisWeek: string; thisMonth: string }
+): string => {
   const date = parseISO(dateStr);
 
-  if (isToday(date)) return '今天';
-  if (isYesterday(date)) return '昨天';
-  if (isThisWeek(date)) return '本周';
-  if (isThisMonth(date)) return '本月';
+  if (isToday(date)) return labels.today;
+  if (isYesterday(date)) return labels.yesterday;
+  if (isThisWeek(date)) return labels.thisWeek;
+  if (isThisMonth(date)) return labels.thisMonth;
 
-  return format(date, 'yyyy年MM月', { locale: zhCN });
+  return format(date, monthFormats[locale], { locale: dateFnsLocales[locale] });
 };
 
 // 消息项组件
 const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) => {
   return (
-    <View className={`p-4 mt-3 rounded-lg ${item.isRead ? 'bg-gray-50' : 'bg-blue-50'}`} onTouchEnd={onPress}>
+    <View
+      className={`p-4 mt-3 rounded-xl border ${
+        item.isRead ? 'bg-card border-border' : 'bg-primary/10 border-primary/20'
+      }`}
+      onTouchEnd={onPress}
+    >
       <View className="flex-row items-center justify-between mb-2">
-        <Text className={`font-medium ${item.isRead ? 'text-gray-700' : 'text-blue-700'}`}>{item.title}</Text>
-        {!item.isRead && <View className="bg-red-500 w-2 h-2 rounded-full" />}
+        <Text className={`font-medium ${item.isRead ? 'text-foreground' : 'text-primary'}`}>{item.title}</Text>
+        {!item.isRead && <View className="bg-primary w-2 h-2 rounded-full" />}
       </View>
       <Text className="text-muted-foreground mb-2" numberOfLines={2}>
         {item.content}
@@ -124,13 +151,15 @@ const NoticeItem = ({ item, onPress }: { item: Notice; onPress: () => void }) =>
 // 日期分组标题组件
 const DateGroupHeader = ({ title }: { title: string }) => (
   <View className="flex-row items-center py-2 mt-2">
-    <CalendarClock size={16} color="#6b7280" />
+    <CalendarClock size={16} color="#87867f" />
     <Text className="text-sm font-medium text-muted-foreground ml-2">{title}</Text>
   </View>
 );
 
 export default function NoticeScreen() {
   const { notices, loading, refreshing, hasMore, currentPage, fetchNotices, markAsRead } = useNoticeStore();
+  const locale = useCurrentLocale();
+  const { LL } = useI18nContext();
 
   // 分组消息
   const [groupedNotices, setGroupedNotices] = useState<GroupedNotices[]>([]);
@@ -147,7 +176,12 @@ export default function NoticeScreen() {
     const groups: Record<string, Notice[]> = {};
 
     notices.forEach((notice) => {
-      const dateGroup = getDateGroup(notice.createdAt);
+      const dateGroup = getDateGroup(notice.createdAt, locale, {
+        today: LL.common.today(),
+        yesterday: LL.common.yesterday(),
+        thisWeek: LL.common.thisWeek(),
+        thisMonth: LL.common.thisMonth(),
+      });
       if (!groups[dateGroup]) {
         groups[dateGroup] = [];
       }
@@ -159,7 +193,12 @@ export default function NoticeScreen() {
       .map(([date, data]) => ({ date, data }))
       .sort((a, b) => {
         // 根据组名按特定顺序排序
-        const order = ['今天', '昨天', '本周', '本月'];
+        const order = [
+          String(LL.common.today()),
+          String(LL.common.yesterday()),
+          String(LL.common.thisWeek()),
+          String(LL.common.thisMonth()),
+        ];
         const aIndex = order.indexOf(a.date);
         const bIndex = order.indexOf(b.date);
 
@@ -172,7 +211,7 @@ export default function NoticeScreen() {
       });
 
     setGroupedNotices(sortedGroups);
-  }, [notices]);
+  }, [LL, locale, notices]);
 
   // 刷新数据
   const onRefresh = useCallback(() => {
@@ -223,18 +262,18 @@ export default function NoticeScreen() {
 
     return (
       <View className="flex-1 justify-center items-center py-10">
-        <Mail size={48} color="#d1d5db" />
-        <Text className="mt-4 text-secondary-foreground">暂无消息</Text>
+        <Mail size={48} color="#d1cfc5" />
+        <Text className="mt-4 text-secondary-foreground">{LL.notice.empty()}</Text>
       </View>
     );
-  }, [loading, refreshing]);
+  }, [LL, loading, refreshing]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
       <View className="flex-1 bg-background px-5 pb-1 pt-2">
         <Stack.Screen
           options={{
-            title: '消息中心',
+            title: LL.routes.notices(),
           }}
         />
 

@@ -1,9 +1,12 @@
 import { Stack } from 'expo-router';
 import { ChevronDown, ChevronUp, Search } from 'lucide-react-native';
 import React, { useCallback, useMemo, useState } from 'react';
-import { FlatList, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, ScrollView, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Input } from '~/components/ui/input';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 
 // 定义问题类型
 interface Question {
@@ -110,20 +113,20 @@ const QuestionItem = ({
   onToggle: () => void;
 }) => {
   return (
-    <View className="mt-2 border border-gray-200 rounded-lg overflow-hidden">
+    <View className="mt-3 border border-border rounded-xl overflow-hidden bg-card">
       <TouchableOpacity
-        className="flex-row items-center justify-between p-4 bg-background"
+        className="flex-row items-center justify-between p-4 bg-card"
         onPress={onToggle}
         activeOpacity={0.7}
       >
-        <Text className="flex-1 font-medium text-gray-800">{item.question}</Text>
+        <Text className="flex-1 font-medium text-foreground">{item.question}</Text>
         <View className="ml-2">
-          {isExpanded ? <ChevronUp size={20} color="#6b7280" /> : <ChevronDown size={20} color="#6b7280" />}
+          {isExpanded ? <ChevronUp size={20} color="#87867f" /> : <ChevronDown size={20} color="#87867f" />}
         </View>
       </TouchableOpacity>
 
       {isExpanded && (
-        <View className="p-4 bg-muted border-t border-gray-100">
+        <View className="p-4 bg-muted border-t border-border">
           <Text className="text-muted-foreground leading-6">{item.answer}</Text>
         </View>
       )}
@@ -143,16 +146,19 @@ const CategoryTag = ({
 }) => {
   return (
     <TouchableOpacity
-      className={`py-1.5 px-3 mr-2 rounded-full ${isSelected ? 'bg-primary' : 'bg-muted'}`}
+      className={`py-1.5 px-3 mr-2 rounded-full border ${isSelected ? 'border-primary bg-primary' : 'border-border bg-muted'}`}
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <Text className={`font-medium ${isSelected ? 'text-white' : 'text-muted-foreground'}`}>{category.name}</Text>
+      <Text className={`font-medium ${isSelected ? 'text-primary-foreground' : 'text-muted-foreground'}`}>
+        {category.name}
+      </Text>
     </TouchableOpacity>
   );
 };
 
 export default function QaScreen() {
+  const { LL } = useI18nContext();
   // 状态
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -193,30 +199,30 @@ export default function QaScreen() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }} className="bg-background">
+    <SafeAreaView edges={['bottom']} style={{ flex: 1 }} className="bg-background">
       <Stack.Screen
         options={{
-          title: '常见问题',
+          title: LL.routes.qa(),
         }}
       />
 
       <View className="px-5 pt-5 pb-3">
         {/* 搜索框 */}
-        <View className="flex-row items-center bg-muted rounded-full px-4 mb-4">
-          <Search size={20} color="#9ca3af" />
+        <View className="flex-row items-center bg-card rounded-xl border border-border px-4 mb-4">
+          <Search size={20} color="#87867f" />
           <Input
             className="flex-1 py-2 px-3 border-0 bg-transparent"
-            placeholder="搜索问题"
+            placeholder={LL.qa.searchPlaceholder()}
             value={searchQuery}
             onChangeText={setSearchQuery}
-            placeholderTextColor="#9ca3af"
+            placeholderTextColor="#87867f"
           />
         </View>
 
         {/* 分类标签 */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <CategoryTag
-            category={{ id: 'all', name: '全部' }}
+            category={{ id: 'all', name: LL.qa.all() }}
             isSelected={selectedCategory === 'all'}
             onPress={() => handleCategoryPress('all')}
           />
@@ -243,12 +249,12 @@ export default function QaScreen() {
               onToggle={() => toggleQuestion(item.id)}
             />
           )}
-          contentContainerClassName="px-4 py-2"
+          contentContainerClassName="px-5 py-2"
           showsVerticalScrollIndicator={false}
         />
       ) : (
         <View className="flex-1 justify-center items-center px-4">
-          <Text className="text-secondary-foreground text-lg">未找到相关问题，请尝试其他关键词</Text>
+          <Text className="text-secondary-foreground text-lg">{LL.qa.noResults()}</Text>
         </View>
       )}
     </SafeAreaView>

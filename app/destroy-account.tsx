@@ -3,16 +3,18 @@ import { router, Stack } from 'expo-router';
 import { Info } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ActivityIndicator, Alert, View } from 'react-native';
+import { Alert, View } from 'react-native';
 import * as z from 'zod';
 
-import { Button } from '~/components/ui/button';
-import { Checkbox } from '~/components/ui/checkbox';
-import { Input } from '~/components/ui/input';
-import { toast } from '~/components/ui/sonner';
-import { Text } from '~/components/ui/text';
-import { cn } from '~/lib/utils';
-import { useAuthStore } from '~/store/auth';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { toast } from '@/components/ui/sonner';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
+import { cn } from '@/lib/utils';
+import { useAuthStore } from '@/store/auth';
 
 // 定义表单验证模式
 const destroyAccountSchema = z.object({
@@ -29,6 +31,7 @@ type DestroyAccountFormValues = z.infer<typeof destroyAccountSchema>;
  * 展示应用的销毁账号内容
  */
 export default function DestroyAccountScreen() {
+  const { LL } = useI18nContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { signOut } = useAuthStore();
 
@@ -101,24 +104,24 @@ export default function DestroyAccountScreen() {
     <View className="flex-1 bg-background">
       <Stack.Screen
         options={{
-          title: '账户注销',
+          title: LL.routes.destroyAccount(),
         }}
       />
 
-      <View className="flex-1 p-5">
-        <Text className="text-2xl font-bold mb-6">账户注销</Text>
+      <View className="flex-1 px-5 py-8">
+        <Text className="text-2xl font-medium mb-6">账户注销 👋</Text>
 
-        <View className="mb-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
+        <View className="mb-6 p-4 bg-primary/10 rounded-xl border border-primary/20">
           <View className="flex-row gap-2">
-            <Info size={20} color="#B45309" className="mr-2 mt-1" />
-            <Text className="flex-1 text-amber-800">
+            <Info size={20} color="#c96442" className="mr-2 mt-1" />
+            <Text className="flex-1 text-foreground">
               注销账户将永久删除您的所有数据，包括个人信息、历史记录和关联服务。此操作无法撤销。
             </Text>
           </View>
         </View>
 
         {/* 密码验证 */}
-        <View className="space-y-2 mb-6">
+        <View className="gap-2 mb-6">
           <Text className="font-medium mb-2">请输入您的密码以确认身份</Text>
           <Controller
             control={control}
@@ -131,21 +134,21 @@ export default function DestroyAccountScreen() {
                 onBlur={onBlur}
                 secureTextEntry
                 editable={!isSubmitting}
-                className={cn('bg-background', !!errors.password && 'border-destructive')}
+                className={cn(!!errors.password && 'border-destructive')}
               />
             )}
           />
         </View>
 
         {/* 确认选项 */}
-        <View className="space-y-2 mb-1">
+        <View className="gap-2 mb-1">
           <Controller
             control={control}
             name="confirmDestroy"
             render={({ field: { onChange, value } }) => (
               <View className="flex-row items-start">
-                <Checkbox checked={value} onCheckedChange={onChange} disabled={isSubmitting} />
-                <Text className={cn('flex-1 ml-2 text-gray-700', errors.confirmDestroy ? 'text-destructive' : '')}>
+                <Checkbox checked={value} onCheckedChange={onChange} disabled={isSubmitting} className="mt-[2px]" />
+                <Text className={cn('flex-1 ml-2 text-foreground', errors.confirmDestroy ? 'text-destructive' : '')}>
                   我理解注销账户将永久删除我的所有数据，且此操作不可逆转
                 </Text>
               </View>
@@ -155,7 +158,11 @@ export default function DestroyAccountScreen() {
 
         {/* 提交按钮 */}
         <Button variant="destructive" onPress={handleSubmit(onSubmit)} disabled={isSubmitting} className="mt-2">
-          {isSubmitting ? <ActivityIndicator size="small" color="#fff" className="mr-2" /> : <Text>注销我的账户</Text>}
+          {isSubmitting ? (
+            <ActivityIndicator size="small" color="#faf9f5" className="mr-2" />
+          ) : (
+            <Text>注销我的账户</Text>
+          )}
         </Button>
       </View>
     </View>

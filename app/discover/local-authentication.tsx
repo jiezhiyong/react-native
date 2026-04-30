@@ -2,9 +2,9 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Card } from '~/components/ui/card';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 
 const securityLevelDesc = {
   [String(LocalAuthentication.SecurityLevel.NONE)]: '无',

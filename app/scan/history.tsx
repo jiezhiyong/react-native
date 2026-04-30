@@ -1,15 +1,20 @@
 import { format } from 'date-fns';
+import type { Locale } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import * as Clipboard from 'expo-clipboard';
 import { Stack, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Circle, CircleCheck, FileX, Trash2 } from 'lucide-react-native';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { Alert, FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, TouchableOpacity, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
+import type { Locales } from '@/i18n/i18n-types';
+import { useCurrentLocale } from '@/store/locale';
 
 import { type ScanHistoryItem, useScanHistoryStore } from '../../store/scan-history';
 
@@ -24,28 +29,29 @@ interface EditToolbarProps {
 // 底部编辑工具栏组件
 const EditToolbar: React.FC<EditToolbarProps> = React.memo(
   ({ selectedItems, historyLength, toggleSelectAll, handleBatchDelete }) => {
+    const { LL } = useI18nContext();
     // 计算是否全选和是否有选中项
     const isAllSelected = selectedItems.length === historyLength;
     const hasSelectedItems = selectedItems.length > 0;
 
     return (
-      <View className="pl-5 pr-3 pt-3 flex-row justify-between items-center border-t border-gray-100">
+      <View className="pl-5 pr-3 pt-3 flex-row justify-between items-center border-t border-border bg-background">
         <TouchableOpacity onPress={toggleSelectAll} className="flex-row items-center gap-2">
           {isAllSelected ? (
             <CircleCheck size={20} strokeWidth={1.5} />
           ) : (
-            <Circle size={20} strokeWidth={1.5} color="#eaeaea" />
+            <Circle size={20} strokeWidth={1.5} color="#d1cfc5" />
           )}
-          <Text>全选</Text>
+          <Text>{LL.scanHistory.selectAll()}</Text>
         </TouchableOpacity>
 
         <Button
           variant="destructive"
           onPress={handleBatchDelete}
           disabled={!hasSelectedItems}
-          className="rounded-full min-w-28"
+          className="rounded-xl min-w-28"
         >
-          <Text className="text-white font-medium">删除</Text>
+          <Text className="text-primary-foreground font-medium">{LL.common.delete()}</Text>
         </Button>
       </View>
     );
@@ -62,15 +68,20 @@ export default function HistoryScreen() {
   const history = useScanHistoryStore((state) => state.history);
   const removeHistory = useScanHistoryStore((state) => state.removeHistory);
   const removeMultipleHistory = useScanHistoryStore((state) => state.removeMultipleHistory);
+  const locale = useCurrentLocale();
+  const { LL } = useI18nContext();
 
   // 用于引用当前打开的Swipeable组件
   const openedRowRef = useRef<Swipeable | null>(null);
 
   // 复制内容到剪贴板
-  const copyToClipboard = useCallback(async (content: string) => {
-    await Clipboard.setStringAsync(content);
-    Alert.alert('复制成功', '内容已复制到剪贴板');
-  }, []);
+  const copyToClipboard = useCallback(
+    async (content: string) => {
+      await Clipboard.setStringAsync(content);
+      Alert.alert(LL.common.copied(), LL.common.contentCopied());
+    },
+    [LL]
+  );
 
   // 打开URL
   const openUrl = useCallback(
@@ -86,10 +97,10 @@ export default function HistoryScreen() {
   // 删除单个历史记录
   const handleDelete = useCallback(
     (id: string) => {
-      Alert.alert('删除确认', '确定要删除这条记录吗？', [
-        { text: '取消', style: 'cancel' },
+      Alert.alert(LL.scanHistory.deleteConfirmTitle(), LL.scanHistory.deleteOneConfirm(), [
+        { text: LL.common.cancel(), style: 'cancel' },
         {
-          text: '删除',
+          text: LL.common.delete(),
           onPress: () => {
             removeHistory(id);
             if (openedRowRef.current) {
@@ -101,32 +112,36 @@ export default function HistoryScreen() {
         },
       ]);
     },
-    [removeHistory, openedRowRef]
+    [LL, removeHistory, openedRowRef]
   );
 
   // 批量删除选中的历史记录
   const handleBatchDelete = useCallback(() => {
     if (selectedItems.length === 0) {
-      Alert.alert('提示', '请先选择要删除的记录');
+      Alert.alert(LL.common.notice(), LL.scanHistory.selectBeforeDelete());
       return;
     }
 
-    Alert.alert('删除确认', `确定要删除选中的 ${selectedItems.length} 条记录吗？`, [
-      { text: '取消', style: 'cancel' },
-      {
-        text: '删除',
-        onPress: () => {
-          removeMultipleHistory(selectedItems);
-          setSelectedItems([]);
-          // 如果删除后没有记录了，退出编辑模式
-          if (history.length === selectedItems.length) {
-            setIsEditing(false);
-          }
+    Alert.alert(
+      LL.scanHistory.deleteConfirmTitle(),
+      LL.scanHistory.deleteSelectedConfirm({ count: selectedItems.length }),
+      [
+        { text: LL.common.cancel(), style: 'cancel' },
+        {
+          text: LL.common.delete(),
+          onPress: () => {
+            removeMultipleHistory(selectedItems);
+            setSelectedItems([]);
+            // 如果删除后没有记录了，退出编辑模式
+            if (history.length === selectedItems.length) {
+              setIsEditing(false);
+            }
+          },
+          style: 'destructive',
         },
-        style: 'destructive',
-      },
-    ]);
-  }, [selectedItems, history.length, removeMultipleHistory]);
+      ]
+    );
+  }, [LL, selectedItems, history.length, removeMultipleHistory]);
 
   // 切换选中状态
   const toggleSelect = useCallback((id: string) => {
@@ -143,10 +158,23 @@ export default function HistoryScreen() {
   }, [selectedItems.length, history]);
 
   // 格式化时间
-  const formatDate = useCallback((timestamp: number) => {
-    const date = new Date(timestamp);
-    return format(date, 'yyyy-MM-dd', { locale: zhCN });
-  }, []);
+  const dateFormats = {
+    en: 'MMM d, yyyy',
+    zh: 'yyyy-MM-dd',
+  } satisfies Record<Locales, string>;
+
+  const dateLocales = {
+    en: undefined,
+    zh: zhCN,
+  } satisfies Record<Locales, Locale | undefined>;
+
+  const formatDate = useCallback(
+    (timestamp: number) => {
+      const date = new Date(timestamp);
+      return format(date, dateFormats[locale], { locale: dateLocales[locale] });
+    },
+    [dateFormats, dateLocales, locale]
+  );
 
   // 单个记录项组件接口
   interface HistoryItemProps {
@@ -179,14 +207,14 @@ export default function HistoryScreen() {
     }
 
     return (
-      <View className="flex-row ml-5 mr-3 gap-3 items-center overflow-hidden border-b border-gray-100">
+      <View className="flex-row mx-5 gap-3 items-center overflow-hidden border-b border-border">
         <TouchableOpacity className="flex-1 py-3 items-center flex-row gap-3 overflow-hidden" onPress={handlePress}>
           {isEditing && (
             <>
               {isSelected ? (
                 <CircleCheck size={20} strokeWidth={1.5} />
               ) : (
-                <Circle size={20} strokeWidth={1.5} color="#eaeaea" />
+                <Circle size={20} strokeWidth={1.5} color="#d1cfc5" />
               )}
             </>
           )}
@@ -203,7 +231,7 @@ export default function HistoryScreen() {
 
         {isEditing && (
           <Button variant="ghost" onPress={handleDeleteItem} size="icon" className="shrink-0">
-            <Trash2 size={18} strokeWidth={1.5} color="red" />
+            <Trash2 size={18} strokeWidth={1.5} color="#b53333" />
           </Button>
         )}
       </View>
@@ -248,15 +276,15 @@ export default function HistoryScreen() {
   const renderEmptyState = useCallback(
     () => (
       <View className="flex-1 justify-center items-center p-5">
-        <FileX size={120} color="#6b7280" />
-        <Text className="text-muted-foreground text-center mt-4">暂无扫描记录</Text>
-        <Text className="text-secondary-foreground text-center mt-2 text-sm">扫描二维码后会自动保存在这里</Text>
-        <TouchableOpacity onPress={() => router.back()} className="mt-6 bg-blue-500 py-3 px-6 rounded-full">
-          <Text className="text-white font-medium">去扫描</Text>
+        <FileX size={120} color="#87867f" />
+        <Text className="text-muted-foreground text-center mt-4">{LL.scanHistory.emptyTitle()}</Text>
+        <Text className="text-secondary-foreground text-center mt-2 text-sm">{LL.scanHistory.emptyDescription()}</Text>
+        <TouchableOpacity onPress={() => router.back()} className="mt-6 bg-primary py-3 px-6 rounded-xl">
+          <Text className="text-primary-foreground font-medium">{LL.scanHistory.scanNow()}</Text>
         </TouchableOpacity>
       </View>
     ),
-    [router]
+    [LL, router]
   );
 
   // 编辑切换处理
@@ -278,13 +306,13 @@ export default function HistoryScreen() {
     function HeaderRightButton() {
       return (
         <TouchableOpacity onPress={handleToggleEdit}>
-          <Text className="text-blue-500 font-medium">{isEditing ? '取消' : '编辑'}</Text>
+          <Text className="text-primary font-medium">{isEditing ? LL.common.cancel() : LL.common.edit()}</Text>
         </TouchableOpacity>
       );
     }
 
     return HeaderRightButton;
-  }, [history.length, isEditing, handleToggleEdit]);
+  }, [LL, history.length, isEditing, handleToggleEdit]);
 
   // 缓存FlatList配置
   const flatListProps = useMemo(
@@ -313,11 +341,11 @@ export default function HistoryScreen() {
   }, [isEditing, history.length, selectedItems, toggleSelectAll, handleBatchDelete]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
       <StatusBar style="dark" />
       <Stack.Screen
         options={{
-          title: '历史记录',
+          title: LL.routes.scanHistory(),
           headerRight: headerRight,
         }}
       />

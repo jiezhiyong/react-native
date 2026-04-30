@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import { secureStorage } from '~/lib/secure-storage';
+import { secureStorage } from '@/lib/secure-storage';
 
 // 认证状态接口
 interface AuthState {

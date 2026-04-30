@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 
-import { InfoItemRow } from '~/components/InfoItem';
+import { InfoItemRow } from '@/components/InfoItem';
 
 import { Text } from '../../components/ui/text';
 

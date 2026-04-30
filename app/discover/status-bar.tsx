@@ -2,8 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Platform, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoStatusBarScreen() {
   const [isHidden, setIsHidden] = useState(false);
@@ -33,7 +33,7 @@ export default function ExpoStatusBarScreen() {
 
   return (
     <View className="flex-1 p-5">
-      <StatusBar animated hidden={isHidden} style={style} backgroundColor={backgroundColor} translucent={translucent} />
+      <StatusBar animated hidden={isHidden} style={style} />
 
       <View className="mb-6">
         <Text className="text-2xl font-bold mb-2">状态栏</Text>

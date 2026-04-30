@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import Animated, { useAnimatedProps, useSharedValue, withSpring } from 'react-native-reanimated';
 import Svg, { Circle } from 'react-native-svg';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 

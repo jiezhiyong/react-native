@@ -1,10 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
 import MaskedView from '@react-native-masked-view/masked-view';
+import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
-import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, TouchableOpacity, View } from 'react-native';
 
-import { cn } from '~/lib/utils';
+import { Text } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
 
 const { width } = Dimensions.get('window');
 
@@ -22,7 +24,7 @@ export default function ExpoMaskedViewScreen() {
             <Image
               source={{ uri: 'https://picsum.photos/200' }}
               style={{ width: 200, height: 200 }}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </MaskedView>
         );
@@ -42,7 +44,7 @@ export default function ExpoMaskedViewScreen() {
             <Image
               source={{ uri: 'https://picsum.photos/200' }}
               style={{ width: 200, height: 200, borderRadius: 10 }}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </MaskedView>
         );

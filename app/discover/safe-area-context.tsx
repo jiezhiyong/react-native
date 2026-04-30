@@ -1,5 +1,9 @@
-import { Text, View } from 'react-native';
+import { router } from 'expo-router';
+import { View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function SafeAreaContextScreen() {
   const insets = useSafeAreaInsets();
@@ -17,6 +21,15 @@ export default function SafeAreaContextScreen() {
             <Text className="text-lg font-medium mb-2">useSafeAreaInsets</Text>
             <Text className="text-sm">{JSON.stringify(insets, null, 2)}</Text>
           </View>
+
+          <Button
+            className="mt-4"
+            onPress={() => {
+              router.back();
+            }}
+          >
+            <Text>返回</Text>
+          </Button>
         </View>
       </SafeAreaView>
 

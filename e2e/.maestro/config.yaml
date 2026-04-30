@@ -1,0 +1,12 @@
+# Maestro 全局配置文件
+# 设置测试应用的包名，根据不同环境选择对应的包名
+appId: com.jiezhiyong.qachat.dev # 开发环境包名
+
+# 可选配置项
+# timeout: 10000  # 默认超时时间（毫秒）
+# waitTimeout: 5000  # 等待超时时间（毫秒）
+
+# 测试环境说明：
+# Development: com.jiezhiyong.qachat.dev
+# Test: com.jiezhiyong.qachat.test
+# Production: com.jiezhiyong.qachat

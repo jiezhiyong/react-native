@@ -3,8 +3,8 @@ import * as React from 'react';
 import { Platform } from 'react-native';
 import Animated, { interpolateColor, useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
 
-import { useColorScheme } from '~/hooks/useColorScheme';
-import { cn } from '~/lib/utils';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { cn } from '@/lib/utils';
 
 const SwitchWeb = React.forwardRef<SwitchPrimitives.RootRef, SwitchPrimitives.RootProps>(
   ({ className, ...props }, ref) => (
@@ -32,12 +32,12 @@ SwitchWeb.displayName = 'SwitchWeb';
 
 const RGB_COLORS = {
   light: {
-    primary: 'rgb(24, 24, 27)',
-    input: 'rgb(228, 228, 231)',
+    primary: 'rgb(201, 100, 66)',
+    input: 'rgb(232, 230, 220)',
   },
   dark: {
-    primary: 'rgb(250, 250, 250)',
-    input: 'rgb(39, 39, 42)',
+    primary: 'rgb(217, 119, 87)',
+    input: 'rgb(61, 61, 58)',
   },
 } as const;
 

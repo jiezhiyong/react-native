@@ -5,8 +5,8 @@ import * as TaskManager from 'expo-task-manager';
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // 定义位置任务名称
 const LOCATION_TASK_NAME = 'background-location-task';

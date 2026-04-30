@@ -1,9 +1,16 @@
 import Constants from 'expo-constants';
+import { Image } from 'expo-image';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import * as StoreReview from 'expo-store-review';
 import * as Updates from 'expo-updates';
 import { ChevronRight } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, Linking, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, TouchableOpacity, View } from 'react-native';
+
+import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 
 interface AboutItemProps {
   title: string;
@@ -17,14 +24,14 @@ const AboutItem = ({ title, desc, onPress, loading }: AboutItemProps) => {
     <TouchableOpacity
       onPress={onPress}
       disabled={loading}
-      className="flex-row items-center justify-between p-5 border-b border-gray-100"
+      className="flex-row items-center justify-between p-5 border-b border-border"
       activeOpacity={0.7}
     >
       <View className="flex-row items-center gap-3 flex-1">
         <Text className="flex-1">{title}</Text>
         {desc && <Text className="text-muted-foreground">{desc}</Text>}
       </View>
-      {loading ? <ActivityIndicator /> : <ChevronRight size={20} color="#ccc" />}
+      {loading ? <ActivityIndicator /> : <ChevronRight size={20} color="#87867f" />}
     </TouchableOpacity>
   );
 };
@@ -41,6 +48,7 @@ const AboutItem = ({ title, desc, onPress, loading }: AboutItemProps) => {
 // https://github.com/expo/custom-expo-updates-server
 // https://docs.expo.dev/technical-specs/expo-updates-1/
 export default function AboutScreen() {
+  const { LL } = useI18nContext();
   const appVersion = Constants.expoConfig?.version || '?';
   const appName = Constants.expoConfig?.name || '?';
 
@@ -70,18 +78,21 @@ export default function AboutScreen() {
   };
 
   return (
-    <View className="flex-1 bg-muted p-5">
+    <View className="flex-1 bg-background p-5">
+      <StatusBar style="dark" />
+      <Stack.Screen options={{ title: LL.mine.about() }} />
+
       {/* 应用信息 */}
-      <View className="items-center justify-center py-10 bg-background rounded-xl">
+      <View className="items-center justify-center py-10 bg-card rounded-xl border border-border">
         <View className="w-20 h-20 rounded-xl overflow-hidden mb-4 bg-muted items-center justify-center">
-          <Image source={require('../assets/images/icon.png')} className="flex-1" resizeMode="contain" />
+          <Image source={require('../assets/images/icon.png')} className="flex-1 size-20" contentFit="contain" />
         </View>
-        <Text className="text-xl font-bold mb-1">{appName}</Text>
+        <Text className="text-xl font-medium mb-1 text-foreground">{appName}</Text>
         <Text className="text-muted-foreground">Version {appVersion}</Text>
       </View>
 
       {/* 功能列表 */}
-      <View className="bg-background mt-4 rounded-xl">
+      <View className="bg-card mt-4 rounded-xl border border-border overflow-hidden">
         {/* TODO: 检查更新 */}
         <AboutItem
           title="检查更新"

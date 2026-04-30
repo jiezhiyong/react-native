@@ -2,8 +2,8 @@ import { useFonts } from 'expo-font';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
-import { Text } from '~/components/ui/text';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 
 // 字体示例文本
 const sampleText = '人生若只如初见，何事秋风悲画扇。等闲变却故人心，却道故人心易变。';
@@ -30,7 +30,7 @@ const FontSample: React.FC<{ name: string }> = ({ name }) => {
 
 export default function ExpoFontScreen() {
   const [fontsLoaded, fontError] = useFonts({
-    spaceMono: require('~/assets/fonts/SpaceMono-Regular.ttf'),
+    spaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
 
   // 如果字体未加载完成，返回 null 不渲染内容

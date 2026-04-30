@@ -2,8 +2,8 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import React, { useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // 定义用户信息类型
 interface UserInfo {
@@ -100,11 +100,11 @@ export default function AppleAuthenticationScreen() {
 
       <ScrollView className="flex-1">
         <View className="mb-6 bg-muted rounded-lg p-4 gap-3">
-          <Text className="text-gray-700 dark:text-gray-300">
+          <Text className="text-foreground">
             身份验证状态: {isAppleAuthAvailable === null ? '检查中...' : isAppleAuthAvailable ? '可用' : '不可用'}
           </Text>
 
-          <Text className="text-gray-700 dark:text-gray-300">登录凭证状态: {credentialState || '未登录'}</Text>
+          <Text className="text-foreground">登录凭证状态: {credentialState || '未登录'}</Text>
         </View>
 
         {/* 用户信息显示 */}

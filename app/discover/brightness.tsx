@@ -4,9 +4,9 @@ import { PermissionStatus } from 'expo-modules-core';
 import { useEffect, useState } from 'react';
 import { Platform, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { sleep } from '~/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { sleep } from '@/lib/utils';
 
 export default function ExpoBrightnessScreen() {
   const [brightness, setBrightness] = useState<number>(0);
@@ -108,8 +108,8 @@ export default function ExpoBrightnessScreen() {
           minimumValue={0}
           maximumValue={1}
           step={0.01}
-          thumbTintColor="#3b82f6"
-          minimumTrackTintColor="#3b82f6"
+          thumbTintColor="#c96442"
+          minimumTrackTintColor="#c96442"
           maximumTrackTintColor="#d1d5db"
         />
         <View className="flex-row justify-between mt-1">

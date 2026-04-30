@@ -2,18 +2,8 @@ import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Application from 'expo-application';
 import Constants from 'expo-constants';
-import {
-  Button,
-  Divider,
-  Heading,
-  Image,
-  RefreshIcon,
-  Row,
-  Spacer,
-  Text,
-  View,
-  XIcon,
-} from 'expo-dev-client-components';
+import { Button, Divider, Heading, RefreshIcon, Row, Spacer, Text, View, XIcon } from 'expo-dev-client-components';
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { Globe, House, LockKeyhole } from 'lucide-react-native';
 import * as React from 'react';
@@ -124,7 +114,7 @@ export function Main() {
       >
         <Image
           style={{ width: 40, height: 40, transform: 'rotate(-30deg)' }}
-          source={require('~/assets/images/debug.png')}
+          source={require('@/assets/images/debug.png')}
         />
       </Pressable>
 
@@ -151,8 +141,9 @@ export function Main() {
                     <View>
                       <View height="xl" width="xl" overflow="hidden" bg="secondary" rounded="medium">
                         <Image
-                          source={require('~/assets/images/icon.png')}
-                          style={{ flex: 1, width: '100%', resizeMode: 'contain' }}
+                          source={require('@/assets/images/icon.png')}
+                          resizeMode="contain"
+                          style={{ flex: 1, width: '100%' }}
                         />
                       </View>
                     </View>

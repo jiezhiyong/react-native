@@ -1,5 +1,6 @@
 import { Slot, Stack, usePathname } from 'expo-router';
-import { SafeAreaView, View } from 'react-native';
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const unstable_settings = {
   initialRouteName: 'index', // Ensure any route can link back to `/`
@@ -29,5 +30,9 @@ export default function DiscoverLayout() {
     return inner;
   }
 
-  return <SafeAreaView className="flex-1">{inner}</SafeAreaView>;
+  return (
+    <SafeAreaView edges={['bottom']} className="flex-1">
+      {inner}
+    </SafeAreaView>
+  );
 }

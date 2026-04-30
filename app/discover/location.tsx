@@ -1,10 +1,11 @@
 import * as Location from 'expo-location';
 import { PermissionStatus } from 'expo-modules-core';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // https://docs.expo.dev/versions/latest/sdk/location/
 export default function ExpoLocationScreen() {
@@ -148,7 +149,7 @@ export default function ExpoLocationScreen() {
         <View>{getLocationText()}</View>
       </View>
 
-      <View className="space-y-4">
+      <View className="gap-4">
         <Button className="mb-3" onPress={getCurrentLocation} disabled={isWatching}>
           {loading ? <ActivityIndicator /> : <Text>获取当前位置</Text>}
         </Button>

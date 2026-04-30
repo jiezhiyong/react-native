@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -7,7 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { cn } from '~/lib/utils';
+import { cn } from '@/lib/utils';
 
 const duration = 1000;
 
@@ -22,7 +23,11 @@ function Skeleton({ className, ...props }: Omit<React.ComponentPropsWithoutRef<t
     opacity: sv.value,
   }));
 
-  return <Animated.View style={style} className={cn('rounded-md bg-secondary dark:bg-muted', className)} {...props} />;
+  return (
+    <Animated.View style={style} {...props}>
+      <View className={cn('rounded-sm bg-primary/20', className)} />
+    </Animated.View>
+  );
 }
 
 export { Skeleton };

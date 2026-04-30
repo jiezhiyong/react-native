@@ -9,7 +9,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import { cn } from '~/lib/utils';
+import { cn } from '@/lib/utils';
 
 const Progress = React.forwardRef<
   ProgressPrimitive.RootRef,
@@ -55,7 +55,7 @@ function Indicator({ value, className }: { value: number | undefined | null; cla
 
   return (
     <ProgressPrimitive.Indicator asChild>
-      <Animated.View style={indicator} className={cn('h-full bg-foreground', className)} />
+      <Animated.View style={indicator} className={cn('h-full bg-primary', className)} />
     </ProgressPrimitive.Indicator>
   );
 }

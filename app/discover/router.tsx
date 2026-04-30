@@ -1,8 +1,8 @@
 import { Link, useRouter } from 'expo-router';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // 主页面组件
 export default function RouteScreen() {

@@ -3,9 +3,9 @@ import { Pedometer } from 'expo-sensors';
 import { useState } from 'react';
 import { Alert, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { useEffectAsync } from '~/hooks/use-effect-async';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useEffectAsync } from '@/hooks/use-effect-async';
 
 export default function ExpoPedometerScreen() {
   const [isAvailable, setIsAvailable] = useState<boolean>(false);
@@ -103,7 +103,7 @@ export default function ExpoPedometerScreen() {
         <Text className="text-muted-foreground">使用设备传感器计算和记录用户的步数。</Text>
       </View>
 
-      <View className="space-y-6">
+      <View className="gap-6">
         <View className="py-10 bg-muted rounded-lg mb-6 items-center">
           <Text className="mb-2 text-muted-foreground">今日步数</Text>
           <Text className="text-4xl font-bold">{stepCount.toLocaleString()}</Text>

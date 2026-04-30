@@ -1,26 +1,18 @@
 import * as Audio from 'expo-audio';
+import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { Stack, useRouter } from 'expo-router';
 import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Camera, Image as ImageIcon, Mic, Play, Plus, Send, X } from 'lucide-react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, KeyboardAvoidingView, Modal, Platform, ScrollView, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { create } from 'zustand';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 
 const PLAYBACK_STATUS_UPDATE = 'playbackStatusUpdate';
 
@@ -123,7 +115,7 @@ const quickQuestions: QuickQuestion[] = [
 async function playNewMessageSound() {
   try {
     // 创建一个音频播放器
-    const player = Audio.createAudioPlayer(require('~/assets/audios/received-message.mp3'));
+    const player = Audio.createAudioPlayer(require('@/assets/audios/received-message.mp3'));
 
     // 监听播放完成事件, 播放完成后释放资源
     const subscribe = player.addListener(PLAYBACK_STATUS_UPDATE, (status: Audio.AudioStatus) => {
@@ -167,14 +159,14 @@ const MessageBubble = ({ message }: { message: Message }) => {
 
   return (
     <View className={`flex-row max-w-[85%] my-2 ${isUser ? 'self-end' : 'self-start'}`}>
-      {!isUser && <Image source={require('~/assets/images/icon.png')} className="size-10 rounded-full mr-3" />}
+      {!isUser && <Image source={require('@/assets/images/icon.png')} className="size-10 rounded-full mr-3" />}
 
-      <View className={`p-4 rounded-3xl ${isUser ? 'bg-cyan-300 rounded-tr-none' : 'bg-muted rounded-tl-none'}`}>
+      <View className={`p-4 rounded-3xl ${isUser ? 'bg-primary/15 rounded-tr-none' : 'bg-card rounded-tl-none'}`}>
         {message.type === 'text' && <Text>{message.content}</Text>}
 
         {message.type === 'image' && message.mediaUrl && (
           <TouchableOpacity onPress={handleMediaPress} activeOpacity={0.8}>
-            <Image source={{ uri: message.mediaUrl }} className="w-48 h-48 rounded-md" resizeMode="cover" />
+            <Image source={{ uri: message.mediaUrl }} className="w-48 h-48 rounded-md" contentFit="cover" />
           </TouchableOpacity>
         )}
 
@@ -182,15 +174,15 @@ const MessageBubble = ({ message }: { message: Message }) => {
           <TouchableOpacity onPress={handleMediaPress} activeOpacity={0.8}>
             <View className="relative w-48 h-48 rounded-md overflow-hidden">
               {message.thumbnailUrl ? (
-                <Image source={{ uri: message.thumbnailUrl }} className="w-full h-full" resizeMode="cover" />
+                <Image source={{ uri: message.thumbnailUrl }} className="w-full h-full" contentFit="cover" />
               ) : (
-                <View className="w-full h-full bg-gray-300 items-center justify-center">
-                  <ActivityIndicator color="#0066FF" />
+                <View className="w-full h-full bg-muted items-center justify-center">
+                  <ActivityIndicator color="#c96442" />
                 </View>
               )}
               <View className="absolute inset-0 items-center justify-center bg-black/20">
                 <View className="w-12 h-12 rounded-full bg-background/50 items-center justify-center">
-                  <Play color="#000" size={24} />
+                  <Play color="#141413" size={24} />
                 </View>
               </View>
             </View>
@@ -206,7 +198,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
         </Text>
       </View>
 
-      {isUser && <Image source={require('~/assets/images/avatar.jpg')} className="size-10 rounded-full ml-3" />}
+      {isUser && <Image source={require('@/assets/images/avatar.jpg')} className="size-10 rounded-full ml-3" />}
     </View>
   );
 };
@@ -215,11 +207,11 @@ const MessageBubble = ({ message }: { message: Message }) => {
 const QuickQuestionButton = ({ question, onPress }: { question: QuickQuestion; onPress: () => void }) => {
   return (
     <TouchableOpacity
-      className="bg-gray-50 border border-gray-200 rounded-full px-4 py-2"
+      className="bg-card border border-border rounded-full px-4 py-2"
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <Text className="text-sm text-gray-700" numberOfLines={1}>
+      <Text className="text-sm text-foreground" numberOfLines={1}>
         {question.question}
       </Text>
     </TouchableOpacity>
@@ -301,40 +293,36 @@ const MediaPicker = ({
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible} onRequestClose={onClose}>
       <View className="flex-1 justify-end shadow-md">
-        <View className="bg-background rounded-t-3xl p-5">
+        <View className="bg-card rounded-t-3xl p-5 border border-border">
           <View className="flex-row justify-between items-center mb-6">
             <Text className="text-lg font-medium">选择媒体</Text>
             <TouchableOpacity onPress={onClose} className="p-1">
-              <X size={24} color="#6B7280" />
+              <X size={24} color="#87867f" />
             </TouchableOpacity>
           </View>
 
-          <View className="flex-row justify-around mb-10">
+          <View className="flex-row justify-around text-primary">
             <TouchableOpacity className="items-center" onPress={handleTakePhoto}>
-              <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
+              <View className="w-14 h-14 rounded-full bg-primary/20 items-center justify-center mb-2">
                 <Camera size={28} />
               </View>
-              <Text className="text-gray-700">拍照</Text>
+              <Text className="text-foreground">拍照</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickImage}>
-              <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
+              <View className="w-14 h-14 rounded-full bg-primary/20 items-center justify-center mb-2">
                 <ImageIcon size={28} />
               </View>
-              <Text className="text-gray-700">图片</Text>
+              <Text className="text-foreground">图片</Text>
             </TouchableOpacity>
 
             <TouchableOpacity className="items-center" onPress={handlePickVideo}>
-              <View className="w-14 h-14 rounded-full bg-muted items-center justify-center mb-2">
+              <View className="w-14 h-14 rounded-full bg-primary/20 items-center justify-center mb-2">
                 <Mic size={28} />
               </View>
-              <Text className="text-gray-700">视频</Text>
+              <Text className="text-foreground">视频</Text>
             </TouchableOpacity>
           </View>
-
-          <Button onPress={onClose} variant="outline" className="mb-6">
-            <Text>取消</Text>
-          </Button>
         </View>
       </View>
     </Modal>
@@ -342,6 +330,7 @@ const MediaPicker = ({
 };
 
 export default function OnlineServiceScreen() {
+  const { LL } = useI18nContext();
   const [inputText, setInputText] = useState('');
   const [showMediaPicker, setShowMediaPicker] = useState(false);
   const flatListRef = useRef<FlatList>(null);
@@ -459,7 +448,7 @@ export default function OnlineServiceScreen() {
     >
       <Stack.Screen
         options={{
-          title: '在线客服',
+          title: LL.routes.onlineService(),
         }}
       />
 
@@ -475,7 +464,7 @@ export default function OnlineServiceScreen() {
         </ScrollView>
       </View>
 
-      <SafeAreaView className="flex-1">
+      <SafeAreaView edges={['bottom']} className="flex-1">
         {/* 聊天区域 */}
         <FlatList
           ref={flatListRef}
@@ -488,13 +477,13 @@ export default function OnlineServiceScreen() {
         {/* 加载指示器 */}
         {isLoading && (
           <View className="py-3 px-4 rounded-lg flex-row items-center justify-center">
-            <ActivityIndicator size="small" color="#3B82F6" />
-            <Text className="ml-2 text-gray-700 text-sm">正在输入 ...</Text>
+            <ActivityIndicator size="small" color="#c96442" />
+            <Text className="ml-2 text-muted-foreground text-sm">正在输入 ...</Text>
           </View>
         )}
 
         {/* 输入框区域 */}
-        <View className="px-5 py-3 border-t border-gray-100 flex-row items-center">
+        <View className="px-5 py-3 border-t border-border flex-row items-center bg-background">
           <TouchableOpacity className="mr-2 p-2" onPress={() => setShowMediaPicker(true)}>
             <Plus size={24} />
           </TouchableOpacity>
@@ -509,11 +498,11 @@ export default function OnlineServiceScreen() {
           </View>
 
           <TouchableOpacity
-            className={`ml-3 p-2 rounded-full size-10 justify-center ${inputText.trim() ? 'bg-primary' : 'bg-gray-300'}`}
+            className={`ml-3 p-2 rounded-full size-10 justify-center ${inputText.trim() ? 'bg-primary' : 'bg-muted'}`}
             onPress={sendTextMessage}
             disabled={!inputText.trim()}
           >
-            <Send size={20} color="#fff" />
+            <Send size={20} color="#faf9f5" />
           </TouchableOpacity>
         </View>
       </SafeAreaView>

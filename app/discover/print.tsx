@@ -3,9 +3,9 @@ import * as Sharing from 'expo-sharing';
 import { useState } from 'react';
 import { Alert, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { Textarea } from '~/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function ExpoPrintScreen() {
   const [htmlContent, setHtmlContent] = useState<string>('有内鬼，终止交易');

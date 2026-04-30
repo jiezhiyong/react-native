@@ -1,15 +1,48 @@
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useRouter } from 'expo-router';
-import { setStatusBarStyle } from 'expo-status-bar';
-import { Search, Terminal, X } from 'lucide-react-native';
+import { Bell, Search, Terminal, X } from 'lucide-react-native';
 import * as React from 'react';
-import { Animated, TouchableOpacity, View } from 'react-native';
+import { RefreshControl, Platform as RNPlatform, TouchableOpacity, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { BREAK_POINT } from '~/components/ui/custom-header';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
-import { cn } from '~/lib/utils';
-import { useTabsScrollStore } from '~/store/scroll';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Input } from '@/components/ui/input';
+import { ScrollHeader } from '@/components/ui/scroll-header';
+import { Text } from '@/components/ui/text';
+import { useScrollHeader } from '@/hooks/useScrollHeader';
+import { useI18nContext } from '@/i18n/i18n-react';
+import { cn, sleep } from '@/lib/utils';
+
+type Platform = 'android' | 'ios' | 'h5';
+type PlatformSupport = {
+  platform: Platform;
+  deviceOnly?: boolean;
+};
+
+const platformMeta: Record<
+  Platform,
+  {
+    icon: React.ComponentProps<typeof FontAwesome>['name'];
+    label: string;
+    searchAliases: string[];
+  }
+> = {
+  android: {
+    icon: 'android',
+    label: 'Android',
+    searchAliases: ['android'],
+  },
+  ios: {
+    icon: 'apple',
+    label: 'iOS',
+    searchAliases: ['ios', 'iphone', 'ipad', 'apple'],
+  },
+  h5: {
+    icon: 'html5',
+    label: 'H5',
+    searchAliases: ['h5', 'web'],
+  },
+};
 
 const demos: { name: string; desc: string; supports: string }[] = [
   // 设备信息等
@@ -19,6 +52,18 @@ const demos: { name: string; desc: string; supports: string }[] = [
     supports: 'Android, iOS, Web',
   },
   { name: 'device', desc: '物理设备系统信息', supports: 'Android, iOS, Web' },
+
+  // 新增功能 Demo
+  { name: 'app-state', desc: 'AppState 和 Appearance 监听，应用状态与主题变化', supports: 'Android, iOS, Web' },
+  { name: 'websocket', desc: 'WebSocket 实时通信，消息收发与重连', supports: 'Android, iOS, Web' },
+  { name: 'file-download', desc: '文件下载进度监控，支持取消和重试', supports: 'Android, iOS, Web' },
+  { name: 'vibration', desc: '震动与触觉反馈，Vibration API 和 Haptics 对比', supports: 'Android, iOS' },
+  { name: 'maps', desc: '地图显示，当前位置标记，自定义标记和地图类型切换', supports: 'Android, iOS, Web' },
+  { name: 'file-upload', desc: '文件上传进度监控，支持取消和重试', supports: 'Android, iOS, Web' },
+  { name: 'network-info', desc: '网络状态监听，连接类型和网络详细信息', supports: 'Android, iOS, Web' },
+
+  // 监控与分析
+  { name: 'sentry', desc: 'Sentry 错误监控与性能分析演示', supports: 'Android, iOS, Web' },
 
   // 常用
   { name: 'webview', desc: 'WebView', supports: 'Android, iOS' },
@@ -104,96 +149,166 @@ const demos: { name: string; desc: string; supports: string }[] = [
   { name: 'store-review', desc: '应用内评论', supports: 'Android, iOS' },
   { name: 'intent-launcher', desc: '意图启动器', supports: 'Android' },
   { name: 'navigation-bar', desc: '访问 Android 原生导航栏各种交互', supports: 'Android' },
+  { name: 'react-native-bottom-shee', desc: '', supports: 'Android, iOS, Web' },
 ];
+
+function getPlatformSupports(supports: string): PlatformSupport[] {
+  return supports.split(',').map((support) => {
+    const value = support.trim();
+    const normalized = value.toLowerCase();
+
+    if (normalized.startsWith('android')) {
+      return { platform: 'android', deviceOnly: normalized.includes('device') };
+    }
+
+    if (normalized.startsWith('ios')) {
+      return { platform: 'ios', deviceOnly: normalized.includes('device') };
+    }
+
+    return { platform: 'h5' };
+  });
+}
+
+function getSupportSearchText(supports: string) {
+  return getPlatformSupports(supports)
+    .flatMap((support) => {
+      const aliases = platformMeta[support.platform].searchAliases;
+      return support.deviceOnly ? [...aliases, 'device', 'real device', '实机', '真机'] : aliases;
+    })
+    .join(' ');
+}
+
+function getFilteredDemos(searchQuery: string) {
+  if (searchQuery.trim() === '') {
+    return demos;
+  }
+
+  const query = searchQuery.toLowerCase();
+  return demos.filter(
+    (item) =>
+      item.name.toLowerCase().includes(query) ||
+      item.desc.toLowerCase().includes(query) ||
+      getSupportSearchText(item.supports).includes(query)
+  );
+}
+
+function PlatformSupportIcons({ supports }: { supports: string }) {
+  return (
+    <View className="pl-2 mb-1 flex-row flex-wrap gap-1">
+      {getPlatformSupports(supports).map((support) => {
+        const meta = platformMeta[support.platform];
+        const iconColor =
+          support.platform === 'android' ? '#3ddc84' : support.platform === 'ios' ? '#87867f' : '#e34f26';
+        const key = `${support.platform}-${support.deviceOnly ? 'device' : 'base'}`;
+
+        return (
+          <View
+            key={key}
+            accessibilityLabel={`${meta.label}${support.deviceOnly ? ' 实机' : ''}`}
+            className="relative h-6 min-w-6 flex-row items-center justify-center rounded-md border border-border bg-background px-1.5"
+          >
+            <FontAwesome name={meta.icon} size={14} color={iconColor} />
+            {support.deviceOnly && <Text className="text-[9px] leading-3 text-primary">&nbsp;实机</Text>}
+          </View>
+        );
+      })}
+    </View>
+  );
+}
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { LL } = useI18nContext();
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filteredDemos, setFilteredDemos] = React.useState(demos);
+  const [refreshing, setRefreshing] = React.useState(false);
 
-  const { discoverScrollY, updateDiscoverScroll, activeTab } = useTabsScrollStore();
+  const { scrollY, scrollHandler, isDarkStyle, headerHeight } = useScrollHeader();
+  const c = isDarkStyle ? '#141413' : '#faf9f5';
 
-  // 设置滚动监听
+  const rightButtons = [{ icon: <Bell size={20} color={c} />, onPress: () => router.push('/notice' as any) }];
+
   React.useEffect(() => {
-    const id = discoverScrollY.addListener(({ value }) => {
-      updateDiscoverScroll(value);
-      if (activeTab === 'discover') {
-        setStatusBarStyle(value > BREAK_POINT ? 'dark' : 'light');
-      }
-    });
-
-    return () => discoverScrollY.removeListener(id);
-  }, [activeTab, discoverScrollY, updateDiscoverScroll]);
-
-  // 处理搜索逻辑
-  React.useEffect(() => {
-    if (searchQuery.trim() === '') {
-      setFilteredDemos(demos);
-      return;
-    }
-
-    const query = searchQuery.toLowerCase();
-    const filtered = demos.filter(
-      (item) =>
-        item.name.toLowerCase().includes(query) ||
-        item.desc.toLowerCase().includes(query) ||
-        item.supports.toLowerCase().includes(query)
-    );
-    setFilteredDemos(filtered);
+    setFilteredDemos(getFilteredDemos(searchQuery));
   }, [searchQuery]);
 
-  // 清除搜索
+  const handleRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+
+    try {
+      await sleep(600);
+      setFilteredDemos(getFilteredDemos(searchQuery));
+    } finally {
+      setRefreshing(false);
+    }
+  }, [searchQuery]);
+
   const handleClearSearch = () => {
     setSearchQuery('');
   };
 
   return (
-    <Animated.FlatList
-      className="px-5 pt-5 flex-1 bg-muted/80"
-      data={filteredDemos}
-      onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: discoverScrollY } } }], {
-        useNativeDriver: false,
-      })}
-      scrollEventThrottle={16}
-      ListHeaderComponent={
-        <View className="mb-4">
-          <View className="flex-row items-center bg-background rounded-md border border-input">
-            <View className="pl-3">
-              <Search size={18} color="#9ca3af" />
+    <View className="flex-1">
+      <ScrollHeader
+        title={LL.tabs.discover()}
+        scrollY={scrollY}
+        gradientColors={['#c96442', '#d9b9a5']}
+        rightButtons={rightButtons}
+      />
+      <Animated.FlatList
+        className="flex-1 bg-background"
+        data={filteredDemos}
+        keyExtractor={(item) => item.name}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+        contentInset={RNPlatform.OS === 'ios' ? { top: headerHeight } : undefined}
+        contentOffset={RNPlatform.OS === 'ios' ? { x: 0, y: -headerHeight } : undefined}
+        scrollIndicatorInsets={RNPlatform.OS === 'ios' ? { top: headerHeight } : undefined}
+        contentContainerStyle={{
+          paddingTop: RNPlatform.OS === 'ios' ? 20 : headerHeight + 20,
+          paddingHorizontal: 20,
+        }}
+        ListHeaderComponent={
+          <View className="mb-4">
+            <View className="flex-row items-center bg-card rounded-xl border border-input">
+              <View className="pl-3">
+                <Search size={18} color="#87867f" />
+              </View>
+              <Input
+                className="flex-1 border-0 bg-transparent"
+                placeholder={LL.discover.searchPlaceholder()}
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+              />
+              {searchQuery.length > 0 && (
+                <TouchableOpacity className="pr-3" onPress={handleClearSearch}>
+                  <X size={18} color="#87867f" />
+                </TouchableOpacity>
+              )}
             </View>
-            <Input
-              className="flex-1 border-0 bg-transparent"
-              placeholder="搜索功能、描述或平台..."
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-            />
-            {searchQuery.length > 0 && (
-              <TouchableOpacity className="pr-3" onPress={handleClearSearch}>
-                <X size={18} color="#9ca3af" />
-              </TouchableOpacity>
+            {filteredDemos.length === 0 && (
+              <Text className="text-center mt-4 text-muted-foreground">{LL.discover.noResults()}</Text>
             )}
           </View>
-          {filteredDemos.length === 0 && (
-            <Text className="text-center mt-4 text-muted-foreground">没有找到匹配的项目</Text>
-          )}
-        </View>
-      }
-      renderItem={({ item, index }) => (
-        <TouchableOpacity
-          className={cn('mb-2', index === filteredDemos.length - 1 && 'mb-5')}
-          onPress={() => router.navigate(`/discover/${item.name}` as any)}
-        >
-          <Alert icon={Terminal}>
-            <AlertTitle className="capitalize">
-              <Text>
-                {index + 1}. {item.name}
-              </Text>
-              <Text className="text-green-500 text-sm"> - {item.supports}</Text>
-            </AlertTitle>
-            <AlertDescription className="text-muted-foreground">{item.desc}</AlertDescription>
-          </Alert>
-        </TouchableOpacity>
-      )}
-    />
+        }
+        renderItem={({ item, index }) => (
+          <TouchableOpacity
+            className={cn('mb-2', index === filteredDemos.length - 1 && 'mb-5')}
+            onPress={() => router.navigate(`/discover/${item.name}` as any)}
+          >
+            <Alert icon={Terminal}>
+              <AlertTitle className="capitalize">
+                <Text className="text-primary">
+                  {index + 1}. {item.name}
+                </Text>
+                <PlatformSupportIcons supports={item.supports} />
+              </AlertTitle>
+              <AlertDescription className="text-muted-foreground">{item.desc}</AlertDescription>
+            </Alert>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
   );
 }

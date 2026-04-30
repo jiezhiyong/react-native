@@ -2,92 +2,59 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 import * as React from 'react';
 
-import { HapticTab } from '~/components/HapticTab';
-import { BREAK_POINT, DiscoverHeader, HomeHeader, MineHeader } from '~/components/ui/custom-header';
-import TabBarBackground from '~/components/ui/TabBarBackground';
-import { useColorScheme } from '~/hooks/useColorScheme';
-import { useTabsScrollStore } from '~/store/scroll';
+import { HapticTab } from '@/components/HapticTab';
+import TabBarBackground from '@/components/ui/TabBarBackground';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { useI18nContext } from '@/i18n/i18n-react';
+import { NAV_THEME } from '@/lib/theme';
 
 export default function TabLayout() {
   const { colorScheme } = useColorScheme();
-  const { setActiveTab, homeScrollValue, mineScrollValue, discoverScrollValue, setStatusBarStyle } =
-    useTabsScrollStore();
-
-  // 根据当前tab的滚动值设置状态栏样式
-  const handleTabPress = (tab: 'home' | 'mine' | 'discover') => {
-    setActiveTab(tab);
-
-    setTimeout(() => {
-      if (tab === 'home') {
-        setStatusBarStyle(homeScrollValue > BREAK_POINT ? 'dark' : 'light');
-      } else if (tab === 'mine') {
-        setStatusBarStyle(mineScrollValue > BREAK_POINT ? 'dark' : 'light');
-      } else if (tab === 'discover') {
-        setStatusBarStyle(discoverScrollValue > BREAK_POINT ? 'dark' : 'light');
-      }
-    }, 0);
-  };
+  const { LL } = useI18nContext();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colorScheme === 'dark' ? '#fff' : '#000',
+        tabBarActiveTintColor: colorScheme === 'dark' ? NAV_THEME.dark.colors.primary : NAV_THEME.light.colors.primary,
+        tabBarInactiveTintColor: colorScheme === 'dark' ? '#87867f' : '#5e5d59',
         tabBarHideOnKeyboard: true,
         headerTitleAllowFontScaling: true,
         tabBarButton: HapticTab as any,
-        headerStyle: {
-          backgroundColor: '',
-        },
-        headerShown: true,
+        headerShown: false,
         headerShadowVisible: false,
-        headerTintColor: '',
         tabBarStyle: {
           backgroundColor: '',
         },
         animation: 'none',
         tabBarBackground: TabBarBackground,
-        headerTransparent: false,
-      }}
-      screenListeners={{
-        tabPress: (e) => {
-          const route = e.target?.split('-')[0];
-          if (route === 'index') handleTabPress('home');
-          else if (route === 'mine') handleTabPress('mine');
-          else if (route === 'discover') handleTabPress('discover');
-        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: LL.tabs.home(),
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'disc' : 'disc-outline'} color={color} size={24} />
           ),
-          headerShown: true,
-          header: () => <HomeHeader />,
         }}
       />
       <Tabs.Screen
         name="mine"
         options={{
-          title: 'Mine',
+          title: LL.tabs.mine(),
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'person' : 'person-outline'} color={color} size={24} />
           ),
-          headerShown: true,
-          header: () => <MineHeader />,
         }}
       />
       <Tabs.Screen
         name="discover"
         options={{
-          title: 'Discover',
+          title: LL.tabs.discover(),
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'planet' : 'planet-outline'} color={color} size={24} />
           ),
-          headerShown: true,
-          header: () => <DiscoverHeader />,
+          tabBarBadge: 2,
         }}
       />
     </Tabs>

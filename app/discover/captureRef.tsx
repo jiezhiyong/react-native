@@ -4,8 +4,8 @@ import React, { useRef, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 /**
  * CaptureRef 示例页面
@@ -76,12 +76,12 @@ export default function CaptureRefScreen() {
       {/* 这个视图将被捕获 */}
       <View
         ref={viewRef}
-        className="rounded-xl p-5 shadow-md mb-6 border border-gray-200 bg-background"
+        className="rounded-xl p-5 shadow-md mb-6 border border-border bg-background"
         collapsable={false} // 在Android上必须设置为false
       >
         <View className="items-center mb-4 rounded-lg overflow-hidden">
           <Image
-            source={require('~/assets/images/icon.png')}
+            source={require('@/assets/images/icon.png')}
             style={{ width: '100%', height: 200 }}
             contentFit="cover"
           />

@@ -2,8 +2,8 @@
 import * as Linking from 'expo-linking';
 import { Alert, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoLinkingScreen() {
   // 打开网页链接
@@ -66,25 +66,25 @@ export default function ExpoLinkingScreen() {
 
       <View className="flex-col gap-3">
         <View>
-          <Button className="flex-row justify-center items-center space-x-2" onPress={openWebUrl}>
+          <Button className="flex-row justify-center items-center gap-2" onPress={openWebUrl}>
             <Text>打开网页 (expo.dev)</Text>
           </Button>
         </View>
 
         <View>
-          <Button className="flex-row justify-center items-center space-x-2" onPress={openPhone}>
+          <Button className="flex-row justify-center items-center gap-2" onPress={openPhone}>
             <Text>拨打电话</Text>
           </Button>
         </View>
 
         <View>
-          <Button className="flex-row justify-center items-center space-x-2" onPress={openEmail}>
+          <Button className="flex-row justify-center items-center gap-2" onPress={openEmail}>
             <Text>发送邮件</Text>
           </Button>
         </View>
 
         <View>
-          <Button className="flex-row justify-center items-center space-x-2" onPress={checkCanOpenUrl}>
+          <Button className="flex-row justify-center items-center gap-2" onPress={checkCanOpenUrl}>
             <Text>检查URL是否可以打开 (expo.dev)</Text>
           </Button>
         </View>

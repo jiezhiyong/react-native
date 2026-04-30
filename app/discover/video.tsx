@@ -2,8 +2,8 @@ import { useEvent } from 'expo';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { StyleSheet, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // demo, TODO: 切换为国内可用的视频
 const videoSource = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
@@ -32,7 +32,7 @@ export default function ExpoVideoScreen() {
         </View>
 
         {/* 控制按钮 */}
-        <View className="mt-6 space-x-4 gap-3">
+        <View className="mt-6 gap-4 gap-3">
           <Button
             variant={isPlaying ? 'destructive' : 'default'}
             onPress={() => {

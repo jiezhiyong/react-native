@@ -1,7 +1,8 @@
 import { Redirect, Stack } from 'expo-router';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { useAuth } from '~/store/auth';
+import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { useAuth } from '@/store/auth';
 
 export const unstable_settings = {
   initialRouteName: 'bill',
@@ -19,7 +20,7 @@ export default function ProtectedLayout() {
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" />
       </View>
     );
   }
@@ -38,5 +39,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#f5f4ed',
   },
 });

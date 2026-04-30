@@ -2,9 +2,9 @@ import * as Speech from 'expo-speech';
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { Textarea } from '~/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function ExpoSpeechScreen() {
   const [isSpeaking, setIsSpeaking] = useState(false);

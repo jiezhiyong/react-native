@@ -71,16 +71,16 @@ export default function BarometerScreen() {
       </View>
 
       {/* 当前气压数据 */}
-      <View className="bg-blue-50 rounded-xl p-5 mb-6 items-center">
+      <View className="bg-primary/10 rounded-xl p-5 mb-6 items-center border border-primary/20">
         <View className="flex-row items-center justify-center mb-2">
-          <Text className="text-lg font-medium ml-2 text-gray-700">当前气压 (hPa)</Text>
+          <Text className="text-lg font-medium ml-2 text-foreground">当前气压 (hPa)</Text>
         </View>
-        <Text className="text-4xl font-bold text-blue-600 my-2">{formattedPressure}</Text>
+        <Text className="text-4xl font-bold text-primary my-2">{formattedPressure}</Text>
 
         {data.relativeAltitude !== null && (
           <View className="mt-4 items-center">
-            <Text className="text-md font-medium text-gray-700">相对海拔 (m)</Text>
-            <Text className="text-2xl font-medium text-blue-500 mt-1">{formattedAltitude}</Text>
+            <Text className="text-md font-medium text-foreground">相对海拔 (m)</Text>
+            <Text className="text-2xl font-medium text-primary mt-1">{formattedAltitude}</Text>
           </View>
         )}
       </View>
@@ -88,7 +88,7 @@ export default function BarometerScreen() {
       {/* 控制按钮 */}
       <View className="flex-row justify-center mb-8">
         <TouchableOpacity
-          className={`py-3 px-8 rounded-full mx-2 ${isMonitoring ? 'bg-red-500' : 'bg-blue-500'}`}
+          className={`py-3 px-8 rounded-full mx-2 ${isMonitoring ? 'bg-destructive' : 'bg-primary'}`}
           onPress={isMonitoring ? stopMonitoring : startMonitoring}
         >
           <Text className="text-white font-medium">{isMonitoring ? '停止监测' : '开始监测'}</Text>

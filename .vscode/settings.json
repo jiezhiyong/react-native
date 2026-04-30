@@ -1,4 +1,5 @@
 {
+  "editor.links": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
@@ -44,5 +45,13 @@
       "iconColour": "#8bc34a"
     }
   },
-  "java.compile.nullAnalysis.mode": "disabled"
+  "files.readonlyInclude": {
+    "i18n/i18n-react.tsx": true,
+    "i18n/i18n-types.ts": true,
+    "i18n/i18n-util.**": true
+  },
+  "search.exclude": {
+    "**/dist": true,
+    "**/coverage": true
+  }
 }

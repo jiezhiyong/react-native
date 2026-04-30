@@ -21,7 +21,7 @@ export function SettingsRowSwitch({
   testID,
 }: SettingsRowSwitchProps) {
   return (
-    <View style={{ opacity: disabled ? 0.75 : 1 }} pointerEvents={disabled ? 'none' : 'auto'}>
+    <View style={{ opacity: disabled ? 0.75 : 1, pointerEvents: disabled ? 'none' : 'auto' }}>
       <Row padding="small" align="center">
         <View width="large" height="large">
           {icon}

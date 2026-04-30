@@ -1,4 +1,5 @@
 import { File } from 'expo-file-system';
+import { Image } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
 import { PermissionStatus } from 'expo-modules-core';
 import { Stack, useLocalSearchParams } from 'expo-router';
@@ -6,18 +7,15 @@ import * as Sharing from 'expo-sharing';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { Download, Share2 } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  Image,
-  Platform,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { ActivityIndicator } from '@/components/ActivityIndicator';
+import { Text } from '@/components/ui/text';
+import { useI18nContext } from '@/i18n/i18n-react';
 
 export default function MediaViewerScreen() {
+  const { LL } = useI18nContext();
   const params = useLocalSearchParams<{ url: string; type: string }>();
   const { url, type } = params;
   const [isLoading, setIsLoading] = useState(false);
@@ -111,10 +109,10 @@ export default function MediaViewerScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-black">
+    <SafeAreaView edges={['bottom']} className="flex-1 bg-black">
       <Stack.Screen
         options={{
-          title: '媒体预览',
+          title: LL.routes.mediaViewer(),
           headerRight: () => (
             <View className="flex-row">
               <TouchableOpacity className="items-center justify-center mr-4" onPress={handleDownload}>
@@ -133,7 +131,7 @@ export default function MediaViewerScreen() {
       <View className="flex-1 justify-center items-center">
         {isLoading && (
           <View className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 bg-black/70 p-4 rounded-lg">
-            <ActivityIndicator color="#fff" />
+            <ActivityIndicator color="#faf9f5" />
           </View>
         )}
 
@@ -147,7 +145,7 @@ export default function MediaViewerScreen() {
           <Image
             source={{ uri: url }}
             className="w-full h-full"
-            resizeMode="contain"
+            contentFit="contain"
             onLoad={handleMediaLoad}
             onError={() => handleMediaError('图片加载失败')}
           />

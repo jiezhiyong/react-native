@@ -3,8 +3,8 @@ import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 // https://docs.expo.dev/versions/latest/sdk/imagepicker/
 export default function ExpoImagePickerScreen() {

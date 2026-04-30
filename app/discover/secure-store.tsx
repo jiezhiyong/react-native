@@ -2,9 +2,9 @@ import * as SecureStore from 'expo-secure-store';
 import { useState } from 'react';
 import { Alert, View } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoSecureStoreScreen() {
   const [key, setKey] = useState('password');

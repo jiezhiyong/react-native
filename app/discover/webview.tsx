@@ -3,8 +3,8 @@ import { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { WebView, WebViewNavigation } from 'react-native-webview';
 
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function ExpoWebViewScreen() {
   const [canGoBack, setCanGoBack] = useState(false);

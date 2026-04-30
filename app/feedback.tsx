@@ -1,19 +1,22 @@
 import { useRouter } from 'expo-router';
 import { Plus } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
-import { Textarea } from '~/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
+import { Textarea } from '@/components/ui/textarea';
+import { useI18nContext } from '@/i18n/i18n-react';
 
-const feedbackTypes = ['异常报错', '投诉', '意见反馈', '授信问题', '借款问题', '还款问题', '其他'];
-type FeedbackType = (typeof feedbackTypes)[number];
+const feedbackTypeIds = ['bug', 'complaint', 'feedback', 'credit', 'loan', 'repayment', 'other'] as const;
+type FeedbackType = (typeof feedbackTypeIds)[number];
 
 export default function FeedbackScreen() {
   const router = useRouter();
-  const [selectedType, setSelectedType] = useState<FeedbackType | null>(feedbackTypes[0]);
+  const { LL } = useI18nContext();
+  const [selectedType, setSelectedType] = useState<FeedbackType | null>(feedbackTypeIds[0]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -23,24 +26,24 @@ export default function FeedbackScreen() {
 
   const handleSubmit = () => {
     console.log('提交反馈', { selectedType, title, content });
-    alert('反馈已提交');
+    alert(LL.feedback.submitted());
     router.back();
   };
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1">
-      <SafeAreaView className="flex-1 bg-muted">
-        <ScrollView className="flex-1">
+      <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
+        <ScrollView className="flex-1 px-5 py-5">
           {/* 问题标签 */}
-          <View className="p-5 bg-background">
-            <Text className="text-lg font-bold">请选择问题标签</Text>
-            <Text className="text-sm text-secondary-foreground mb-4">精准分类，处理更快</Text>
+          <View className="p-5 bg-card rounded-xl border border-border">
+            <Text className="text-lg font-medium">{LL.feedback.selectTag()}</Text>
+            <Text className="text-sm text-secondary-foreground mb-4">{LL.feedback.selectTagDescription()}</Text>
 
             <View className="flex-row flex-wrap gap-3">
-              {feedbackTypes.map((type) => (
+              {feedbackTypeIds.map((type) => (
                 <TypeButton
                   key={type}
-                  title={type}
+                  title={LL.feedback.types[type]()}
                   isSelected={selectedType === type}
                   onPress={() => handleTypeSelect(type)}
                 />
@@ -49,15 +52,15 @@ export default function FeedbackScreen() {
           </View>
 
           {/* 反馈内容 */}
-          <View className="mt-3 p-5 bg-background">
+          <View className="mt-4 p-5 bg-card rounded-xl border border-border">
             <View className="flex-row items-center mb-4">
-              <Text className="text-red-500 mr-1">*</Text>
-              <Text className="text-lg font-bold">反馈标题与内容</Text>
+              <Text className="text-destructive mr-1">*</Text>
+              <Text className="text-lg font-medium">{LL.feedback.titleAndContent()}</Text>
             </View>
 
             <Input
               className="mb-3"
-              placeholder="标题（最多30个字）"
+              placeholder={LL.feedback.titlePlaceholder()}
               maxLength={30}
               value={title}
               onChangeText={setTitle}
@@ -65,7 +68,7 @@ export default function FeedbackScreen() {
 
             <Textarea
               className="mb-3 min-h-[100px]"
-              placeholder="您的建议是我们改进的动力"
+              placeholder={LL.feedback.contentPlaceholder()}
               textAlignVertical="top"
               value={content}
               onChangeText={setContent}
@@ -75,21 +78,19 @@ export default function FeedbackScreen() {
           </View>
 
           {/* 上传照片 */}
-          <View className="mt-3 p-5 bg-background">
-            <Text className="text-lg font-bold">上传照片</Text>
-            <Text className="text-sm text-secondary-foreground mb-4">
-              上传操作入口，报错提示截图、手机系统版本截图等信息，最多可上传10张，图像尺寸小于1M
-            </Text>
+          <View className="mt-4 p-5 bg-card rounded-xl border border-border">
+            <Text className="text-lg font-medium">{LL.feedback.uploadPhotos()}</Text>
+            <Text className="text-sm text-secondary-foreground mb-4">{LL.feedback.uploadPhotosDescription()}</Text>
 
-            <TouchableOpacity className="w-20 h-20 bg-muted items-center justify-center rounded-md">
-              <Plus size={24} color="#999" />
+            <TouchableOpacity className="w-20 h-20 bg-muted items-center justify-center rounded-xl border border-border">
+              <Plus size={24} color="#87867f" />
             </TouchableOpacity>
           </View>
 
           {/* 提交按钮 */}
-          <View className="p-5">
-            <Button className="py-4 rounded-full" onPress={handleSubmit}>
-              <Text>提交</Text>
+          <View className="py-5">
+            <Button className="py-4 rounded-xl" onPress={handleSubmit}>
+              <Text>{LL.feedback.submit()}</Text>
             </Button>
           </View>
         </ScrollView>
@@ -107,10 +108,10 @@ interface TypeButtonProps {
 const TypeButton = ({ title, isSelected, onPress }: TypeButtonProps) => {
   return (
     <TouchableOpacity
-      className={`py-1.5 px-3 rounded-full ${isSelected ? 'bg-primary' : 'bg-muted'}`}
+      className={`py-1.5 px-3 rounded-full border ${isSelected ? 'border-primary bg-primary' : 'border-border bg-muted'}`}
       onPress={onPress}
     >
-      <Text className={`text-sm ${isSelected ? 'text-white' : 'text-gray-700'}`}>{title}</Text>
+      <Text className={`text-sm ${isSelected ? 'text-primary-foreground' : 'text-secondary-foreground'}`}>{title}</Text>
     </TouchableOpacity>
   );
 };
