@@ -11,7 +11,7 @@ const config = getSentryExpoConfig(__dirname, {
 
 // 添加路径别名配置
 config.resolver.extraNodeModules = {
-  '~': path.resolve(__dirname),
+  '@': path.resolve(__dirname),
 };
 
 // enabling-tree-shaking
