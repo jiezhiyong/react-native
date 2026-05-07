@@ -13,7 +13,7 @@
     "run:ios:device": "expo run:ios --device",
     "run:android": "expo run:android",
     "build:android:debug": "APP_VARIANT=preview NO_MINIFY=true ENABLE_DEBUG_PANEL=true FORCE_DEV_MODE=false expo prebuild -p android && cd android && ./gradlew assembleDebug",
-    "build:ios:debug": "APP_VARIANT=preview NO_MINIFY=true ENABLE_DEBUG_PANEL=true FORCE_DEV_MODE=false expo prebuild -p ios && cd ios && xcodebuild -workspace ChatQA.xcworkspace -scheme ChatQA -configuration Debug -archivePath build/ChatQA.xcarchive archive",
+    "build:ios:debug": "APP_VARIANT=preview NO_MINIFY=true ENABLE_DEBUG_PANEL=true FORCE_DEV_MODE=false expo prebuild -p ios && cd ios && xcodebuild -workspace ChatQADev.xcworkspace -scheme ChatQADev -configuration Debug -archivePath build/ChatQADev.xcarchive archive",
     "test": "jest --watchAll",
     "test:e2e": "maestro test e2e/",
     "test:e2e:single": "maestro test",
