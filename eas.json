@@ -26,11 +26,12 @@
         "simulator": true
       }
     },
-    "test": {
+    "preview": {
+      "developmentClient": true,
       "distribution": "internal",
-      "channel": "test",
+      "channel": "preview",
       "env": {
-        "APP_VARIANT": "test"
+        "APP_VARIANT": "preview"
       },
       "android": {
         "buildType": "apk",
@@ -48,7 +49,9 @@
         "gradleCommand": ":app:assembleRelease"
       },
       "ios": {
-        "buildArtifactPaths": ["ios/build/*"]
+        "buildArtifactPaths": [
+          "ios/build/*"
+        ]
       }
     }
   },

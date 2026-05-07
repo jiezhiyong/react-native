@@ -32,3 +32,25 @@
   ```
 
   同时把 iOS 下 `contentContainerStyle.paddingTop` 改为页面自身需要的间距，不再额外叠加 `headerHeight`；Android 仍可保留原来的 `paddingTop: headerHeight + ...`。这样 `RefreshControl` 会从安全区和自定义 Header 下方出现，避免被遮挡。
+
+- Q: EAS iOS App Store production 云端构建失败，日志提示 `Failed to set up credentials`
+- A: 失败发生在 `Resolve build configuration` / `EAS_BUILD_INTERNAL` 阶段，还没有进入 Xcode 编译。构建日志关键错误：
+
+  ```text
+  Distribution Certificate is not validated for non-interactive builds.
+  Failed to set up credentials.
+  Credentials are not set up. Run this command again in interactive mode.
+  ```
+
+  当前 Apple Developer 账号已过期，生产 App Store 构建需要有效的 iOS distribution certificate / provisioning profile。GitHub App 触发的非交互构建无法在云端交互式修复凭据。待办：续费 Apple Developer 后执行 `npm exec --package eas-cli -- eas credentials -p ios`，修复远程 iOS credentials，再重新触发 production 构建。
+
+- Q: EAS Android Play Store production 云端构建失败，日志提示 `File ./google-services.json doesn't exist`
+- A: 失败发生在 `Resolve build configuration` / `EAS_BUILD_INTERNAL` 阶段，还没有进入 Gradle 编译。当前构建被 GitHub App 触发并带有 `--auto-submit-with-profile production`，因此 EAS 在构建前准备 Play Store 自动提交凭据。构建日志关键错误：
+
+  ```text
+  File ./google-services.json doesn't exist.
+  A Google Service Account JSON key is required to upload your app to Google Play Store.
+  Input is required, but stdin is not readable. Failed to display prompt: Path to Google Service Account file:
+  ```
+
+  `eas.json` 中 `submit.production.android.serviceAccountKeyPath` 指向 `./google-services.json`，但这里需要的是 Google Play Service Account JSON key，不是 Firebase 的 `google-services.json`。待办：如果暂时只需要构建，关闭 auto-submit 或不要使用 `--auto-submit`；如果需要自动提交，在 EAS Android Credentials 中上传 Google Play Service Account Key，或把 `serviceAccountKeyPath` 改为正确的私密 key 文件路径。

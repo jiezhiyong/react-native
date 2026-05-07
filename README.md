@@ -133,7 +133,7 @@ npx @react-native-reusables/cli@latest add
 ## TODO: 创建内部分发用 DEBUG 版本
 
 ```sh
-1. pnpm prebuild:test -p ios
+1. pnpm prebuild:preview -p ios
 2. open ios/ChatQA.xcworkspace
 3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Info - Build Configuration -> 选择 Debug
 4. Xcode - Archive: 选择 Any iOS Device (arm64) -> Product -> Archive
@@ -141,7 +141,7 @@ npx @react-native-reusables/cli@latest add
 ```
 
 ```sh
-1. pnpm prebuild:test -p android
+1. pnpm prebuild:preview -p android
 2. cd android && ./gradlew app:assembleDebug
 ```
 

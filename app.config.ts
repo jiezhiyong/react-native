@@ -4,7 +4,7 @@ import { ConfigContext, ExpoConfig } from 'expo/config';
 
 const VERSION_CODE = 1;
 const IS_DEV = process.env.APP_VARIANT === 'development';
-const IS_TEST = process.env.APP_VARIANT === 'test';
+const IS_PRE = process.env.APP_VARIANT === 'preview';
 const ngrokUrl = `${process.env.EXPO_TUNNEL_SUBDOMAIN}.ngrok.io`;
 const ENABLE_IOS_CAPABILITIES = !IS_DEV || process.env.EXPO_ENABLE_IOS_CAPABILITIES === 'true';
 const IOS_CAPABILITY_PLUGINS: ExpoConfig['plugins'] = [['expo-apple-authentication', {}]];
@@ -13,8 +13,8 @@ const DEV_SIMULATOR_PLUGINS: ExpoConfig['plugins'] = [['./plugins/withDevSimulat
 const getUniqueIdentifier = () => {
   if (IS_DEV) {
     return 'com.jiezhiyong.qachat.dev';
-  } else if (IS_TEST) {
-    return 'com.jiezhiyong.qachat.test';
+  } else if (IS_PRE) {
+    return 'com.jiezhiyong.qachat.pre';
   }
   return 'com.jiezhiyong.qachat';
 };
@@ -22,8 +22,8 @@ const getUniqueIdentifier = () => {
 const getAppName = () => {
   if (IS_DEV) {
     return 'ChatQA (Dev)';
-  } else if (IS_TEST) {
-    return 'ChatQA (Test)';
+  } else if (IS_PRE) {
+    return 'ChatQA (Pre)';
   }
   return 'ChatQA';
 };
