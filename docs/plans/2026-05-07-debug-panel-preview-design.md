@@ -4,7 +4,7 @@
 
 ## 背景
 
-当前仓库已经有 `debug-panel/`，使用 `@gorhom/bottom-sheet` 实现了部分业务调试面板能力，包括 API 环境切换、请求加解密开关、AsyncStorage 查看、App 信息展示等。根布局通过 `__DEV__ || Constants.expoConfig?.extra?.enableDebugPanel` 控制是否挂载调试面板。
+当前仓库已经有 `debug-panel/`，使用 `@gorhom/bottom-sheet` 实现了部分业务调试面板能力，包括 API 环境切换、请求加解密开关、AsyncStorage 查看、App 信息展示等。根布局通过 `APP_VARIANT` 控制是否挂载调试面板。
 
 需要新增一个更接近发布版本更新行为的 Preview 内部分发包，用于测试 Expo OTA / EAS Update。Development Build 默认依赖本地 Metro 动态加载 JavaScript，不适合作为验证发布更新行为的主路径。
 
@@ -41,7 +41,7 @@
 | `preview_debug_updates` | Debug 配置排障包 | 可用 | 可按开发者需要配置 | `EX_UPDATES_NATIVE_DEBUG=1`，只用于 updates 原生加载排障 |
 | `production` | 正式发布 | 不可用 | 无 | 使用 `production` channel |
 
-`preview` 应调整为 `developmentClient: false`、`distribution: internal`、`channel: preview`、`APP_VARIANT=preview`、`ENABLE_DEBUG_PANEL=true`。`preview_debug_updates` 单独保留给开发者排查 updates 原生层问题，不作为 QA / 产品日常分发包。
+`preview` 应调整为 `developmentClient: false`、`distribution: internal`、`channel: preview`、`APP_VARIANT=preview`。`preview_debug_updates` 单独保留给开发者排查 updates 原生层问题，不作为 QA / 产品日常分发包。
 
 ## expo-dev-menu 使用边界
 

@@ -8,20 +8,19 @@ import { PortalHost } from '@rn-primitives/portal';
 import * as Sentry from '@sentry/react-native';
 import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { isRunningInExpoGo } from 'expo';
-import Constants from 'expo-constants';
 import { Stack, useNavigationContainerRef } from 'expo-router';
 import Head from 'expo-router/head';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { AppState, Platform } from 'react-native';
+import { AppState, Platform, StyleSheet } from 'react-native';
 import type { AppStateStatus } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { Toaster } from '@/components/ui/sonner';
-import { DebugPanel } from '@/debug-panel';
+import { DebugPanelHost } from '@/debug-panel/runtime/DebugPanelHost';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect';
 import TypesafeI18n, { useI18nContext } from '@/i18n/i18n-react';
@@ -205,21 +204,19 @@ function RootLayout() {
     return null;
   }
 
-  // 使用环境变量或自定义配置控制DebugPanel的显示
-  const showDebugPanel = __DEV__ || Constants.expoConfig?.extra?.enableDebugPanel;
-
   return (
     <>
       <StatusBar style="dark" />
-      {showDebugPanel ? <DebugPanel /> : null}
       <SafeAreaProvider>
         <KeyboardProvider>
           <QueryClientProvider client={queryClient}>
             <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-              <GestureHandlerRootView>
-                <TypesafeI18n locale={locale}>
-                  <AppStack />
-                </TypesafeI18n>
+              <GestureHandlerRootView style={styles.gestureRoot}>
+                <DebugPanelHost>
+                  <TypesafeI18n locale={locale}>
+                    <AppStack />
+                  </TypesafeI18n>
+                </DebugPanelHost>
               </GestureHandlerRootView>
             </ThemeProvider>
           </QueryClientProvider>
@@ -235,3 +232,9 @@ function RootLayout() {
 }
 
 export default Sentry.wrap(RootLayout);
+
+const styles = StyleSheet.create({
+  gestureRoot: {
+    flex: 1,
+  },
+});

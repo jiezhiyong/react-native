@@ -38,6 +38,13 @@
         "gradleCommand": ":app:assembleRelease"
       }
     },
+    "preview_debug_updates": {
+      "extends": "preview",
+      "env": {
+        "APP_VARIANT": "preview",
+        "EX_UPDATES_NATIVE_DEBUG": "1"
+      }
+    },
     "production": {
       "autoIncrement": true,
       "channel": "production",

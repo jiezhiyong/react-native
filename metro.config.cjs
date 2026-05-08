@@ -9,6 +9,9 @@ const config = getSentryExpoConfig(__dirname, {
   isCSSEnabled: true,
 });
 
+const isDevelopmentVariant = process.env.APP_VARIANT === 'development';
+const isProductionVariant = !['development', 'preview'].includes(process.env.APP_VARIANT);
+
 // 添加路径别名配置
 config.resolver.extraNodeModules = {
   '@': path.resolve(__dirname),
@@ -50,6 +53,28 @@ wrapped.resolver = {
   unstable_enablePackageExports: false,
   // three 的 exports 将子路径指到无扩展名文件，实际文件为 *.js，直接解析会触发 Metro 的 package exports 回退 WARN
   resolveRequest: (context, moduleName, platform) => {
+    if (
+      isProductionVariant &&
+      (moduleName === '@/debug-panel/runtime/DebugPanelHost' ||
+        moduleName === './runtime/DebugPanelHost' ||
+        moduleName === '../runtime/DebugPanelHost')
+    ) {
+      return context.resolveRequest(
+        context,
+        path.resolve(__dirname, 'debug-panel/runtime/DebugPanelHost.noop.tsx'),
+        platform
+      );
+    }
+
+    if (
+      !isDevelopmentVariant &&
+      (moduleName === '@/debug-panel/dev-menu/register' ||
+        moduleName === '../dev-menu/register' ||
+        moduleName === './dev-menu/register')
+    ) {
+      return context.resolveRequest(context, path.resolve(__dirname, 'debug-panel/dev-menu/noop.ts'), platform);
+    }
+
     if (
       previousResolveRequest &&
       typeof moduleName === 'string' &&

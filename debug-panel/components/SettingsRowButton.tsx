@@ -1,4 +1,5 @@
 import { Button, Row, scale, Spacer, Text, View } from 'expo-dev-client-components';
+import { StyleSheet } from 'react-native';
 
 type SettingsRowButtonProps = {
   icon: React.ReactElement<any> | null;
@@ -13,14 +14,14 @@ export function SettingsRowButton({ label, icon, description = '', onPress, disa
     <Button.FadeOnPressContainer onPress={onPress} bg="default" disabled={disabled}>
       <Row padding="small" align="center" bg="default" style={{ opacity: disabled ? 0.75 : 1 }}>
         {icon && (
-          <View width="large" height="large">
+          <View width="large" height="large" style={styles.iconContainer}>
             {icon}
           </View>
         )}
 
         <Spacer.Horizontal size="small" />
 
-        <View>
+        <View grow="1" shrink="1" style={styles.labelContainer}>
           <Text>{label}</Text>
         </View>
 
@@ -48,3 +49,14 @@ export function SettingsRowButton({ label, icon, description = '', onPress, disa
     </Button.FadeOnPressContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  labelContainer: {
+    justifyContent: 'center',
+    minHeight: scale.large,
+  },
+});
