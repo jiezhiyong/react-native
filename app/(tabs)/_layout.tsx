@@ -1,9 +1,7 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Tabs } from 'expo-router';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import * as React from 'react';
+import { type ColorValue, DynamicColorIOS, Platform } from 'react-native';
 
-import { HapticTab } from '@/components/HapticTab';
-import TabBarBackground from '@/components/ui/TabBarBackground';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useI18nContext } from '@/i18n/i18n-react';
 import { NAV_THEME } from '@/lib/theme';
@@ -11,52 +9,37 @@ import { NAV_THEME } from '@/lib/theme';
 export default function TabLayout() {
   const { colorScheme } = useColorScheme();
   const { LL } = useI18nContext();
+  const tintColor: ColorValue =
+    Platform.OS === 'ios'
+      ? DynamicColorIOS({
+          dark: 'white',
+          light: 'black',
+        })
+      : colorScheme === 'dark'
+        ? NAV_THEME.dark.colors.primary
+        : NAV_THEME.light.colors.primary;
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: colorScheme === 'dark' ? NAV_THEME.dark.colors.primary : NAV_THEME.light.colors.primary,
-        tabBarInactiveTintColor: colorScheme === 'dark' ? '#87867f' : '#5e5d59',
-        tabBarHideOnKeyboard: true,
-        headerTitleAllowFontScaling: true,
-        tabBarButton: HapticTab as any,
-        headerShown: false,
-        headerShadowVisible: false,
-        tabBarStyle: {
-          backgroundColor: '',
-        },
-        animation: 'none',
-        tabBarBackground: TabBarBackground,
+    <NativeTabs
+      minimizeBehavior="onScrollDown"
+      tintColor={tintColor}
+      labelStyle={{
+        color: tintColor,
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: LL.tabs.home(),
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'disc' : 'disc-outline'} color={color} size={24} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="mine"
-        options={{
-          title: LL.tabs.mine(),
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'person' : 'person-outline'} color={color} size={24} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="discover"
-        options={{
-          title: LL.tabs.discover(),
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'planet' : 'planet-outline'} color={color} size={24} />
-          ),
-          tabBarBadge: 2,
-        }}
-      />
-    </Tabs>
+      <NativeTabs.Trigger name="index">
+        <NativeTabs.Trigger.Label>{LL.tabs.home()}</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf={{ default: 'record.circle', selected: 'record.circle.fill' }} md="home" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="mine">
+        <NativeTabs.Trigger.Label>{LL.tabs.mine()}</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf={{ default: 'person', selected: 'person.fill' }} md="person" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="discover">
+        <NativeTabs.Trigger.Label>{LL.tabs.discover()}</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf={{ default: 'globe', selected: 'globe.americas.fill' }} md="travel_explore" />
+        <NativeTabs.Trigger.Badge>2</NativeTabs.Trigger.Badge>
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }
