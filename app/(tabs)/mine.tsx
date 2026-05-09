@@ -208,7 +208,7 @@ export default function MinePage() {
         onScroll={scrollHandler}
         scrollEventThrottle={16}
         contentContainerStyle={{ paddingTop: Platform.OS === 'ios' ? 0 : headerHeight }}
-        contentInset={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
+        contentInset={Platform.OS === 'ios' ? { top: headerHeight / 2 } : undefined}
         contentOffset={Platform.OS === 'ios' ? { x: 0, y: -headerHeight } : undefined}
         scrollIndicatorInsets={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}

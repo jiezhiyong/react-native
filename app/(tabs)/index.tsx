@@ -165,11 +165,11 @@ export default function HomeScreen() {
         onScrollEndDrag={handleScrollEnd}
         scrollEventThrottle={16}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-        contentInset={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
+        contentInset={Platform.OS === 'ios' ? { top: headerHeight / 2 } : undefined}
         contentOffset={Platform.OS === 'ios' ? { x: 0, y: -headerHeight } : undefined}
         scrollIndicatorInsets={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
         contentContainerStyle={{
-          paddingTop: Platform.OS === 'ios' ? 12 : headerHeight + 12,
+          paddingTop: Platform.OS === 'ios' ? 0 : headerHeight,
           paddingHorizontal: 20,
           paddingBottom: 20,
         }}

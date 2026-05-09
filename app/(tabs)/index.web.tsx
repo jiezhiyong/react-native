@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { Bell, Headphones } from 'lucide-react-native';
 import * as React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Platform, RefreshControl, View } from 'react-native';
+import { RefreshControl, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { ActivityIndicator } from '@/components/ActivityIndicator';
@@ -143,9 +143,9 @@ export default function HomeScreen() {
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
         onEndReached={loadData}
         onEndReachedThreshold={0.5}
-        contentInset={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
-        contentOffset={Platform.OS === 'ios' ? { x: 0, y: -headerHeight } : undefined}
-        scrollIndicatorInsets={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
+        contentInset={undefined}
+        contentOffset={undefined}
+        scrollIndicatorInsets={undefined}
         data={data}
         masonry
         numColumns={2}
@@ -162,7 +162,7 @@ export default function HomeScreen() {
         }
         ListEmptyComponent={null}
         contentContainerStyle={{
-          paddingTop: Platform.OS === 'ios' ? 12 : headerHeight + 12,
+          paddingTop: headerHeight,
           paddingHorizontal: 20,
           paddingBottom: 20,
         }}
