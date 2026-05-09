@@ -262,7 +262,7 @@ export default function HomeScreen() {
         onScroll={scrollHandler}
         scrollEventThrottle={16}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-        contentInset={RNPlatform.OS === 'ios' ? { top: headerHeight } : undefined}
+        contentInset={RNPlatform.OS === 'ios' ? { top: headerHeight / 2 } : undefined}
         contentOffset={RNPlatform.OS === 'ios' ? { x: 0, y: -headerHeight } : undefined}
         scrollIndicatorInsets={RNPlatform.OS === 'ios' ? { top: headerHeight } : undefined}
         contentContainerStyle={{

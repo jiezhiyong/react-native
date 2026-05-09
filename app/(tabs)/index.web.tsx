@@ -1,9 +1,10 @@
+import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { Bell, Headphones } from 'lucide-react-native';
 import * as React from 'react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { type NativeScrollEvent, type NativeSyntheticEvent, Platform, RefreshControl, View } from 'react-native';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { RefreshControl, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { ActivityIndicator } from '@/components/ActivityIndicator';
@@ -16,26 +17,10 @@ import { useScrollHeader } from '@/hooks/useScrollHeader';
 import { useI18nContext } from '@/i18n/i18n-react';
 import { sleep } from '@/lib/utils';
 
+const ReanimatedFlashList = Animated.createAnimatedComponent(FlashList) as unknown as typeof FlashList;
 interface DataItem {
   id: number;
   skeletonNum: number;
-}
-
-function getEstimatedItemHeight(item: DataItem) {
-  return 180 + item.skeletonNum * 24;
-}
-
-function splitIntoMasonryColumns(items: DataItem[]) {
-  const columns: [DataItem[], DataItem[]] = [[], []];
-  const heights = [0, 0];
-
-  items.forEach((item) => {
-    const columnIndex = heights[0] <= heights[1] ? 0 : 1;
-    columns[columnIndex].push(item);
-    heights[columnIndex] += getEstimatedItemHeight(item);
-  });
-
-  return columns;
 }
 
 export default function HomeScreen() {
@@ -142,56 +127,8 @@ export default function HomeScreen() {
     );
   }, []);
 
-  const masonryColumns = useMemo(() => splitIntoMasonryColumns(data), [data]);
-
-  const handleScrollEnd = useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
-      const distanceFromEnd = contentSize.height - (contentOffset.y + layoutMeasurement.height);
-
-      if (distanceFromEnd < 300) {
-        loadData();
-      }
-    },
-    [loadData]
-  );
-
   return (
-    <>
-      <Animated.ScrollView
-        className="flex-1 bg-background"
-        onScroll={scrollHandler}
-        onMomentumScrollEnd={handleScrollEnd}
-        onScrollEndDrag={handleScrollEnd}
-        scrollEventThrottle={16}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-        contentInset={Platform.OS === 'ios' ? { top: headerHeight / 2 } : undefined}
-        contentOffset={Platform.OS === 'ios' ? { x: 0, y: -headerHeight } : undefined}
-        scrollIndicatorInsets={Platform.OS === 'ios' ? { top: headerHeight } : undefined}
-        contentContainerStyle={{
-          paddingTop: Platform.OS === 'ios' ? 0 : headerHeight,
-          paddingHorizontal: 20,
-          paddingBottom: 20,
-        }}
-      >
-        <View className="w-full rounded-xl overflow-hidden pt-5 pb-1 px-1">
-          <Image
-            className="rounded-xl h-[120px]"
-            source={require('@/assets/images/home-header-bg.jpg')}
-            contentFit="cover"
-          />
-        </View>
-        <View className="flex-row">
-          {masonryColumns.map((column, columnIndex) => (
-            <View key={columnIndex} className="flex-1">
-              {column.map((item) => (
-                <React.Fragment key={item.id}>{renderItem({ item })}</React.Fragment>
-              ))}
-            </View>
-          ))}
-        </View>
-        {renderFooter()}
-      </Animated.ScrollView>
+    <View className="flex-1 bg-background">
       <ScrollHeader
         title={LL.tabs.home()}
         scrollY={scrollY}
@@ -199,6 +136,37 @@ export default function HomeScreen() {
         rightButtons={rightButtons}
         gradientColors={['#c96442', '#d97757']}
       />
-    </>
+      <ReanimatedFlashList
+        keyExtractor={(item: any) => item.id.toString()}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+        onEndReached={loadData}
+        onEndReachedThreshold={0.5}
+        contentInset={undefined}
+        contentOffset={undefined}
+        scrollIndicatorInsets={undefined}
+        data={data}
+        masonry
+        numColumns={2}
+        renderItem={renderItem}
+        ListFooterComponent={renderFooter}
+        ListHeaderComponent={
+          <View className="w-full rounded-xl overflow-hidden pt-5 pb-1 px-1">
+            <Image
+              className="rounded-xl h-[120px]"
+              source={require('@/assets/images/home-header-bg.jpg')}
+              contentFit="cover"
+            />
+          </View>
+        }
+        ListEmptyComponent={null}
+        contentContainerStyle={{
+          paddingTop: headerHeight,
+          paddingHorizontal: 20,
+          paddingBottom: 20,
+        }}
+      />
+    </View>
   );
 }
