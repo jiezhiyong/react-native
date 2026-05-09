@@ -27,7 +27,7 @@
       }
     },
     "preview": {
-      "developmentClient": true,
+      "developmentClient": false,
       "distribution": "internal",
       "channel": "preview",
       "env": {
@@ -36,6 +36,13 @@
       "android": {
         "buildType": "apk",
         "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "preview_debug_updates": {
+      "extends": "preview",
+      "env": {
+        "APP_VARIANT": "preview",
+        "EX_UPDATES_NATIVE_DEBUG": "1"
       }
     },
     "production": {

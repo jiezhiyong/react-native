@@ -130,19 +130,55 @@ npx @react-native-reusables/cli@latest add
 - [OTA](https://github.com/vantuan88291/react-native-ota-hot-update、 https://github.com/gronxb/hot-updater)
 - [Expo 配置插件](https://github.com/expo/config-plugins)
 
-## TODO: 创建内部分发用 DEBUG 版本
+## 创建 Preview 内部分发版本
 
 ```sh
-1. pnpm prebuild:preview -p ios
-2. open ios/ChatQA.xcworkspace
-3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Info - Build Configuration -> 选择 Debug
+eas build --profile preview --platform ios
+eas build --profile preview --platform android
+
+# or
+
+eas build --profile preview --platform ios --local
+eas build --profile preview --platform android --local
+```
+
+或者手动近似构建（不等同于 EAS Build；需要自行确认签名、channel、导出方式）
+
+```sh
+1. pnpm prebuild:pre -p ios
+2. open ios/ChatQADev.xcworkspace
+3. Xcode - Configure release scheme: Product -> Scheme -> Edit Scheme -> Run tab: Info - Build Configuration -> 选择 Release
 4. Xcode - Archive: 选择 Any iOS Device (arm64) -> Product -> Archive
-5. 选择 Archive -> Debugging -> Export -> 导出 .ipa 文件
+5. 选择 Archive -> Release -> Export -> 导出 .ipa 文件
 ```
 
 ```sh
-1. pnpm prebuild:preview -p android
-2. cd android && ./gradlew app:assembleDebug
+1. pnpm prebuild:pre -p android
+2. cd android && ./gradlew :app:assembleRelease
+```
+
+## 构建 Debug 配置的 expo-updates 原生排障包
+
+- https://docs.expo.dev/versions/latest/sdk/updates/#testing
+- https://docs.expo.dev/debugging/runtime-issues/#native-debugging
+
+```sh
+1. export EX_UPDATES_NATIVE_DEBUG=1
+2. pnpm prebuild:dev
+
+# Android Studio
+3. open -a "/Applications/Android Studio.app" ./android
+4. 等待项目同步完成（右下角进度条消失）
+5. 选择设备，构建应用 (Control + R)
+
+# Xcode
+3. npx pod-install
+4. sed -i '' 's/SKIP_BUNDLING/FORCE_BUNDLING/g;' ios/ChatQADev.xcodeproj/project.pbxproj
+5. xed ios
+6. 选择设备，构建应用 (Command + R)
+
+7. unset EX_UPDATES_NATIVE_DEBUG
+8. sed -i '' 's/FORCE_BUNDLING/SKIP_BUNDLING/g' ios/ChatQADev.xcodeproj/project.pbxproj # 恢复 SKIP_BUNDLING 变更
 ```
 
 ## 其他
@@ -159,30 +195,6 @@ npx expo-doctor@latest # 检查配置
 npx react-compiler-healthcheck@latest # 检查项目与 React 编译器的兼容性
 ```
 
-## TODO: 构建具有与发布构建相同更新行为的调试版本
-
-- https://docs.expo.dev/versions/latest/sdk/updates/#testing
-- https://docs.expo.dev/debugging/runtime-issues/#native-debugging
-
-```sh
-1. export EX_UPDATES_NATIVE_DEBUG=1
-2. pnpm prebuild:dev
-
-# Android Studio
-3. open -a "/Applications/Android Studio.app" ./android
-4. 等待项目同步完成（右下角进度条消失）
-5. 选择设备，构建应用 (Control + R)
-
-# Xcode
-3. npx pod-install
-4. sed -i '' 's/SKIP_BUNDLING/FORCE_BUNDLING/g;' ios/ChatQA.xcodeproj/project.pbxproj
-5. xed ios
-6. 选择设备，构建应用 (Command + R)
-
-7. unset EX_UPDATES_NATIVE_DEBUG
-8. sed -i '' 's/FORCE_BUNDLING/SKIP_BUNDLING/g' ios/ChatQA.xcodeproj/project.pbxproj # 恢复 SKIP_BUNDLING 变更
-```
-
 ## TODO
 
 ```sh
@@ -192,14 +204,3 @@ npx react-native bundle --platform android --dev true --entry-file index.js --bu
 # ios
 npx react-native bundle --platform ios --dev true --entry-file index.js --bundle-output ios/main.jsbundle --assets-dest ios
 ```
-
-## TODO: 待办事项
-
-- Webview sdk: 回退携带数据、ntv_new ...
-- 包含调试面板，但不包含 dev-client 的 Test 变体包
-- 网络请求封装，支持网络加解密
-- 应用宝
-- 地图
-- 人脸识别
-- 友盟？消息推送？
-- ios 设备上安装 Test 变体报错

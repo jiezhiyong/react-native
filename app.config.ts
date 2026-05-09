@@ -5,6 +5,7 @@ import { ConfigContext, ExpoConfig } from 'expo/config';
 const VERSION_CODE = 1;
 const IS_DEV = process.env.APP_VARIANT === 'development';
 const IS_PRE = process.env.APP_VARIANT === 'preview';
+const APP_VARIANT = IS_DEV ? 'development' : IS_PRE ? 'preview' : 'production';
 const ngrokUrl = `${process.env.EXPO_TUNNEL_SUBDOMAIN}.ngrok.io`;
 const ENABLE_IOS_CAPABILITIES = !IS_DEV || process.env.EXPO_ENABLE_IOS_CAPABILITIES === 'true';
 const IOS_CAPABILITY_PLUGINS: ExpoConfig['plugins'] = [['expo-apple-authentication', {}]];
@@ -92,6 +93,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ],
   },
   extra: {
+    appVariant: APP_VARIANT,
     supportsRTL: true,
     router: {
       origin: false,
@@ -99,7 +101,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     eas: {
       projectId: '240e7c3e-9922-48a7-9a4a-84be0fcc615c',
     },
-    enableDebugPanel: process.env.ENABLE_DEBUG_PANEL === 'true',
   },
   owner: 'jiezhiyong',
   runtimeVersion: '1.0.0',
