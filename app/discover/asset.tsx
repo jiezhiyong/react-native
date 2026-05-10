@@ -31,7 +31,7 @@ export default function ExpoAssetScreen() {
         // 可以传入一个或多个资源
         const assets = await Asset.loadAsync([
           require('../../assets/images/icon.png'),
-          require('../../assets/images/react-logo.png'),
+          require('../../assets/images/splash-icon.png'),
         ]);
 
         setLoadedAssets(assets);
@@ -63,7 +63,7 @@ export default function ExpoAssetScreen() {
       setIsDownloading(true);
 
       // 创建一个资源对象
-      const remoteAsset = Asset.fromModule(require('../../assets/images/icon-demo.png'));
+      const remoteAsset = Asset.fromModule(require('../../assets/images/icon.png'));
 
       // 下载资源
       remoteAsset

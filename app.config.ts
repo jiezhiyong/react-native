@@ -40,19 +40,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   version: '1.0.0',
   orientation: 'portrait',
   userInterfaceStyle: 'automatic',
-  jsEngine: 'hermes',
   experiments: {
     reactCompiler: true,
     typedRoutes: true,
   },
-  // splash: {
-  //   image: './assets/images/splash.png',
-  //   resizeMode: 'contain',
-  //   backgroundColor: '#ffffff',
-  // },
   assetBundlePatterns: ['**/*'],
   android: {
-    // scheme: 'qachat',
+    scheme: 'qachat',
     versionCode: VERSION_CODE,
     package: getUniqueIdentifier(),
     softwareKeyboardLayoutMode: 'pan',
@@ -76,7 +70,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   web: {
     bundler: 'metro',
     output: 'server',
-    favicon: './assets/images/favicon.png',
+    favicon: './assets/images/favicon.ico',
     intentFilters: [
       {
         action: 'VIEW',
@@ -201,11 +195,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-splash-screen',
       {
-        backgroundColor: '#26292e',
+        backgroundColor: '#fff',
         image: './assets/images/splash-icon.png',
         dark: {
-          image: './assets/images/splash-icon-dark.png',
-          backgroundColor: '#26292e',
+          image: './assets/images/splash-icon.png',
+          backgroundColor: '#000',
         },
         imageWidth: 200,
       },
