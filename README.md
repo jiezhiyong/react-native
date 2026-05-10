@@ -194,13 +194,3 @@ npx expo install --check # 检查依赖
 npx expo-doctor@latest # 检查配置
 npx react-compiler-healthcheck@latest # 检查项目与 React 编译器的兼容性
 ```
-
-## TODO
-
-```sh
-# android
-npx react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
-
-# ios
-npx react-native bundle --platform ios --dev true --entry-file index.js --bundle-output ios/main.jsbundle --assets-dest ios
-```

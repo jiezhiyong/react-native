@@ -2,7 +2,7 @@
   <string name="app_name">ChatQA (Dev)</string>
   <string name="expo_system_ui_user_interface_style" translatable="false">automatic</string>
   <string name="expo_runtime_version">1.0.0</string>
+  <string name="blob_provider_authority">com.jiezhiyong.qachat.dev.blobs</string>
   <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
   <string name="ExpoLocalization_supportsRTL" translatable="false">true</string>
-  <string name="blob_provider_authority">com.jiezhiyong.qachat.dev.blobs</string>
 </resources>

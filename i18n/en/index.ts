@@ -51,7 +51,7 @@ const en = {
     noMore: 'No more items',
   },
   mine: {
-    notification: 'Notifications',
+    notification: 'Notices',
     helpCenter: 'Help Center',
     feedback: 'Feedback',
     about: 'About Us',

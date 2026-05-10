@@ -17,7 +17,7 @@
     "test": "jest --watchAll",
     "test:e2e": "maestro test e2e/",
     "test:e2e:single": "maestro test",
-    "lint": "npx eslint app components lib store modules --ignore-pattern '**/node_modules/**' --fix --max-warnings 999",
+    "lint": "npx eslint app components lib store --ignore-pattern '**/node_modules/**' --fix --max-warnings 999",
     "typecheck": "tsc",
     "format": "eslint --fix . && prettier --write --ignore-unknown .",
     "postinstall": "BROWSERSLIST_IGNORE_OLD_DATA=1 tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css",

@@ -70,7 +70,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   web: {
     bundler: 'metro',
     output: 'server',
-    favicon: './assets/images/favicon.ico',
+    favicon: './assets/images/favicon.png',
     intentFilters: [
       {
         action: 'VIEW',

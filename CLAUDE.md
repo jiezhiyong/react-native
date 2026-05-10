@@ -113,7 +113,6 @@ pnpm analyze:android
 - `hooks/`: custom hooks
 - `assets/`: images, fonts, and static assets
 - `i18n/`: typesafe-i18n locale files and generated typing utilities
-- `modules/`: local Expo native modules (for example `my-module`)
 - `debug-panel/`: debug-only panel module with its own components and hooks
 - `plugins/`: local Expo config plugins
 - `e2e/`: Maestro E2E tests
@@ -121,7 +120,6 @@ pnpm analyze:android
 ### Repo-Specific Patterns
 
 - `i18n/` uses typesafe-i18n; after changing locale files, run `pnpm generate-i18n`.
-- `modules/my-module` is a local Expo native module; changes there may require `pnpm prebuild[:variant]`.
 - Routing is file-based through Expo Router under `app/`.
 - App behavior changes by `APP_VARIANT`.
 - Native configuration is driven by `app.config.ts`, not a checked-in `app.json`.

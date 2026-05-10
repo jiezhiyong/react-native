@@ -127,7 +127,7 @@ const QuickLinksSection = () => {
             >
               <IconComponent name={item.icon} size={20} color={item.iconColor} />
             </View>
-            <Text className="text-sm text-center whitespace-nowrap">{item.title}</Text>
+            <Text className="text-sm text-center text-ellipsis w-[100%]">{item.title}</Text>
           </TouchableOpacity>
         ))}
       </View>
