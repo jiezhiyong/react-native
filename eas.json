@@ -66,7 +66,7 @@
   "submit": {
     "production": {
       "android": {
-        "serviceAccountKeyPath": "@secret:GOOGLE_PLAY_SERVICE_ACCOUNT",
+        "applicationId": "com.jiezhiyong.qachat",
         "track": "production"
       }
     }
