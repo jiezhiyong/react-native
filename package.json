@@ -1,7 +1,7 @@
 {
   "name": "react-native-app",
   "main": "index.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "run:dev": "APP_VARIANT=development expo start",
     "run:pre": "APP_VARIANT=preview expo start --no-dev",
