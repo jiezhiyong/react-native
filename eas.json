@@ -53,8 +53,7 @@
         "GOOGLE_SERVICES_JSON": "@secret:GOOGLE_SERVICES_JSON"
       },
       "android": {
-        "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "app-bundle"
       },
       "ios": {
         "buildArtifactPaths": [
