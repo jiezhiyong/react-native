@@ -29,7 +29,7 @@ export default function DOMComponent({
   return (
     <div>
       <h1>Hello, {name}</h1>
-      <img src={`/partial-react-logo.png`} />
+      <img src={`/assets/images/icon.png`} />
       <Link href="/webview">webview</Link>
       <p>Pathname: {pathname}</p>
     </div>

@@ -129,7 +129,7 @@ export default function HomeScreen() {
     return (
       <View className="px-1 pt-2">
         <View className="w-full overflow-hidden rounded-xl border border-primary/20 p-3 bg-card">
-          <View className="w-full aspect-square bg-primary/20 rounded-md" style={{ height: 150 }} />
+          <View className="w-full aspect-square bg-primary/20 rounded-md" style={{ height: 132 }} />
 
           {Array.from({ length: item.skeletonNum }).map((_, index) => (
             <View key={index}>

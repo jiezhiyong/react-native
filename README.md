@@ -6,20 +6,17 @@ This is an [Expo](https://expo.dev) project template. doc: [Expo documentation](
 
 ```bash
 pnpm install # 安装依赖
-pnpm run:dev --clear # 启动开发模式 (可选清除 bundler 缓存)
+npx expo install expo-dev-client # 安装开发客户端
 ```
 
 ## 创建本地开发版本 Development Build（依赖 Development servers）
 
 ```sh
-npx expo install expo-dev-client # 安装开发客户端
+pnpm run:dev --clear # App 已装好，只改 JS/TS，启动开发模式 (可选清除 bundler 缓存)
 ```
 
 ```sh
 pnpm prebuild:dev -p <android | ios> # 使用 Prebuild 生成原生 Android 和 iOS 目录
-```
-
-```sh
 pnpm run:ios:simulator
 pnpm run:ios:device
 pnpm run:android

@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 type DevMenuItem = {
   name: string;
   callback: () => void;
@@ -11,7 +13,7 @@ type DevMenuModule = {
 let hasRegistered = false;
 
 export async function registerDevelopmentDebugPanelMenu(openDebugPanel: () => void) {
-  if (!__DEV__ || hasRegistered) {
+  if (Platform.OS === 'web' || !__DEV__ || hasRegistered) {
     return;
   }
 

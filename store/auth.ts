@@ -47,7 +47,7 @@ export const useAuthStore = create<AuthState>()(
             session: 'session_abc',
             id: 'id_123456',
             name: '张三',
-            avatar: 'avatar.png',
+            avatar: 'assets/images/avatar.jpg',
             mobile: '138 **** 1234',
             isLoading: false,
           });
