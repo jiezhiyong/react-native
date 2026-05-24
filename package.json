@@ -11,7 +11,7 @@
     "prebuild": "expo prebuild",
     "run:ios:simulator": "APP_VARIANT=development expo run:ios",
     "run:ios:device": "APP_VARIANT=development expo run:ios --device",
-    "run:android": "APP_VARIANT=development expo run:android",
+    "run:android": "APP_VARIANT=development expo run:android --device Pixel_9",
     "build:android:debug": "APP_VARIANT=preview NO_MINIFY=true FORCE_DEV_MODE=false expo prebuild -p android && cd android && ./gradlew assembleDebug",
     "build:ios:debug": "APP_VARIANT=preview NO_MINIFY=true FORCE_DEV_MODE=false expo prebuild -p ios && cd ios && xcodebuild -workspace ChatQADev.xcworkspace -scheme ChatQADev -configuration Debug -archivePath build/ChatQADev.xcarchive archive",
     "test": "jest --watchAll",

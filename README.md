@@ -191,3 +191,7 @@ npx expo install --check # 检查依赖
 npx expo-doctor@latest # 检查配置
 npx react-compiler-healthcheck@latest # 检查项目与 React 编译器的兼容性
 ```
+
+```sh
+emulator -list-avds # 获取 Android 模拟器 AVD 真实名称
+```

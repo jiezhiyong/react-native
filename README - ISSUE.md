@@ -77,3 +77,12 @@
   - 不要改成 `contentInsetAdjustmentBehavior="never"` + `automaticallyAdjustContentInsets={false}` 来强行关掉系统注入。这会让 UITabBarController 在 iOS 26 失去对滚动视图的检测，`<NativeTabs minimizeBehavior="onScrollDown">` 不再生效（下滑收起 Tab 失效）。
   - `scrollIndicatorInsets.top` 不参与上面的叠加，保持 `headerHeight` 即可，让滚动条从自定义 Header 下方开始。
   - 后续升级 Expo SDK 时，建议重新验证 NativeTabs 的自动 inset 行为，如果上游修复了 `disableAutomaticContentInsets` 的语义，就可以恢复成 `contentInset.top = headerHeight` 写法。
+
+- Q: Android 上点击 `Button` / `Pressable` 报错 `Couldn't find a navigation context. Have you wrapped your app with 'NavigationContainer'?`，栈指向 `components/ui/button.tsx` 的 `Pressable`
+- A: 这不是路由未包裹 `NavigationContainer`，而是 **NativeWind css-interop 与 `shadow-*` 在 `Pressable` 上的已知冲突**。css-interop 处理 shadow 或条件切换 className 时，可能误触发 React Navigation context 的 getter，抛出误导性错误。典型场景：`variant="outline"` 按钮点击后切到带 `shadow-sm` 的 `destructive` 按钮时崩溃；`default` 变体同理。
+
+  修复：不要在 `Pressable`（含 `@/components/ui/button`）上使用 NativeWind 的 `shadow-sm` / `shadow-*`；本项目已从 `button.tsx` 的 `default`、`destructive` 变体移除 `shadow-sm shadow-foreground/5`。
+
+  若仍需阴影，改用 `StyleSheet` 的 `elevation` / `shadowColor` 等内联样式，避免 `shadow-*` Tailwind 类。
+
+  参考：[nativewind#1536](https://github.com/nativewind/nativewind/issues/1536)、[expo#38191](https://github.com/expo/expo/issues/38191)

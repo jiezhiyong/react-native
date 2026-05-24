@@ -5,8 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
-// demo, TODO: 切换为国内可用的视频
-const videoSource = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+const videoSource = 'https://static.expo.dev/static/home/9-2025/splash-develop-dark.webm';
 
 export default function ExpoVideoScreen() {
   // 初始化视频播放器
