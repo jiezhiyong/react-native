@@ -23,6 +23,7 @@ expo-env.d.ts
 # 凭证文件
 credentials.json
 keystores/release.keystore
+storepass
 google-services.json
 google-play-service-account.json
 GoogleService-Info.plist
