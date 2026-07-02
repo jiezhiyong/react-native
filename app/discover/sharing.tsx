@@ -1,4 +1,4 @@
-import { downloadAsync, File, Paths } from 'expo-file-system';
+import { File, Paths } from 'expo-file-system';
 import { Image } from 'expo-image';
 import * as Sharing from 'expo-sharing';
 import { useState } from 'react';
@@ -20,7 +20,7 @@ export default function ExpoSharingScreen() {
       const cacheDir = Paths.cache;
       const tempFile = new File(cacheDir, 'temp-image.jpg');
 
-      await downloadAsync(imageUrl, tempFile.uri);
+      await File.downloadFileAsync(imageUrl, tempFile, { idempotent: true });
       await Sharing.shareAsync(tempFile.uri);
     } catch (error: unknown) {
       setShareResult(JSON.stringify(error, null, 2));

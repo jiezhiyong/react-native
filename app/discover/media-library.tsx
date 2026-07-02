@@ -1,35 +1,39 @@
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { ImagePickerAsset } from 'expo-image-picker';
-import * as MediaLibrary from 'expo-media-library';
+import { Album, Asset, AssetField, MediaType, Query, usePermissions } from 'expo-media-library';
 import { useEffect, useState } from 'react';
 import { Alert, FlatList, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
+type AssetItem = {
+  id: string;
+  uri: string;
+};
+
 export default function ExpoMediaLibraryScreen() {
-  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
-  const [, setAlbums] = useState<MediaLibrary.Album[]>([]);
-  const [selectedAlbum, setSelectedAlbum] = useState<MediaLibrary.Album | null>(null);
-  const [assets, setAssets] = useState<MediaLibrary.Asset[]>([]);
+  const [permissionResponse, requestPermission] = usePermissions();
+  const [selectedAlbumTitle, setSelectedAlbumTitle] = useState<string | null>(null);
+  const [assets, setAssets] = useState<AssetItem[]>([]);
   const [selectedAsset, setSelectedAsset] = useState<ImagePickerAsset | null>(null);
 
   useEffect(() => {
     if (permissionResponse?.granted) {
-      loadAlbums();
-    } else {
-      requestPermission();
+      void loadAlbums();
+    } else if (permissionResponse) {
+      void requestPermission();
     }
   }, [permissionResponse?.granted]);
 
   const loadAlbums = async () => {
     try {
-      const fetchedAlbums = await MediaLibrary.getAlbumsAsync();
-      setAlbums(fetchedAlbums);
+      const fetchedAlbums = await Album.getAll();
       if (fetchedAlbums.length > 0) {
-        setSelectedAlbum(fetchedAlbums[0]);
-        loadAssets(fetchedAlbums[0]);
+        const firstAlbum = fetchedAlbums[0];
+        setSelectedAlbumTitle(await firstAlbum.getTitle());
+        await loadAssets(firstAlbum);
       }
     } catch (error) {
       console.error('加载相册失败:', error);
@@ -37,14 +41,18 @@ export default function ExpoMediaLibraryScreen() {
     }
   };
 
-  const loadAssets = async (album: MediaLibrary.Album) => {
+  const loadAssets = async (album: Album) => {
     try {
-      const { assets } = await MediaLibrary.getAssetsAsync({
-        album: album,
-        mediaType: ['photo'],
-        first: 20,
-      });
-      setAssets(assets);
+      const fetchedAssets = await new Query().album(album).eq(AssetField.MEDIA_TYPE, MediaType.IMAGE).limit(20).exe();
+
+      const assetsWithUri = await Promise.all(
+        fetchedAssets.map(async (asset) => ({
+          id: asset.id,
+          uri: await asset.getUri(),
+        }))
+      );
+
+      setAssets(assetsWithUri);
     } catch (error) {
       console.error('加载媒体文件失败:', error);
       Alert.alert('错误', '加载媒体文件失败');
@@ -54,9 +62,9 @@ export default function ExpoMediaLibraryScreen() {
   const createAlbum = async () => {
     try {
       const albumName = `相册_${Date.now()}`;
-      const album = await MediaLibrary.createAlbumAsync(albumName);
-      Alert.alert('成功', `已创建相册: ${album.title}`);
-      loadAlbums();
+      const album = await Album.create(albumName, []);
+      Alert.alert('成功', `已创建相册: ${await album.getTitle()}`);
+      await loadAlbums();
     } catch (error) {
       console.error('创建相册失败:', error);
       Alert.alert('错误', '创建相册失败');
@@ -108,9 +116,9 @@ export default function ExpoMediaLibraryScreen() {
         </Button>
       </View>
 
-      {selectedAlbum && (
+      {selectedAlbumTitle && (
         <>
-          <Text className="text-lg font-medium mb-2">选择的相册: {selectedAlbum.title}</Text>
+          <Text className="text-lg font-medium mb-2">选择的相册: {selectedAlbumTitle}</Text>
           <FlatList
             data={assets}
             numColumns={3}

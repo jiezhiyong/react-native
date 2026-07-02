@@ -1,4 +1,12 @@
-import * as Calendar from 'expo-calendar';
+import {
+  CalendarAccessLevel,
+  createCalendar,
+  EntityTypes,
+  type ExpoCalendar,
+  ExpoCalendarEvent,
+  getCalendars,
+  requestCalendarPermissions,
+} from 'expo-calendar';
 import { PermissionStatus } from 'expo-modules-core';
 import { CalendarIcon, Trash } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
@@ -10,19 +18,28 @@ import { cn } from '@/lib/utils';
 import { Button } from '../../components/ui/button';
 import { Text } from '../../components/ui/text';
 
+type DisplayEvent = {
+  id: string;
+  title: string;
+  startDate: string;
+  endDate: string;
+  allDay?: boolean;
+  location?: string;
+  notes?: string;
+};
+
 export default function ExpoCalendarScreen() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
-  const [calendars, setCalendars] = useState<Calendar.Calendar[]>([]);
-  const [selectedCalendar, setSelectedCalendar] = useState<Calendar.Calendar | null>(null);
-  const [events, setEvents] = useState<Calendar.Event[]>([]);
+  const [calendars, setCalendars] = useState<ExpoCalendar[]>([]);
+  const [selectedCalendar, setSelectedCalendar] = useState<ExpoCalendar | null>(null);
+  const [events, setEvents] = useState<DisplayEvent[]>([]);
 
-  // 获取日历权限
   const getCalendarPermissions = async () => {
     try {
-      const { status } = await Calendar.requestCalendarPermissionsAsync();
+      const { status } = await requestCalendarPermissions();
       if (status === PermissionStatus.GRANTED) {
         setHasPermission(true);
-        fetchCalendars();
+        await fetchCalendars();
       } else {
         setHasPermission(false);
         Alert.alert('权限被拒绝', '请在设置中开启日历权限才能使用该功能');
@@ -33,57 +50,55 @@ export default function ExpoCalendarScreen() {
     }
   };
 
-  // 获取设备上的所有日历
   const fetchCalendars = async () => {
     try {
-      const calendarsList = await Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT);
+      const calendarsList = await getCalendars(EntityTypes.EVENT);
       setCalendars(calendarsList);
-      setSelectedCalendar(calendarsList[0]);
-      fetchEvents(calendarsList[0].id);
+      if (calendarsList.length > 0) {
+        setSelectedCalendar(calendarsList[0]);
+        await fetchEvents(calendarsList[0]);
+      }
     } catch (error) {
       console.error('获取日历失败：', error);
       Alert.alert('错误', '获取日历列表时出现错误');
     }
   };
 
-  // 创建新日历
-  const createCalendar = async () => {
+  const createNewCalendar = async () => {
     try {
       let defaultCalendarSource;
       if (Platform.OS === 'ios') {
         defaultCalendarSource = await getDefaultCalendarSource();
       }
 
-      const newCalendarID = await Calendar.createCalendarAsync({
+      const newCalendar = await createCalendar({
         title: `Expo 示例日历 ${new Date().toISOString().split('T')[0]}`,
         color: '#2196F3',
-        entityType: Calendar.EntityTypes.EVENT,
+        entityType: EntityTypes.EVENT,
         name: 'expoCalendarExample',
         ownerAccount: 'personal',
-        accessLevel: Calendar.CalendarAccessLevel.OWNER,
+        accessLevel: CalendarAccessLevel.OWNER,
         isVisible: Platform.OS === 'android' ? true : undefined,
         sourceId: Platform.OS === 'ios' ? defaultCalendarSource?.id : undefined,
         source: Platform.OS === 'ios' ? defaultCalendarSource : undefined,
       });
 
-      Alert.alert('成功', `创建日历成功！ID: ${newCalendarID}`);
-      fetchCalendars();
+      Alert.alert('成功', `创建日历成功！ID: ${newCalendar.id}`);
+      await fetchCalendars();
     } catch (error) {
       console.error('创建日历失败：', error);
       Alert.alert('错误', (error as Error).message);
     }
   };
 
-  // 获取默认日历源（仅iOS需要）
   const getDefaultCalendarSource = async () => {
-    const calendars = await Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT);
-    const defaultCalendars = calendars.filter(
+    const allCalendars = await getCalendars(EntityTypes.EVENT);
+    const defaultCalendars = allCalendars.filter(
       (each) => each.source.name === 'iCloud' || each.source.name === 'Default'
     );
-    return defaultCalendars.length > 0 ? defaultCalendars[0].source : calendars[0].source;
+    return defaultCalendars.length > 0 ? defaultCalendars[0].source : allCalendars[0].source;
   };
 
-  // 创建新事件
   const createEvent = async () => {
     if (!selectedCalendar) {
       Alert.alert('提示', '请先选择一个日历');
@@ -92,67 +107,62 @@ export default function ExpoCalendarScreen() {
 
     try {
       const startDate = new Date();
-      const endDate = new Date(startDate.getTime() + 60 * 60 * 1000); // 1小时后
+      const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
 
-      const eventDetails = {
+      const event = await selectedCalendar.createEvent({
         title: `测试事件 ${new Date().toISOString().split('T')[0]}`,
         startDate,
         endDate,
         notes: '这是一个由 Expo Calendar API 创建的测试事件',
         location: '线上会议',
         timeZone: 'Asia/Shanghai',
-        alarms: [
-          {
-            relativeOffset: -15, // 事件开始前15分钟提醒
-          },
-        ],
-      };
+        alarms: [{ relativeOffset: -15 }],
+      });
 
-      const eventId = await Calendar.createEventAsync(selectedCalendar.id, eventDetails);
-      Alert.alert('成功', `事件创建成功！ID: ${eventId}`);
-      fetchEvents(selectedCalendar.id);
+      Alert.alert('成功', `事件创建成功！ID: ${event.id}`);
+      await fetchEvents(selectedCalendar);
     } catch (error) {
       console.error('创建事件失败：', error);
       Alert.alert('错误', (error as Error).message);
     }
   };
 
-  // 获取指定日历的所有事件
-  const fetchEvents = async (calendarId: string) => {
+  const toDisplayEvent = (event: ExpoCalendarEvent): DisplayEvent => ({
+    id: event.id,
+    title: event.title,
+    startDate: new Date(event.startDate).toLocaleString(),
+    endDate: new Date(event.endDate).toLocaleString(),
+    allDay: event.allDay,
+    location: event.location ?? undefined,
+    notes: event.notes ?? undefined,
+  });
+
+  const fetchEvents = async (calendar: ExpoCalendar) => {
     try {
-      // 获取从今天开始一个月内的事件
       const startDate = new Date();
       const endDate = new Date();
       endDate.setMonth(endDate.getMonth() + 1);
 
-      const events = await Calendar.getEventsAsync([calendarId], startDate, endDate);
-
-      setEvents(
-        events.map((event) => ({
-          ...event,
-          startDate: new Date(event.startDate).toLocaleString(),
-          endDate: new Date(event.endDate).toLocaleString(),
-        }))
-      );
+      const calendarEvents = await calendar.listEvents(startDate, endDate);
+      setEvents(calendarEvents.map(toDisplayEvent));
     } catch (error) {
       console.error('获取事件失败：', error);
       Alert.alert('错误', '获取事件列表时出现错误');
     }
   };
 
-  // 选择日历并加载其事件
-  const selectCalendar = (calendar: Calendar.Calendar) => {
+  const selectCalendar = (calendar: ExpoCalendar) => {
     setSelectedCalendar(calendar);
-    fetchEvents(calendar.id);
+    void fetchEvents(calendar);
   };
 
-  // 删除事件
   const deleteEvent = async (eventId: string) => {
     try {
-      await Calendar.deleteEventAsync(eventId);
+      const event = await ExpoCalendarEvent.get(eventId);
+      await event.delete();
       Alert.alert('成功', '事件已删除');
       if (selectedCalendar) {
-        fetchEvents(selectedCalendar.id);
+        await fetchEvents(selectedCalendar);
       }
     } catch (error) {
       console.error('删除事件失败：', error);
@@ -160,9 +170,8 @@ export default function ExpoCalendarScreen() {
     }
   };
 
-  // 组件挂载时请求权限
   useEffect(() => {
-    getCalendarPermissions();
+    void getCalendarPermissions();
   }, []);
 
   if (hasPermission === false) {
@@ -183,10 +192,9 @@ export default function ExpoCalendarScreen() {
         <Text className="text-muted-foreground">访问和管理设备上的日历事件和提醒。</Text>
       </View>
 
-      {/* 日历列表 */}
       <View className="flex-row justify-between items-center mb-2">
         <Text className="text-lg font-medium">日历列表</Text>
-        <Button size="sm" onPress={createCalendar}>
+        <Button size="sm" onPress={createNewCalendar}>
           <Text>创建日历</Text>
         </Button>
       </View>
@@ -223,7 +231,6 @@ export default function ExpoCalendarScreen() {
         </Button>
       </View>
 
-      {/* 事件列表 */}
       {selectedCalendar && (
         <View>
           {events.length === 0 ? (

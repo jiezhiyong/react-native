@@ -191,30 +191,39 @@ import { NavigationBar } from 'expo-navigation-bar';
 | `@react-navigation__bottom-tabs@7.15.7` | 需验证 patch 是否仍适用 | 升级 bottom-tabs 后重新评估 |
 | `@react-native-segmented-control` | 可能仍需要 | 检查上游是否已修复 `boxShadow` |
 
-## 试升级结果摘要
+## 验证结果
 
 在 `cursor/expo-sdk57-upgrade-prep-e764` 分支上：
 
 - `npx expo install expo@^57.0.0 --fix` — 依赖升级成功
-- `npx expo-doctor@latest` — **20/20 通过**（排除 typescript 后）
-- `pnpm typecheck` — **26 个错误**，集中在 `app/discover/` 演示页（calendar、media-library、navigation-bar）及 TS 6 的 `global.css` 侧效导入
-- 生产路径（tabs、核心功能）暂无 typecheck 错误
+- `npx expo-doctor@latest` — **20/20 通过**
+- `pnpm typecheck` — **通过**（已迁移至 SDK 57 新 API）
+- `pnpm lint` — 通过（仅有既有 warnings）
+
+### 已完成的代码迁移
+
+- `@react-navigation/*` → `expo-router` 导出
+- `expo-calendar` → `getCalendars` / `ExpoCalendar.createEvent` 等 OOP API
+- `expo-media-library` → `Album` / `Asset` / `Query` 新 API
+- `expo-contacts` → `Contact.getAll` / `Contact.presentPicker`
+- `expo-navigation-bar` → 声明式 `<NavigationBar />` 组件
+- `expo-file-system` → `File.downloadFileAsync` / `DownloadTask` / `File.upload`
 
 ## 升级检查清单
 
-- [ ] main 上先对齐 SDK 55 补丁版本
-- [ ] 创建升级分支
-- [ ] 运行 `npx expo install expo@^57.0.0 --fix`（或经 56 逐步升级）
-- [ ] 更新 config-plugins / dev-plugins / metro-config
-- [ ] 添加 `expo-status-bar` config plugin
-- [ ] 更新 `pnpm.overrides.expo-image-loader`
-- [ ] 迁移 `@react-navigation/*` 导入
-- [ ] 修复 discover 演示页的 calendar / media-library / navigation-bar API
-- [ ] 验证 `expo-file-system` 异步调用
+- [x] main 上先对齐 SDK 55 补丁版本（在升级分支直接升至 57）
+- [x] 创建升级分支
+- [x] 运行 `npx expo install expo@^57.0.0 --fix`
+- [x] 更新 config-plugins / dev-plugins / metro-config
+- [x] 添加 `expo-status-bar` config plugin
+- [x] 更新 `pnpm.overrides.expo-image-loader`
+- [x] 迁移 `@react-navigation/*` 导入
+- [x] 修复 discover 演示页的 calendar / media-library / navigation-bar API
+- [x] 验证 `expo-file-system` 异步调用与新上传/下载 API
 - [ ] 重新评估 pnpm patches
 - [ ] 删除并重新 prebuild 原生目录
 - [ ] 构建新 development client
-- [ ] 运行 typecheck / lint / test
+- [x] 运行 typecheck / lint / test
 - [ ] 在真机 / 模拟器上回归核心流程（相机、推送、Stripe、Vision Camera 等）
 
 ## 相关命令速查

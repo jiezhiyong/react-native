@@ -1,4 +1,4 @@
-import * as FileSystem from 'expo-file-system';
+import { File, UploadType } from 'expo-file-system';
 import * as ImagePicker from 'expo-image-picker';
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
@@ -54,12 +54,13 @@ export default function FileUploadDemo() {
       const asset = result.assets[0];
 
       // Get file info
-      const fileInfo = await FileSystem.getInfoAsync(asset.uri);
+      const file = new File(asset.uri);
+      const fileInfo = file.info();
 
       const fileData: FileInfo = {
         uri: asset.uri,
         name: asset.fileName || `image_${Date.now()}.jpg`,
-        size: fileInfo.exists ? (fileInfo as any).size || 0 : 0,
+        size: fileInfo.exists ? fileInfo.size || 0 : 0,
         mimeType: asset.mimeType || 'image/jpeg',
         width: asset.width,
         height: asset.height,
@@ -90,10 +91,10 @@ export default function FileUploadDemo() {
     try {
       const uploadUrl = 'https://httpbin.org/post';
 
-      const result = await FileSystem.uploadAsync(uploadUrl, selectedFile.uri, {
+      const result = await new File(selectedFile.uri).upload(uploadUrl, {
         fieldName: 'file',
         httpMethod: 'POST',
-        uploadType: 1, // FileSystem.FileSystemUploadType.MULTIPART
+        uploadType: UploadType.MULTIPART,
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -1,5 +1,5 @@
 import { CameraMode, CameraType, CameraView, useCameraPermissions } from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
+import { Album, Asset, requestPermissionsAsync } from 'expo-media-library';
 import { PermissionStatus } from 'expo-modules-core';
 import { Camera, SwitchCamera, Video, Zap, ZapOff } from 'lucide-react-native';
 import { useRef, useState } from 'react';
@@ -37,7 +37,7 @@ export default function ExpoCameraScreen() {
 
   // 请求媒体库权限
   const requestMediaLibraryPermission = async () => {
-    const permission = await MediaLibrary.requestPermissionsAsync();
+    const permission = await requestPermissionsAsync();
     setHasMediaLibraryPermission(permission.status === PermissionStatus.GRANTED);
     return permission.status === PermissionStatus.GRANTED;
   };
@@ -149,8 +149,8 @@ export default function ExpoCameraScreen() {
     }
 
     try {
-      const asset = await MediaLibrary.createAssetAsync(mediaUri);
-      await MediaLibrary.createAlbumAsync('Expo相机', asset, false);
+      const asset = await Asset.create(mediaUri);
+      await Album.create('Expo相机', [asset], false);
       Alert.alert('保存成功', mode === 'picture' ? '照片已保存到相册' : '视频已保存到相册');
     } catch (error) {
       console.error('保存媒体文件时出错：', error);
