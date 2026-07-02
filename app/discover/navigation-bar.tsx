@@ -1,172 +1,75 @@
 import { Ionicons } from '@expo/vector-icons';
-import * as NavigationBar from 'expo-navigation-bar';
+import { NavigationBar, type NavigationBarStyle } from 'expo-navigation-bar';
 import { Check } from 'lucide-react-native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
 export default function ExpoNavigationBarScreen() {
-  const [visibility, setVisibility] = useState<NavigationBar.NavigationBarVisibility>('visible');
-  const [backgroundColor, setBackgroundColor] = useState('#ffffff');
-  const [behavior, setBehavior] = useState<NavigationBar.NavigationBarBehavior>('overlay-swipe');
-  const [position, setPosition] = useState<NavigationBar.NavigationBarPosition>('relative');
-  const [buttonStyle, setButtonStyle] = useState<NavigationBar.NavigationBarButtonStyle>('light');
-  const [error, setError] = useState('');
+  const [hidden, setHidden] = useState(false);
+  const [style, setStyle] = useState<NavigationBarStyle>('light');
 
-  // 初始化导航栏设置
-  useEffect(() => {
-    async function setupNavigationBar() {
-      try {
-        // 设置初始状态
-        await NavigationBar.setBackgroundColorAsync(backgroundColor);
-        await NavigationBar.setBehaviorAsync(behavior);
-        await NavigationBar.setPositionAsync(position);
-        await NavigationBar.setButtonStyleAsync(buttonStyle);
-        await NavigationBar.setVisibilityAsync(visibility);
-      } catch (error) {
-        setError('导航栏初始化失败: ' + (error as Error).message);
-      }
-    }
-    setupNavigationBar();
-  }, []);
-
-  // 切换导航栏可见性
-  const toggleVisibility = async () => {
-    try {
-      const newVisibility = visibility === 'visible' ? 'hidden' : 'visible';
-      await NavigationBar.setVisibilityAsync(newVisibility);
-      setVisibility(newVisibility);
-    } catch (error) {
-      setError('切换导航栏可见性失败: ' + (error as Error).message);
-    }
+  const toggleVisibility = () => {
+    setHidden((current) => !current);
   };
 
-  // 更改背景颜色
-  const changeBackgroundColor = async (color: string) => {
-    try {
-      await NavigationBar.setBackgroundColorAsync(color);
-      setBackgroundColor(color);
-    } catch (error) {
-      setError('更改背景颜色失败: ' + (error as Error).message);
-    }
-  };
-
-  // 更改行为模式
-  const changeBehavior = async (newBehavior: NavigationBar.NavigationBarBehavior) => {
-    try {
-      await NavigationBar.setBehaviorAsync(newBehavior);
-      setBehavior(newBehavior);
-    } catch (error) {
-      setError('更改行为模式失败: ' + (error as Error).message);
-    }
-  };
-
-  // 更改位置
-  const changePosition = async (newPosition: NavigationBar.NavigationBarPosition) => {
-    try {
-      await NavigationBar.setPositionAsync(newPosition);
-      setPosition(newPosition);
-    } catch (error) {
-      setError('更改位置失败: ' + (error as Error).message);
-    }
-  };
-
-  // 更改按钮样式
-  const changeButtonStyle = async (newStyle: NavigationBar.NavigationBarButtonStyle) => {
-    try {
-      await NavigationBar.setButtonStyleAsync(newStyle);
-      setButtonStyle(newStyle);
-    } catch (error) {
-      setError('更改按钮样式失败: ' + (error as Error).message);
-    }
+  const changeStyle = (nextStyle: NavigationBarStyle) => {
+    setStyle(nextStyle);
   };
 
   return (
-    <ScrollView className="flex-1 p-5">
-      <View className="mb-6">
-        <Text className="text-2xl font-bold mb-2">导航栏 (仅限 Android)</Text>
-        <Text className="text-muted-foreground">自定义和控制设备的导航栏样式和行为</Text>
-      </View>
+    <>
+      <NavigationBar hidden={hidden} style={style} />
 
-      {/* 导航栏可见性控制 */}
-      <View className="mb-6">
-        <Text className="text-lg font-medium mb-2">可见性控制</Text>
-        <Button onPress={toggleVisibility} className="flex-row">
-          <Ionicons name={visibility === 'visible' ? 'eye-off' : 'eye'} size={20} color="white" />
-          <Text className="text-white ml-2">{visibility === 'visible' ? '隐藏导航栏' : '显示导航栏'}</Text>
-        </Button>
-      </View>
-
-      {/* 背景颜色控制 */}
-      <View className="mb-6">
-        <Text className="text-lg font-medium mb-2">背景颜色</Text>
-        <View className="flex-row justify-between">
-          {['#ffffff', '#000000', '#ef4444', '#22c55e', '#3b82f6'].map((color) => (
-            <TouchableOpacity
-              key={color}
-              className="size-14 rounded-full border justify-center items-center"
-              style={{ backgroundColor: color }}
-              onPress={() => changeBackgroundColor(color)}
-            >
-              {backgroundColor === color ? <Check /> : null}
-            </TouchableOpacity>
-          ))}
+      <ScrollView className="flex-1 p-5">
+        <View className="mb-6">
+          <Text className="text-2xl font-bold mb-2">导航栏 (仅限 Android)</Text>
+          <Text className="text-muted-foreground">使用声明式 API 控制设备导航栏的样式与可见性。</Text>
         </View>
-      </View>
 
-      {/* 行为模式控制 */}
-      <View className="mb-6">
-        <Text className="text-lg font-medium mb-2">行为模式</Text>
-        <View className="flex-row gap-3">
-          {(['overlay-swipe', 'inset-swipe', 'inset-touch'] as const).map((mode) => (
-            <Button key={mode} variant={behavior === mode ? 'default' : 'outline'} onPress={() => changeBehavior(mode)}>
-              <Text>{mode === 'overlay-swipe' ? '覆盖滑动' : mode === 'inset-swipe' ? '嵌入滑动' : '嵌入触摸'}</Text>
-            </Button>
-          ))}
+        <View className="mb-6">
+          <Text className="text-lg font-medium mb-2">可见性控制</Text>
+          <Button onPress={toggleVisibility} className="flex-row">
+            <Ionicons name={hidden ? 'eye' : 'eye-off'} size={20} color="white" />
+            <Text className="text-white ml-2">{hidden ? '显示导航栏' : '隐藏导航栏'}</Text>
+          </Button>
         </View>
-      </View>
 
-      {/* 位置控制 */}
-      <View className="mb-6">
-        <Text className="text-lg font-medium mb-2">位置</Text>
-        <View className="flex-row gap-3">
-          {(['relative', 'absolute'] as const).map((pos) => (
-            <Button key={pos} variant={position === pos ? 'default' : 'outline'} onPress={() => changePosition(pos)}>
-              <Text className={position === pos ? 'text-white' : 'text-muted-foreground'}>
-                {pos === 'absolute' ? '绝对定位' : '相对定位'}
-              </Text>
-            </Button>
-          ))}
+        <View className="mb-6">
+          <Text className="text-lg font-medium mb-2">按钮样式</Text>
+          <View className="flex-row gap-3 flex-wrap">
+            {(['auto', 'light', 'dark', 'inverted'] as const).map((item) => (
+              <Button key={item} variant={style === item ? 'default' : 'outline'} onPress={() => changeStyle(item)}>
+                <Text className={style === item ? 'text-white' : 'text-muted-foreground'}>{item}</Text>
+              </Button>
+            ))}
+          </View>
         </View>
-      </View>
 
-      {/* 按钮样式控制 */}
-      <View className="mb-6">
-        <Text className="text-lg font-medium mb-2">按钮样式</Text>
-        <View className="flex-row gap-3">
-          {(['light', 'dark'] as const).map((style) => (
-            <Button
-              key={style}
-              variant={buttonStyle === style ? 'default' : 'outline'}
-              onPress={() => changeButtonStyle(style)}
-            >
-              <Text className={buttonStyle === style ? 'text-white' : 'text-muted-foreground'}>
-                {style === 'light' ? '浅色样式' : '深色样式'}
-              </Text>
-            </Button>
-          ))}
+        <View className="mb-6">
+          <Text className="text-lg font-medium mb-2">当前配置</Text>
+          <Text className="text-muted-foreground">hidden: {hidden ? 'true' : 'false'}</Text>
+          <Text className="text-muted-foreground">style: {style}</Text>
         </View>
-      </View>
 
-      {/* 错误提示 */}
-      {error ? (
-        <View>
-          <Text className="text-lg font-medium mb-2">错误提示</Text>
-          <Text className="text-destructive">{error || '-'}</Text>
+        <View className="mb-6">
+          <Text className="text-lg font-medium mb-2">样式预览标记</Text>
+          <View className="flex-row justify-between">
+            {(['light', 'dark'] as const).map((item) => (
+              <TouchableOpacity
+                key={item}
+                className="size-14 rounded-full border justify-center items-center"
+                style={{ backgroundColor: item === 'light' ? '#ffffff' : '#000000' }}
+                onPress={() => changeStyle(item)}
+              >
+                {style === item ? <Check /> : null}
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
-      ) : null}
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 }

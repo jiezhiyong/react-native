@@ -1,6 +1,6 @@
 import { File } from 'expo-file-system';
 import { Image } from 'expo-image';
-import * as MediaLibrary from 'expo-media-library';
+import { Asset, requestPermissionsAsync } from 'expo-media-library';
 import { PermissionStatus } from 'expo-modules-core';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import * as Sharing from 'expo-sharing';
@@ -32,7 +32,7 @@ export default function MediaViewerScreen() {
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
-        const { status } = await MediaLibrary.requestPermissionsAsync();
+        const { status } = await requestPermissionsAsync();
         setHasPermission(status === PermissionStatus.GRANTED);
       }
     })();
@@ -58,7 +58,7 @@ export default function MediaViewerScreen() {
       }
 
       if (!hasPermission) {
-        const { status } = await MediaLibrary.requestPermissionsAsync();
+        const { status } = await requestPermissionsAsync();
         if (status !== PermissionStatus.GRANTED) {
           setError('需要存储权限才能保存媒体');
           return;
@@ -70,7 +70,7 @@ export default function MediaViewerScreen() {
 
       // 保存到媒体库
       const file = new File(url);
-      await MediaLibrary.saveToLibraryAsync(file.uri);
+      await Asset.create(file.uri);
       setIsLoading(false);
       alert('媒体已成功保存到设备');
     } catch (err) {

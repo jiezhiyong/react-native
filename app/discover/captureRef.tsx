@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import * as MediaLibrary from 'expo-media-library';
+import { Asset, usePermissions } from 'expo-media-library';
 import React, { useRef, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
@@ -17,7 +17,7 @@ export default function CaptureRefScreen() {
   // 截图的URI
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   // 媒体库权限
-  const [status, requestPermission] = MediaLibrary.usePermissions();
+  const [status, requestPermission] = usePermissions();
 
   // 请求媒体库权限
   React.useEffect(() => {
@@ -51,7 +51,7 @@ export default function CaptureRefScreen() {
       });
 
       // 保存截图到媒体库
-      await MediaLibrary.saveToLibraryAsync(uri);
+      await Asset.create(uri);
 
       // 设置截图URI以在界面上显示
       setCapturedImage(uri);

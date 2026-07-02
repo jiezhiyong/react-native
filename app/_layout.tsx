@@ -3,12 +3,12 @@ import '@/lib/nativewind';
 
 import { useReactNavigationDevTools } from '@dev-plugins/react-navigation';
 import { useReactQueryDevTools } from '@dev-plugins/react-query';
-import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import * as Sentry from '@sentry/react-native';
 import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { isRunningInExpoGo } from 'expo';
-import { Stack, useNavigationContainerRef } from 'expo-router';
+import { DarkTheme, DefaultTheme, Stack, ThemeProvider, useNavigationContainerRef } from 'expo-router';
+import type { Theme } from 'expo-router/build/react-navigation/native/types';
 import Head from 'expo-router/head';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';

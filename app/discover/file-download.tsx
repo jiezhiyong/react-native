@@ -1,4 +1,4 @@
-import * as FileSystem from 'expo-file-system/legacy';
+import { DownloadTask, File, Paths } from 'expo-file-system';
 import React, { useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 
@@ -52,7 +52,7 @@ const DOWNLOAD_FILES: DownloadFile[] = [
 
 export default function FileDownloadScreen() {
   const [downloads, setDownloads] = useState<Record<string, DownloadInfo>>({});
-  const [downloadResumables, setDownloadResumables] = useState<Record<string, any>>({});
+  const [downloadTasks, setDownloadTasks] = useState<Record<string, DownloadTask>>({});
 
   // 格式化文件大小
   const formatBytes = (bytes: number) => {
@@ -92,7 +92,7 @@ export default function FileDownloadScreen() {
   const startDownload = async (file: DownloadFile) => {
     try {
       const fileName = `${file.name.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}`;
-      const fileUri = `${FileSystem.documentDirectory}${fileName}`;
+      const destination = new File(Paths.document, fileName);
 
       // 初始化下载信息
       const downloadInfo: DownloadInfo = {
@@ -112,46 +112,43 @@ export default function FileDownloadScreen() {
       }));
 
       // 创建下载任务
-      const downloadResumable = FileSystem.createDownloadResumable(file.url, fileUri, {}, (downloadProgress) => {
-        const { totalBytesWritten, totalBytesExpectedToWrite } = downloadProgress;
-        const progress = totalBytesExpectedToWrite > 0 ? (totalBytesWritten / totalBytesExpectedToWrite) * 100 : 0;
+      const downloadTask = File.createDownloadTask(file.url, destination, {
+        onProgress: ({ bytesWritten, totalBytes }) => {
+          const progress = totalBytes > 0 ? (bytesWritten / totalBytes) * 100 : 0;
 
-        setDownloads((prev) => {
-          const currentDownload = prev[file.name];
-          if (!currentDownload) return prev;
+          setDownloads((prev) => {
+            const currentDownload = prev[file.name];
+            if (!currentDownload) return prev;
 
-          // 计算下载速度
-          const now = Date.now();
-          const startTime = currentDownload.startTime?.getTime() || now;
-          const elapsedSeconds = (now - startTime) / 1000;
-          const speed = elapsedSeconds > 0 ? totalBytesWritten / elapsedSeconds / 1024 : 0; // KB/s
+            const now = Date.now();
+            const startTime = currentDownload.startTime?.getTime() || now;
+            const elapsedSeconds = (now - startTime) / 1000;
+            const speed = elapsedSeconds > 0 ? bytesWritten / elapsedSeconds / 1024 : 0;
 
-          return {
-            ...prev,
-            [file.name]: {
-              ...currentDownload,
-              totalBytes: totalBytesExpectedToWrite || 0,
-              downloadedBytes: totalBytesWritten,
-              progress: Math.round(progress),
-              speed,
-            },
-          };
-        });
+            return {
+              ...prev,
+              [file.name]: {
+                ...currentDownload,
+                totalBytes: totalBytes || 0,
+                downloadedBytes: bytesWritten,
+                progress: Math.round(progress),
+                speed,
+              },
+            };
+          });
+        },
       });
 
-      // 保存下载任务引用
-      setDownloadResumables((prev) => ({
+      setDownloadTasks((prev) => ({
         ...prev,
-        [file.name]: downloadResumable,
+        [file.name]: downloadTask,
       }));
 
-      // 开始下载
-      const result = await downloadResumable.downloadAsync();
+      const result = await downloadTask.downloadAsync();
 
-      if (result && result.uri) {
-        // 获取文件信息
-        const fileInfo = await FileSystem.getInfoAsync(result.uri);
-        const fileSize = fileInfo.exists ? (fileInfo as any).size || 0 : 0;
+      if (result) {
+        const fileInfo = result.info();
+        const fileSize = fileInfo.exists ? fileInfo.size || 0 : 0;
 
         setDownloads((prev) => ({
           ...prev,
@@ -192,7 +189,7 @@ export default function FileDownloadScreen() {
       Alert.alert('下载失败', `下载 "${file.name}" 时发生错误：${error.message}`);
     } finally {
       // 清理下载任务引用
-      setDownloadResumables((prev) => {
+      setDownloadTasks((prev) => {
         const newState = { ...prev };
         delete newState[file.name];
         return newState;
@@ -202,10 +199,10 @@ export default function FileDownloadScreen() {
 
   // 取消下载
   const cancelDownload = async (fileName: string) => {
-    const downloadResumable = downloadResumables[fileName];
-    if (downloadResumable) {
+    const downloadTask = downloadTasks[fileName];
+    if (downloadTask) {
       try {
-        await downloadResumable.cancelAsync();
+        downloadTask.cancel();
         setDownloads((prev) => ({
           ...prev,
           [fileName]: {
@@ -216,7 +213,7 @@ export default function FileDownloadScreen() {
         }));
 
         // 清理下载任务引用
-        setDownloadResumables((prev) => {
+        setDownloadTasks((prev) => {
           const newState = { ...prev };
           delete newState[fileName];
           return newState;
@@ -239,8 +236,8 @@ export default function FileDownloadScreen() {
     }
 
     try {
-      const fileInfo = await FileSystem.getInfoAsync(downloadInfo.localUri);
-      const fileSize = fileInfo.exists ? (fileInfo as any).size || 0 : 0;
+      const fileInfo = new File(downloadInfo.localUri).info();
+      const fileSize = fileInfo.exists ? fileInfo.size || 0 : 0;
       const downloadTime =
         downloadInfo.endTime && downloadInfo.startTime
           ? ((downloadInfo.endTime.getTime() - downloadInfo.startTime.getTime()) / 1000).toFixed(1)
@@ -272,7 +269,7 @@ export default function FileDownloadScreen() {
   // 删除文件
   const deleteFile = async (fileName: string, fileUri: string) => {
     try {
-      await FileSystem.deleteAsync(fileUri);
+      new File(fileUri).delete();
       setDownloads((prev) => {
         const newState = { ...prev };
         delete newState[fileName];
@@ -293,7 +290,7 @@ export default function FileDownloadScreen() {
         style: 'destructive',
         onPress: () => {
           setDownloads({});
-          setDownloadResumables({});
+          setDownloadTasks({});
         },
       },
     ]);

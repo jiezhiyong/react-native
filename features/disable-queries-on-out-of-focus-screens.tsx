@@ -1,4 +1,4 @@
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Text } from '@/components/ui/text';

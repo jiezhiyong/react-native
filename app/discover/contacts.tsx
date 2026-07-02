@@ -1,4 +1,4 @@
-import * as Contacts from 'expo-contacts';
+import { Contact, ContactField, ContactsSortOrder, requestPermissionsAsync } from 'expo-contacts';
 import { PermissionStatus } from 'expo-modules-core';
 import React, { useEffect, useState } from 'react';
 import { Alert, FlatList, View } from 'react-native';
@@ -34,7 +34,7 @@ export default function ExpoContactsScreen() {
   const requestContactsPermission = async () => {
     setLoading(true);
     try {
-      const { status } = await Contacts.requestPermissionsAsync();
+      const { status } = await requestPermissionsAsync();
       setHasPermission(status === PermissionStatus.GRANTED);
 
       if (status === PermissionStatus.GRANTED) {
@@ -54,22 +54,33 @@ export default function ExpoContactsScreen() {
   const fetchContacts = async () => {
     try {
       // 获取联系人数据，仅请求姓名和电话号码
-      const { data } = await Contacts.getContactsAsync({
-        fields: [Contacts.Fields.Name, Contacts.Fields.PhoneNumbers],
-        sort: Contacts.SortTypes.FirstName,
-      });
+      const contacts = await Contact.getAll({ sortOrder: ContactsSortOrder.GivenName });
 
-      if (data.length > 0) {
-        // 数据处理和过滤，只保留有名字的联系人
-        const filteredContacts = data
-          .filter((contact) => contact.name && contact.id)
-          .map((contact) => ({
-            id: contact.id!,
-            name: contact.name || '未知',
-            phoneNumbers: contact.phoneNumbers,
-          }));
+      if (contacts.length > 0) {
+        const filteredContacts: ContactItem[] = [];
 
-        setContacts(filteredContacts);
+        for (const contact of contacts) {
+          const details = await contact.getDetails([ContactField.FULL_NAME, ContactField.PHONES]);
+          if (!details.fullName) {
+            continue;
+          }
+
+          filteredContacts.push({
+            id: contact.id,
+            name: details.fullName,
+            phoneNumbers: details.phones?.map((phone) => ({
+              id: phone.id,
+              number: phone.number,
+            })),
+          });
+        }
+
+        if (filteredContacts.length > 0) {
+          setContacts(filteredContacts);
+        } else {
+          setContacts([]);
+          toast.info('未找到联系人');
+        }
       } else {
         setContacts([]);
         toast.info('未找到联系人');
@@ -103,10 +114,15 @@ export default function ExpoContactsScreen() {
 
   const presentContactPickerAsync = async () => {
     try {
-      const contact = await Contacts.presentContactPickerAsync();
+      const contact = await Contact.presentPicker();
       if (contact) {
-        const { phoneNumbers, firstName = '', lastName = '' } = contact;
-        Alert.alert('Result', `${firstName}${lastName}：${phoneNumbers?.[0].digits}`);
+        const details = await contact.getDetails([
+          ContactField.GIVEN_NAME,
+          ContactField.FAMILY_NAME,
+          ContactField.PHONES,
+        ]);
+        const { phones, givenName = '', familyName = '' } = details;
+        Alert.alert('Result', `${givenName}${familyName}：${phones?.[0]?.number ?? ''}`);
       }
     } catch (error) {
       console.error('获取联系人数据出错:', error);
